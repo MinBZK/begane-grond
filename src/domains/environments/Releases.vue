@@ -5,7 +5,7 @@
 // (build -> test -> scan -> deploy) per app derived from the current
 // environment matrix. New releases created in the promotion wizard appear here
 // live because everything reads from the store.
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -29,6 +29,26 @@ const releases = computed(() => store.releases);
 
 const prodReleases = computed(() => releases.value.filter((r) => r.env === 'prod').length);
 const releasingApps = computed(() => new Set(releases.value.map((r) => r.app)).size);
+
+// The release history scales into the hundreds, so the timeline and the log
+// table both render through a search filter (app name, version, person, note)
+// and an initial cap with a "toon meer" button instead of dumping everything.
+const query = ref('');
+const relLimit = ref(20);
+
+const filteredReleases = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  if (!q) return releases.value;
+  return releases.value.filter((r) => {
+    const hay = `${appName(r.app)} ${r.version} ${personName(r.by)} ${ENV_LABEL[r.env] || r.env} ${r.notes || ''}`.toLowerCase();
+    return hay.includes(q);
+  });
+});
+const visibleReleases = computed(() => filteredReleases.value.slice(0, relLimit.value));
+const relMore = computed(() => Math.max(0, filteredReleases.value.length - relLimit.value));
+function showMoreReleases() {
+  relLimit.value += 20;
+}
 
 const tableColumns = [
   { key: 'app', label: 'Applicatie' },
@@ -78,12 +98,14 @@ const pipelines = computed(() =>
   })
 );
 
-function badgeStatus(s) {
-  if (s === 'ready') return 'ready';
-  if (s === 'running') return 'provisioning';
-  if (s === 'failing') return 'failing';
-  return 'requested';
-}
+// There are over a hundred deployments; rendering a four-stage chain for each
+// makes the panel endless. By default we only show apps with a pending deploy
+// (dev ahead of prod) plus a count of the ones already shipped, with a toggle
+// to reveal the full fleet.
+const pipeAll = ref(false);
+const pendingPipelines = computed(() => pipelines.value.filter((p) => p.pending));
+const shippedCount = computed(() => pipelines.value.length - pendingPipelines.value.length);
+const visiblePipelines = computed(() => (pipeAll.value ? pipelines.value : pendingPipelines.value));
 </script>
 
 <template>
@@ -112,6 +134,16 @@ function badgeStatus(s) {
 
     <nldd-spacer size="24" />
 
+    <!-- Shared search over both the timeline and the release log below. -->
+    <nldd-search-field
+      placeholder="Zoek op applicatie, versie, persoon of notitie"
+      accessible-label="Zoek release"
+      :value="query"
+      @input="(e) => (query = e.target.value)"
+    ></nldd-search-field>
+
+    <nldd-spacer size="16" />
+
     <nldd-container layout="grid" column-count="2" gap="16">
       <!-- Timeline -->
       <nldd-card>
@@ -119,7 +151,7 @@ function badgeStatus(s) {
           <nldd-title size="4"><h2>Release-tijdlijn</h2></nldd-title>
           <nldd-spacer size="16" />
           <ol class="rp-timeline">
-            <li v-for="rel in releases" :key="rel.id" class="rp-tl-item">
+            <li v-for="rel in visibleReleases" :key="rel.id" class="rp-tl-item">
               <span class="rp-tl-dot" :class="`rp-env-${rel.env}`"></span>
               <div class="rp-tl-body">
                 <div class="rp-tl-head">
@@ -133,8 +165,18 @@ function badgeStatus(s) {
                 <div v-if="rel.notes" class="rp-tl-notes">{{ rel.notes }}</div>
               </div>
             </li>
-            <li v-if="!releases.length" class="rp-tl-empty">Nog geen releases gelogd.</li>
+            <li v-if="!filteredReleases.length" class="rp-tl-empty">
+              {{ query ? 'Geen releases gevonden.' : 'Nog geen releases gelogd.' }}
+            </li>
           </ol>
+          <nldd-spacer v-if="relMore > 0" size="12" />
+          <nldd-button
+            v-if="relMore > 0"
+            variant="secondary"
+            :text="`Toon meer (nog ${relMore})`"
+            start-icon="chevron-down"
+            @click="showMoreReleases"
+          ></nldd-button>
         </nldd-container>
       </nldd-card>
 
@@ -146,10 +188,22 @@ function badgeStatus(s) {
           <nldd-rich-text>
             <p>Status per applicatie. Een lopende deploy betekent dat dev voorloopt op productie.</p>
           </nldd-rich-text>
+          <nldd-spacer size="12" />
+
+          <div class="rp-pipe-bar">
+            <nldd-tag color="success" size="md">{{ shippedCount }} op productie gelijk</nldd-tag>
+            <nldd-button
+              variant="secondary"
+              :text="pipeAll ? `Alleen lopende (${pendingPipelines.length})` : `Toon alle (${pipelines.length})`"
+              :start-icon="pipeAll ? 'chevron-down' : 'rectangle-stack'"
+              @click="pipeAll = !pipeAll"
+            ></nldd-button>
+          </div>
+
           <nldd-spacer size="16" />
 
           <div class="rp-pipes">
-            <div v-for="p in pipelines" :key="p.app" class="rp-pipe-row">
+            <div v-for="p in visiblePipelines" :key="p.app" class="rp-pipe-row">
               <div class="rp-pipe-head">
                 <router-link :to="`/apps/${p.app}`" class="rp-pipe-app">{{ p.name }}</router-link>
                 <span v-if="p.pending" class="rp-pipe-pending">
@@ -167,6 +221,9 @@ function badgeStatus(s) {
                 </template>
               </div>
             </div>
+            <p v-if="!visiblePipelines.length" class="rp-tl-empty">
+              Alles staat gelijk met productie. Geen lopende deploys.
+            </p>
           </div>
         </nldd-container>
       </nldd-card>
@@ -178,7 +235,7 @@ function badgeStatus(s) {
       <nldd-container padding="20">
         <nldd-title size="4"><h2>Release-log</h2></nldd-title>
         <nldd-spacer size="16" />
-        <DataTable :columns="tableColumns" :rows="releases" row-key="id">
+        <DataTable :columns="tableColumns" :rows="visibleReleases" row-key="id">
           <template #cell="{ row, col, value }">
             <template v-if="col.key === 'app'">
               <router-link :to="`/apps/${row.app}`" class="rp-cell-link">{{ appName(row.app) }}</router-link>
@@ -191,6 +248,14 @@ function badgeStatus(s) {
             <template v-else>{{ value }}</template>
           </template>
         </DataTable>
+        <nldd-spacer v-if="relMore > 0" size="12" />
+        <nldd-button
+          v-if="relMore > 0"
+          variant="secondary"
+          :text="`Toon meer (nog ${relMore})`"
+          start-icon="chevron-down"
+          @click="showMoreReleases"
+        ></nldd-button>
       </nldd-container>
     </nldd-card>
   </div>
@@ -260,6 +325,12 @@ function badgeStatus(s) {
 .rp-env-acc { background: #d98a00; }
 .rp-env-prod { background: #1a7a3e; }
 
+.rp-pipe-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
 .rp-pipes {
   display: flex;
   flex-direction: column;

@@ -54,6 +54,12 @@ const searchMatches = computed(() =>
   store.repos.filter((r) => ['Vue', 'Rust', 'Python'].includes(r.lang)),
 );
 
+// The code-search can match a large slice of the fleet, so the preview list of
+// matched repos is capped with a raise-the-cap control rather than dumped whole.
+const searchLimit = ref(25);
+const visibleSearchMatches = computed(() => searchMatches.value.slice(0, searchLimit.value));
+const moreSearchCount = computed(() => Math.max(0, searchMatches.value.length - searchLimit.value));
+
 // The effective repo list depends on the selection mode.
 const targetRepos = computed(() => {
   const ids = form.selectMode === 'search'
@@ -69,8 +75,11 @@ function toggleRepo(id) {
 }
 
 // Filter for the manual repo list. A real fleet spans hundreds of repos, so the
-// manual picker is search-driven rather than a full wall of rows.
+// manual picker is search-driven rather than a full wall of rows. We cap the
+// rendered set at an initial N and let the user raise the cap, so an empty
+// filter never paints the whole fleet at once.
 const repoFilter = ref('');
+const repoLimit = ref(25);
 const filteredRepos = computed(() => {
   const q = repoFilter.value.trim().toLowerCase();
   if (!q) return store.repos;
@@ -78,6 +87,14 @@ const filteredRepos = computed(() => {
     (r) => r.name.toLowerCase().includes(q) || (r.lang || '').toLowerCase().includes(q),
   );
 });
+const visibleRepos = computed(() => filteredRepos.value.slice(0, repoLimit.value));
+const moreRepoCount = computed(() => Math.max(0, filteredRepos.value.length - repoLimit.value));
+
+// Preview can fan out over the whole target set, and each repo renders a full
+// code-viewer, so cap the rendered diffs the same way.
+const previewLimit = ref(8);
+const visiblePreview = computed(() => targetRepos.value.slice(0, previewLimit.value));
+const morePreviewCount = computed(() => Math.max(0, targetRepos.value.length - previewLimit.value));
 
 // --- Faked per-repo dry-run diffs for the preview step ---
 function diffFor(repo) {
@@ -256,7 +273,7 @@ const wizardSteps = [
             <nldd-spacer size="12" />
             <div class="rp-repo-list">
             <button
-              v-for="r in filteredRepos"
+              v-for="r in visibleRepos"
               :key="r.id"
               type="button"
               class="rp-repo-row"
@@ -273,6 +290,14 @@ const wizardSteps = [
             </button>
             <p v-if="!filteredRepos.length" class="rp-repo-empty">Geen repos gevonden voor "{{ repoFilter }}".</p>
             </div>
+            <nldd-spacer v-if="moreRepoCount > 0" size="12" />
+            <nldd-button
+              v-if="moreRepoCount > 0"
+              variant="secondary"
+              :text="`Toon meer (nog ${moreRepoCount})`"
+              start-icon="chevron-down"
+              @click="repoLimit += 25"
+            ></nldd-button>
           </div>
 
           <!-- Platform code search (rp code search) -->
@@ -287,12 +312,20 @@ const wizardSteps = [
             <p class="rp-search-count">{{ searchMatches.length }} repos matchen <code>{{ form.searchQuery }}</code></p>
             <nldd-spacer size="8" />
             <div class="rp-repo-list">
-              <div v-for="r in searchMatches" :key="r.id" class="rp-repo-row rp-static">
+              <div v-for="r in visibleSearchMatches" :key="r.id" class="rp-repo-row rp-static">
                 <span class="rp-repo-check"><nldd-icon name="check-mark" aria-hidden="true"></nldd-icon></span>
                 <span class="rp-repo-name">{{ r.name }}</span>
                 <nldd-tag color="neutral" size="md">{{ r.lang }}</nldd-tag>
               </div>
             </div>
+            <nldd-spacer v-if="moreSearchCount > 0" size="12" />
+            <nldd-button
+              v-if="moreSearchCount > 0"
+              variant="secondary"
+              :text="`Toon meer (nog ${moreSearchCount})`"
+              start-icon="chevron-down"
+              @click="searchLimit += 25"
+            ></nldd-button>
           </div>
 
           <nldd-spacer size="14" />
@@ -363,7 +396,7 @@ const wizardSteps = [
           </nldd-rich-text>
           <nldd-spacer size="16" />
           <div class="rp-preview-stack">
-            <div v-for="r in targetRepos" :key="r.id" class="rp-preview-item">
+            <div v-for="r in visiblePreview" :key="r.id" class="rp-preview-item">
               <div class="rp-preview-head">
                 <nldd-icon name="folder-stack" aria-hidden="true"></nldd-icon>
                 <span class="rp-repo-name">{{ r.name }}</span>
@@ -372,6 +405,14 @@ const wizardSteps = [
               <nldd-code-viewer>{{ diffFor(r) }}</nldd-code-viewer>
             </div>
           </div>
+          <nldd-spacer v-if="morePreviewCount > 0" size="14" />
+          <nldd-button
+            v-if="morePreviewCount > 0"
+            variant="secondary"
+            :text="`Toon meer diffs (nog ${morePreviewCount})`"
+            start-icon="chevron-down"
+            @click="previewLimit += 8"
+          ></nldd-button>
         </div>
 
         <!-- Step 4: rollout summary -->

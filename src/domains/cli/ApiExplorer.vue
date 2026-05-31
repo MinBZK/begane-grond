@@ -20,6 +20,16 @@ const BASE = 'https://api.rijks.app/v1';
 // Pretty-print a JS object as a JSON string for the code blocks.
 const j = (obj) => JSON.stringify(obj, null, 2);
 
+// Build a representative list-response sample. A real ADR-conforme lijst-API
+// returns a page, not the whole collection, so we show the first `n` items plus
+// a truncation marker ("+N meer") instead of dumping all 123 apps / 81 oncall-
+// records into a single code block.
+function sample(rows, n = 2) {
+  const arr = Array.isArray(rows) ? rows : [];
+  if (arr.length <= n) return arr;
+  return [...arr.slice(0, n), { '...': `+${arr.length - n} meer` }];
+}
+
 // --- The endpoint catalogue, grouped per platform domain --------------------
 // Each endpoint mirrors a real CLI verb / store action and uses live seed data
 // in its response sample so the explorer stays consistent with the rest of the
@@ -40,9 +50,11 @@ const groups = computed(() => [
         path: '/infra/instances',
         summary: 'Lijst alle instances van een team',
         query: '?team=team-platform',
-        response: store.instances
-          .filter((i) => i.team === 'team-platform')
-          .map((i) => ({ id: i.id, kind: i.kind, env: i.env, status: i.status, dc: i.dc, costMonth: i.costMonth })),
+        response: sample(
+          store.instances
+            .filter((i) => i.team === 'team-platform')
+            .map((i) => ({ id: i.id, kind: i.kind, env: i.env, status: i.status, dc: i.dc, costMonth: i.costMonth })),
+        ),
       },
       {
         method: 'POST',
@@ -79,7 +91,7 @@ const groups = computed(() => [
         method: 'GET',
         path: '/apps',
         summary: 'Lijst alle applicaties',
-        response: store.apps.map((a) => ({ id: a.id, name: a.name, team: a.team, repo: a.repo, maturity: a.maturity, health: a.health })),
+        response: sample(store.apps.map((a) => ({ id: a.id, name: a.name, team: a.team, repo: a.repo, maturity: a.maturity, health: a.health }))),
       },
       {
         method: 'POST',
@@ -108,14 +120,14 @@ const groups = computed(() => [
         method: 'GET',
         path: '/oncall',
         summary: 'Wie is er piket per team',
-        response: store.oncall.map((o) => ({ team: o.team, person: o.person, until: o.until, escalation: o.escalation })),
+        response: sample(store.oncall.map((o) => ({ team: o.team, person: o.person, until: o.until, escalation: o.escalation }))),
       },
       {
         method: 'GET',
         path: '/incidents',
         summary: 'Lijst open incidenten',
         query: '?status=open',
-        response: store.incidents.map((i) => ({ id: i.id, title: i.title, severity: i.severity, status: i.status, service: i.service, team: i.team })),
+        response: sample(store.incidents.map((i) => ({ id: i.id, title: i.title, severity: i.severity, status: i.status, service: i.service, team: i.team }))),
       },
       {
         method: 'POST',
@@ -135,7 +147,7 @@ const groups = computed(() => [
         method: 'GET',
         path: '/fleet/campaigns',
         summary: 'Lijst alle campagnes',
-        response: store.campaigns.map((c) => ({ id: c.id, title: c.title, type: c.type, status: c.status, repos: c.repos.length, progress: c.progress })),
+        response: sample(store.campaigns.map((c) => ({ id: c.id, title: c.title, type: c.type, status: c.status, repos: c.repos.length, progress: c.progress }))),
       },
       {
         method: 'POST',
@@ -155,7 +167,7 @@ const groups = computed(() => [
         method: 'GET',
         path: '/ai/models',
         summary: 'Beschikbare soevereine modellen',
-        response: store.llmModels.map((m) => ({ id: m.id, name: m.name, residency: m.residency, context: m.context, pricePer1m: m.pricePer1m })),
+        response: sample(store.llmModels.map((m) => ({ id: m.id, name: m.name, residency: m.residency, context: m.context, pricePer1m: m.pricePer1m })), 3),
       },
       {
         method: 'POST',

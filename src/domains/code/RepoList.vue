@@ -2,7 +2,7 @@
 // RepoList — mock of code.overheid.nl. Shows the public/internal repository
 // catalogue from the store, filterable by visibility, with CI status, stars
 // and the "open-tenzij" policy badge. Rows link through to RepoDetail.
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
@@ -14,6 +14,11 @@ const store = usePlatformStore();
 // 'alle' | 'open' | 'intern'
 const filter = ref('alle');
 const query = ref('');
+
+// The catalogue holds 100+ repos; render a capped initial page and let the
+// user reveal more, so the landing grid stays manageable.
+const PAGE = 24;
+const limit = ref(PAGE);
 
 const LANG_ICON = {
   Rust: 'gear',
@@ -35,6 +40,16 @@ const repos = computed(() => {
   }
   // Most-starred first — looks like a real code portal landing page.
   return [...list].sort((a, b) => b.stars - a.stars);
+});
+
+// Only render the first `limit` repos; "Toon meer" raises the cap.
+const visibleRepos = computed(() => repos.value.slice(0, limit.value));
+const remaining = computed(() => Math.max(0, repos.value.length - limit.value));
+
+// Reset the cap whenever the result set changes, so a new filter or search
+// always starts at the top.
+watch([filter, query], () => {
+  limit.value = PAGE;
 });
 
 const totals = computed(() => {
@@ -119,7 +134,7 @@ function appName(repo) {
 
     <nldd-collection layout="grid" item-width="340px">
       <router-link
-        v-for="repo in repos"
+        v-for="repo in visibleRepos"
         :key="repo.id"
         :to="`/code/${repo.id}`"
         class="rp-repo-link"
@@ -181,6 +196,15 @@ function appName(repo) {
         </nldd-card>
       </router-link>
     </nldd-collection>
+
+    <div v-if="remaining" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${remaining})`"
+        start-icon="chevron-down"
+        @click="limit += PAGE"
+      ></nldd-button>
+    </div>
 
     <div v-if="!repos.length" class="rp-empty">
       <nldd-inline-dialog
@@ -295,6 +319,11 @@ function appName(repo) {
 .rp-repo-app nldd-icon {
   width: 0.9rem;
   height: 0.9rem;
+}
+.rp-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
 }
 .rp-empty {
   margin-top: 1rem;

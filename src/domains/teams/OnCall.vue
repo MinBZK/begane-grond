@@ -2,13 +2,17 @@
 // Platform-wide on-call board: who holds the pager per team, the escalation
 // path behind them, and the recent incidents they would pick up. Reads
 // store.oncall and joins it to people, teams and incidents.
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 
 const store = usePlatformStore();
+
+// Cap the incidents shown per card so a busy team does not stretch the card
+// into a wall of links. The full list stays one click away on the team page.
+const INCIDENTS_PER_CARD = 4;
 
 const board = computed(() =>
   store.oncall.map((o) => {
@@ -33,6 +37,35 @@ const totals = computed(() => ({
   open: openIncidents.value.length,
   escalations: store.oncall.reduce((n, o) => n + o.escalation.length, 0),
 }));
+
+// Search + filter + cap. The board now spans the whole platform (one shift per
+// team), so we filter on team/person and let the user narrow to the diensten
+// that actually have lopende incidenten. The grid is capped at an initial N
+// with a "Toon meer" button so it never renders the full wall at once.
+const query = ref('');
+const onlyIncidents = ref(false);
+const limit = ref(24);
+
+const filtered = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return board.value.filter((b) => {
+    if (onlyIncidents.value && !b.incidents.length) return false;
+    if (!q) return true;
+    return (
+      (b.team?.name || '').toLowerCase().includes(q) ||
+      (b.person?.name || '').toLowerCase().includes(q) ||
+      (b.person?.role || '').toLowerCase().includes(q) ||
+      b.escalation.some((e) => (e.name || '').toLowerCase().includes(q))
+    );
+  });
+});
+
+const visible = computed(() => filtered.value.slice(0, limit.value));
+const remaining = computed(() => Math.max(0, filtered.value.length - visible.value.length));
+
+function showMore() {
+  limit.value += 24;
+}
 
 function hueFor(id) {
   let h = 0;
@@ -62,8 +95,27 @@ function hueFor(id) {
 
     <nldd-spacer size="24" />
 
+    <!-- Search + filter over the platform-wide piketboard, with a capped grid. -->
+    <div class="rp-oc-toolbar">
+      <nldd-search-field
+        class="rp-oc-search"
+        placeholder="Zoek op team, piketdrager of rol"
+        accessible-label="Zoek piketdienst"
+        :value="query"
+        @input="(e) => (query = e.target.value)"
+      ></nldd-search-field>
+      <nldd-button
+        :variant="onlyIncidents ? 'primary' : 'secondary'"
+        :text="onlyIncidents ? 'Alleen met incidenten' : 'Alle diensten'"
+        start-icon="exclamation-triangle"
+        @click="onlyIncidents = !onlyIncidents"
+      />
+    </div>
+
+    <nldd-spacer size="16" />
+
     <nldd-collection layout="grid" item-width="380px">
-      <nldd-card v-for="b in board" :key="b.team.id" :accessible-label="`Piket ${b.team.name}`">
+      <nldd-card v-for="b in visible" :key="b.team.id" :accessible-label="`Piket ${b.team.name}`">
         <nldd-container padding="20">
           <div class="rp-oc-head">
             <router-link :to="`/teams/${b.team.id}`" class="rp-link">
@@ -104,7 +156,7 @@ function hueFor(id) {
           <div class="rp-oc-section-label">Recente incidenten</div>
           <div v-if="b.incidents.length" class="rp-oc-incidents">
             <router-link
-              v-for="inc in b.incidents"
+              v-for="inc in b.incidents.slice(0, INCIDENTS_PER_CARD)"
               :key="inc.id"
               :to="`/incidenten/${inc.id}`"
               class="rp-oc-inc"
@@ -114,6 +166,13 @@ function hueFor(id) {
               <nldd-tag color="neutral" size="md">{{ inc.severity }}</nldd-tag>
               <StatusBadge :status="inc.status" />
             </router-link>
+            <router-link
+              v-if="b.incidents.length > INCIDENTS_PER_CARD"
+              :to="`/teams/${b.team.id}`"
+              class="rp-oc-inc-more"
+            >
+              Nog {{ b.incidents.length - INCIDENTS_PER_CARD }} incidenten op de teampagina
+            </router-link>
           </div>
           <div v-else class="rp-oc-noesc">Geen recente incidenten.</div>
 
@@ -122,6 +181,19 @@ function hueFor(id) {
         </nldd-container>
       </nldd-card>
     </nldd-collection>
+
+    <p v-if="!filtered.length" class="rp-oc-empty">
+      Geen piketdienst gevonden voor deze selectie.
+    </p>
+
+    <div v-if="remaining > 0" class="rp-oc-more-row">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${remaining})`"
+        start-icon="chevron-down"
+        @click="showMore"
+      />
+    </div>
   </div>
 </template>
 
@@ -252,5 +324,35 @@ function hueFor(id) {
 }
 .rp-link:hover {
   text-decoration: underline;
+}
+.rp-oc-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.rp-oc-search {
+  flex: 1 1 18rem;
+  min-width: 14rem;
+}
+.rp-oc-inc-more {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.2rem 0.5rem;
+}
+.rp-oc-inc-more:hover {
+  text-decoration: underline;
+}
+.rp-oc-empty {
+  opacity: 0.6;
+  padding: 1.5rem 0.25rem;
+  margin: 0;
+}
+.rp-oc-more-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
 }
 </style>

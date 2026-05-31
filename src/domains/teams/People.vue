@@ -1,7 +1,7 @@
 <script setup>
 // People directory: searchable list of everyone on the platform with avatar,
 // role, organisation, team and Matrix handle. Cards click through to a profile.
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -9,6 +9,12 @@ import MetricCard from '../../components/shared/MetricCard.vue';
 const store = usePlatformStore();
 const query = ref('');
 const orgFilter = ref('');
+
+// The directory now holds hundreds of people. Render a capped first page and
+// let the user reveal more, so the page stays navigable instead of a wall of
+// cards. The cap resets whenever the search or organisation filter changes.
+const PAGE = 24;
+const limit = ref(PAGE);
 
 const rows = computed(() =>
   store.people
@@ -30,6 +36,18 @@ const rows = computed(() =>
       );
     }),
 );
+
+const visible = computed(() => rows.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, rows.value.length - limit.value));
+
+// Reset the cap when the result set changes so a fresh search starts at page 1.
+watch([query, orgFilter], () => {
+  limit.value = PAGE;
+});
+
+function showMore() {
+  limit.value += PAGE;
+}
 
 function hueFor(id) {
   let h = 0;
@@ -77,7 +95,7 @@ function hueFor(id) {
 
     <nldd-collection layout="grid" item-width="320px">
       <router-link
-        v-for="p in rows"
+        v-for="p in visible"
         :key="p.id"
         :to="`/teams/mensen/${p.id}`"
         class="rp-person-link"
@@ -113,6 +131,16 @@ function hueFor(id) {
         </nldd-card>
       </router-link>
     </nldd-collection>
+
+    <div v-if="moreCount > 0" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${moreCount})`"
+        start-icon="chevron-down"
+        @click="showMore"
+      />
+      <span class="rp-more-count">{{ visible.length }} van {{ rows.length }} getoond</span>
+    </div>
 
     <div v-if="!rows.length" class="rp-empty">
       <nldd-rich-text><p>Geen mensen gevonden voor deze filter.</p></nldd-rich-text>
@@ -190,6 +218,17 @@ function hueFor(id) {
 }
 .rp-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.rp-more {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.rp-more-count {
+  font-size: 0.85rem;
+  opacity: 0.6;
 }
 .rp-empty {
   padding: 2rem;

@@ -1,7 +1,10 @@
 <script setup>
 // Teams overview: a tile per team with member avatars, owning organisation,
 // what the team owns (apps / instances / racks counts) and who is on call now.
-import { computed } from 'vue';
+// At platform scale there are ~99 teams, so the grid is search- and org-filtered
+// and capped to an initial page of cards with a "Toon meer" button, rather than
+// rendering every tile at once.
+import { computed, ref } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -34,6 +37,48 @@ const totals = computed(() => ({
   orgs: store.organisations.length,
   oncall: store.oncall.length,
 }));
+
+// --- Search + org filter + capped display ---
+const PAGE = 24;
+const query = ref('');
+const orgFilter = ref('');
+const limit = ref(PAGE);
+
+// Only organisations that actually own at least one team, so the dropdown is
+// not padded with empty options.
+const orgOptions = computed(() => {
+  const used = new Set(store.teams.map((t) => t.org));
+  return store.organisations
+    .filter((o) => used.has(o.id))
+    .map((o) => ({ id: o.id, label: o.short || o.name }))
+    .sort((a, b) => a.label.localeCompare(b.label, 'nl'));
+});
+
+const filtered = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return teamCards.value.filter((t) => {
+    if (orgFilter.value && t.org !== orgFilter.value) return false;
+    if (!q) return true;
+    return (
+      t.name.toLowerCase().includes(q) ||
+      t.id.toLowerCase().includes(q) ||
+      (t.orgShort || '').toLowerCase().includes(q) ||
+      (t.matrix || '').toLowerCase().includes(q) ||
+      t.memberPeople.some((p) => p.name.toLowerCase().includes(q))
+    );
+  });
+});
+
+const visible = computed(() => filtered.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filtered.value.length - visible.value.length));
+
+function showMore() {
+  limit.value += PAGE;
+}
+
+function resetLimit() {
+  limit.value = PAGE;
+}
 </script>
 
 <template>
@@ -59,8 +104,31 @@ const totals = computed(() => ({
 
     <nldd-spacer size="24" />
 
+    <div class="rp-team-filters">
+      <nldd-search-field
+        class="rp-team-search"
+        placeholder="Zoek op team, organisatie, kanaal of lid"
+        accessible-label="Zoek team"
+        :value="query"
+        @input="(e) => { query = e.target.value; resetLimit(); }"
+      ></nldd-search-field>
+      <nldd-dropdown class="rp-team-orgfilter" accessible-label="Filter op organisatie">
+        <select :value="orgFilter" @change="(e) => { orgFilter = e.target.value; resetLimit(); }">
+          <option value="">Alle organisaties</option>
+          <option v-for="o in orgOptions" :key="o.id" :value="o.id">{{ o.label }}</option>
+        </select>
+      </nldd-dropdown>
+    </div>
+
+    <nldd-spacer size="12" />
+    <p class="rp-team-count">
+      {{ filtered.length }} van {{ teamCards.length }} teams
+    </p>
+
+    <nldd-spacer size="12" />
+
     <nldd-collection layout="grid" item-width="360px">
-      <router-link v-for="t in teamCards" :key="t.id" :to="`/teams/${t.id}`" class="rp-team-link">
+      <router-link v-for="t in visible" :key="t.id" :to="`/teams/${t.id}`" class="rp-team-link">
         <nldd-card :accessible-label="t.name">
           <nldd-container padding="20">
             <div class="rp-team-top">
@@ -116,10 +184,51 @@ const totals = computed(() => ({
         </nldd-card>
       </router-link>
     </nldd-collection>
+
+    <p v-if="!filtered.length" class="rp-team-empty">
+      Geen teams gevonden. Pas je zoekopdracht of het organisatiefilter aan.
+    </p>
+
+    <div v-if="moreCount > 0" class="rp-team-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${moreCount})`"
+        start-icon="chevron-down"
+        @click="showMore"
+      />
+    </div>
   </div>
 </template>
 
 <style scoped>
+.rp-team-filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.rp-team-search {
+  flex: 1 1 280px;
+  min-width: 220px;
+}
+.rp-team-orgfilter {
+  flex: 0 0 auto;
+}
+.rp-team-count {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+.rp-team-empty {
+  margin: 0;
+  padding: 1.5rem 0;
+  opacity: 0.6;
+}
+.rp-team-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
 .rp-team-link {
   text-decoration: none;
   color: inherit;

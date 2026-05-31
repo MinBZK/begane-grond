@@ -3,7 +3,7 @@
 // (apps + instances) with a green/red indicator. A service is "verstoord" when
 // it has an open or mitigated incident, otherwise "operationeel". We derive the
 // state purely from the store so it stays in sync with the incident actions.
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 
@@ -54,10 +54,52 @@ const all = computed(() => [...appServices.value, ...infraServices.value]);
 const downCount = computed(() => all.value.filter((s) => s.tone !== 'ok').length);
 const total = computed(() => all.value.length);
 const allGood = computed(() => downCount.value === 0);
+const okCount = computed(() => total.value - downCount.value);
+// Uptime is reported as the share of services without an open disruption. With
+// hundreds of services this number is dominated by the operational baseline, so
+// we keep more precision to stay meaningful instead of always reading "100%".
 const uptime = computed(() => {
   if (!total.value) return '100';
-  return (((total.value - downCount.value) / total.value) * 100).toFixed(1);
+  return ((okCount.value / total.value) * 100).toFixed(2);
 });
+
+// A public status page only needs to surface what is actually wrong. With 100+
+// apps and 240+ infra services, listing every operational tile makes the page
+// unscrollable and buries the real signal. So by default we show only the
+// disrupted services, plus an "N operationeel" pill and a button to reveal the
+// full catalogue. A search field filters the visible set by name, id or team.
+const showAll = ref(false);
+const query = ref('');
+const LIMIT = 24;
+const appLimit = ref(LIMIT);
+const infraLimit = ref(LIMIT);
+
+function matches(s) {
+  const q = query.value.trim().toLowerCase();
+  if (!q) return true;
+  return (
+    s.name.toLowerCase().includes(q) ||
+    s.id.toLowerCase().includes(q) ||
+    (s.sub || '').toLowerCase().includes(q)
+  );
+}
+
+const appFiltered = computed(() =>
+  appServices.value.filter((s) => (showAll.value || s.tone !== 'ok') && matches(s)),
+);
+const infraFiltered = computed(() =>
+  infraServices.value.filter((s) => (showAll.value || s.tone !== 'ok') && matches(s)),
+);
+const visibleApps = computed(() => appFiltered.value.slice(0, appLimit.value));
+const visibleInfra = computed(() => infraFiltered.value.slice(0, infraLimit.value));
+const appMore = computed(() => Math.max(0, appFiltered.value.length - appLimit.value));
+const infraMore = computed(() => Math.max(0, infraFiltered.value.length - infraLimit.value));
+
+function toggleAll() {
+  showAll.value = !showAll.value;
+  appLimit.value = LIMIT;
+  infraLimit.value = LIMIT;
+}
 </script>
 
 <template>
@@ -99,11 +141,33 @@ const uptime = computed(() => {
 
     <nldd-spacer size="24" />
 
+    <!-- Controls: search across the catalogue + toggle to reveal operational services. -->
+    <div class="rp-controls">
+      <nldd-search-field
+        class="rp-search"
+        placeholder="Zoek op naam, id of team"
+        accessible-label="Zoek dienst"
+        :value="query"
+        @input="(e) => (query = e.target.value)"
+      ></nldd-search-field>
+      <nldd-tag color="success" size="md">{{ okCount }} operationeel</nldd-tag>
+      <nldd-button
+        :variant="showAll ? 'primary' : 'secondary'"
+        :text="showAll ? 'Toon alleen verstoringen' : 'Toon alle diensten'"
+        @click="toggleAll"
+      ></nldd-button>
+    </div>
+
+    <nldd-spacer size="24" />
+
     <nldd-title size="4"><h2>Applicaties</h2></nldd-title>
     <nldd-spacer size="12" />
-    <nldd-collection layout="grid" item-width="320px">
+    <p v-if="!appFiltered.length" class="rp-empty">
+      {{ query ? `Geen applicaties gevonden voor "${query}".` : 'Alle applicaties operationeel.' }}
+    </p>
+    <nldd-collection v-else layout="grid" item-width="320px">
       <router-link
-        v-for="s in appServices"
+        v-for="s in visibleApps"
         :key="s.id"
         :to="s.route"
         class="rp-svc-link"
@@ -128,14 +192,24 @@ const uptime = computed(() => {
         </nldd-card>
       </router-link>
     </nldd-collection>
+    <div v-if="appMore > 0" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${appMore})`"
+        @click="appLimit += LIMIT"
+      ></nldd-button>
+    </div>
 
     <nldd-spacer size="24" />
 
     <nldd-title size="4"><h2>Infra-diensten</h2></nldd-title>
     <nldd-spacer size="12" />
-    <nldd-collection layout="grid" item-width="320px">
+    <p v-if="!infraFiltered.length" class="rp-empty">
+      {{ query ? `Geen infra-diensten gevonden voor "${query}".` : 'Alle infra-diensten operationeel.' }}
+    </p>
+    <nldd-collection v-else layout="grid" item-width="320px">
       <router-link
-        v-for="s in infraServices"
+        v-for="s in visibleInfra"
         :key="s.id"
         :to="s.route"
         class="rp-svc-link"
@@ -160,6 +234,13 @@ const uptime = computed(() => {
         </nldd-card>
       </router-link>
     </nldd-collection>
+    <div v-if="infraMore > 0" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${infraMore})`"
+        @click="infraLimit += LIMIT"
+      ></nldd-button>
+    </div>
 
     <nldd-spacer size="20" />
     <nldd-rich-text>
@@ -206,6 +287,25 @@ const uptime = computed(() => {
   opacity: 0.7;
   font-size: 0.9rem;
   margin-top: 0.15rem;
+}
+.rp-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.rp-search {
+  flex: 1 1 280px;
+  min-width: 240px;
+}
+.rp-empty {
+  opacity: 0.65;
+  margin: 0;
+}
+.rp-more {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
 }
 .rp-svc-link {
   text-decoration: none;

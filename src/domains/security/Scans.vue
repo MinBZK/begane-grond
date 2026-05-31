@@ -70,6 +70,40 @@ const totalFindings = computed(() =>
 );
 const cleanRepos = computed(() => board.value.filter((row) => row.failed === 0).length);
 
+// At scale the board has one row per repository (hundreds). Rendering all of
+// them at once makes the page unmanageably long and buries the repos that
+// actually need attention. Filter by query + status and cap the rendered rows,
+// defaulting the view to repos with open findings.
+const query = ref('');
+const statusFilter = ref('bevindingen'); // 'bevindingen' | 'schoon' | 'alle'
+const limit = ref(25);
+const STATUS_OPTIONS = [
+  { id: 'bevindingen', label: 'Met bevindingen' },
+  { id: 'schoon', label: 'Schoon' },
+  { id: 'alle', label: 'Alle repos' },
+];
+
+const filteredBoard = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return board.value.filter((row) => {
+    if (statusFilter.value === 'bevindingen' && row.failed === 0) return false;
+    if (statusFilter.value === 'schoon' && row.failed > 0) return false;
+    if (!q) return true;
+    return (
+      row.repo.name.toLowerCase().includes(q) ||
+      row.repo.id.toLowerCase().includes(q) ||
+      (row.app?.name || '').toLowerCase().includes(q)
+    );
+  });
+});
+const visibleBoard = computed(() => filteredBoard.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filteredBoard.value.length - limit.value));
+const failingRepos = computed(() => board.value.filter((row) => row.failed > 0).length);
+function setStatusFilter(id) {
+  statusFilter.value = id;
+  limit.value = 25;
+}
+
 // Re-run a single scanner on a repo: brief spinner, then re-audit. Result is
 // deterministic so it stays the same, but the audit trail records the run.
 const running = ref({}); // key `${repoId}:${scannerId}` -> true
@@ -96,11 +130,16 @@ async function rescanAll() {
 
 // Audit overview: surface security-relevant actions from the store's audit log.
 const SECURITY_TERMS = ['scan', 'secret', 'vuln', 'security', 'incident', 'certificaat'];
-const auditRows = computed(() =>
+const auditMatches = computed(() =>
   store.auditLog.filter((a) =>
     SECURITY_TERMS.some((t) => `${a.action} ${a.resource}`.toLowerCase().includes(t)),
   ),
 );
+// The audit log grows without bound; show only the most recent entries with a
+// "toon meer" affordance so the page stays readable.
+const auditLimit = ref(12);
+const auditRows = computed(() => auditMatches.value.slice(0, auditLimit.value));
+const auditMoreCount = computed(() => Math.max(0, auditMatches.value.length - auditLimit.value));
 </script>
 
 <template>
@@ -131,6 +170,30 @@ const auditRows = computed(() =>
     <nldd-rich-text><p>Elke cel is de uitslag van één scanner op één repository. Klik op een uitslag om die scanner opnieuw te draaien.</p></nldd-rich-text>
     <nldd-spacer size="16" />
 
+    <div class="rp-board-controls">
+      <nldd-search-field
+        class="rp-board-search"
+        placeholder="Zoek op repository of app"
+        accessible-label="Zoek repository"
+        :value="query"
+        @input="(e) => (query = e.target.value)"
+      ></nldd-search-field>
+      <div class="rp-board-chips" role="group" aria-label="Filter op status">
+        <nldd-button
+          v-for="opt in STATUS_OPTIONS"
+          :key="opt.id"
+          :variant="statusFilter === opt.id ? 'primary' : 'secondary'"
+          :text="opt.label"
+          @click="setStatusFilter(opt.id)"
+        ></nldd-button>
+      </div>
+    </div>
+    <nldd-spacer size="8" />
+    <p class="rp-board-count">
+      {{ filteredBoard.length }} van {{ board.length }} repos · {{ failingRepos }} met open bevindingen
+    </p>
+    <nldd-spacer size="12" />
+
     <nldd-card>
       <nldd-container padding="0">
         <div class="rp-board-wrap">
@@ -147,7 +210,12 @@ const auditRows = computed(() =>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="row in board" :key="row.repo.id">
+              <tr v-if="!visibleBoard.length">
+                <td :colspan="SCANNERS.length + 1" class="rp-board-empty">
+                  Geen repository gevonden voor deze filters.
+                </td>
+              </tr>
+              <tr v-for="row in visibleBoard" :key="row.repo.id">
                 <td class="rp-board-repo">
                   <router-link :to="`/code/${row.repo.id}`" class="rp-repo-link">{{ row.repo.name }}</router-link>
                   <span class="rp-repo-sub">
@@ -186,6 +254,15 @@ const auditRows = computed(() =>
       </nldd-container>
     </nldd-card>
 
+    <div v-if="moreCount > 0" class="rp-board-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${moreCount})`"
+        start-icon="chevron-down"
+        @click="limit += 25"
+      ></nldd-button>
+    </div>
+
     <nldd-spacer size="16" />
 
     <div class="rp-legend">
@@ -217,9 +294,17 @@ const auditRows = computed(() =>
           <nldd-icon name="books-vertical" aria-hidden="true"></nldd-icon>
           <span>Nog geen security-acties gelogd. Draai een scan of roteer een secret.</span>
         </div>
+        <div v-if="auditMoreCount > 0" class="rp-board-more">
+          <nldd-button
+            variant="secondary"
+            :text="`Toon meer (nog ${auditMoreCount})`"
+            start-icon="chevron-down"
+            @click="auditLimit += 12"
+          ></nldd-button>
+        </div>
         <nldd-spacer size="12" />
         <div class="rp-audit-foot">
-          <span>{{ auditRows.length }} security-acties getoond</span>
+          <span>{{ auditRows.length }} van {{ auditMatches.length }} security-acties getoond</span>
           <span class="rp-actor">
             Laatste actie door
             <router-link :to="`/teams/mensen/${store.currentUser}`" class="rp-link">{{ store.personById(store.currentUser).name }}</router-link>
@@ -231,6 +316,36 @@ const auditRows = computed(() =>
 </template>
 
 <style scoped>
+.rp-board-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.rp-board-search {
+  flex: 1 1 280px;
+  min-width: 220px;
+}
+.rp-board-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.rp-board-count {
+  margin: 0;
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+.rp-board-empty {
+  text-align: center;
+  opacity: 0.6;
+  padding: 1.4rem 0.85rem;
+}
+.rp-board-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.85rem;
+}
 .rp-board-wrap {
   overflow-x: auto;
 }

@@ -50,6 +50,61 @@ const rows = computed(() =>
   }),
 );
 
+// --- Filtering + capped list -----------------------------------------------
+// The store now holds ~99 teams, so rendering every budget bar at once makes
+// the page unmanageably long. We filter by name and by status, default to the
+// teams that actually have a budget set, and cap the visible rows with a
+// "Toon meer"-button (same pattern as the wizards).
+const query = ref('');
+const statusFilter = ref('met-budget');
+const limit = ref(25);
+
+const statusOptions = [
+  { id: 'met-budget', label: 'Met budget' },
+  { id: 'over', label: 'Over budget' },
+  { id: 'near', label: 'Bijna op' },
+  { id: 'binnen', label: 'Binnen budget' },
+  { id: 'geen', label: 'Geen budget' },
+  { id: 'alle', label: 'Alle teams' },
+];
+
+function matchesStatus(r) {
+  switch (statusFilter.value) {
+    case 'over':
+      return r.over;
+    case 'near':
+      return r.near;
+    case 'binnen':
+      return r.hasBudget && !r.over && !r.near;
+    case 'geen':
+      return !r.hasBudget;
+    case 'met-budget':
+      return r.hasBudget;
+    default:
+      return true;
+  }
+}
+
+const filtered = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return rows.value.filter((r) => {
+    if (!matchesStatus(r)) return false;
+    if (!q) return true;
+    return r.name.toLowerCase().includes(q) || r.team.toLowerCase().includes(q);
+  });
+});
+
+const visible = computed(() => filtered.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filtered.value.length - visible.value.length));
+
+function setStatus(id) {
+  statusFilter.value = id;
+  limit.value = 25;
+}
+function showMore() {
+  limit.value += 25;
+}
+
 // --- Portfolio totals -------------------------------------------------------
 const totalBudget = computed(() =>
   store.budgets.reduce((sum, b) => sum + (b.budget || 0), 0),
@@ -134,12 +189,37 @@ function bumpBudget(teamId, delta) {
           <nldd-container padding="24">
             <div class="rp-section-head">
               <nldd-title size="4"><h2>Budget versus uitgave</h2></nldd-title>
-              <nldd-tag color="neutral" size="md">{{ rows.length }} teams</nldd-tag>
+              <nldd-tag color="neutral" size="md">{{ filtered.length }} van {{ rows.length }} teams</nldd-tag>
+            </div>
+            <nldd-spacer size="16" />
+
+            <!-- Filters: zoek op team + status -->
+            <div class="rp-budget-filters">
+              <nldd-search-field
+                class="rp-budget-search"
+                label="Zoek team"
+                hide-label
+                placeholder="Zoek op teamnaam of id"
+                :value="query"
+                @input="(e) => (query = e.target.value)"
+              ></nldd-search-field>
+              <div class="rp-budget-chips">
+                <nldd-button
+                  v-for="opt in statusOptions"
+                  :key="opt.id"
+                  :variant="statusFilter === opt.id ? 'primary' : 'secondary'"
+                  size="sm"
+                  :text="opt.label"
+                  @click="setStatus(opt.id)"
+                />
+              </div>
             </div>
             <nldd-spacer size="20" />
 
+            <p v-if="!filtered.length" class="rp-budget-empty">Geen teams gevonden voor deze filter.</p>
+
             <ul class="rp-budgets">
-              <li v-for="r in rows" :key="r.team" class="rp-budget-row">
+              <li v-for="r in visible" :key="r.team" class="rp-budget-row">
                 <div class="rp-budget-head">
                   <router-link :to="`/teams/${r.team}`" class="rp-budget-team">
                     <nldd-icon name="person-2" aria-hidden="true"></nldd-icon>
@@ -193,6 +273,11 @@ function bumpBudget(teamId, delta) {
                 </div>
               </li>
             </ul>
+
+            <div v-if="moreCount" class="rp-budget-more">
+              <nldd-button variant="secondary" text="Toon meer" :start-icon="'chevron-down'" @click="showMore" />
+              <span class="rp-budget-more-count">nog {{ moreCount }} meer</span>
+            </div>
 
             <CliHint command="rp budget set --team team-toeslagen --amount 320" label="Budget bijstellen via de CLI:" />
           </nldd-container>
@@ -261,6 +346,37 @@ function bumpBudget(teamId, delta) {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+}
+
+/* Filters */
+.rp-budget-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.rp-budget-search {
+  width: 100%;
+  max-width: 360px;
+}
+.rp-budget-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.rp-budget-empty {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+.rp-budget-more {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 1.4rem 0 0.4rem;
+}
+.rp-budget-more-count {
+  font-size: 0.85rem;
+  opacity: 0.6;
 }
 
 /* Budget rows */

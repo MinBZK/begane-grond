@@ -3,7 +3,7 @@
 // README preview, language/stars/CI summary, faked issues and pull requests,
 // an open-source compliance panel (CONTRIBUTING, Code of Conduct, secret
 // scan), and cross-layer relation links to the linked app and owning team.
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
@@ -173,7 +173,13 @@ const LABEL_COLOR = {
   observability: 'accent',
 };
 
-const issues = computed(() => ISSUE_POOL.slice(0, repo.value?.openIssues || 0));
+// A repo can have more open issues than the curated pool has entries (the seed
+// now scales issue counts up to ~15). Cycle the pool deterministically so the
+// list matches repo.openIssues exactly, keeping every entry distinct by number.
+const issues = computed(() => {
+  const n = repo.value?.openIssues || 0;
+  return Array.from({ length: n }, (_, i) => ISSUE_POOL[i % ISSUE_POOL.length]);
+});
 const prs = computed(() => PR_POOL.slice(0, repo.value?.openPrs || 0));
 
 function authorName(id) {
@@ -194,9 +200,31 @@ const prColumns = [
   { key: 'age', label: 'Geopend', align: 'right' },
 ];
 
-const issueRows = computed(() =>
+// All issue rows, before filtering/capping. Stable numbers per repo.
+const allIssueRows = computed(() =>
   issues.value.map((it, i) => ({ id: i, num: `#${412 + i}`, ...it })),
 );
+
+// Label filter (chips) + display cap, so a repo with many open issues stays
+// manageable instead of rendering one tall table.
+const issueLabel = ref('all');
+const issueLimit = ref(10);
+const issueLabels = computed(() => [
+  ...new Set(allIssueRows.value.map((r) => r.label)),
+]);
+const filteredIssues = computed(() =>
+  issueLabel.value === 'all'
+    ? allIssueRows.value
+    : allIssueRows.value.filter((r) => r.label === issueLabel.value),
+);
+const issueRows = computed(() => filteredIssues.value.slice(0, issueLimit.value));
+const issuesMore = computed(() =>
+  Math.max(0, filteredIssues.value.length - issueRows.value.length),
+);
+function pickIssueLabel(label) {
+  issueLabel.value = label;
+  issueLimit.value = 10;
+}
 const prRows = computed(() =>
   prs.value.map((pr, i) => ({
     id: i,
@@ -376,7 +404,7 @@ const relationLinks = computed(() => {
           <nldd-container padding="24">
             <div class="rp-section-head">
               <nldd-title size="4"><h2>Open pull requests</h2></nldd-title>
-              <nldd-tag color="accent" size="md">{{ prRows.length }}</nldd-tag>
+              <nldd-tag color="accent" size="md">{{ repo.openPrs }}</nldd-tag>
             </div>
             <nldd-spacer size="12" />
             <DataTable v-if="prRows.length" :columns="prColumns" :rows="prRows" row-key="id">
@@ -400,9 +428,27 @@ const relationLinks = computed(() => {
           <nldd-container padding="24">
             <div class="rp-section-head">
               <nldd-title size="4"><h2>Open issues</h2></nldd-title>
-              <nldd-tag color="accent" size="md">{{ issueRows.length }}</nldd-tag>
+              <nldd-tag color="accent" size="md">{{ repo.openIssues }}</nldd-tag>
             </div>
             <nldd-spacer size="12" />
+            <!-- Label filter: only worth showing when there is more than one label. -->
+            <div v-if="allIssueRows.length && issueLabels.length > 1" class="rp-issue-filter">
+              <nldd-button
+                :variant="issueLabel === 'all' ? 'primary' : 'secondary'"
+                size="sm"
+                text="Alle"
+                @click="pickIssueLabel('all')"
+              ></nldd-button>
+              <nldd-button
+                v-for="lbl in issueLabels"
+                :key="lbl"
+                :variant="issueLabel === lbl ? 'primary' : 'secondary'"
+                size="sm"
+                :text="lbl"
+                @click="pickIssueLabel(lbl)"
+              ></nldd-button>
+            </div>
+            <nldd-spacer v-if="allIssueRows.length && issueLabels.length > 1" size="12" />
             <DataTable v-if="issueRows.length" :columns="issueColumns" :rows="issueRows" row-key="id">
               <template #cell="{ col, value }">
                 <nldd-tag
@@ -414,6 +460,15 @@ const relationLinks = computed(() => {
               </template>
             </DataTable>
             <nldd-rich-text v-else><p>Geen open issues.</p></nldd-rich-text>
+            <template v-if="issuesMore > 0">
+              <nldd-spacer size="12" />
+              <nldd-button
+                variant="secondary"
+                :text="`Toon meer (nog ${issuesMore})`"
+                start-icon="chevron-down"
+                @click="issueLimit += 10"
+              ></nldd-button>
+            </template>
           </nldd-container>
         </nldd-card>
       </div>
@@ -614,6 +669,11 @@ const relationLinks = computed(() => {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+}
+.rp-issue-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 .rp-inline-link {
   color: var(--semantics-action-default-color, inherit);

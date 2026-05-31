@@ -50,6 +50,10 @@ function sourceMeta(source) {
 // --- Live event-stream filters --------------------------------------------
 const sevFilter = ref('all'); // all | info | success | warning | critical
 const sourceFilter = ref('all'); // all | <source key>
+const streamQuery = ref(''); // free-text filter on title/actor/team
+// The stream can hold hundreds of events on a busy platform. Show a capped
+// initial window and let the reader expand it with "Toon meer".
+const streamLimit = ref(25);
 
 // Sources that actually appear in the stream, sorted by event volume so the
 // dropdown leads with the busiest domains.
@@ -64,8 +68,21 @@ const streamEvents = computed(() => {
   let list = store.events;
   if (sevFilter.value !== 'all') list = list.filter((e) => e.severity === sevFilter.value);
   if (sourceFilter.value !== 'all') list = list.filter((e) => e.source === sourceFilter.value);
+  const q = streamQuery.value.trim().toLowerCase();
+  if (q) {
+    list = list.filter(
+      (e) =>
+        (e.title || '').toLowerCase().includes(q) ||
+        actorName(e.actor).toLowerCase().includes(q) ||
+        teamName(e.team).toLowerCase().includes(q),
+    );
+  }
   return list;
 });
+
+// Only the first streamLimit events are rendered; the rest stay one click away.
+const visibleStreamEvents = computed(() => streamEvents.value.slice(0, streamLimit.value));
+const streamMore = computed(() => Math.max(0, streamEvents.value.length - streamLimit.value));
 
 function openEvent(ev) {
   store.markRead(ev.id);
@@ -107,12 +124,13 @@ const subColumns = [
   { key: 'via', label: 'Bezorgd via' },
 ];
 
-const subRows = computed(() =>
+const allSubRows = computed(() =>
   store.subscriptions.map((sub) => {
     const meta = eventTypeMap[sub.event] || {};
     const channel = store.channels.find((c) => c.team === sub.team);
     return {
       ...sub,
+      teamLabel: teamName(sub.team),
       label: meta.label || sub.event,
       icon: meta.icon || 'circle-filled',
       source: meta.source || 'platform',
@@ -120,6 +138,24 @@ const subRows = computed(() =>
     };
   })
 );
+
+// Routering tables scale with the number of teams (dozens to hundreds), so the
+// abonnementen and kanalen tables get a shared text filter plus a render cap.
+const subQuery = ref('');
+const subLimit = ref(25);
+const filteredSubRows = computed(() => {
+  const q = subQuery.value.trim().toLowerCase();
+  if (!q) return allSubRows.value;
+  return allSubRows.value.filter(
+    (r) =>
+      r.teamLabel.toLowerCase().includes(q) ||
+      (r.event || '').toLowerCase().includes(q) ||
+      (r.label || '').toLowerCase().includes(q) ||
+      sourceMeta(r.source).label.toLowerCase().includes(q),
+  );
+});
+const subRows = computed(() => filteredSubRows.value.slice(0, subLimit.value));
+const subMore = computed(() => Math.max(0, filteredSubRows.value.length - subLimit.value));
 
 const channelColumns = [
   { key: 'team', label: 'Team' },
@@ -129,13 +165,29 @@ const channelColumns = [
   { key: 'status', label: 'Status' },
 ];
 
-const channelRows = computed(() =>
+const allChannelRows = computed(() =>
   store.channels.map((c) => ({
     ...c,
+    teamLabel: teamName(c.team),
     subs: store.subscriptions.filter((s) => s.team === c.team).length,
     status: c.type === 'webhook' && c.target.includes('…') ? 'in beoordeling' : 'operationeel',
   }))
 );
+
+const channelQuery = ref('');
+const channelLimit = ref(25);
+const filteredChannelRows = computed(() => {
+  const q = channelQuery.value.trim().toLowerCase();
+  if (!q) return allChannelRows.value;
+  return allChannelRows.value.filter(
+    (r) =>
+      r.teamLabel.toLowerCase().includes(q) ||
+      (r.type || '').toLowerCase().includes(q) ||
+      (r.target || '').toLowerCase().includes(q),
+  );
+});
+const channelRows = computed(() => filteredChannelRows.value.slice(0, channelLimit.value));
+const channelMore = computed(() => Math.max(0, filteredChannelRows.value.length - channelLimit.value));
 
 // --- CloudEvents envelope from a real recent event ------------------------
 // Pick the newest event that has a deep-link target, so the rendered envelope
@@ -236,6 +288,13 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
         </nldd-rich-text>
       </div>
       <div class="rp-filters">
+        <nldd-search-field
+          class="rp-stream-search"
+          placeholder="Zoek in events"
+          accessible-label="Zoek in de event-stream"
+          :value="streamQuery"
+          @input="(e) => (streamQuery = e.target.value)"
+        ></nldd-search-field>
         <nldd-segmented-control>
           <button type="button" :aria-pressed="sevFilter === 'all'" @click="sevFilter = 'all'">Alles</button>
           <button type="button" :aria-pressed="sevFilter === 'critical'" @click="sevFilter = 'critical'">Kritiek</button>
@@ -259,7 +318,7 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
     <nldd-card accessible-label="Event-stream">
       <ul class="rp-stream">
         <li
-          v-for="ev in streamEvents"
+          v-for="ev in visibleStreamEvents"
           :key="ev.id"
           class="rp-stream-item"
           :class="{ 'rp-unread': !ev.read }"
@@ -294,6 +353,15 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
         <li v-if="!streamEvents.length" class="rp-stream-empty">Geen events die aan dit filter voldoen.</li>
       </ul>
     </nldd-card>
+
+    <div v-if="streamMore" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${streamMore})`"
+        start-icon="chevron-down"
+        @click="streamLimit += 25"
+      ></nldd-button>
+    </div>
 
     <nldd-spacer size="32" />
 
@@ -371,6 +439,14 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
 
     <nldd-title size="4"><h3>Abonnementen</h3></nldd-title>
     <nldd-spacer size="8" />
+    <nldd-search-field
+      class="rp-table-search"
+      placeholder="Zoek op team, event-type of bron"
+      accessible-label="Zoek abonnement"
+      :value="subQuery"
+      @input="(e) => (subQuery = e.target.value)"
+    ></nldd-search-field>
+    <nldd-spacer size="12" />
     <DataTable :columns="subColumns" :rows="subRows" row-key="id">
       <template #cell="{ row, col, value }">
         <template v-if="col.key === 'team'">
@@ -396,10 +472,27 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
       </template>
     </DataTable>
 
+    <div v-if="subMore" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${subMore})`"
+        start-icon="chevron-down"
+        @click="subLimit += 25"
+      ></nldd-button>
+    </div>
+
     <nldd-spacer size="20" />
 
     <nldd-title size="4"><h3>Kanalen</h3></nldd-title>
     <nldd-spacer size="8" />
+    <nldd-search-field
+      class="rp-table-search"
+      placeholder="Zoek op team, type of bestemming"
+      accessible-label="Zoek kanaal"
+      :value="channelQuery"
+      @input="(e) => (channelQuery = e.target.value)"
+    ></nldd-search-field>
+    <nldd-spacer size="12" />
     <DataTable :columns="channelColumns" :rows="channelRows" row-key="id">
       <template #cell="{ row, col, value }">
         <template v-if="col.key === 'team'">
@@ -423,6 +516,15 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
         <template v-else>{{ value }}</template>
       </template>
     </DataTable>
+
+    <div v-if="channelMore" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${channelMore})`"
+        start-icon="chevron-down"
+        @click="channelLimit += 25"
+      ></nldd-button>
+    </div>
 
     <nldd-spacer size="32" />
 
@@ -459,6 +561,17 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
   align-items: center;
   gap: 0.6rem;
   flex-wrap: wrap;
+}
+.rp-stream-search {
+  min-width: 16rem;
+}
+.rp-table-search {
+  max-width: 28rem;
+}
+.rp-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.85rem;
 }
 
 /* --- Live stream --- */

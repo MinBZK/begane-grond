@@ -42,20 +42,62 @@ const expiryColor = (sec) => {
 // "zojuist" on rotate; treat that as freshly rotated for the success styling.
 const justRotated = (sec) => sec.rotated === 'zojuist';
 
-// Group secrets by team, in the team order from the store.
-const groups = computed(() =>
-  store.teams
-    .map((team) => ({
-      team,
-      secrets: store.secrets.filter((s) => s.team === team.id),
-    }))
-    .filter((g) => g.secrets.length > 0),
-);
+// Search + type filter so the tree stays usable now the kluis spans many teams.
+const query = ref('');
+const typeFilter = ref('alle');
+// Build the type chips live from the data, so we never list a type with 0 hits.
+const types = computed(() => {
+  const seen = [...new Set(store.secrets.map((s) => s.type))];
+  return ['alle', ...seen];
+});
+const setType = (t) => {
+  typeFilter.value = t;
+};
 
-// All teams expanded by default; this is a small dataset.
-const open = ref(Object.fromEntries(store.teams.map((t) => [t.id, true])));
+// Secrets that match the active search query and type filter.
+const matchingSecrets = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return store.secrets.filter((s) => {
+    if (typeFilter.value !== 'alle' && s.type !== typeFilter.value) return false;
+    if (!q) return true;
+    const teamName = (store.teamById(s.team)?.name || '').toLowerCase();
+    return (
+      s.name.toLowerCase().includes(q) ||
+      s.type.toLowerCase().includes(q) ||
+      teamName.includes(q)
+    );
+  });
+});
+
+// Group the matching secrets by team, in the team order from the store.
+const allGroups = computed(() => {
+  const byTeam = new Map();
+  for (const s of matchingSecrets.value) {
+    if (!byTeam.has(s.team)) byTeam.set(s.team, []);
+    byTeam.get(s.team).push(s);
+  }
+  return store.teams
+    .map((team) => ({ team, secrets: byTeam.get(team.id) || [] }))
+    .filter((g) => g.secrets.length > 0);
+});
+
+// Cap the number of team groups shown; reveal more on demand.
+const limit = ref(12);
+const groups = computed(() => allGroups.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, allGroups.value.length - limit.value));
+const showMore = () => {
+  limit.value += 12;
+};
+
+// Collapse groups by default so the page stays short; a search expands matches.
+const open = ref({});
+const isOpen = (id) => {
+  // When searching, auto-expand so hits are visible without extra clicks.
+  if (open.value[id] !== undefined) return open.value[id];
+  return query.value.trim() !== '' || typeFilter.value !== 'alle';
+};
 const toggle = (id) => {
-  open.value[id] = !open.value[id];
+  open.value[id] = !isOpen(id);
 };
 
 const total = computed(() => store.secrets.length);
@@ -134,14 +176,38 @@ function appForSecret(sec) {
 
     <nldd-spacer size="24" />
 
+    <div class="rp-filters">
+      <nldd-search-field
+        placeholder="Zoek op secret, type of team"
+        accessible-label="Zoek secret"
+        :value="query"
+        @input="(e) => (query = e.target.value)"
+      ></nldd-search-field>
+      <div class="rp-type-chips">
+        <nldd-button
+          v-for="t in types"
+          :key="t"
+          size="sm"
+          :variant="typeFilter === t ? 'primary' : 'secondary'"
+          :text="t === 'alle' ? 'Alle types' : t"
+          @click="setType(t)"
+        ></nldd-button>
+      </div>
+    </div>
+
+    <nldd-spacer size="16" />
+
     <div class="rp-tree">
+      <p v-if="!allGroups.length" class="rp-empty">
+        Geen secrets gevonden voor deze filters.
+      </p>
       <nldd-card v-for="g in groups" :key="g.team.id" :accessible-label="g.team.name">
         <nldd-container padding="20">
           <button class="rp-team-row" type="button" @click="toggle(g.team.id)">
             <nldd-icon
               name="chevron-right"
               class="rp-chevron"
-              :class="{ 'rp-chevron-open': open[g.team.id] }"
+              :class="{ 'rp-chevron-open': isOpen(g.team.id) }"
               aria-hidden="true"
             ></nldd-icon>
             <nldd-icon name="person-2" aria-hidden="true" class="rp-team-icon"></nldd-icon>
@@ -157,7 +223,7 @@ function appForSecret(sec) {
             </router-link>
           </button>
 
-          <div v-if="open[g.team.id]" class="rp-secrets">
+          <div v-if="isOpen(g.team.id)" class="rp-secrets">
             <div v-for="sec in g.secrets" :key="sec.id" class="rp-secret">
               <div class="rp-secret-main">
                 <nldd-icon
@@ -210,6 +276,14 @@ function appForSecret(sec) {
           </div>
         </nldd-container>
       </nldd-card>
+
+      <nldd-button
+        v-if="moreCount > 0"
+        variant="secondary"
+        :text="`Toon meer (nog ${moreCount} teams)`"
+        start-icon="chevron-down"
+        @click="showMore"
+      ></nldd-button>
     </div>
 
     <nldd-spacer size="24" />
@@ -232,6 +306,22 @@ function appForSecret(sec) {
 </template>
 
 <style scoped>
+.rp-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.rp-type-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.rp-empty {
+  opacity: 0.6;
+  margin: 0;
+  padding: 0.5rem 0.25rem;
+}
 .rp-tree {
   display: flex;
   flex-direction: column;

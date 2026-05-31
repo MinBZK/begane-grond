@@ -4,7 +4,7 @@
 // health badge per app (from the app catalog), and a "promote" action that
 // jumps into the promotion wizard. All data is read live from the store, so
 // promotions done in the wizard reflect back here immediately.
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -42,6 +42,53 @@ const totalApps = computed(() => rows.value.length);
 const inSync = computed(() => rows.value.filter((r) => !r.drift).length);
 const needPromotion = computed(() => rows.value.filter((r) => r.aheadOfProd).length);
 const unhealthy = computed(() => rows.value.filter((r) => r.health !== 'ok').length);
+
+// The catalog now holds 120+ apps with a pipeline, so the matrix is far too
+// long to scan as one wall of rows. Add a search box, a status filter and a
+// capped view with a "show more" affordance, so the table stays scannable and
+// drift jumps out instead of drowning in in-sync rows.
+const query = ref('');
+const statusFilter = ref('all'); // all | drift | promote | unhealthy
+const limit = ref(25);
+
+const STATUS_FILTERS = [
+  { id: 'all', label: 'Alles' },
+  { id: 'drift', label: 'Drift' },
+  { id: 'promote', label: 'Te promoten' },
+  { id: 'unhealthy', label: 'Aandacht nodig' },
+];
+
+const filtered = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return rows.value.filter((r) => {
+    if (statusFilter.value === 'drift' && !r.drift) return false;
+    if (statusFilter.value === 'promote' && !r.aheadOfProd) return false;
+    if (statusFilter.value === 'unhealthy' && r.health === 'ok') return false;
+    if (!q) return true;
+    return (
+      r.name.toLowerCase().includes(q) ||
+      r.key.toLowerCase().includes(q) ||
+      (r.team?.name || '').toLowerCase().includes(q)
+    );
+  });
+});
+
+const visible = computed(() => filtered.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filtered.value.length - limit.value));
+
+function setStatusFilter(id) {
+  statusFilter.value = id;
+  limit.value = 25;
+}
+function showMore() {
+  limit.value += 25;
+}
+
+// Recent promotions: the release log grows without bound, so only the most
+// recent handful belong in this side panel. The full history lives behind the
+// "Alle releases" button.
+const RELEASE_PREVIEW = 8;
+const recentReleases = computed(() => store.releases.slice(0, RELEASE_PREVIEW));
 
 // Highlight the cell that differs from the environment to its left, so the
 // "where does the version change" reads instantly in the grid.
@@ -87,6 +134,28 @@ function changed(versions, env) {
         </nldd-rich-text>
         <nldd-spacer size="16" />
 
+        <div class="rp-matrix-controls">
+          <nldd-search-field
+            class="rp-matrix-search"
+            placeholder="Zoek op applicatie, id of team"
+            accessible-label="Zoek applicatie"
+            :value="query"
+            @input="(e) => { query = e.target.value; limit = 25; }"
+          ></nldd-search-field>
+          <div class="rp-matrix-filters">
+            <nldd-button
+              v-for="f in STATUS_FILTERS"
+              :key="f.id"
+              size="sm"
+              :variant="statusFilter === f.id ? 'primary' : 'secondary'"
+              :text="f.label"
+              @click="setStatusFilter(f.id)"
+            ></nldd-button>
+          </div>
+        </div>
+
+        <nldd-spacer size="12" />
+
         <div class="rp-matrix-wrap">
           <table class="rp-matrix">
             <thead>
@@ -98,7 +167,7 @@ function changed(versions, env) {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="r in rows" :key="r.key">
+              <tr v-for="r in visible" :key="r.key">
                 <td class="rp-col-app">
                   <router-link :to="`/apps/${r.key}`" class="rp-app-link">
                     <nldd-icon name="rectangle-stack" aria-hidden="true"></nldd-icon>
@@ -129,6 +198,21 @@ function changed(versions, env) {
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <p v-if="!filtered.length" class="rp-matrix-empty">
+          Geen applicatie gevonden voor deze filters.
+        </p>
+
+        <div v-if="moreCount > 0" class="rp-matrix-more">
+          <span>{{ visible.length }} van {{ filtered.length }} applicaties</span>
+          <nldd-button
+            variant="secondary"
+            size="sm"
+            :text="`Toon meer (nog ${moreCount})`"
+            end-icon="chevron-down"
+            @click="showMore"
+          ></nldd-button>
         </div>
       </nldd-container>
     </nldd-card>
@@ -161,7 +245,7 @@ function changed(versions, env) {
           <nldd-title size="5"><h3>Recente promoties</h3></nldd-title>
           <nldd-spacer size="12" />
           <nldd-list>
-            <nldd-list-item v-for="rel in store.releases" :key="rel.id">
+            <nldd-list-item v-for="rel in recentReleases" :key="rel.id">
               <nldd-title-cell
                 :text="`${appName(rel.app)} ${rel.version}`"
                 :supporting-text="`naar ${rel.env} · ${rel.when}`"
@@ -181,6 +265,36 @@ function changed(versions, env) {
 </template>
 
 <style scoped>
+.rp-matrix-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.rp-matrix-search {
+  flex: 1 1 18rem;
+  min-width: 14rem;
+}
+.rp-matrix-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.rp-matrix-empty {
+  margin: 1rem 0 0;
+  opacity: 0.6;
+}
+.rp-matrix-more {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
 .rp-matrix-wrap {
   overflow-x: auto;
   border: 1px solid var(--semantics-dividers-color);

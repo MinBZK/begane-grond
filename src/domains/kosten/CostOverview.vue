@@ -5,7 +5,7 @@
 // an SVG donut + bar chart, a 6-month trend sparkline, and a showback table
 // that says who pays for which instance. Each instance is also given an energy
 // flavour: estimated kWh and CO2, scaled by the PUE of its datacenter.
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -56,15 +56,18 @@ const fmtCo2 = (n) => `${(n).toLocaleString('nl-NL', { maximumFractionDigits: 0 
 const teamName = (id) => store.teamById(id)?.name || id;
 
 // --- Per-team breakdown (from the team rollup) ------------------------------
-const TEAM_COLORS = {
-  'team-platform': '#2563eb',
-  'team-burgerzaken': '#0d9488',
-  'team-toeslagen': '#d97706',
-  'team-data': '#7c3aed',
-};
-const teamColor = (id) => TEAM_COLORS[id] || '#64748b';
+// The team rollup now spans ~74 teams. Drawing one donut arc + legend row per
+// team turns 99% of the ring into an indistinguishable grey mass. We therefore
+// show the top N spenders individually and fold the long tail into a single
+// "overige teams" bucket. Colours are generated programmatically (HSL spread
+// over the index) so every segment is visually distinct without a hardcoded map.
+const TOP_TEAMS = 8;
+const REST_COLOR = '#94a3b8';
+const teamColorAt = (i) => `hsl(${(i * 47) % 360} 62% 48%)`;
 
-const breakdown = computed(() => {
+// Full, unaggregated per-team list (top spenders first). Used for budget flags
+// and as the source for both the capped breakdown and the rest bucket.
+const allTeamCosts = computed(() => {
   const total = teamRollupTotal.value || 1;
   return [...store.costByTeam]
     .sort((a, b) => b.month - a.month)
@@ -76,11 +79,33 @@ const breakdown = computed(() => {
         month: t.month,
         trend: t.trend,
         pct: (t.month / total) * 100,
-        color: teamColor(t.team),
         budget: budget?.budget ?? null,
         overBudget: budget ? t.month > budget.budget : false,
       };
     });
+});
+
+// Capped breakdown: top N teams (each its own colour) plus an aggregated
+// "overige teams" row when the tail is non-empty.
+const breakdown = computed(() => {
+  const all = allTeamCosts.value;
+  const total = teamRollupTotal.value || 1;
+  const top = all.slice(0, TOP_TEAMS).map((t, i) => ({ ...t, color: teamColorAt(i) }));
+  const rest = all.slice(TOP_TEAMS);
+  if (rest.length === 0) return top;
+  const restMonth = rest.reduce((sum, t) => sum + (t.month || 0), 0);
+  top.push({
+    team: '__rest__',
+    name: `Overige teams (${rest.length})`,
+    month: restMonth,
+    trend: '',
+    pct: (restMonth / total) * 100,
+    color: REST_COLOR,
+    budget: null,
+    overBudget: false,
+    isRest: true,
+  });
+  return top;
 });
 
 // --- SVG donut --------------------------------------------------------------
@@ -151,7 +176,19 @@ const showbackColumns = [
   { key: 'co2', label: 'CO2/mnd', align: 'right' },
   { key: 'costMonth', label: '€/mnd', align: 'right', mono: true },
 ];
-const showbackRows = computed(() =>
+// The showback table now spans 244 instances. DataTable has no pagination, so
+// we add a search field plus a datacenter filter and cap the visible rows to an
+// initial N, with a "toon meer" button that raises the cap. Default sort is by
+// monthly cost (highest first) so the cap shows the most expensive instances.
+const showbackQuery = ref('');
+const showbackDc = ref('all');
+const showbackLimit = ref(25);
+const SHOWBACK_STEP = 25;
+
+const appName = (id) => store.appById(id)?.name || '—';
+const dcName = (id) => store.datacenterById(id)?.name || id;
+
+const allShowbackRows = computed(() =>
   [...store.instances]
     .sort((a, b) => (b.costMonth || 0) - (a.costMonth || 0))
     .map((i) => {
@@ -160,8 +197,26 @@ const showbackRows = computed(() =>
     }),
 );
 
-const appName = (id) => store.appById(id)?.name || '—';
-const dcName = (id) => store.datacenterById(id)?.name || id;
+const filteredShowback = computed(() => {
+  const q = showbackQuery.value.trim().toLowerCase();
+  const dc = showbackDc.value;
+  return allShowbackRows.value.filter((r) => {
+    if (dc !== 'all' && r.dc !== dc) return false;
+    if (!q) return true;
+    return (
+      (r.name || '').toLowerCase().includes(q) ||
+      (r.kind || '').toLowerCase().includes(q) ||
+      teamName(r.team).toLowerCase().includes(q) ||
+      appName(r.app).toLowerCase().includes(q)
+    );
+  });
+});
+
+const showbackRows = computed(() => filteredShowback.value.slice(0, showbackLimit.value));
+const showbackMore = computed(() => Math.max(0, filteredShowback.value.length - showbackLimit.value));
+function showMoreShowback() {
+  showbackLimit.value += SHOWBACK_STEP;
+}
 </script>
 
 <template>
@@ -243,10 +298,14 @@ const dcName = (id) => store.datacenterById(id)?.name || id;
               <!-- Legend + bars -->
               <ul class="rp-legend">
                 <li v-for="b in breakdown" :key="b.team" class="rp-legend-row">
-                  <router-link :to="`/teams/${b.team}`" class="rp-legend-team">
+                  <router-link v-if="!b.isRest" :to="`/teams/${b.team}`" class="rp-legend-team">
                     <span class="rp-legend-dot" :style="{ background: b.color }"></span>
                     <span class="rp-legend-name">{{ b.name }}</span>
                   </router-link>
+                  <span v-else class="rp-legend-team rp-legend-rest">
+                    <span class="rp-legend-dot" :style="{ background: b.color }"></span>
+                    <span class="rp-legend-name">{{ b.name }}</span>
+                  </span>
                   <div class="rp-legend-bar-wrap">
                     <div
                       class="rp-legend-bar"
@@ -257,7 +316,7 @@ const dcName = (id) => store.datacenterById(id)?.name || id;
                     <strong>{{ fmtEur(b.month) }}</strong>
                     <span class="rp-legend-pct">{{ b.pct.toFixed(0) }}%</span>
                     <nldd-tag v-if="b.overBudget" color="critical" size="md">over budget</nldd-tag>
-                    <span v-else class="rp-legend-trend" :class="{ up: b.trend.startsWith('+') }">{{ b.trend }}</span>
+                    <span v-else-if="b.trend" class="rp-legend-trend" :class="{ up: b.trend.startsWith('+') }">{{ b.trend }}</span>
                   </div>
                 </li>
               </ul>
@@ -357,11 +416,30 @@ const dcName = (id) => store.datacenterById(id)?.name || id;
       <nldd-container padding="24">
         <div class="rp-section-head">
           <nldd-title size="4"><h2>Showback: wie betaalt voor wat</h2></nldd-title>
-          <nldd-tag color="neutral" size="md">{{ store.instances.length }} instances</nldd-tag>
+          <nldd-tag color="neutral" size="md">{{ filteredShowback.length }} van {{ store.instances.length }} instances</nldd-tag>
         </div>
         <nldd-rich-text>
           <p>Elke afgenomen dienst wordt teruggerekend naar het team dat hem afnam. Klik door naar instance, app, team of datacenter.</p>
         </nldd-rich-text>
+        <nldd-spacer size="16" />
+
+        <div class="rp-showback-controls">
+          <nldd-search-field
+            class="rp-showback-search"
+            placeholder="Zoek op instance, type, team of applicatie"
+            @input="(e) => { showbackQuery = e.target.value; showbackLimit = 25; }"
+          ></nldd-search-field>
+          <nldd-dropdown>
+            <select
+              class="rp-showback-dc"
+              :value="showbackDc"
+              @change="(e) => { showbackDc = e.target.value; showbackLimit = 25; }"
+            >
+              <option value="all">Alle datacenters</option>
+              <option v-for="dc in store.datacenters" :key="dc.id" :value="dc.id">{{ dc.name }}</option>
+            </select>
+          </nldd-dropdown>
+        </div>
         <nldd-spacer size="16" />
 
         <DataTable :columns="showbackColumns" :rows="showbackRows" row-key="id">
@@ -397,6 +475,18 @@ const dcName = (id) => store.datacenterById(id)?.name || id;
             <template v-else>{{ value }}</template>
           </template>
         </DataTable>
+
+        <div v-if="showbackMore > 0" class="rp-showback-more">
+          <nldd-button
+            variant="secondary"
+            :text="`Toon meer (nog ${showbackMore})`"
+            start-icon="chevron-down"
+            @click="showMoreShowback"
+          />
+        </div>
+        <p v-else-if="filteredShowback.length === 0" class="rp-showback-empty">
+          Geen instances gevonden voor deze zoekopdracht of dit datacenter.
+        </p>
 
         <CliHint command="rp cost showback --by team --period maand" label="Hetzelfde overzicht via de CLI:" />
       </nldd-container>
@@ -640,6 +730,39 @@ const dcName = (id) => store.datacenterById(id)?.name || id;
 .rp-energy-cap {
   font-size: 0.75rem;
   opacity: 0.6;
+}
+
+.rp-legend-rest {
+  cursor: default;
+}
+.rp-legend-rest .rp-legend-name {
+  opacity: 0.75;
+  font-style: italic;
+}
+
+/* Showback controls */
+.rp-showback-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+.rp-showback-search {
+  flex: 1 1 280px;
+  min-width: 220px;
+}
+.rp-showback-dc {
+  min-width: 200px;
+}
+.rp-showback-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.rp-showback-empty {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin: 1rem 0 0;
 }
 
 /* Table cells */

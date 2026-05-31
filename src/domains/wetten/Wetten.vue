@@ -24,6 +24,14 @@ const filtered = computed(() =>
 
 const publishedCount = computed(() => store.wettenByStatus('gepubliceerd').length);
 
+// Active trajecten only: publishWet() marks a traject 'goedgekeurd' and detaches
+// it from the wet, but leaves it in store.trajecten. Filter completed ones out so
+// the metric and the list reflect work that is actually still underway.
+const COMPLETED_TRAJECT_STATUSES = ['goedgekeurd', 'afgesloten'];
+const activeTrajecten = computed(() =>
+  store.trajecten.filter((t) => !COMPLETED_TRAJECT_STATUSES.includes(t.status)),
+);
+
 function ownerName(teamId) {
   return store.teamById(teamId)?.name || teamId;
 }
@@ -68,7 +76,7 @@ function wetName(id) {
       <MetricCard :value="store.wetten.length" label="Wetten in corpus" sub="machine-leesbaar" icon="books-vertical" />
       <MetricCard :value="publishedCount" label="Gepubliceerd" sub="live in uitvoering" icon="check-mark-circle" />
       <MetricCard :value="`${store.avgCoverage}%`" label="Gemiddelde dekking" sub="uitvoerbare logica" icon="sparkles" />
-      <MetricCard :value="store.trajecten.length" label="Actieve trajecten" sub="wijzigingen onderweg" icon="pencil" />
+      <MetricCard :value="activeTrajecten.length" label="Actieve trajecten" sub="wijzigingen onderweg" icon="pencil" />
     </nldd-container>
 
     <nldd-spacer size="16" />
@@ -136,7 +144,7 @@ function wetName(id) {
 
     <nldd-collection layout="grid" item-width="440px">
       <router-link
-        v-for="t in store.trajecten"
+        v-for="t in activeTrajecten"
         :key="t.id"
         :to="`/wetten/${t.wet}`"
         class="rp-wet-link"

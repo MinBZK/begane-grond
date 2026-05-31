@@ -45,6 +45,11 @@ const teamIncidents = computed(() =>
 const teamCost = computed(() =>
   team.value ? store.costByTeam.find((c) => c.team === team.value.id) : null,
 );
+// Maandkosten run into the thousands; format with a Dutch thousands separator
+// instead of showing a bare integer derived straight from the store.
+const teamCostLabel = computed(
+  () => `€ ${(teamCost.value ? teamCost.value.month : 0).toLocaleString('nl-NL')}`,
+);
 
 const appLinks = computed(() =>
   ownApps.value.map((a) => ({ text: a.name, to: `/apps/${a.id}`, icon: 'rectangle-stack' })),
@@ -90,7 +95,7 @@ const chatOpen = ref(false);
       <MetricCard :value="members.length" label="Leden" icon="person" />
       <MetricCard :value="ownApps.length" label="Apps" icon="rectangle-stack" />
       <MetricCard :value="ownInstances.length" label="Infra" icon="cylinder-split" />
-      <MetricCard :value="`€${teamCost ? teamCost.month : 0}`" label="Maandkosten" :sub="teamCost ? teamCost.trend : ''" icon="euro-sign" />
+      <MetricCard :value="teamCostLabel" label="Maandkosten" :sub="teamCost ? teamCost.trend : ''" icon="euro-sign" />
     </nldd-container>
 
     <nldd-spacer size="24" />

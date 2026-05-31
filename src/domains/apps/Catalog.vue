@@ -2,7 +2,7 @@
 // Software catalog: every app in the store, filterable by team / type /
 // maturity and searchable by name or stack. Each row links through to the app
 // detail page, which in turn links down to repo, infra and team.
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -14,6 +14,12 @@ const query = ref('');
 const teamFilter = ref('');
 const typeFilter = ref('');
 const maturityFilter = ref('');
+
+// The catalogue now holds well over a hundred apps, so rendering every card at
+// once makes the page unmanageably long. Cap the grid at an initial batch and
+// let the user reveal more in steps.
+const PAGE_SIZE = 24;
+const limit = ref(PAGE_SIZE);
 
 const types = computed(() => [...new Set(store.apps.map((a) => a.type))]);
 const maturities = ['goud', 'zilver', 'brons'];
@@ -42,6 +48,20 @@ const filtered = computed(() => {
   });
 });
 
+// Only the capped slice is actually rendered; the rest stays behind "Toon meer".
+const visible = computed(() => filtered.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filtered.value.length - limit.value));
+
+// Any change to the active filters resets the cap so a fresh result set starts
+// from the top instead of inheriting a previously expanded limit.
+watch([query, teamFilter, typeFilter, maturityFilter], () => {
+  limit.value = PAGE_SIZE;
+});
+
+function showMore() {
+  limit.value += PAGE_SIZE;
+}
+
 const total = computed(() => store.apps.length);
 const goldCount = computed(() => store.apps.filter((a) => a.maturity === 'goud').length);
 const warnCount = computed(() => store.apps.filter((a) => a.health !== 'ok').length);
@@ -51,6 +71,7 @@ function reset() {
   teamFilter.value = '';
   typeFilter.value = '';
   maturityFilter.value = '';
+  limit.value = PAGE_SIZE;
 }
 </script>
 
@@ -125,7 +146,7 @@ function reset() {
 
     <nldd-collection layout="grid" item-width="340px">
       <router-link
-        v-for="app in filtered"
+        v-for="app in visible"
         :key="app.id"
         :to="`/apps/${app.id}`"
         class="rp-app-link"
@@ -166,6 +187,15 @@ function reset() {
       </router-link>
     </nldd-collection>
 
+    <div v-if="moreCount" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${moreCount})`"
+        start-icon="chevron-down"
+        @click="showMore"
+      ></nldd-button>
+    </div>
+
     <nldd-card v-if="!filtered.length">
       <nldd-container padding="24">
         <nldd-rich-text><p>Geen applicaties gevonden voor deze filters.</p></nldd-rich-text>
@@ -191,6 +221,7 @@ function reset() {
   font-size: 0.85rem;
   opacity: 0.8;
 }
+.rp-more { display: flex; justify-content: center; margin-top: 1.25rem; }
 .rp-app-link { text-decoration: none; color: inherit; display: block; }
 .rp-app-top {
   display: flex;

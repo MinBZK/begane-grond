@@ -2,7 +2,7 @@
 // One basisregistratie in detail: its fields, the data holder, the AVG
 // classification and availability, and crucially its consumers (which services
 // and laws read which field). The consumers list is the traceability spine.
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
@@ -39,6 +39,30 @@ const consumerColumns = [
   { key: 'soort', label: 'Soort' },
   { key: 'veld', label: 'Afgenomen veld', mono: true },
 ];
+
+// The consumers list is the traceability spine and grows unbounded at platform
+// scale (a popular register is read by dozens of services and laws). Filter on
+// afnemer/veld + a soort-chip, and cap the table at an initial N rows with a
+// "Toon meer" control so the page stays manageable.
+const query = ref('');
+const soortFilter = ref('alle');
+const limit = ref(25);
+const soortFilters = [
+  { id: 'alle', label: 'Alle' },
+  { id: 'Dienst', label: 'Diensten' },
+  { id: 'Wet', label: 'Wetten' },
+];
+
+const filteredConsumers = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return consumerRows.value.filter((r) => {
+    if (soortFilter.value !== 'alle' && r.soort !== soortFilter.value) return false;
+    if (!q) return true;
+    return r.naam.toLowerCase().includes(q) || r.veld.toLowerCase().includes(q);
+  });
+});
+const visibleConsumers = computed(() => filteredConsumers.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filteredConsumers.value.length - limit.value));
 
 const relations = computed(() => {
   if (!register.value) return [];
@@ -102,7 +126,28 @@ const relations = computed(() => {
       <p>Elke afnemer leest een specifiek veld. Klik door naar de dienst of de wet die het gebruikt.</p>
     </nldd-rich-text>
     <nldd-spacer size="16" />
-    <DataTable :columns="consumerColumns" :rows="consumerRows" row-key="id">
+
+    <div class="rp-consumer-filters">
+      <nldd-search-field
+        placeholder="Zoek op afnemer of veld"
+        accessible-label="Zoek afnemer"
+        :value="query"
+        @input="(e) => (query = e.target.value)"
+      ></nldd-search-field>
+      <div class="rp-chips">
+        <nldd-button
+          v-for="f in soortFilters"
+          :key="f.id"
+          :variant="soortFilter === f.id ? 'primary' : 'secondary'"
+          :text="f.label"
+          @click="soortFilter = f.id"
+        ></nldd-button>
+      </div>
+    </div>
+
+    <nldd-spacer size="12" />
+
+    <DataTable :columns="consumerColumns" :rows="visibleConsumers" row-key="id">
       <template #cell="{ row, col, value }">
         <template v-if="col.key === 'naam'">
           <router-link :to="row.to" class="rp-link">{{ row.naam }}</router-link>
@@ -113,6 +158,18 @@ const relations = computed(() => {
         <template v-else>{{ value }}</template>
       </template>
     </DataTable>
+
+    <p v-if="!filteredConsumers.length" class="rp-consumer-empty">
+      Geen afnemers gevonden voor deze filters.
+    </p>
+    <div v-if="moreCount > 0" class="rp-consumer-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${moreCount})`"
+        start-icon="chevron-down"
+        @click="limit += 25"
+      ></nldd-button>
+    </div>
 
     <nldd-spacer size="24" />
     <CliHint :command="`rp register show ${register.id}\nrp register connect ${register.id} --field ${register.fields[0]} --app app-toeslagen`" />
@@ -163,6 +220,28 @@ const relations = computed(() => {
 .rp-class nldd-icon {
   width: 1rem;
   height: 1rem;
+}
+.rp-consumer-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.rp-consumer-filters nldd-search-field {
+  flex: 1 1 16rem;
+  min-width: 12rem;
+}
+.rp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.rp-consumer-empty {
+  opacity: 0.6;
+  margin: 0.75rem 0 0;
+}
+.rp-consumer-more {
+  margin-top: 0.75rem;
 }
 .rp-link {
   color: var(--semantics-actions-primary-default-background-color, #154273);

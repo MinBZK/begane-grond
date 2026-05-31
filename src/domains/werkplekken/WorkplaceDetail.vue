@@ -81,8 +81,29 @@ function revoke() {
   router.push('/werkplekken');
 }
 
+// Handover target picker. The directory holds hundreds of people, so a wall of
+// <option>s is unusable: use a search-as-you-type picker capped to a few
+// matches, like the provisioning wizard.
 const otherPeople = computed(() =>
   store.people.filter((p) => !wp.value || p.id !== wp.value.person),
+);
+const handoverQuery = ref('');
+const handoverLimit = 6;
+const handoverMatches = computed(() => {
+  const q = handoverQuery.value.trim().toLowerCase();
+  return q
+    ? otherPeople.value.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          (p.role || '').toLowerCase().includes(q) ||
+          (store.teamById(p.team)?.name || '').toLowerCase().includes(q),
+      )
+    : otherPeople.value;
+});
+const handoverVisible = computed(() => handoverMatches.value.slice(0, handoverLimit));
+const handoverMore = computed(() => Math.max(0, handoverMatches.value.length - handoverLimit));
+const handoverTarget = computed(() =>
+  handoverTo.value ? store.personById(handoverTo.value) : null,
 );
 </script>
 
@@ -202,15 +223,51 @@ const otherPeople = computed(() =>
             <div v-if="handoverOpen" class="rp-handover">
               <nldd-spacer size="16" />
               <nldd-form-field label="Overdragen aan">
-                <nldd-dropdown>
-                  <select v-model="handoverTo">
-                    <option value="" disabled>Kies een medewerker…</option>
-                    <option v-for="p in otherPeople" :key="p.id" :value="p.id">
-                      {{ p.name }} — {{ store.teamById(p.team)?.name }}
-                    </option>
-                  </select>
-                </nldd-dropdown>
+                <nldd-search-field
+                  placeholder="Zoek op naam, rol of team"
+                  accessible-label="Zoek medewerker"
+                  :value="handoverQuery"
+                  @input="(e) => (handoverQuery = e.target.value)"
+                ></nldd-search-field>
               </nldd-form-field>
+
+              <!-- Currently chosen target, always visible even when filtered out. -->
+              <template v-if="handoverTarget">
+                <nldd-spacer size="12" />
+                <div class="rp-pick rp-pick-on rp-pick-selected">
+                  <span class="rp-pick-avatar">{{ handoverTarget.avatar }}</span>
+                  <span class="rp-pick-main">
+                    <strong>{{ handoverTarget.name }}</strong>
+                    <span class="rp-pick-sub">{{ handoverTarget.role }} · {{ store.teamById(handoverTarget.team)?.name }}</span>
+                  </span>
+                  <nldd-tag color="success" size="md">Gekozen</nldd-tag>
+                </div>
+              </template>
+
+              <nldd-spacer size="12" />
+              <div class="rp-pick-list">
+                <button
+                  v-for="p in handoverVisible"
+                  :key="p.id"
+                  type="button"
+                  class="rp-pick"
+                  :class="{ 'rp-pick-on': handoverTo === p.id }"
+                  @click="handoverTo = p.id"
+                >
+                  <span class="rp-pick-avatar">{{ p.avatar }}</span>
+                  <span class="rp-pick-main">
+                    <strong>{{ p.name }}</strong>
+                    <span class="rp-pick-sub">{{ p.role }} · {{ store.teamById(p.team)?.name }}</span>
+                  </span>
+                </button>
+                <p v-if="!handoverVisible.length" class="rp-pick-empty">
+                  Geen medewerker gevonden voor "{{ handoverQuery }}".
+                </p>
+              </div>
+              <p v-if="handoverMore > 0" class="rp-pick-more">
+                En nog {{ handoverMore }} resultaten. Verfijn je zoekopdracht.
+              </p>
+
               <nldd-spacer size="12" />
               <nldd-button
                 variant="primary"
@@ -354,5 +411,70 @@ const otherPeople = computed(() =>
 .rp-action-danger nldd-icon {
   color: var(--nldd-color-critical, #b3261e);
   opacity: 1;
+}
+/* Handover picker: search-driven results list, not a wall of options. */
+.rp-pick-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 18rem;
+  overflow-y: auto;
+}
+.rp-pick {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  text-align: left;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--semantics-dividers-color);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.rp-pick:hover {
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-pick-on {
+  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-pick-selected {
+  align-items: center;
+}
+.rp-pick-selected nldd-tag {
+  margin-left: auto;
+}
+.rp-pick-avatar {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  background: var(--semantics-actions-primary-default-background-color, #154273);
+}
+.rp-pick-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.rp-pick-sub {
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+.rp-pick-empty {
+  opacity: 0.6;
+  padding: 0.75rem 0.25rem;
+  margin: 0;
+}
+.rp-pick-more {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.6;
 }
 </style>

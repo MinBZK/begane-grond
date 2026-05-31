@@ -15,6 +15,10 @@ const instanceCount = computed(() => store.instances.length);
 const monthlyCost = computed(() =>
   store.instances.reduce((sum, i) => sum + (i.costMonth || 0), 0),
 );
+// At platform scale the running fleet sums to a five-figure monthly bill, so the
+// raw number is unreadable without thousands separators. Derive the formatted
+// label live from the store and format it in the Dutch locale.
+const monthlyCostLabel = computed(() => `€${monthlyCost.value.toLocaleString('nl-NL')}`);
 const readyCount = computed(() =>
   store.instances.filter((i) => i.status === 'ready').length,
 );
@@ -47,7 +51,7 @@ function tierColor(tier) {
     <nldd-container layout="grid" column-count="3" gap="16">
       <MetricCard :value="services.length" label="Diensten in catalogus" icon="cloud" />
       <MetricCard :value="instanceCount" label="Lopende instances" :sub="`${readyCount} ready`" icon="rectangle-stack" to="/infra/instances" />
-      <MetricCard :value="`€${monthlyCost}`" label="Maandkosten infra" sub="optelsom van alle instances" icon="euro-sign" />
+      <MetricCard :value="monthlyCostLabel" label="Maandkosten infra" :sub="`optelsom van ${instanceCount} instances`" icon="euro-sign" />
     </nldd-container>
 
     <nldd-spacer size="28" />

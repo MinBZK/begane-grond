@@ -4,7 +4,7 @@
 // lifecycle status. Each row links through to the owning team and exposes an
 // OpenAPI spec panel with a copy-able base URL and an `rp` CLI hint. A search
 // field plus a status filter keep the catalog navigable as it grows.
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -19,9 +19,14 @@ const query = ref('');
 const statusFilter = ref('');
 const selected = ref(null);
 
+// Cap the table at a readable initial page; "Toon meer" raises the cap. With 80+
+// koppelvlakken the full catalog is an unmanageably long table otherwise.
+const PAGE = 25;
+const limit = ref(PAGE);
+
 const statuses = computed(() => [...new Set(store.apis.map((a) => a.status))]);
 
-const rows = computed(() => {
+const filtered = computed(() => {
   const q = query.value.trim().toLowerCase();
   return store.apis.filter((a) => {
     if (statusFilter.value && a.status !== statusFilter.value) return false;
@@ -33,6 +38,19 @@ const rows = computed(() => {
     );
   });
 });
+
+const rows = computed(() => filtered.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filtered.value.length - limit.value));
+
+// Reset the cap whenever the filter set changes, so "Toon meer" always reflects
+// the current query rather than a leftover offset.
+watch([query, statusFilter], () => {
+  limit.value = PAGE;
+});
+
+function showMore() {
+  limit.value += PAGE;
+}
 
 const adrCompliant = computed(() => store.apis.filter((a) => a.adr).length);
 const inProd = computed(() => store.apis.filter((a) => a.status === 'productie').length);
@@ -116,6 +134,10 @@ const relatedApps = computed(() => {
 
     <nldd-spacer size="16" />
 
+    <p class="rp-result-count">
+      {{ filtered.length }} koppelvlakken{{ query || statusFilter ? ' gevonden' : '' }}
+    </p>
+
     <DataTable :columns="columns" :rows="rows" row-key="id">
       <template #cell="{ row, col, value }">
         <template v-if="col.key === 'name'">
@@ -146,6 +168,19 @@ const relatedApps = computed(() => {
         <template v-else>{{ value }}</template>
       </template>
     </DataTable>
+
+    <p v-if="!filtered.length" class="rp-empty">
+      Geen koppelvlakken gevonden voor deze zoekopdracht.
+    </p>
+
+    <div v-if="moreCount > 0" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${moreCount})`"
+        start-icon="chevron-down"
+        @click="showMore"
+      ></nldd-button>
+    </div>
 
     <template v-if="selected">
       <nldd-spacer size="24" />
@@ -223,6 +258,21 @@ const relatedApps = computed(() => {
 .rp-filters nldd-search-field {
   flex: 1;
   min-width: 240px;
+}
+.rp-result-count {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+.rp-empty {
+  opacity: 0.6;
+  padding: 1rem 0.25rem;
+  margin: 0;
+}
+.rp-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
 .rp-link {
   color: var(--semantics-actions-primary-default-background-color, #154273);

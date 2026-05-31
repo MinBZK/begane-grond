@@ -2,7 +2,7 @@
 // Detail of a single datacenter: KPIs, the alleys with their hot/cold aisle
 // orientation, a rack list, and the instances that physically live here. Links
 // to the floorplan and to individual racks so the user can keep drilling down.
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
@@ -37,7 +37,7 @@ const rackColumns = [
   { key: 'watts', label: 'Vermogen', align: 'right', mono: true },
   { key: 'go', label: '', align: 'right' },
 ];
-const rackRows = computed(() =>
+const allRackRows = computed(() =>
   racks.value.map((r) => ({
     id: r.id,
     label: r.label,
@@ -47,6 +47,44 @@ const rackRows = computed(() =>
     watts: rackWatts(r),
   })),
 );
+
+// A datacenter can hold dozens of racks. Filter on label/rij/eigenaar and cap
+// the table to a sane initial count with a "toon meer" control.
+const rackQuery = ref('');
+const rackLimit = ref(25);
+const filteredRackRows = computed(() => {
+  const q = rackQuery.value.trim().toLowerCase();
+  if (!q) return allRackRows.value;
+  return allRackRows.value.filter(
+    (r) =>
+      r.label.toLowerCase().includes(q) ||
+      String(r.alley).toLowerCase().includes(q) ||
+      String(r.team).toLowerCase().includes(q),
+  );
+});
+const visibleRackRows = computed(() => filteredRackRows.value.slice(0, rackLimit.value));
+const moreRacks = computed(() => Math.max(0, filteredRackRows.value.length - rackLimit.value));
+
+// Instances physically hosted here run into the dozens per datacenter. Offer a
+// search plus an env filter and cap the list, instead of rendering them all.
+const instQuery = ref('');
+const instEnv = ref('alle');
+const instLimit = ref(24);
+const instEnvs = computed(() => {
+  const set = new Set(instances.value.map((i) => i.env).filter(Boolean));
+  return ['alle', ...Array.from(set).sort()];
+});
+const filteredInstances = computed(() => {
+  const q = instQuery.value.trim().toLowerCase();
+  return instances.value.filter((i) => {
+    if (instEnv.value !== 'alle' && i.env !== instEnv.value) return false;
+    if (!q) return true;
+    const team = (store.teamById(i.team)?.name || i.team || '').toLowerCase();
+    return i.name.toLowerCase().includes(q) || team.includes(q);
+  });
+});
+const visibleInstances = computed(() => filteredInstances.value.slice(0, instLimit.value));
+const moreInstances = computed(() => Math.max(0, filteredInstances.value.length - instLimit.value));
 
 function aisleColor(aisle) {
   return aisle === 'hot' ? 'critical' : 'accent';
@@ -119,7 +157,14 @@ function aisleLabel(aisle) {
 
         <nldd-title size="3"><h2>Racks</h2></nldd-title>
         <nldd-spacer size="12" />
-        <DataTable :columns="rackColumns" :rows="rackRows" row-key="id">
+        <nldd-search-field
+          placeholder="Zoek op rack, rij of eigenaar"
+          accessible-label="Zoek rack"
+          :value="rackQuery"
+          @input="(e) => (rackQuery = e.target.value)"
+        ></nldd-search-field>
+        <nldd-spacer size="12" />
+        <DataTable :columns="rackColumns" :rows="visibleRackRows" row-key="id">
           <template #cell="{ row, col, value }">
             <template v-if="col.key === 'fill'">
               <div class="rp-fill-cell">
@@ -134,6 +179,10 @@ function aisleLabel(aisle) {
             <template v-else>{{ value }}</template>
           </template>
         </DataTable>
+        <p v-if="!filteredRackRows.length" class="rp-empty-line">Geen racks gevonden voor "{{ rackQuery }}".</p>
+        <div v-if="moreRacks > 0" class="rp-more-row">
+          <nldd-button variant="secondary" :text="`Toon meer (nog ${moreRacks})`" start-icon="chevron-down" @click="rackLimit += 25"></nldd-button>
+        </div>
 
         <template v-if="procurement.length">
           <nldd-spacer size="28" />
@@ -164,17 +213,41 @@ function aisleLabel(aisle) {
 
         <nldd-card accessible-label="Instances in dit datacenter">
           <nldd-container padding="20">
-            <nldd-title size="5"><h3>Instances hier</h3></nldd-title>
-            <nldd-spacer size="12" />
-            <div v-if="instances.length" class="rp-inst-list">
-              <router-link v-for="i in instances" :key="i.id" :to="`/infra/instances/${i.id}`" class="rp-inst-row">
-                <div class="rp-inst-main">
-                  <span class="rp-mono">{{ i.name }}</span>
-                  <span class="rp-inst-meta">{{ store.teamById(i.team)?.name || i.team }} · {{ i.env }}</span>
-                </div>
-                <StatusBadge :status="i.status" />
-              </router-link>
+            <div class="rp-inst-head">
+              <nldd-title size="5"><h3>Instances hier</h3></nldd-title>
+              <nldd-tag color="neutral" size="md">{{ instances.length }} totaal</nldd-tag>
             </div>
+            <template v-if="instances.length">
+              <nldd-spacer size="12" />
+              <nldd-search-field
+                placeholder="Zoek op naam of team"
+                accessible-label="Zoek instance"
+                :value="instQuery"
+                @input="(e) => (instQuery = e.target.value)"
+              ></nldd-search-field>
+              <nldd-spacer size="8" />
+              <nldd-dropdown accessible-label="Filter op omgeving">
+                <select :value="instEnv" @change="(e) => (instEnv = e.target.value)">
+                  <option v-for="env in instEnvs" :key="env" :value="env">
+                    {{ env === 'alle' ? 'Alle omgevingen' : env }}
+                  </option>
+                </select>
+              </nldd-dropdown>
+              <nldd-spacer size="12" />
+              <div v-if="filteredInstances.length" class="rp-inst-list">
+                <router-link v-for="i in visibleInstances" :key="i.id" :to="`/infra/instances/${i.id}`" class="rp-inst-row">
+                  <div class="rp-inst-main">
+                    <span class="rp-mono">{{ i.name }}</span>
+                    <span class="rp-inst-meta">{{ store.teamById(i.team)?.name || i.team }} · {{ i.env }}</span>
+                  </div>
+                  <StatusBadge :status="i.status" />
+                </router-link>
+              </div>
+              <nldd-rich-text v-else><p>Geen instances gevonden voor deze filters.</p></nldd-rich-text>
+              <div v-if="moreInstances > 0" class="rp-more-row">
+                <nldd-button variant="secondary" :text="`Toon meer (nog ${moreInstances})`" start-icon="chevron-down" @click="instLimit += 24"></nldd-button>
+              </div>
+            </template>
             <nldd-rich-text v-else><p>Nog geen instances op deze locatie.</p></nldd-rich-text>
           </nldd-container>
         </nldd-card>
@@ -260,10 +333,23 @@ function aisleLabel(aisle) {
   width: 0.9rem;
   height: 0.9rem;
 }
+.rp-inst-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
 .rp-inst-list {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+}
+.rp-empty-line {
+  margin: 0.75rem 0 0;
+  opacity: 0.6;
+}
+.rp-more-row {
+  margin-top: 0.85rem;
 }
 .rp-inst-row {
   display: flex;

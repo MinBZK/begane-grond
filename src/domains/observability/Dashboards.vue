@@ -89,6 +89,45 @@ const totals = computed(() => {
   return { services, avgP99, totalRps, breaching };
 });
 
+// --- Filter + cap -----------------------------------------------------------
+// At platform scale there is one tile per service (100+). Render a manageable
+// initial set: a free-text search over name/team, a health/alert filter, and a
+// "toon meer" cap so the grid never becomes an unscrollable wall of tiles.
+const query = ref('');
+const healthFilter = ref('alle'); // alle | warn | alerts
+const limit = ref(24);
+
+const healthFilters = [
+  { id: 'alle', label: 'Alle' },
+  { id: 'warn', label: 'In waarschuwing' },
+  { id: 'alerts', label: 'Met alerts' },
+];
+
+const filtered = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return dashboards.value.filter((d) => {
+    if (healthFilter.value === 'warn' && d.app.health !== 'warn') return false;
+    if (healthFilter.value === 'alerts' && !d.openAlerts) return false;
+    if (!q) return true;
+    return (
+      d.app.name.toLowerCase().includes(q) ||
+      d.app.id.toLowerCase().includes(q) ||
+      (d.team?.name || '').toLowerCase().includes(q)
+    );
+  });
+});
+
+const visible = computed(() => filtered.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filtered.value.length - limit.value));
+
+function setHealthFilter(id) {
+  healthFilter.value = id;
+  limit.value = 24;
+}
+function showMore() {
+  limit.value += 24;
+}
+
 // --- Detail panel -----------------------------------------------------------
 const selected = ref(null);
 function open(d) {
@@ -136,9 +175,37 @@ function relLinks(d) {
 
     <nldd-spacer size="24" />
 
+    <div class="rp-dash-toolbar">
+      <nldd-search-field
+        class="rp-dash-search"
+        placeholder="Zoek op dienst, id of team"
+        accessible-label="Zoek dashboard"
+        :value="query"
+        @input="(e) => { query = e.target.value; limit = 24; }"
+      ></nldd-search-field>
+      <div class="rp-dash-chips">
+        <nldd-button
+          v-for="f in healthFilters"
+          :key="f.id"
+          :variant="healthFilter === f.id ? 'primary' : 'secondary'"
+          size="sm"
+          :text="f.label"
+          @click="setHealthFilter(f.id)"
+        ></nldd-button>
+      </div>
+    </div>
+
+    <nldd-spacer size="16" />
+
+    <p class="rp-dash-count">
+      {{ filtered.length }} van {{ dashboards.length }} diensten
+    </p>
+
+    <nldd-spacer size="12" />
+
     <nldd-collection layout="grid" item-width="380px">
       <nldd-card
-        v-for="d in dashboards"
+        v-for="d in visible"
         :key="d.app.id"
         class="rp-dash-card"
         :accessible-label="'Dashboard ' + d.app.name"
@@ -199,6 +266,19 @@ function relLinks(d) {
         </nldd-container>
       </nldd-card>
     </nldd-collection>
+
+    <p v-if="!filtered.length" class="rp-dash-empty">
+      Geen diensten gevonden voor deze filters.
+    </p>
+
+    <div v-if="moreCount > 0" class="rp-dash-more">
+      <nldd-button
+        variant="secondary"
+        :text="'Toon meer (nog ' + moreCount + ')'"
+        start-icon="chevron-down"
+        @click="showMore"
+      ></nldd-button>
+    </div>
 
     <!-- Detail panel -->
     <nldd-modal-dialog v-if="selected" :open="true" @close="close">
@@ -298,6 +378,36 @@ function relLinks(d) {
   --rp-rps: #2bb7a3;
   --rp-err: #d4351c;
   --rp-ok: #4a8a3c;
+}
+.rp-dash-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.rp-dash-search {
+  flex: 1 1 320px;
+  min-width: 220px;
+}
+.rp-dash-chips {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.rp-dash-count {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+.rp-dash-empty {
+  margin: 1rem 0;
+  opacity: 0.6;
+  font-style: italic;
+}
+.rp-dash-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
 }
 .rp-dash-card {
   cursor: pointer;

@@ -4,7 +4,7 @@
 // whether it runs an inway (publishes services) or outway (consumes services).
 // Below the cards sits the OIN-register as a clean table. Services link through
 // to the matching koppelvlak in the API-catalog where possible.
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -20,7 +20,30 @@ const MODE = {
   outway: { label: 'Outway (afnemer)', color: 'accent', icon: 'cloud', desc: 'Neemt diensten af van andere peers' },
 };
 
-const peers = computed(() => store.fscPeers);
+// The federation now carries dozens of peers; render a searchable, capped grid
+// instead of one endless wall of cards. Filter on org, OIN and offered service
+// names, plus a mode-chip (alle / inway / outway).
+const query = ref('');
+const modeFilter = ref('all');
+const limit = ref(24);
+
+const filteredPeers = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return store.fscPeers.filter((p) => {
+    if (modeFilter.value !== 'all' && p.mode !== modeFilter.value) return false;
+    if (!q) return true;
+    return (
+      p.org.toLowerCase().includes(q) ||
+      p.oin.includes(q) ||
+      p.services.some((svc) => svc.toLowerCase().includes(q))
+    );
+  });
+});
+const visiblePeers = computed(() => filteredPeers.value.slice(0, limit.value));
+const peerMoreCount = computed(() => Math.max(0, filteredPeers.value.length - limit.value));
+function showMorePeers() {
+  limit.value += 24;
+}
 
 const totalServices = computed(() =>
   store.fscPeers.reduce((s, p) => s + p.services.length, 0),
@@ -41,8 +64,11 @@ const registerColumns = [
   { key: 'service', label: 'Aangeboden dienst' },
   { key: 'mode', label: 'Modus' },
 ];
-const registerRows = computed(() =>
-  store.fscPeers.flatMap((p) =>
+// The register follows the same search/mode filter as the cards, one row per
+// offered service, capped to a readable initial set.
+const registerLimit = ref(25);
+const allRegisterRows = computed(() =>
+  filteredPeers.value.flatMap((p) =>
     p.services.map((svc, idx) => ({
       id: `${p.id}-${idx}`,
       org: p.org,
@@ -52,6 +78,13 @@ const registerRows = computed(() =>
     })),
   ),
 );
+const registerRows = computed(() => allRegisterRows.value.slice(0, registerLimit.value));
+const registerMoreCount = computed(() =>
+  Math.max(0, allRegisterRows.value.length - registerLimit.value),
+);
+function showMoreRegister() {
+  registerLimit.value += 25;
+}
 
 // Format an OIN into grouped blocks for legibility on the cards.
 function fmtOin(oin) {
@@ -88,8 +121,27 @@ function fmtOin(oin) {
     <nldd-title size="4"><h2>Service-directory</h2></nldd-title>
     <nldd-spacer size="12" />
 
+    <div class="rp-toolbar">
+      <nldd-search-field
+        class="rp-search"
+        placeholder="Zoek op organisatie, OIN of dienst"
+        accessible-label="Zoek peer"
+        :value="query"
+        @input="(e) => ((query = e.target.value), (limit = 24), (registerLimit = 25))"
+      ></nldd-search-field>
+      <nldd-segmented-control>
+        <button type="button" :aria-pressed="modeFilter === 'all'" @click="((modeFilter = 'all'), (limit = 24), (registerLimit = 25))">Alle</button>
+        <button type="button" :aria-pressed="modeFilter === 'inway'" @click="((modeFilter = 'inway'), (limit = 24), (registerLimit = 25))">Inway</button>
+        <button type="button" :aria-pressed="modeFilter === 'outway'" @click="((modeFilter = 'outway'), (limit = 24), (registerLimit = 25))">Outway</button>
+      </nldd-segmented-control>
+    </div>
+
+    <nldd-spacer size="16" />
+
+    <p v-if="!filteredPeers.length" class="rp-empty">Geen peers gevonden voor deze selectie.</p>
+
     <nldd-collection layout="grid" item-width="360px">
-      <nldd-card v-for="p in peers" :key="p.id" :accessible-label="`Peer ${p.org}`">
+      <nldd-card v-for="p in visiblePeers" :key="p.id" :accessible-label="`Peer ${p.org}`">
         <nldd-container padding="20">
           <div class="rp-peer-head">
             <div class="rp-peer-avatar"><nldd-icon name="apartment-building" aria-hidden="true"></nldd-icon></div>
@@ -130,6 +182,15 @@ function fmtOin(oin) {
       </nldd-card>
     </nldd-collection>
 
+    <div v-if="peerMoreCount > 0" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${peerMoreCount})`"
+        start-icon="chevron-down"
+        @click="showMorePeers"
+      ></nldd-button>
+    </div>
+
     <nldd-spacer size="32" />
 
     <nldd-title size="4"><h2>OIN-register</h2></nldd-title>
@@ -166,6 +227,17 @@ function fmtOin(oin) {
         <template v-else>{{ value }}</template>
       </template>
     </DataTable>
+
+    <p v-if="!allRegisterRows.length" class="rp-empty">Geen diensten in het register voor deze selectie.</p>
+
+    <div v-if="registerMoreCount > 0" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${registerMoreCount})`"
+        start-icon="chevron-down"
+        @click="showMoreRegister"
+      ></nldd-button>
+    </div>
 
     <nldd-spacer size="24" />
 
@@ -246,5 +318,24 @@ function fmtOin(oin) {
 }
 .rp-register-note a {
   text-decoration: none;
+}
+.rp-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+.rp-search {
+  flex: 1 1 280px;
+  min-width: 240px;
+}
+.rp-more {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.rp-empty {
+  opacity: 0.6;
+  margin: 0.5rem 0;
 }
 </style>

@@ -31,6 +31,27 @@ const teamsWithPlugins = computed(() =>
   store.teams.filter((t) => store.pluginsInstalledByTeam(t.id).length),
 );
 
+// With ~99 teams the per-team overview can still grow to dozens of cards, so we
+// add a name filter and an initial cap with a "Toon meer"-button.
+const teamQuery = ref('');
+const teamLimit = ref(24);
+const filteredTeams = computed(() => {
+  const q = teamQuery.value.trim().toLowerCase();
+  if (!q) return teamsWithPlugins.value;
+  return teamsWithPlugins.value.filter(
+    (t) =>
+      t.name.toLowerCase().includes(q) ||
+      store
+        .pluginsInstalledByTeam(t.id)
+        .some((pid) => (store.skillPluginById(pid)?.name || pid).toLowerCase().includes(q)),
+  );
+});
+const visibleTeams = computed(() => filteredTeams.value.slice(0, teamLimit.value));
+const moreTeams = computed(() => Math.max(0, filteredTeams.value.length - teamLimit.value));
+function showMoreTeams() {
+  teamLimit.value += 24;
+}
+
 function isInstalled(pluginId) {
   return installedForMyTeam.value.includes(pluginId);
 }
@@ -157,8 +178,15 @@ function standardName(id) {
       <p>Per team is zichtbaar welke skill-plugins actief zijn. Zo weet je of een team de standaarden kent die het moet volgen.</p>
     </nldd-rich-text>
     <nldd-spacer size="16" />
+    <nldd-search-field
+      placeholder="Zoek op team of plugin"
+      accessible-label="Zoek team"
+      :value="teamQuery"
+      @input="(e) => (teamQuery = e.target.value)"
+    ></nldd-search-field>
+    <nldd-spacer size="16" />
     <nldd-collection layout="grid" item-width="320px">
-      <nldd-card v-for="t in teamsWithPlugins" :key="t.id" :accessible-label="t.name">
+      <nldd-card v-for="t in visibleTeams" :key="t.id" :accessible-label="t.name">
         <nldd-container padding="20">
           <router-link :to="'/teams/' + t.id" class="rp-team-link">
             <nldd-title size="5"><h3>{{ t.name }}</h3></nldd-title>
@@ -178,6 +206,19 @@ function standardName(id) {
         </nldd-container>
       </nldd-card>
     </nldd-collection>
+
+    <nldd-rich-text v-if="!filteredTeams.length">
+      <p class="rp-empty">Geen team gevonden voor "{{ teamQuery }}".</p>
+    </nldd-rich-text>
+    <template v-if="moreTeams > 0">
+      <nldd-spacer size="16" />
+      <nldd-button
+        variant="secondary"
+        :text="'Toon meer (nog ' + moreTeams + ')'"
+        start-icon="chevron-down"
+        @click="showMoreTeams"
+      ></nldd-button>
+    </template>
 
     <nldd-spacer size="24" />
     <CliHint command="rp ai skill install standaarden --team team-platform" />

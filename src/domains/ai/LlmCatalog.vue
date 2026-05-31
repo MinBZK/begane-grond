@@ -16,6 +16,27 @@ const store = usePlatformStore();
 
 const models = computed(() => store.llmModels);
 
+// KPI sub-labels derived live from the store instead of hardcoded counts, so
+// they keep matching the catalogue when the seed changes.
+const sovereignCount = computed(
+  () => models.value.filter((m) => m.residency === 'Nederland').length,
+);
+const euCount = computed(() => models.value.filter((m) => m.residency === 'EU').length,
+);
+const residencyLabel = computed(() => {
+  const parts = [];
+  if (sovereignCount.value) parts.push(`${sovereignCount.value} soeverein`);
+  if (euCount.value) parts.push(`${euCount.value} EU`);
+  return parts.join(', ') || 'geen';
+});
+// Active LLM instances live: every store instance of kind 'llm'.
+const llmInstances = computed(() => store.instances.filter((i) => i.kind === 'llm'));
+const llmInstanceSub = computed(() => {
+  if (!llmInstances.value.length) return 'geen actieve instance';
+  if (llmInstances.value.length === 1) return llmInstances.value[0].name;
+  return `${llmInstances.value.length} instances`;
+});
+
 // Map a residency/host string to a tag colour for the sovereignty badge.
 function residencyColor(residency) {
   if (residency === 'Nederland') return 'success';
@@ -47,11 +68,35 @@ const usageByTeam = computed(() =>
     };
   }),
 );
+// Search + cap for the per-team usage table: 99 teams is an unreadable wall, so
+// filter on team/model and show an initial slice with a "toon meer" control.
+const usageQuery = ref('');
+const usageLimit = ref(25);
+const filteredUsage = computed(() => {
+  const q = usageQuery.value.trim().toLowerCase();
+  if (!q) return usageByTeam.value;
+  return usageByTeam.value.filter(
+    (r) => r.name.toLowerCase().includes(q) || r.model.toLowerCase().includes(q),
+  );
+});
+const visibleUsage = computed(() => filteredUsage.value.slice(0, usageLimit.value));
+const usageMoreCount = computed(() =>
+  Math.max(0, filteredUsage.value.length - usageLimit.value),
+);
+// Global totals (all teams) feed the KPI cards at the top.
 const totalTokensM = computed(() =>
   usageByTeam.value.reduce((a, r) => a + parseFloat(r.tokensM), 0).toFixed(1),
 );
 const totalCost = computed(() => usageByTeam.value.reduce((a, r) => a + r.cost, 0));
-const maxTeamCost = computed(() => Math.max(...usageByTeam.value.map((r) => r.cost)));
+// Footer totals reflect the full filtered set (not just the visible slice) so
+// the table footer stays meaningful while the body is capped.
+const filteredTokensM = computed(() =>
+  filteredUsage.value.reduce((a, r) => a + parseFloat(r.tokensM), 0).toFixed(1),
+);
+const filteredCost = computed(() => filteredUsage.value.reduce((a, r) => a + r.cost, 0));
+const maxTeamCost = computed(() =>
+  filteredUsage.value.length ? Math.max(...filteredUsage.value.map((r) => r.cost)) : 1,
+);
 
 // --- Procurement wizard ----------------------------------------------------
 const wizardOpen = ref(false);
@@ -70,6 +115,32 @@ const selectedModel = computed(
   () => models.value.find((m) => m.id === form.model) || models.value[0],
 );
 const teamApps = computed(() => store.appsByTeam(form.team));
+
+// Team picker for the wizard: 99 teams is too many for a single dropdown, so
+// this is a search-as-you-type picker capped to a handful of matches, with the
+// selected team always pinned above. Mirrors the person picker in
+// NewWorkplaceWizard.
+const teamQuery = ref('');
+const teamLimit = 6;
+const selectedTeamObj = computed(() => store.teamById(form.team));
+const filteredTeams = computed(() => {
+  const q = teamQuery.value.trim().toLowerCase();
+  const all = store.teams.filter((t) => t.id !== form.team);
+  const matches = q ? all.filter((t) => t.name.toLowerCase().includes(q)) : all;
+  return matches.slice(0, teamLimit);
+});
+const teamMoreCount = computed(() => {
+  const q = teamQuery.value.trim().toLowerCase();
+  const total = q
+    ? store.teams.filter((t) => t.id !== form.team && t.name.toLowerCase().includes(q)).length
+    : store.teams.length - 1;
+  return Math.max(0, total - teamLimit);
+});
+function pickTeam(id) {
+  form.team = id;
+  // Reset the optional app link when the owner team changes.
+  form.app = '';
+}
 
 const wizardSteps = [
   { title: 'Model' },
@@ -130,6 +201,7 @@ function resetWizard() {
   ordered.value = null;
   apiKey.value = '';
   revealed.value = false;
+  teamQuery.value = '';
 }
 </script>
 
@@ -156,10 +228,16 @@ function resetWizard() {
 
     <!-- KPI row -->
     <nldd-container layout="grid" column-count="4" gap="16">
-      <MetricCard :value="models.length" label="Modellen in catalogus" sub="2 soeverein, 1 EU" icon="sparkles" />
+      <MetricCard :value="models.length" label="Modellen in catalogus" :sub="residencyLabel" icon="sparkles" />
       <MetricCard :value="`${totalTokensM}M`" label="Tokens deze maand" sub="alle teams" icon="arrow-up-arrow-down" />
-      <MetricCard :value="`€${totalCost}`" label="Kosten deze maand" sub="token-verbruik" icon="euro-sign" />
-      <MetricCard value="1" label="Actieve LLM-instances" sub="llm-gilde-prod" icon="cloud" to="/infra/instances/llm-gilde-prod" />
+      <MetricCard :value="`€${totalCost.toLocaleString('nl-NL')}`" label="Kosten deze maand" sub="token-verbruik" icon="euro-sign" />
+      <MetricCard
+        :value="llmInstances.length"
+        label="Actieve LLM-instances"
+        :sub="llmInstanceSub"
+        icon="cloud"
+        :to="llmInstances.length === 1 ? `/infra/instances/${llmInstances[0].id}` : '/infra/instances'"
+      />
     </nldd-container>
 
     <nldd-spacer size="28" />
@@ -273,12 +351,46 @@ function resetWizard() {
             <nldd-title size="5"><h3>Voor welk team?</h3></nldd-title>
             <nldd-spacer size="12" />
             <nldd-form-field label="Eigenaar-team">
-              <nldd-dropdown>
-                <select v-model="form.team">
-                  <option v-for="t in store.teams" :key="t.id" :value="t.id">{{ t.name }}</option>
-                </select>
-              </nldd-dropdown>
+              <nldd-search-field
+                placeholder="Zoek een team op naam"
+                accessible-label="Zoek team"
+                :value="teamQuery"
+                @input="(e) => (teamQuery = e.target.value)"
+              ></nldd-search-field>
             </nldd-form-field>
+
+            <!-- Selected team stays pinned, even when filtered out of the list. -->
+            <template v-if="selectedTeamObj">
+              <nldd-spacer size="12" />
+              <div class="rp-pick rp-pick-on rp-pick-selected">
+                <span class="rp-pick-main">
+                  <strong>{{ selectedTeamObj.name }}</strong>
+                </span>
+                <nldd-tag color="success" size="sm">Geselecteerd</nldd-tag>
+              </div>
+            </template>
+
+            <nldd-spacer size="12" />
+            <div class="rp-pick-list">
+              <button
+                v-for="t in filteredTeams"
+                :key="t.id"
+                type="button"
+                class="rp-pick"
+                @click="pickTeam(t.id)"
+              >
+                <span class="rp-pick-main">
+                  <strong>{{ t.name }}</strong>
+                </span>
+              </button>
+              <p v-if="!filteredTeams.length" class="rp-pick-empty">
+                Geen team gevonden voor "{{ teamQuery }}".
+              </p>
+            </div>
+            <p v-if="teamMoreCount > 0" class="rp-pick-more">
+              En nog {{ teamMoreCount }} teams. Verfijn je zoekopdracht.
+            </p>
+
             <nldd-spacer size="16" />
             <nldd-form-field label="Koppelen aan applicatie (optioneel)">
               <nldd-dropdown>
@@ -399,6 +511,13 @@ function resetWizard() {
       <!-- Token usage / cost per team -->
       <nldd-title size="3"><h2>Token-verbruik en kosten per team</h2></nldd-title>
       <nldd-rich-text><p>Verbruik deze maand via de LLM-gateway. Cache-hits verlagen de kosten.</p></nldd-rich-text>
+      <nldd-spacer size="12" />
+      <nldd-search-field
+        placeholder="Filter op team of model"
+        accessible-label="Filter verbruik per team"
+        :value="usageQuery"
+        @input="(e) => (usageQuery = e.target.value)"
+      ></nldd-search-field>
       <nldd-spacer size="16" />
       <nldd-card accessible-label="Verbruik per team">
         <nldd-container padding="8">
@@ -414,7 +533,7 @@ function resetWizard() {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="row in usageByTeam" :key="row.team">
+              <tr v-for="row in visibleUsage" :key="row.team">
                 <td>
                   <router-link class="rp-team-link" :to="`/teams/${row.team}`">{{ row.name }}</router-link>
                 </td>
@@ -424,27 +543,40 @@ function resetWizard() {
                 <td class="rp-num rp-mono">{{ row.cached }}%</td>
                 <td>
                   <div class="rp-cost-cell">
-                    <span class="rp-mono">€{{ row.cost }}</span>
+                    <span class="rp-mono">€{{ row.cost.toLocaleString('nl-NL') }}</span>
                     <div class="rp-cost-bar">
                       <div class="rp-cost-fill" :style="{ width: `${(row.cost / maxTeamCost) * 100}%` }"></div>
                     </div>
                   </div>
                 </td>
               </tr>
+              <tr v-if="!filteredUsage.length">
+                <td colspan="6" class="rp-usage-empty">Geen team gevonden voor "{{ usageQuery }}".</td>
+              </tr>
             </tbody>
             <tfoot>
               <tr>
-                <td><strong>Totaal</strong></td>
+                <td><strong>{{ usageQuery ? 'Subtotaal' : 'Totaal' }}</strong></td>
                 <td></td>
                 <td></td>
-                <td class="rp-num rp-mono"><strong>{{ totalTokensM }}M</strong></td>
+                <td class="rp-num rp-mono"><strong>{{ filteredTokensM }}M</strong></td>
                 <td></td>
-                <td class="rp-mono"><strong>€{{ totalCost }}</strong></td>
+                <td class="rp-mono"><strong>€{{ filteredCost.toLocaleString('nl-NL') }}</strong></td>
               </tr>
             </tfoot>
           </table>
         </nldd-container>
       </nldd-card>
+      <p v-if="usageMoreCount > 0" class="rp-usage-more">
+        {{ visibleUsage.length }} van {{ filteredUsage.length }} teams getoond.
+        <nldd-button
+          variant="secondary"
+          size="sm"
+          :text="`Toon meer (nog ${usageMoreCount})`"
+          start-icon="chevron-down"
+          @click="usageLimit += 25"
+        ></nldd-button>
+      </p>
 
       <nldd-spacer size="28" />
 
@@ -553,6 +685,20 @@ function resetWizard() {
 .rp-num {
   text-align: right;
 }
+.rp-usage-empty {
+  text-align: center;
+  opacity: 0.6;
+  padding: 1rem;
+}
+.rp-usage-more {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 0.85rem 0 0;
+  font-size: 0.88rem;
+  opacity: 0.85;
+}
 .rp-team-link {
   color: inherit;
   font-weight: 600;
@@ -586,6 +732,58 @@ function resetWizard() {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 0.75rem;
+}
+/* Team search-picker (wizard step 1): a capped results list, not a 99-option select. */
+.rp-pick-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 18rem;
+  overflow-y: auto;
+}
+.rp-pick {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: left;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--semantics-dividers-color);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.rp-pick:hover {
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-pick-on {
+  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-pick-selected {
+  align-items: center;
+}
+.rp-pick-selected nldd-tag {
+  margin-left: auto;
+}
+.rp-pick-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.rp-pick-empty {
+  opacity: 0.6;
+  padding: 0.75rem 0.25rem;
+  margin: 0;
+}
+.rp-pick-more {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.6;
 }
 .rp-choice {
   display: flex;

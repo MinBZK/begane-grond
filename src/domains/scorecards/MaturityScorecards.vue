@@ -4,7 +4,7 @@
 // accessibility, open-source licence) and a brons/zilver/goud grade. Failing
 // checks click through to where they get fixed. All derived live from the
 // store, so edits elsewhere (rotate a secret, define an SLO) move the score.
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -40,11 +40,43 @@ const filters = computed(() => [
     count: fleet.value.summary[t],
   })),
 ]);
-const visibleCards = computed(() =>
-  filter.value === 'alles'
+
+// Search + cap. The fleet is large (100+ apps), so rendering every scorecard
+// at once makes the screen unmanageably long. We filter on the obvious fields
+// (name, id, team) and cap the grid to an initial N, with a "Toon meer"-button.
+const query = ref('');
+const limit = ref(24);
+const PAGE = 24;
+
+const filteredCards = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  let cards = filter.value === 'alles'
     ? fleet.value.cards
-    : fleet.value.cards.filter((c) => c.tier === filter.value)
-);
+    : fleet.value.cards.filter((c) => c.tier === filter.value);
+  if (q) {
+    cards = cards.filter((c) => {
+      const team = store.teamById(c.app.team)?.name || '';
+      return (
+        c.app.name.toLowerCase().includes(q) ||
+        c.app.id.toLowerCase().includes(q) ||
+        team.toLowerCase().includes(q)
+      );
+    });
+  }
+  return cards;
+});
+
+const visibleCards = computed(() => filteredCards.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filteredCards.value.length - limit.value));
+
+// Reset the cap whenever the result set changes, so a new filter or query
+// starts from the top instead of inheriting an expanded limit.
+watch([query, filter], () => {
+  limit.value = PAGE;
+});
+function showMore() {
+  limit.value += PAGE;
+}
 
 const avgPct = computed(() => Math.round(fleet.value.summary.avgRatio * 100));
 
@@ -130,6 +162,16 @@ const crumbs = [
 
     <nldd-spacer size="24" />
 
+    <!-- Search -->
+    <nldd-search-field
+      placeholder="Zoek op app, id of team"
+      accessible-label="Zoek scorecards"
+      :value="query"
+      @input="(e) => (query = e.target.value)"
+    ></nldd-search-field>
+
+    <nldd-spacer size="16" />
+
     <!-- Filter -->
     <div class="sc-filter">
       <nldd-button
@@ -143,10 +185,26 @@ const crumbs = [
 
     <nldd-spacer size="16" />
 
-    <!-- Scorecards grid -->
+    <!-- Scorecards grid (capped, with a "toon meer"-knop) -->
     <nldd-collection layout="grid" item-width="440px">
       <ScorecardCard v-for="card in visibleCards" :key="card.app.id" :card="card" />
     </nldd-collection>
+
+    <p v-if="!filteredCards.length" class="sc-empty">
+      Geen scorecards gevonden voor deze selectie.
+    </p>
+
+    <template v-if="moreCount > 0">
+      <nldd-spacer size="16" />
+      <div class="sc-more">
+        <nldd-button
+          variant="secondary"
+          :text="`Toon meer (nog ${moreCount})`"
+          start-icon="chevron-down"
+          @click="showMore"
+        ></nldd-button>
+      </div>
+    </template>
 
     <nldd-spacer size="28" />
 
@@ -220,6 +278,14 @@ const crumbs = [
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+.sc-empty {
+  opacity: 0.6;
+  margin: 1rem 0;
+}
+.sc-more {
+  display: flex;
+  justify-content: center;
 }
 .sc-tier-legend {
   display: flex;

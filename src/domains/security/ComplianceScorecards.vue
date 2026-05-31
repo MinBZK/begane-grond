@@ -6,7 +6,7 @@
 // derived deterministically from the seed (app maturity + repo CI + known
 // open vulnerabilities) so the demo stays stable across refreshes but still
 // looks like a real, varied audit.
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -86,6 +86,41 @@ const scorecards = computed(() =>
   }),
 );
 
+// At platform scale there is a scorecard per application (100+), which renders
+// as an unmanageable wall of cards. Filter on name/team/maturity plus a risk
+// segment, then cap the grid at an initial N with a "toon meer" affordance.
+const query = ref('');
+const riskFilter = ref('all'); // all | risk | compliant
+const limit = ref(24);
+
+const RISK_SEGMENTS = [
+  { id: 'all', label: 'Alle' },
+  { id: 'risk', label: 'Met rode controls' },
+  { id: 'compliant', label: 'Volledig compliant' },
+];
+
+const filteredScorecards = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  return scorecards.value.filter((sc) => {
+    if (riskFilter.value === 'risk' && sc.reds === 0) return false;
+    if (riskFilter.value === 'compliant' && !(sc.reds === 0 && sc.score >= 90)) return false;
+    if (!q) return true;
+    return (
+      sc.app.name.toLowerCase().includes(q) ||
+      (sc.team?.name || '').toLowerCase().includes(q) ||
+      sc.app.maturity.toLowerCase().includes(q)
+    );
+  });
+});
+
+const visibleScorecards = computed(() => filteredScorecards.value.slice(0, limit.value));
+const moreCount = computed(() => Math.max(0, filteredScorecards.value.length - limit.value));
+
+// Reset the cap whenever the filter set changes, so "toon meer" always starts fresh.
+watch([query, riskFilter], () => {
+  limit.value = 24;
+});
+
 function gradeFor(score) {
   if (score >= 90) return 'A';
   if (score >= 75) return 'B';
@@ -164,8 +199,37 @@ function focus(card, cell) {
 
     <nldd-spacer size="24" />
 
+    <div class="rp-toolbar">
+      <nldd-search-field
+        class="rp-search"
+        placeholder="Zoek op applicatie, team of volwassenheid"
+        accessible-label="Zoek scorekaart"
+        :value="query"
+        @input="(e) => (query = e.target.value)"
+      ></nldd-search-field>
+      <div class="rp-segments" role="group" aria-label="Filter op risico">
+        <nldd-button
+          v-for="seg in RISK_SEGMENTS"
+          :key="seg.id"
+          :variant="riskFilter === seg.id ? 'primary' : 'secondary'"
+          :text="seg.label"
+          @click="riskFilter = seg.id"
+        ></nldd-button>
+      </div>
+    </div>
+
+    <nldd-spacer size="8" />
+    <p class="rp-result-count">
+      {{ filteredScorecards.length }} van {{ scorecards.length }} scorekaarten
+    </p>
+    <nldd-spacer size="16" />
+
+    <div v-if="!filteredScorecards.length" class="rp-empty">
+      <nldd-rich-text><p>Geen scorekaarten gevonden voor deze filters.</p></nldd-rich-text>
+    </div>
+
     <div class="rp-cards">
-      <nldd-card v-for="sc in scorecards" :key="sc.app.id" :accessible-label="sc.app.name">
+      <nldd-card v-for="sc in visibleScorecards" :key="sc.app.id" :accessible-label="sc.app.name">
         <nldd-container padding="20">
           <div class="rp-card-head">
             <div class="rp-card-title">
@@ -231,6 +295,15 @@ function focus(card, cell) {
           </div>
         </nldd-container>
       </nldd-card>
+    </div>
+
+    <div v-if="moreCount > 0" class="rp-more">
+      <nldd-button
+        variant="secondary"
+        :text="`Toon meer (nog ${moreCount})`"
+        start-icon="chevron-down"
+        @click="limit += 24"
+      ></nldd-button>
     </div>
 
     <nldd-spacer size="32" />
@@ -299,6 +372,35 @@ function focus(card, cell) {
 </template>
 
 <style scoped>
+.rp-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.rp-search {
+  flex: 1 1 280px;
+  min-width: 220px;
+}
+.rp-segments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.rp-result-count {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+.rp-empty {
+  padding: 1.5rem 0;
+  opacity: 0.75;
+}
+.rp-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
 .rp-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
