@@ -7,9 +7,21 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { domains, waveLabels } from '../nav.js';
 import { commandItems } from '../lib/commands.js';
+import { usePlatformStore } from '../stores/index.js';
+import NotificationInbox from './shared/NotificationInbox.vue';
 
 const route = useRoute();
 const router = useRouter();
+const store = usePlatformStore();
+
+// --- Notification bell ---
+const inboxOpen = ref(false);
+function toggleInbox() {
+  inboxOpen.value = !inboxOpen.value;
+}
+function closeInbox() {
+  inboxOpen.value = false;
+}
 
 // --- Side navigation, grouped by build wave ---
 const groups = computed(() => {
@@ -110,6 +122,13 @@ onBeforeUnmount(() => {
             icon="search"
             @click="openPalette"
           ></nldd-menu-bar-item>
+          <nldd-menu-bar-item
+            :text="store.unreadCount ? `Notificaties (${store.unreadCount})` : 'Notificaties'"
+            icon="envelope"
+            accessible-label="Notificaties"
+            :class="{ 'rp-bell-alert': store.unreadCritical }"
+            @click="toggleInbox"
+          ></nldd-menu-bar-item>
           <nldd-menu-bar-item text="Nieuw" icon="plus" expandable>
             <nldd-menu>
               <nldd-menu-item text="Nieuwe applicatie" @click="router.push('/apps/nieuw')"></nldd-menu-item>
@@ -200,7 +219,58 @@ onBeforeUnmount(() => {
       </nldd-list>
     </nldd-container>
   </nldd-window>
+
+  <!-- Notification bell popover -->
+  <div v-if="inboxOpen" class="rp-inbox-backdrop" @click="closeInbox"></div>
+  <div v-if="inboxOpen" class="rp-inbox-pop" role="dialog" aria-label="Notificaties">
+    <div class="rp-inbox-pop-head">
+      <nldd-title size="5"><h2>Notificaties</h2></nldd-title>
+      <router-link to="/notificaties" @click="closeInbox" class="rp-inbox-pop-all">Beheer</router-link>
+    </div>
+    <NotificationInbox variant="compact" :limit="12" @navigate="closeInbox" />
+  </div>
 </template>
+
+<style scoped>
+.rp-bell-alert::after {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  right: 0.4rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--semantics-feedback-critical-color, #d52b1e);
+}
+.rp-inbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+.rp-inbox-pop {
+  position: fixed;
+  top: 4.2rem;
+  right: 1rem;
+  z-index: 61;
+  width: min(30rem, 94vw);
+  max-height: 78vh;
+  overflow-y: auto;
+  background: var(--semantics-surfaces-background-color, #fff);
+  border: 1px solid var(--semantics-dividers-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.18);
+  padding: 1rem 1.1rem 1.1rem;
+}
+.rp-inbox-pop-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.rp-inbox-pop-all {
+  font-size: 0.88rem;
+}
+</style>
 
 <style scoped>
 .rp-shell {

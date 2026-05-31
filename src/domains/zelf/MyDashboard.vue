@@ -12,6 +12,7 @@ import StatusBadge from '../../components/shared/StatusBadge.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
 import DataTable from '../../components/shared/DataTable.vue';
 import CliHint from '../../components/shared/CliHint.vue';
+import NotificationInbox from '../../components/shared/NotificationInbox.vue';
 
 const store = usePlatformStore();
 
@@ -240,6 +241,20 @@ function rotate(secretId) {
               title="Niets te doen"
               supporting-text="Geen openstaande acties voor jou of je team. Goed bezig."
             ></nldd-inline-dialog>
+          </nldd-container>
+        </nldd-card>
+
+        <nldd-spacer size="20" />
+
+        <!-- Notification feed, fed by the event bus -->
+        <nldd-card accessible-label="Mijn notificaties">
+          <nldd-container padding="20">
+            <div class="rp-section-head">
+              <nldd-title size="5"><h3>Mijn notificaties</h3></nldd-title>
+              <router-link to="/notificaties" class="rp-section-link">Alle notificaties <nldd-icon name="chevron-right" aria-hidden="true"></nldd-icon></router-link>
+            </div>
+            <nldd-spacer size="12" />
+            <NotificationInbox variant="full" :limit="8" />
           </nldd-container>
         </nldd-card>
 

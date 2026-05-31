@@ -1,52 +1,126 @@
 <script setup>
-// Notifications domain: where teams declare how they want to be told things.
-// Three concerns on one screen:
-//   1. Channels  — store.channels: a Matrix room or a webhook per team.
-//   2. Subscriptions — store.subscriptions: CloudEvents-style event names a team
-//      listens for (deploy.completed, incident.opened, cost.budget-exceeded, …).
-//   3. History — a mocked recent-events feed; each event is matched to the team
-//      subscribed to it and "fanned out" over their channel, with a delivery
-//      status (StatusBadge). The mock is local to this screen; adding a channel
-//      or subscription mutates the live Pinia store.
+// Notifications domain — the central nervous system of the platform. This is
+// the showcase screen for the event bus: every domain (infra, deploy,
+// incidents, security, code, cost, fleet, AI, …) emits CloudEvents into
+// store.events, and here they all converge. The screen has six parts:
+//   1. Live event-stream — the full store.events timeline, filterable by
+//      severity and by source domain.
+//   2. Per-bron — one card per source with an event count, a deep link into
+//      the domain, and a mute-toggle (store.toggleMuteSource).
+//   3. Routering — subscriptions and channels as DataTables, plus a small
+//      schema showing how an event flows event -> subscription -> channel.
+//   4. CloudEvents envelope — a real recent event rendered as a 1.0 envelope.
+// Everything reads from the live Pinia store; nothing is hard-coded here.
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
+import { eventTypeMap } from '../../data/events.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import DataTable from '../../components/shared/DataTable.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import CliHint from '../../components/shared/CliHint.vue';
-import RelationLinks from '../../components/shared/RelationLinks.vue';
 
 const store = usePlatformStore();
+const router = useRouter();
 
-// --- Reference catalog of CloudEvents the platform emits ------------------
-// NL GOV CloudEvents profile: reverse-DNS-ish dotted names. Source is the
-// platform service that produces the event; this is what lands in the `type`
-// field of a CloudEvents envelope.
-const eventCatalog = [
-  { type: 'deploy.completed', source: 'nl.overheid.platform.deploy', desc: 'Een release is uitgerold naar een omgeving', icon: 'arrow-up-arrow-down' },
-  { type: 'incident.opened', source: 'nl.overheid.platform.incidents', desc: 'Er is een nieuw incident geopend', icon: 'exclamation-triangle' },
-  { type: 'incident.resolved', source: 'nl.overheid.platform.incidents', desc: 'Een incident is opgelost', icon: 'check-mark-circle' },
-  { type: 'cost.budget-exceeded', source: 'nl.overheid.platform.finops', desc: 'Een team gaat over zijn maandbudget heen', icon: 'euro-sign' },
-  { type: 'secret.rotated', source: 'nl.overheid.platform.secrets', desc: 'Een secret is geroteerd', icon: 'lock-closed' },
-  { type: 'cert.expiring', source: 'nl.overheid.platform.pki', desc: 'Een certificaat verloopt binnen 30 dagen', icon: 'certificate' },
-  { type: 'vuln.detected', source: 'nl.overheid.platform.security', desc: 'Een kwetsbaarheid is gevonden in een repo', icon: 'shield-check-mark' },
-  { type: 'campaign.completed', source: 'nl.overheid.platform.fleet', desc: 'Een fleet-shift-campagne is afgerond', icon: 'ship-wheel' },
-];
+// Severity -> NLDD tag colour. 'info' maps to neutral (there is no neutral
+// feedback colour, so the dot falls back to the divider tone).
+const SEV_COLOR = { critical: 'critical', warning: 'warning', success: 'success', info: 'neutral' };
+const SEV_LABEL = { critical: 'Kritiek', warning: 'Waarschuwing', success: 'Succes', info: 'Info' };
 
-function eventMeta(type) {
-  return eventCatalog.find((e) => e.type === type) || { type, source: 'nl.overheid.platform', desc: '', icon: 'envelope' };
+function dotColor(severity) {
+  const c = SEV_COLOR[severity] || 'neutral';
+  return c === 'neutral'
+    ? 'var(--semantics-dividers-color, currentColor)'
+    : `var(--semantics-feedback-${c}-color, currentColor)`;
 }
 
 function teamName(id) {
-  return store.teamById(id)?.name || id;
+  return store.teamById(id)?.name || id || '—';
+}
+function actorName(id) {
+  if (!id || id === 'system') return 'systeem';
+  return store.personById(id)?.name || id;
+}
+function sourceMeta(source) {
+  return store.eventSourceMeta[source] || { label: source || 'platform', icon: 'circle-filled', path: '/' };
 }
 
+// --- Live event-stream filters --------------------------------------------
+const sevFilter = ref('all'); // all | info | success | warning | critical
+const sourceFilter = ref('all'); // all | <source key>
+
+// Sources that actually appear in the stream, sorted by event volume so the
+// dropdown leads with the busiest domains.
+const activeSources = computed(() => {
+  const by = store.eventsBySource;
+  return Object.keys(by)
+    .filter((s) => s)
+    .sort((a, b) => by[b].length - by[a].length);
+});
+
+const streamEvents = computed(() => {
+  let list = store.events;
+  if (sevFilter.value !== 'all') list = list.filter((e) => e.severity === sevFilter.value);
+  if (sourceFilter.value !== 'all') list = list.filter((e) => e.source === sourceFilter.value);
+  return list;
+});
+
+function openEvent(ev) {
+  store.markRead(ev.id);
+  if (ev.target) router.push(ev.target);
+}
+
+// --- Per-bron overview ----------------------------------------------------
+// One card per source domain, newest-volume first, with a mute-toggle.
+const sourceCards = computed(() => {
+  const by = store.eventsBySource;
+  return activeSources.value.map((source) => {
+    const list = by[source];
+    const meta = sourceMeta(source);
+    return {
+      source,
+      label: meta.label,
+      icon: meta.icon,
+      path: meta.path,
+      count: list.length,
+      unread: list.filter((e) => !e.read).length,
+      critical: list.filter((e) => e.severity === 'critical').length,
+      muted: store.mutedSources.includes(source),
+    };
+  });
+});
+
+// --- Routering: subscriptions + channels ----------------------------------
 function channelIcon(type) {
-  return type === 'Matrix' ? 'person-2' : 'link';
+  if (type === 'Matrix') return 'person-2';
+  if (type === 'email') return 'envelope';
+  return 'link';
 }
 
-// --- Channels -------------------------------------------------------------
+const subColumns = [
+  { key: 'team', label: 'Team' },
+  { key: 'event', label: 'Event-type', mono: true },
+  { key: 'label', label: 'Betekenis' },
+  { key: 'source', label: 'Bron' },
+  { key: 'via', label: 'Bezorgd via' },
+];
+
+const subRows = computed(() =>
+  store.subscriptions.map((sub) => {
+    const meta = eventTypeMap[sub.event] || {};
+    const channel = store.channels.find((c) => c.team === sub.team);
+    return {
+      ...sub,
+      label: meta.label || sub.event,
+      icon: meta.icon || 'circle-filled',
+      source: meta.source || 'platform',
+      via: channel ? channel.type : null,
+    };
+  })
+);
+
 const channelColumns = [
   { key: 'team', label: 'Team' },
   { key: 'type', label: 'Type' },
@@ -59,255 +133,280 @@ const channelRows = computed(() =>
   store.channels.map((c) => ({
     ...c,
     subs: store.subscriptions.filter((s) => s.team === c.team).length,
-    // A webhook with a truncated placeholder target is presented as still
-    // pending verification; a real-looking URL or a Matrix room is operational.
     status: c.type === 'webhook' && c.target.includes('…') ? 'in beoordeling' : 'operationeel',
   }))
 );
 
-// --- Subscriptions --------------------------------------------------------
-const subColumns = [
-  { key: 'team', label: 'Team' },
-  { key: 'event', label: 'Event-type', mono: true },
-  { key: 'source', label: 'Bron', mono: true },
-  { key: 'via', label: 'Bezorgd via' },
-  { key: 'actions', label: '', align: 'right' },
-];
-
-const subRows = computed(() =>
-  store.subscriptions.map((s) => {
-    const meta = eventMeta(s.event);
-    const channel = store.channels.find((c) => c.team === s.team);
-    return {
-      ...s,
-      source: meta.source,
-      desc: meta.desc,
-      icon: meta.icon,
-      via: channel ? channel.type : null,
-    };
-  })
+// --- CloudEvents envelope from a real recent event ------------------------
+// Pick the newest event that has a deep-link target, so the rendered envelope
+// always references something the reader can click through to.
+const sampleEvent = computed(
+  () => store.events.find((e) => e.target) || store.events[0] || null
 );
 
-function removeSubscription(id) {
-  const sub = store.subscriptions.find((s) => s.id === id);
-  store.subscriptions = store.subscriptions.filter((s) => s.id !== id);
-  if (sub) store.audit('abonnement opgezegd', `${teamName(sub.team)} ✕ ${sub.event}`);
-}
-
-// --- New-subscription form ------------------------------------------------
-const showForm = ref(false);
-const formTeam = ref('team-platform');
-const formEvent = ref('deploy.completed');
-
-// Events the chosen team is not yet subscribed to (avoid duplicates).
-const availableEvents = computed(() =>
-  eventCatalog.filter(
-    (e) => !store.subscriptions.some((s) => s.team === formTeam.value && s.event === e.type)
-  )
-);
-
-const formChannel = computed(() => store.channels.find((c) => c.team === formTeam.value));
-
-let _subSeq = 100;
-function addSubscription() {
-  if (!formEvent.value) return;
-  const sub = { id: `sub-new-${++_subSeq}`, team: formTeam.value, event: formEvent.value };
-  store.subscriptions.push(sub);
-  store.audit('abonnement aangemaakt', `${teamName(sub.team)} → ${sub.event}`);
-  showForm.value = false;
-  formEvent.value = availableEvents.value[0]?.type || '';
-}
-
-function openForm() {
-  showForm.value = true;
-  formEvent.value = availableEvents.value[0]?.type || '';
-}
-
-// --- History mock ---------------------------------------------------------
-// A recent feed of CloudEvents that actually fired, each fanned out to one
-// subscribed team's channel with a delivery outcome. Hand-built so it reads
-// like a believable afternoon on the platform.
-const history = ref([
-  { id: 'evt-9012', event: 'deploy.completed', team: 'team-platform', subject: 'app-platformportaal → prod', at: 'gisteren 10:05', delivery: 'geleverd' },
-  { id: 'evt-9011', event: 'incident.opened', team: 'team-toeslagen', subject: 'inc-2024-017 · Verhoogde latency', at: '09:14', delivery: 'geleverd' },
-  { id: 'evt-9010', event: 'cost.budget-exceeded', team: 'team-toeslagen', subject: 'Toeslagen €300 / €280', at: '08:55', delivery: 'failing' },
-  { id: 'evt-9009', event: 'secret.rotated', team: 'team-platform', subject: 'platform/llm-gateway-key', at: 'di 09:40', delivery: 'geleverd' },
-  { id: 'evt-9008', event: 'incident.resolved', team: 'team-burgerzaken', subject: 'inc-2024-016 · pg-burgerzaken-prod temp', at: 'gisteren 16:30', delivery: 'geleverd' },
-  { id: 'evt-9007', event: 'cert.expiring', team: 'team-data', subject: 'api.datadeling.overheid.nl · 30 dagen', at: 'gisteren 11:02', delivery: 'in beoordeling' },
-  { id: 'evt-9006', event: 'vuln.detected', team: 'team-toeslagen', subject: 'CVE-2024-3094 · repo-toeslagen', at: 'ma 22:18', delivery: 'geleverd' },
-  { id: 'evt-9005', event: 'deploy.completed', team: 'team-burgerzaken', subject: 'app-paspoort → prod', at: 'gisteren 14:22', delivery: 'geleverd' },
-]);
-
-const historyColumns = [
-  { key: 'at', label: 'Tijd', mono: true },
-  { key: 'event', label: 'Event-type', mono: true },
-  { key: 'subject', label: 'Onderwerp' },
-  { key: 'team', label: 'Team' },
-  { key: 'channel', label: 'Kanaal' },
-  { key: 'delivery', label: 'Bezorging' },
-];
-
-const historyRows = computed(() =>
-  history.value.map((h) => {
-    const channel = store.channels.find((c) => c.team === h.team);
-    return {
-      ...h,
-      icon: eventMeta(h.event).icon,
-      channelType: channel?.type || 'webhook',
-      channelTarget: channel?.target || 'geen kanaal',
-    };
-  })
-);
-
-// Simulate a freshly fired event landing at the top of the feed.
-let _evtSeq = 9012;
-function fireTestEvent() {
-  const channel = store.channels.find((c) => c.team === 'team-platform');
-  history.value.unshift({
-    id: `evt-${++_evtSeq}`,
-    event: 'deploy.completed',
-    team: 'team-platform',
-    subject: 'rp test-event (handmatig)',
-    at: 'zojuist',
-    delivery: channel ? 'geleverd' : 'failing',
-  });
-  store.audit('test-notificatie verstuurd', 'deploy.completed → team-platform');
-}
+const envelopeJson = computed(() => {
+  const ev = sampleEvent.value;
+  if (!ev) return '{}';
+  const meta = eventTypeMap[ev.type] || {};
+  const envelope = {
+    specversion: '1.0',
+    type: ev.type,
+    source: `nl.overheid.platform.${meta.source || 'platform'}`,
+    id: ev.id,
+    time: '2026-05-31T09:14:00Z',
+    subject: ev.resource || ev.title,
+    datacontenttype: 'application/json',
+    dataschema: `https://schemas.rijksplatform.nl/${ev.type}.json`,
+    data: {
+      title: ev.title,
+      severity: ev.severity,
+      team: ev.team,
+      actor: ev.actor,
+      target: ev.target,
+    },
+  };
+  return JSON.stringify(envelope, null, 2);
+});
 
 // --- KPIs -----------------------------------------------------------------
-const matrixCount = computed(() => store.channels.filter((c) => c.type === 'Matrix').length);
-const webhookCount = computed(() => store.channels.filter((c) => c.type === 'webhook').length);
-const failedToday = computed(() => history.value.filter((h) => h.delivery === 'failing').length);
-
-// Teams that consume events but have no channel configured at all.
-const teamsWithoutChannel = computed(() =>
-  store.teams.filter((t) => !store.channels.some((c) => c.team === t.id))
-);
-
-// Example CloudEvents envelope shown in the JSON panel. Built in script so the
-// braces and quotes pass through nldd-code untouched.
-const envelopeJson = [
-  '{',
-  '  "specversion": "1.0",',
-  '  "type": "deploy.completed",',
-  '  "source": "nl.overheid.platform.deploy",',
-  '  "id": "evt-9012",',
-  '  "time": "2026-05-30T10:05:00Z",',
-  '  "subject": "app-platformportaal",',
-  '  "datacontenttype": "application/json",',
-  '  "data": { "env": "prod", "version": "v0.6.5" }',
-  '}',
-].join('\n');
+const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
 </script>
 
 <template>
   <div class="rp-page">
     <PageHeader
       title="Notificaties"
-      lede="Kanalen, abonnementen en bezorging. Teams ontvangen platform-gebeurtenissen als CloudEvents over een Matrix-room of webhook. Hier zie je wie waarop is geabonneerd en wat er recent is verstuurd."
+      lede="De centrale zenuwbaan van het platform. Elke domein — infra, deploys, incidenten, security, code, kosten, fleet, AI — stuurt zijn gebeurtenissen als CloudEvents naar één bus. Hier komen ze allemaal samen: een live stream, per bron te dempen, en gerouteerd naar de kanalen van teams."
       :crumbs="[
         { text: 'Platform', href: '/' },
         { text: 'Notificaties', href: '/notificaties' },
       ]"
     >
       <template #actions>
-        <nldd-button variant="secondary" text="Test-event vuren" start-icon="sparkles" @click="fireTestEvent"></nldd-button>
-        <nldd-button variant="primary" text="Abonnement toevoegen" start-icon="plus" @click="openForm"></nldd-button>
+        <nldd-button
+          v-if="store.unreadCount"
+          variant="secondary"
+          text="Alles gelezen"
+          start-icon="check-mark"
+          @click="store.markAllRead()"
+        ></nldd-button>
+        <router-link to="/zelf" class="rp-btn-link">
+          <nldd-button variant="primary" text="Mijn inbox" start-icon="person"></nldd-button>
+        </router-link>
       </template>
     </PageHeader>
 
+    <!-- 2. KPIs ---------------------------------------------------------- -->
     <nldd-container layout="grid" column-count="4" gap="16">
-      <MetricCard :value="store.channels.length" label="Kanalen" :sub="`${matrixCount}× Matrix · ${webhookCount}× webhook`" icon="envelope" />
-      <MetricCard :value="store.subscriptions.length" label="Abonnementen" sub="actieve event-subscriptions" icon="link" />
-      <MetricCard :value="eventCatalog.length" label="Event-types" sub="NL GOV CloudEvents" icon="folder-stack" />
       <MetricCard
-        :value="failedToday"
-        label="Mislukte bezorgingen"
-        :sub="failedToday ? 'vandaag, vereist aandacht' : 'vandaag, alles groen'"
+        :value="store.events.length"
+        label="Events totaal"
+        sub="over alle domeinen"
+        icon="folder-stack"
+      />
+      <MetricCard
+        :value="store.unreadCount"
+        label="Ongelezen"
+        sub="in jouw inbox"
+        icon="envelope"
+        to="/zelf"
+      />
+      <MetricCard
+        :value="store.unreadCritical"
+        label="Kritiek ongelezen"
+        :sub="store.unreadCritical ? 'vereist directe aandacht' : 'niets kritieks open'"
         icon="exclamation-triangle"
+      />
+      <MetricCard
+        :value="sourceCount"
+        label="Bronsystemen"
+        sub="domeinen voeden de bus"
+        icon="cylinder-split"
       />
     </nldd-container>
 
-    <nldd-spacer size="16" />
+    <nldd-spacer size="32" />
 
-    <nldd-inline-dialog
-      v-if="teamsWithoutChannel.length"
-      title="Teams zonder kanaal"
-      :supporting-text="`${teamsWithoutChannel.map((t) => t.name).join(', ')} ontvangen nog geen notificaties. Configureer een Matrix-room of webhook om gebeurtenissen te ontvangen.`"
-    ></nldd-inline-dialog>
+    <!-- 3. Live event-stream -------------------------------------------- -->
+    <div class="rp-section-head">
+      <div>
+        <nldd-title size="3"><h2>Live event-stream</h2></nldd-title>
+        <nldd-rich-text>
+          <p>Elke gebeurtenis op het platform, nieuwste bovenaan. Klik een regel om de bron te openen.</p>
+        </nldd-rich-text>
+      </div>
+      <div class="rp-filters">
+        <nldd-segmented-control>
+          <button type="button" :aria-pressed="sevFilter === 'all'" @click="sevFilter = 'all'">Alles</button>
+          <button type="button" :aria-pressed="sevFilter === 'critical'" @click="sevFilter = 'critical'">Kritiek</button>
+          <button type="button" :aria-pressed="sevFilter === 'warning'" @click="sevFilter = 'warning'">Waarschuwing</button>
+          <button type="button" :aria-pressed="sevFilter === 'success'" @click="sevFilter = 'success'">Succes</button>
+          <button type="button" :aria-pressed="sevFilter === 'info'" @click="sevFilter = 'info'">Info</button>
+        </nldd-segmented-control>
+        <nldd-dropdown>
+          <select v-model="sourceFilter" aria-label="Filter op bron">
+            <option value="all">Alle bronnen</option>
+            <option v-for="s in activeSources" :key="s" :value="s">
+              {{ sourceMeta(s).label }} ({{ store.eventsBySource[s].length }})
+            </option>
+          </select>
+        </nldd-dropdown>
+      </div>
+    </div>
 
-    <!-- New-subscription form ------------------------------------------- -->
-    <template v-if="showForm">
-      <nldd-spacer size="16" />
-      <nldd-card accessible-label="Nieuw abonnement">
-        <nldd-container padding="24">
-          <div class="rp-form-head">
-            <nldd-title size="4"><h2>Nieuw abonnement</h2></nldd-title>
-            <nldd-button variant="secondary" text="Annuleren" start-icon="dismiss" @click="showForm = false"></nldd-button>
+    <nldd-spacer size="12" />
+
+    <nldd-card accessible-label="Event-stream">
+      <ul class="rp-stream">
+        <li
+          v-for="ev in streamEvents"
+          :key="ev.id"
+          class="rp-stream-item"
+          :class="{ 'rp-unread': !ev.read }"
+        >
+          <span class="rp-dot" :style="{ '--rp-dot-color': dotColor(ev.severity) }" :title="SEV_LABEL[ev.severity]"></span>
+          <span class="rp-stream-icon">
+            <nldd-icon :name="sourceMeta(ev.source).icon" aria-hidden="true"></nldd-icon>
+          </span>
+          <span class="rp-stream-main" @click="openEvent(ev)">
+            <span class="rp-stream-title">{{ ev.title }}</span>
+            <span class="rp-stream-meta">
+              <nldd-tag :color="SEV_COLOR[ev.severity]" size="md">{{ ev.label }}</nldd-tag>
+              <router-link
+                :to="sourceMeta(ev.source).path"
+                class="rp-source-tag"
+                @click.stop
+              >
+                <nldd-icon :name="sourceMeta(ev.source).icon" aria-hidden="true"></nldd-icon>
+                {{ sourceMeta(ev.source).label }}
+              </router-link>
+              <span class="rp-stream-by">{{ actorName(ev.actor) }} · {{ teamName(ev.team) }} · {{ ev.at }}</span>
+            </span>
+          </span>
+          <nldd-icon
+            v-if="ev.target"
+            name="chevron-right"
+            aria-hidden="true"
+            class="rp-stream-chev"
+            @click="openEvent(ev)"
+          ></nldd-icon>
+        </li>
+        <li v-if="!streamEvents.length" class="rp-stream-empty">Geen events die aan dit filter voldoen.</li>
+      </ul>
+    </nldd-card>
+
+    <nldd-spacer size="32" />
+
+    <!-- 4. Per bron ------------------------------------------------------ -->
+    <nldd-title size="3"><h2>Per bron</h2></nldd-title>
+    <nldd-rich-text>
+      <p>Elk domein dat de bus voedt, met zijn aantal events. Demp een bron om die uit jouw inbox te houden; de stream blijft volledig.</p>
+    </nldd-rich-text>
+    <nldd-spacer size="12" />
+
+    <nldd-container layout="grid" column-count="4" gap="16">
+      <nldd-card v-for="c in sourceCards" :key="c.source" :accessible-label="c.label">
+        <nldd-container padding="20">
+          <div class="rp-source-top">
+            <span class="rp-source-ic"><nldd-icon :name="c.icon" aria-hidden="true"></nldd-icon></span>
+            <nldd-tag v-if="c.muted" color="neutral" size="md">gedempt</nldd-tag>
+            <nldd-tag v-else-if="c.critical" color="critical" size="md">{{ c.critical }} kritiek</nldd-tag>
           </div>
-          <nldd-spacer size="16" />
-          <nldd-container layout="grid" column-count="2" gap="16">
-            <nldd-form-field label="Team">
-              <nldd-dropdown>
-                <select v-model="formTeam">
-                  <option v-for="t in store.teams" :key="t.id" :value="t.id">{{ t.name }}</option>
-                </select>
-              </nldd-dropdown>
-            </nldd-form-field>
-            <nldd-form-field label="Event-type">
-              <nldd-dropdown>
-                <select v-model="formEvent">
-                  <option v-for="e in availableEvents" :key="e.type" :value="e.type">{{ e.type }}</option>
-                </select>
-              </nldd-dropdown>
-            </nldd-form-field>
-          </nldd-container>
-
-          <nldd-spacer size="16" />
-
-          <div v-if="formEvent" class="rp-form-preview">
-            <nldd-icon :name="eventMeta(formEvent).icon" aria-hidden="true"></nldd-icon>
-            <div>
-              <p class="rp-preview-desc">{{ eventMeta(formEvent).desc }}</p>
-              <p class="rp-preview-meta">
-                Bron <span class="rp-mono">{{ eventMeta(formEvent).source }}</span> ·
-                bezorging via
-                <template v-if="formChannel">{{ formChannel.type }} <span class="rp-mono">{{ formChannel.target }}</span></template>
-                <template v-else><strong>geen kanaal</strong> — configureer eerst een kanaal voor dit team</template>
-              </p>
-            </div>
-          </div>
-          <nldd-inline-dialog
-            v-else
-            title="Geen events meer beschikbaar"
-            supporting-text="Dit team is al op alle beschikbare event-types geabonneerd."
-          ></nldd-inline-dialog>
-
-          <nldd-spacer size="16" />
-          <nldd-button variant="primary" text="Abonnement aanmaken" start-icon="check-mark" :disabled="!formEvent || undefined" @click="addSubscription"></nldd-button>
-
-          <CliHint
-            v-if="formEvent"
-            :command="`rp notify subscribe --team ${formTeam} --event ${formEvent}`"
-            label="Dit kan ook via de CLI:"
-          />
+          <div class="rp-source-count">{{ c.count }}</div>
+          <router-link :to="c.path" class="rp-source-name">{{ c.label }}</router-link>
+          <div class="rp-source-sub">{{ c.unread }} ongelezen</div>
+          <nldd-spacer size="12" />
+          <nldd-button
+            :variant="c.muted ? 'primary' : 'secondary'"
+            size="sm"
+            :text="c.muted ? 'Dempen opheffen' : 'Bron dempen'"
+            :start-icon="c.muted ? 'eye' : 'dismiss-circle'"
+            @click="store.toggleMuteSource(c.source)"
+          ></nldd-button>
         </nldd-container>
       </nldd-card>
-    </template>
+    </nldd-container>
 
-    <nldd-spacer size="24" />
+    <nldd-spacer size="32" />
 
-    <!-- Channels --------------------------------------------------------- -->
-    <nldd-title size="4"><h2>Kanalen</h2></nldd-title>
-    <nldd-rich-text><p>Per team één bestemming: een Matrix-room (#team:rijk.chat) of een webhook-endpoint.</p></nldd-rich-text>
-    <nldd-spacer size="12" />
+    <!-- 5. Routering ----------------------------------------------------- -->
+    <nldd-title size="3"><h2>Routering: abonnementen en kanalen</h2></nldd-title>
+    <nldd-rich-text>
+      <p>Een team abonneert zich op een event-type; matchende events worden gefanned-out over het kanaal van dat team.</p>
+    </nldd-rich-text>
+    <nldd-spacer size="16" />
+
+    <!-- Flow schema: event -> subscription -> channel -->
+    <nldd-card accessible-label="Routering-schema">
+      <nldd-container padding="20">
+        <div class="rp-flow">
+          <div class="rp-flow-step">
+            <span class="rp-flow-ic"><nldd-icon name="folder-stack" aria-hidden="true"></nldd-icon></span>
+            <div>
+              <div class="rp-flow-title">Event</div>
+              <div class="rp-flow-sub"><span class="rp-mono">deploy.completed</span> komt op de bus</div>
+            </div>
+          </div>
+          <nldd-icon class="rp-flow-arrow" name="arrow-right" aria-hidden="true"></nldd-icon>
+          <div class="rp-flow-step">
+            <span class="rp-flow-ic"><nldd-icon name="link" aria-hidden="true"></nldd-icon></span>
+            <div>
+              <div class="rp-flow-title">Abonnement</div>
+              <div class="rp-flow-sub">team-platform luistert op dit type</div>
+            </div>
+          </div>
+          <nldd-icon class="rp-flow-arrow" name="arrow-right" aria-hidden="true"></nldd-icon>
+          <div class="rp-flow-step">
+            <span class="rp-flow-ic"><nldd-icon name="person-2" aria-hidden="true"></nldd-icon></span>
+            <div>
+              <div class="rp-flow-title">Kanaal</div>
+              <div class="rp-flow-sub">bezorgd in <span class="rp-mono">#platform:rijk.chat</span></div>
+            </div>
+          </div>
+        </div>
+      </nldd-container>
+    </nldd-card>
+
+    <nldd-spacer size="20" />
+
+    <nldd-title size="4"><h3>Abonnementen</h3></nldd-title>
+    <nldd-spacer size="8" />
+    <DataTable :columns="subColumns" :rows="subRows" row-key="id">
+      <template #cell="{ row, col, value }">
+        <template v-if="col.key === 'team'">
+          <router-link :to="`/teams/${row.team}`" class="rp-link">{{ teamName(value) }}</router-link>
+        </template>
+        <template v-else-if="col.key === 'event'">
+          <span class="rp-event">
+            <nldd-icon :name="row.icon" aria-hidden="true"></nldd-icon>
+            <span class="rp-mono">{{ value }}</span>
+          </span>
+        </template>
+        <template v-else-if="col.key === 'source'">
+          <router-link :to="sourceMeta(value).path" class="rp-source-tag">
+            <nldd-icon :name="sourceMeta(value).icon" aria-hidden="true"></nldd-icon>
+            {{ sourceMeta(value).label }}
+          </router-link>
+        </template>
+        <template v-else-if="col.key === 'via'">
+          <nldd-tag v-if="value" color="accent" size="md">{{ value }}</nldd-tag>
+          <nldd-tag v-else color="critical" size="md">geen kanaal</nldd-tag>
+        </template>
+        <template v-else>{{ value }}</template>
+      </template>
+    </DataTable>
+
+    <nldd-spacer size="20" />
+
+    <nldd-title size="4"><h3>Kanalen</h3></nldd-title>
+    <nldd-spacer size="8" />
     <DataTable :columns="channelColumns" :rows="channelRows" row-key="id">
       <template #cell="{ row, col, value }">
         <template v-if="col.key === 'team'">
           <router-link :to="`/teams/${row.team}`" class="rp-link">{{ teamName(value) }}</router-link>
         </template>
         <template v-else-if="col.key === 'type'">
-          <span class="rp-type">
+          <span class="rp-event">
             <nldd-icon :name="channelIcon(value)" aria-hidden="true"></nldd-icon>
             {{ value }}
           </span>
@@ -325,119 +424,216 @@ const envelopeJson = [
       </template>
     </DataTable>
 
-    <nldd-spacer size="24" />
+    <nldd-spacer size="32" />
 
-    <!-- Subscriptions ---------------------------------------------------- -->
-    <nldd-title size="4"><h2>Abonnementen</h2></nldd-title>
-    <nldd-rich-text><p>CloudEvents-event-types waarop teams zijn geabonneerd. Elk abonnement wordt bezorgd over het kanaal van het team.</p></nldd-rich-text>
+    <!-- 6. CloudEvents envelope ----------------------------------------- -->
+    <nldd-title size="3"><h2>CloudEvents-envelop</h2></nldd-title>
+    <nldd-rich-text>
+      <p>Zo verlaat een event de bus richting een webhook: een NL GOV CloudEvents 1.0-envelop, hier opgebouwd uit het meest recente event.</p>
+    </nldd-rich-text>
     <nldd-spacer size="12" />
-    <DataTable :columns="subColumns" :rows="subRows" row-key="id">
-      <template #cell="{ row, col, value }">
-        <template v-if="col.key === 'team'">
-          <router-link :to="`/teams/${row.team}`" class="rp-link">{{ teamName(value) }}</router-link>
-        </template>
-        <template v-else-if="col.key === 'event'">
-          <span class="rp-event">
-            <nldd-icon :name="row.icon" aria-hidden="true"></nldd-icon>
-            <span class="rp-mono">{{ value }}</span>
-          </span>
-        </template>
-        <template v-else-if="col.key === 'source'">
-          <span class="rp-mono rp-dim">{{ value }}</span>
-        </template>
-        <template v-else-if="col.key === 'via'">
-          <nldd-tag v-if="value" color="accent" size="md">{{ value }}</nldd-tag>
-          <nldd-tag v-else color="critical" size="md">geen kanaal</nldd-tag>
-        </template>
-        <template v-else-if="col.key === 'actions'">
-          <nldd-button variant="secondary" size="sm" text="Opzeggen" start-icon="dismiss" @click="removeSubscription(row.id)"></nldd-button>
-        </template>
-        <template v-else>{{ value }}</template>
-      </template>
-    </DataTable>
+    <nldd-card accessible-label="CloudEvents-envelop">
+      <nldd-container padding="20">
+        <nldd-code-viewer language="json">{{ envelopeJson }}</nldd-code-viewer>
+      </nldd-container>
+    </nldd-card>
 
-    <nldd-spacer size="24" />
-
-    <!-- History ---------------------------------------------------------- -->
-    <nldd-title size="4"><h2>Notificatie-historie</h2></nldd-title>
-    <nldd-rich-text><p>Recent gevuurde events en hun bezorging per kanaal. De nieuwste bovenaan.</p></nldd-rich-text>
-    <nldd-spacer size="12" />
-    <DataTable :columns="historyColumns" :rows="historyRows" row-key="id">
-      <template #cell="{ row, col, value }">
-        <template v-if="col.key === 'at'">
-          <span class="rp-mono rp-dim">{{ value }}</span>
-        </template>
-        <template v-else-if="col.key === 'event'">
-          <span class="rp-event">
-            <nldd-icon :name="row.icon" aria-hidden="true"></nldd-icon>
-            <span class="rp-mono">{{ value }}</span>
-          </span>
-        </template>
-        <template v-else-if="col.key === 'team'">
-          <router-link :to="`/teams/${row.team}`" class="rp-link">{{ teamName(value) }}</router-link>
-        </template>
-        <template v-else-if="col.key === 'channel'">
-          <span class="rp-channel">
-            <nldd-icon :name="channelIcon(row.channelType)" aria-hidden="true"></nldd-icon>
-            <span class="rp-mono">{{ row.channelTarget }}</span>
-          </span>
-        </template>
-        <template v-else-if="col.key === 'delivery'">
-          <StatusBadge :status="value" />
-        </template>
-        <template v-else>{{ value }}</template>
-      </template>
-    </DataTable>
-
-    <nldd-spacer size="24" />
-
-    <!-- Event catalog + relations --------------------------------------- -->
-    <nldd-container layout="grid" column-count="2" gap="16">
-      <nldd-card accessible-label="Event-catalogus">
-        <nldd-container padding="20">
-          <nldd-title size="5"><h3>Event-catalogus</h3></nldd-title>
-          <nldd-rich-text><p>De CloudEvents die het platform uitstuurt. Abonneer een team om ze te ontvangen.</p></nldd-rich-text>
-          <nldd-spacer size="12" />
-          <nldd-list>
-            <nldd-list-item v-for="e in eventCatalog" :key="e.type">
-              <nldd-icon-cell slot="start" :name="e.icon"></nldd-icon-cell>
-              <nldd-title-cell :text="e.type" :supporting-text="e.desc"></nldd-title-cell>
-              <nldd-text-cell slot="end" :text="e.source"></nldd-text-cell>
-            </nldd-list-item>
-          </nldd-list>
-        </nldd-container>
-      </nldd-card>
-
-      <div>
-        <RelationLinks
-          title="Bronnen van notificaties"
-          :links="[
-            { text: 'Incidenten', to: '/incidenten/inc-2024-017', icon: 'exclamation-triangle' },
-            { text: 'Omgevingen & releases', to: '/environments', icon: 'arrow-up-arrow-down' },
-            { text: 'Kosten & budgetten', to: '/kosten', icon: 'euro-sign' },
-            { text: 'Secrets', to: '/secrets', icon: 'lock-closed' },
-            { text: 'Fleet-shift campagnes', to: '/fleet', icon: 'ship-wheel' },
-            { text: 'Team-chat (Matrix)', to: '/teams/on-call', icon: 'person-2' },
-          ]"
-        />
-        <nldd-spacer size="16" />
-        <nldd-card accessible-label="CloudEvents-envelop">
-          <nldd-container padding="20">
-            <nldd-title size="5"><h3>CloudEvents-envelop</h3></nldd-title>
-            <nldd-rich-text><p>Zo ziet een bezorgd event eruit op de webhook (NL GOV CloudEvents 1.0).</p></nldd-rich-text>
-            <nldd-spacer size="12" />
-            <nldd-code-viewer language="json">{{ envelopeJson }}</nldd-code-viewer>
-          </nldd-container>
-        </nldd-card>
-      </div>
-    </nldd-container>
-
-    <nldd-spacer size="24" />
-    <CliHint command="rp notify list --team team-platform" label="Bekijk de kanalen en abonnementen ook via de CLI:" />
+    <nldd-spacer size="20" />
+    <CliHint
+      command="rp notify subscribe deploy.completed --team team-platform"
+      label="Abonneer een team op een event-type via de CLI:"
+    />
   </div>
 </template>
 
 <style scoped>
+.rp-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.rp-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* --- Live stream --- */
+.rp-stream {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 34rem;
+  overflow-y: auto;
+}
+.rp-stream-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--semantics-dividers-color);
+}
+.rp-stream-item:last-child {
+  border-bottom: none;
+}
+.rp-stream-item:hover {
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-stream-item.rp-unread {
+  background: color-mix(in srgb, var(--semantics-surfaces-tinted-background-color) 70%, transparent);
+}
+.rp-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--rp-dot-color);
+  margin-top: 0.45rem;
+  flex: 0 0 auto;
+}
+.rp-stream-icon {
+  flex: 0 0 auto;
+  margin-top: 0.1rem;
+}
+.rp-stream-icon nldd-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  opacity: 0.75;
+}
+.rp-stream-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+.rp-stream-title {
+  font-weight: 600;
+  line-height: 1.3;
+}
+.rp-unread .rp-stream-title {
+  font-weight: 700;
+}
+.rp-stream-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.rp-stream-by {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+.rp-stream-chev {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.4;
+  margin-top: 0.25rem;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.rp-stream-empty {
+  padding: 2rem;
+  text-align: center;
+  opacity: 0.6;
+}
+
+/* Clickable source tag */
+.rp-source-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--semantics-dividers-color);
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: inherit;
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-source-tag:hover {
+  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+}
+.rp-source-tag nldd-icon {
+  width: 0.85rem;
+  height: 0.85rem;
+  opacity: 0.7;
+}
+
+/* --- Per bron cards --- */
+.rp-source-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 1.5rem;
+}
+.rp-source-ic nldd-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  opacity: 0.75;
+}
+.rp-source-count {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 0.4rem;
+}
+.rp-source-name {
+  display: block;
+  font-weight: 600;
+  margin-top: 0.1rem;
+  color: var(--semantics-actions-primary-default-background-color, #154273);
+  text-decoration: none;
+}
+.rp-source-name:hover {
+  text-decoration: underline;
+}
+.rp-source-sub {
+  opacity: 0.65;
+  font-size: 0.85rem;
+}
+
+/* --- Flow schema --- */
+.rp-flow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.rp-flow-step {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
+  flex: 1 1 14rem;
+}
+.rp-flow-ic nldd-icon {
+  width: 1.3rem;
+  height: 1.3rem;
+  opacity: 0.8;
+}
+.rp-flow-title {
+  font-weight: 700;
+}
+.rp-flow-sub {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+.rp-flow-arrow {
+  width: 1.2rem;
+  height: 1.2rem;
+  opacity: 0.5;
+  flex: 0 0 auto;
+}
+
+/* --- Shared bits --- */
 .rp-link {
   color: var(--semantics-actions-primary-default-background-color, #154273);
   text-decoration: none;
@@ -449,53 +645,17 @@ const envelopeJson = [
 .rp-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
-.rp-dim {
-  opacity: 0.65;
-}
-.rp-type,
-.rp-event,
-.rp-channel {
+.rp-event {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
 }
-.rp-type nldd-icon,
-.rp-event nldd-icon,
-.rp-channel nldd-icon {
+.rp-event nldd-icon {
   width: 1rem;
   height: 1rem;
   opacity: 0.75;
 }
-.rp-form-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.rp-form-preview {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.9rem 1rem;
-  border-radius: 10px;
-  border: 1px solid var(--semantics-dividers-color);
-  background: var(--semantics-surfaces-tinted-background-color);
-}
-.rp-form-preview nldd-icon {
-  width: 1.4rem;
-  height: 1.4rem;
-  opacity: 0.8;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
-}
-.rp-preview-desc {
-  margin: 0 0 0.25rem;
-  font-weight: 600;
-}
-.rp-preview-meta {
-  margin: 0;
-  font-size: 0.85rem;
-  opacity: 0.8;
+.rp-btn-link {
+  text-decoration: none;
 }
 </style>

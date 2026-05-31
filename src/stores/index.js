@@ -4,12 +4,16 @@
 // clickable demo needs. Domain views read these arrays and call these helpers.
 import { defineStore } from 'pinia';
 import * as seed from '../data/seed.js';
+import { eventSeed, eventTypeMap, eventSources, SEVERITIES } from '../data/events.js';
 
 // Deep clone the seed so the store owns mutable copies (refresh resets it).
 const clone = (v) => JSON.parse(JSON.stringify(v));
 
 let _seq = 1000;
 const nextId = (prefix) => `${prefix}-${++_seq}`;
+
+// Severity rank for sorting/escalation.
+const SEV_RANK = { critical: 0, warning: 1, success: 2, info: 3 };
 
 export const usePlatformStore = defineStore('platform', {
   state: () => ({
@@ -59,6 +63,26 @@ export const usePlatformStore = defineStore('platform', {
     learningPaths: clone(seed.learningPaths),
     // The "logged in" demo user.
     currentUser: 'ans',
+
+    // --- Notification event bus ---
+    // Every platform event lives here, newest first. Seeded with a believable
+    // backlog; new events are appended live by emit() from every domain action.
+    // Each event: { id, type, severity, source, label, icon, team, actor,
+    //   title, resource, target, at, read, muted }.
+    events: eventSeed.map((e, i) => {
+      const meta = eventTypeMap[e.type] || {};
+      return {
+        id: `evt-${5000 - i}`,
+        read: i > 2, // first few unread so the bell shows activity on load
+        muted: false,
+        source: meta.source,
+        label: meta.label,
+        icon: meta.icon || 'circle-filled',
+        ...e,
+      };
+    }),
+    // Per-user notification preferences: muted event sources/types.
+    mutedSources: [],
   }),
 
   getters: {
@@ -92,11 +116,98 @@ export const usePlatformStore = defineStore('platform', {
     },
     // Which marketplace plugin (if any) covers a given standard id.
     pluginForStandard: (s) => (stdId) => s.skillPlugins.find((p) => (p.standards || []).includes(stdId)),
+
+    // --- Notification inbox ---
+    // The current user's relevant events: everything for their team, plus
+    // anything that names them as actor. Muted sources are excluded.
+    inboxEvents: (s) => {
+      const me = s.people.find((p) => p.id === s.currentUser);
+      const myTeam = me?.team;
+      return s.events.filter(
+        (e) =>
+          !e.muted &&
+          !s.mutedSources.includes(e.source) &&
+          (e.team === myTeam || e.actor === s.currentUser || e.severity === 'critical'),
+      );
+    },
+    unreadCount() {
+      return this.inboxEvents.filter((e) => !e.read).length;
+    },
+    unreadCritical() {
+      return this.inboxEvents.filter((e) => !e.read && e.severity === 'critical').length;
+    },
+    // Events grouped by source domain, for the management view.
+    eventsBySource: (s) => {
+      const map = {};
+      for (const e of s.events) (map[e.source] ||= []).push(e);
+      return map;
+    },
+    // Source metadata passthrough for views.
+    eventSourceMeta: () => eventSources,
+    eventSeverities: () => SEVERITIES,
   },
 
   actions: {
     audit(action, resource) {
       this.auditLog.unshift({ id: nextId('a'), actor: this.currentUser, action, resource, at: 'zojuist' });
+    },
+
+    // --- The event bus: the spine that feeds the notification system ---
+    // Every domain action calls emit() to publish a CloudEvent. It is routed
+    // into the inbox, matched against subscriptions for delivery, and (for
+    // anything actor-driven) also written to the audit log. New events show up
+    // live in the bell + inbox + the /notificaties stream.
+    emit(type, { title, resource = null, target = null, team = null, actor = null, severity = null } = {}) {
+      const meta = eventTypeMap[type] || { source: 'platform', label: type, icon: 'circle-filled', severity: 'info' };
+      const ev = {
+        id: nextId('evt'),
+        type,
+        source: meta.source,
+        label: meta.label,
+        icon: meta.icon || 'circle-filled',
+        severity: severity || meta.severity || 'info',
+        title: title || meta.label,
+        resource,
+        target,
+        team: team || this.teamOfPerson(this.currentUser)?.id || null,
+        actor: actor || this.currentUser,
+        at: 'zojuist',
+        read: false,
+        muted: false,
+      };
+      this.events.unshift(ev);
+      // Deliver to matching subscriptions (updates their last-fired marker).
+      this.routeEvent(ev);
+      // Escalate unacked critical events to the on-call of the owning team.
+      if (ev.severity === 'critical' && ev.team) {
+        const rec = this.oncall.find((o) => o.team === ev.team);
+        if (rec) ev.escalatedTo = rec.person;
+      }
+      return ev;
+    },
+
+    // Match an event against team subscriptions; mark which channels delivered.
+    routeEvent(ev) {
+      const matched = this.subscriptions.filter(
+        (sub) => sub.event === ev.type && (!sub.team || sub.team === ev.team),
+      );
+      ev.deliveredTo = matched.flatMap((sub) =>
+        this.channels.filter((c) => c.team === sub.team).map((c) => c.type),
+      );
+    },
+
+    // --- Inbox actions ---
+    markRead(id) {
+      const e = this.events.find((x) => x.id === id);
+      if (e) e.read = true;
+    },
+    markAllRead() {
+      for (const e of this.inboxEvents) e.read = true;
+    },
+    toggleMuteSource(source) {
+      const i = this.mutedSources.indexOf(source);
+      if (i === -1) this.mutedSources.push(source);
+      else this.mutedSources.splice(i, 1);
     },
 
     // Fake provisioning: flip status through a chain over a few seconds so the
@@ -120,17 +231,27 @@ export const usePlatformStore = defineStore('platform', {
       };
       this.instances.push(inst);
       this.audit('infra afgenomen', inst.name);
-      this.runStatusChain(inst, ['provisioning', 'ready']);
+      this.emit('infra.instance.requested', { title: `${inst.name} aangevraagd`, resource: inst.id, target: `/infra/instances/${inst.id}`, team });
+      // When provisioning completes, fire the ready event too.
+      this.runStatusChain(inst, ['provisioning', 'ready']).then(() => {
+        this.emit('infra.instance.ready', { title: `${inst.name} is gereed`, resource: inst.id, target: `/infra/instances/${inst.id}`, team });
+      });
       return inst;
     },
     scaleInstance(id) {
       const i = this.instanceById(id);
-      if (i) this.audit('instance geschaald', i.name);
+      if (i) {
+        this.audit('instance geschaald', i.name);
+        this.emit('infra.instance.scaled', { title: `${i.name} geschaald`, resource: i.id, target: `/infra/instances/${i.id}`, team: i.team });
+      }
     },
     deleteInstance(id) {
       const i = this.instanceById(id);
       this.instances = this.instances.filter((x) => x.id !== id);
-      if (i) this.audit('instance verwijderd', i.name);
+      if (i) {
+        this.audit('instance verwijderd', i.name);
+        this.emit('infra.instance.deleted', { title: `${i.name} verwijderd`, resource: i.id, team: i.team });
+      }
     },
 
     // --- Apps / golden path ---
@@ -151,6 +272,8 @@ export const usePlatformStore = defineStore('platform', {
         this.orderInstance({ kind, name: `${name.toLowerCase().replace(/\s+/g, '-')}-${kind}`, team, app: id, env: 'dev', size: 'S' });
       }
       this.audit('applicatie aangemaakt', name);
+      this.emit('repo.created', { title: `Repository ${ns}/${slug} aangemaakt`, resource: repoId, target: `/code/${repoId}`, team });
+      this.emit('app.created', { title: `Applicatie ${name} aangemaakt`, resource: id, target: `/apps/${id}`, team });
       return { app, repoId };
     },
 
@@ -172,8 +295,12 @@ export const usePlatformStore = defineStore('platform', {
     provisionWorkplace({ person, model, image }) {
       const wp = { id: nextId('wp'), person, model, image, status: 'besteld', lastSeen: '—', encrypted: true, updated: false };
       this.workplaces.push(wp);
+      const personName = this.personById(person)?.name || person;
+      const team = this.personById(person)?.team;
       this.audit('werkplek uitgerold', `${wp.id} → ${person}`);
-      this.runStatusChain(wp, ['provisioning', 'geleverd', 'in gebruik']);
+      this.runStatusChain(wp, ['provisioning', 'geleverd', 'in gebruik']).then(() => {
+        this.emit('workplace.provisioned', { title: `Werkplek ${wp.id} uitgerold aan ${personName}`, resource: wp.id, target: `/werkplekken/${wp.id}`, team });
+      });
       return wp;
     },
 
@@ -183,6 +310,7 @@ export const usePlatformStore = defineStore('platform', {
       if (sec) {
         sec.rotated = 'zojuist';
         this.audit('secret geroteerd', sec.name);
+        this.emit('secret.rotated', { title: `${sec.name} geroteerd`, resource: sec.id, target: '/secrets', team: sec.team });
       }
     },
 
@@ -199,12 +327,21 @@ export const usePlatformStore = defineStore('platform', {
       c.status = 'actief';
       c.progress = { open: c.repos.length, merged: 0, failing: 0 };
       this.audit('campagne uitgerold', c.title);
+      this.emit('fleet.campaign.started', { title: `Campagne "${c.title}" uitgerold over ${c.repos.length} repos`, resource: c.id, target: `/fleet/${c.id}`, team: c.owner });
+      // Each targeted repo gets a fleet PR opened.
+      for (const repoId of c.repos) {
+        this.emit('fleet.pr.opened', { title: `Fleet-PR geopend in ${this.repoById(repoId)?.name || repoId}`, resource: repoId, target: `/fleet/${c.id}`, team: c.owner });
+      }
     },
 
     // --- Incidents ---
     ackIncident(id) {
       const i = this.incidents.find((x) => x.id === id);
-      if (i) { i.status = 'mitigated'; this.audit('incident bevestigd', i.id); }
+      if (i) {
+        i.status = 'mitigated';
+        this.audit('incident bevestigd', i.id);
+        this.emit('incident.acknowledged', { title: `Incident ${i.id} bevestigd: ${i.title}`, resource: i.id, target: `/incidenten/${i.id}`, team: i.team });
+      }
     },
 
     // --- Skills-marketplace ---
@@ -219,6 +356,7 @@ export const usePlatformStore = defineStore('platform', {
         const p = this.skillPluginById(pluginId);
         if (p) p.installs += 1;
         this.audit('skill-plugin geïnstalleerd', `${pluginId} → ${team}`);
+        this.emit('ai.skill.installed', { title: `${p?.name || pluginId} geïnstalleerd`, resource: pluginId, target: '/ai/skills', team });
       }
     },
     uninstallSkill(team, pluginId) {
@@ -229,7 +367,20 @@ export const usePlatformStore = defineStore('platform', {
     // --- Environments ---
     promote(app, fromEnv, toEnv) {
       const d = this.deployments.find((x) => x.app === app);
-      if (d) { d[toEnv] = d[fromEnv]; this.audit('release gepromoot', `${app} → ${toEnv}`); }
+      if (d) {
+        d[toEnv] = d[fromEnv];
+        const appObj = this.appById(app);
+        this.audit('release gepromoot', `${app} → ${toEnv}`);
+        this.emit('release.promoted', { title: `${appObj?.name || app} ${d[toEnv]} gepromoot naar ${toEnv}`, resource: app, target: `/apps/${app}`, team: appObj?.team, severity: toEnv === 'prod' ? 'success' : 'info' });
+        if (toEnv === 'prod') {
+          this.emit('deploy.completed', { title: `${appObj?.name || app} ${d.prod} live op productie`, resource: app, target: `/apps/${app}`, team: appObj?.team });
+        }
+      }
+    },
+
+    // --- Code / PR / issue events (emitted from code + AI flows) ---
+    emitCodeEvent(type, opts) {
+      return this.emit(type, opts);
     },
   },
 });
