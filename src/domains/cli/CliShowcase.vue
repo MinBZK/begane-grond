@@ -178,6 +178,36 @@ rp rack place ${firstRack.value?.id || 'r-dh-a1'} --u 14 --height 2 \\
 rp rack remove ${firstRack.value?.id || 'r-dh-a1'} --u 14
 rp dc show dc-denhaag --capacity`,
   },
+  {
+    id: 'wet',
+    title: 'rp wet',
+    icon: 'certificate',
+    lede: 'Van wettekst naar een draaiende, machine-leesbare dienst.',
+    to: '/wetten',
+    toText: 'Open het wetten-corpus',
+    code: `# Harvest een wet uit BWB en maak hem machine-leesbaar
+rp wet harvest BWBR0008659 --name "Wet op de huurtoeslag"
+rp wet edit huurtoeslagwet
+
+# Koppel invoer aan een basisregister
+rp wet input add huurtoeslagwet --field toetsingsinkomen --from register:inkomen
+
+# Test, publiceer en rol uit als dienst
+rp wet scenario run huurtoeslagwet
+rp wet publish huurtoeslagwet
+rp wet deploy huurtoeslagwet --template rust-api`,
+  },
+  {
+    id: 'register',
+    title: 'rp register',
+    icon: 'cylinder-split',
+    lede: 'Sluit diensten en wetten aan op de basisregistraties.',
+    to: '/registers',
+    toText: 'Open de basisregistraties',
+    code: `rp register list
+rp register show brp
+rp register connect inkomen --field toetsingsinkomen --app app-toeslagen`,
+  },
 ]);
 
 // --- Quick reference: global flags ------------------------------------------

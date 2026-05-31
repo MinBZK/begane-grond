@@ -47,6 +47,14 @@ const relationLinks = computed(() => {
   for (const inc of incidents.value) {
     links.push({ text: inc.title, to: `/incidenten/${inc.id}`, icon: 'exclamation-triangle' });
   }
+  // RegelRecht cross-links: the law this app executes and the registers it reads.
+  const wet = store.wetForApp(app.value.id);
+  if (wet) links.push({ text: `Voert uit: ${wet.name}`, to: `/wetten/${wet.id}`, icon: 'certificate' });
+  for (const rc of store.registersForConsumer(app.value.id)) {
+    if (rc.register) {
+      links.push({ text: `Leest ${rc.via} uit ${rc.register.name}`, to: `/registers/${rc.register.id}`, icon: 'cylinder-split' });
+    }
+  }
   return links;
 });
 

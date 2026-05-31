@@ -296,6 +296,48 @@ function scoreColor(score) {
 
     <nldd-spacer size="32" />
 
+    <!-- RegelRecht: laws published as executable specs -->
+    <nldd-title size="3"><h2>Juridische uitvoerbaarheid</h2></nldd-title>
+    <nldd-rich-text>
+      <p>
+        Naast de technische standaarden hoort ook de wet zelf machine-leesbaar te zijn. Met
+        RegelRecht wordt een wettekst een uitvoerbare specificatie: getest met scenario's en
+        gepubliceerd als draaiende dienst.
+      </p>
+    </nldd-rich-text>
+    <nldd-spacer size="16" />
+
+    <nldd-collection layout="grid" item-width="340px">
+      <router-link to="/wetten" class="rp-jur-link">
+        <nldd-card class="rp-std-card" accessible-label="Machine-leesbare wet (RegelRecht)">
+          <nldd-container padding="20">
+            <div class="rp-std-head">
+              <div class="rp-std-icon rp-kind-juridisch">
+                <nldd-icon name="certificate" aria-hidden="true"></nldd-icon>
+              </div>
+              <div class="rp-std-titles">
+                <nldd-title size="5"><h3>Machine-leesbare wet (RegelRecht)</h3></nldd-title>
+                <span class="rp-std-kind">Juridisch</span>
+              </div>
+              <nldd-tag color="accent" size="md">RegelRecht</nldd-tag>
+            </div>
+
+            <nldd-rich-text class="rp-std-tagline">
+              <p>Wetten gepubliceerd als uitvoerbare specificaties, getoetst en als dienst uitgerold.</p>
+            </nldd-rich-text>
+
+            <nldd-spacer size="12" />
+            <div class="rp-std-foot">
+              <span>{{ store.wetten.filter((w) => w.status === 'gepubliceerd').length }} gepubliceerde wetten</span>
+              <nldd-icon name="chevron-right" aria-hidden="true"></nldd-icon>
+            </div>
+          </nldd-container>
+        </nldd-card>
+      </router-link>
+    </nldd-collection>
+
+    <nldd-spacer size="32" />
+
     <!-- internet.nl badge wall for public services -->
     <nldd-title size="3"><h2>Internet.nl-badges voor publieke diensten</h2></nldd-title>
     <nldd-rich-text>
@@ -418,6 +460,8 @@ function scoreColor(score) {
 .rp-kind-api { background: #e6f6ec; color: #1f7a45; }
 .rp-kind-security { background: #fdeede; color: #97551a; }
 .rp-kind-toegankelijkheid { background: #fde9ef; color: #9c2a55; }
+.rp-kind-juridisch { background: #e7eefb; color: #1f3f86; }
+.rp-jur-link { text-decoration: none; color: inherit; display: block; height: 100%; }
 .rp-std-titles {
   flex: 1 1 auto;
   min-width: 0;

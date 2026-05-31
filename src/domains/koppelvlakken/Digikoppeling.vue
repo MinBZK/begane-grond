@@ -136,6 +136,13 @@ function fmtOin(oin) {
     <nldd-rich-text>
       <p>Het Organisatie-Identificatienummer (OIN) per aangeboden dienst. Het register is de bron voor routering en adressering binnen Digikoppeling.</p>
     </nldd-rich-text>
+    <nldd-spacer size="12" />
+    <div class="rp-register-note">
+      <span>Deze koppelvlakken ontsluiten de basisregistraties.</span>
+      <router-link to="/registers">
+        <nldd-button variant="secondary" text="Naar de basisregistraties" start-icon="cylinder-split"></nldd-button>
+      </router-link>
+    </div>
     <nldd-spacer size="16" />
 
     <DataTable :columns="registerColumns" :rows="registerRows" row-key="id">
@@ -228,5 +235,16 @@ function fmtOin(oin) {
   width: 1rem;
   height: 1rem;
   opacity: 0.7;
+}
+.rp-register-note {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+.rp-register-note a {
+  text-decoration: none;
 }
 </style>

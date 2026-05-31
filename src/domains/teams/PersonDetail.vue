@@ -45,6 +45,12 @@ const relations = computed(() => {
   teamInstances.value.forEach((i) => links.push({ text: i.name, to: `/infra/instances/${i.id}`, icon: 'cylinder-split' }));
   teamRacks.value.forEach((r) => links.push({ text: `Rack ${r.label}`, to: `/fysiek/racks/${r.id}`, icon: 'cylinder-split' }));
   workplaces.value.forEach((w) => links.push({ text: `Werkplek ${w.id}`, to: `/werkplekken/${w.id}`, icon: 'house' }));
+  // RegelRecht trajecten this person participates in.
+  if (person.value) {
+    store.trajectenByPerson(person.value.id).forEach((t) =>
+      links.push({ text: `Traject: ${t.name}`, to: `/wetten/${t.wet}`, icon: 'pencil' }),
+    );
+  }
   return links;
 });
 
