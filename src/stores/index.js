@@ -64,6 +64,11 @@ export const usePlatformStore = defineStore('platform', {
     skillPlugins: clone(seed.skillPlugins),
     skillInstalls: clone(seed.skillInstalls),
     learningPaths: clone(seed.learningPaths),
+    registers: clone(seed.registers),
+    registerConsumers: clone(seed.registerConsumers),
+    wetten: clone(seed.wetten),
+    trajecten: clone(seed.trajecten),
+    scenarios: clone(seed.scenarios),
     // The "logged in" demo user.
     currentUser: 'ans',
 
@@ -130,6 +135,41 @@ export const usePlatformStore = defineStore('platform', {
       const run = s.runners.reduce((n, r) => n + r.running, 0);
       const queued = s.runners.reduce((n, r) => n + r.queued, 0);
       return { capacity: cap, running: run, queued, pct: cap ? Math.round((run / cap) * 100) : 0 };
+    },
+
+    // --- Registers (basisregistraties) ---
+    registerById: (s) => (id) => s.registers.find((r) => r.id === id),
+    consumersOfRegister: (s) => (registerId) => s.registerConsumers.filter((c) => c.register === registerId),
+    registersForConsumer: (s) => (consumerId) =>
+      s.registerConsumers
+        .filter((c) => c.consumer === consumerId)
+        .map((c) => ({ ...c, register: s.registers.find((r) => r.id === c.register) })),
+
+    // --- Wetten (RegelRecht) ---
+    wetById: (s) => (id) => s.wetten.find((w) => w.id === id),
+    wettenByStatus: (s) => (status) => s.wetten.filter((w) => w.status === status),
+    scenariosByWet: (s) => (wetId) => s.scenarios.filter((sc) => sc.wet === wetId),
+    trajectById: (s) => (id) => s.trajecten.find((t) => t.id === id),
+    trajectenByWet: (s) => (wetId) => s.trajecten.filter((t) => t.wet === wetId),
+    trajectenByPerson: (s) => (personId) => s.trajecten.filter((t) => (t.members || []).includes(personId)),
+    appForWet: (s) => (wetId) => {
+      const w = s.wetten.find((x) => x.id === wetId);
+      return w?.service ? s.apps.find((a) => a.id === w.service) : null;
+    },
+    wetForApp: (s) => (appId) => s.wetten.find((w) => w.service === appId),
+    // Registers a law reads from (across all its articles' inputs).
+    registersForWet: (s) => (wetId) => {
+      const w = s.wetten.find((x) => x.id === wetId);
+      if (!w) return [];
+      const ids = new Set();
+      for (const art of w.articles || [])
+        for (const inp of art.inputs || [])
+          if (inp.source?.kind === 'register') ids.add(inp.source.id);
+      return [...ids].map((id) => s.registers.find((r) => r.id === id)).filter(Boolean);
+    },
+    avgCoverage: (s) => {
+      if (!s.wetten.length) return 0;
+      return Math.round((s.wetten.reduce((n, w) => n + (w.coverage || 0), 0) / s.wetten.length) * 100);
     },
 
     // --- Notification inbox ---
@@ -396,6 +436,100 @@ export const usePlatformStore = defineStore('platform', {
     // --- Code / PR / issue events (emitted from code + AI flows) ---
     emitCodeEvent(type, opts) {
       return this.emit(type, opts);
+    },
+
+    // --- Registers (basisregistraties) ---
+    connectRegister({ consumer, consumerType = 'app', register, field }) {
+      const id = nextId('rc');
+      this.registerConsumers.push({ id, register, consumer, via: field, type: consumerType });
+      const reg = this.registerById(register);
+      this.audit('databron aangesloten', `${reg?.name || register} → ${consumer}`);
+      this.emit('register.connected', { title: `${reg?.name || register} aangesloten op ${consumer}`, resource: register, target: `/registers/${register}` });
+      return id;
+    },
+
+    // --- Wetten (RegelRecht: law -> system) ---
+    harvestWet({ name, bwbId, layer = 'WET' }) {
+      const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const w = {
+        id, name, layer, bwbId, url: `https://wetten.overheid.nl/${bwbId}`,
+        validFrom: '2026-01-01', version: '2026-01-01', status: 'harvested', coverage: 0,
+        owner: this.teamOfPerson(this.currentUser)?.id || 'team-toeslagen', service: null, traject: null,
+        articles: [{ number: '1', title: 'Begripsbepalingen', legalCharacter: null, decisionType: null, definitions: [], parameters: [], inputs: [], outputs: [], openTerms: [] }],
+      };
+      this.wetten.push(w);
+      this.audit('wet geharvest', name);
+      this.emit('wet.harvested', { title: `${name} geharvest uit BWB`, resource: id, target: `/wetten/${id}`, team: w.owner });
+      return w;
+    },
+    createTraject({ name, wet, members = [], team }) {
+      const id = `${(wet || 'traject').slice(0, 12)}-${(++_seq).toString(16).padStart(8, '0')}`;
+      const t = { id, name, wet, status: 'concept', branch: id, members, team: team || this.teamOfPerson(this.currentUser)?.id, opened: 'zojuist' };
+      this.trajecten.push(t);
+      const w = this.wetById(wet);
+      if (w) w.traject = id;
+      this.audit('traject geopend', name);
+      this.emit('traject.created', { title: `Traject geopend: ${name}`, resource: id, target: wet ? `/wetten/${wet}` : '/wetten', team: t.team });
+      return t;
+    },
+    enrichWet(wetId, { inputs = [], outputs = [], coverage } = {}) {
+      const w = this.wetById(wetId);
+      if (!w) return;
+      if (w.status === 'harvested') w.status = 'in bewerking';
+      const art = w.articles[0];
+      if (art) {
+        if (inputs.length) art.inputs = inputs;
+        if (outputs.length) art.outputs = outputs;
+      }
+      if (coverage != null) w.coverage = coverage;
+      else w.coverage = Math.min(1, (w.coverage || 0) + 0.3);
+      w.status = 'enriched';
+      this.audit('wet machine-leesbaar gemaakt', w.name);
+      this.emit('wet.enriched', { title: `${w.name} machine-leesbaar gemaakt`, resource: wetId, target: `/wetten/${wetId}`, team: w.owner });
+      // Connecting a register input also registers a data-source consumer.
+      for (const inp of inputs) {
+        if (inp.source?.kind === 'register') {
+          this.registerConsumers.push({ id: nextId('rc'), register: inp.source.id, consumer: wetId, via: inp.name, type: 'wet' });
+        }
+      }
+    },
+    runScenarios(wetId, { failOne = false } = {}) {
+      const list = this.scenariosByWet(wetId);
+      let failed = 0;
+      list.forEach((sc, i) => {
+        sc.status = failOne && i === 0 ? 'fail' : 'pass';
+        if (sc.status === 'fail') failed++;
+      });
+      const w = this.wetById(wetId);
+      if (failed) {
+        this.emit('scenario.failed', { title: `${failed} scenario('s) gezakt voor ${w?.name || wetId}`, resource: wetId, target: `/wetten/${wetId}`, team: w?.owner, severity: 'warning' });
+      } else {
+        this.audit('wet gevalideerd', w?.name || wetId);
+        this.emit('wet.validated', { title: `Alle scenario's groen voor ${w?.name || wetId}`, resource: wetId, target: `/wetten/${wetId}`, team: w?.owner });
+      }
+      return { total: list.length, failed };
+    },
+    publishWet(wetId) {
+      const w = this.wetById(wetId);
+      if (!w) return;
+      w.status = 'gepubliceerd';
+      if (w.traject) {
+        const t = this.trajectById(w.traject);
+        if (t) t.status = 'goedgekeurd';
+        w.traject = null;
+      }
+      this.audit('wet gepubliceerd', w.name);
+      this.emit('wet.published', { title: `${w.name} ${w.version} gepubliceerd naar corpus`, resource: wetId, target: `/wetten/${wetId}`, team: w.owner });
+    },
+    // Publish + generate the executing service via the app golden path.
+    deployWetAsService(wetId, { template = 'tpl-rust-api' } = {}) {
+      const w = this.wetById(wetId);
+      if (!w) return null;
+      if (w.status !== 'gepubliceerd') this.publishWet(wetId);
+      const { app, repoId } = this.createApp({ name: `${w.name} uitvoering`, team: w.owner, template, withInfra: ['postgres'], visibility: 'open' });
+      w.service = app.id;
+      this.emit('wet.deployed', { title: `${w.name} uitgerold als dienst (${app.name})`, resource: wetId, target: `/apps/${app.id}`, team: w.owner });
+      return { app, repoId };
     },
 
     // --- CI runners ---

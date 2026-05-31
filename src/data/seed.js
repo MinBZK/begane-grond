@@ -459,3 +459,127 @@ export const learningPaths = [
   { id: 'lp-newdev', name: 'Nieuwe developer', steps: ['Account & werkplek', 'Eerste repo clonen', 'Lokaal draaien', 'Eerste PR'] },
   { id: 'lp-prod', name: 'Eerste service in productie', steps: ['App via golden path', 'Infra afnemen', 'CI groen', 'Promoten naar prod'] },
 ];
+
+// --- Basisregistraties / databronnen ---
+// The authoritative data sources that laws and services read from. This is the
+// stelsel van basisregistraties: a machine-readable law's `input.source` points
+// at one of these (or another law) for values like income or insurance status.
+// `kind`: basisregistratie | sectoraal. `fields` are the attributes provided.
+export const registers = [
+  { id: 'brp', name: 'BRP — Basisregistratie Personen', authority: 'rvig', kind: 'basisregistratie', oin: '00000001003214345001', classification: 'persoonsgegevens (AVG)', availability: '99.95%', status: 'operationeel',
+    fields: ['bsn', 'geboortedatum', 'verblijfadres', 'nationaliteit', 'partner', 'overlijdensdatum'] },
+  { id: 'brk', name: 'BRK — Basisregistratie Kadaster', authority: 'rvig', kind: 'basisregistratie', oin: '00000001821002193000', classification: 'openbaar met beperkingen', availability: '99.9%', status: 'operationeel',
+    fields: ['perceel', 'eigenaar', 'oppervlakte', 'beperkingen'] },
+  { id: 'bag', name: 'BAG — Adressen en Gebouwen', authority: 'logius', kind: 'basisregistratie', oin: '00000001821002193001', classification: 'openbaar', availability: '99.9%', status: 'operationeel',
+    fields: ['adres', 'verblijfsobject', 'bouwjaar', 'gebruiksdoel', 'oppervlakte'] },
+  { id: 'hr', name: 'Handelsregister (KVK)', authority: 'logius', kind: 'basisregistratie', oin: '00000003244440010000', classification: 'openbaar', availability: '99.8%', status: 'operationeel',
+    fields: ['kvk-nummer', 'rechtsvorm', 'vestiging', 'sbi-code', 'bestuurders'] },
+  { id: 'inkomen', name: 'Inkomensgegevens', authority: 'bzk', kind: 'sectoraal', oin: '00000001823288444000', classification: 'bijzondere persoonsgegevens (AVG)', availability: '99.5%', status: 'operationeel',
+    fields: ['toetsingsinkomen', 'verzamelinkomen', 'fiscaal_partner', 'belastingjaar'] },
+  { id: 'zorgpolis', name: 'Zorgpolis-status', authority: 'rvig', kind: 'sectoraal', oin: '00000001003214345099', classification: 'bijzondere persoonsgegevens (AVG)', availability: '99.7%', status: 'operationeel',
+    fields: ['is_verzekerd', 'polis_status', 'verzekeraar', 'ingangsdatum'] },
+  { id: 'kenteken', name: 'Kentekenregister (RDW)', authority: 'logius', kind: 'sectoraal', oin: '00000001809000000001', classification: 'openbaar met beperkingen', availability: '99.6%', status: 'operationeel',
+    fields: ['kenteken', 'voertuigsoort', 'tenaamstelling', 'apk-vervaldatum'] },
+];
+
+// Which app/law reads which field from which register (the traceability spine).
+// `consumer` is an app id or wet id; `via` names the field consumed.
+export const registerConsumers = [
+  { id: 'rc-1', register: 'inkomen', consumer: 'zorgtoeslagwet', via: 'toetsingsinkomen', type: 'wet' },
+  { id: 'rc-2', register: 'zorgpolis', consumer: 'zorgtoeslagwet', via: 'is_verzekerd', type: 'wet' },
+  { id: 'rc-3', register: 'brp', consumer: 'zorgtoeslagwet', via: 'partner', type: 'wet' },
+  { id: 'rc-4', register: 'brp', consumer: 'app-paspoort', via: 'verblijfadres', type: 'app' },
+  { id: 'rc-5', register: 'brp', consumer: 'app-toeslagen', via: 'geboortedatum', type: 'app' },
+  { id: 'rc-6', register: 'inkomen', consumer: 'app-toeslagen', via: 'toetsingsinkomen', type: 'app' },
+  { id: 'rc-7', register: 'hr', consumer: 'app-datadeling', via: 'kvk-nummer', type: 'app' },
+];
+
+// --- Wetten (RegelRecht corpus) ---
+// Machine-readable laws. `status`: harvested | in bewerking | enriched |
+// gepubliceerd. `coverage` = fraction of the law with executable logic. Each
+// article summary carries definitions, open_terms (IoC delegation), inputs with
+// a `source` (another wet or a register), and outputs. `service` is the app that
+// executes this law; `traject` the active edit workspace.
+export const wetten = [
+  {
+    id: 'zorgtoeslagwet', name: 'Wet op de zorgtoeslag', layer: 'WET', bwbId: 'BWBR0018451',
+    url: 'https://wetten.overheid.nl/BWBR0018451/2025-01-01', validFrom: '2025-01-01', version: '2025-01-01',
+    status: 'gepubliceerd', coverage: 0.92, owner: 'team-toeslagen', service: 'app-toeslagen', traject: null,
+    articles: [
+      {
+        number: '2', title: 'Hoogte van de zorgtoeslag', legalCharacter: 'BESCHIKKING', decisionType: 'TOEKENNING',
+        definitions: [
+          { name: 'drempelinkomen_alleenstaande', value: '€ 39.719' },
+          { name: 'percentage_toetsingsinkomen', value: '13,7%' },
+        ],
+        parameters: [{ name: 'bsn', type: 'string', required: true }],
+        inputs: [
+          { name: 'is_verzekerde', type: 'boolean', source: { kind: 'register', id: 'zorgpolis', output: 'is_verzekerd' } },
+          { name: 'toetsingsinkomen', type: 'bedrag', source: { kind: 'register', id: 'inkomen', output: 'toetsingsinkomen' } },
+          { name: 'heeft_toeslagpartner', type: 'boolean', source: { kind: 'wet', id: 'awir', output: 'heeft_toeslagpartner' } },
+          { name: 'standaardpremie', type: 'bedrag', source: { kind: 'wet', id: 'regeling-standaardpremie', output: 'standaardpremie' } },
+        ],
+        outputs: [
+          { name: 'heeft_recht_op_zorgtoeslag', type: 'boolean' },
+          { name: 'hoogte_zorgtoeslag', type: 'bedrag' },
+        ],
+        openTerms: [{ id: 'standaardpremie', delegatedTo: 'minister', delegationType: 'MINISTERIELE_REGELING' }],
+      },
+    ],
+  },
+  {
+    id: 'regeling-standaardpremie', name: 'Regeling standaardpremie en bestuursrechtelijke premie', layer: 'MINISTERIELE_REGELING', bwbId: 'BWBR0036515',
+    url: 'https://wetten.overheid.nl/BWBR0036515/2025-01-01', validFrom: '2025-01-01', version: '2025-01-01',
+    status: 'gepubliceerd', coverage: 1.0, owner: 'team-toeslagen', service: null, traject: null,
+    implements: { law: 'zorgtoeslagwet', article: '4', openTerm: 'standaardpremie' },
+    articles: [
+      {
+        number: '1', title: 'Standaardpremie', legalCharacter: 'REGELING', decisionType: null,
+        definitions: [{ name: 'standaardpremie', value: '€ 2.112' }],
+        parameters: [], inputs: [],
+        outputs: [{ name: 'standaardpremie', type: 'bedrag' }],
+        openTerms: [],
+      },
+    ],
+  },
+  {
+    id: 'awir', name: 'Algemene wet inkomensafhankelijke regelingen', layer: 'WET', bwbId: 'BWBR0018472',
+    url: 'https://wetten.overheid.nl/BWBR0018472/2025-01-01', validFrom: '2025-01-01', version: '2025-01-01',
+    status: 'enriched', coverage: 0.64, owner: 'team-toeslagen', service: null, traject: null,
+    articles: [
+      {
+        number: '3', title: 'Toeslagpartner', legalCharacter: 'TOETS', decisionType: null,
+        definitions: [],
+        parameters: [{ name: 'bsn', type: 'string', required: true }],
+        inputs: [{ name: 'partner', type: 'string', source: { kind: 'register', id: 'brp', output: 'partner' } }],
+        outputs: [{ name: 'heeft_toeslagpartner', type: 'boolean' }],
+        openTerms: [],
+      },
+    ],
+  },
+  {
+    id: 'huurtoeslagwet', name: 'Wet op de huurtoeslag', layer: 'WET', bwbId: 'BWBR0008659',
+    url: 'https://wetten.overheid.nl/BWBR0008659/2025-01-01', validFrom: '2025-01-01', version: '2025-01-01',
+    status: 'harvested', coverage: 0.0, owner: 'team-toeslagen', service: null, traject: null,
+    articles: [
+      {
+        number: '1', title: 'Begripsbepalingen', legalCharacter: null, decisionType: null,
+        definitions: [], parameters: [], inputs: [], outputs: [], openTerms: [],
+      },
+    ],
+  },
+];
+
+// --- Trajecten (RegelRecht edit workspaces) ---
+export const trajecten = [
+  { id: 'awir-3f2a9c01', name: 'AWIR toeslagpartner-logica', wet: 'awir', status: 'in review', branch: 'awir-3f2a9c01', members: ['sanne', 'joost'], team: 'team-toeslagen', opened: 'di 11:00' },
+  { id: 'huurtoeslag-7b1e4d22', name: 'Huurtoeslagwet machine-leesbaar', wet: 'huurtoeslagwet', status: 'concept', branch: 'huurtoeslag-7b1e4d22', members: ['sanne'], team: 'team-toeslagen', opened: 'vandaag 08:30' },
+];
+
+// --- BDD-scenario's per wet (Given/When/Then) ---
+export const scenarios = [
+  { id: 'sc-1', wet: 'zorgtoeslagwet', name: 'Alleenstaande boven 18 heeft recht (2025)', given: ['rekendatum 2025-01-01', 'verzekerd via zorgpolis', 'toetsingsinkomen € 25.000', 'geen toeslagpartner'], then: 'recht op zorgtoeslag, hoogte € 2.096,92', status: 'pass' },
+  { id: 'sc-2', wet: 'zorgtoeslagwet', name: 'Inkomen boven grens: geen recht', given: ['rekendatum 2025-01-01', 'verzekerd', 'toetsingsinkomen € 45.000'], then: 'geen recht op zorgtoeslag', status: 'pass' },
+  { id: 'sc-3', wet: 'zorgtoeslagwet', name: 'Niet verzekerd: geen recht', given: ['rekendatum 2025-01-01', 'niet verzekerd via zorgpolis'], then: 'geen recht op zorgtoeslag', status: 'pass' },
+  { id: 'sc-4', wet: 'awir', name: 'Gehuwd: heeft toeslagpartner', given: ['partner geregistreerd in BRP'], then: 'heeft_toeslagpartner = waar', status: 'pass' },
+];

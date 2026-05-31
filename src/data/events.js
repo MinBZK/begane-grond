@@ -89,6 +89,19 @@ export const eventCatalog = [
   { type: 'capacity.warning', source: 'fysiek', label: 'Capaciteit-waarschuwing', severity: 'warning', icon: 'apartment-building' },
   // Standards
   { type: 'standard.updated', source: 'standaarden', label: 'Standaard bijgewerkt', severity: 'info', icon: 'check-mark-circle' },
+  // Wetten (RegelRecht: law -> system)
+  { type: 'wet.harvested', source: 'wetten', label: 'Wet geharvest uit BWB', severity: 'info', icon: 'file-text' },
+  { type: 'wet.created', source: 'wetten', label: 'Wet aangemaakt', severity: 'info', icon: 'certificate' },
+  { type: 'traject.created', source: 'wetten', label: 'Traject geopend', severity: 'info', icon: 'pencil' },
+  { type: 'wet.enriched', source: 'wetten', label: 'Wet machine-leesbaar gemaakt', severity: 'info', icon: 'chevron-left-forward-slash-chevron-right' },
+  { type: 'scenario.failed', source: 'wetten', label: 'Scenario gezakt', severity: 'warning', icon: 'exclamation-triangle' },
+  { type: 'wet.validated', source: 'wetten', label: 'Wet gevalideerd', severity: 'success', icon: 'check-mark-circle' },
+  { type: 'wet.published', source: 'wetten', label: 'Wet gepubliceerd naar corpus', severity: 'success', icon: 'check-mark-circle' },
+  { type: 'wet.deployed', source: 'wetten', label: 'Wet uitgerold als dienst', severity: 'success', icon: 'rectangle-stack' },
+  { type: 'wet.deprecated', source: 'wetten', label: 'Wet uitgefaseerd', severity: 'warning', icon: 'dismiss-circle' },
+  // Registers (basisregistraties / databronnen)
+  { type: 'register.connected', source: 'registers', label: 'Databron aangesloten', severity: 'success', icon: 'link' },
+  { type: 'register.degraded', source: 'registers', label: 'Databron verminderd beschikbaar', severity: 'warning', icon: 'exclamation-circle' },
 ];
 
 // Quick lookup by type.
@@ -112,6 +125,8 @@ export const eventSources = {
   governance: { label: 'Governance', icon: 'certificate', path: '/governance' },
   fysiek: { label: 'Fysieke infra', icon: 'apartment-building', path: '/fysiek' },
   standaarden: { label: 'Standaarden', icon: 'check-mark-circle', path: '/standaarden' },
+  wetten: { label: 'Wetten', icon: 'certificate', path: '/wetten' },
+  registers: { label: 'Basisregistraties', icon: 'cylinder-split', path: '/registers' },
 };
 
 // Historical event seed: a believable backlog spanning every domain so the
@@ -149,4 +164,9 @@ export const eventSeed = [
   { type: 'issue.assigned', severity: 'info', team: 'team-toeslagen', actor: 'sanne', title: 'CVE-2024-3094 toegewezen aan Sanne Visser', resource: 'repo-toeslagen', target: '/security/kwetsbaarheden', at: 'di 11:30' },
   { type: 'commit.pushed', severity: 'info', team: 'team-burgerzaken', actor: 'joost', title: '3 commits gepusht naar feat/machtigingen', resource: 'repo-paspoort', target: '/code/repo-paspoort', at: 'ma 16:20' },
   { type: 'repo.created', severity: 'success', team: 'team-platform', actor: 'ans', title: 'Repository platformportaal aangemaakt', resource: 'repo-platformportaal', target: '/code/repo-platformportaal', at: 'do 10:00' },
+
+  // Wetten & registers feed — law-to-system lifecycle on the bus.
+  { type: 'wet.published', severity: 'success', team: 'team-toeslagen', actor: 'sanne', title: 'Wet op de zorgtoeslag 2025-01-01 gepubliceerd', resource: 'zorgtoeslagwet', target: '/wetten/zorgtoeslagwet', at: 'gisteren 15:40' },
+  { type: 'traject.created', severity: 'info', team: 'team-toeslagen', actor: 'sanne', title: 'Traject geopend: Huurtoeslagwet machine-leesbaar', resource: 'huurtoeslag-7b1e4d22', target: '/wetten/huurtoeslagwet', at: 'vandaag 08:30' },
+  { type: 'register.connected', severity: 'success', team: 'team-toeslagen', actor: 'sanne', title: 'Inkomensgegevens aangesloten op Toeslagenmotor', resource: 'inkomen', target: '/registers/inkomen', at: 'di 13:15' },
 ];

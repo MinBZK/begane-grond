@@ -203,6 +203,29 @@ export const domains = [
     ],
   },
   {
+    key: 'registers',
+    path: '/registers',
+    label: 'Basisregistraties',
+    icon: 'cylinder-split',
+    wave: 'C',
+    routes: [
+      { path: '/registers', name: 'registers', view: () => import('./domains/registers/Registers.vue'), title: 'Basisregistraties' },
+      { path: '/registers/:id', name: 'registers-detail', view: () => import('./domains/registers/RegisterDetail.vue'), title: 'Register' },
+    ],
+  },
+  {
+    key: 'wetten',
+    path: '/wetten',
+    label: 'Wetten (RegelRecht)',
+    icon: 'certificate',
+    wave: 'C',
+    routes: [
+      { path: '/wetten', name: 'wetten', view: () => import('./domains/wetten/Wetten.vue'), title: 'Wetten-corpus' },
+      { path: '/wetten/nieuw', name: 'wetten-nieuw', view: () => import('./domains/wetten/NewWetWizard.vue'), title: 'Wet naar systeem' },
+      { path: '/wetten/:id', name: 'wetten-detail', view: () => import('./domains/wetten/WetDetail.vue'), title: 'Wet' },
+    ],
+  },
+  {
     key: 'governance',
     path: '/governance',
     label: 'Governance',
