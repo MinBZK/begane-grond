@@ -110,7 +110,7 @@ onBeforeUnmount(() => {
             icon="search"
             @click="openPalette"
           ></nldd-menu-bar-item>
-          <nldd-menu-bar-item text="+ Nieuw" icon="plus" expandable>
+          <nldd-menu-bar-item text="Nieuw" icon="plus" expandable>
             <nldd-menu>
               <nldd-menu-item text="Nieuwe applicatie" @click="router.push('/apps/nieuw')"></nldd-menu-item>
               <nldd-menu-item text="Dienst afnemen" @click="router.push('/infra')"></nldd-menu-item>
