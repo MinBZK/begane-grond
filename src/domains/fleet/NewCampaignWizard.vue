@@ -1,0 +1,501 @@
+<script setup>
+// New fleet-shift campaign wizard. Five steps, modeled after stuc / Fleetshift:
+//   1) type        — regex codemod / LLM-transformatie (Claude) / file-creation
+//   2) target repos — pick from store.repos, or a mock `gh search code` query
+//   3) definition   — regex+replacement / LLM-prompt / file to add
+//   4) preview      — faked per-repo dry-run diffs in <nldd-code>
+//   5) rollout      — on finish: store.createCampaign + store.runCampaign
+// After finish we show a live rollout screen and a CliHint with the rp command.
+import { ref, reactive, computed } from 'vue';
+import { usePlatformStore } from '../../stores/index.js';
+import PageHeader from '../../components/shared/PageHeader.vue';
+import Wizard from '../../components/shared/Wizard.vue';
+import StatusBadge from '../../components/shared/StatusBadge.vue';
+import CliHint from '../../components/shared/CliHint.vue';
+
+const store = usePlatformStore();
+
+const TYPES = [
+  { value: 'regex', label: 'Regex-codemod', icon: 'magnifier', desc: 'Zoek-en-vervang met een reguliere expressie over alle bestanden.' },
+  { value: 'llm', label: 'LLM-transformatie (Claude)', icon: 'sparkles', desc: 'Beschrijf de gewenste wijziging; de soevereine LLM-gateway stelt per repo een diff voor.' },
+  { value: 'file-creation', label: 'Bestand toevoegen', icon: 'rectangle-stack', desc: 'Voeg in elke repo hetzelfde bestand toe (bijv. security.txt, LICENSE).' },
+];
+
+// Form state with sensible defaults so the wizard is filled from the start.
+const form = reactive({
+  type: 'regex',
+  title: '',
+  owner: store.currentPerson?.team || store.teams[0]?.id,
+  // repo selection
+  selectMode: 'pick', // 'pick' | 'search'
+  repos: ['repo-paspoort', 'repo-toeslagen'],
+  searchQuery: 'path:**/package.json nldd-design-system',
+  // regex definition
+  pattern: 'nldd-design-system@0\\.8\\.\\d+',
+  replacement: 'nldd-design-system@0.9.0',
+  glob: 'package.json',
+  // llm definition
+  prompt: 'Voeg in elke service een /healthz endpoint toe dat 200 OK teruggeeft, met een testcase. Houd de bestaande codestijl aan.',
+  // file-creation definition
+  filePath: '.well-known/security.txt',
+  fileBody: 'Contact: mailto:security@rijksoverheid.nl\nExpires: 2027-01-01T00:00:00.000Z\nPreferred-Languages: nl, en\nPolicy: https://www.ncsc.nl/contact/kwetsbaarheid-melden',
+});
+
+function typeMeta(v) {
+  return TYPES.find((t) => t.value === v) || TYPES[0];
+}
+function teamName(id) {
+  return store.teamById(id)?.name || id;
+}
+
+// Repos matched by the mock gh-search query: a deterministic subset so the demo
+// feels real without a backend.
+const searchMatches = computed(() =>
+  store.repos.filter((r) => ['Vue', 'Rust', 'Python'].includes(r.lang)),
+);
+
+// The effective repo list depends on the selection mode.
+const targetRepos = computed(() => {
+  const ids = form.selectMode === 'search'
+    ? searchMatches.value.map((r) => r.id)
+    : form.repos;
+  return ids.map((id) => store.repoById(id)).filter(Boolean);
+});
+
+function toggleRepo(id) {
+  const i = form.repos.indexOf(id);
+  if (i === -1) form.repos.push(id);
+  else form.repos.splice(i, 1);
+}
+
+// --- Faked per-repo dry-run diffs for the preview step ---
+function diffFor(repo) {
+  if (form.type === 'regex') {
+    return [
+      `diff --git a/${form.glob} b/${form.glob}`,
+      `--- a/${form.glob}`,
+      `+++ b/${form.glob}`,
+      '@@ -14,7 +14,7 @@',
+      '   "dependencies": {',
+      `-    "@nldd/design-system": "0.8.${(repo.stars % 9)}"`,
+      '+    "@nldd/design-system": "0.9.0"',
+      '   }',
+    ].join('\n');
+  }
+  if (form.type === 'llm') {
+    const fileGuess = repo.lang === 'Rust' ? 'src/health.rs' : repo.lang === 'Python' ? 'app/health.py' : 'src/health.ts';
+    return [
+      `diff --git a/${fileGuess} b/${fileGuess}`,
+      'new file mode 100644',
+      `+++ b/${fileGuess}`,
+      '@@ -0,0 +1,6 @@',
+      '+// Gegenereerd door fleet-shift (Claude via gateway)',
+      '+pub async fn healthz() -> impl Responder {',
+      '+    HttpResponse::Ok().body("OK")',
+      '+}',
+    ].join('\n');
+  }
+  // file-creation
+  return [
+    `diff --git a/${form.filePath} b/${form.filePath}`,
+    'new file mode 100644',
+    `+++ b/${form.filePath}`,
+    `@@ -0,0 +1,${form.fileBody.split('\n').length} @@`,
+    ...form.fileBody.split('\n').map((l) => `+${l}`),
+  ].join('\n');
+}
+
+// --- Rollout result state ---
+const launched = ref(null); // created campaign (reactive store object)
+const cliCommand = computed(() => {
+  const t = form.type;
+  const repoArgs = targetRepos.value.map((r) => r.name).join(' ');
+  if (t === 'regex') {
+    return `rp fleet campaign run --type regex \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --match '${form.pattern}' --replace '${form.replacement}' --glob '${form.glob}' \\\n  --repos ${repoArgs}`;
+  }
+  if (t === 'llm') {
+    return `rp fleet campaign run --type llm --model claude-gateway \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --prompt "${form.prompt.slice(0, 60)}…" \\\n  --repos ${repoArgs}`;
+  }
+  return `rp fleet campaign run --type file-creation \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --add ${form.filePath} \\\n  --repos ${repoArgs}`;
+});
+
+function finish() {
+  const camp = store.createCampaign({
+    title: form.title || typeMeta(form.type).label,
+    type: form.type,
+    owner: form.owner,
+    repos: targetRepos.value.map((r) => r.id),
+  });
+  store.runCampaign(camp.id);
+  launched.value = camp;
+}
+
+const wizardSteps = [
+  { title: 'Type' },
+  { title: 'Doel-repos' },
+  { title: 'Definitie' },
+  { title: 'Preview' },
+  { title: 'Uitrollen' },
+];
+</script>
+
+<template>
+  <div class="rp-page">
+    <PageHeader
+      title="Nieuwe fleet-shift campagne"
+      lede="Definieer één wijziging en rol die uit over de hele vloot. Bekijk eerst een dry-run met per-repo diffs voordat er PR's worden geopend."
+      :crumbs="[
+        { text: 'Platform', href: '/' },
+        { text: 'Fleet-shift', href: '/fleet' },
+        { text: 'Nieuwe campagne', href: '/fleet/nieuw' },
+      ]"
+    />
+
+    <!-- Rollout result screen -->
+    <div v-if="launched">
+      <nldd-card :accessible-label="`Campagne ${launched.title}`">
+        <nldd-container padding="24">
+          <div class="rp-done-head">
+            <div>
+              <nldd-title size="4"><h2>{{ launched.title }}</h2></nldd-title>
+              <nldd-rich-text>
+                <p>{{ typeMeta(launched.type).label }} · {{ teamName(launched.owner) }} · {{ launched.repos.length }} repos</p>
+              </nldd-rich-text>
+            </div>
+            <StatusBadge :status="launched.status" />
+          </div>
+
+          <nldd-spacer size="16" />
+          <nldd-inline-dialog
+            title="Campagne uitgerold"
+            :supporting-text="`Er worden ${launched.repos.length} concept-PR's geopend. Volg de voortgang per repo op de campagnepagina.`"
+          ></nldd-inline-dialog>
+
+          <nldd-spacer size="20" />
+          <nldd-button-group orientation="horizontal">
+            <router-link :to="`/fleet/${launched.id}`">
+              <nldd-button variant="primary" text="Naar campagne" end-icon="arrow-right"></nldd-button>
+            </router-link>
+            <router-link to="/fleet">
+              <nldd-button variant="secondary" text="Alle campagnes" start-icon="folder-stack"></nldd-button>
+            </router-link>
+          </nldd-button-group>
+
+          <CliHint :command="cliCommand" />
+        </nldd-container>
+      </nldd-card>
+    </div>
+
+    <!-- The wizard -->
+    <Wizard v-else :steps="wizardSteps" finish-label="Uitrollen" @finish="finish">
+      <template #default="{ step }">
+        <!-- Step 0: type -->
+        <div v-if="step === 0">
+          <nldd-title size="5"><h3>Wat voor wijziging?</h3></nldd-title>
+          <nldd-spacer size="14" />
+          <nldd-segmented-control>
+            <button
+              v-for="t in TYPES"
+              :key="t.value"
+              type="button"
+              :aria-pressed="form.type === t.value"
+              @click="form.type = t.value"
+            >{{ t.label }}</button>
+          </nldd-segmented-control>
+          <nldd-spacer size="16" />
+          <nldd-inline-dialog :title="typeMeta(form.type).label" :supporting-text="typeMeta(form.type).desc"></nldd-inline-dialog>
+
+          <nldd-spacer size="20" />
+          <nldd-container layout="grid" column-count="2" gap="16">
+            <nldd-form-field label="Titel van de campagne">
+              <nldd-text-field
+                :value="form.title"
+                placeholder="bijv. Bump NLDD naar 0.9"
+                @input="(e) => (form.title = e.target.value)"
+              ></nldd-text-field>
+            </nldd-form-field>
+            <nldd-form-field label="Eigenaar-team">
+              <nldd-dropdown>
+                <select v-model="form.owner">
+                  <option v-for="t in store.teams" :key="t.id" :value="t.id">{{ t.name }}</option>
+                </select>
+              </nldd-dropdown>
+            </nldd-form-field>
+          </nldd-container>
+        </div>
+
+        <!-- Step 1: target repos -->
+        <div v-else-if="step === 1">
+          <nldd-title size="5"><h3>Welke repos?</h3></nldd-title>
+          <nldd-spacer size="14" />
+          <nldd-segmented-control>
+            <button type="button" :aria-pressed="form.selectMode === 'pick'" @click="form.selectMode = 'pick'">Handmatig kiezen</button>
+            <button type="button" :aria-pressed="form.selectMode === 'search'" @click="form.selectMode = 'search'">gh search code</button>
+          </nldd-segmented-control>
+          <nldd-spacer size="16" />
+
+          <!-- Manual pick -->
+          <div v-if="form.selectMode === 'pick'" class="rp-repo-list">
+            <button
+              v-for="r in store.repos"
+              :key="r.id"
+              type="button"
+              class="rp-repo-row"
+              :class="{ 'rp-sel': form.repos.includes(r.id) }"
+              @click="toggleRepo(r.id)"
+            >
+              <span class="rp-repo-check">
+                <nldd-icon :name="form.repos.includes(r.id) ? 'check-mark' : 'plus'" aria-hidden="true"></nldd-icon>
+              </span>
+              <span class="rp-repo-name">{{ r.name }}</span>
+              <nldd-tag color="neutral" size="md">{{ r.lang }}</nldd-tag>
+              <nldd-tag :color="r.visibility === 'open' ? 'success' : 'neutral'" size="md">{{ r.visibility }}</nldd-tag>
+              <span class="rp-repo-ci" :class="`rp-ci-${r.ci}`">CI {{ r.ci }}</span>
+            </button>
+          </div>
+
+          <!-- Mock gh search -->
+          <div v-else>
+            <nldd-form-field label="gh search code query">
+              <nldd-text-field
+                :value="form.searchQuery"
+                @input="(e) => (form.searchQuery = e.target.value)"
+              ></nldd-text-field>
+            </nldd-form-field>
+            <nldd-spacer size="12" />
+            <p class="rp-search-count">{{ searchMatches.length }} repos matchen <code>{{ form.searchQuery }}</code></p>
+            <nldd-spacer size="8" />
+            <div class="rp-repo-list">
+              <div v-for="r in searchMatches" :key="r.id" class="rp-repo-row rp-static">
+                <span class="rp-repo-check"><nldd-icon name="check-mark" aria-hidden="true"></nldd-icon></span>
+                <span class="rp-repo-name">{{ r.name }}</span>
+                <nldd-tag color="neutral" size="md">{{ r.lang }}</nldd-tag>
+              </div>
+            </div>
+          </div>
+
+          <nldd-spacer size="14" />
+          <p class="rp-target-count">
+            <nldd-icon name="folder-stack" aria-hidden="true"></nldd-icon>
+            {{ targetRepos.length }} repos geselecteerd
+          </p>
+        </div>
+
+        <!-- Step 2: definition -->
+        <div v-else-if="step === 2">
+          <nldd-title size="5"><h3>Definitie</h3></nldd-title>
+          <nldd-spacer size="14" />
+
+          <!-- regex -->
+          <div v-if="form.type === 'regex'">
+            <nldd-container layout="grid" column-count="2" gap="16">
+              <nldd-form-field label="Patroon (regex)">
+                <nldd-text-field :value="form.pattern" @input="(e) => (form.pattern = e.target.value)"></nldd-text-field>
+              </nldd-form-field>
+              <nldd-form-field label="Vervanging">
+                <nldd-text-field :value="form.replacement" @input="(e) => (form.replacement = e.target.value)"></nldd-text-field>
+              </nldd-form-field>
+            </nldd-container>
+            <nldd-spacer size="14" />
+            <nldd-form-field label="Bestandsfilter (glob)">
+              <nldd-text-field :value="form.glob" @input="(e) => (form.glob = e.target.value)"></nldd-text-field>
+            </nldd-form-field>
+          </div>
+
+          <!-- llm -->
+          <div v-else-if="form.type === 'llm'">
+            <nldd-inline-dialog title="Model: Claude (via gateway)" supporting-text="EU-residency, tot Intern geclassificeerd. De gateway stelt per repo een diff voor; jij bekijkt en mergt."></nldd-inline-dialog>
+            <nldd-spacer size="14" />
+            <nldd-form-field label="Prompt voor de transformatie">
+              <textarea
+                class="rp-textarea"
+                :value="form.prompt"
+                rows="6"
+                @input="(e) => (form.prompt = e.target.value)"
+              ></textarea>
+            </nldd-form-field>
+          </div>
+
+          <!-- file-creation -->
+          <div v-else>
+            <nldd-form-field label="Pad van het toe te voegen bestand">
+              <nldd-text-field :value="form.filePath" @input="(e) => (form.filePath = e.target.value)"></nldd-text-field>
+            </nldd-form-field>
+            <nldd-spacer size="14" />
+            <nldd-form-field label="Inhoud">
+              <textarea
+                class="rp-textarea rp-mono"
+                :value="form.fileBody"
+                rows="6"
+                @input="(e) => (form.fileBody = e.target.value)"
+              ></textarea>
+            </nldd-form-field>
+          </div>
+        </div>
+
+        <!-- Step 3: preview / dry-run -->
+        <div v-else-if="step === 3">
+          <nldd-title size="5"><h3>Dry-run preview</h3></nldd-title>
+          <nldd-spacer size="6" />
+          <nldd-rich-text>
+            <p>Voorgestelde diff per repo. Er worden nog geen PR's geopend.</p>
+          </nldd-rich-text>
+          <nldd-spacer size="16" />
+          <div class="rp-preview-stack">
+            <div v-for="r in targetRepos" :key="r.id" class="rp-preview-item">
+              <div class="rp-preview-head">
+                <nldd-icon name="folder-stack" aria-hidden="true"></nldd-icon>
+                <span class="rp-repo-name">{{ r.name }}</span>
+                <nldd-tag color="accent" size="md">1 bestand</nldd-tag>
+              </div>
+              <nldd-code-viewer>{{ diffFor(r) }}</nldd-code-viewer>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: rollout summary -->
+        <div v-else-if="step === 4">
+          <nldd-title size="5"><h3>Klaar om uit te rollen</h3></nldd-title>
+          <nldd-spacer size="16" />
+          <dl class="rp-summary">
+            <div><dt>Type</dt><dd>{{ typeMeta(form.type).label }}</dd></div>
+            <div><dt>Titel</dt><dd>{{ form.title || typeMeta(form.type).label }}</dd></div>
+            <div><dt>Eigenaar</dt><dd>{{ teamName(form.owner) }}</dd></div>
+            <div><dt>Repos</dt><dd>{{ targetRepos.length }} ({{ targetRepos.map((r) => r.name).join(', ') }})</dd></div>
+            <div v-if="form.type === 'regex'"><dt>Codemod</dt><dd class="rp-mono">s/{{ form.pattern }}/{{ form.replacement }}/ in {{ form.glob }}</dd></div>
+            <div v-else-if="form.type === 'llm'"><dt>Model</dt><dd>Claude (via gateway)</dd></div>
+            <div v-else><dt>Bestand</dt><dd class="rp-mono">{{ form.filePath }}</dd></div>
+          </dl>
+          <nldd-spacer size="16" />
+          <nldd-inline-dialog
+            title="Wat er gebeurt bij uitrollen"
+            supporting-text="Er wordt per repo een concept-PR geopend met de getoonde diff. CI draait; jij beoordeelt en mergt. De campagne start in status actief."
+          ></nldd-inline-dialog>
+        </div>
+      </template>
+    </Wizard>
+  </div>
+</template>
+
+<style scoped>
+.rp-repo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.rp-repo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--semantics-dividers-color);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.rp-repo-row.rp-static { cursor: default; }
+.rp-repo-row:not(.rp-static):hover {
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-repo-row.rp-sel {
+  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-repo-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--semantics-dividers-color);
+  flex-shrink: 0;
+}
+.rp-repo-row.rp-sel .rp-repo-check,
+.rp-repo-row.rp-static .rp-repo-check {
+  background: var(--nldd-color-success, #39870c);
+  border-color: var(--nldd-color-success, #39870c);
+  color: white;
+}
+.rp-repo-check nldd-icon { width: 0.9rem; height: 0.9rem; }
+.rp-repo-name {
+  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9rem;
+}
+.rp-repo-ci {
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.rp-ci-green { color: var(--nldd-color-success, #39870c); }
+.rp-ci-red { color: var(--nldd-color-critical, #d52b1e); }
+.rp-search-count {
+  font-size: 0.88rem;
+  opacity: 0.85;
+}
+.rp-search-count code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.rp-target-count {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.rp-target-count nldd-icon { width: 1rem; height: 1rem; }
+.rp-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--semantics-dividers-color);
+  font: inherit;
+  resize: vertical;
+  background: var(--semantics-surfaces-default-background-color, #fff);
+  color: inherit;
+}
+.rp-textarea.rp-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+}
+.rp-preview-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.rp-preview-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.rp-preview-head nldd-icon { width: 1rem; height: 1rem; }
+.rp-summary {
+  display: grid;
+  gap: 0.1rem;
+  margin: 0;
+}
+.rp-summary > div {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--semantics-dividers-color);
+}
+.rp-summary dt { font-weight: 600; opacity: 0.7; }
+.rp-summary dd { margin: 0; }
+.rp-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.rp-done-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+</style>

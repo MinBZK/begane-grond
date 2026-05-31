@@ -1,0 +1,114 @@
+/* Rijksoverheid fonts. Registered under the EXACT names the NLDD design tokens
+   reference (RijksSans, JetBrains Mono, RijksoverheidSerif) and pointing at the
+   variable-font files copied from the @nldd package into /public/fonts. NLDD's
+   own settings.css also declares these @font-face rules, but its relative
+   `../fonts/*` urls 404 in our app — these absolute ones are what actually
+   load, so headings/labels render in RijksSans instead of falling back to a
+   system serif. */
+@font-face {
+  font-family: 'RijksSans';
+  src: url('/fonts/RijksSansWeb-Regular.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'RijksSans';
+  src: url('/fonts/RijksSansWeb-Italic.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono[wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Italic[wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'RijksoverheidSerif';
+  src: url('/fonts/ROserifwebregular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  background: var(--semantics-surfaces-background-color);
+  color-scheme: light;
+  scroll-padding-top: 5rem;
+}
+html.dark {
+  color-scheme: dark;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+/* Pin the document body to the Rijks sans token so plain DOM we render outside
+   NLDD components (the app shell, side nav, tables) never falls back to a
+   system serif. */
+body {
+  font-family: var(--primitives-font-family-sans-serif, 'RijksSans', system-ui, sans-serif);
+}
+#app {
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* The app shell owns the page scroll via nldd-page; give it a full box. */
+nldd-top-navigation-bar {
+  display: block;
+  width: 100%;
+}
+
+/* --- Shared app utilities used across domain screens --- */
+
+/* Page section width helper for content-heavy domain pages. */
+.rp-page {
+  width: 100%;
+}
+
+/* A simple two-column layout used on overview screens (list + detail / aside). */
+.rp-min-width-0 {
+  min-width: 0;
+}
+
+/* Status dot used by StatusBadge / inline status pills. */
+.rp-dot {
+  display: inline-block;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--rp-dot-color, var(--semantics-dividers-color));
+}
+
+/* Monospace for ids / connection strings / CLI peeks. */
+.rp-mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Reduced-motion-friendly pulse for provisioning animations. */
+@media (prefers-reduced-motion: no-preference) {
+  .rp-pulse {
+    animation: rp-pulse 1.4s ease-in-out infinite;
+  }
+}
+@keyframes rp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
