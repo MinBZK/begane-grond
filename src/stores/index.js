@@ -37,6 +37,8 @@ export const usePlatformStore = defineStore('platform', {
     environments: clone(seed.environments),
     deployments: clone(seed.deployments),
     releases: clone(seed.releases),
+    runners: clone(seed.runners),
+    ciJobs: clone(seed.ciJobs),
     incidents: clone(seed.incidents),
     changes: clone(seed.changes),
     alerts: clone(seed.alerts),
@@ -116,6 +118,18 @@ export const usePlatformStore = defineStore('platform', {
     },
     // Which marketplace plugin (if any) covers a given standard id.
     pluginForStandard: (s) => (stdId) => s.skillPlugins.find((p) => (p.standards || []).includes(stdId)),
+
+    // --- CI runners ---
+    runnerById: (s) => (id) => s.runners.find((r) => r.id === id),
+    runnersByRack: (s) => (rack) => s.runners.filter((r) => r.rack === rack),
+    jobsByPool: (s) => (pool) => s.ciJobs.filter((j) => j.pool === pool),
+    // Total concurrent CI capacity and current utilisation across all pools.
+    runnerUtilisation: (s) => {
+      const cap = s.runners.reduce((n, r) => n + r.capacity, 0);
+      const run = s.runners.reduce((n, r) => n + r.running, 0);
+      const queued = s.runners.reduce((n, r) => n + r.queued, 0);
+      return { capacity: cap, running: run, queued, pct: cap ? Math.round((run / cap) * 100) : 0 };
+    },
 
     // --- Notification inbox ---
     // The current user's relevant events: everything for their team, plus
@@ -381,6 +395,21 @@ export const usePlatformStore = defineStore('platform', {
     // --- Code / PR / issue events (emitted from code + AI flows) ---
     emitCodeEvent(type, opts) {
       return this.emit(type, opts);
+    },
+
+    // --- CI runners ---
+    scaleRunner(id, delta) {
+      const r = this.runnerById(id);
+      if (!r) return;
+      r.capacity = Math.max(1, r.capacity + delta);
+      this.audit('runner-pool geschaald', `${r.name} → ${r.capacity} jobs`);
+      this.emit('runner.scaled', { title: `Runner-pool ${r.name} geschaald naar ${r.capacity} parallelle jobs`, resource: r.id, target: '/environments/runners', team: r.team });
+    },
+    toggleRunnerStandby(id) {
+      const r = this.runnerById(id);
+      if (!r) return;
+      r.status = r.status === 'stand-by' ? 'operationeel' : 'stand-by';
+      this.emit(r.status === 'operationeel' ? 'runner.online' : 'runner.offline', { title: `Runner-pool ${r.name} is nu ${r.status}`, resource: r.id, target: '/environments/runners', team: r.team });
     },
   },
 });

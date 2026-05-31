@@ -21,6 +21,11 @@ export const eventCatalog = [
   { type: 'deploy.completed', source: 'environments', label: 'Deploy voltooid', severity: 'success', icon: 'check-mark-circle' },
   { type: 'deploy.failed', source: 'environments', label: 'Deploy mislukt', severity: 'critical', icon: 'exclamation-triangle' },
   { type: 'release.promoted', source: 'environments', label: 'Release gepromoot', severity: 'info', icon: 'arrow-up-arrow-down' },
+  // CI runners (Forgejo Actions runners on physical nodes)
+  { type: 'runner.scaled', source: 'environments', label: 'Runner-pool geschaald', severity: 'info', icon: 'gear' },
+  { type: 'runner.online', source: 'environments', label: 'Runner-pool online', severity: 'success', icon: 'check-mark-circle' },
+  { type: 'runner.offline', source: 'environments', label: 'Runner-pool offline', severity: 'warning', icon: 'exclamation-triangle' },
+  { type: 'runner.saturated', source: 'environments', label: 'Runner-pool vol', severity: 'warning', icon: 'exclamation-circle' },
   // Incidents
   { type: 'incident.opened', source: 'incidenten', label: 'Incident geopend', severity: 'critical', icon: 'exclamation-triangle' },
   { type: 'incident.acknowledged', source: 'incidenten', label: 'Incident bevestigd', severity: 'warning', icon: 'eye' },

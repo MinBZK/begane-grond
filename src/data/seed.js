@@ -198,6 +198,46 @@ export const releases = [
   { id: 'rel-2', app: 'app-platformportaal', version: 'v0.6.5', env: 'prod', by: 'ans', when: 'gisteren 10:05', notes: 'NLDD bump + nieuwe rack-view' },
 ];
 
+// CI runner pools (Forgejo Actions runners). The link the platform makes that a
+// generic CI host does not: each pool runs on real nodes in a rack in a
+// datacenter. `node` is a device label inside `rack`; jobs/capacity drive the
+// load bar; `labels` are the runner labels jobs select with (runs-on: ...).
+export const runners = [
+  {
+    id: 'pool-shared', name: 'shared', team: 'team-platform', kind: 'gedeeld',
+    labels: ['rijksict-runner', 'linux', 'x64'], status: 'operationeel',
+    capacity: 12, running: 7, queued: 3, node: 'k8s-node-01', rack: 'r-dh-a1', dc: 'dc-denhaag',
+    os: 'Fedora CoreOS', autoscale: true,
+  },
+  {
+    id: 'pool-arm', name: 'arm64', team: 'team-platform', kind: 'gedeeld',
+    labels: ['rijksict-runner', 'linux', 'arm64'], status: 'operationeel',
+    capacity: 4, running: 1, queued: 0, node: 'k8s-node-03', rack: 'r-dh-a3', dc: 'dc-denhaag',
+    os: 'Fedora CoreOS', autoscale: true,
+  },
+  {
+    id: 'pool-toeslagen', name: 'toeslagen-isolated', team: 'team-toeslagen', kind: 'team',
+    labels: ['toeslagen-runner', 'linux', 'x64'], status: 'operationeel',
+    capacity: 6, running: 6, queued: 4, node: 'app-node-01', rack: 'r-dh-b1', dc: 'dc-denhaag',
+    os: 'Fedora CoreOS', autoscale: false,
+  },
+  {
+    id: 'pool-apeldoorn', name: 'apeldoorn-dr', team: 'team-platform', kind: 'gedeeld',
+    labels: ['rijksict-runner', 'linux', 'x64', 'dr'], status: 'stand-by',
+    capacity: 8, running: 0, queued: 0, node: 'k8s-node-ap-01', rack: 'r-ap-a1', dc: 'dc-apeldoorn',
+    os: 'Fedora CoreOS', autoscale: true,
+  },
+];
+
+// Recent and running CI jobs across the runner pools (Forgejo Actions).
+export const ciJobs = [
+  { id: 'job-7781', repo: 'repo-toeslagen', workflow: 'ci.yml', branch: 'feat/kafka-retry', pool: 'pool-toeslagen', status: 'failing', duration: '3m12s', by: 'sanne', at: 'vandaag 09:07' },
+  { id: 'job-7780', repo: 'repo-platformportaal', workflow: 'ci.yml', branch: 'main', pool: 'pool-shared', status: 'running', duration: '1m40s', by: 'ans', at: 'zojuist' },
+  { id: 'job-7779', repo: 'repo-paspoort', workflow: 'ci.yml', branch: 'feat/machtigingen', pool: 'pool-shared', status: 'queued', duration: '—', by: 'joost', at: 'zojuist' },
+  { id: 'job-7778', repo: 'repo-datadeling', workflow: 'ci.yml', branch: 'main', pool: 'pool-shared', status: 'passed', duration: '2m05s', by: 'pieter', at: '12 min geleden' },
+  { id: 'job-7777', repo: 'repo-paspoort', workflow: 'deploy.yml', branch: 'main', pool: 'pool-shared', status: 'passed', duration: '4m31s', by: 'joost', at: '1 uur geleden' },
+];
+
 export const incidents = [
   { id: 'inc-2024-017', title: 'Verhoogde latency Toeslagenmotor', severity: 'sev2', status: 'mitigated', service: 'app-toeslagen', team: 'team-toeslagen', opened: 'vandaag 09:14', oncall: 'sanne', timeline: [
     { at: '09:14', what: 'Alert: p99 latency > 2s' },

@@ -20,6 +20,8 @@ const rack = computed(() => store.rackById(route.params.rack));
 const dc = computed(() => (rack.value ? store.datacenterById(rack.value.dc) : null));
 const alley = computed(() => (rack.value ? store.alleys.find((a) => a.id === rack.value.alley) : null));
 const team = computed(() => (rack.value ? store.teamById(rack.value.team) : null));
+// CI runner pools that physically run in this rack (cross-layer link).
+const runnersHere = computed(() => (rack.value ? store.runnersByRack(rack.value.id) : []));
 
 const tab = ref('elevatie');
 
@@ -309,6 +311,7 @@ const cableColumns = [
             { text: dc?.name || 'Datacenter', to: `/fysiek/datacenters/${rack.dc}`, icon: 'apartment-building' },
             { text: 'Zaalindeling', to: `/fysiek/datacenters/${rack.dc}/floor`, icon: 'rectangle-stack' },
             ...(team ? [{ text: `Team ${team.name}`, to: `/teams/${team.id}`, icon: 'person-2' }] : []),
+            ...runnersHere.map((r) => ({ text: `CI-runner: ${r.name}`, to: '/environments/runners', icon: 'ship-wheel' })),
             { text: 'Netwerktopologie', to: '/fysiek/netwerk', icon: 'arrow-up-arrow-down' },
           ]"
         />

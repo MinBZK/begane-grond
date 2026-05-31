@@ -60,6 +60,9 @@ function changed(versions, env) {
       :crumbs="[{ text: 'Platform', href: '/' }, { text: 'Omgevingen', href: '/environments' }]"
     >
       <template #actions>
+        <router-link to="/environments/runners">
+          <nldd-button variant="secondary" text="CI-runners" start-icon="ship-wheel"></nldd-button>
+        </router-link>
         <router-link to="/environments/releases">
           <nldd-button variant="secondary" text="Release-historie" start-icon="clock"></nldd-button>
         </router-link>
