@@ -330,6 +330,66 @@ export const llmModels = [
   { id: 'claude-gateway', name: 'Claude (via gateway)', host: 'EU', context: '200k', pricePer1m: 9.0, residency: 'EU', classification: 'tot Intern' },
 ];
 
+// --- Skills-marketplace ---
+// Catalogus van AI-assistent-plugins die generatieve AI naar naleving van
+// overheidsstandaarden sturen. Naar github.com/developer-overheid-nl/skills-marketplace:
+// neutrale marketplace.json als bron, installeerbaar in Claude Code / Cursor.
+// Elke plugin bundelt "skills" (geen developer-vaardigheden maar AI-capabilities).
+// install: het platform-commando via de rp-CLI (voegt team-context, governance
+// en audit toe). altInstall: dezelfde plugin direct in Claude Code / Cursor,
+// buiten het platform om. rp gebruikt onder water dezelfde marketplace.
+export const skillPlugins = [
+  {
+    id: 'standaarden', name: 'Logius-standaarden', publisher: 'developer-overheid-nl', skills: 10,
+    desc: 'API Design Rules, Digikoppeling, OAuth NL, FSC en andere Logius-standaarden als AI-skills.',
+    install: 'rp ai skill install standaarden --team team-platform',
+    altInstall: 'claude plugin install standaarden@overheid-plugins',
+    standards: ['std-adr'], platforms: ['Claude Code', 'Cursor'], installs: 34,
+  },
+  {
+    id: 'nerds', name: 'NeRDS-richtlijnen', publisher: 'developer-overheid-nl', skills: 14,
+    desc: 'De 14 richtlijnen van de Nederlandse Richtlijn Digitale Systemen, van privacy tot open source.',
+    install: 'rp ai skill install nerds --team team-platform',
+    altInstall: 'claude plugin install nerds@overheid-plugins',
+    standards: ['std-bio', 'std-wcag'], platforms: ['Claude Code', 'Cursor'], installs: 28,
+  },
+  {
+    id: 'geo', name: 'Geo-standaarden', publisher: 'developer-overheid-nl', skills: 6,
+    desc: 'Geonovum geo-standaarden: OGC API, metadata, informatiemodellen (NEN 3610, IMGeo).',
+    install: 'rp ai skill install geo --team team-data',
+    altInstall: 'claude plugin install geo@overheid-plugins',
+    standards: [], platforms: ['Claude Code', 'Cursor'], installs: 9,
+  },
+  {
+    id: 'internet', name: 'Internetstandaarden', publisher: 'developer-overheid-nl', skills: 5,
+    desc: 'internet.nl web- en mailstandaarden: HTTPS, DNSSEC, DMARC, DKIM, SPF, security.txt.',
+    install: 'rp ai skill install internet --team team-platform',
+    altInstall: 'claude plugin install internet@overheid-plugins',
+    standards: ['std-internetnl'], platforms: ['Claude Code', 'Cursor'], installs: 21,
+  },
+  {
+    id: 'design', name: 'NLDD Design System', publisher: 'rijksict', skills: 4,
+    desc: 'Skills voor het NLDD design system: componenten kiezen, tokens en toegankelijke patronen.',
+    install: 'rp ai skill install design --team team-platform',
+    altInstall: 'claude plugin install design@overheid-plugins',
+    standards: ['std-nldd'], platforms: ['Claude Code', 'Cursor'], installs: 31,
+  },
+  {
+    id: 'marketplace', name: 'Marketplace-meta', publisher: 'developer-overheid-nl', skills: 2,
+    desc: 'Skills om zelf plugins te publiceren en de marketplace.json gesynchroniseerd te houden.',
+    install: 'rp ai skill install marketplace --team team-platform',
+    altInstall: 'claude plugin install marketplace@overheid-plugins',
+    standards: [], platforms: ['Claude Code', 'Cursor'], installs: 6,
+  },
+];
+// Welke teams welke plugins hebben geinstalleerd (per team in de demo).
+export const skillInstalls = [
+  { team: 'team-platform', plugins: ['standaarden', 'nerds', 'design', 'internet'] },
+  { team: 'team-burgerzaken', plugins: ['standaarden', 'nerds'] },
+  { team: 'team-toeslagen', plugins: ['standaarden', 'design'] },
+  { team: 'team-data', plugins: ['geo', 'standaarden'] },
+];
+
 // --- Learning paths ---
 export const learningPaths = [
   { id: 'lp-newdev', name: 'Nieuwe developer', steps: ['Account & werkplek', 'Eerste repo clonen', 'Lokaal draaien', 'Eerste PR'] },

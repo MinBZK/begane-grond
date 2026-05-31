@@ -102,6 +102,9 @@ const standardsView = computed(() =>
       exempt,
       total: apps.length,
       score,
+      // Marketplace plugin (if any) whose AI-skills cover this standard, so the
+      // card can offer to install the assistant that knows this standard.
+      plugin: store.pluginForStandard(std.id),
     };
   })
 );
@@ -242,6 +245,18 @@ function scoreColor(score) {
           </div>
 
           <nldd-rich-text class="rp-std-tagline"><p>{{ std.meta.tagline }}</p></nldd-rich-text>
+
+          <!-- An AI-skill plugin knows this standard: link to the marketplace. -->
+          <router-link
+            v-if="std.plugin"
+            to="/ai/skills"
+            class="rp-std-skill"
+            @click.stop
+            :title="'AI-skill: ' + std.plugin.name"
+          >
+            <nldd-icon name="sparkles" aria-hidden="true"></nldd-icon>
+            <span>AI-skill beschikbaar</span>
+          </router-link>
 
           <!-- Score bar -->
           <div class="rp-score-row">
@@ -525,5 +540,24 @@ function scoreColor(score) {
   height: 0.9rem;
   flex: 0 0 auto;
   color: #d98a1f;
+}
+.rp-std-skill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--semantics-dividers-color);
+  font-size: 0.78rem;
+  text-decoration: none;
+  color: inherit;
+}
+.rp-std-skill:hover {
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-std-skill nldd-icon {
+  width: 0.85rem;
+  height: 0.85rem;
 }
 </style>

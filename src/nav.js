@@ -245,6 +245,7 @@ export const domains = [
     routes: [
       { path: '/ai', name: 'ai', view: () => import('./domains/ai/AiCoding.vue'), title: 'AI-assisted coding' },
       { path: '/ai/llm', name: 'ai-llm', view: () => import('./domains/ai/LlmCatalog.vue'), title: 'LLM-API’s' },
+      { path: '/ai/skills', name: 'ai-skills', view: () => import('./domains/ai/SkillsMarketplace.vue'), title: 'Skills-marketplace' },
     ],
   },
   {

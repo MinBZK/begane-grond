@@ -228,6 +228,9 @@ const governance = [
       ]"
     >
       <template #actions>
+        <router-link to="/ai/skills">
+          <nldd-button variant="secondary" text="Skills-marketplace" start-icon="puzzle-piece"></nldd-button>
+        </router-link>
         <router-link to="/ai/llm">
           <nldd-button variant="secondary" text="LLM-catalogus" start-icon="sparkles"></nldd-button>
         </router-link>

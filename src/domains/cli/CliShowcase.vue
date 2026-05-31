@@ -154,7 +154,11 @@ rp ai key create --team ${myTeam.value?.id || 'team-platform'} --name ci-summari
 
 rp ai models                     # overheids-llm-l, overheids-llm-s, claude-gateway
 rp ai chat --model overheids-llm-l "Vat dit changelog samen" < CHANGELOG.md
-rp ai key rotate ci-summarizer`,
+
+# Skills-marketplace: geef je assistent kennis van de overheidsstandaarden
+rp ai skill search digikoppeling
+rp ai skill install standaarden --team ${myTeam.value?.id || 'team-platform'}
+rp ai skill list --team ${myTeam.value?.id || 'team-platform'}`,
   },
   {
     id: 'rack',

@@ -54,6 +54,8 @@ export const usePlatformStore = defineStore('platform', {
     campaigns: clone(seed.campaigns),
     techRadar: clone(seed.techRadar),
     llmModels: clone(seed.llmModels),
+    skillPlugins: clone(seed.skillPlugins),
+    skillInstalls: clone(seed.skillInstalls),
     learningPaths: clone(seed.learningPaths),
     // The "logged in" demo user.
     currentUser: 'ans',
@@ -83,6 +85,13 @@ export const usePlatformStore = defineStore('platform', {
     },
     incidentsByTeam: (s) => (team) => s.incidents.filter((i) => i.team === team),
     currentPerson: (s) => s.people.find((p) => p.id === s.currentUser),
+    skillPluginById: (s) => (id) => s.skillPlugins.find((p) => p.id === id),
+    pluginsInstalledByTeam: (s) => (team) => {
+      const rec = s.skillInstalls.find((x) => x.team === team);
+      return rec ? rec.plugins : [];
+    },
+    // Which marketplace plugin (if any) covers a given standard id.
+    pluginForStandard: (s) => (stdId) => s.skillPlugins.find((p) => (p.standards || []).includes(stdId)),
   },
 
   actions: {
@@ -189,6 +198,25 @@ export const usePlatformStore = defineStore('platform', {
     ackIncident(id) {
       const i = this.incidents.find((x) => x.id === id);
       if (i) { i.status = 'mitigated'; this.audit('incident bevestigd', i.id); }
+    },
+
+    // --- Skills-marketplace ---
+    installSkill(team, pluginId) {
+      let rec = this.skillInstalls.find((x) => x.team === team);
+      if (!rec) {
+        rec = { team, plugins: [] };
+        this.skillInstalls.push(rec);
+      }
+      if (!rec.plugins.includes(pluginId)) {
+        rec.plugins.push(pluginId);
+        const p = this.skillPluginById(pluginId);
+        if (p) p.installs += 1;
+        this.audit('skill-plugin geïnstalleerd', `${pluginId} → ${team}`);
+      }
+    },
+    uninstallSkill(team, pluginId) {
+      const rec = this.skillInstalls.find((x) => x.team === team);
+      if (rec) rec.plugins = rec.plugins.filter((id) => id !== pluginId);
     },
 
     // --- Environments ---
