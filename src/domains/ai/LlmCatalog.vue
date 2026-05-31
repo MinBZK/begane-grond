@@ -87,11 +87,12 @@ function teamName(id) {
 const apiKey = ref('');
 function genKey() {
   const rand = Math.random().toString(36).slice(2, 10);
-  return `rp-llm-${rand}`;
+  return `llm_sk_live_${rand}`;
 }
 const maskedKey = computed(() => {
   if (!apiKey.value) return '';
-  return `${apiKey.value.slice(0, 11)}${'•'.repeat(24)}`;
+  // Mask the body, keep the prefix and the last 4 chars (matches rp ai key create).
+  return `${apiKey.value.slice(0, 12)}${'•'.repeat(16)}${apiKey.value.slice(-4)}`;
 });
 const endpoint = computed(() => {
   if (!ordered.value) return '';
@@ -194,7 +195,7 @@ function resetWizard() {
                   API-key
                 </div>
                 <div class="rp-key-value">
-                  <code>{{ revealed ? apiKey + '••••••••••••••••' : maskedKey }}</code>
+                  <code>{{ revealed ? apiKey : maskedKey }}</code>
                   <nldd-button
                     variant="secondary"
                     size="sm"

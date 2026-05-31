@@ -195,17 +195,17 @@ export const deployments = [
 ];
 export const releases = [
   { id: 'rel-1', app: 'app-paspoort', version: 'v2.3.9', env: 'prod', by: 'joost', when: 'gisteren 14:22', notes: 'Bugfix in BSN-validatie' },
-  { id: 'rel-2', app: 'app-platformportaal', version: 'v0.6.5', env: 'prod', by: 'ans', when: 'di 10:05', notes: 'NLDD bump + nieuwe rack-view' },
+  { id: 'rel-2', app: 'app-platformportaal', version: 'v0.6.5', env: 'prod', by: 'ans', when: 'gisteren 10:05', notes: 'NLDD bump + nieuwe rack-view' },
 ];
 
 export const incidents = [
   { id: 'inc-2024-017', title: 'Verhoogde latency Toeslagenmotor', severity: 'sev2', status: 'mitigated', service: 'app-toeslagen', team: 'team-toeslagen', opened: 'vandaag 09:14', oncall: 'sanne', timeline: [
     { at: '09:14', what: 'Alert: p99 latency > 2s' },
     { at: '09:21', what: 'Kafka-consumer lag vastgesteld' },
-    { at: '09:40', what: 'Extra replica bijgeschaald — gemitigeerd' },
+    { at: '09:40', what: 'Extra replica bijgeschaald, gemitigeerd' },
   ] },
-  { id: 'inc-2024-016', title: 'pg-primary-01 hoge temperatuur', severity: 'sev3', status: 'resolved', service: 'pg-burgerzaken-prod', team: 'team-platform', opened: 'gisteren 16:02', oncall: 'fatima', timeline: [
-    { at: '16:02', what: 'Koeling-alert rack DH-A1' },
+  { id: 'inc-2024-016', title: 'pg-burgerzaken-prod hoge temperatuur', severity: 'sev3', status: 'resolved', service: 'pg-burgerzaken-prod', team: 'team-burgerzaken', opened: 'gisteren 16:02', oncall: 'joost', timeline: [
+    { at: '16:02', what: 'Koeling-alert rack DH-A1 (eigenaar Platform Engineering)' },
     { at: '16:30', what: 'Airflow hersteld, opgelost' },
   ] },
 ];
@@ -280,7 +280,7 @@ export const rfcs = [
 export const auditLog = [
   { id: 'a1', actor: 'ans', action: 'infra afgenomen', resource: 'llm-gilde-prod', at: 'di 10:02' },
   { id: 'a2', actor: 'fatima', action: 'secret geroteerd', resource: 'platform/llm-gateway-key', at: 'di 09:40' },
-  { id: 'a3', actor: 'joost', action: 'release gepromoot', resource: 'app-paspoort → prod', at: 'ma 14:22' },
+  { id: 'a3', actor: 'joost', action: 'release gepromoot', resource: 'app-paspoort → prod', at: 'gisteren 14:22' },
 ];
 
 // --- Standards marketplace ---

@@ -16,7 +16,7 @@ const store = usePlatformStore();
 // FSC modes: inway = aanbieder (publishes), outway = afnemer (consumes). The seed
 // only carries inways; we render a clear badge per mode.
 const MODE = {
-  inway: { label: 'Inway (aanbieder)', color: 'brand', icon: 'arrow-up-arrow-down', desc: 'Biedt diensten aan via de service-directory' },
+  inway: { label: 'Inway (aanbieder)', color: 'success', icon: 'arrow-up-arrow-down', desc: 'Biedt diensten aan via de service-directory' },
   outway: { label: 'Outway (afnemer)', color: 'accent', icon: 'cloud', desc: 'Neemt diensten af van andere peers' },
 };
 
@@ -162,7 +162,7 @@ function fmtOin(oin) {
 
     <nldd-spacer size="24" />
 
-    <CliHint command="rp fsc directory list --register oin" label="Doorzoek het OIN-register ook via de CLI:" />
+    <CliHint command="rp koppelvlak token --oin 00000001823288444000 --service &quot;Paspoort API&quot;" label="Vraag een OIN-token aan voor een koppelvlak via de CLI:" />
   </div>
 </template>
 

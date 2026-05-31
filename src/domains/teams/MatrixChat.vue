@@ -28,7 +28,7 @@ const defaultSeed = () => {
     return [
       { from: 'Fatima El Amrani', text: 'Piket is overgedragen, alerts staan groen.', mine: false },
       { from: 'Ans Bakker', text: 'Top. Ik pak de NLDD-bump in het portaal vandaag op.', mine: true },
-      { from: 'Pieter Jansen', text: 'Datadeling-API certificaat verloopt over 30 dagen, staat op de planning.', mine: false },
+      { from: 'Pieter Jansen', text: 'Koppelvlak-certificaat verloopt over 30 dagen, staat op de planning.', mine: false },
     ];
   }
   return [

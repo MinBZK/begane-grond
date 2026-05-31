@@ -59,12 +59,12 @@ const README = {
     run: 'uv run uvicorn datadeling.main:app --reload',
   },
   'repo-stuc': {
-    tagline: 'Standaard utility-componenten voor rijksbrede herbruik.',
+    tagline: 'Open-source engine achter rijksbrede fleet-transformaties.',
     body: [
-      'STUC bundelt herbruikbare bouwstenen (auth-helpers, FSC-clients, logging-middleware) zodat teams niet telkens het wiel opnieuw uitvinden. Hergebruik boven bouwen.',
-      'Python-bibliotheek, gepubliceerd op de interne package-registry en als open source onder EUPL-1.2.',
+      'STUC is de engine die rijksbrede transformaties over repositories uitvoert (codemods, FSC-koppelingen, logging-middleware). Teams gebruiken hem niet rechtstreeks: het loopt via rp fleet, zodat campagnes overal hetzelfde verlopen.',
+      'Geschreven in Python, ontwikkeld in de open onder EUPL-1.2. De engine staat los op code.overheid.nl, maar het gebruik zit native in rp.',
     ],
-    run: 'uv add stuc',
+    run: 'rp fleet campaign run camp-securitytxt',
   },
 };
 
@@ -78,6 +78,59 @@ const readme = computed(
 );
 
 const cloneUrl = computed(() => `https://code.overheid.nl/${repo.value?.name}.git`);
+
+// File tree shown like a code host's repo root. Files common to every
+// government repo (license, contributing, security.txt, CI) plus a
+// language-specific source layout. Deterministic per repo so the demo is
+// stable; `you` marks where the README run-command points.
+const COMMON = [
+  { name: '.github/workflows/ci.yml', kind: 'file', icon: 'gear', note: 'CI-pijplijn' },
+  { name: '.well-known/security.txt', kind: 'file', icon: 'shield-check-mark', note: 'RFC 9116' },
+  { name: 'CODE_OF_CONDUCT.md', kind: 'file', icon: 'file-text' },
+  { name: 'CONTRIBUTING.md', kind: 'file', icon: 'file-text' },
+  { name: 'LICENSE', kind: 'file', icon: 'certificate', note: 'EUPL-1.2' },
+  { name: 'README.md', kind: 'file', icon: 'file-text' },
+];
+const BY_LANG = {
+  Rust: [
+    { name: 'src/', kind: 'dir', icon: 'folder' },
+    { name: 'src/main.rs', kind: 'file', icon: 'chevron-left-forward-slash-chevron-right' },
+    { name: 'src/lib.rs', kind: 'file', icon: 'chevron-left-forward-slash-chevron-right' },
+    { name: 'tests/', kind: 'dir', icon: 'folder' },
+    { name: 'Cargo.toml', kind: 'file', icon: 'cylinder-split' },
+    { name: 'Cargo.lock', kind: 'file', icon: 'cylinder-split' },
+  ],
+  Vue: [
+    { name: 'src/', kind: 'dir', icon: 'folder' },
+    { name: 'src/main.js', kind: 'file', icon: 'chevron-left-forward-slash-chevron-right' },
+    { name: 'src/App.vue', kind: 'file', icon: 'chevron-left-forward-slash-chevron-right' },
+    { name: 'src/components/', kind: 'dir', icon: 'folder' },
+    { name: 'package.json', kind: 'file', icon: 'cylinder-split' },
+    { name: 'vite.config.js', kind: 'file', icon: 'gear' },
+  ],
+  Python: [
+    { name: 'src/', kind: 'dir', icon: 'folder' },
+    { name: 'src/__init__.py', kind: 'file', icon: 'chevron-left-forward-slash-chevron-right' },
+    { name: 'src/cli.py', kind: 'file', icon: 'chevron-left-forward-slash-chevron-right' },
+    { name: 'tests/', kind: 'dir', icon: 'folder' },
+    { name: 'pyproject.toml', kind: 'file', icon: 'cylinder-split' },
+    { name: 'uv.lock', kind: 'file', icon: 'cylinder-split' },
+  ],
+};
+const fileTree = computed(() => {
+  const lang = repo.value?.lang || 'Vue';
+  const src = BY_LANG[lang] || BY_LANG.Vue;
+  // Dirs first, then files, each group alphabetic, like a code host.
+  return [...src, ...COMMON].sort((a, b) => {
+    if (a.kind !== b.kind) return a.kind === 'dir' ? -1 : 1;
+    return a.name.localeCompare(b.name);
+  });
+});
+const lastCommit = computed(() => ({
+  msg: prs.value[0]?.title || readme.value.tagline,
+  by: 'sanne',
+  when: '2 uur geleden',
+}));
 
 // Faked open issues — seeded from openIssues count but with realistic titles.
 const ISSUE_POOL = [
@@ -263,6 +316,33 @@ const relationLinks = computed(() => {
 
     <div class="rp-detail-grid">
       <div class="rp-detail-main">
+        <!-- File browser (repo root) -->
+        <nldd-card accessible-label="Bestanden">
+          <nldd-container padding="24">
+            <div class="rp-section-head">
+              <nldd-title size="4"><h2>Bestanden</h2></nldd-title>
+              <nldd-tag color="neutral" size="md">main</nldd-tag>
+            </div>
+            <nldd-spacer size="8" />
+            <p class="rp-lastcommit">
+              <nldd-icon name="clock" aria-hidden="true"></nldd-icon>
+              <strong>{{ authorName(lastCommit.by) }}</strong>
+              <span>{{ lastCommit.msg }}</span>
+              <span class="rp-lastcommit-when">{{ lastCommit.when }}</span>
+            </p>
+            <nldd-spacer size="12" />
+            <ul class="rp-filetree">
+              <li v-for="f in fileTree" :key="f.name" :class="{ 'rp-file-dir': f.kind === 'dir' }">
+                <nldd-icon :name="f.icon" aria-hidden="true"></nldd-icon>
+                <span class="rp-file-name">{{ f.name }}</span>
+                <nldd-tag v-if="f.note" color="neutral" size="md">{{ f.note }}</nldd-tag>
+              </li>
+            </ul>
+          </nldd-container>
+        </nldd-card>
+
+        <nldd-spacer size="20" />
+
         <!-- README -->
         <nldd-card accessible-label="README">
           <nldd-container padding="24">
@@ -409,7 +489,7 @@ const relationLinks = computed(() => {
 
     <nldd-spacer size="24" />
 
-    <CliHint :command="`rp repo clone ${repo.name}`" label="Clone via de CLI:" />
+    <CliHint :command="`git clone ${cloneUrl}`" label="Clone via de terminal:" />
   </div>
 
   <div v-else class="rp-page">
@@ -445,6 +525,67 @@ const relationLinks = computed(() => {
   .rp-detail-grid {
     grid-template-columns: 1fr;
   }
+}
+.rp-lastcommit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.88rem;
+  opacity: 0.85;
+}
+.rp-lastcommit nldd-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+.rp-lastcommit span:not(.rp-lastcommit-when) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rp-lastcommit-when {
+  margin-left: auto;
+  opacity: 0.6;
+  flex: 0 0 auto;
+}
+.rp-filetree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--semantics-dividers-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.rp-filetree li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.85rem;
+  border-bottom: 1px solid var(--semantics-dividers-color);
+  font-size: 0.92rem;
+}
+.rp-filetree li:last-child {
+  border-bottom: none;
+}
+.rp-filetree li:hover {
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-filetree nldd-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: 0 0 auto;
+  opacity: 0.7;
+}
+.rp-file-dir .rp-file-name {
+  font-weight: 600;
+}
+.rp-file-name {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.88rem;
+}
+.rp-filetree li nldd-tag {
+  margin-left: auto;
 }
 .rp-readme-head {
   display: flex;

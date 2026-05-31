@@ -128,14 +128,14 @@ function openForm() {
 // subscribed team's channel with a delivery outcome. Hand-built so it reads
 // like a believable afternoon on the platform.
 const history = ref([
-  { id: 'evt-9012', event: 'deploy.completed', team: 'team-platform', subject: 'app-platformportaal → prod', at: '14:22', delivery: 'geleverd' },
+  { id: 'evt-9012', event: 'deploy.completed', team: 'team-platform', subject: 'app-platformportaal → prod', at: 'gisteren 10:05', delivery: 'geleverd' },
   { id: 'evt-9011', event: 'incident.opened', team: 'team-toeslagen', subject: 'inc-2024-017 · Verhoogde latency', at: '09:14', delivery: 'geleverd' },
   { id: 'evt-9010', event: 'cost.budget-exceeded', team: 'team-toeslagen', subject: 'Toeslagen €300 / €280', at: '08:55', delivery: 'failing' },
   { id: 'evt-9009', event: 'secret.rotated', team: 'team-platform', subject: 'platform/llm-gateway-key', at: 'di 09:40', delivery: 'geleverd' },
-  { id: 'evt-9008', event: 'incident.resolved', team: 'team-platform', subject: 'inc-2024-016 · pg-primary temp', at: 'gisteren 16:30', delivery: 'geleverd' },
+  { id: 'evt-9008', event: 'incident.resolved', team: 'team-burgerzaken', subject: 'inc-2024-016 · pg-burgerzaken-prod temp', at: 'gisteren 16:30', delivery: 'geleverd' },
   { id: 'evt-9007', event: 'cert.expiring', team: 'team-data', subject: 'api.datadeling.overheid.nl · 30 dagen', at: 'gisteren 11:02', delivery: 'in beoordeling' },
   { id: 'evt-9006', event: 'vuln.detected', team: 'team-toeslagen', subject: 'CVE-2024-3094 · repo-toeslagen', at: 'ma 22:18', delivery: 'geleverd' },
-  { id: 'evt-9005', event: 'deploy.completed', team: 'team-burgerzaken', subject: 'app-paspoort → prod', at: 'ma 14:22', delivery: 'geleverd' },
+  { id: 'evt-9005', event: 'deploy.completed', team: 'team-burgerzaken', subject: 'app-paspoort → prod', at: 'gisteren 14:22', delivery: 'geleverd' },
 ]);
 
 const historyColumns = [
@@ -192,7 +192,7 @@ const envelopeJson = [
   '  "type": "deploy.completed",',
   '  "source": "nl.overheid.platform.deploy",',
   '  "id": "evt-9012",',
-  '  "time": "2026-05-31T14:22:00Z",',
+  '  "time": "2026-05-30T10:05:00Z",',
   '  "subject": "app-platformportaal",',
   '  "datacontenttype": "application/json",',
   '  "data": { "env": "prod", "version": "v0.6.5" }',

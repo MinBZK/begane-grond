@@ -1,10 +1,11 @@
 <script setup>
 // Skills-marketplace: a catalog of AI-assistant plugins that steer generative
 // AI toward compliance with Dutch government standards. Modelled on
-// github.com/developer-overheid-nl/skills-marketplace — a neutral marketplace
+// github.com/developer-overheid-nl/skills-marketplace, a neutral marketplace
 // of plugins (each bundling "skills", i.e. AI capabilities) installable into
-// Claude Code or Cursor. This is the missing link between the platform's AI
-// offering and its standards: the assistant learns the standard you must meet.
+// rp code or a Claude-Code-style editor such as Cursor. This is the missing
+// link between the platform's AI offering and its standards: the assistant
+// learns the standard you must meet.
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
@@ -71,7 +72,7 @@ function standardName(id) {
     <nldd-container layout="grid" column-count="2" md-column-count="1" gap="12">
       <nldd-inline-dialog
         title="Installeer via rp, niet als losse tool"
-        supporting-text="Op het platform installeer je een plugin met rp ai skill install — met team-context, dataclassificatie en audit. rp gebruikt onder water dezelfde marketplace. Direct in Claude Code of Cursor kan ook, buiten het platform om."
+        supporting-text="Op het platform installeer je een plugin met rp ai skill install, met team-context, dataclassificatie en audit. rp gebruikt onder water dezelfde marketplace. Rechtstreeks in je editor, zoals Cursor, kan ook buiten het platform om."
       ></nldd-inline-dialog>
       <nldd-inline-dialog
         title="Informatieve samenvattingen, geen officiële standaard"
@@ -126,7 +127,7 @@ function standardName(id) {
           <nldd-spacer size="12" />
           <nldd-code-viewer language="bash">{{ p.install }}</nldd-code-viewer>
           <p class="rp-plugin-alt">
-            Buiten het platform, direct in Claude Code of Cursor:
+            Buiten het platform, rechtstreeks in je editor zoals Cursor:
             <code>{{ p.altInstall }}</code>
           </p>
 

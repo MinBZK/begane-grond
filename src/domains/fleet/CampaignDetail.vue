@@ -21,7 +21,7 @@ const campaign = computed(() => store.campaigns.find((c) => c.id === route.param
 
 const TYPE_META = {
   regex: { label: 'Regex-codemod', icon: 'magnifier' },
-  llm: { label: 'LLM-transformatie (Claude)', icon: 'sparkles' },
+  llm: { label: 'LLM-transformatie', icon: 'sparkles' },
   'file-creation': { label: 'Bestand toevoegen', icon: 'rectangle-stack' },
 };
 function typeMeta(type) {

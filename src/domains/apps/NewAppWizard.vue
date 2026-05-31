@@ -20,12 +20,12 @@ const TEMPLATE_META = {
   'tpl-vue-nldd': {
     icon: 'rectangle-stack', lang: 'Vue',
     tree: ['src/', '  App.vue', '  main.ts', 'public/', 'vite.config.ts', '.github/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
-    suggests: ['k8s'],
+    suggests: ['kubernetes'],
   },
   'tpl-rust-api': {
     icon: 'cylinder-split', lang: 'Rust',
     tree: ['src/', '  main.rs', '  routes/', 'migrations/', 'openapi.yaml', 'features/', '.github/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
-    suggests: ['postgres', 'k8s'],
+    suggests: ['postgres', 'kubernetes'],
   },
   'tpl-python-job': {
     icon: 'folder-stack', lang: 'Python',
@@ -90,9 +90,9 @@ const repoSlug = computed(() => {
 
 const cliCommand = computed(() => {
   const parts = [`rp app new "${form.name || 'mijn-app'}"`];
-  if (form.template) parts.push(`--template ${form.template.replace('tpl-', '')}`);
   parts.push(`--team ${form.team}`);
-  for (const k of form.infra) parts.push(`--with ${k}`);
+  if (form.template) parts.push(`--template ${form.template}`);
+  if (form.infra.length) parts.push(`--with-infra ${form.infra.join(',')}`);
   parts.push(`--visibility ${form.visibility}`);
   return parts.join(' ');
 });

@@ -221,7 +221,7 @@ const otherPeople = computed(() =>
               ></nldd-button>
             </div>
 
-            <CliHint :command="`rp werkplek reimage ${wp.id}\\nrp werkplek overdragen ${wp.id} --naar <persoon>\\nrp werkplek intrekken ${wp.id}`" />
+            <CliHint :command="`rp werkplek reimage ${wp.id}\\nrp werkplek transfer ${wp.id} --to <person>\\nrp werkplek revoke ${wp.id}`" />
           </nldd-container>
         </nldd-card>
       </div>

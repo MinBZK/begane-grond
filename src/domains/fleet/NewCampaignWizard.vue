@@ -1,6 +1,6 @@
 <script setup>
 // New fleet-shift campaign wizard. Five steps, modeled after stuc / Fleetshift:
-//   1) type        — regex codemod / LLM-transformatie (Claude) / file-creation
+//   1) type        — regex codemod / LLM-transformatie / file-creation
 //   2) target repos — pick from store.repos, or a mock `gh search code` query
 //   3) definition   — regex+replacement / LLM-prompt / file to add
 //   4) preview      — faked per-repo dry-run diffs in <nldd-code>
@@ -17,7 +17,7 @@ const store = usePlatformStore();
 
 const TYPES = [
   { value: 'regex', label: 'Regex-codemod', icon: 'magnifier', desc: 'Zoek-en-vervang met een reguliere expressie over alle bestanden.' },
-  { value: 'llm', label: 'LLM-transformatie (Claude)', icon: 'sparkles', desc: 'Beschrijf de gewenste wijziging; de soevereine LLM-gateway stelt per repo een diff voor.' },
+  { value: 'llm', label: 'LLM-transformatie', icon: 'sparkles', desc: 'Beschrijf de gewenste wijziging; de soevereine LLM-gateway stelt per repo een diff voor.' },
   { value: 'file-creation', label: 'Bestand toevoegen', icon: 'rectangle-stack', desc: 'Voeg in elke repo hetzelfde bestand toe (bijv. security.txt, LICENSE).' },
 ];
 
@@ -67,6 +67,17 @@ function toggleRepo(id) {
   if (i === -1) form.repos.push(id);
   else form.repos.splice(i, 1);
 }
+
+// Filter for the manual repo list. A real fleet spans hundreds of repos, so the
+// manual picker is search-driven rather than a full wall of rows.
+const repoFilter = ref('');
+const filteredRepos = computed(() => {
+  const q = repoFilter.value.trim().toLowerCase();
+  if (!q) return store.repos;
+  return store.repos.filter(
+    (r) => r.name.toLowerCase().includes(q) || (r.lang || '').toLowerCase().includes(q),
+  );
+});
 
 // --- Faked per-repo dry-run diffs for the preview step ---
 function diffFor(repo) {
@@ -235,9 +246,17 @@ const wizardSteps = [
           <nldd-spacer size="16" />
 
           <!-- Manual pick -->
-          <div v-if="form.selectMode === 'pick'" class="rp-repo-list">
+          <div v-if="form.selectMode === 'pick'">
+            <nldd-search-field
+              placeholder="Filter repos op naam of taal"
+              accessible-label="Filter repos"
+              :value="repoFilter"
+              @input="(e) => (repoFilter = e.target.value)"
+            ></nldd-search-field>
+            <nldd-spacer size="12" />
+            <div class="rp-repo-list">
             <button
-              v-for="r in store.repos"
+              v-for="r in filteredRepos"
               :key="r.id"
               type="button"
               class="rp-repo-row"
@@ -252,6 +271,8 @@ const wizardSteps = [
               <nldd-tag :color="r.visibility === 'open' ? 'success' : 'neutral'" size="md">{{ r.visibility }}</nldd-tag>
               <span class="rp-repo-ci" :class="`rp-ci-${r.ci}`">CI {{ r.ci }}</span>
             </button>
+            <p v-if="!filteredRepos.length" class="rp-repo-empty">Geen repos gevonden voor "{{ repoFilter }}".</p>
+            </div>
           </div>
 
           <!-- Mock gh search -->

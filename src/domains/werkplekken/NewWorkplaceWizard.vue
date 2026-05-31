@@ -50,6 +50,35 @@ watch(
 );
 
 const selectedPerson = computed(() => store.personById(form.value.person));
+
+// Person picker. A real platform has thousands of employees, so this is a
+// search-as-you-type picker against the identity directory (here: the store),
+// not a wall of cards. We show a capped number of matches; an empty query
+// shows a few recent/suggested people so the step is never blank.
+const personQuery = ref('');
+const personLimit = 6;
+const filteredPeople = computed(() => {
+  const q = personQuery.value.trim().toLowerCase();
+  // Exclude the already-selected person: they are shown in the pinned chip above.
+  const all = store.people.filter((p) => p.id !== form.value.person);
+  const matches = q
+    ? all.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.role.toLowerCase().includes(q) ||
+          (store.teamById(p.team)?.name || '').toLowerCase().includes(q),
+      )
+    : all;
+  return matches.slice(0, personLimit);
+});
+const moreCount = computed(() => {
+  const q = personQuery.value.trim().toLowerCase();
+  const total = q ? filteredPeople.value.length : store.people.length;
+  return Math.max(0, total - personLimit);
+});
+function pickPerson(id) {
+  form.value.person = id;
+}
 const selectedTeam = computed(() =>
   selectedPerson.value ? store.teamById(selectedPerson.value.team) : null,
 );
@@ -67,12 +96,13 @@ function finish() {
     person: form.value.person,
     model: form.value.model,
     image: form.value.image,
+    profile: form.value.profile,
   });
 }
 
 const cliCommand = computed(
   () =>
-    `rp werkplek provision \\\n  --persoon ${form.value.person} \\\n  --model ${form.value.model} \\\n  --image ${form.value.image} \\\n  --profiel ${form.value.profile}${form.value.encrypted ? ' \\\n  --encryptie' : ''}${form.value.mdm ? ' \\\n  --mdm' : ''}`,
+    `rp werkplek provision \\\n  --person ${form.value.person} \\\n  --model ${form.value.model} \\\n  --image ${form.value.image} \\\n  --profile ${form.value.profile}${form.value.encrypted ? ' \\\n  --encrypted' : ''}${form.value.mdm ? ' \\\n  --mdm' : ''}`,
 );
 </script>
 
@@ -154,18 +184,42 @@ const cliCommand = computed(
     <!-- Wizard -->
     <Wizard v-else :steps="steps" finish-label="Uitrollen" @finish="finish">
       <template #default="{ step }">
-        <!-- Step 1: person -->
+        <!-- Step 1: person (search-as-you-type, scales to a large directory) -->
         <div v-if="step === 0">
           <nldd-title size="4"><h2>Voor wie is deze werkplek?</h2></nldd-title>
+          <nldd-spacer size="8" />
+          <nldd-rich-text><p>Zoek de medewerker in de Rijksgids.</p></nldd-rich-text>
+          <nldd-spacer size="12" />
+
+          <nldd-search-field
+            placeholder="Zoek op naam, rol of team"
+            accessible-label="Zoek medewerker"
+            :value="personQuery"
+            @input="(e) => (personQuery = e.target.value)"
+          ></nldd-search-field>
+
+          <!-- Currently selected person, always visible even when filtered out. -->
+          <template v-if="selectedPerson">
+            <nldd-spacer size="12" />
+            <div class="rp-pick rp-pick-on rp-pick-selected">
+              <span class="rp-pick-avatar">{{ selectedPerson.avatar }}</span>
+              <span class="rp-pick-main">
+                <strong>{{ selectedPerson.name }}</strong>
+                <span class="rp-pick-sub">{{ selectedPerson.role }} · {{ store.teamById(selectedPerson.team)?.name }}</span>
+              </span>
+              <nldd-tag color="success" size="md">Geselecteerd</nldd-tag>
+            </div>
+          </template>
+
           <nldd-spacer size="16" />
-          <div class="rp-pick-grid">
+          <div class="rp-pick-list">
             <button
-              v-for="p in store.people"
+              v-for="p in filteredPeople"
               :key="p.id"
               type="button"
               class="rp-pick"
               :class="{ 'rp-pick-on': form.person === p.id }"
-              @click="form.person = p.id"
+              @click="pickPerson(p.id)"
             >
               <span class="rp-pick-avatar">{{ p.avatar }}</span>
               <span class="rp-pick-main">
@@ -173,7 +227,11 @@ const cliCommand = computed(
                 <span class="rp-pick-sub">{{ p.role }} · {{ store.teamById(p.team)?.name }}</span>
               </span>
             </button>
+            <p v-if="!filteredPeople.length" class="rp-pick-empty">Geen medewerker gevonden voor "{{ personQuery }}".</p>
           </div>
+          <p v-if="moreCount > 0" class="rp-pick-more">
+            En nog {{ moreCount }} resultaten. Verfijn je zoekopdracht.
+          </p>
         </div>
 
         <!-- Step 2: hardware -->
@@ -308,6 +366,30 @@ const cliCommand = computed(
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 0.75rem;
+}
+/* Person picker: a vertical results list (search-driven), not a wall of cards. */
+.rp-pick-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 22rem;
+  overflow-y: auto;
+}
+.rp-pick-selected {
+  align-items: center;
+}
+.rp-pick-selected nldd-tag {
+  margin-left: auto;
+}
+.rp-pick-empty {
+  opacity: 0.6;
+  padding: 0.75rem 0.25rem;
+  margin: 0;
+}
+.rp-pick-more {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.6;
 }
 .rp-pick {
   display: flex;

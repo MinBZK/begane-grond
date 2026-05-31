@@ -65,15 +65,15 @@ const mcpTools = [
     icon: 'person-circle',
   },
   {
-    name: 'rp.deploy.promote',
+    name: 'rp.app.promote',
     desc: 'Promoot een release van acceptatie naar productie, met gate-checks.',
     scope: 'schrijft',
     example: '"Promoot paspoort van acc naar prod"',
     icon: 'arrow-up-arrow-down',
   },
   {
-    name: 'rp.incident.timeline',
-    desc: 'Haal de tijdlijn en status van een lopend incident op.',
+    name: 'rp.incident.list',
+    desc: 'Haal de status van lopende incidenten op.',
     scope: 'leest',
     example: '"Wat is de status van inc-2024-017?"',
     icon: 'exclamation-triangle',
@@ -110,7 +110,7 @@ const agentRuns = ref([
   {
     id: 'run-8839',
     task: 'Genereert runbook voor inc-2024-017',
-    tool: 'rp.incident.timeline',
+    tool: 'rp.incident.list',
     by: 'sanne',
     status: 'actief',
     progress: 40,

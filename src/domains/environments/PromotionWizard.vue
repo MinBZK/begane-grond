@@ -147,7 +147,7 @@ async function runDeploy() {
 }
 
 const cliCommand = computed(
-  () => `rp env promote ${appId.value} --from ${fromEnv.value} --to ${toEnv.value}`
+  () => `rp app promote ${appId.value} --from ${fromEnv.value} --to ${toEnv.value}`
 );
 
 const relationLinks = computed(() => {

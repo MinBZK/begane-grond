@@ -137,8 +137,15 @@ export const usePlatformStore = defineStore('platform', {
     createApp({ name, team, template, withInfra = [], visibility = 'open' }) {
       const id = nextId('app');
       const repoId = nextId('repo');
-      this.repos.push({ id: repoId, name: `rijksict/${name.toLowerCase().replace(/\s+/g, '-')}`, visibility, lang: template?.includes('rust') ? 'Rust' : template?.includes('python') ? 'Python' : 'Vue', stars: 0, openPrs: 0, openIssues: 0, ci: 'green', license: 'EUPL-1.2', app: id });
-      const app = { id, name, team, type: 'service', stack: [], repo: repoId, maturity: 'brons', health: 'ok' };
+      const slug = name.toLowerCase().replace(/\s+/g, '-');
+      // Repo namespace follows the team's organisation, not a fixed prefix.
+      const orgNs = { bzk: 'minbzk', dictu: 'dictu', logius: 'logius', rvig: 'rvig', rijksict: 'rijksict' };
+      const teamObj = this.teamById(team);
+      const ns = orgNs[teamObj?.org] || 'rijksict';
+      // App type follows the template: frontend/docs templates are websites.
+      const type = /vue|nldd|astro|docs/.test(template || '') ? 'website' : 'service';
+      this.repos.push({ id: repoId, name: `${ns}/${slug}`, visibility, lang: template?.includes('rust') ? 'Rust' : template?.includes('python') ? 'Python' : 'Vue', stars: 0, openPrs: 0, openIssues: 0, ci: 'green', license: 'EUPL-1.2', app: id });
+      const app = { id, name, team, type, stack: [], repo: repoId, maturity: 'brons', health: 'ok' };
       this.apps.push(app);
       for (const kind of withInfra) {
         this.orderInstance({ kind, name: `${name.toLowerCase().replace(/\s+/g, '-')}-${kind}`, team, app: id, env: 'dev', size: 'S' });

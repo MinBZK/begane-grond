@@ -196,7 +196,7 @@ const auditRows = computed(() =>
 
     <nldd-spacer size="16" />
 
-    <CliHint command="rp scan run --all --type dependency,container,secret" label="Scannen kan ook in CI of via de CLI:" />
+    <CliHint command="rp fleet run --campaign securityscan --dry-run" label="Scannen kan ook in CI of via de CLI:" />
 
     <nldd-spacer size="32" />
 
@@ -222,7 +222,7 @@ const auditRows = computed(() =>
           <span>{{ auditRows.length }} security-acties getoond</span>
           <span class="rp-actor">
             Laatste actie door
-            <router-link :to="`/teams/mensen/${store.currentUser}`" class="rp-link">{{ store.currentUser }}</router-link>
+            <router-link :to="`/teams/mensen/${store.currentUser}`" class="rp-link">{{ store.personById(store.currentUser).name }}</router-link>
           </span>
         </div>
       </nldd-container>
