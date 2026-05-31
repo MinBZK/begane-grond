@@ -148,7 +148,7 @@ function appName(repo) {
                 ></nldd-icon>
                 {{ repo.visibility === 'open' ? 'Openbaar' : 'Intern' }}
               </nldd-tag>
-              <nldd-tag v-if="repo.visibility === 'open'" color="brand" size="md">open-tenzij</nldd-tag>
+              <nldd-tag v-if="repo.visibility === 'open'" color="accent" size="md">open-tenzij</nldd-tag>
               <nldd-tag color="accent" size="md">{{ repo.license }}</nldd-tag>
             </div>
 

@@ -401,7 +401,7 @@ const envelopeJson = [
           <nldd-list>
             <nldd-list-item v-for="e in eventCatalog" :key="e.type">
               <nldd-icon-cell slot="start" :name="e.icon"></nldd-icon-cell>
-              <nldd-title-cell :title="e.type" :description="e.desc"></nldd-title-cell>
+              <nldd-title-cell :text="e.type" :supporting-text="e.desc"></nldd-title-cell>
               <nldd-text-cell slot="end" :text="e.source"></nldd-text-cell>
             </nldd-list-item>
           </nldd-list>

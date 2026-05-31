@@ -209,7 +209,7 @@ const auditRows = computed(() =>
         <nldd-list v-if="auditRows.length">
           <nldd-list-item v-for="a in auditRows" :key="a.id">
             <nldd-icon-cell slot="start" name="books-vertical"></nldd-icon-cell>
-            <nldd-title-cell :title="a.action" :description="a.resource"></nldd-title-cell>
+            <nldd-title-cell :text="a.action" :supporting-text="a.resource"></nldd-title-cell>
             <nldd-text-cell slot="end" :text="a.at"></nldd-text-cell>
           </nldd-list-item>
         </nldd-list>

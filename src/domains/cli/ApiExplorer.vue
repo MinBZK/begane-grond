@@ -233,7 +233,7 @@ function randomSecret() {
 function createToken() {
   if (!newToken.name.trim()) return;
   const secret = randomSecret();
-  const t = { id: 'pat_' + (tokens.value.length + 1), name: newToken.name.trim(), scope: newToken.scope, created: 'zojuist', lastUsed: '—', secret, revealed: true };
+  const t = { id: 'pat_' + (tokens.value.length + 1), name: newToken.name.trim(), scope: newToken.scope, created: 'zojuist', lastUsed: 'nog niet gebruikt', secret, revealed: true };
   tokens.value.unshift(t);
   justCreated.value = { name: t.name, secret };
   store.audit('API-token aangemaakt', t.name);
@@ -288,7 +288,7 @@ const openapiUrl = `${BASE}/openapi.json`;
   <div class="rp-page">
     <PageHeader
       title="API-explorer"
-      lede="De REST-API achter het Rijksplatform. Dezelfde acties als de rp-CLI, maar als HTTP-endpoints — handig voor eigen integraties en CI. Volgt de API Design Rules (ADR), met OAuth2-bearer-tokens."
+      lede="De REST-API achter het Rijksplatform. Dezelfde acties als de rp-CLI, maar als HTTP-endpoints, handig voor eigen integraties en CI. Volgt de API Design Rules (ADR), met OAuth2-bearer-tokens."
       :crumbs="[
         { text: 'Home', href: '/' },
         { text: 'CLI & API', href: '/cli' },
@@ -319,7 +319,7 @@ const openapiUrl = `${BASE}/openapi.json`;
             <span class="rp-base-label">Basis-URL</span>
             <code class="rp-base-url">{{ BASE }}</code>
           </div>
-          <nldd-tag color="brand" size="md">ADR · OAuth2 · application/json</nldd-tag>
+          <nldd-tag color="accent" size="md">ADR · OAuth2 · application/json</nldd-tag>
         </div>
       </nldd-container>
     </nldd-card>

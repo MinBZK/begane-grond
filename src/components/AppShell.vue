@@ -97,7 +97,7 @@ onBeforeUnmount(() => {
 
 <template>
   <nldd-page>
-    <nldd-skip-link slot="header" text="Direct naar de inhoud">
+    <nldd-skip-link slot="header" href="#hoofdinhoud" text="Direct naar de inhoud">
       <nldd-top-navigation-bar
         logo-title="Rijksplatform"
         logo-subtitle="developer platform voor de Rijksoverheid"
@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
             </ul>
           </template>
         </nav>
-        <main class="rp-main rp-min-width-0">
+        <main id="hoofdinhoud" tabindex="-1" class="rp-main rp-min-width-0">
           <slot />
         </main>
       </div>

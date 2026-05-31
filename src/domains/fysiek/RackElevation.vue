@@ -198,10 +198,10 @@ const cableColumns = [
       <!-- Right: tabbed detail -->
       <div class="rp-rack-detail">
         <nldd-tab-bar>
-          <nldd-tab :selected="tab === 'elevatie' || undefined" @click="tab = 'elevatie'">Overzicht</nldd-tab>
-          <nldd-tab :selected="tab === 'stroom' || undefined" @click="tab = 'stroom'">Stroom</nldd-tab>
-          <nldd-tab :selected="tab === 'koeling' || undefined" @click="tab = 'koeling'">Koeling</nldd-tab>
-          <nldd-tab :selected="tab === 'bekabeling' || undefined" @click="tab = 'bekabeling'">Bekabeling</nldd-tab>
+          <nldd-tab-bar-item text="Overzicht" :selected="tab === 'elevatie'" @select="tab = 'elevatie'"></nldd-tab-bar-item>
+          <nldd-tab-bar-item text="Stroom" :selected="tab === 'stroom'" @select="tab = 'stroom'"></nldd-tab-bar-item>
+          <nldd-tab-bar-item text="Koeling" :selected="tab === 'koeling'" @select="tab = 'koeling'"></nldd-tab-bar-item>
+          <nldd-tab-bar-item text="Bekabeling" :selected="tab === 'bekabeling'" @select="tab = 'bekabeling'"></nldd-tab-bar-item>
         </nldd-tab-bar>
 
         <nldd-spacer size="16" />
@@ -216,7 +216,7 @@ const cableColumns = [
                 <nldd-icon-cell>
                   <span class="rp-led-inline" :style="{ background: ledColor(d.status) }"></span>
                 </nldd-icon-cell>
-                <nldd-title-cell :title="d.label" :supporting-text="`U${d.u} · ${typeLabel(d.type)} · ${d.height}U`"></nldd-title-cell>
+                <nldd-title-cell :text="d.label" :supporting-text="`U${d.u} · ${typeLabel(d.type)} · ${d.height}U`"></nldd-title-cell>
                 <nldd-spacer-cell></nldd-spacer-cell>
                 <nldd-text-cell :text="d.team ? (store.teamById(d.team)?.name || d.team) : '—'"></nldd-text-cell>
                 <nldd-text-cell :text="`${d.watts || 0} W`"></nldd-text-cell>

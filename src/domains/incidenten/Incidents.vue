@@ -44,13 +44,6 @@ const sev2plus = computed(
 const teamsAffected = computed(
   () => new Set(store.incidents.map((i) => i.team)).size
 );
-
-function sevColor(sev) {
-  if (sev === 'sev1') return 'critical';
-  if (sev === 'sev2') return 'critical';
-  if (sev === 'sev3') return 'warning';
-  return 'neutral';
-}
 </script>
 
 <template>
@@ -92,7 +85,7 @@ function sevColor(sev) {
             class="rp-inc-row"
           >
             <div class="rp-inc-sev">
-              <nldd-tag :color="sevColor(inc.severity)" size="md">{{ inc.severity }}</nldd-tag>
+              <StatusBadge :status="inc.severity" size="md" />
             </div>
             <div class="rp-inc-main">
               <div class="rp-inc-title">{{ inc.title }}</div>

@@ -107,9 +107,9 @@ const LABEL_COLOR = {
   docs: 'neutral',
   feature: 'accent',
   enhancement: 'accent',
-  a11y: 'brand',
+  a11y: 'accent',
   refactor: 'neutral',
-  observability: 'brand',
+  observability: 'accent',
 };
 
 const issues = computed(() => ISSUE_POOL.slice(0, repo.value?.openIssues || 0));
@@ -241,7 +241,7 @@ const relationLinks = computed(() => {
         ></nldd-icon>
         {{ repo.visibility === 'open' ? 'Openbaar' : 'Intern' }}
       </nldd-tag>
-      <nldd-tag v-if="repo.visibility === 'open'" color="brand" size="md">open-tenzij</nldd-tag>
+      <nldd-tag v-if="repo.visibility === 'open'" color="accent" size="md">open-tenzij</nldd-tag>
       <nldd-tag color="accent" size="md">{{ repo.lang }}</nldd-tag>
       <nldd-tag color="accent" size="md">{{ repo.license }}</nldd-tag>
     </div>

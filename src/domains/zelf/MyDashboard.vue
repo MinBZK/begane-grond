@@ -91,7 +91,7 @@ const actions = computed(() => {
       title: `Keur change goed: ${c.title}`,
       sub: `Risico ${c.risk} · venster ${c.window}`,
       cta: 'Naar wijzigingen',
-      to: '/governance/changes',
+      to: '/incidenten/changes',
     });
   }
   for (const i of myIncidents.value) {
@@ -164,7 +164,7 @@ function rotate(secretId) {
           <div class="rp-identity-meta">
             <nldd-title size="4"><h2>{{ me.name }}</h2></nldd-title>
             <div class="rp-identity-sub">
-              <nldd-tag color="brand" size="md">{{ me.role }}</nldd-tag>
+              <nldd-tag color="accent" size="md">{{ me.role }}</nldd-tag>
               <nldd-tag v-if="myTeam" color="accent" size="md">{{ myTeam.name }}</nldd-tag>
               <span class="rp-matrix"><nldd-icon name="link" aria-hidden="true"></nldd-icon> {{ me.matrix }}</span>
             </div>
@@ -193,7 +193,7 @@ function rotate(secretId) {
     <nldd-container layout="grid" column-count="4" gap="16">
       <MetricCard :value="myApps.length" label="Mijn apps" sub="services en sites" icon="rectangle-stack" :to="myApps.length ? `/apps/${myApps[0].id}` : ''" />
       <MetricCard :value="myInstances.length" label="Afgenomen infra" sub="instances van mijn team" icon="cylinder-split" />
-      <MetricCard :value="`€ ${monthlySpend.toLocaleString('nl-NL')}`" label="Infra-kosten" sub="per maand" icon="euro-sign" to="/governance/kosten" />
+      <MetricCard :value="`€ ${monthlySpend.toLocaleString('nl-NL')}`" label="Infra-kosten" sub="per maand" icon="euro-sign" to="/kosten" />
       <MetricCard :value="openActionCount" label="Openstaande acties" :sub="openActionCount ? 'vragen om aandacht' : 'alles bij'" icon="check-mark-circle" />
     </nldd-container>
 

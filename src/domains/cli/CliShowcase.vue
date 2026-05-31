@@ -263,7 +263,7 @@ function copy(text) {
         <nldd-container padding="20">
           <div class="rp-auth-head">
             <nldd-title size="4"><h2>2. Inloggen</h2></nldd-title>
-            <nldd-tag color="brand" size="md">OIDC · NL GOV</nldd-tag>
+            <nldd-tag color="accent" size="md">OIDC · NL GOV</nldd-tag>
           </div>
           <nldd-rich-text>
             <p>Geen wachtwoorden of langlevende tokens. <code>rp auth login</code> opent je browser en gebruikt de Rijkspas.</p>
@@ -278,14 +278,16 @@ function copy(text) {
 
     <!-- Command tree -------------------------------------------------------- -->
     <nldd-tab-bar>
-      <nldd-tab
-        :selected="tab === 'domeinen' || undefined"
-        @click="tab = 'domeinen'"
-      >Commando's per domein</nldd-tab>
-      <nldd-tab
-        :selected="tab === 'referentie' || undefined"
-        @click="tab = 'referentie'"
-      >Snelreferentie</nldd-tab>
+      <nldd-tab-bar-item
+        text="Commando's per domein"
+        :selected="tab === 'domeinen'"
+        @select="tab = 'domeinen'"
+      ></nldd-tab-bar-item>
+      <nldd-tab-bar-item
+        text="Snelreferentie"
+        :selected="tab === 'referentie'"
+        @select="tab = 'referentie'"
+      ></nldd-tab-bar-item>
     </nldd-tab-bar>
     <nldd-spacer size="20" />
 
@@ -323,7 +325,7 @@ function copy(text) {
             <nldd-spacer size="12" />
             <nldd-list>
               <nldd-list-item v-for="f in globalFlags" :key="f.flag">
-                <nldd-title-cell :title="f.flag" :description="f.desc"></nldd-title-cell>
+                <nldd-title-cell :overline="f.flag" :text="f.desc"></nldd-title-cell>
               </nldd-list-item>
             </nldd-list>
           </nldd-container>

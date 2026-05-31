@@ -26,10 +26,10 @@ const sizeOptions = computed(() => {
     return store.llmModels.map((m) => ({ value: m.id, label: m.name, sub: `${m.context} context · €${m.pricePer1m}/1M` }));
   }
   return [
-    { value: 'S', label: 'S — klein', sub: 'dev/test, 2 vCPU' },
-    { value: 'M', label: 'M — middel', sub: '4 vCPU, HA-paar' },
-    { value: 'L', label: 'L — groot', sub: '8 vCPU, HA-paar' },
-    { value: 'XL', label: 'XL — extra groot', sub: '16 vCPU, multi-node' },
+    { value: 'S', label: 'S (klein)', sub: 'dev/test, 2 vCPU' },
+    { value: 'M', label: 'M (middel)', sub: '4 vCPU, HA-paar' },
+    { value: 'L', label: 'L (groot)', sub: '8 vCPU, HA-paar' },
+    { value: 'XL', label: 'XL (extra groot)', sub: '16 vCPU, multi-node' },
   ];
 });
 

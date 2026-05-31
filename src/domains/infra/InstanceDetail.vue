@@ -166,7 +166,7 @@ const relationLinks = computed(() => {
         <nldd-container padding="20">
           <dl class="rp-facts">
             <div><dt>Soort</dt><dd>{{ service?.name || instance.kind }}</dd></div>
-            <div><dt>Omgeving</dt><dd><nldd-tag :color="instance.env === 'prod' ? 'brand' : 'neutral'" size="md">{{ ENV_LABELS[instance.env] || instance.env }}</nldd-tag></dd></div>
+            <div><dt>Omgeving</dt><dd><nldd-tag :color="instance.env === 'prod' ? 'accent' : 'neutral'" size="md">{{ ENV_LABELS[instance.env] || instance.env }}</nldd-tag></dd></div>
             <div><dt>Grootte</dt><dd class="rp-mono">{{ instance.size }}</dd></div>
             <div><dt>Tier</dt><dd>{{ service?.tier || '—' }}</dd></div>
             <div><dt>Kosten</dt><dd class="rp-mono">{{ instance.costMonth ? `€${instance.costMonth}/mnd` : '—' }}</dd></div>

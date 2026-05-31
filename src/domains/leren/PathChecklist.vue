@@ -79,7 +79,7 @@ const currentIndex = computed(() => done.value.findIndex((d) => !d));
           <div class="rp-step-body">
             <div class="rp-step-top">
               <span class="rp-step-num">Stap {{ i + 1 }}</span>
-              <nldd-tag v-if="i === currentIndex && !finished" color="brand" size="sm">nu</nldd-tag>
+              <nldd-tag v-if="i === currentIndex && !finished" color="accent" size="sm">nu</nldd-tag>
             </div>
             <span class="rp-step-text">{{ step }}</span>
             <p v-if="meta[i]?.hint" class="rp-step-hint">{{ meta[i].hint }}</p>

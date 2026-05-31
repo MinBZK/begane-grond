@@ -160,7 +160,7 @@ function changed(versions, env) {
           <nldd-list>
             <nldd-list-item v-for="rel in store.releases" :key="rel.id">
               <nldd-title-cell
-                :title="`${appName(rel.app)} ${rel.version}`"
+                :text="`${appName(rel.app)} ${rel.version}`"
                 :supporting-text="`naar ${rel.env} · ${rel.when}`"
               ></nldd-title-cell>
               <nldd-spacer-cell></nldd-spacer-cell>

@@ -256,8 +256,8 @@ function nodeFill(type) {
               <nldd-list>
                 <nldd-list-item v-for="r in releases" :key="r.id">
                   <nldd-icon-cell slot="start" name="arrow-up-arrow-down"></nldd-icon-cell>
-                  <nldd-title-cell :label="`${r.version} → ${r.env}`" :value="r.notes"></nldd-title-cell>
-                  <nldd-text-cell slot="end" :value="`${r.when} · ${r.by}`"></nldd-text-cell>
+                  <nldd-title-cell :overline="`${r.version} → ${r.env}`" :text="r.notes"></nldd-title-cell>
+                  <nldd-text-cell slot="end" :text="`${r.when} · ${r.by}`"></nldd-text-cell>
                 </nldd-list-item>
               </nldd-list>
             </nldd-container>

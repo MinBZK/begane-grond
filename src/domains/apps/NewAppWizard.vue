@@ -39,7 +39,7 @@ const TEMPLATE_META = {
   },
 };
 function tplMeta(id) {
-  return TEMPLATE_META[id] || { icon: 'sparkles', lang: '—', tree: [], suggests: [] };
+  return TEMPLATE_META[id] || { icon: 'sparkles', lang: 'onbekend', tree: [], suggests: [] };
 }
 
 const INFRA = [
@@ -343,11 +343,11 @@ const canFinish = computed(() => form.template && form.name.trim() && form.team)
             <nldd-radio-button-group>
               <label class="rp-radio-row">
                 <input type="radio" name="vis" value="open" :checked="form.visibility === 'open'" @change="form.visibility = 'open'" />
-                <span><strong>Open</strong> — publiek op code.overheid.nl (open-tenzij)</span>
+                <span><strong>Open</strong>, publiek op code.overheid.nl (open-tenzij)</span>
               </label>
               <label class="rp-radio-row">
                 <input type="radio" name="vis" value="intern" :checked="form.visibility === 'intern'" @change="form.visibility = 'intern'" />
-                <span><strong>Intern</strong> — alleen binnen het Rijk (vraagt motivatie)</span>
+                <span><strong>Intern</strong>, alleen binnen het Rijk (vraagt motivatie)</span>
               </label>
             </nldd-radio-button-group>
           </nldd-form-field>
@@ -373,23 +373,23 @@ const canFinish = computed(() => form.template && form.name.trim() && form.team)
           <nldd-list>
             <nldd-list-item @click="go(1)">
               <nldd-icon-cell slot="start" name="rectangle-stack"></nldd-icon-cell>
-              <nldd-title-cell label="Applicatie" :value="form.name || '—'"></nldd-title-cell>
+              <nldd-title-cell overline="Applicatie" :text="form.name || 'geen'"></nldd-title-cell>
             </nldd-list-item>
             <nldd-list-item @click="go(0)">
               <nldd-icon-cell slot="start" name="sparkles"></nldd-icon-cell>
-              <nldd-title-cell label="Golden path" :value="selectedTemplate?.name || '—'"></nldd-title-cell>
+              <nldd-title-cell overline="Golden path" :text="selectedTemplate?.name || 'geen'"></nldd-title-cell>
             </nldd-list-item>
             <nldd-list-item @click="go(1)">
               <nldd-icon-cell slot="start" name="person-2"></nldd-icon-cell>
-              <nldd-title-cell label="Team" :value="selectedTeam?.name || '—'"></nldd-title-cell>
+              <nldd-title-cell overline="Team" :text="selectedTeam?.name || 'geen'"></nldd-title-cell>
             </nldd-list-item>
             <nldd-list-item @click="go(2)">
               <nldd-icon-cell slot="start" name="cloud"></nldd-icon-cell>
-              <nldd-title-cell label="Infra" :value="form.infra.length ? form.infra.join(', ') : 'geen'"></nldd-title-cell>
+              <nldd-title-cell overline="Infra" :text="form.infra.length ? form.infra.join(', ') : 'geen'"></nldd-title-cell>
             </nldd-list-item>
             <nldd-list-item @click="go(3)">
               <nldd-icon-cell slot="start" name="folder-stack"></nldd-icon-cell>
-              <nldd-title-cell label="Repository" :value="`${repoSlug} · ${form.visibility} · ${form.license}`"></nldd-title-cell>
+              <nldd-title-cell overline="Repository" :text="`${repoSlug} · ${form.visibility} · ${form.license}`"></nldd-title-cell>
             </nldd-list-item>
           </nldd-list>
 

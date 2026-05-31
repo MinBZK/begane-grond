@@ -19,9 +19,10 @@ const COLORS = {
   'in beoordeling': 'warning', 'in behandeling': 'warning', mitigated: 'warning',
   beta: 'warning', deels: 'warning', warn: 'warning', warning: 'warning', actief: 'accent',
   gepland: 'neutral', concept: 'neutral', offerte: 'neutral',
+  sev3: 'warning', medium: 'warning', laag: 'neutral', low: 'neutral',
   // bad
   red: 'critical', failing: 'critical', open: 'critical', critical: 'critical',
-  sev1: 'critical', sev2: 'critical', high: 'critical', verstoord: 'critical',
+  sev1: 'critical', sev2: 'critical', high: 'critical', hoog: 'critical', verstoord: 'critical',
 };
 
 const color = computed(() => COLORS[props.status?.toLowerCase?.()] || 'neutral');

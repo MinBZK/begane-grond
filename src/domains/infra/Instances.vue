@@ -108,7 +108,7 @@ function kindLabel(kind) {
           <router-link :to="`/teams/${row.team}`" class="rp-link">{{ teamName(value) }}</router-link>
         </template>
         <template v-else-if="col.key === 'env'">
-          <nldd-tag :color="value === 'prod' ? 'brand' : 'neutral'" size="md">{{ ENV_LABELS[value] || value }}</nldd-tag>
+          <nldd-tag :color="value === 'prod' ? 'accent' : 'neutral'" size="md">{{ ENV_LABELS[value] || value }}</nldd-tag>
         </template>
         <template v-else-if="col.key === 'costMonth'">
           <span class="rp-mono">{{ value ? `€${value}` : '—' }}</span>

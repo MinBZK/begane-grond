@@ -6,6 +6,7 @@ import { ref, computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
+import StatusBadge from '../../components/shared/StatusBadge.vue';
 
 const store = usePlatformStore();
 
@@ -17,12 +18,8 @@ const maturityFilter = ref('');
 const types = computed(() => [...new Set(store.apps.map((a) => a.type))]);
 const maturities = ['goud', 'zilver', 'brons'];
 
-// Health icon + colour mapping for the small inline indicator on each card.
-const HEALTH = {
-  ok: { icon: 'check-mark-circle', color: 'success', label: 'Gezond' },
-  warn: { icon: 'exclamation-triangle', color: 'warning', label: 'Aandacht' },
-  critical: { icon: 'exclamation-triangle', color: 'critical', label: 'Verstoord' },
-};
+// The health indicator colour + label are delegated to the shared StatusBadge
+// so we keep a single colour source instead of a local mapping.
 const MATURITY = {
   goud: 'starburst-filled',
   zilver: 'starburst-filled',
@@ -143,9 +140,7 @@ function reset() {
                 <nldd-title size="5"><h3>{{ app.name }}</h3></nldd-title>
                 <span class="rp-app-team">{{ teamName(app.team) }}</span>
               </div>
-              <nldd-tag :color="HEALTH[app.health]?.color || 'neutral'" size="md">
-                {{ HEALTH[app.health]?.label || app.health }}
-              </nldd-tag>
+              <StatusBadge :status="app.health" size="md" />
             </div>
 
             <nldd-spacer size="12" />

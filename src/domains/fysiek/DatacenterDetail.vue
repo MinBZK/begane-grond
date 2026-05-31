@@ -141,7 +141,7 @@ function aisleLabel(aisle) {
           <nldd-spacer size="12" />
           <nldd-list>
             <nldd-list-item v-for="p in procurement" :key="p.id">
-              <nldd-title-cell :title="p.item" :supporting-text="`${p.supplier} · ${p.lead} levertijd`"></nldd-title-cell>
+              <nldd-title-cell :text="p.item" :supporting-text="`${p.supplier} · ${p.lead} levertijd`"></nldd-title-cell>
               <nldd-spacer-cell></nldd-spacer-cell>
               <nldd-text-cell :text="`€ ${p.amount.toLocaleString('nl-NL')}`"></nldd-text-cell>
               <nldd-icon-cell><StatusBadge :status="p.status" /></nldd-icon-cell>
