@@ -84,7 +84,7 @@ const cloneUrl = computed(() => `https://code.overheid.nl/${repo.value?.name}.gi
 // language-specific source layout. Deterministic per repo so the demo is
 // stable; `you` marks where the README run-command points.
 const COMMON = [
-  { name: '.github/workflows/ci.yml', kind: 'file', icon: 'gear', note: 'CI-pijplijn' },
+  { name: '.forgejo/workflows/ci.yml', kind: 'file', icon: 'gear', note: 'CI-pijplijn (Forgejo Actions)' },
   { name: '.well-known/security.txt', kind: 'file', icon: 'shield-check-mark', note: 'RFC 9116' },
   { name: 'CODE_OF_CONDUCT.md', kind: 'file', icon: 'file-text' },
   { name: 'CONTRIBUTING.md', kind: 'file', icon: 'file-text' },

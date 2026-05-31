@@ -1,7 +1,7 @@
 <script setup>
 // New fleet-shift campaign wizard. Five steps, modeled after stuc / Fleetshift:
 //   1) type        — regex codemod / LLM-transformatie / file-creation
-//   2) target repos — pick from store.repos, or a mock `gh search code` query
+//   2) target repos — pick from store.repos, or a platform code-search query
 //   3) definition   — regex+replacement / LLM-prompt / file to add
 //   4) preview      — faked per-repo dry-run diffs in <nldd-code>
 //   5) rollout      — on finish: store.createCampaign + store.runCampaign
@@ -48,7 +48,7 @@ function teamName(id) {
   return store.teamById(id)?.name || id;
 }
 
-// Repos matched by the mock gh-search query: a deterministic subset so the demo
+// Repos matched by the code-search query: a deterministic subset so the demo
 // feels real without a backend.
 const searchMatches = computed(() =>
   store.repos.filter((r) => ['Vue', 'Rust', 'Python'].includes(r.lang)),
@@ -241,7 +241,7 @@ const wizardSteps = [
           <nldd-spacer size="14" />
           <nldd-segmented-control>
             <button type="button" :aria-pressed="form.selectMode === 'pick'" @click="form.selectMode = 'pick'">Handmatig kiezen</button>
-            <button type="button" :aria-pressed="form.selectMode === 'search'" @click="form.selectMode = 'search'">gh search code</button>
+            <button type="button" :aria-pressed="form.selectMode === 'search'" @click="form.selectMode = 'search'">Code-zoekopdracht</button>
           </nldd-segmented-control>
           <nldd-spacer size="16" />
 
@@ -275,9 +275,9 @@ const wizardSteps = [
             </div>
           </div>
 
-          <!-- Mock gh search -->
+          <!-- Platform code search (rp code search) -->
           <div v-else>
-            <nldd-form-field label="gh search code query">
+            <nldd-form-field label="Code-zoekopdracht (rp code search)">
               <nldd-text-field
                 :value="form.searchQuery"
                 @input="(e) => (form.searchQuery = e.target.value)"

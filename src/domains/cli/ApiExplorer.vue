@@ -3,7 +3,7 @@
 // actions that the `rp` CLI exposes are available as HTTP endpoints. Users can
 // browse endpoints per domain (method, path, request/response samples), mint a
 // masked personal access token (kept in component state, not the store), and
-// copy a GitHub Actions snippet that drives the API from CI.
+// copy a Forgejo Actions snippet that drives the API from CI.
 import { ref, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
@@ -251,7 +251,7 @@ function copy(text) {
   navigator.clipboard?.writeText(text);
 }
 
-// --- GitHub Actions automation snippet --------------------------------------
+// --- Forgejo Actions automation snippet (code.overheid.nl runs on Forgejo) ---
 const ghActions = `name: deploy-naar-acc
 on:
   push:
@@ -277,9 +277,9 @@ jobs:
         run: |
           rp infra watch pg-burgerzaken-staging --timeout 5m --output json`;
 
-const ghSecretCmd = `gh secret set RIJKSPLATFORM_TOKEN \\
+const ghSecretCmd = `fj secret set RIJKSPLATFORM_TOKEN \\
   --repo minbzk/paspoort \\
-  --body 'rpp_live_••••••••••••••••'`;
+  --body 'rpp_live_••••••••••••••••'   # Forgejo CLI; kan ook via code.overheid.nl`;
 
 const openapiUrl = `${BASE}/openapi.json`;
 </script>
@@ -482,8 +482,8 @@ const openapiUrl = `${BASE}/openapi.json`;
         </nldd-container>
       </nldd-card>
 
-      <!-- GitHub Actions automation -->
-      <nldd-card accessible-label="Automatisering met GitHub Actions">
+      <!-- Forgejo Actions automation (code.overheid.nl runs on Forgejo) -->
+      <nldd-card accessible-label="Automatisering met Forgejo Actions">
         <nldd-container padding="20">
           <div class="rp-eg-title">
             <nldd-icon name="folder-stack" aria-hidden="true"></nldd-icon>
@@ -491,8 +491,8 @@ const openapiUrl = `${BASE}/openapi.json`;
           </div>
           <nldd-rich-text>
             <p>
-              Zet je token als repository-secret en stuur de API aan vanuit GitHub Actions.
-              De CLI is op de eigen runners voorgeïnstalleerd.
+              Zet je token als repository-secret en stuur de API aan vanuit Forgejo Actions
+              op code.overheid.nl. De rp-CLI is op de eigen runners voorgeïnstalleerd.
             </p>
           </nldd-rich-text>
           <nldd-spacer size="14" />
@@ -500,7 +500,7 @@ const openapiUrl = `${BASE}/openapi.json`;
           <nldd-spacer size="6" />
           <nldd-code-viewer language="bash">{{ ghSecretCmd }}</nldd-code-viewer>
           <nldd-spacer size="16" />
-          <span class="rp-ep-coltitle">.github/workflows/deploy.yml</span>
+          <span class="rp-ep-coltitle">.forgejo/workflows/deploy.yml</span>
           <nldd-spacer size="6" />
           <nldd-code-viewer language="yaml">{{ ghActions }}</nldd-code-viewer>
           <nldd-spacer size="14" />

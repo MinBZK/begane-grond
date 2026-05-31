@@ -19,22 +19,22 @@ const route = useRoute();
 const TEMPLATE_META = {
   'tpl-vue-nldd': {
     icon: 'rectangle-stack', lang: 'Vue',
-    tree: ['src/', '  App.vue', '  main.ts', 'public/', 'vite.config.ts', '.github/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
+    tree: ['src/', '  App.vue', '  main.ts', 'public/', 'vite.config.ts', '.forgejo/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
     suggests: ['kubernetes'],
   },
   'tpl-rust-api': {
     icon: 'cylinder-split', lang: 'Rust',
-    tree: ['src/', '  main.rs', '  routes/', 'migrations/', 'openapi.yaml', 'features/', '.github/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
+    tree: ['src/', '  main.rs', '  routes/', 'migrations/', 'openapi.yaml', 'features/', '.forgejo/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
     suggests: ['postgres', 'kubernetes'],
   },
   'tpl-python-job': {
     icon: 'folder-stack', lang: 'Python',
-    tree: ['src/', '  job.py', 'pyproject.toml', 'uv.lock', 'tests/', '.github/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
+    tree: ['src/', '  job.py', 'pyproject.toml', 'uv.lock', 'tests/', '.forgejo/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
     suggests: ['postgres', 'kafka'],
   },
   'tpl-astro-docs': {
     icon: 'books-vertical', lang: 'Astro',
-    tree: ['src/', '  pages/', '  content/', 'astro.config.mjs', '.github/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
+    tree: ['src/', '  pages/', '  content/', 'astro.config.mjs', '.forgejo/workflows/ci.yml', 'LICENSE (EUPL-1.2)'],
     suggests: [],
   },
 };
