@@ -19,6 +19,14 @@ const store = usePlatformStore();
 const repo = computed(() => store.repoById(route.params.repo));
 const app = computed(() => (repo.value?.app ? store.appById(repo.value.app) : null));
 const team = computed(() => (app.value ? store.teamById(app.value.team) : null));
+// The runner pool this repo's CI runs on: from a recent job, else the team's
+// own pool, else the shared pool. Links the code layer to the physical runners.
+const ciPool = computed(() => {
+  const job = store.ciJobs.find((j) => j.repo === repo.value?.id);
+  if (job) return store.runnerById(job.pool);
+  const teamPool = store.runners.find((r) => r.team === team.value?.id);
+  return teamPool || store.runners.find((r) => r.id === 'pool-shared') || store.runners[0];
+});
 const org = computed(() => (team.value ? store.orgById(team.value.org) : null));
 const vulns = computed(() =>
   store.vulnerabilities.filter((v) => v.repo === repo.value?.id),
@@ -449,6 +457,10 @@ const relationLinks = computed(() => {
               <span>Laatste pipeline</span>
               <StatusBadge :status="repo.ci" />
             </div>
+            <div v-if="ciPool" class="rp-kv">
+              <span>Draait op runner</span>
+              <router-link to="/environments/runners" class="rp-link">{{ ciPool.name }}</router-link>
+            </div>
             <div class="rp-kv">
               <span>Secret-scan</span>
               <nldd-tag
@@ -652,6 +664,16 @@ const relationLinks = computed(() => {
   justify-content: space-between;
   gap: 0.5rem;
   padding: 0.35rem 0;
+}
+.rp-kv .rp-link {
+  color: var(--semantics-actions-primary-default-background-color, #154273);
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.9rem;
+}
+.rp-kv .rp-link:hover {
+  text-decoration: underline;
 }
 .rp-kv span {
   font-size: 0.9rem;

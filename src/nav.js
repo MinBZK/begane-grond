@@ -119,6 +119,15 @@ export const domains = [
       { path: '/environments', name: 'environments', view: () => import('./domains/environments/EnvMatrix.vue'), title: 'Omgevingen' },
       { path: '/environments/promotie/:app', name: 'environments-promotie', view: () => import('./domains/environments/PromotionWizard.vue'), title: 'Promoten' },
       { path: '/environments/releases', name: 'environments-releases', view: () => import('./domains/environments/Releases.vue'), title: 'Releases' },
+    ],
+  },
+  {
+    key: 'runners',
+    path: '/environments/runners',
+    label: 'CI-runners',
+    icon: 'ship-wheel',
+    wave: 'B',
+    routes: [
       { path: '/environments/runners', name: 'environments-runners', view: () => import('./domains/environments/Runners.vue'), title: 'CI-runners' },
     ],
   },
