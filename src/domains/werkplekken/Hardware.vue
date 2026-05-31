@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import CliHint from '../../components/shared/CliHint.vue';
+import DeviceIllustration from './DeviceIllustration.vue';
 
 const store = usePlatformStore();
 const router = useRouter();
@@ -19,6 +20,20 @@ const deployedByModel = computed(() => {
 });
 
 const stockColor = (n) => (n > 15 ? 'success' : n > 5 ? 'warning' : 'critical');
+
+// Filter by device category. 'all' shows everything.
+const categoryFilter = ref('all');
+const filteredHardware = computed(() =>
+  categoryFilter.value === 'all'
+    ? store.hardware
+    : store.hardware.filter((hw) => hw.category === categoryFilter.value),
+);
+// Categories that actually have devices, with a count for the chip.
+const categories = computed(() =>
+  store.deviceCategories
+    .map((c) => ({ ...c, count: store.hardware.filter((hw) => hw.category === c.id).length }))
+    .filter((c) => c.count > 0),
+);
 
 function order(modelId) {
   router.push({ path: '/werkplekken/nieuw', query: { model: modelId } });
@@ -33,7 +48,7 @@ const lastOrdered = ref('');
   <div class="rp-page">
     <PageHeader
       title="Hardware-catalogus"
-      lede="De gestandaardiseerde autonome Rijkslaptops. Versleuteld, MDM-beheerd en met een immutable image. Bestel direct of laat een nieuwe medewerker uitrollen."
+      lede="Alle uitgeefbare devices: autonome Linux-laptops, modulaire Framework-laptops, zware dev-workstations, tablets en diensttelefoons. Versleuteld en MDM-beheerd. Bestel direct of laat een medewerker uitrollen."
       :crumbs="[
         { text: 'Rijksplatform', href: '/' },
         { text: 'Werkplekken', href: '/werkplekken' },
@@ -50,15 +65,38 @@ const lastOrdered = ref('');
       </template>
     </PageHeader>
 
+    <!-- Device-category filter -->
+    <div class="rp-cat-filter">
+      <button type="button" class="rp-cat" :class="{ 'rp-cat-on': categoryFilter === 'all' }" @click="categoryFilter = 'all'">
+        Alle devices
+      </button>
+      <button
+        v-for="c in categories"
+        :key="c.id"
+        type="button"
+        class="rp-cat"
+        :class="{ 'rp-cat-on': categoryFilter === c.id }"
+        @click="categoryFilter = c.id"
+      >
+        <nldd-icon :name="c.icon" aria-hidden="true"></nldd-icon>
+        {{ c.label }} ({{ c.count }})
+      </button>
+    </div>
+    <nldd-spacer size="20" />
+
     <nldd-collection layout="grid" item-width="380px">
-      <nldd-card v-for="hw in store.hardware" :key="hw.id" class="rp-hw-card">
+      <nldd-card v-for="hw in filteredHardware" :key="hw.id" class="rp-hw-card">
         <nldd-container padding="24">
+          <!-- Stylised device illustration -->
+          <DeviceIllustration :type="hw.illustration" />
+          <nldd-spacer size="16" />
+
           <div class="rp-hw-head">
-            <nldd-icon name="rectangle-stack" aria-hidden="true" class="rp-hw-icon"></nldd-icon>
-            <div>
+            <div class="rp-min-width-0">
               <nldd-title size="4"><h2>{{ hw.name }}</h2></nldd-title>
               <span class="rp-hw-sub">{{ deployedByModel[hw.id] || 0 }}× in gebruik</span>
             </div>
+            <nldd-tag v-if="hw.circular" color="success" size="md">circulair</nldd-tag>
           </div>
 
           <nldd-spacer size="16" />
@@ -76,11 +114,20 @@ const lastOrdered = ref('');
               <nldd-icon name="rectangle-stack" aria-hidden="true"></nldd-icon>
               <span>{{ hw.storage }}</span>
             </div>
+            <div v-if="hw.gpu">
+              <nldd-icon name="sparkles" aria-hidden="true"></nldd-icon>
+              <span>GPU: {{ hw.gpu }}</span>
+            </div>
             <div>
               <nldd-icon name="lock-closed" aria-hidden="true"></nldd-icon>
               <span>Full-disk-encryptie standaard</span>
             </div>
+            <div v-if="hw.repairScore >= 9">
+              <nldd-icon name="heart" aria-hidden="true"></nldd-icon>
+              <span>Repareerbaarheid {{ hw.repairScore }}/10 (recht op reparatie)</span>
+            </div>
           </div>
+          <p v-if="hw.note" class="rp-hw-note">{{ hw.note }}</p>
 
           <nldd-spacer size="16" />
 
@@ -125,18 +172,45 @@ const lastOrdered = ref('');
 .rp-hw-card {
   height: 100%;
 }
+.rp-cat-filter {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.rp-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--semantics-dividers-color);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.rp-cat:hover {
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-cat-on {
+  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-surfaces-tinted-background-color);
+  font-weight: 700;
+}
+.rp-cat nldd-icon {
+  width: 1rem;
+  height: 1rem;
+}
 .rp-hw-head {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.85rem;
 }
-.rp-hw-icon {
-  width: 2.4rem;
-  height: 2.4rem;
-  padding: 0.5rem;
-  border-radius: 10px;
-  background: var(--semantics-surfaces-tinted-background-color);
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+.rp-hw-note {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-style: italic;
 }
 .rp-hw-sub {
   font-size: 0.8rem;

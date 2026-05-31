@@ -32,6 +32,7 @@ export const usePlatformStore = defineStore('platform', {
     teams: clone(seed.teams),
     oncall: clone(seed.oncall),
     hardware: clone(seed.hardware),
+    deviceCategories: clone(seed.deviceCategories),
     images: clone(seed.images),
     workplaces: clone(seed.workplaces),
     environments: clone(seed.environments),

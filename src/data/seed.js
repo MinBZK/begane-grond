@@ -172,9 +172,33 @@ export const oncall = [
 ];
 
 // --- Workplaces / laptops ---
+// Hardware-catalogus over meerdere device-categorieën. `category` groepeert
+// (laptop | framework | workstation | tablet | phone); `illustration` kiest de
+// gestileerde SVG. Framework- en circulaire modellen dragen duurzaamheidsvelden
+// (repareerbaarheidsscore, circulair) die aansluiten op /duurzaamheid en MVI.
 export const hardware = [
-  { id: 'rijkslaptop-linux-14', name: 'Rijkslaptop Linux 14"', cpu: 'AMD Ryzen 7', ram: '32 GB', storage: '1 TB NVMe', stock: 23, lead: '1 wk', price: 1450 },
-  { id: 'rijkslaptop-linux-13', name: 'Rijkslaptop Linux 13"', cpu: 'AMD Ryzen 5', ram: '16 GB', storage: '512 GB NVMe', stock: 8, lead: '2 wk', price: 1150 },
+  // Standaard Linux-laptops
+  { id: 'rijkslaptop-linux-14', name: 'Rijkslaptop Linux 14"', category: 'laptop', illustration: 'laptop', cpu: 'AMD Ryzen 7', ram: '32 GB', storage: '1 TB NVMe', stock: 23, lead: '1 wk', price: 1450, repairScore: 7, circular: false },
+  { id: 'rijkslaptop-linux-13', name: 'Rijkslaptop Linux 13"', category: 'laptop', illustration: 'laptop', cpu: 'AMD Ryzen 5', ram: '16 GB', storage: '512 GB NVMe', stock: 8, lead: '2 wk', price: 1150, repairScore: 7, circular: false },
+  // Framework: modulair en repareerbaar (recht-op-reparatie, circulair)
+  { id: 'framework-13', name: 'Framework Laptop 13', category: 'framework', illustration: 'framework', cpu: 'AMD Ryzen 7 7840U', ram: '32 GB', storage: '1 TB NVMe', stock: 14, lead: '1 wk', price: 1599, repairScore: 10, circular: true, note: 'Modulair, onderdelen zelf vervangbaar' },
+  { id: 'framework-16', name: 'Framework Laptop 16', category: 'framework', illustration: 'framework', cpu: 'AMD Ryzen 7 7840HS', ram: '64 GB', storage: '2 TB NVMe', stock: 6, lead: '3 wk', price: 2299, repairScore: 10, circular: true, note: 'Uitwisselbare poorten en GPU-module' },
+  // Zware developer-workstations
+  { id: 'dev-workstation-xl', name: 'Dev-workstation XL', category: 'workstation', illustration: 'workstation', cpu: 'AMD Threadripper (32 cores)', ram: '128 GB', storage: '4 TB NVMe', gpu: 'NVIDIA RTX (24 GB)', stock: 3, lead: '4 wk', price: 4850, repairScore: 8, circular: false, note: 'Voor zware builds, data en ML' },
+  { id: 'dev-workstation-m', name: 'Dev-workstation M', category: 'workstation', illustration: 'workstation', cpu: 'AMD Ryzen 9 (16 cores)', ram: '64 GB', storage: '2 TB NVMe', gpu: 'iGPU', stock: 9, lead: '2 wk', price: 2650, repairScore: 8, circular: false },
+  // Tablets (veldwerk, inspecteurs) — MDM-beheerd
+  { id: 'rijkstablet-11', name: 'Rijkstablet 11"', category: 'tablet', illustration: 'tablet', cpu: 'ARM (8 cores)', ram: '8 GB', storage: '256 GB', stock: 31, lead: '1 wk', price: 720, repairScore: 5, circular: false, note: 'Veldwerk en inspectie, MDM-beheerd' },
+  // Diensttelefoons — secure-profiel
+  { id: 'rijkstelefoon', name: 'Rijkstelefoon', category: 'phone', illustration: 'phone', cpu: 'ARM (8 cores)', ram: '8 GB', storage: '256 GB', stock: 47, lead: '1 wk', price: 640, repairScore: 6, circular: false, note: 'Secure-profiel, versleuteld' },
+];
+
+// Device-categorie-metadata voor groepering/filtering in de catalogus.
+export const deviceCategories = [
+  { id: 'laptop', label: 'Laptops', icon: 'rectangle-stack' },
+  { id: 'framework', label: 'Framework (modulair)', icon: 'puzzle-piece' },
+  { id: 'workstation', label: 'Dev-workstations', icon: 'cylinder-split' },
+  { id: 'tablet', label: 'Tablets', icon: 'rectangle-stack' },
+  { id: 'phone', label: 'Telefoons', icon: 'person' },
 ];
 export const images = [
   { id: 'autonoom-13', name: 'Autonome werkplek 13', base: 'Fedora Silverblue', desc: 'Immutable, MDM, full-disk-encryptie' },
