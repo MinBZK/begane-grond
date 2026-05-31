@@ -107,7 +107,7 @@ const chart = computed(() => {
     <nldd-collection layout="grid" item-width="220px">
       <MetricCard :value="store.procurement.length" label="Inkooporders" sub="totaal in beeld" icon="euro-sign" />
       <MetricCard :value="`€ ${totalOpen.toLocaleString('nl-NL')}`" label="Openstaand" :sub="`${openCount} orders nog te leveren`" icon="clock" />
-      <MetricCard :value="`€ ${totalAll.toLocaleString('nl-NL')}`" label="Totale waarde" sub="boekjaar 2024" icon="books-vertical" />
+      <MetricCard :value="`€ ${totalAll.toLocaleString('nl-NL')}`" label="Totale waarde" sub="boekjaar 2026" icon="books-vertical" />
       <MetricCard
         :value="projection.breach ? `+${projection.breach.m} mnd` : `> ${projection.months} mnd`"
         label="Capaciteit krap"

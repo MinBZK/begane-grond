@@ -22,7 +22,14 @@ const installedForMyTeam = computed(() =>
 );
 
 const totalSkills = computed(() => store.skillPlugins.reduce((n, p) => n + p.skills, 0));
-const totalInstalls = computed(() => store.skillPlugins.reduce((n, p) => n + p.installs, 0));
+// Real current installs across teams (not the per-plugin cumulative counter).
+const totalInstalls = computed(() =>
+  store.teams.reduce((n, t) => n + store.pluginsInstalledByTeam(t.id).length, 0),
+);
+// Only teams that actually installed something (avoids ~95 empty cards).
+const teamsWithPlugins = computed(() =>
+  store.teams.filter((t) => store.pluginsInstalledByTeam(t.id).length),
+);
 
 function isInstalled(pluginId) {
   return installedForMyTeam.value.includes(pluginId);
@@ -151,7 +158,7 @@ function standardName(id) {
     </nldd-rich-text>
     <nldd-spacer size="16" />
     <nldd-collection layout="grid" item-width="320px">
-      <nldd-card v-for="t in store.teams" :key="t.id" :accessible-label="t.name">
+      <nldd-card v-for="t in teamsWithPlugins" :key="t.id" :accessible-label="t.name">
         <nldd-container padding="20">
           <router-link :to="'/teams/' + t.id" class="rp-team-link">
             <nldd-title size="5"><h3>{{ t.name }}</h3></nldd-title>

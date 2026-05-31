@@ -12,7 +12,12 @@ const store = usePlatformStore();
 
 const totalCapacity = computed(() => store.datacenters.reduce((s, d) => s + d.capacityKw, 0));
 const totalUsed = computed(() => store.datacenters.reduce((s, d) => s + d.usedKw, 0));
-const totalRacks = computed(() => store.datacenters.reduce((s, d) => s + d.racks, 0));
+// Actually-modelled racks (not the dc.racks capacity field, which is a planned
+// total). The capacity sum lives in the sub-label.
+const totalRacks = computed(() => store.racks.length);
+const rackCapacity = computed(() => store.datacenters.reduce((s, d) => s + d.racks, 0));
+const dcOperationeel = computed(() => store.datacenters.filter((d) => d.status === 'operationeel').length);
+const dcInAanbouw = computed(() => store.datacenters.filter((d) => d.status === 'in aanbouw').length);
 const avgPue = computed(() => {
   const live = store.datacenters.filter((d) => d.usedKw > 0);
   if (!live.length) return '—';
@@ -44,9 +49,9 @@ function barColor(p) {
     </PageHeader>
 
     <nldd-collection layout="grid" item-width="220px">
-      <MetricCard :value="store.datacenters.length" label="Datacenters" sub="2 operationeel, 1 in aanbouw" icon="apartment-building" />
+      <MetricCard :value="store.datacenters.length" label="Datacenters" :sub="`${dcOperationeel} operationeel${dcInAanbouw ? `, ${dcInAanbouw} in aanbouw` : ''}`" icon="apartment-building" />
       <MetricCard :value="`${totalUsed} kW`" :label="`van ${totalCapacity} kW capaciteit`" :sub="`${Math.round((totalUsed / totalCapacity) * 100)}% benut`" icon="cloud" />
-      <MetricCard :value="totalRacks" label="Racks in productie" sub="42U formfactor" icon="rectangle-stack" />
+      <MetricCard :value="totalRacks" label="Racks in productie" :sub="`${rackCapacity} rackposities capaciteit`" icon="rectangle-stack" />
       <MetricCard :value="avgPue" label="Gemiddelde PUE" sub="lager is beter" icon="starburst-filled" />
     </nldd-collection>
 

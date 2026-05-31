@@ -315,7 +315,7 @@ export const people = [
     "name": "Maud Vermeulen",
     "role": "Tech lead",
     "org": "bd",
-    "team": "team-bd-inning",
+    "team": "team-bd-aangifte",
     "matrix": "@maud-vermeulen:rijk.chat",
     "avatar": "MV",
     "history": [
@@ -345,7 +345,7 @@ export const people = [
     "name": "Ans Kaya",
     "role": "Information security officer",
     "org": "bd",
-    "team": "team-bd-aangifte",
+    "team": "team-bd-gegevens",
     "matrix": "@ans-kaya:rijk.chat",
     "avatar": "AK",
     "history": [
@@ -360,7 +360,7 @@ export const people = [
     "name": "Amira Mol",
     "role": "Business analist",
     "org": "bd",
-    "team": "team-bd-aangifte",
+    "team": "team-bd-gegevens",
     "matrix": "@amira-mol:rijk.chat",
     "avatar": "AM",
     "history": [
@@ -375,7 +375,7 @@ export const people = [
     "name": "Omar Van Es",
     "role": "Database administrator",
     "org": "bd",
-    "team": "team-bd-aangifte",
+    "team": "team-bd-fraude",
     "matrix": "@omar-van-es:rijk.chat",
     "avatar": "OV",
     "history": [
@@ -390,7 +390,7 @@ export const people = [
     "name": "Henk Wagenaar",
     "role": "Platform engineer",
     "org": "bd",
-    "team": "team-bd-gegevens",
+    "team": "team-bd-fraude",
     "matrix": "@henk-wagenaar:rijk.chat",
     "avatar": "HW",
     "history": [
@@ -405,7 +405,7 @@ export const people = [
     "name": "Marieke Lubbers",
     "role": "Frontend developer",
     "org": "bd",
-    "team": "team-bd-gegevens",
+    "team": "team-bd-iam",
     "matrix": "@marieke-lubbers:rijk.chat",
     "avatar": "ML",
     "history": [
@@ -420,7 +420,7 @@ export const people = [
     "name": "Yvonne Erdem",
     "role": "Security engineer",
     "org": "bd",
-    "team": "team-bd-gegevens",
+    "team": "team-bd-iam",
     "matrix": "@yvonne-erdem:rijk.chat",
     "avatar": "YE",
     "history": [
@@ -435,7 +435,7 @@ export const people = [
     "name": "Sander Slootweg",
     "role": "Tech lead",
     "org": "bd",
-    "team": "team-bd-gegevens",
+    "team": "team-bd-platform",
     "matrix": "@sander-slootweg:rijk.chat",
     "avatar": "SS",
     "history": [
@@ -450,7 +450,7 @@ export const people = [
     "name": "Mark Asik",
     "role": "Scrum master",
     "org": "bd",
-    "team": "team-bd-gegevens",
+    "team": "team-bd-platform",
     "matrix": "@mark-asik:rijk.chat",
     "avatar": "MA",
     "history": [
@@ -464,14 +464,14 @@ export const people = [
     "id": "julia-el-amrani",
     "name": "Julia El Amrani",
     "role": "Information security officer",
-    "org": "bd",
-    "team": "team-bd-fraude",
+    "org": "duo",
+    "team": "team-duo-studiefinanciering",
     "matrix": "@julia-el-amrani:rijk.chat",
     "avatar": "JE",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, BD"
+        "what": "Information security officer, DUO"
       }
     ]
   },
@@ -479,14 +479,14 @@ export const people = [
     "id": "liv-ozturk",
     "name": "Liv Ozturk",
     "role": "Business analist",
-    "org": "bd",
-    "team": "team-bd-fraude",
+    "org": "duo",
+    "team": "team-duo-studiefinanciering",
     "matrix": "@liv-ozturk:rijk.chat",
     "avatar": "LO",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, BD"
+        "what": "Business analist, DUO"
       }
     ]
   },
@@ -494,14 +494,14 @@ export const people = [
     "id": "mees-maas",
     "name": "Mees Maas",
     "role": "Database administrator",
-    "org": "bd",
-    "team": "team-bd-fraude",
+    "org": "duo",
+    "team": "team-duo-register",
     "matrix": "@mees-maas:rijk.chat",
     "avatar": "MM",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, BD"
+        "what": "Database administrator, DUO"
       }
     ]
   },
@@ -509,14 +509,14 @@ export const people = [
     "id": "khalid-veenstra",
     "name": "Khalid Veenstra",
     "role": "Platform engineer",
-    "org": "bd",
-    "team": "team-bd-fraude",
+    "org": "duo",
+    "team": "team-duo-register",
     "matrix": "@khalid-veenstra:rijk.chat",
     "avatar": "KV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, BD"
+        "what": "Platform engineer, DUO"
       }
     ]
   },
@@ -524,14 +524,14 @@ export const people = [
     "id": "lieke-arslan",
     "name": "Lieke Arslan",
     "role": "Frontend developer",
-    "org": "bd",
-    "team": "team-bd-fraude",
+    "org": "duo",
+    "team": "team-duo-examens",
     "matrix": "@lieke-arslan:rijk.chat",
     "avatar": "LA",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, BD"
+        "what": "Frontend developer, DUO"
       }
     ]
   },
@@ -539,14 +539,14 @@ export const people = [
     "id": "isa-roeloffzen",
     "name": "Isa Roeloffzen",
     "role": "Security engineer",
-    "org": "bd",
-    "team": "team-bd-fraude",
+    "org": "duo",
+    "team": "team-duo-examens",
     "matrix": "@isa-roeloffzen:rijk.chat",
     "avatar": "IR",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, BD"
+        "what": "Security engineer, DUO"
       }
     ]
   },
@@ -554,14 +554,14 @@ export const people = [
     "id": "selin-van-loon",
     "name": "Selin Van Loon",
     "role": "Tech lead",
-    "org": "bd",
-    "team": "team-bd-iam",
+    "org": "duo",
+    "team": "team-duo-data",
     "matrix": "@selin-van-loon:rijk.chat",
     "avatar": "SV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, BD"
+        "what": "Tech lead, DUO"
       }
     ]
   },
@@ -569,14 +569,14 @@ export const people = [
     "id": "daan-lammers",
     "name": "Daan Lammers",
     "role": "Scrum master",
-    "org": "bd",
-    "team": "team-bd-iam",
+    "org": "duo",
+    "team": "team-duo-data",
     "matrix": "@daan-lammers:rijk.chat",
     "avatar": "DL",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, BD"
+        "what": "Scrum master, DUO"
       }
     ]
   },
@@ -584,14 +584,14 @@ export const people = [
     "id": "iris-nijhuis",
     "name": "Iris Nijhuis",
     "role": "Information security officer",
-    "org": "bd",
-    "team": "team-bd-iam",
+    "org": "duo",
+    "team": "team-duo-platform",
     "matrix": "@iris-nijhuis:rijk.chat",
     "avatar": "IN",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, BD"
+        "what": "Information security officer, DUO"
       }
     ]
   },
@@ -599,14 +599,14 @@ export const people = [
     "id": "jeroen-holwerda",
     "name": "Jeroen Holwerda",
     "role": "Business analist",
-    "org": "bd",
-    "team": "team-bd-iam",
+    "org": "duo",
+    "team": "team-duo-platform",
     "matrix": "@jeroen-holwerda:rijk.chat",
     "avatar": "JH",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, BD"
+        "what": "Business analist, DUO"
       }
     ]
   },
@@ -614,14 +614,14 @@ export const people = [
     "id": "noor-naber",
     "name": "Noor Naber",
     "role": "Database administrator",
-    "org": "bd",
-    "team": "team-bd-iam",
+    "org": "uwv",
+    "team": "team-uwv-uitkeringen",
     "matrix": "@noor-naber:rijk.chat",
     "avatar": "NN",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, BD"
+        "what": "Database administrator, UWV"
       }
     ]
   },
@@ -629,14 +629,14 @@ export const people = [
     "id": "esra-veldhuis",
     "name": "Esra Veldhuis",
     "role": "Platform engineer",
-    "org": "bd",
-    "team": "team-bd-iam",
+    "org": "uwv",
+    "team": "team-uwv-uitkeringen",
     "matrix": "@esra-veldhuis:rijk.chat",
     "avatar": "EV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, BD"
+        "what": "Platform engineer, UWV"
       }
     ]
   },
@@ -644,14 +644,14 @@ export const people = [
     "id": "tariq-mulder",
     "name": "Tariq Mulder",
     "role": "Frontend developer",
-    "org": "bd",
-    "team": "team-bd-iam",
+    "org": "uwv",
+    "team": "team-uwv-werk",
     "matrix": "@tariq-mulder:rijk.chat",
     "avatar": "TM",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, BD"
+        "what": "Frontend developer, UWV"
       }
     ]
   },
@@ -659,14 +659,14 @@ export const people = [
     "id": "soumaya-janssen",
     "name": "Soumaya Janssen",
     "role": "Security engineer",
-    "org": "bd",
-    "team": "team-bd-platform",
+    "org": "uwv",
+    "team": "team-uwv-werk",
     "matrix": "@soumaya-janssen:rijk.chat",
     "avatar": "SJ",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, BD"
+        "what": "Security engineer, UWV"
       }
     ]
   },
@@ -674,14 +674,14 @@ export const people = [
     "id": "jan-huisman",
     "name": "Jan Huisman",
     "role": "Tech lead",
-    "org": "bd",
-    "team": "team-bd-platform",
+    "org": "uwv",
+    "team": "team-uwv-gegevens",
     "matrix": "@jan-huisman:rijk.chat",
     "avatar": "JH",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, BD"
+        "what": "Tech lead, UWV"
       }
     ]
   },
@@ -689,14 +689,14 @@ export const people = [
     "id": "ingrid-vink",
     "name": "Ingrid Vink",
     "role": "Scrum master",
-    "org": "bd",
-    "team": "team-bd-platform",
+    "org": "uwv",
+    "team": "team-uwv-gegevens",
     "matrix": "@ingrid-vink:rijk.chat",
     "avatar": "IV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, BD"
+        "what": "Scrum master, UWV"
       }
     ]
   },
@@ -704,14 +704,14 @@ export const people = [
     "id": "jasper-ennaji",
     "name": "Jasper Ennaji",
     "role": "Information security officer",
-    "org": "duo",
-    "team": "team-duo-studiefinanciering",
+    "org": "uwv",
+    "team": "team-uwv-arbeidsmarkt",
     "matrix": "@jasper-ennaji:rijk.chat",
     "avatar": "JE",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, DUO"
+        "what": "Information security officer, UWV"
       }
     ]
   },
@@ -719,14 +719,14 @@ export const people = [
     "id": "robin-roos",
     "name": "Robin Roos",
     "role": "Business analist",
-    "org": "duo",
-    "team": "team-duo-studiefinanciering",
+    "org": "uwv",
+    "team": "team-uwv-arbeidsmarkt",
     "matrix": "@robin-roos:rijk.chat",
     "avatar": "RR",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, DUO"
+        "what": "Business analist, UWV"
       }
     ]
   },
@@ -734,14 +734,14 @@ export const people = [
     "id": "fenna-bruins",
     "name": "Fenna Bruins",
     "role": "Database administrator",
-    "org": "duo",
-    "team": "team-duo-studiefinanciering",
+    "org": "uwv",
+    "team": "team-uwv-platform",
     "matrix": "@fenna-bruins:rijk.chat",
     "avatar": "FB",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, DUO"
+        "what": "Database administrator, UWV"
       }
     ]
   },
@@ -749,14 +749,14 @@ export const people = [
     "id": "sterre-van-der-veen",
     "name": "Sterre Van der Veen",
     "role": "Platform engineer",
-    "org": "duo",
-    "team": "team-duo-studiefinanciering",
+    "org": "uwv",
+    "team": "team-uwv-platform",
     "matrix": "@sterre-van-der-veen:rijk.chat",
     "avatar": "SV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, DUO"
+        "what": "Platform engineer, UWV"
       }
     ]
   },
@@ -764,14 +764,14 @@ export const people = [
     "id": "levi-mohamed",
     "name": "Levi Mohamed",
     "role": "Frontend developer",
-    "org": "duo",
-    "team": "team-duo-register",
+    "org": "rvo",
+    "team": "team-rvo-subsidies",
     "matrix": "@levi-mohamed:rijk.chat",
     "avatar": "LM",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, DUO"
+        "what": "Frontend developer, RVO"
       }
     ]
   },
@@ -779,14 +779,14 @@ export const people = [
     "id": "gijs-van-os",
     "name": "Gijs Van Os",
     "role": "Security engineer",
-    "org": "duo",
-    "team": "team-duo-register",
+    "org": "rvo",
+    "team": "team-rvo-subsidies",
     "matrix": "@gijs-van-os:rijk.chat",
     "avatar": "GV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, DUO"
+        "what": "Security engineer, RVO"
       }
     ]
   },
@@ -794,14 +794,14 @@ export const people = [
     "id": "olivier-el-khattabi",
     "name": "Olivier El Khattabi",
     "role": "Tech lead",
-    "org": "duo",
-    "team": "team-duo-register",
+    "org": "rvo",
+    "team": "team-rvo-vergunningen",
     "matrix": "@olivier-el-khattabi:rijk.chat",
     "avatar": "OE",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, DUO"
+        "what": "Tech lead, RVO"
       }
     ]
   },
@@ -809,14 +809,14 @@ export const people = [
     "id": "senna-wielinga",
     "name": "Senna Wielinga",
     "role": "Scrum master",
-    "org": "duo",
-    "team": "team-duo-register",
+    "org": "rvo",
+    "team": "team-rvo-vergunningen",
     "matrix": "@senna-wielinga:rijk.chat",
     "avatar": "SW",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, DUO"
+        "what": "Scrum master, RVO"
       }
     ]
   },
@@ -824,14 +824,14 @@ export const people = [
     "id": "meryem-hendriks",
     "name": "Meryem Hendriks",
     "role": "Information security officer",
-    "org": "duo",
-    "team": "team-duo-register",
+    "org": "rvo",
+    "team": "team-rvo-geodata",
     "matrix": "@meryem-hendriks:rijk.chat",
     "avatar": "MH",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, DUO"
+        "what": "Information security officer, RVO"
       }
     ]
   },
@@ -839,14 +839,14 @@ export const people = [
     "id": "lotte-hofman",
     "name": "Lotte Hofman",
     "role": "Business analist",
-    "org": "duo",
-    "team": "team-duo-examens",
+    "org": "rvo",
+    "team": "team-rvo-geodata",
     "matrix": "@lotte-hofman:rijk.chat",
     "avatar": "LH",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, DUO"
+        "what": "Business analist, RVO"
       }
     ]
   },
@@ -854,14 +854,14 @@ export const people = [
     "id": "tim-willems",
     "name": "Tim Willems",
     "role": "Database administrator",
-    "org": "duo",
-    "team": "team-duo-examens",
+    "org": "rvo",
+    "team": "team-rvo-portaal",
     "matrix": "@tim-willems:rijk.chat",
     "avatar": "TW",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, DUO"
+        "what": "Database administrator, RVO"
       }
     ]
   },
@@ -869,14 +869,14 @@ export const people = [
     "id": "bas-demir",
     "name": "Bas Demir",
     "role": "Platform engineer",
-    "org": "duo",
-    "team": "team-duo-examens",
+    "org": "rvo",
+    "team": "team-rvo-portaal",
     "matrix": "@bas-demir:rijk.chat",
     "avatar": "BD",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, DUO"
+        "what": "Platform engineer, RVO"
       }
     ]
   },
@@ -884,14 +884,14 @@ export const people = [
     "id": "nadia-van-der-velde",
     "name": "Nadia Van der Velde",
     "role": "Frontend developer",
-    "org": "duo",
-    "team": "team-duo-examens",
+    "org": "rws",
+    "team": "team-rws-areaal",
     "matrix": "@nadia-van-der-velde:rijk.chat",
     "avatar": "NV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, DUO"
+        "what": "Frontend developer, RWS"
       }
     ]
   },
@@ -899,14 +899,14 @@ export const people = [
     "id": "layla-groen",
     "name": "Layla Groen",
     "role": "Security engineer",
-    "org": "duo",
-    "team": "team-duo-examens",
+    "org": "rws",
+    "team": "team-rws-areaal",
     "matrix": "@layla-groen:rijk.chat",
     "avatar": "LG",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, DUO"
+        "what": "Security engineer, RWS"
       }
     ]
   },
@@ -914,14 +914,14 @@ export const people = [
     "id": "hassan-tuinstra",
     "name": "Hassan Tuinstra",
     "role": "Tech lead",
-    "org": "duo",
-    "team": "team-duo-examens",
+    "org": "rws",
+    "team": "team-rws-verkeer",
     "matrix": "@hassan-tuinstra:rijk.chat",
     "avatar": "HT",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, DUO"
+        "what": "Tech lead, RWS"
       }
     ]
   },
@@ -929,14 +929,14 @@ export const people = [
     "id": "said-schipper",
     "name": "Said Schipper",
     "role": "Scrum master",
-    "org": "duo",
-    "team": "team-duo-data",
+    "org": "rws",
+    "team": "team-rws-verkeer",
     "matrix": "@said-schipper:rijk.chat",
     "avatar": "SS",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, DUO"
+        "what": "Scrum master, RWS"
       }
     ]
   },
@@ -944,14 +944,14 @@ export const people = [
     "id": "gerard-polat",
     "name": "Gerard Polat",
     "role": "Information security officer",
-    "org": "duo",
-    "team": "team-duo-data",
+    "org": "rws",
+    "team": "team-rws-sensoren",
     "matrix": "@gerard-polat:rijk.chat",
     "avatar": "GP",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, DUO"
+        "what": "Information security officer, RWS"
       }
     ]
   },
@@ -959,14 +959,14 @@ export const people = [
     "id": "wilma-korteweg",
     "name": "Wilma Korteweg",
     "role": "Business analist",
-    "org": "duo",
-    "team": "team-duo-data",
+    "org": "rws",
+    "team": "team-rws-sensoren",
     "matrix": "@wilma-korteweg:rijk.chat",
     "avatar": "WK",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, DUO"
+        "what": "Business analist, RWS"
       }
     ]
   },
@@ -974,14 +974,14 @@ export const people = [
     "id": "casper-bulut",
     "name": "Casper Bulut",
     "role": "Database administrator",
-    "org": "duo",
-    "team": "team-duo-data",
+    "org": "rws",
+    "team": "team-rws-inspectie",
     "matrix": "@casper-bulut:rijk.chat",
     "avatar": "CB",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, DUO"
+        "what": "Database administrator, RWS"
       }
     ]
   },
@@ -989,14 +989,14 @@ export const people = [
     "id": "bart-visser",
     "name": "Bart Visser",
     "role": "Platform engineer",
-    "org": "duo",
-    "team": "team-duo-data",
+    "org": "rws",
+    "team": "team-rws-inspectie",
     "matrix": "@bart-visser:rijk.chat",
     "avatar": "BV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, DUO"
+        "what": "Platform engineer, RWS"
       }
     ]
   },
@@ -1004,14 +1004,14 @@ export const people = [
     "id": "suze-kok",
     "name": "Suze Kok",
     "role": "Frontend developer",
-    "org": "duo",
-    "team": "team-duo-data",
+    "org": "rws",
+    "team": "team-rws-platform",
     "matrix": "@suze-kok:rijk.chat",
     "avatar": "SK",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, DUO"
+        "what": "Frontend developer, RWS"
       }
     ]
   },
@@ -1019,14 +1019,14 @@ export const people = [
     "id": "nina-van-der-heijden",
     "name": "Nina Van der Heijden",
     "role": "Security engineer",
-    "org": "duo",
-    "team": "team-duo-data",
+    "org": "rws",
+    "team": "team-rws-platform",
     "matrix": "@nina-van-der-heijden:rijk.chat",
     "avatar": "NV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, DUO"
+        "what": "Security engineer, RWS"
       }
     ]
   },
@@ -1034,14 +1034,14 @@ export const people = [
     "id": "loes-van-den-heuvel",
     "name": "Loes Van den Heuvel",
     "role": "Tech lead",
-    "org": "duo",
-    "team": "team-duo-platform",
+    "org": "ind",
+    "team": "team-ind-aanvragen",
     "matrix": "@loes-van-den-heuvel:rijk.chat",
     "avatar": "LV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, DUO"
+        "what": "Tech lead, IND"
       }
     ]
   },
@@ -1049,14 +1049,14 @@ export const people = [
     "id": "boris-sahin",
     "name": "Boris Sahin",
     "role": "Scrum master",
-    "org": "duo",
-    "team": "team-duo-platform",
+    "org": "ind",
+    "team": "team-ind-aanvragen",
     "matrix": "@boris-sahin:rijk.chat",
     "avatar": "BS",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, DUO"
+        "what": "Scrum master, IND"
       }
     ]
   },
@@ -1064,14 +1064,14 @@ export const people = [
     "id": "jelle-driessen",
     "name": "Jelle Driessen",
     "role": "Information security officer",
-    "org": "duo",
-    "team": "team-duo-platform",
+    "org": "ind",
+    "team": "team-ind-dossiers",
     "matrix": "@jelle-driessen:rijk.chat",
     "avatar": "JD",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, DUO"
+        "what": "Information security officer, IND"
       }
     ]
   },
@@ -1079,14 +1079,14 @@ export const people = [
     "id": "anne-faber",
     "name": "Anne Faber",
     "role": "Business analist",
-    "org": "uwv",
-    "team": "team-uwv-uitkeringen",
+    "org": "ind",
+    "team": "team-ind-dossiers",
     "matrix": "@anne-faber:rijk.chat",
     "avatar": "AF",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, UWV"
+        "what": "Business analist, IND"
       }
     ]
   },
@@ -1094,14 +1094,14 @@ export const people = [
     "id": "ilias-theunissen",
     "name": "Ilias Theunissen",
     "role": "Database administrator",
-    "org": "uwv",
-    "team": "team-uwv-uitkeringen",
+    "org": "ind",
+    "team": "team-ind-iam",
     "matrix": "@ilias-theunissen:rijk.chat",
     "avatar": "IT",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, UWV"
+        "what": "Database administrator, IND"
       }
     ]
   },
@@ -1109,14 +1109,14 @@ export const people = [
     "id": "joost-strik",
     "name": "Joost Strik",
     "role": "Platform engineer",
-    "org": "uwv",
-    "team": "team-uwv-uitkeringen",
+    "org": "ind",
+    "team": "team-ind-iam",
     "matrix": "@joost-strik:rijk.chat",
     "avatar": "JS",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, UWV"
+        "what": "Platform engineer, IND"
       }
     ]
   },
@@ -1124,14 +1124,14 @@ export const people = [
     "id": "eva-van-zanten",
     "name": "Eva Van Zanten",
     "role": "Frontend developer",
-    "org": "uwv",
-    "team": "team-uwv-uitkeringen",
+    "org": "ind",
+    "team": "team-ind-data",
     "matrix": "@eva-van-zanten:rijk.chat",
     "avatar": "EV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, UWV"
+        "what": "Frontend developer, IND"
       }
     ]
   },
@@ -1139,14 +1139,14 @@ export const people = [
     "id": "stijn-wubben",
     "name": "Stijn Wubben",
     "role": "Security engineer",
-    "org": "uwv",
-    "team": "team-uwv-werk",
+    "org": "ind",
+    "team": "team-ind-data",
     "matrix": "@stijn-wubben:rijk.chat",
     "avatar": "SW",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, UWV"
+        "what": "Security engineer, IND"
       }
     ]
   },
@@ -1154,14 +1154,14 @@ export const people = [
     "id": "aisha-snijders",
     "name": "Aisha Snijders",
     "role": "Tech lead",
-    "org": "uwv",
-    "team": "team-uwv-werk",
+    "org": "logius",
+    "team": "team-logius-digid",
     "matrix": "@aisha-snijders:rijk.chat",
     "avatar": "AS",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, UWV"
+        "what": "Tech lead, LOGIUS"
       }
     ]
   },
@@ -1169,14 +1169,14 @@ export const people = [
     "id": "pieter-de-boer",
     "name": "Pieter De Boer",
     "role": "Scrum master",
-    "org": "uwv",
-    "team": "team-uwv-werk",
+    "org": "logius",
+    "team": "team-logius-digid",
     "matrix": "@pieter-de-boer:rijk.chat",
     "avatar": "PD",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, UWV"
+        "what": "Scrum master, LOGIUS"
       }
     ]
   },
@@ -1184,14 +1184,14 @@ export const people = [
     "id": "rachid-kuipers",
     "name": "Rachid Kuipers",
     "role": "Information security officer",
-    "org": "uwv",
-    "team": "team-uwv-werk",
+    "org": "logius",
+    "team": "team-logius-digikoppeling",
     "matrix": "@rachid-kuipers:rijk.chat",
     "avatar": "RK",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, UWV"
+        "what": "Information security officer, LOGIUS"
       }
     ]
   },
@@ -1199,14 +1199,14 @@ export const people = [
     "id": "hala-prins",
     "name": "Hala Prins",
     "role": "Business analist",
-    "org": "uwv",
-    "team": "team-uwv-werk",
+    "org": "logius",
+    "team": "team-logius-digikoppeling",
     "matrix": "@hala-prins:rijk.chat",
     "avatar": "HP",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, UWV"
+        "what": "Business analist, LOGIUS"
       }
     ]
   },
@@ -1214,14 +1214,14 @@ export const people = [
     "id": "cornelis-smeets",
     "name": "Cornelis Smeets",
     "role": "Database administrator",
-    "org": "uwv",
-    "team": "team-uwv-gegevens",
+    "org": "logius",
+    "team": "team-logius-machtigen",
     "matrix": "@cornelis-smeets:rijk.chat",
     "avatar": "CS",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, UWV"
+        "what": "Database administrator, LOGIUS"
       }
     ]
   },
@@ -1229,14 +1229,14 @@ export const people = [
     "id": "saskia-karaca",
     "name": "Saskia Karaca",
     "role": "Platform engineer",
-    "org": "uwv",
-    "team": "team-uwv-gegevens",
+    "org": "logius",
+    "team": "team-logius-machtigen",
     "matrix": "@saskia-karaca:rijk.chat",
     "avatar": "SK",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, UWV"
+        "what": "Platform engineer, LOGIUS"
       }
     ]
   },
@@ -1244,14 +1244,14 @@ export const people = [
     "id": "floris-van-beek",
     "name": "Floris Van Beek",
     "role": "Frontend developer",
-    "org": "uwv",
-    "team": "team-uwv-gegevens",
+    "org": "logius",
+    "team": "team-logius-stelsel",
     "matrix": "@floris-van-beek:rijk.chat",
     "avatar": "FV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, UWV"
+        "what": "Frontend developer, LOGIUS"
       }
     ]
   },
@@ -1259,14 +1259,14 @@ export const people = [
     "id": "roel-reijnders",
     "name": "Roel Reijnders",
     "role": "Security engineer",
-    "org": "uwv",
-    "team": "team-uwv-gegevens",
+    "org": "logius",
+    "team": "team-logius-stelsel",
     "matrix": "@roel-reijnders:rijk.chat",
     "avatar": "RR",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, UWV"
+        "what": "Security engineer, LOGIUS"
       }
     ]
   },
@@ -1274,14 +1274,14 @@ export const people = [
     "id": "vincent-van-dam",
     "name": "Vincent Van Dam",
     "role": "Tech lead",
-    "org": "uwv",
-    "team": "team-uwv-gegevens",
+    "org": "dictu",
+    "team": "team-dictu-hosting",
     "matrix": "@vincent-van-dam:rijk.chat",
     "avatar": "VV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, UWV"
+        "what": "Tech lead, DICTU"
       }
     ]
   },
@@ -1289,14 +1289,14 @@ export const people = [
     "id": "sophie-doornbos",
     "name": "Sophie Doornbos",
     "role": "Scrum master",
-    "org": "uwv",
-    "team": "team-uwv-gegevens",
+    "org": "dictu",
+    "team": "team-dictu-hosting",
     "matrix": "@sophie-doornbos:rijk.chat",
     "avatar": "SD",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, UWV"
+        "what": "Scrum master, DICTU"
       }
     ]
   },
@@ -1304,14 +1304,14 @@ export const people = [
     "id": "indy-bijl",
     "name": "Indy Bijl",
     "role": "Information security officer",
-    "org": "uwv",
-    "team": "team-uwv-arbeidsmarkt",
+    "org": "dictu",
+    "team": "team-dictu-werkplek",
     "matrix": "@indy-bijl:rijk.chat",
     "avatar": "IB",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, UWV"
+        "what": "Information security officer, DICTU"
       }
     ]
   },
@@ -1319,14 +1319,14 @@ export const people = [
     "id": "finn-charradi",
     "name": "Finn Charradi",
     "role": "Business analist",
-    "org": "uwv",
-    "team": "team-uwv-arbeidsmarkt",
+    "org": "dictu",
+    "team": "team-dictu-werkplek",
     "matrix": "@finn-charradi:rijk.chat",
     "avatar": "FC",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, UWV"
+        "what": "Business analist, DICTU"
       }
     ]
   },
@@ -1334,14 +1334,14 @@ export const people = [
     "id": "wessel-verschuren",
     "name": "Wessel Verschuren",
     "role": "Database administrator",
-    "org": "uwv",
-    "team": "team-uwv-arbeidsmarkt",
+    "org": "dictu",
+    "team": "team-dictu-security",
     "matrix": "@wessel-verschuren:rijk.chat",
     "avatar": "WV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, UWV"
+        "what": "Database administrator, DICTU"
       }
     ]
   },
@@ -1349,14 +1349,14 @@ export const people = [
     "id": "britt-peters",
     "name": "Britt Peters",
     "role": "Platform engineer",
-    "org": "uwv",
-    "team": "team-uwv-arbeidsmarkt",
+    "org": "dictu",
+    "team": "team-dictu-security",
     "matrix": "@britt-peters:rijk.chat",
     "avatar": "BP",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, UWV"
+        "what": "Platform engineer, DICTU"
       }
     ]
   },
@@ -1364,14 +1364,14 @@ export const people = [
     "id": "abdel-bakkal",
     "name": "Abdel Bakkal",
     "role": "Frontend developer",
-    "org": "uwv",
-    "team": "team-uwv-arbeidsmarkt",
+    "org": "dictu",
+    "team": "team-dictu-data",
     "matrix": "@abdel-bakkal:rijk.chat",
     "avatar": "AB",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, UWV"
+        "what": "Frontend developer, DICTU"
       }
     ]
   },
@@ -1379,14 +1379,14 @@ export const people = [
     "id": "dilan-scholten",
     "name": "Dilan Scholten",
     "role": "Security engineer",
-    "org": "uwv",
-    "team": "team-uwv-arbeidsmarkt",
+    "org": "dictu",
+    "team": "team-dictu-data",
     "matrix": "@dilan-scholten:rijk.chat",
     "avatar": "DS",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, UWV"
+        "what": "Security engineer, DICTU"
       }
     ]
   },
@@ -1394,14 +1394,14 @@ export const people = [
     "id": "sven-ben-ali",
     "name": "Sven Ben Ali",
     "role": "Tech lead",
-    "org": "uwv",
-    "team": "team-uwv-arbeidsmarkt",
+    "org": "rvig",
+    "team": "team-rvig-brp",
     "matrix": "@sven-ben-ali:rijk.chat",
     "avatar": "SB",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, UWV"
+        "what": "Tech lead, RvIG"
       }
     ]
   },
@@ -1409,14 +1409,14 @@ export const people = [
     "id": "hugo-ouali",
     "name": "Hugo Ouali",
     "role": "Scrum master",
-    "org": "uwv",
-    "team": "team-uwv-platform",
+    "org": "rvig",
+    "team": "team-rvig-brp",
     "matrix": "@hugo-ouali:rijk.chat",
     "avatar": "HO",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, UWV"
+        "what": "Scrum master, RvIG"
       }
     ]
   },
@@ -1424,14 +1424,14 @@ export const people = [
     "id": "anouk-dekker",
     "name": "Anouk Dekker",
     "role": "Information security officer",
-    "org": "uwv",
-    "team": "team-uwv-platform",
+    "org": "rvig",
+    "team": "team-rvig-reisdocumenten",
     "matrix": "@anouk-dekker:rijk.chat",
     "avatar": "AD",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, UWV"
+        "what": "Information security officer, RvIG"
       }
     ]
   },
@@ -1439,14 +1439,14 @@ export const people = [
     "id": "fatima-linders",
     "name": "Fatima Linders",
     "role": "Business analist",
-    "org": "uwv",
-    "team": "team-uwv-platform",
+    "org": "rvig",
+    "team": "team-rvig-reisdocumenten",
     "matrix": "@fatima-linders:rijk.chat",
     "avatar": "FL",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, UWV"
+        "what": "Business analist, RvIG"
       }
     ]
   },
@@ -1454,14 +1454,14 @@ export const people = [
     "id": "bilal-verbruggen",
     "name": "Bilal Verbruggen",
     "role": "Database administrator",
-    "org": "rvo",
-    "team": "team-rvo-subsidies",
+    "org": "rvig",
+    "team": "team-rvig-iam",
     "matrix": "@bilal-verbruggen:rijk.chat",
     "avatar": "BV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, RVO"
+        "what": "Database administrator, RvIG"
       }
     ]
   },
@@ -1469,14 +1469,14 @@ export const people = [
     "id": "zeynep-cetin",
     "name": "Zeynep Cetin",
     "role": "Platform engineer",
-    "org": "rvo",
-    "team": "team-rvo-subsidies",
+    "org": "rvig",
+    "team": "team-rvig-iam",
     "matrix": "@zeynep-cetin:rijk.chat",
     "avatar": "ZC",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, RVO"
+        "what": "Platform engineer, RvIG"
       }
     ]
   },
@@ -1484,1810 +1484,10 @@ export const people = [
     "id": "willem-van-der-plas",
     "name": "Willem Van der Plas",
     "role": "Frontend developer",
-    "org": "rvo",
-    "team": "team-rvo-subsidies",
-    "matrix": "@willem-van-der-plas:rijk.chat",
-    "avatar": "WV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "kees-cinar",
-    "name": "Kees Cinar",
-    "role": "Security engineer",
-    "org": "rvo",
-    "team": "team-rvo-subsidies",
-    "matrix": "@kees-cinar:rijk.chat",
-    "avatar": "KC",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "carla-bakker",
-    "name": "Carla Bakker",
-    "role": "Tech lead",
-    "org": "rvo",
-    "team": "team-rvo-vergunningen",
-    "matrix": "@carla-bakker:rijk.chat",
-    "avatar": "CB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, RVO"
-      }
-    ]
-  },
-  {
-    "id": "niels-brouwer",
-    "name": "Niels Brouwer",
-    "role": "Scrum master",
-    "org": "rvo",
-    "team": "team-rvo-vergunningen",
-    "matrix": "@niels-brouwer:rijk.chat",
-    "avatar": "NB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, RVO"
-      }
-    ]
-  },
-  {
-    "id": "koen-schouten",
-    "name": "Koen Schouten",
-    "role": "Information security officer",
-    "org": "rvo",
-    "team": "team-rvo-vergunningen",
-    "matrix": "@koen-schouten:rijk.chat",
-    "avatar": "KS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "roos-sanders",
-    "name": "Roos Sanders",
-    "role": "Business analist",
-    "org": "rvo",
-    "team": "team-rvo-vergunningen",
-    "matrix": "@roos-sanders:rijk.chat",
-    "avatar": "RS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, RVO"
-      }
-    ]
-  },
-  {
-    "id": "mila-celik",
-    "name": "Mila Celik",
-    "role": "Database administrator",
-    "org": "rvo",
-    "team": "team-rvo-vergunningen",
-    "matrix": "@mila-celik:rijk.chat",
-    "avatar": "MC",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, RVO"
-      }
-    ]
-  },
-  {
-    "id": "sem-van-der-laan",
-    "name": "Sem Van der Laan",
-    "role": "Platform engineer",
-    "org": "rvo",
-    "team": "team-rvo-geodata",
-    "matrix": "@sem-van-der-laan:rijk.chat",
-    "avatar": "SV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "ahmed-wijnands",
-    "name": "Ahmed Wijnands",
-    "role": "Frontend developer",
-    "org": "rvo",
-    "team": "team-rvo-geodata",
-    "matrix": "@ahmed-wijnands:rijk.chat",
-    "avatar": "AW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "mats-engelen",
-    "name": "Mats Engelen",
-    "role": "Security engineer",
-    "org": "rvo",
-    "team": "team-rvo-geodata",
-    "matrix": "@mats-engelen:rijk.chat",
-    "avatar": "ME",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "puck-van-hattem",
-    "name": "Puck Van Hattem",
-    "role": "Tech lead",
-    "org": "rvo",
-    "team": "team-rvo-geodata",
-    "matrix": "@puck-van-hattem:rijk.chat",
-    "avatar": "PV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, RVO"
-      }
-    ]
-  },
-  {
-    "id": "hatice-gunes",
-    "name": "Hatice Gunes",
-    "role": "Scrum master",
-    "org": "rvo",
-    "team": "team-rvo-geodata",
-    "matrix": "@hatice-gunes:rijk.chat",
-    "avatar": "HG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, RVO"
-      }
-    ]
-  },
-  {
-    "id": "emma-geerts",
-    "name": "Emma Geerts",
-    "role": "Information security officer",
-    "org": "rvo",
-    "team": "team-rvo-geodata",
-    "matrix": "@emma-geerts:rijk.chat",
-    "avatar": "EG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "lars-kraaijeveld",
-    "name": "Lars Kraaijeveld",
-    "role": "Business analist",
-    "org": "rvo",
-    "team": "team-rvo-portaal",
-    "matrix": "@lars-kraaijeveld:rijk.chat",
-    "avatar": "LK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, RVO"
-      }
-    ]
-  },
-  {
-    "id": "femke-meijer",
-    "name": "Femke Meijer",
-    "role": "Database administrator",
-    "org": "rvo",
-    "team": "team-rvo-portaal",
-    "matrix": "@femke-meijer:rijk.chat",
-    "avatar": "FM",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, RVO"
-      }
-    ]
-  },
-  {
-    "id": "sara-de-wit",
-    "name": "Sara De Wit",
-    "role": "Platform engineer",
-    "org": "rvo",
-    "team": "team-rvo-portaal",
-    "matrix": "@sara-de-wit:rijk.chat",
-    "avatar": "SD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "mehmet-koster",
-    "name": "Mehmet Koster",
-    "role": "Frontend developer",
-    "org": "rvo",
-    "team": "team-rvo-portaal",
-    "matrix": "@mehmet-koster:rijk.chat",
-    "avatar": "MK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "imane-gerritsen",
-    "name": "Imane Gerritsen",
-    "role": "Security engineer",
-    "org": "rvo",
-    "team": "team-rvo-portaal",
-    "matrix": "@imane-gerritsen:rijk.chat",
-    "avatar": "IG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, RVO"
-      }
-    ]
-  },
-  {
-    "id": "fatih-korkmaz",
-    "name": "Fatih Korkmaz",
-    "role": "Tech lead",
-    "org": "rvo",
-    "team": "team-rvo-portaal",
-    "matrix": "@fatih-korkmaz:rijk.chat",
-    "avatar": "FK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, RVO"
-      }
-    ]
-  },
-  {
-    "id": "dirk-verbeek",
-    "name": "Dirk Verbeek",
-    "role": "Scrum master",
-    "org": "rvo",
-    "team": "team-rvo-portaal",
-    "matrix": "@dirk-verbeek:rijk.chat",
-    "avatar": "DV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, RVO"
-      }
-    ]
-  },
-  {
-    "id": "annemarie-van-wijk",
-    "name": "Annemarie Van Wijk",
-    "role": "Information security officer",
-    "org": "rws",
-    "team": "team-rws-areaal",
-    "matrix": "@annemarie-van-wijk:rijk.chat",
-    "avatar": "AV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "quinten-de-groot",
-    "name": "Quinten De Groot",
-    "role": "Business analist",
-    "org": "rws",
-    "team": "team-rws-areaal",
-    "matrix": "@quinten-de-groot:rijk.chat",
-    "avatar": "QD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, RWS"
-      }
-    ]
-  },
-  {
-    "id": "maarten-berends",
-    "name": "Maarten Berends",
-    "role": "Database administrator",
-    "org": "rws",
-    "team": "team-rws-areaal",
-    "matrix": "@maarten-berends:rijk.chat",
-    "avatar": "MB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, RWS"
-      }
-    ]
-  },
-  {
-    "id": "tess-tromp",
-    "name": "Tess Tromp",
-    "role": "Platform engineer",
-    "org": "rws",
-    "team": "team-rws-verkeer",
-    "matrix": "@tess-tromp:rijk.chat",
-    "avatar": "TT",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "veerle-bouazza",
-    "name": "Veerle Bouazza",
-    "role": "Frontend developer",
-    "org": "rws",
-    "team": "team-rws-verkeer",
-    "matrix": "@veerle-bouazza:rijk.chat",
-    "avatar": "VB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "marit-roozendaal",
-    "name": "Marit Roozendaal",
-    "role": "Security engineer",
-    "org": "rws",
-    "team": "team-rws-verkeer",
-    "matrix": "@marit-roozendaal:rijk.chat",
-    "avatar": "MR",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "teun-vos",
-    "name": "Teun Vos",
-    "role": "Tech lead",
-    "org": "rws",
-    "team": "team-rws-verkeer",
-    "matrix": "@teun-vos:rijk.chat",
-    "avatar": "TV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, RWS"
-      }
-    ]
-  },
-  {
-    "id": "ties-van-der-meer",
-    "name": "Ties Van der Meer",
-    "role": "Scrum master",
-    "org": "rws",
-    "team": "team-rws-sensoren",
-    "matrix": "@ties-van-der-meer:rijk.chat",
-    "avatar": "TV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, RWS"
-      }
-    ]
-  },
-  {
-    "id": "romy-de-lange",
-    "name": "Romy De Lange",
-    "role": "Information security officer",
-    "org": "rws",
-    "team": "team-rws-sensoren",
-    "matrix": "@romy-de-lange:rijk.chat",
-    "avatar": "RD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "younes-bouali",
-    "name": "Younes Bouali",
-    "role": "Business analist",
-    "org": "rws",
-    "team": "team-rws-sensoren",
-    "matrix": "@younes-bouali:rijk.chat",
-    "avatar": "YB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, RWS"
-      }
-    ]
-  },
-  {
-    "id": "bram-el-hadioui",
-    "name": "Bram El Hadioui",
-    "role": "Database administrator",
-    "org": "rws",
-    "team": "team-rws-sensoren",
-    "matrix": "@bram-el-hadioui:rijk.chat",
-    "avatar": "BE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, RWS"
-      }
-    ]
-  },
-  {
-    "id": "ruben-van-der-wal",
-    "name": "Ruben Van der Wal",
-    "role": "Platform engineer",
-    "org": "rws",
-    "team": "team-rws-sensoren",
-    "matrix": "@ruben-van-der-wal:rijk.chat",
-    "avatar": "RV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "yara-goossens",
-    "name": "Yara Goossens",
-    "role": "Frontend developer",
-    "org": "rws",
-    "team": "team-rws-inspectie",
-    "matrix": "@yara-goossens:rijk.chat",
-    "avatar": "YG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "youssef-van-driel",
-    "name": "Youssef Van Driel",
-    "role": "Security engineer",
-    "org": "rws",
-    "team": "team-rws-inspectie",
-    "matrix": "@youssef-van-driel:rijk.chat",
-    "avatar": "YV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "karim-bakhti",
-    "name": "Karim Bakhti",
-    "role": "Tech lead",
-    "org": "rws",
-    "team": "team-rws-inspectie",
-    "matrix": "@karim-bakhti:rijk.chat",
-    "avatar": "KB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, RWS"
-      }
-    ]
-  },
-  {
-    "id": "samira-renkema",
-    "name": "Samira Renkema",
-    "role": "Scrum master",
-    "org": "rws",
-    "team": "team-rws-inspectie",
-    "matrix": "@samira-renkema:rijk.chat",
-    "avatar": "SR",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, RWS"
-      }
-    ]
-  },
-  {
-    "id": "bouchra-yildiz",
-    "name": "Bouchra Yildiz",
-    "role": "Information security officer",
-    "org": "rws",
-    "team": "team-rws-inspectie",
-    "matrix": "@bouchra-yildiz:rijk.chat",
-    "avatar": "BY",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "johan-jansen",
-    "name": "Johan Jansen",
-    "role": "Business analist",
-    "org": "rws",
-    "team": "team-rws-inspectie",
-    "matrix": "@johan-jansen:rijk.chat",
-    "avatar": "JJ",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, RWS"
-      }
-    ]
-  },
-  {
-    "id": "petra-dijkstra",
-    "name": "Petra Dijkstra",
-    "role": "Database administrator",
-    "org": "rws",
-    "team": "team-rws-platform",
-    "matrix": "@petra-dijkstra:rijk.chat",
-    "avatar": "PD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, RWS"
-      }
-    ]
-  },
-  {
-    "id": "tobias-van-leeuwen",
-    "name": "Tobias Van Leeuwen",
-    "role": "Platform engineer",
-    "org": "rws",
-    "team": "team-rws-platform",
-    "matrix": "@tobias-van-leeuwen:rijk.chat",
-    "avatar": "TV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "wouter-hoekstra",
-    "name": "Wouter Hoekstra",
-    "role": "Frontend developer",
-    "org": "rws",
-    "team": "team-rws-platform",
-    "matrix": "@wouter-hoekstra:rijk.chat",
-    "avatar": "WH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "erik-aydin",
-    "name": "Erik Aydin",
-    "role": "Security engineer",
-    "org": "rws",
-    "team": "team-rws-platform",
-    "matrix": "@erik-aydin:rijk.chat",
-    "avatar": "EA",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "lara-kuiper",
-    "name": "Lara Kuiper",
-    "role": "Tech lead",
-    "org": "rws",
-    "team": "team-rws-platform",
-    "matrix": "@lara-kuiper:rijk.chat",
-    "avatar": "LK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, RWS"
-      }
-    ]
-  },
-  {
-    "id": "fleur-stam",
-    "name": "Fleur Stam",
-    "role": "Scrum master",
-    "org": "rws",
-    "team": "team-rws-platform",
-    "matrix": "@fleur-stam:rijk.chat",
-    "avatar": "FS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, RWS"
-      }
-    ]
-  },
-  {
-    "id": "luuk-bosman",
-    "name": "Luuk Bosman",
-    "role": "Information security officer",
-    "org": "rws",
-    "team": "team-rws-platform",
-    "matrix": "@luuk-bosman:rijk.chat",
-    "avatar": "LB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, RWS"
-      }
-    ]
-  },
-  {
-    "id": "pim-donker",
-    "name": "Pim Donker",
-    "role": "Business analist",
-    "org": "ind",
-    "team": "team-ind-aanvragen",
-    "matrix": "@pim-donker:rijk.chat",
-    "avatar": "PD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, IND"
-      }
-    ]
-  },
-  {
-    "id": "demi-tekin",
-    "name": "Demi Tekin",
-    "role": "Database administrator",
-    "org": "ind",
-    "team": "team-ind-aanvragen",
-    "matrix": "@demi-tekin:rijk.chat",
-    "avatar": "DT",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, IND"
-      }
-    ]
-  },
-  {
-    "id": "driss-buitenhuis",
-    "name": "Driss Buitenhuis",
-    "role": "Platform engineer",
-    "org": "ind",
-    "team": "team-ind-aanvragen",
-    "matrix": "@driss-buitenhuis:rijk.chat",
-    "avatar": "DB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, IND"
-      }
-    ]
-  },
-  {
-    "id": "sanne-van-bommel",
-    "name": "Sanne Van Bommel",
-    "role": "Frontend developer",
-    "org": "ind",
-    "team": "team-ind-dossiers",
-    "matrix": "@sanne-van-bommel:rijk.chat",
-    "avatar": "SV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, IND"
-      }
-    ]
-  },
-  {
-    "id": "thijs-smit",
-    "name": "Thijs Smit",
-    "role": "Security engineer",
-    "org": "ind",
-    "team": "team-ind-dossiers",
-    "matrix": "@thijs-smit:rijk.chat",
-    "avatar": "TS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, IND"
-      }
-    ]
-  },
-  {
-    "id": "maud-yilmaz",
-    "name": "Maud Yilmaz",
-    "role": "Tech lead",
-    "org": "ind",
-    "team": "team-ind-dossiers",
-    "matrix": "@maud-yilmaz:rijk.chat",
-    "avatar": "MY",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, IND"
-      }
-    ]
-  },
-  {
-    "id": "mohammed-verhoeven",
-    "name": "Mohammed Verhoeven",
-    "role": "Scrum master",
-    "org": "ind",
-    "team": "team-ind-dossiers",
-    "matrix": "@mohammed-verhoeven:rijk.chat",
-    "avatar": "MV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, IND"
-      }
-    ]
-  },
-  {
-    "id": "ans-wolters",
-    "name": "Ans Wolters",
-    "role": "Information security officer",
-    "org": "ind",
-    "team": "team-ind-iam",
-    "matrix": "@ans-wolters:rijk.chat",
-    "avatar": "AW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, IND"
-      }
-    ]
-  },
-  {
-    "id": "amira-dogan",
-    "name": "Amira Dogan",
-    "role": "Business analist",
-    "org": "ind",
-    "team": "team-ind-iam",
-    "matrix": "@amira-dogan:rijk.chat",
-    "avatar": "AD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, IND"
-      }
-    ]
-  },
-  {
-    "id": "omar-timmermans",
-    "name": "Omar Timmermans",
-    "role": "Database administrator",
-    "org": "ind",
-    "team": "team-ind-iam",
-    "matrix": "@omar-timmermans:rijk.chat",
-    "avatar": "OT",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, IND"
-      }
-    ]
-  },
-  {
-    "id": "henk-evers",
-    "name": "Henk Evers",
-    "role": "Platform engineer",
-    "org": "ind",
-    "team": "team-ind-iam",
-    "matrix": "@henk-evers:rijk.chat",
-    "avatar": "HE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, IND"
-      }
-    ]
-  },
-  {
-    "id": "marieke-van-rijn",
-    "name": "Marieke Van Rijn",
-    "role": "Frontend developer",
-    "org": "ind",
-    "team": "team-ind-iam",
-    "matrix": "@marieke-van-rijn:rijk.chat",
-    "avatar": "MV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, IND"
-      }
-    ]
-  },
-  {
-    "id": "yvonne-van-ginkel",
-    "name": "Yvonne Van Ginkel",
-    "role": "Security engineer",
-    "org": "ind",
-    "team": "team-ind-data",
-    "matrix": "@yvonne-van-ginkel:rijk.chat",
-    "avatar": "YV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, IND"
-      }
-    ]
-  },
-  {
-    "id": "sander-sikkema",
-    "name": "Sander Sikkema",
-    "role": "Tech lead",
-    "org": "ind",
-    "team": "team-ind-data",
-    "matrix": "@sander-sikkema:rijk.chat",
-    "avatar": "SS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, IND"
-      }
-    ]
-  },
-  {
-    "id": "mark-vreeswijk",
-    "name": "Mark Vreeswijk",
-    "role": "Scrum master",
-    "org": "ind",
-    "team": "team-ind-data",
-    "matrix": "@mark-vreeswijk:rijk.chat",
-    "avatar": "MV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, IND"
-      }
-    ]
-  },
-  {
-    "id": "julia-pijnenburg",
-    "name": "Julia Pijnenburg",
-    "role": "Information security officer",
-    "org": "ind",
-    "team": "team-ind-data",
-    "matrix": "@julia-pijnenburg:rijk.chat",
-    "avatar": "JP",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, IND"
-      }
-    ]
-  },
-  {
-    "id": "liv-bos",
-    "name": "Liv Bos",
-    "role": "Business analist",
-    "org": "ind",
-    "team": "team-ind-data",
-    "matrix": "@liv-bos:rijk.chat",
-    "avatar": "LB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, IND"
-      }
-    ]
-  },
-  {
-    "id": "mees-van-den-berg",
-    "name": "Mees Van den Berg",
-    "role": "Database administrator",
-    "org": "ind",
-    "team": "team-ind-data",
-    "matrix": "@mees-van-den-berg:rijk.chat",
-    "avatar": "MV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, IND"
-      }
-    ]
-  },
-  {
-    "id": "khalid-postma",
-    "name": "Khalid Postma",
-    "role": "Platform engineer",
-    "org": "logius",
-    "team": "team-logius-digid",
-    "matrix": "@khalid-postma:rijk.chat",
-    "avatar": "KP",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "lieke-el-idrissi",
-    "name": "Lieke El Idrissi",
-    "role": "Frontend developer",
-    "org": "logius",
-    "team": "team-logius-digid",
-    "matrix": "@lieke-el-idrissi:rijk.chat",
-    "avatar": "LE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "isa-boutaleb",
-    "name": "Isa Boutaleb",
-    "role": "Security engineer",
-    "org": "logius",
-    "team": "team-logius-digid",
-    "matrix": "@isa-boutaleb:rijk.chat",
-    "avatar": "IB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "selin-blom",
-    "name": "Selin Blom",
-    "role": "Tech lead",
-    "org": "logius",
-    "team": "team-logius-digid",
-    "matrix": "@selin-blom:rijk.chat",
-    "avatar": "SB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "daan-heijmans",
-    "name": "Daan Heijmans",
-    "role": "Scrum master",
-    "org": "logius",
-    "team": "team-logius-digid",
-    "matrix": "@daan-heijmans:rijk.chat",
-    "avatar": "DH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "iris-koning",
-    "name": "Iris Koning",
-    "role": "Information security officer",
-    "org": "logius",
-    "team": "team-logius-digid",
-    "matrix": "@iris-koning:rijk.chat",
-    "avatar": "IK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "jeroen-hamid",
-    "name": "Jeroen Hamid",
-    "role": "Business analist",
-    "org": "logius",
-    "team": "team-logius-digid",
-    "matrix": "@jeroen-hamid:rijk.chat",
-    "avatar": "JH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "noor-diks",
-    "name": "Noor Diks",
-    "role": "Database administrator",
-    "org": "logius",
-    "team": "team-logius-digikoppeling",
-    "matrix": "@noor-diks:rijk.chat",
-    "avatar": "ND",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "esra-akkaya",
-    "name": "Esra Akkaya",
-    "role": "Platform engineer",
-    "org": "logius",
-    "team": "team-logius-digikoppeling",
-    "matrix": "@esra-akkaya:rijk.chat",
-    "avatar": "EA",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "tariq-de-vries",
-    "name": "Tariq De Vries",
-    "role": "Frontend developer",
-    "org": "logius",
-    "team": "team-logius-digikoppeling",
-    "matrix": "@tariq-de-vries:rijk.chat",
-    "avatar": "TD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "soumaya-van-dijk",
-    "name": "Soumaya Van Dijk",
-    "role": "Security engineer",
-    "org": "logius",
-    "team": "team-logius-machtigen",
-    "matrix": "@soumaya-van-dijk:rijk.chat",
-    "avatar": "SV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "jan-vermeulen",
-    "name": "Jan Vermeulen",
-    "role": "Tech lead",
-    "org": "logius",
-    "team": "team-logius-machtigen",
-    "matrix": "@jan-vermeulen:rijk.chat",
-    "avatar": "JV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "ingrid-van-vliet",
-    "name": "Ingrid Van Vliet",
-    "role": "Scrum master",
-    "org": "logius",
-    "team": "team-logius-machtigen",
-    "matrix": "@ingrid-van-vliet:rijk.chat",
-    "avatar": "IV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "jasper-kaya",
-    "name": "Jasper Kaya",
-    "role": "Information security officer",
-    "org": "logius",
-    "team": "team-logius-machtigen",
-    "matrix": "@jasper-kaya:rijk.chat",
-    "avatar": "JK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "robin-mol",
-    "name": "Robin Mol",
-    "role": "Business analist",
-    "org": "logius",
-    "team": "team-logius-stelsel",
-    "matrix": "@robin-mol:rijk.chat",
-    "avatar": "RM",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "fenna-van-es",
-    "name": "Fenna Van Es",
-    "role": "Database administrator",
-    "org": "logius",
-    "team": "team-logius-stelsel",
-    "matrix": "@fenna-van-es:rijk.chat",
-    "avatar": "FV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "sterre-wagenaar",
-    "name": "Sterre Wagenaar",
-    "role": "Platform engineer",
-    "org": "logius",
-    "team": "team-logius-stelsel",
-    "matrix": "@sterre-wagenaar:rijk.chat",
-    "avatar": "SW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "levi-lubbers",
-    "name": "Levi Lubbers",
-    "role": "Frontend developer",
-    "org": "logius",
-    "team": "team-logius-stelsel",
-    "matrix": "@levi-lubbers:rijk.chat",
-    "avatar": "LL",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "gijs-erdem",
-    "name": "Gijs Erdem",
-    "role": "Security engineer",
-    "org": "logius",
-    "team": "team-logius-stelsel",
-    "matrix": "@gijs-erdem:rijk.chat",
-    "avatar": "GE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, LOGIUS"
-      }
-    ]
-  },
-  {
-    "id": "olivier-slootweg",
-    "name": "Olivier Slootweg",
-    "role": "Tech lead",
-    "org": "dictu",
-    "team": "team-dictu-hosting",
-    "matrix": "@olivier-slootweg:rijk.chat",
-    "avatar": "OS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "senna-asik",
-    "name": "Senna Asik",
-    "role": "Scrum master",
-    "org": "dictu",
-    "team": "team-dictu-hosting",
-    "matrix": "@senna-asik:rijk.chat",
-    "avatar": "SA",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "meryem-el-amrani",
-    "name": "Meryem El Amrani",
-    "role": "Information security officer",
-    "org": "dictu",
-    "team": "team-dictu-hosting",
-    "matrix": "@meryem-el-amrani:rijk.chat",
-    "avatar": "ME",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "lotte-ozturk",
-    "name": "Lotte Ozturk",
-    "role": "Business analist",
-    "org": "dictu",
-    "team": "team-dictu-hosting",
-    "matrix": "@lotte-ozturk:rijk.chat",
-    "avatar": "LO",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "tim-maas",
-    "name": "Tim Maas",
-    "role": "Database administrator",
-    "org": "dictu",
-    "team": "team-dictu-hosting",
-    "matrix": "@tim-maas:rijk.chat",
-    "avatar": "TM",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "bas-veenstra",
-    "name": "Bas Veenstra",
-    "role": "Platform engineer",
-    "org": "dictu",
-    "team": "team-dictu-hosting",
-    "matrix": "@bas-veenstra:rijk.chat",
-    "avatar": "BV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "nadia-arslan",
-    "name": "Nadia Arslan",
-    "role": "Frontend developer",
-    "org": "dictu",
-    "team": "team-dictu-werkplek",
-    "matrix": "@nadia-arslan:rijk.chat",
-    "avatar": "NA",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "layla-roeloffzen",
-    "name": "Layla Roeloffzen",
-    "role": "Security engineer",
-    "org": "dictu",
-    "team": "team-dictu-werkplek",
-    "matrix": "@layla-roeloffzen:rijk.chat",
-    "avatar": "LR",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "hassan-van-loon",
-    "name": "Hassan Van Loon",
-    "role": "Tech lead",
-    "org": "dictu",
-    "team": "team-dictu-werkplek",
-    "matrix": "@hassan-van-loon:rijk.chat",
-    "avatar": "HV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "said-lammers",
-    "name": "Said Lammers",
-    "role": "Scrum master",
-    "org": "dictu",
-    "team": "team-dictu-werkplek",
-    "matrix": "@said-lammers:rijk.chat",
-    "avatar": "SL",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "gerard-nijhuis",
-    "name": "Gerard Nijhuis",
-    "role": "Information security officer",
-    "org": "dictu",
-    "team": "team-dictu-werkplek",
-    "matrix": "@gerard-nijhuis:rijk.chat",
-    "avatar": "GN",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "wilma-holwerda",
-    "name": "Wilma Holwerda",
-    "role": "Business analist",
-    "org": "dictu",
-    "team": "team-dictu-werkplek",
-    "matrix": "@wilma-holwerda:rijk.chat",
-    "avatar": "WH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "casper-naber",
-    "name": "Casper Naber",
-    "role": "Database administrator",
-    "org": "dictu",
-    "team": "team-dictu-werkplek",
-    "matrix": "@casper-naber:rijk.chat",
-    "avatar": "CN",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "bart-veldhuis",
-    "name": "Bart Veldhuis",
-    "role": "Platform engineer",
-    "org": "dictu",
-    "team": "team-dictu-security",
-    "matrix": "@bart-veldhuis:rijk.chat",
-    "avatar": "BV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "suze-mulder",
-    "name": "Suze Mulder",
-    "role": "Frontend developer",
-    "org": "dictu",
-    "team": "team-dictu-security",
-    "matrix": "@suze-mulder:rijk.chat",
-    "avatar": "SM",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "nina-janssen",
-    "name": "Nina Janssen",
-    "role": "Security engineer",
-    "org": "dictu",
-    "team": "team-dictu-security",
-    "matrix": "@nina-janssen:rijk.chat",
-    "avatar": "NJ",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "loes-huisman",
-    "name": "Loes Huisman",
-    "role": "Tech lead",
-    "org": "dictu",
-    "team": "team-dictu-data",
-    "matrix": "@loes-huisman:rijk.chat",
-    "avatar": "LH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "boris-vink",
-    "name": "Boris Vink",
-    "role": "Scrum master",
-    "org": "dictu",
-    "team": "team-dictu-data",
-    "matrix": "@boris-vink:rijk.chat",
-    "avatar": "BV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "jelle-ennaji",
-    "name": "Jelle Ennaji",
-    "role": "Information security officer",
-    "org": "dictu",
-    "team": "team-dictu-data",
-    "matrix": "@jelle-ennaji:rijk.chat",
-    "avatar": "JE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "anne-roos",
-    "name": "Anne Roos",
-    "role": "Business analist",
-    "org": "dictu",
-    "team": "team-dictu-data",
-    "matrix": "@anne-roos:rijk.chat",
-    "avatar": "AR",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, DICTU"
-      }
-    ]
-  },
-  {
-    "id": "ilias-bruins",
-    "name": "Ilias Bruins",
-    "role": "Database administrator",
-    "org": "rvig",
-    "team": "team-rvig-brp",
-    "matrix": "@ilias-bruins:rijk.chat",
-    "avatar": "IB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "joost-van-der-veen",
-    "name": "Joost Van der Veen",
-    "role": "Platform engineer",
-    "org": "rvig",
-    "team": "team-rvig-brp",
-    "matrix": "@joost-van-der-veen:rijk.chat",
-    "avatar": "JV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "eva-mohamed",
-    "name": "Eva Mohamed",
-    "role": "Frontend developer",
-    "org": "rvig",
-    "team": "team-rvig-brp",
-    "matrix": "@eva-mohamed:rijk.chat",
-    "avatar": "EM",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "stijn-van-os",
-    "name": "Stijn Van Os",
-    "role": "Security engineer",
-    "org": "rvig",
-    "team": "team-rvig-brp",
-    "matrix": "@stijn-van-os:rijk.chat",
-    "avatar": "SV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "aisha-el-khattabi",
-    "name": "Aisha El Khattabi",
-    "role": "Tech lead",
-    "org": "rvig",
-    "team": "team-rvig-brp",
-    "matrix": "@aisha-el-khattabi:rijk.chat",
-    "avatar": "AE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "pieter-wielinga",
-    "name": "Pieter Wielinga",
-    "role": "Scrum master",
-    "org": "rvig",
-    "team": "team-rvig-reisdocumenten",
-    "matrix": "@pieter-wielinga:rijk.chat",
-    "avatar": "PW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "rachid-hendriks",
-    "name": "Rachid Hendriks",
-    "role": "Information security officer",
-    "org": "rvig",
-    "team": "team-rvig-reisdocumenten",
-    "matrix": "@rachid-hendriks:rijk.chat",
-    "avatar": "RH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "hala-hofman",
-    "name": "Hala Hofman",
-    "role": "Business analist",
-    "org": "rvig",
-    "team": "team-rvig-reisdocumenten",
-    "matrix": "@hala-hofman:rijk.chat",
-    "avatar": "HH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "cornelis-willems",
-    "name": "Cornelis Willems",
-    "role": "Database administrator",
-    "org": "rvig",
-    "team": "team-rvig-reisdocumenten",
-    "matrix": "@cornelis-willems:rijk.chat",
-    "avatar": "CW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "saskia-demir",
-    "name": "Saskia Demir",
-    "role": "Platform engineer",
-    "org": "rvig",
-    "team": "team-rvig-reisdocumenten",
-    "matrix": "@saskia-demir:rijk.chat",
-    "avatar": "SD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "floris-van-der-velde",
-    "name": "Floris Van der Velde",
-    "role": "Frontend developer",
-    "org": "rvig",
-    "team": "team-rvig-reisdocumenten",
-    "matrix": "@floris-van-der-velde:rijk.chat",
-    "avatar": "FV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "roel-groen",
-    "name": "Roel Groen",
-    "role": "Security engineer",
-    "org": "rvig",
-    "team": "team-rvig-iam",
-    "matrix": "@roel-groen:rijk.chat",
-    "avatar": "RG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "vincent-tuinstra",
-    "name": "Vincent Tuinstra",
-    "role": "Tech lead",
-    "org": "rvig",
-    "team": "team-rvig-iam",
-    "matrix": "@vincent-tuinstra:rijk.chat",
-    "avatar": "VT",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "sophie-schipper",
-    "name": "Sophie Schipper",
-    "role": "Scrum master",
-    "org": "rvig",
-    "team": "team-rvig-iam",
-    "matrix": "@sophie-schipper:rijk.chat",
-    "avatar": "SS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "indy-polat",
-    "name": "Indy Polat",
-    "role": "Information security officer",
-    "org": "rvig",
-    "team": "team-rvig-iam",
-    "matrix": "@indy-polat:rijk.chat",
-    "avatar": "IP",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "finn-korteweg",
-    "name": "Finn Korteweg",
-    "role": "Business analist",
-    "org": "rvig",
-    "team": "team-rvig-iam",
-    "matrix": "@finn-korteweg:rijk.chat",
-    "avatar": "FK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "wessel-bulut",
-    "name": "Wessel Bulut",
-    "role": "Database administrator",
-    "org": "rvig",
-    "team": "team-rvig-iam",
-    "matrix": "@wessel-bulut:rijk.chat",
-    "avatar": "WB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "britt-visser",
-    "name": "Britt Visser",
-    "role": "Platform engineer",
-    "org": "rvig",
-    "team": "team-rvig-iam",
-    "matrix": "@britt-visser:rijk.chat",
-    "avatar": "BV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, RvIG"
-      }
-    ]
-  },
-  {
-    "id": "abdel-kok",
-    "name": "Abdel Kok",
-    "role": "Frontend developer",
     "org": "jio",
     "team": "team-jio-platform",
-    "matrix": "@abdel-kok:rijk.chat",
-    "avatar": "AK",
+    "matrix": "@willem-van-der-plas:rijk.chat",
+    "avatar": "WV",
     "history": [
       {
         "period": "2022–nu",
@@ -3296,13 +1496,13 @@ export const people = [
     ]
   },
   {
-    "id": "dilan-van-der-heijden",
-    "name": "Dilan Van der Heijden",
+    "id": "kees-cinar",
+    "name": "Kees Cinar",
     "role": "Security engineer",
     "org": "jio",
     "team": "team-jio-platform",
-    "matrix": "@dilan-van-der-heijden:rijk.chat",
-    "avatar": "DV",
+    "matrix": "@kees-cinar:rijk.chat",
+    "avatar": "KC",
     "history": [
       {
         "period": "2022–nu",
@@ -3311,13 +1511,13 @@ export const people = [
     ]
   },
   {
-    "id": "sven-van-den-heuvel",
-    "name": "Sven Van den Heuvel",
+    "id": "carla-bakker",
+    "name": "Carla Bakker",
     "role": "Tech lead",
     "org": "jio",
-    "team": "team-jio-platform",
-    "matrix": "@sven-van-den-heuvel:rijk.chat",
-    "avatar": "SV",
+    "team": "team-jio-keten",
+    "matrix": "@carla-bakker:rijk.chat",
+    "avatar": "CB",
     "history": [
       {
         "period": "2022–nu",
@@ -3326,13 +1526,13 @@ export const people = [
     ]
   },
   {
-    "id": "hugo-sahin",
-    "name": "Hugo Sahin",
+    "id": "niels-brouwer",
+    "name": "Niels Brouwer",
     "role": "Scrum master",
     "org": "jio",
     "team": "team-jio-keten",
-    "matrix": "@hugo-sahin:rijk.chat",
-    "avatar": "HS",
+    "matrix": "@niels-brouwer:rijk.chat",
+    "avatar": "NB",
     "history": [
       {
         "period": "2022–nu",
@@ -3341,13 +1541,13 @@ export const people = [
     ]
   },
   {
-    "id": "anouk-driessen",
-    "name": "Anouk Driessen",
+    "id": "koen-schouten",
+    "name": "Koen Schouten",
     "role": "Information security officer",
     "org": "jio",
-    "team": "team-jio-keten",
-    "matrix": "@anouk-driessen:rijk.chat",
-    "avatar": "AD",
+    "team": "team-jio-security",
+    "matrix": "@koen-schouten:rijk.chat",
+    "avatar": "KS",
     "history": [
       {
         "period": "2022–nu",
@@ -3356,13 +1556,13 @@ export const people = [
     ]
   },
   {
-    "id": "fatima-faber",
-    "name": "Fatima Faber",
+    "id": "roos-sanders",
+    "name": "Roos Sanders",
     "role": "Business analist",
     "org": "jio",
-    "team": "team-jio-keten",
-    "matrix": "@fatima-faber:rijk.chat",
-    "avatar": "FF",
+    "team": "team-jio-security",
+    "matrix": "@roos-sanders:rijk.chat",
+    "avatar": "RS",
     "history": [
       {
         "period": "2022–nu",
@@ -3371,133 +1571,13 @@ export const people = [
     ]
   },
   {
-    "id": "bilal-theunissen",
-    "name": "Bilal Theunissen",
-    "role": "Database administrator",
-    "org": "jio",
-    "team": "team-jio-keten",
-    "matrix": "@bilal-theunissen:rijk.chat",
-    "avatar": "BT",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, JIO"
-      }
-    ]
-  },
-  {
-    "id": "zeynep-strik",
-    "name": "Zeynep Strik",
-    "role": "Platform engineer",
-    "org": "jio",
-    "team": "team-jio-security",
-    "matrix": "@zeynep-strik:rijk.chat",
-    "avatar": "ZS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, JIO"
-      }
-    ]
-  },
-  {
-    "id": "willem-van-zanten",
-    "name": "Willem Van Zanten",
-    "role": "Frontend developer",
-    "org": "jio",
-    "team": "team-jio-security",
-    "matrix": "@willem-van-zanten:rijk.chat",
-    "avatar": "WV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, JIO"
-      }
-    ]
-  },
-  {
-    "id": "kees-wubben",
-    "name": "Kees Wubben",
-    "role": "Security engineer",
-    "org": "jio",
-    "team": "team-jio-security",
-    "matrix": "@kees-wubben:rijk.chat",
-    "avatar": "KW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, JIO"
-      }
-    ]
-  },
-  {
-    "id": "carla-snijders",
-    "name": "Carla Snijders",
-    "role": "Tech lead",
-    "org": "jio",
-    "team": "team-jio-security",
-    "matrix": "@carla-snijders:rijk.chat",
-    "avatar": "CS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, JIO"
-      }
-    ]
-  },
-  {
-    "id": "niels-de-boer",
-    "name": "Niels De Boer",
-    "role": "Scrum master",
-    "org": "jio",
-    "team": "team-jio-security",
-    "matrix": "@niels-de-boer:rijk.chat",
-    "avatar": "ND",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, JIO"
-      }
-    ]
-  },
-  {
-    "id": "koen-kuipers",
-    "name": "Koen Kuipers",
-    "role": "Information security officer",
-    "org": "cjib",
-    "team": "team-cjib-inning",
-    "matrix": "@koen-kuipers:rijk.chat",
-    "avatar": "KK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "roos-prins",
-    "name": "Roos Prins",
-    "role": "Business analist",
-    "org": "cjib",
-    "team": "team-cjib-inning",
-    "matrix": "@roos-prins:rijk.chat",
-    "avatar": "RP",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "mila-smeets",
-    "name": "Mila Smeets",
+    "id": "mila-celik",
+    "name": "Mila Celik",
     "role": "Database administrator",
     "org": "cjib",
     "team": "team-cjib-inning",
-    "matrix": "@mila-smeets:rijk.chat",
-    "avatar": "MS",
+    "matrix": "@mila-celik:rijk.chat",
+    "avatar": "MC",
     "history": [
       {
         "period": "2022–nu",
@@ -3506,13 +1586,13 @@ export const people = [
     ]
   },
   {
-    "id": "sem-karaca",
-    "name": "Sem Karaca",
+    "id": "sem-van-der-laan",
+    "name": "Sem Van der Laan",
     "role": "Platform engineer",
     "org": "cjib",
     "team": "team-cjib-inning",
-    "matrix": "@sem-karaca:rijk.chat",
-    "avatar": "SK",
+    "matrix": "@sem-van-der-laan:rijk.chat",
+    "avatar": "SV",
     "history": [
       {
         "period": "2022–nu",
@@ -3521,13 +1601,13 @@ export const people = [
     ]
   },
   {
-    "id": "ahmed-van-beek",
-    "name": "Ahmed Van Beek",
+    "id": "ahmed-wijnands",
+    "name": "Ahmed Wijnands",
     "role": "Frontend developer",
     "org": "cjib",
-    "team": "team-cjib-inning",
-    "matrix": "@ahmed-van-beek:rijk.chat",
-    "avatar": "AV",
+    "team": "team-cjib-sanctie",
+    "matrix": "@ahmed-wijnands:rijk.chat",
+    "avatar": "AW",
     "history": [
       {
         "period": "2022–nu",
@@ -3536,13 +1616,13 @@ export const people = [
     ]
   },
   {
-    "id": "mats-reijnders",
-    "name": "Mats Reijnders",
+    "id": "mats-engelen",
+    "name": "Mats Engelen",
     "role": "Security engineer",
     "org": "cjib",
-    "team": "team-cjib-inning",
-    "matrix": "@mats-reijnders:rijk.chat",
-    "avatar": "MR",
+    "team": "team-cjib-sanctie",
+    "matrix": "@mats-engelen:rijk.chat",
+    "avatar": "ME",
     "history": [
       {
         "period": "2022–nu",
@@ -3551,12 +1631,12 @@ export const people = [
     ]
   },
   {
-    "id": "puck-van-dam",
-    "name": "Puck Van Dam",
+    "id": "puck-van-hattem",
+    "name": "Puck Van Hattem",
     "role": "Tech lead",
     "org": "cjib",
-    "team": "team-cjib-sanctie",
-    "matrix": "@puck-van-dam:rijk.chat",
+    "team": "team-cjib-data",
+    "matrix": "@puck-van-hattem:rijk.chat",
     "avatar": "PV",
     "history": [
       {
@@ -3566,13 +1646,13 @@ export const people = [
     ]
   },
   {
-    "id": "hatice-doornbos",
-    "name": "Hatice Doornbos",
+    "id": "hatice-gunes",
+    "name": "Hatice Gunes",
     "role": "Scrum master",
     "org": "cjib",
-    "team": "team-cjib-sanctie",
-    "matrix": "@hatice-doornbos:rijk.chat",
-    "avatar": "HD",
+    "team": "team-cjib-data",
+    "matrix": "@hatice-gunes:rijk.chat",
+    "avatar": "HG",
     "history": [
       {
         "period": "2022–nu",
@@ -3581,133 +1661,13 @@ export const people = [
     ]
   },
   {
-    "id": "emma-bijl",
-    "name": "Emma Bijl",
-    "role": "Information security officer",
-    "org": "cjib",
-    "team": "team-cjib-sanctie",
-    "matrix": "@emma-bijl:rijk.chat",
-    "avatar": "EB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "lars-charradi",
-    "name": "Lars Charradi",
-    "role": "Business analist",
-    "org": "cjib",
-    "team": "team-cjib-sanctie",
-    "matrix": "@lars-charradi:rijk.chat",
-    "avatar": "LC",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "femke-verschuren",
-    "name": "Femke Verschuren",
-    "role": "Database administrator",
-    "org": "cjib",
-    "team": "team-cjib-sanctie",
-    "matrix": "@femke-verschuren:rijk.chat",
-    "avatar": "FV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "sara-peters",
-    "name": "Sara Peters",
-    "role": "Platform engineer",
-    "org": "cjib",
-    "team": "team-cjib-sanctie",
-    "matrix": "@sara-peters:rijk.chat",
-    "avatar": "SP",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "mehmet-bakkal",
-    "name": "Mehmet Bakkal",
-    "role": "Frontend developer",
-    "org": "cjib",
-    "team": "team-cjib-sanctie",
-    "matrix": "@mehmet-bakkal:rijk.chat",
-    "avatar": "MB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "imane-scholten",
-    "name": "Imane Scholten",
-    "role": "Security engineer",
-    "org": "cjib",
-    "team": "team-cjib-data",
-    "matrix": "@imane-scholten:rijk.chat",
-    "avatar": "IS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "fatih-ben-ali",
-    "name": "Fatih Ben Ali",
-    "role": "Tech lead",
-    "org": "cjib",
-    "team": "team-cjib-data",
-    "matrix": "@fatih-ben-ali:rijk.chat",
-    "avatar": "FB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "dirk-ouali",
-    "name": "Dirk Ouali",
-    "role": "Scrum master",
-    "org": "cjib",
-    "team": "team-cjib-data",
-    "matrix": "@dirk-ouali:rijk.chat",
-    "avatar": "DO",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, CJIB"
-      }
-    ]
-  },
-  {
-    "id": "annemarie-dekker",
-    "name": "Annemarie Dekker",
+    "id": "emma-geerts",
+    "name": "Emma Geerts",
     "role": "Information security officer",
     "org": "svb",
     "team": "team-svb-aow",
-    "matrix": "@annemarie-dekker:rijk.chat",
-    "avatar": "AD",
+    "matrix": "@emma-geerts:rijk.chat",
+    "avatar": "EG",
     "history": [
       {
         "period": "2022–nu",
@@ -3716,13 +1676,13 @@ export const people = [
     ]
   },
   {
-    "id": "quinten-linders",
-    "name": "Quinten Linders",
+    "id": "lars-kraaijeveld",
+    "name": "Lars Kraaijeveld",
     "role": "Business analist",
     "org": "svb",
     "team": "team-svb-aow",
-    "matrix": "@quinten-linders:rijk.chat",
-    "avatar": "QL",
+    "matrix": "@lars-kraaijeveld:rijk.chat",
+    "avatar": "LK",
     "history": [
       {
         "period": "2022–nu",
@@ -3731,13 +1691,13 @@ export const people = [
     ]
   },
   {
-    "id": "maarten-verbruggen",
-    "name": "Maarten Verbruggen",
+    "id": "femke-meijer",
+    "name": "Femke Meijer",
     "role": "Database administrator",
     "org": "svb",
-    "team": "team-svb-aow",
-    "matrix": "@maarten-verbruggen:rijk.chat",
-    "avatar": "MV",
+    "team": "team-svb-kinderbijslag",
+    "matrix": "@femke-meijer:rijk.chat",
+    "avatar": "FM",
     "history": [
       {
         "period": "2022–nu",
@@ -3746,13 +1706,13 @@ export const people = [
     ]
   },
   {
-    "id": "tess-cetin",
-    "name": "Tess Cetin",
+    "id": "sara-de-wit",
+    "name": "Sara De Wit",
     "role": "Platform engineer",
     "org": "svb",
-    "team": "team-svb-aow",
-    "matrix": "@tess-cetin:rijk.chat",
-    "avatar": "TC",
+    "team": "team-svb-kinderbijslag",
+    "matrix": "@sara-de-wit:rijk.chat",
+    "avatar": "SD",
     "history": [
       {
         "period": "2022–nu",
@@ -3761,13 +1721,13 @@ export const people = [
     ]
   },
   {
-    "id": "veerle-van-der-plas",
-    "name": "Veerle Van der Plas",
+    "id": "mehmet-koster",
+    "name": "Mehmet Koster",
     "role": "Frontend developer",
     "org": "svb",
-    "team": "team-svb-kinderbijslag",
-    "matrix": "@veerle-van-der-plas:rijk.chat",
-    "avatar": "VV",
+    "team": "team-svb-gegevens",
+    "matrix": "@mehmet-koster:rijk.chat",
+    "avatar": "MK",
     "history": [
       {
         "period": "2022–nu",
@@ -3776,13 +1736,13 @@ export const people = [
     ]
   },
   {
-    "id": "marit-cinar",
-    "name": "Marit Cinar",
+    "id": "imane-gerritsen",
+    "name": "Imane Gerritsen",
     "role": "Security engineer",
     "org": "svb",
-    "team": "team-svb-kinderbijslag",
-    "matrix": "@marit-cinar:rijk.chat",
-    "avatar": "MC",
+    "team": "team-svb-gegevens",
+    "matrix": "@imane-gerritsen:rijk.chat",
+    "avatar": "IG",
     "history": [
       {
         "period": "2022–nu",
@@ -3791,13 +1751,13 @@ export const people = [
     ]
   },
   {
-    "id": "teun-bakker",
-    "name": "Teun Bakker",
+    "id": "fatih-korkmaz",
+    "name": "Fatih Korkmaz",
     "role": "Tech lead",
     "org": "svb",
-    "team": "team-svb-kinderbijslag",
-    "matrix": "@teun-bakker:rijk.chat",
-    "avatar": "TB",
+    "team": "team-svb-platform",
+    "matrix": "@fatih-korkmaz:rijk.chat",
+    "avatar": "FK",
     "history": [
       {
         "period": "2022–nu",
@@ -3806,13 +1766,13 @@ export const people = [
     ]
   },
   {
-    "id": "ties-brouwer",
-    "name": "Ties Brouwer",
+    "id": "dirk-verbeek",
+    "name": "Dirk Verbeek",
     "role": "Scrum master",
     "org": "svb",
-    "team": "team-svb-kinderbijslag",
-    "matrix": "@ties-brouwer:rijk.chat",
-    "avatar": "TB",
+    "team": "team-svb-platform",
+    "matrix": "@dirk-verbeek:rijk.chat",
+    "avatar": "DV",
     "history": [
       {
         "period": "2022–nu",
@@ -3821,11 +1781,2051 @@ export const people = [
     ]
   },
   {
+    "id": "annemarie-van-wijk",
+    "name": "Annemarie Van Wijk",
+    "role": "Information security officer",
+    "org": "kvk",
+    "team": "team-kvk-handelsregister",
+    "matrix": "@annemarie-van-wijk:rijk.chat",
+    "avatar": "AV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, KVK"
+      }
+    ]
+  },
+  {
+    "id": "quinten-de-groot",
+    "name": "Quinten De Groot",
+    "role": "Business analist",
+    "org": "kvk",
+    "team": "team-kvk-handelsregister",
+    "matrix": "@quinten-de-groot:rijk.chat",
+    "avatar": "QD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, KVK"
+      }
+    ]
+  },
+  {
+    "id": "maarten-berends",
+    "name": "Maarten Berends",
+    "role": "Database administrator",
+    "org": "kvk",
+    "team": "team-kvk-api",
+    "matrix": "@maarten-berends:rijk.chat",
+    "avatar": "MB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, KVK"
+      }
+    ]
+  },
+  {
+    "id": "tess-tromp",
+    "name": "Tess Tromp",
+    "role": "Platform engineer",
+    "org": "kvk",
+    "team": "team-kvk-api",
+    "matrix": "@tess-tromp:rijk.chat",
+    "avatar": "TT",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, KVK"
+      }
+    ]
+  },
+  {
+    "id": "veerle-bouazza",
+    "name": "Veerle Bouazza",
+    "role": "Frontend developer",
+    "org": "kvk",
+    "team": "team-kvk-ondernemersplein",
+    "matrix": "@veerle-bouazza:rijk.chat",
+    "avatar": "VB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, KVK"
+      }
+    ]
+  },
+  {
+    "id": "marit-roozendaal",
+    "name": "Marit Roozendaal",
+    "role": "Security engineer",
+    "org": "kvk",
+    "team": "team-kvk-ondernemersplein",
+    "matrix": "@marit-roozendaal:rijk.chat",
+    "avatar": "MR",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, KVK"
+      }
+    ]
+  },
+  {
+    "id": "teun-vos",
+    "name": "Teun Vos",
+    "role": "Tech lead",
+    "org": "ienw",
+    "team": "team-ienw-kenteken",
+    "matrix": "@teun-vos:rijk.chat",
+    "avatar": "TV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, IenW"
+      }
+    ]
+  },
+  {
+    "id": "ties-van-der-meer",
+    "name": "Ties Van der Meer",
+    "role": "Scrum master",
+    "org": "ienw",
+    "team": "team-ienw-kenteken",
+    "matrix": "@ties-van-der-meer:rijk.chat",
+    "avatar": "TV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, IenW"
+      }
+    ]
+  },
+  {
+    "id": "romy-de-lange",
+    "name": "Romy De Lange",
+    "role": "Information security officer",
+    "org": "ienw",
+    "team": "team-ienw-voertuig",
+    "matrix": "@romy-de-lange:rijk.chat",
+    "avatar": "RD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, IenW"
+      }
+    ]
+  },
+  {
+    "id": "younes-bouali",
+    "name": "Younes Bouali",
+    "role": "Business analist",
+    "org": "ienw",
+    "team": "team-ienw-voertuig",
+    "matrix": "@younes-bouali:rijk.chat",
+    "avatar": "YB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, IenW"
+      }
+    ]
+  },
+  {
+    "id": "bram-el-hadioui",
+    "name": "Bram El Hadioui",
+    "role": "Database administrator",
+    "org": "ienw",
+    "team": "team-ienw-data",
+    "matrix": "@bram-el-hadioui:rijk.chat",
+    "avatar": "BE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, IenW"
+      }
+    ]
+  },
+  {
+    "id": "ruben-van-der-wal",
+    "name": "Ruben Van der Wal",
+    "role": "Platform engineer",
+    "org": "ienw",
+    "team": "team-ienw-data",
+    "matrix": "@ruben-van-der-wal:rijk.chat",
+    "avatar": "RV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, IenW"
+      }
+    ]
+  },
+  {
+    "id": "yara-goossens",
+    "name": "Yara Goossens",
+    "role": "Frontend developer",
+    "org": "cbs",
+    "team": "team-cbs-statline",
+    "matrix": "@yara-goossens:rijk.chat",
+    "avatar": "YG",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, CBS"
+      }
+    ]
+  },
+  {
+    "id": "youssef-van-driel",
+    "name": "Youssef Van Driel",
+    "role": "Security engineer",
+    "org": "cbs",
+    "team": "team-cbs-statline",
+    "matrix": "@youssef-van-driel:rijk.chat",
+    "avatar": "YV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, CBS"
+      }
+    ]
+  },
+  {
+    "id": "karim-bakhti",
+    "name": "Karim Bakhti",
+    "role": "Tech lead",
+    "org": "cbs",
+    "team": "team-cbs-microdata",
+    "matrix": "@karim-bakhti:rijk.chat",
+    "avatar": "KB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, CBS"
+      }
+    ]
+  },
+  {
+    "id": "samira-renkema",
+    "name": "Samira Renkema",
+    "role": "Scrum master",
+    "org": "cbs",
+    "team": "team-cbs-microdata",
+    "matrix": "@samira-renkema:rijk.chat",
+    "avatar": "SR",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, CBS"
+      }
+    ]
+  },
+  {
+    "id": "bouchra-yildiz",
+    "name": "Bouchra Yildiz",
+    "role": "Information security officer",
+    "org": "cbs",
+    "team": "team-cbs-platform",
+    "matrix": "@bouchra-yildiz:rijk.chat",
+    "avatar": "BY",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, CBS"
+      }
+    ]
+  },
+  {
+    "id": "johan-jansen",
+    "name": "Johan Jansen",
+    "role": "Business analist",
+    "org": "cbs",
+    "team": "team-cbs-platform",
+    "matrix": "@johan-jansen:rijk.chat",
+    "avatar": "JJ",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, CBS"
+      }
+    ]
+  },
+  {
+    "id": "petra-dijkstra",
+    "name": "Petra Dijkstra",
+    "role": "Database administrator",
+    "org": "cbs",
+    "team": "team-cbs-privacy",
+    "matrix": "@petra-dijkstra:rijk.chat",
+    "avatar": "PD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, CBS"
+      }
+    ]
+  },
+  {
+    "id": "tobias-van-leeuwen",
+    "name": "Tobias Van Leeuwen",
+    "role": "Platform engineer",
+    "org": "cbs",
+    "team": "team-cbs-privacy",
+    "matrix": "@tobias-van-leeuwen:rijk.chat",
+    "avatar": "TV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, CBS"
+      }
+    ]
+  },
+  {
+    "id": "wouter-hoekstra",
+    "name": "Wouter Hoekstra",
+    "role": "Frontend developer",
+    "org": "justid",
+    "team": "team-justid-documentatie",
+    "matrix": "@wouter-hoekstra:rijk.chat",
+    "avatar": "WH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, Justid"
+      }
+    ]
+  },
+  {
+    "id": "erik-aydin",
+    "name": "Erik Aydin",
+    "role": "Security engineer",
+    "org": "justid",
+    "team": "team-justid-documentatie",
+    "matrix": "@erik-aydin:rijk.chat",
+    "avatar": "EA",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, Justid"
+      }
+    ]
+  },
+  {
+    "id": "lara-kuiper",
+    "name": "Lara Kuiper",
+    "role": "Tech lead",
+    "org": "justid",
+    "team": "team-justid-vog",
+    "matrix": "@lara-kuiper:rijk.chat",
+    "avatar": "LK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, Justid"
+      }
+    ]
+  },
+  {
+    "id": "fleur-stam",
+    "name": "Fleur Stam",
+    "role": "Scrum master",
+    "org": "justid",
+    "team": "team-justid-vog",
+    "matrix": "@fleur-stam:rijk.chat",
+    "avatar": "FS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, Justid"
+      }
+    ]
+  },
+  {
+    "id": "luuk-bosman",
+    "name": "Luuk Bosman",
+    "role": "Information security officer",
+    "org": "logius",
+    "team": "team-koop-wetten",
+    "matrix": "@luuk-bosman:rijk.chat",
+    "avatar": "LB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "pim-donker",
+    "name": "Pim Donker",
+    "role": "Business analist",
+    "org": "logius",
+    "team": "team-koop-wetten",
+    "matrix": "@pim-donker:rijk.chat",
+    "avatar": "PD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "demi-tekin",
+    "name": "Demi Tekin",
+    "role": "Database administrator",
+    "org": "logius",
+    "team": "team-koop-officielebekendmakingen",
+    "matrix": "@demi-tekin:rijk.chat",
+    "avatar": "DT",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "driss-buitenhuis",
+    "name": "Driss Buitenhuis",
+    "role": "Platform engineer",
+    "org": "logius",
+    "team": "team-koop-officielebekendmakingen",
+    "matrix": "@driss-buitenhuis:rijk.chat",
+    "avatar": "DB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "sanne-van-bommel",
+    "name": "Sanne Van Bommel",
+    "role": "Frontend developer",
+    "org": "dpc",
+    "team": "team-dpc-rijksoverheid",
+    "matrix": "@sanne-van-bommel:rijk.chat",
+    "avatar": "SV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, DPC"
+      }
+    ]
+  },
+  {
+    "id": "thijs-smit",
+    "name": "Thijs Smit",
+    "role": "Security engineer",
+    "org": "dpc",
+    "team": "team-dpc-rijksoverheid",
+    "matrix": "@thijs-smit:rijk.chat",
+    "avatar": "TS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, DPC"
+      }
+    ]
+  },
+  {
+    "id": "maud-yilmaz",
+    "name": "Maud Yilmaz",
+    "role": "Tech lead",
+    "org": "dpc",
+    "team": "team-dpc-content",
+    "matrix": "@maud-yilmaz:rijk.chat",
+    "avatar": "MY",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, DPC"
+      }
+    ]
+  },
+  {
+    "id": "mohammed-verhoeven",
+    "name": "Mohammed Verhoeven",
+    "role": "Scrum master",
+    "org": "dpc",
+    "team": "team-dpc-content",
+    "matrix": "@mohammed-verhoeven:rijk.chat",
+    "avatar": "MV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, DPC"
+      }
+    ]
+  },
+  {
+    "id": "ans-wolters",
+    "name": "Ans Wolters",
+    "role": "Information security officer",
+    "org": "dji",
+    "team": "team-dji-detentie",
+    "matrix": "@ans-wolters:rijk.chat",
+    "avatar": "AW",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, DJI"
+      }
+    ]
+  },
+  {
+    "id": "amira-dogan",
+    "name": "Amira Dogan",
+    "role": "Business analist",
+    "org": "dji",
+    "team": "team-dji-detentie",
+    "matrix": "@amira-dogan:rijk.chat",
+    "avatar": "AD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, DJI"
+      }
+    ]
+  },
+  {
+    "id": "omar-timmermans",
+    "name": "Omar Timmermans",
+    "role": "Database administrator",
+    "org": "dji",
+    "team": "team-dji-data",
+    "matrix": "@omar-timmermans:rijk.chat",
+    "avatar": "OT",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, DJI"
+      }
+    ]
+  },
+  {
+    "id": "henk-evers",
+    "name": "Henk Evers",
+    "role": "Platform engineer",
+    "org": "dji",
+    "team": "team-dji-data",
+    "matrix": "@henk-evers:rijk.chat",
+    "avatar": "HE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, DJI"
+      }
+    ]
+  },
+  {
+    "id": "marieke-van-rijn",
+    "name": "Marieke Van Rijn",
+    "role": "Frontend developer",
+    "org": "cbr",
+    "team": "team-cbr-rijbewijs",
+    "matrix": "@marieke-van-rijn:rijk.chat",
+    "avatar": "MV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, CBR"
+      }
+    ]
+  },
+  {
+    "id": "yvonne-van-ginkel",
+    "name": "Yvonne Van Ginkel",
+    "role": "Security engineer",
+    "org": "cbr",
+    "team": "team-cbr-rijbewijs",
+    "matrix": "@yvonne-van-ginkel:rijk.chat",
+    "avatar": "YV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, CBR"
+      }
+    ]
+  },
+  {
+    "id": "sander-sikkema",
+    "name": "Sander Sikkema",
+    "role": "Tech lead",
+    "org": "cbr",
+    "team": "team-cbr-reservering",
+    "matrix": "@sander-sikkema:rijk.chat",
+    "avatar": "SS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, CBR"
+      }
+    ]
+  },
+  {
+    "id": "mark-vreeswijk",
+    "name": "Mark Vreeswijk",
+    "role": "Scrum master",
+    "org": "cbr",
+    "team": "team-cbr-reservering",
+    "matrix": "@mark-vreeswijk:rijk.chat",
+    "avatar": "MV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, CBR"
+      }
+    ]
+  },
+  {
+    "id": "julia-pijnenburg",
+    "name": "Julia Pijnenburg",
+    "role": "Information security officer",
+    "org": "acm",
+    "team": "team-acm-toezicht",
+    "matrix": "@julia-pijnenburg:rijk.chat",
+    "avatar": "JP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, ACM"
+      }
+    ]
+  },
+  {
+    "id": "liv-bos",
+    "name": "Liv Bos",
+    "role": "Business analist",
+    "org": "acm",
+    "team": "team-acm-toezicht",
+    "matrix": "@liv-bos:rijk.chat",
+    "avatar": "LB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, ACM"
+      }
+    ]
+  },
+  {
+    "id": "mees-van-den-berg",
+    "name": "Mees Van den Berg",
+    "role": "Database administrator",
+    "org": "afm",
+    "team": "team-afm-toezicht",
+    "matrix": "@mees-van-den-berg:rijk.chat",
+    "avatar": "MV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, AFM"
+      }
+    ]
+  },
+  {
+    "id": "khalid-postma",
+    "name": "Khalid Postma",
+    "role": "Platform engineer",
+    "org": "afm",
+    "team": "team-afm-toezicht",
+    "matrix": "@khalid-postma:rijk.chat",
+    "avatar": "KP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, AFM"
+      }
+    ]
+  },
+  {
+    "id": "lieke-el-idrissi",
+    "name": "Lieke El Idrissi",
+    "role": "Frontend developer",
+    "org": "ksa",
+    "team": "team-ksa-handhaving",
+    "matrix": "@lieke-el-idrissi:rijk.chat",
+    "avatar": "LE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, Ksa"
+      }
+    ]
+  },
+  {
+    "id": "isa-boutaleb",
+    "name": "Isa Boutaleb",
+    "role": "Security engineer",
+    "org": "ksa",
+    "team": "team-ksa-handhaving",
+    "matrix": "@isa-boutaleb:rijk.chat",
+    "avatar": "IB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, Ksa"
+      }
+    ]
+  },
+  {
+    "id": "selin-blom",
+    "name": "Selin Blom",
+    "role": "Tech lead",
+    "org": "nza",
+    "team": "team-nza-zorgdata",
+    "matrix": "@selin-blom:rijk.chat",
+    "avatar": "SB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, NZa"
+      }
+    ]
+  },
+  {
+    "id": "daan-heijmans",
+    "name": "Daan Heijmans",
+    "role": "Scrum master",
+    "org": "nza",
+    "team": "team-nza-zorgdata",
+    "matrix": "@daan-heijmans:rijk.chat",
+    "avatar": "DH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, NZa"
+      }
+    ]
+  },
+  {
+    "id": "iris-koning",
+    "name": "Iris Koning",
+    "role": "Information security officer",
+    "org": "fin",
+    "team": "team-fin-financieel",
+    "matrix": "@iris-koning:rijk.chat",
+    "avatar": "IK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, Fin"
+      }
+    ]
+  },
+  {
+    "id": "jeroen-hamid",
+    "name": "Jeroen Hamid",
+    "role": "Business analist",
+    "org": "fin",
+    "team": "team-fin-financieel",
+    "matrix": "@jeroen-hamid:rijk.chat",
+    "avatar": "JH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, Fin"
+      }
+    ]
+  },
+  {
+    "id": "noor-diks",
+    "name": "Noor Diks",
+    "role": "Database administrator",
+    "org": "fin",
+    "team": "team-fin-platform",
+    "matrix": "@noor-diks:rijk.chat",
+    "avatar": "ND",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, Fin"
+      }
+    ]
+  },
+  {
+    "id": "esra-akkaya",
+    "name": "Esra Akkaya",
+    "role": "Platform engineer",
+    "org": "fin",
+    "team": "team-fin-platform",
+    "matrix": "@esra-akkaya:rijk.chat",
+    "avatar": "EA",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, Fin"
+      }
+    ]
+  },
+  {
+    "id": "tariq-de-vries",
+    "name": "Tariq De Vries",
+    "role": "Frontend developer",
+    "org": "szw",
+    "team": "team-szw-regelingen",
+    "matrix": "@tariq-de-vries:rijk.chat",
+    "avatar": "TD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, SZW"
+      }
+    ]
+  },
+  {
+    "id": "soumaya-van-dijk",
+    "name": "Soumaya Van Dijk",
+    "role": "Security engineer",
+    "org": "szw",
+    "team": "team-szw-regelingen",
+    "matrix": "@soumaya-van-dijk:rijk.chat",
+    "avatar": "SV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, SZW"
+      }
+    ]
+  },
+  {
+    "id": "jan-vermeulen",
+    "name": "Jan Vermeulen",
+    "role": "Tech lead",
+    "org": "vws",
+    "team": "team-vws-zorgregister",
+    "matrix": "@jan-vermeulen:rijk.chat",
+    "avatar": "JV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, VWS"
+      }
+    ]
+  },
+  {
+    "id": "ingrid-van-vliet",
+    "name": "Ingrid Van Vliet",
+    "role": "Scrum master",
+    "org": "vws",
+    "team": "team-vws-zorgregister",
+    "matrix": "@ingrid-van-vliet:rijk.chat",
+    "avatar": "IV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, VWS"
+      }
+    ]
+  },
+  {
+    "id": "jasper-kaya",
+    "name": "Jasper Kaya",
+    "role": "Information security officer",
+    "org": "vws",
+    "team": "team-vws-data",
+    "matrix": "@jasper-kaya:rijk.chat",
+    "avatar": "JK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, VWS"
+      }
+    ]
+  },
+  {
+    "id": "robin-mol",
+    "name": "Robin Mol",
+    "role": "Business analist",
+    "org": "vws",
+    "team": "team-vws-data",
+    "matrix": "@robin-mol:rijk.chat",
+    "avatar": "RM",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, VWS"
+      }
+    ]
+  },
+  {
+    "id": "fenna-van-es",
+    "name": "Fenna Van Es",
+    "role": "Database administrator",
+    "org": "jenv",
+    "team": "team-jenv-keten",
+    "matrix": "@fenna-van-es:rijk.chat",
+    "avatar": "FV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, JenV"
+      }
+    ]
+  },
+  {
+    "id": "sterre-wagenaar",
+    "name": "Sterre Wagenaar",
+    "role": "Platform engineer",
+    "org": "jenv",
+    "team": "team-jenv-keten",
+    "matrix": "@sterre-wagenaar:rijk.chat",
+    "avatar": "SW",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, JenV"
+      }
+    ]
+  },
+  {
+    "id": "levi-lubbers",
+    "name": "Levi Lubbers",
+    "role": "Frontend developer",
+    "org": "ocw",
+    "team": "team-ocw-cultuurdata",
+    "matrix": "@levi-lubbers:rijk.chat",
+    "avatar": "LL",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, OCW"
+      }
+    ]
+  },
+  {
+    "id": "gijs-erdem",
+    "name": "Gijs Erdem",
+    "role": "Security engineer",
+    "org": "ocw",
+    "team": "team-ocw-cultuurdata",
+    "matrix": "@gijs-erdem:rijk.chat",
+    "avatar": "GE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, OCW"
+      }
+    ]
+  },
+  {
+    "id": "olivier-slootweg",
+    "name": "Olivier Slootweg",
+    "role": "Tech lead",
+    "org": "lnv",
+    "team": "team-lnv-natuur",
+    "matrix": "@olivier-slootweg:rijk.chat",
+    "avatar": "OS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, LNV"
+      }
+    ]
+  },
+  {
+    "id": "senna-asik",
+    "name": "Senna Asik",
+    "role": "Scrum master",
+    "org": "lnv",
+    "team": "team-lnv-natuur",
+    "matrix": "@senna-asik:rijk.chat",
+    "avatar": "SA",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, LNV"
+      }
+    ]
+  },
+  {
+    "id": "meryem-el-amrani",
+    "name": "Meryem El Amrani",
+    "role": "Information security officer",
+    "org": "ezk",
+    "team": "team-ezk-ondernemen",
+    "matrix": "@meryem-el-amrani:rijk.chat",
+    "avatar": "ME",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, EZK"
+      }
+    ]
+  },
+  {
+    "id": "lotte-ozturk",
+    "name": "Lotte Ozturk",
+    "role": "Business analist",
+    "org": "ezk",
+    "team": "team-ezk-ondernemen",
+    "matrix": "@lotte-ozturk:rijk.chat",
+    "avatar": "LO",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, EZK"
+      }
+    ]
+  },
+  {
+    "id": "tim-maas",
+    "name": "Tim Maas",
+    "role": "Database administrator",
+    "org": "kgg",
+    "team": "team-kgg-energie",
+    "matrix": "@tim-maas:rijk.chat",
+    "avatar": "TM",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, KGG"
+      }
+    ]
+  },
+  {
+    "id": "bas-veenstra",
+    "name": "Bas Veenstra",
+    "role": "Platform engineer",
+    "org": "kgg",
+    "team": "team-kgg-energie",
+    "matrix": "@bas-veenstra:rijk.chat",
+    "avatar": "BV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, KGG"
+      }
+    ]
+  },
+  {
+    "id": "nadia-arslan",
+    "name": "Nadia Arslan",
+    "role": "Frontend developer",
+    "org": "az",
+    "team": "team-az-comms",
+    "matrix": "@nadia-arslan:rijk.chat",
+    "avatar": "NA",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, AZ"
+      }
+    ]
+  },
+  {
+    "id": "layla-roeloffzen",
+    "name": "Layla Roeloffzen",
+    "role": "Security engineer",
+    "org": "az",
+    "team": "team-az-comms",
+    "matrix": "@layla-roeloffzen:rijk.chat",
+    "avatar": "LR",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, AZ"
+      }
+    ]
+  },
+  {
+    "id": "hassan-van-loon",
+    "name": "Hassan Van Loon",
+    "role": "Tech lead",
+    "org": "bz",
+    "team": "team-bz-consulair",
+    "matrix": "@hassan-van-loon:rijk.chat",
+    "avatar": "HV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, BZ"
+      }
+    ]
+  },
+  {
+    "id": "said-lammers",
+    "name": "Said Lammers",
+    "role": "Scrum master",
+    "org": "bz",
+    "team": "team-bz-consulair",
+    "matrix": "@said-lammers:rijk.chat",
+    "avatar": "SL",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, BZ"
+      }
+    ]
+  },
+  {
+    "id": "gerard-nijhuis",
+    "name": "Gerard Nijhuis",
+    "role": "Information security officer",
+    "org": "def",
+    "team": "team-def-secinfra",
+    "matrix": "@gerard-nijhuis:rijk.chat",
+    "avatar": "GN",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, Def"
+      }
+    ]
+  },
+  {
+    "id": "wilma-holwerda",
+    "name": "Wilma Holwerda",
+    "role": "Business analist",
+    "org": "def",
+    "team": "team-def-secinfra",
+    "matrix": "@wilma-holwerda:rijk.chat",
+    "avatar": "WH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, Def"
+      }
+    ]
+  },
+  {
+    "id": "casper-naber",
+    "name": "Casper Naber",
+    "role": "Database administrator",
+    "org": "aenm",
+    "team": "team-aenm-keten",
+    "matrix": "@casper-naber:rijk.chat",
+    "avatar": "CN",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, AenM"
+      }
+    ]
+  },
+  {
+    "id": "bart-veldhuis",
+    "name": "Bart Veldhuis",
+    "role": "Platform engineer",
+    "org": "aenm",
+    "team": "team-aenm-keten",
+    "matrix": "@bart-veldhuis:rijk.chat",
+    "avatar": "BV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, AenM"
+      }
+    ]
+  },
+  {
+    "id": "suze-mulder",
+    "name": "Suze Mulder",
+    "role": "Frontend developer",
+    "org": "dhc",
+    "team": "team-dhc-geschillen",
+    "matrix": "@suze-mulder:rijk.chat",
+    "avatar": "SM",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, DHC"
+      }
+    ]
+  },
+  {
+    "id": "nina-janssen",
+    "name": "Nina Janssen",
+    "role": "Security engineer",
+    "org": "dhc",
+    "team": "team-dhc-geschillen",
+    "matrix": "@nina-janssen:rijk.chat",
+    "avatar": "NJ",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, DHC"
+      }
+    ]
+  },
+  {
+    "id": "loes-huisman",
+    "name": "Loes Huisman",
+    "role": "Tech lead",
+    "org": "ez",
+    "team": "team-ez-markt",
+    "matrix": "@loes-huisman:rijk.chat",
+    "avatar": "LH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, EZ"
+      }
+    ]
+  },
+  {
+    "id": "boris-vink",
+    "name": "Boris Vink",
+    "role": "Scrum master",
+    "org": "ez",
+    "team": "team-ez-markt",
+    "matrix": "@boris-vink:rijk.chat",
+    "avatar": "BV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, EZ"
+      }
+    ]
+  },
+  {
+    "id": "jelle-ennaji",
+    "name": "Jelle Ennaji",
+    "role": "Information security officer",
+    "org": "bzk",
+    "team": "team-bzk-iam",
+    "matrix": "@jelle-ennaji:rijk.chat",
+    "avatar": "JE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, BZK"
+      }
+    ]
+  },
+  {
+    "id": "anne-roos",
+    "name": "Anne Roos",
+    "role": "Business analist",
+    "org": "bzk",
+    "team": "team-bzk-iam",
+    "matrix": "@anne-roos:rijk.chat",
+    "avatar": "AR",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, BZK"
+      }
+    ]
+  },
+  {
+    "id": "ilias-bruins",
+    "name": "Ilias Bruins",
+    "role": "Database administrator",
+    "org": "bzk",
+    "team": "team-bzk-security",
+    "matrix": "@ilias-bruins:rijk.chat",
+    "avatar": "IB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, BZK"
+      }
+    ]
+  },
+  {
+    "id": "joost-van-der-veen",
+    "name": "Joost Van der Veen",
+    "role": "Platform engineer",
+    "org": "bzk",
+    "team": "team-bzk-security",
+    "matrix": "@joost-van-der-veen:rijk.chat",
+    "avatar": "JV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, BZK"
+      }
+    ]
+  },
+  {
+    "id": "eva-mohamed",
+    "name": "Eva Mohamed",
+    "role": "Frontend developer",
+    "org": "rijksict",
+    "team": "team-rijksict-docs",
+    "matrix": "@eva-mohamed:rijk.chat",
+    "avatar": "EM",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, RIJKSICT"
+      }
+    ]
+  },
+  {
+    "id": "stijn-van-os",
+    "name": "Stijn Van Os",
+    "role": "Security engineer",
+    "org": "rijksict",
+    "team": "team-rijksict-docs",
+    "matrix": "@stijn-van-os:rijk.chat",
+    "avatar": "SV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, RIJKSICT"
+      }
+    ]
+  },
+  {
+    "id": "aisha-el-khattabi",
+    "name": "Aisha El Khattabi",
+    "role": "Tech lead",
+    "org": "rijksict",
+    "team": "team-rijksict-iam",
+    "matrix": "@aisha-el-khattabi:rijk.chat",
+    "avatar": "AE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, RIJKSICT"
+      }
+    ]
+  },
+  {
+    "id": "pieter-wielinga",
+    "name": "Pieter Wielinga",
+    "role": "Scrum master",
+    "org": "rijksict",
+    "team": "team-rijksict-iam",
+    "matrix": "@pieter-wielinga:rijk.chat",
+    "avatar": "PW",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, RIJKSICT"
+      }
+    ]
+  },
+  {
+    "id": "rachid-hendriks",
+    "name": "Rachid Hendriks",
+    "role": "Information security officer",
+    "org": "logius",
+    "team": "team-logius-docs",
+    "matrix": "@rachid-hendriks:rijk.chat",
+    "avatar": "RH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "hala-hofman",
+    "name": "Hala Hofman",
+    "role": "Business analist",
+    "org": "logius",
+    "team": "team-logius-docs",
+    "matrix": "@hala-hofman:rijk.chat",
+    "avatar": "HH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "cornelis-willems",
+    "name": "Cornelis Willems",
+    "role": "Database administrator",
+    "org": "bd",
+    "team": "team-bd-inning",
+    "matrix": "@cornelis-willems:rijk.chat",
+    "avatar": "CW",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, BD"
+      }
+    ]
+  },
+  {
+    "id": "saskia-demir",
+    "name": "Saskia Demir",
+    "role": "Platform engineer",
+    "org": "bd",
+    "team": "team-bd-aangifte",
+    "matrix": "@saskia-demir:rijk.chat",
+    "avatar": "SD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, BD"
+      }
+    ]
+  },
+  {
+    "id": "floris-van-der-velde",
+    "name": "Floris Van der Velde",
+    "role": "Frontend developer",
+    "org": "bd",
+    "team": "team-bd-gegevens",
+    "matrix": "@floris-van-der-velde:rijk.chat",
+    "avatar": "FV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, BD"
+      }
+    ]
+  },
+  {
+    "id": "roel-groen",
+    "name": "Roel Groen",
+    "role": "Security engineer",
+    "org": "bd",
+    "team": "team-bd-fraude",
+    "matrix": "@roel-groen:rijk.chat",
+    "avatar": "RG",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, BD"
+      }
+    ]
+  },
+  {
+    "id": "vincent-tuinstra",
+    "name": "Vincent Tuinstra",
+    "role": "Tech lead",
+    "org": "bd",
+    "team": "team-bd-iam",
+    "matrix": "@vincent-tuinstra:rijk.chat",
+    "avatar": "VT",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, BD"
+      }
+    ]
+  },
+  {
+    "id": "sophie-schipper",
+    "name": "Sophie Schipper",
+    "role": "Scrum master",
+    "org": "bd",
+    "team": "team-bd-platform",
+    "matrix": "@sophie-schipper:rijk.chat",
+    "avatar": "SS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, BD"
+      }
+    ]
+  },
+  {
+    "id": "indy-polat",
+    "name": "Indy Polat",
+    "role": "Information security officer",
+    "org": "duo",
+    "team": "team-duo-studiefinanciering",
+    "matrix": "@indy-polat:rijk.chat",
+    "avatar": "IP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, DUO"
+      }
+    ]
+  },
+  {
+    "id": "finn-korteweg",
+    "name": "Finn Korteweg",
+    "role": "Business analist",
+    "org": "duo",
+    "team": "team-duo-register",
+    "matrix": "@finn-korteweg:rijk.chat",
+    "avatar": "FK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, DUO"
+      }
+    ]
+  },
+  {
+    "id": "wessel-bulut",
+    "name": "Wessel Bulut",
+    "role": "Database administrator",
+    "org": "duo",
+    "team": "team-duo-examens",
+    "matrix": "@wessel-bulut:rijk.chat",
+    "avatar": "WB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, DUO"
+      }
+    ]
+  },
+  {
+    "id": "britt-visser",
+    "name": "Britt Visser",
+    "role": "Platform engineer",
+    "org": "duo",
+    "team": "team-duo-data",
+    "matrix": "@britt-visser:rijk.chat",
+    "avatar": "BV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, DUO"
+      }
+    ]
+  },
+  {
+    "id": "abdel-kok",
+    "name": "Abdel Kok",
+    "role": "Frontend developer",
+    "org": "duo",
+    "team": "team-duo-platform",
+    "matrix": "@abdel-kok:rijk.chat",
+    "avatar": "AK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, DUO"
+      }
+    ]
+  },
+  {
+    "id": "dilan-van-der-heijden",
+    "name": "Dilan Van der Heijden",
+    "role": "Security engineer",
+    "org": "uwv",
+    "team": "team-uwv-uitkeringen",
+    "matrix": "@dilan-van-der-heijden:rijk.chat",
+    "avatar": "DV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, UWV"
+      }
+    ]
+  },
+  {
+    "id": "sven-van-den-heuvel",
+    "name": "Sven Van den Heuvel",
+    "role": "Tech lead",
+    "org": "uwv",
+    "team": "team-uwv-werk",
+    "matrix": "@sven-van-den-heuvel:rijk.chat",
+    "avatar": "SV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, UWV"
+      }
+    ]
+  },
+  {
+    "id": "hugo-sahin",
+    "name": "Hugo Sahin",
+    "role": "Scrum master",
+    "org": "uwv",
+    "team": "team-uwv-gegevens",
+    "matrix": "@hugo-sahin:rijk.chat",
+    "avatar": "HS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, UWV"
+      }
+    ]
+  },
+  {
+    "id": "anouk-driessen",
+    "name": "Anouk Driessen",
+    "role": "Information security officer",
+    "org": "uwv",
+    "team": "team-uwv-arbeidsmarkt",
+    "matrix": "@anouk-driessen:rijk.chat",
+    "avatar": "AD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, UWV"
+      }
+    ]
+  },
+  {
+    "id": "fatima-faber",
+    "name": "Fatima Faber",
+    "role": "Business analist",
+    "org": "uwv",
+    "team": "team-uwv-platform",
+    "matrix": "@fatima-faber:rijk.chat",
+    "avatar": "FF",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, UWV"
+      }
+    ]
+  },
+  {
+    "id": "bilal-theunissen",
+    "name": "Bilal Theunissen",
+    "role": "Database administrator",
+    "org": "rvo",
+    "team": "team-rvo-subsidies",
+    "matrix": "@bilal-theunissen:rijk.chat",
+    "avatar": "BT",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, RVO"
+      }
+    ]
+  },
+  {
+    "id": "zeynep-strik",
+    "name": "Zeynep Strik",
+    "role": "Platform engineer",
+    "org": "rvo",
+    "team": "team-rvo-vergunningen",
+    "matrix": "@zeynep-strik:rijk.chat",
+    "avatar": "ZS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, RVO"
+      }
+    ]
+  },
+  {
+    "id": "willem-van-zanten",
+    "name": "Willem Van Zanten",
+    "role": "Frontend developer",
+    "org": "rvo",
+    "team": "team-rvo-geodata",
+    "matrix": "@willem-van-zanten:rijk.chat",
+    "avatar": "WV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, RVO"
+      }
+    ]
+  },
+  {
+    "id": "kees-wubben",
+    "name": "Kees Wubben",
+    "role": "Security engineer",
+    "org": "rvo",
+    "team": "team-rvo-portaal",
+    "matrix": "@kees-wubben:rijk.chat",
+    "avatar": "KW",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, RVO"
+      }
+    ]
+  },
+  {
+    "id": "carla-snijders",
+    "name": "Carla Snijders",
+    "role": "Tech lead",
+    "org": "rws",
+    "team": "team-rws-areaal",
+    "matrix": "@carla-snijders:rijk.chat",
+    "avatar": "CS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, RWS"
+      }
+    ]
+  },
+  {
+    "id": "niels-de-boer",
+    "name": "Niels De Boer",
+    "role": "Scrum master",
+    "org": "rws",
+    "team": "team-rws-verkeer",
+    "matrix": "@niels-de-boer:rijk.chat",
+    "avatar": "ND",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, RWS"
+      }
+    ]
+  },
+  {
+    "id": "koen-kuipers",
+    "name": "Koen Kuipers",
+    "role": "Information security officer",
+    "org": "rws",
+    "team": "team-rws-sensoren",
+    "matrix": "@koen-kuipers:rijk.chat",
+    "avatar": "KK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, RWS"
+      }
+    ]
+  },
+  {
+    "id": "roos-prins",
+    "name": "Roos Prins",
+    "role": "Business analist",
+    "org": "rws",
+    "team": "team-rws-inspectie",
+    "matrix": "@roos-prins:rijk.chat",
+    "avatar": "RP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, RWS"
+      }
+    ]
+  },
+  {
+    "id": "mila-smeets",
+    "name": "Mila Smeets",
+    "role": "Database administrator",
+    "org": "rws",
+    "team": "team-rws-platform",
+    "matrix": "@mila-smeets:rijk.chat",
+    "avatar": "MS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, RWS"
+      }
+    ]
+  },
+  {
+    "id": "sem-karaca",
+    "name": "Sem Karaca",
+    "role": "Platform engineer",
+    "org": "ind",
+    "team": "team-ind-aanvragen",
+    "matrix": "@sem-karaca:rijk.chat",
+    "avatar": "SK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, IND"
+      }
+    ]
+  },
+  {
+    "id": "ahmed-van-beek",
+    "name": "Ahmed Van Beek",
+    "role": "Frontend developer",
+    "org": "ind",
+    "team": "team-ind-dossiers",
+    "matrix": "@ahmed-van-beek:rijk.chat",
+    "avatar": "AV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, IND"
+      }
+    ]
+  },
+  {
+    "id": "mats-reijnders",
+    "name": "Mats Reijnders",
+    "role": "Security engineer",
+    "org": "ind",
+    "team": "team-ind-iam",
+    "matrix": "@mats-reijnders:rijk.chat",
+    "avatar": "MR",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, IND"
+      }
+    ]
+  },
+  {
+    "id": "puck-van-dam",
+    "name": "Puck Van Dam",
+    "role": "Tech lead",
+    "org": "ind",
+    "team": "team-ind-data",
+    "matrix": "@puck-van-dam:rijk.chat",
+    "avatar": "PV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, IND"
+      }
+    ]
+  },
+  {
+    "id": "hatice-doornbos",
+    "name": "Hatice Doornbos",
+    "role": "Scrum master",
+    "org": "logius",
+    "team": "team-logius-digid",
+    "matrix": "@hatice-doornbos:rijk.chat",
+    "avatar": "HD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "emma-bijl",
+    "name": "Emma Bijl",
+    "role": "Information security officer",
+    "org": "logius",
+    "team": "team-logius-digikoppeling",
+    "matrix": "@emma-bijl:rijk.chat",
+    "avatar": "EB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "lars-charradi",
+    "name": "Lars Charradi",
+    "role": "Business analist",
+    "org": "logius",
+    "team": "team-logius-machtigen",
+    "matrix": "@lars-charradi:rijk.chat",
+    "avatar": "LC",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "femke-verschuren",
+    "name": "Femke Verschuren",
+    "role": "Database administrator",
+    "org": "logius",
+    "team": "team-logius-stelsel",
+    "matrix": "@femke-verschuren:rijk.chat",
+    "avatar": "FV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "sara-peters",
+    "name": "Sara Peters",
+    "role": "Platform engineer",
+    "org": "dictu",
+    "team": "team-dictu-hosting",
+    "matrix": "@sara-peters:rijk.chat",
+    "avatar": "SP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, DICTU"
+      }
+    ]
+  },
+  {
+    "id": "mehmet-bakkal",
+    "name": "Mehmet Bakkal",
+    "role": "Frontend developer",
+    "org": "dictu",
+    "team": "team-dictu-werkplek",
+    "matrix": "@mehmet-bakkal:rijk.chat",
+    "avatar": "MB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, DICTU"
+      }
+    ]
+  },
+  {
+    "id": "imane-scholten",
+    "name": "Imane Scholten",
+    "role": "Security engineer",
+    "org": "dictu",
+    "team": "team-dictu-security",
+    "matrix": "@imane-scholten:rijk.chat",
+    "avatar": "IS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, DICTU"
+      }
+    ]
+  },
+  {
+    "id": "fatih-ben-ali",
+    "name": "Fatih Ben Ali",
+    "role": "Tech lead",
+    "org": "dictu",
+    "team": "team-dictu-data",
+    "matrix": "@fatih-ben-ali:rijk.chat",
+    "avatar": "FB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, DICTU"
+      }
+    ]
+  },
+  {
+    "id": "dirk-ouali",
+    "name": "Dirk Ouali",
+    "role": "Scrum master",
+    "org": "rvig",
+    "team": "team-rvig-brp",
+    "matrix": "@dirk-ouali:rijk.chat",
+    "avatar": "DO",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, RvIG"
+      }
+    ]
+  },
+  {
+    "id": "annemarie-dekker",
+    "name": "Annemarie Dekker",
+    "role": "Information security officer",
+    "org": "rvig",
+    "team": "team-rvig-reisdocumenten",
+    "matrix": "@annemarie-dekker:rijk.chat",
+    "avatar": "AD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, RvIG"
+      }
+    ]
+  },
+  {
+    "id": "quinten-linders",
+    "name": "Quinten Linders",
+    "role": "Business analist",
+    "org": "rvig",
+    "team": "team-rvig-iam",
+    "matrix": "@quinten-linders:rijk.chat",
+    "avatar": "QL",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, RvIG"
+      }
+    ]
+  },
+  {
+    "id": "maarten-verbruggen",
+    "name": "Maarten Verbruggen",
+    "role": "Database administrator",
+    "org": "jio",
+    "team": "team-jio-platform",
+    "matrix": "@maarten-verbruggen:rijk.chat",
+    "avatar": "MV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, JIO"
+      }
+    ]
+  },
+  {
+    "id": "tess-cetin",
+    "name": "Tess Cetin",
+    "role": "Platform engineer",
+    "org": "jio",
+    "team": "team-jio-keten",
+    "matrix": "@tess-cetin:rijk.chat",
+    "avatar": "TC",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, JIO"
+      }
+    ]
+  },
+  {
+    "id": "veerle-van-der-plas",
+    "name": "Veerle Van der Plas",
+    "role": "Frontend developer",
+    "org": "jio",
+    "team": "team-jio-security",
+    "matrix": "@veerle-van-der-plas:rijk.chat",
+    "avatar": "VV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, JIO"
+      }
+    ]
+  },
+  {
+    "id": "marit-cinar",
+    "name": "Marit Cinar",
+    "role": "Security engineer",
+    "org": "cjib",
+    "team": "team-cjib-inning",
+    "matrix": "@marit-cinar:rijk.chat",
+    "avatar": "MC",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, CJIB"
+      }
+    ]
+  },
+  {
+    "id": "teun-bakker",
+    "name": "Teun Bakker",
+    "role": "Tech lead",
+    "org": "cjib",
+    "team": "team-cjib-sanctie",
+    "matrix": "@teun-bakker:rijk.chat",
+    "avatar": "TB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, CJIB"
+      }
+    ]
+  },
+  {
+    "id": "ties-brouwer",
+    "name": "Ties Brouwer",
+    "role": "Scrum master",
+    "org": "cjib",
+    "team": "team-cjib-data",
+    "matrix": "@ties-brouwer:rijk.chat",
+    "avatar": "TB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, CJIB"
+      }
+    ]
+  },
+  {
     "id": "romy-schouten",
     "name": "Romy Schouten",
     "role": "Information security officer",
     "org": "svb",
-    "team": "team-svb-kinderbijslag",
+    "team": "team-svb-aow",
     "matrix": "@romy-schouten:rijk.chat",
     "avatar": "RS",
     "history": [
@@ -3840,7 +3840,7 @@ export const people = [
     "name": "Younes Sanders",
     "role": "Business analist",
     "org": "svb",
-    "team": "team-svb-gegevens",
+    "team": "team-svb-kinderbijslag",
     "matrix": "@younes-sanders:rijk.chat",
     "avatar": "YS",
     "history": [
@@ -3870,7 +3870,7 @@ export const people = [
     "name": "Ruben Van der Laan",
     "role": "Platform engineer",
     "org": "svb",
-    "team": "team-svb-gegevens",
+    "team": "team-svb-platform",
     "matrix": "@ruben-van-der-laan:rijk.chat",
     "avatar": "RV",
     "history": [
@@ -3884,250 +3884,10 @@ export const people = [
     "id": "yara-wijnands",
     "name": "Yara Wijnands",
     "role": "Frontend developer",
-    "org": "svb",
-    "team": "team-svb-gegevens",
+    "org": "kvk",
+    "team": "team-kvk-handelsregister",
     "matrix": "@yara-wijnands:rijk.chat",
     "avatar": "YW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, SVB"
-      }
-    ]
-  },
-  {
-    "id": "youssef-engelen",
-    "name": "Youssef Engelen",
-    "role": "Security engineer",
-    "org": "svb",
-    "team": "team-svb-gegevens",
-    "matrix": "@youssef-engelen:rijk.chat",
-    "avatar": "YE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, SVB"
-      }
-    ]
-  },
-  {
-    "id": "karim-van-hattem",
-    "name": "Karim Van Hattem",
-    "role": "Tech lead",
-    "org": "svb",
-    "team": "team-svb-gegevens",
-    "matrix": "@karim-van-hattem:rijk.chat",
-    "avatar": "KV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, SVB"
-      }
-    ]
-  },
-  {
-    "id": "samira-gunes",
-    "name": "Samira Gunes",
-    "role": "Scrum master",
-    "org": "svb",
-    "team": "team-svb-platform",
-    "matrix": "@samira-gunes:rijk.chat",
-    "avatar": "SG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, SVB"
-      }
-    ]
-  },
-  {
-    "id": "bouchra-geerts",
-    "name": "Bouchra Geerts",
-    "role": "Information security officer",
-    "org": "svb",
-    "team": "team-svb-platform",
-    "matrix": "@bouchra-geerts:rijk.chat",
-    "avatar": "BG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, SVB"
-      }
-    ]
-  },
-  {
-    "id": "johan-kraaijeveld",
-    "name": "Johan Kraaijeveld",
-    "role": "Business analist",
-    "org": "svb",
-    "team": "team-svb-platform",
-    "matrix": "@johan-kraaijeveld:rijk.chat",
-    "avatar": "JK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, SVB"
-      }
-    ]
-  },
-  {
-    "id": "petra-meijer",
-    "name": "Petra Meijer",
-    "role": "Database administrator",
-    "org": "svb",
-    "team": "team-svb-platform",
-    "matrix": "@petra-meijer:rijk.chat",
-    "avatar": "PM",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, SVB"
-      }
-    ]
-  },
-  {
-    "id": "tobias-de-wit",
-    "name": "Tobias De Wit",
-    "role": "Platform engineer",
-    "org": "svb",
-    "team": "team-svb-platform",
-    "matrix": "@tobias-de-wit:rijk.chat",
-    "avatar": "TD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, SVB"
-      }
-    ]
-  },
-  {
-    "id": "wouter-koster",
-    "name": "Wouter Koster",
-    "role": "Frontend developer",
-    "org": "svb",
-    "team": "team-svb-platform",
-    "matrix": "@wouter-koster:rijk.chat",
-    "avatar": "WK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, SVB"
-      }
-    ]
-  },
-  {
-    "id": "erik-gerritsen",
-    "name": "Erik Gerritsen",
-    "role": "Security engineer",
-    "org": "svb",
-    "team": "team-svb-platform",
-    "matrix": "@erik-gerritsen:rijk.chat",
-    "avatar": "EG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, SVB"
-      }
-    ]
-  },
-  {
-    "id": "lara-korkmaz",
-    "name": "Lara Korkmaz",
-    "role": "Tech lead",
-    "org": "kvk",
-    "team": "team-kvk-handelsregister",
-    "matrix": "@lara-korkmaz:rijk.chat",
-    "avatar": "LK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, KVK"
-      }
-    ]
-  },
-  {
-    "id": "fleur-verbeek",
-    "name": "Fleur Verbeek",
-    "role": "Scrum master",
-    "org": "kvk",
-    "team": "team-kvk-handelsregister",
-    "matrix": "@fleur-verbeek:rijk.chat",
-    "avatar": "FV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, KVK"
-      }
-    ]
-  },
-  {
-    "id": "luuk-van-wijk",
-    "name": "Luuk Van Wijk",
-    "role": "Information security officer",
-    "org": "kvk",
-    "team": "team-kvk-handelsregister",
-    "matrix": "@luuk-van-wijk:rijk.chat",
-    "avatar": "LV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, KVK"
-      }
-    ]
-  },
-  {
-    "id": "pim-de-groot",
-    "name": "Pim De Groot",
-    "role": "Business analist",
-    "org": "kvk",
-    "team": "team-kvk-api",
-    "matrix": "@pim-de-groot:rijk.chat",
-    "avatar": "PD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, KVK"
-      }
-    ]
-  },
-  {
-    "id": "demi-berends",
-    "name": "Demi Berends",
-    "role": "Database administrator",
-    "org": "kvk",
-    "team": "team-kvk-api",
-    "matrix": "@demi-berends:rijk.chat",
-    "avatar": "DB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, KVK"
-      }
-    ]
-  },
-  {
-    "id": "driss-tromp",
-    "name": "Driss Tromp",
-    "role": "Platform engineer",
-    "org": "kvk",
-    "team": "team-kvk-api",
-    "matrix": "@driss-tromp:rijk.chat",
-    "avatar": "DT",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, KVK"
-      }
-    ]
-  },
-  {
-    "id": "sanne-bouazza",
-    "name": "Sanne Bouazza",
-    "role": "Frontend developer",
-    "org": "kvk",
-    "team": "team-kvk-api",
-    "matrix": "@sanne-bouazza:rijk.chat",
-    "avatar": "SB",
     "history": [
       {
         "period": "2022–nu",
@@ -4136,13 +3896,13 @@ export const people = [
     ]
   },
   {
-    "id": "thijs-roozendaal",
-    "name": "Thijs Roozendaal",
+    "id": "youssef-engelen",
+    "name": "Youssef Engelen",
     "role": "Security engineer",
     "org": "kvk",
-    "team": "team-kvk-ondernemersplein",
-    "matrix": "@thijs-roozendaal:rijk.chat",
-    "avatar": "TR",
+    "team": "team-kvk-api",
+    "matrix": "@youssef-engelen:rijk.chat",
+    "avatar": "YE",
     "history": [
       {
         "period": "2022–nu",
@@ -4151,13 +3911,13 @@ export const people = [
     ]
   },
   {
-    "id": "maud-vos",
-    "name": "Maud Vos",
+    "id": "karim-van-hattem",
+    "name": "Karim Van Hattem",
     "role": "Tech lead",
     "org": "kvk",
     "team": "team-kvk-ondernemersplein",
-    "matrix": "@maud-vos:rijk.chat",
-    "avatar": "MV",
+    "matrix": "@karim-van-hattem:rijk.chat",
+    "avatar": "KV",
     "history": [
       {
         "period": "2022–nu",
@@ -4166,133 +3926,13 @@ export const people = [
     ]
   },
   {
-    "id": "mohammed-van-der-meer",
-    "name": "Mohammed Van der Meer",
-    "role": "Scrum master",
-    "org": "kvk",
-    "team": "team-kvk-ondernemersplein",
-    "matrix": "@mohammed-van-der-meer:rijk.chat",
-    "avatar": "MV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, KVK"
-      }
-    ]
-  },
-  {
-    "id": "ans-de-lange",
-    "name": "Ans De Lange",
-    "role": "Information security officer",
-    "org": "kvk",
-    "team": "team-kvk-ondernemersplein",
-    "matrix": "@ans-de-lange:rijk.chat",
-    "avatar": "AD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, KVK"
-      }
-    ]
-  },
-  {
-    "id": "amira-bouali",
-    "name": "Amira Bouali",
-    "role": "Business analist",
-    "org": "kvk",
-    "team": "team-kvk-ondernemersplein",
-    "matrix": "@amira-bouali:rijk.chat",
-    "avatar": "AB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, KVK"
-      }
-    ]
-  },
-  {
-    "id": "omar-el-hadioui",
-    "name": "Omar El Hadioui",
-    "role": "Database administrator",
-    "org": "ienw",
-    "team": "team-ienw-kenteken",
-    "matrix": "@omar-el-hadioui:rijk.chat",
-    "avatar": "OE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, IenW"
-      }
-    ]
-  },
-  {
-    "id": "henk-van-der-wal",
-    "name": "Henk Van der Wal",
-    "role": "Platform engineer",
-    "org": "ienw",
-    "team": "team-ienw-kenteken",
-    "matrix": "@henk-van-der-wal:rijk.chat",
-    "avatar": "HV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, IenW"
-      }
-    ]
-  },
-  {
-    "id": "marieke-goossens",
-    "name": "Marieke Goossens",
-    "role": "Frontend developer",
-    "org": "ienw",
-    "team": "team-ienw-kenteken",
-    "matrix": "@marieke-goossens:rijk.chat",
-    "avatar": "MG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, IenW"
-      }
-    ]
-  },
-  {
-    "id": "yvonne-van-driel",
-    "name": "Yvonne Van Driel",
-    "role": "Security engineer",
-    "org": "ienw",
-    "team": "team-ienw-kenteken",
-    "matrix": "@yvonne-van-driel:rijk.chat",
-    "avatar": "YV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, IenW"
-      }
-    ]
-  },
-  {
-    "id": "sander-bakhti",
-    "name": "Sander Bakhti",
-    "role": "Tech lead",
-    "org": "ienw",
-    "team": "team-ienw-kenteken",
-    "matrix": "@sander-bakhti:rijk.chat",
-    "avatar": "SB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, IenW"
-      }
-    ]
-  },
-  {
-    "id": "mark-renkema",
-    "name": "Mark Renkema",
+    "id": "samira-gunes",
+    "name": "Samira Gunes",
     "role": "Scrum master",
     "org": "ienw",
     "team": "team-ienw-kenteken",
-    "matrix": "@mark-renkema:rijk.chat",
-    "avatar": "MR",
+    "matrix": "@samira-gunes:rijk.chat",
+    "avatar": "SG",
     "history": [
       {
         "period": "2022–nu",
@@ -4301,13 +3941,13 @@ export const people = [
     ]
   },
   {
-    "id": "julia-yildiz",
-    "name": "Julia Yildiz",
+    "id": "bouchra-geerts",
+    "name": "Bouchra Geerts",
     "role": "Information security officer",
     "org": "ienw",
     "team": "team-ienw-voertuig",
-    "matrix": "@julia-yildiz:rijk.chat",
-    "avatar": "JY",
+    "matrix": "@bouchra-geerts:rijk.chat",
+    "avatar": "BG",
     "history": [
       {
         "period": "2022–nu",
@@ -4316,13 +3956,13 @@ export const people = [
     ]
   },
   {
-    "id": "liv-jansen",
-    "name": "Liv Jansen",
+    "id": "johan-kraaijeveld",
+    "name": "Johan Kraaijeveld",
     "role": "Business analist",
     "org": "ienw",
-    "team": "team-ienw-voertuig",
-    "matrix": "@liv-jansen:rijk.chat",
-    "avatar": "LJ",
+    "team": "team-ienw-data",
+    "matrix": "@johan-kraaijeveld:rijk.chat",
+    "avatar": "JK",
     "history": [
       {
         "period": "2022–nu",
@@ -4331,133 +3971,13 @@ export const people = [
     ]
   },
   {
-    "id": "mees-dijkstra",
-    "name": "Mees Dijkstra",
-    "role": "Database administrator",
-    "org": "ienw",
-    "team": "team-ienw-voertuig",
-    "matrix": "@mees-dijkstra:rijk.chat",
-    "avatar": "MD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, IenW"
-      }
-    ]
-  },
-  {
-    "id": "khalid-van-leeuwen",
-    "name": "Khalid Van Leeuwen",
-    "role": "Platform engineer",
-    "org": "ienw",
-    "team": "team-ienw-voertuig",
-    "matrix": "@khalid-van-leeuwen:rijk.chat",
-    "avatar": "KV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, IenW"
-      }
-    ]
-  },
-  {
-    "id": "lieke-hoekstra",
-    "name": "Lieke Hoekstra",
-    "role": "Frontend developer",
-    "org": "ienw",
-    "team": "team-ienw-voertuig",
-    "matrix": "@lieke-hoekstra:rijk.chat",
-    "avatar": "LH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, IenW"
-      }
-    ]
-  },
-  {
-    "id": "isa-aydin",
-    "name": "Isa Aydin",
-    "role": "Security engineer",
-    "org": "ienw",
-    "team": "team-ienw-voertuig",
-    "matrix": "@isa-aydin:rijk.chat",
-    "avatar": "IA",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, IenW"
-      }
-    ]
-  },
-  {
-    "id": "selin-kuiper",
-    "name": "Selin Kuiper",
-    "role": "Tech lead",
-    "org": "ienw",
-    "team": "team-ienw-voertuig",
-    "matrix": "@selin-kuiper:rijk.chat",
-    "avatar": "SK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, IenW"
-      }
-    ]
-  },
-  {
-    "id": "daan-stam",
-    "name": "Daan Stam",
-    "role": "Scrum master",
-    "org": "ienw",
-    "team": "team-ienw-data",
-    "matrix": "@daan-stam:rijk.chat",
-    "avatar": "DS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, IenW"
-      }
-    ]
-  },
-  {
-    "id": "iris-bosman",
-    "name": "Iris Bosman",
-    "role": "Information security officer",
-    "org": "ienw",
-    "team": "team-ienw-data",
-    "matrix": "@iris-bosman:rijk.chat",
-    "avatar": "IB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, IenW"
-      }
-    ]
-  },
-  {
-    "id": "jeroen-donker",
-    "name": "Jeroen Donker",
-    "role": "Business analist",
-    "org": "ienw",
-    "team": "team-ienw-data",
-    "matrix": "@jeroen-donker:rijk.chat",
-    "avatar": "JD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, IenW"
-      }
-    ]
-  },
-  {
-    "id": "noor-tekin",
-    "name": "Noor Tekin",
+    "id": "petra-meijer",
+    "name": "Petra Meijer",
     "role": "Database administrator",
     "org": "cbs",
     "team": "team-cbs-statline",
-    "matrix": "@noor-tekin:rijk.chat",
-    "avatar": "NT",
+    "matrix": "@petra-meijer:rijk.chat",
+    "avatar": "PM",
     "history": [
       {
         "period": "2022–nu",
@@ -4466,13 +3986,13 @@ export const people = [
     ]
   },
   {
-    "id": "esra-buitenhuis",
-    "name": "Esra Buitenhuis",
+    "id": "tobias-de-wit",
+    "name": "Tobias De Wit",
     "role": "Platform engineer",
     "org": "cbs",
-    "team": "team-cbs-statline",
-    "matrix": "@esra-buitenhuis:rijk.chat",
-    "avatar": "EB",
+    "team": "team-cbs-microdata",
+    "matrix": "@tobias-de-wit:rijk.chat",
+    "avatar": "TD",
     "history": [
       {
         "period": "2022–nu",
@@ -4481,13 +4001,13 @@ export const people = [
     ]
   },
   {
-    "id": "tariq-van-bommel",
-    "name": "Tariq Van Bommel",
+    "id": "wouter-koster",
+    "name": "Wouter Koster",
     "role": "Frontend developer",
     "org": "cbs",
-    "team": "team-cbs-statline",
-    "matrix": "@tariq-van-bommel:rijk.chat",
-    "avatar": "TV",
+    "team": "team-cbs-platform",
+    "matrix": "@wouter-koster:rijk.chat",
+    "avatar": "WK",
     "history": [
       {
         "period": "2022–nu",
@@ -4496,13 +4016,13 @@ export const people = [
     ]
   },
   {
-    "id": "soumaya-smit",
-    "name": "Soumaya Smit",
+    "id": "erik-gerritsen",
+    "name": "Erik Gerritsen",
     "role": "Security engineer",
     "org": "cbs",
-    "team": "team-cbs-statline",
-    "matrix": "@soumaya-smit:rijk.chat",
-    "avatar": "SS",
+    "team": "team-cbs-privacy",
+    "matrix": "@erik-gerritsen:rijk.chat",
+    "avatar": "EG",
     "history": [
       {
         "period": "2022–nu",
@@ -4511,373 +4031,13 @@ export const people = [
     ]
   },
   {
-    "id": "jan-yilmaz",
-    "name": "Jan Yilmaz",
+    "id": "lara-korkmaz",
+    "name": "Lara Korkmaz",
     "role": "Tech lead",
-    "org": "cbs",
-    "team": "team-cbs-microdata",
-    "matrix": "@jan-yilmaz:rijk.chat",
-    "avatar": "JY",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, CBS"
-      }
-    ]
-  },
-  {
-    "id": "ingrid-verhoeven",
-    "name": "Ingrid Verhoeven",
-    "role": "Scrum master",
-    "org": "cbs",
-    "team": "team-cbs-microdata",
-    "matrix": "@ingrid-verhoeven:rijk.chat",
-    "avatar": "IV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, CBS"
-      }
-    ]
-  },
-  {
-    "id": "jasper-wolters",
-    "name": "Jasper Wolters",
-    "role": "Information security officer",
-    "org": "cbs",
-    "team": "team-cbs-microdata",
-    "matrix": "@jasper-wolters:rijk.chat",
-    "avatar": "JW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, CBS"
-      }
-    ]
-  },
-  {
-    "id": "robin-dogan",
-    "name": "Robin Dogan",
-    "role": "Business analist",
-    "org": "cbs",
-    "team": "team-cbs-microdata",
-    "matrix": "@robin-dogan:rijk.chat",
-    "avatar": "RD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, CBS"
-      }
-    ]
-  },
-  {
-    "id": "fenna-timmermans",
-    "name": "Fenna Timmermans",
-    "role": "Database administrator",
-    "org": "cbs",
-    "team": "team-cbs-microdata",
-    "matrix": "@fenna-timmermans:rijk.chat",
-    "avatar": "FT",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, CBS"
-      }
-    ]
-  },
-  {
-    "id": "sterre-evers",
-    "name": "Sterre Evers",
-    "role": "Platform engineer",
-    "org": "cbs",
-    "team": "team-cbs-platform",
-    "matrix": "@sterre-evers:rijk.chat",
-    "avatar": "SE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, CBS"
-      }
-    ]
-  },
-  {
-    "id": "levi-van-rijn",
-    "name": "Levi Van Rijn",
-    "role": "Frontend developer",
-    "org": "cbs",
-    "team": "team-cbs-platform",
-    "matrix": "@levi-van-rijn:rijk.chat",
-    "avatar": "LV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, CBS"
-      }
-    ]
-  },
-  {
-    "id": "gijs-van-ginkel",
-    "name": "Gijs Van Ginkel",
-    "role": "Security engineer",
-    "org": "cbs",
-    "team": "team-cbs-platform",
-    "matrix": "@gijs-van-ginkel:rijk.chat",
-    "avatar": "GV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, CBS"
-      }
-    ]
-  },
-  {
-    "id": "olivier-sikkema",
-    "name": "Olivier Sikkema",
-    "role": "Tech lead",
-    "org": "cbs",
-    "team": "team-cbs-platform",
-    "matrix": "@olivier-sikkema:rijk.chat",
-    "avatar": "OS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, CBS"
-      }
-    ]
-  },
-  {
-    "id": "senna-vreeswijk",
-    "name": "Senna Vreeswijk",
-    "role": "Scrum master",
-    "org": "cbs",
-    "team": "team-cbs-platform",
-    "matrix": "@senna-vreeswijk:rijk.chat",
-    "avatar": "SV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, CBS"
-      }
-    ]
-  },
-  {
-    "id": "meryem-pijnenburg",
-    "name": "Meryem Pijnenburg",
-    "role": "Information security officer",
-    "org": "cbs",
-    "team": "team-cbs-platform",
-    "matrix": "@meryem-pijnenburg:rijk.chat",
-    "avatar": "MP",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, CBS"
-      }
-    ]
-  },
-  {
-    "id": "lotte-bos",
-    "name": "Lotte Bos",
-    "role": "Business analist",
-    "org": "cbs",
-    "team": "team-cbs-privacy",
-    "matrix": "@lotte-bos:rijk.chat",
-    "avatar": "LB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, CBS"
-      }
-    ]
-  },
-  {
-    "id": "tim-van-den-berg",
-    "name": "Tim Van den Berg",
-    "role": "Database administrator",
-    "org": "cbs",
-    "team": "team-cbs-privacy",
-    "matrix": "@tim-van-den-berg:rijk.chat",
-    "avatar": "TV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, CBS"
-      }
-    ]
-  },
-  {
-    "id": "bas-postma",
-    "name": "Bas Postma",
-    "role": "Platform engineer",
-    "org": "cbs",
-    "team": "team-cbs-privacy",
-    "matrix": "@bas-postma:rijk.chat",
-    "avatar": "BP",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, CBS"
-      }
-    ]
-  },
-  {
-    "id": "nadia-el-idrissi",
-    "name": "Nadia El Idrissi",
-    "role": "Frontend developer",
-    "org": "cbs",
-    "team": "team-cbs-privacy",
-    "matrix": "@nadia-el-idrissi:rijk.chat",
-    "avatar": "NE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, CBS"
-      }
-    ]
-  },
-  {
-    "id": "layla-boutaleb",
-    "name": "Layla Boutaleb",
-    "role": "Security engineer",
-    "org": "cbs",
-    "team": "team-cbs-privacy",
-    "matrix": "@layla-boutaleb:rijk.chat",
-    "avatar": "LB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, CBS"
-      }
-    ]
-  },
-  {
-    "id": "hassan-blom",
-    "name": "Hassan Blom",
-    "role": "Tech lead",
-    "org": "cbs",
-    "team": "team-cbs-privacy",
-    "matrix": "@hassan-blom:rijk.chat",
-    "avatar": "HB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, CBS"
-      }
-    ]
-  },
-  {
-    "id": "said-heijmans",
-    "name": "Said Heijmans",
-    "role": "Scrum master",
-    "org": "cbs",
-    "team": "team-cbs-privacy",
-    "matrix": "@said-heijmans:rijk.chat",
-    "avatar": "SH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, CBS"
-      }
-    ]
-  },
-  {
-    "id": "gerard-koning",
-    "name": "Gerard Koning",
-    "role": "Information security officer",
     "org": "justid",
     "team": "team-justid-documentatie",
-    "matrix": "@gerard-koning:rijk.chat",
-    "avatar": "GK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, Justid"
-      }
-    ]
-  },
-  {
-    "id": "wilma-hamid",
-    "name": "Wilma Hamid",
-    "role": "Business analist",
-    "org": "justid",
-    "team": "team-justid-documentatie",
-    "matrix": "@wilma-hamid:rijk.chat",
-    "avatar": "WH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, Justid"
-      }
-    ]
-  },
-  {
-    "id": "casper-diks",
-    "name": "Casper Diks",
-    "role": "Database administrator",
-    "org": "justid",
-    "team": "team-justid-documentatie",
-    "matrix": "@casper-diks:rijk.chat",
-    "avatar": "CD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, Justid"
-      }
-    ]
-  },
-  {
-    "id": "bart-akkaya",
-    "name": "Bart Akkaya",
-    "role": "Platform engineer",
-    "org": "justid",
-    "team": "team-justid-vog",
-    "matrix": "@bart-akkaya:rijk.chat",
-    "avatar": "BA",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, Justid"
-      }
-    ]
-  },
-  {
-    "id": "suze-de-vries",
-    "name": "Suze De Vries",
-    "role": "Frontend developer",
-    "org": "justid",
-    "team": "team-justid-vog",
-    "matrix": "@suze-de-vries:rijk.chat",
-    "avatar": "SD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, Justid"
-      }
-    ]
-  },
-  {
-    "id": "nina-van-dijk",
-    "name": "Nina Van Dijk",
-    "role": "Security engineer",
-    "org": "justid",
-    "team": "team-justid-vog",
-    "matrix": "@nina-van-dijk:rijk.chat",
-    "avatar": "NV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, Justid"
-      }
-    ]
-  },
-  {
-    "id": "loes-vermeulen",
-    "name": "Loes Vermeulen",
-    "role": "Tech lead",
-    "org": "justid",
-    "team": "team-justid-vog",
-    "matrix": "@loes-vermeulen:rijk.chat",
-    "avatar": "LV",
+    "matrix": "@lara-korkmaz:rijk.chat",
+    "avatar": "LK",
     "history": [
       {
         "period": "2022–nu",
@@ -4886,28 +4046,28 @@ export const people = [
     ]
   },
   {
-    "id": "boris-van-vliet",
-    "name": "Boris Van Vliet",
+    "id": "fleur-verbeek",
+    "name": "Fleur Verbeek",
     "role": "Scrum master",
-    "org": "logius",
-    "team": "team-koop-wetten",
-    "matrix": "@boris-van-vliet:rijk.chat",
-    "avatar": "BV",
+    "org": "justid",
+    "team": "team-justid-vog",
+    "matrix": "@fleur-verbeek:rijk.chat",
+    "avatar": "FV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, LOGIUS"
+        "what": "Scrum master, Justid"
       }
     ]
   },
   {
-    "id": "jelle-kaya",
-    "name": "Jelle Kaya",
+    "id": "luuk-van-wijk",
+    "name": "Luuk Van Wijk",
     "role": "Information security officer",
     "org": "logius",
     "team": "team-koop-wetten",
-    "matrix": "@jelle-kaya:rijk.chat",
-    "avatar": "JK",
+    "matrix": "@luuk-van-wijk:rijk.chat",
+    "avatar": "LV",
     "history": [
       {
         "period": "2022–nu",
@@ -4916,13 +4076,13 @@ export const people = [
     ]
   },
   {
-    "id": "anne-mol",
-    "name": "Anne Mol",
+    "id": "pim-de-groot",
+    "name": "Pim De Groot",
     "role": "Business analist",
     "org": "logius",
-    "team": "team-koop-wetten",
-    "matrix": "@anne-mol:rijk.chat",
-    "avatar": "AM",
+    "team": "team-koop-officielebekendmakingen",
+    "matrix": "@pim-de-groot:rijk.chat",
+    "avatar": "PD",
     "history": [
       {
         "period": "2022–nu",
@@ -4931,17 +4091,857 @@ export const people = [
     ]
   },
   {
+    "id": "demi-berends",
+    "name": "Demi Berends",
+    "role": "Database administrator",
+    "org": "dpc",
+    "team": "team-dpc-rijksoverheid",
+    "matrix": "@demi-berends:rijk.chat",
+    "avatar": "DB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, DPC"
+      }
+    ]
+  },
+  {
+    "id": "driss-tromp",
+    "name": "Driss Tromp",
+    "role": "Platform engineer",
+    "org": "dpc",
+    "team": "team-dpc-content",
+    "matrix": "@driss-tromp:rijk.chat",
+    "avatar": "DT",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, DPC"
+      }
+    ]
+  },
+  {
+    "id": "sanne-bouazza",
+    "name": "Sanne Bouazza",
+    "role": "Frontend developer",
+    "org": "dji",
+    "team": "team-dji-detentie",
+    "matrix": "@sanne-bouazza:rijk.chat",
+    "avatar": "SB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, DJI"
+      }
+    ]
+  },
+  {
+    "id": "thijs-roozendaal",
+    "name": "Thijs Roozendaal",
+    "role": "Security engineer",
+    "org": "dji",
+    "team": "team-dji-data",
+    "matrix": "@thijs-roozendaal:rijk.chat",
+    "avatar": "TR",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, DJI"
+      }
+    ]
+  },
+  {
+    "id": "maud-vos",
+    "name": "Maud Vos",
+    "role": "Tech lead",
+    "org": "cbr",
+    "team": "team-cbr-rijbewijs",
+    "matrix": "@maud-vos:rijk.chat",
+    "avatar": "MV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, CBR"
+      }
+    ]
+  },
+  {
+    "id": "mohammed-van-der-meer",
+    "name": "Mohammed Van der Meer",
+    "role": "Scrum master",
+    "org": "cbr",
+    "team": "team-cbr-reservering",
+    "matrix": "@mohammed-van-der-meer:rijk.chat",
+    "avatar": "MV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, CBR"
+      }
+    ]
+  },
+  {
+    "id": "ans-de-lange",
+    "name": "Ans De Lange",
+    "role": "Information security officer",
+    "org": "acm",
+    "team": "team-acm-toezicht",
+    "matrix": "@ans-de-lange:rijk.chat",
+    "avatar": "AD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, ACM"
+      }
+    ]
+  },
+  {
+    "id": "amira-bouali",
+    "name": "Amira Bouali",
+    "role": "Business analist",
+    "org": "afm",
+    "team": "team-afm-toezicht",
+    "matrix": "@amira-bouali:rijk.chat",
+    "avatar": "AB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, AFM"
+      }
+    ]
+  },
+  {
+    "id": "omar-el-hadioui",
+    "name": "Omar El Hadioui",
+    "role": "Database administrator",
+    "org": "ksa",
+    "team": "team-ksa-handhaving",
+    "matrix": "@omar-el-hadioui:rijk.chat",
+    "avatar": "OE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, Ksa"
+      }
+    ]
+  },
+  {
+    "id": "henk-van-der-wal",
+    "name": "Henk Van der Wal",
+    "role": "Platform engineer",
+    "org": "nza",
+    "team": "team-nza-zorgdata",
+    "matrix": "@henk-van-der-wal:rijk.chat",
+    "avatar": "HV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, NZa"
+      }
+    ]
+  },
+  {
+    "id": "marieke-goossens",
+    "name": "Marieke Goossens",
+    "role": "Frontend developer",
+    "org": "fin",
+    "team": "team-fin-financieel",
+    "matrix": "@marieke-goossens:rijk.chat",
+    "avatar": "MG",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, Fin"
+      }
+    ]
+  },
+  {
+    "id": "yvonne-van-driel",
+    "name": "Yvonne Van Driel",
+    "role": "Security engineer",
+    "org": "fin",
+    "team": "team-fin-platform",
+    "matrix": "@yvonne-van-driel:rijk.chat",
+    "avatar": "YV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, Fin"
+      }
+    ]
+  },
+  {
+    "id": "sander-bakhti",
+    "name": "Sander Bakhti",
+    "role": "Tech lead",
+    "org": "szw",
+    "team": "team-szw-regelingen",
+    "matrix": "@sander-bakhti:rijk.chat",
+    "avatar": "SB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, SZW"
+      }
+    ]
+  },
+  {
+    "id": "mark-renkema",
+    "name": "Mark Renkema",
+    "role": "Scrum master",
+    "org": "vws",
+    "team": "team-vws-zorgregister",
+    "matrix": "@mark-renkema:rijk.chat",
+    "avatar": "MR",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, VWS"
+      }
+    ]
+  },
+  {
+    "id": "julia-yildiz",
+    "name": "Julia Yildiz",
+    "role": "Information security officer",
+    "org": "vws",
+    "team": "team-vws-data",
+    "matrix": "@julia-yildiz:rijk.chat",
+    "avatar": "JY",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, VWS"
+      }
+    ]
+  },
+  {
+    "id": "liv-jansen",
+    "name": "Liv Jansen",
+    "role": "Business analist",
+    "org": "jenv",
+    "team": "team-jenv-keten",
+    "matrix": "@liv-jansen:rijk.chat",
+    "avatar": "LJ",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, JenV"
+      }
+    ]
+  },
+  {
+    "id": "mees-dijkstra",
+    "name": "Mees Dijkstra",
+    "role": "Database administrator",
+    "org": "ocw",
+    "team": "team-ocw-cultuurdata",
+    "matrix": "@mees-dijkstra:rijk.chat",
+    "avatar": "MD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, OCW"
+      }
+    ]
+  },
+  {
+    "id": "khalid-van-leeuwen",
+    "name": "Khalid Van Leeuwen",
+    "role": "Platform engineer",
+    "org": "lnv",
+    "team": "team-lnv-natuur",
+    "matrix": "@khalid-van-leeuwen:rijk.chat",
+    "avatar": "KV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, LNV"
+      }
+    ]
+  },
+  {
+    "id": "lieke-hoekstra",
+    "name": "Lieke Hoekstra",
+    "role": "Frontend developer",
+    "org": "ezk",
+    "team": "team-ezk-ondernemen",
+    "matrix": "@lieke-hoekstra:rijk.chat",
+    "avatar": "LH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, EZK"
+      }
+    ]
+  },
+  {
+    "id": "isa-aydin",
+    "name": "Isa Aydin",
+    "role": "Security engineer",
+    "org": "kgg",
+    "team": "team-kgg-energie",
+    "matrix": "@isa-aydin:rijk.chat",
+    "avatar": "IA",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, KGG"
+      }
+    ]
+  },
+  {
+    "id": "selin-kuiper",
+    "name": "Selin Kuiper",
+    "role": "Tech lead",
+    "org": "az",
+    "team": "team-az-comms",
+    "matrix": "@selin-kuiper:rijk.chat",
+    "avatar": "SK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, AZ"
+      }
+    ]
+  },
+  {
+    "id": "daan-stam",
+    "name": "Daan Stam",
+    "role": "Scrum master",
+    "org": "bz",
+    "team": "team-bz-consulair",
+    "matrix": "@daan-stam:rijk.chat",
+    "avatar": "DS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, BZ"
+      }
+    ]
+  },
+  {
+    "id": "iris-bosman",
+    "name": "Iris Bosman",
+    "role": "Information security officer",
+    "org": "def",
+    "team": "team-def-secinfra",
+    "matrix": "@iris-bosman:rijk.chat",
+    "avatar": "IB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, Def"
+      }
+    ]
+  },
+  {
+    "id": "jeroen-donker",
+    "name": "Jeroen Donker",
+    "role": "Business analist",
+    "org": "aenm",
+    "team": "team-aenm-keten",
+    "matrix": "@jeroen-donker:rijk.chat",
+    "avatar": "JD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, AenM"
+      }
+    ]
+  },
+  {
+    "id": "noor-tekin",
+    "name": "Noor Tekin",
+    "role": "Database administrator",
+    "org": "dhc",
+    "team": "team-dhc-geschillen",
+    "matrix": "@noor-tekin:rijk.chat",
+    "avatar": "NT",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, DHC"
+      }
+    ]
+  },
+  {
+    "id": "esra-buitenhuis",
+    "name": "Esra Buitenhuis",
+    "role": "Platform engineer",
+    "org": "ez",
+    "team": "team-ez-markt",
+    "matrix": "@esra-buitenhuis:rijk.chat",
+    "avatar": "EB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, EZ"
+      }
+    ]
+  },
+  {
+    "id": "tariq-van-bommel",
+    "name": "Tariq Van Bommel",
+    "role": "Frontend developer",
+    "org": "bzk",
+    "team": "team-bzk-iam",
+    "matrix": "@tariq-van-bommel:rijk.chat",
+    "avatar": "TV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, BZK"
+      }
+    ]
+  },
+  {
+    "id": "soumaya-smit",
+    "name": "Soumaya Smit",
+    "role": "Security engineer",
+    "org": "bzk",
+    "team": "team-bzk-security",
+    "matrix": "@soumaya-smit:rijk.chat",
+    "avatar": "SS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, BZK"
+      }
+    ]
+  },
+  {
+    "id": "jan-yilmaz",
+    "name": "Jan Yilmaz",
+    "role": "Tech lead",
+    "org": "rijksict",
+    "team": "team-rijksict-docs",
+    "matrix": "@jan-yilmaz:rijk.chat",
+    "avatar": "JY",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, RIJKSICT"
+      }
+    ]
+  },
+  {
+    "id": "ingrid-verhoeven",
+    "name": "Ingrid Verhoeven",
+    "role": "Scrum master",
+    "org": "rijksict",
+    "team": "team-rijksict-iam",
+    "matrix": "@ingrid-verhoeven:rijk.chat",
+    "avatar": "IV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, RIJKSICT"
+      }
+    ]
+  },
+  {
+    "id": "jasper-wolters",
+    "name": "Jasper Wolters",
+    "role": "Information security officer",
+    "org": "logius",
+    "team": "team-logius-docs",
+    "matrix": "@jasper-wolters:rijk.chat",
+    "avatar": "JW",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "robin-dogan",
+    "name": "Robin Dogan",
+    "role": "Business analist",
+    "org": "bd",
+    "team": "team-bd-inning",
+    "matrix": "@robin-dogan:rijk.chat",
+    "avatar": "RD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, BD"
+      }
+    ]
+  },
+  {
+    "id": "fenna-timmermans",
+    "name": "Fenna Timmermans",
+    "role": "Database administrator",
+    "org": "bd",
+    "team": "team-bd-aangifte",
+    "matrix": "@fenna-timmermans:rijk.chat",
+    "avatar": "FT",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, BD"
+      }
+    ]
+  },
+  {
+    "id": "sterre-evers",
+    "name": "Sterre Evers",
+    "role": "Platform engineer",
+    "org": "bd",
+    "team": "team-bd-gegevens",
+    "matrix": "@sterre-evers:rijk.chat",
+    "avatar": "SE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, BD"
+      }
+    ]
+  },
+  {
+    "id": "levi-van-rijn",
+    "name": "Levi Van Rijn",
+    "role": "Frontend developer",
+    "org": "bd",
+    "team": "team-bd-fraude",
+    "matrix": "@levi-van-rijn:rijk.chat",
+    "avatar": "LV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, BD"
+      }
+    ]
+  },
+  {
+    "id": "gijs-van-ginkel",
+    "name": "Gijs Van Ginkel",
+    "role": "Security engineer",
+    "org": "bd",
+    "team": "team-bd-iam",
+    "matrix": "@gijs-van-ginkel:rijk.chat",
+    "avatar": "GV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, BD"
+      }
+    ]
+  },
+  {
+    "id": "olivier-sikkema",
+    "name": "Olivier Sikkema",
+    "role": "Tech lead",
+    "org": "bd",
+    "team": "team-bd-platform",
+    "matrix": "@olivier-sikkema:rijk.chat",
+    "avatar": "OS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, BD"
+      }
+    ]
+  },
+  {
+    "id": "senna-vreeswijk",
+    "name": "Senna Vreeswijk",
+    "role": "Scrum master",
+    "org": "duo",
+    "team": "team-duo-studiefinanciering",
+    "matrix": "@senna-vreeswijk:rijk.chat",
+    "avatar": "SV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, DUO"
+      }
+    ]
+  },
+  {
+    "id": "meryem-pijnenburg",
+    "name": "Meryem Pijnenburg",
+    "role": "Information security officer",
+    "org": "duo",
+    "team": "team-duo-register",
+    "matrix": "@meryem-pijnenburg:rijk.chat",
+    "avatar": "MP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, DUO"
+      }
+    ]
+  },
+  {
+    "id": "lotte-bos",
+    "name": "Lotte Bos",
+    "role": "Business analist",
+    "org": "duo",
+    "team": "team-duo-examens",
+    "matrix": "@lotte-bos:rijk.chat",
+    "avatar": "LB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, DUO"
+      }
+    ]
+  },
+  {
+    "id": "tim-van-den-berg",
+    "name": "Tim Van den Berg",
+    "role": "Database administrator",
+    "org": "duo",
+    "team": "team-duo-data",
+    "matrix": "@tim-van-den-berg:rijk.chat",
+    "avatar": "TV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, DUO"
+      }
+    ]
+  },
+  {
+    "id": "bas-postma",
+    "name": "Bas Postma",
+    "role": "Platform engineer",
+    "org": "duo",
+    "team": "team-duo-platform",
+    "matrix": "@bas-postma:rijk.chat",
+    "avatar": "BP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, DUO"
+      }
+    ]
+  },
+  {
+    "id": "nadia-el-idrissi",
+    "name": "Nadia El Idrissi",
+    "role": "Frontend developer",
+    "org": "uwv",
+    "team": "team-uwv-uitkeringen",
+    "matrix": "@nadia-el-idrissi:rijk.chat",
+    "avatar": "NE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, UWV"
+      }
+    ]
+  },
+  {
+    "id": "layla-boutaleb",
+    "name": "Layla Boutaleb",
+    "role": "Security engineer",
+    "org": "uwv",
+    "team": "team-uwv-werk",
+    "matrix": "@layla-boutaleb:rijk.chat",
+    "avatar": "LB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, UWV"
+      }
+    ]
+  },
+  {
+    "id": "hassan-blom",
+    "name": "Hassan Blom",
+    "role": "Tech lead",
+    "org": "uwv",
+    "team": "team-uwv-gegevens",
+    "matrix": "@hassan-blom:rijk.chat",
+    "avatar": "HB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, UWV"
+      }
+    ]
+  },
+  {
+    "id": "said-heijmans",
+    "name": "Said Heijmans",
+    "role": "Scrum master",
+    "org": "uwv",
+    "team": "team-uwv-arbeidsmarkt",
+    "matrix": "@said-heijmans:rijk.chat",
+    "avatar": "SH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, UWV"
+      }
+    ]
+  },
+  {
+    "id": "gerard-koning",
+    "name": "Gerard Koning",
+    "role": "Information security officer",
+    "org": "uwv",
+    "team": "team-uwv-platform",
+    "matrix": "@gerard-koning:rijk.chat",
+    "avatar": "GK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, UWV"
+      }
+    ]
+  },
+  {
+    "id": "wilma-hamid",
+    "name": "Wilma Hamid",
+    "role": "Business analist",
+    "org": "rvo",
+    "team": "team-rvo-subsidies",
+    "matrix": "@wilma-hamid:rijk.chat",
+    "avatar": "WH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, RVO"
+      }
+    ]
+  },
+  {
+    "id": "casper-diks",
+    "name": "Casper Diks",
+    "role": "Database administrator",
+    "org": "rvo",
+    "team": "team-rvo-vergunningen",
+    "matrix": "@casper-diks:rijk.chat",
+    "avatar": "CD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, RVO"
+      }
+    ]
+  },
+  {
+    "id": "bart-akkaya",
+    "name": "Bart Akkaya",
+    "role": "Platform engineer",
+    "org": "rvo",
+    "team": "team-rvo-geodata",
+    "matrix": "@bart-akkaya:rijk.chat",
+    "avatar": "BA",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, RVO"
+      }
+    ]
+  },
+  {
+    "id": "suze-de-vries",
+    "name": "Suze De Vries",
+    "role": "Frontend developer",
+    "org": "rvo",
+    "team": "team-rvo-portaal",
+    "matrix": "@suze-de-vries:rijk.chat",
+    "avatar": "SD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, RVO"
+      }
+    ]
+  },
+  {
+    "id": "nina-van-dijk",
+    "name": "Nina Van Dijk",
+    "role": "Security engineer",
+    "org": "rws",
+    "team": "team-rws-areaal",
+    "matrix": "@nina-van-dijk:rijk.chat",
+    "avatar": "NV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, RWS"
+      }
+    ]
+  },
+  {
+    "id": "loes-vermeulen",
+    "name": "Loes Vermeulen",
+    "role": "Tech lead",
+    "org": "rws",
+    "team": "team-rws-verkeer",
+    "matrix": "@loes-vermeulen:rijk.chat",
+    "avatar": "LV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, RWS"
+      }
+    ]
+  },
+  {
+    "id": "boris-van-vliet",
+    "name": "Boris Van Vliet",
+    "role": "Scrum master",
+    "org": "rws",
+    "team": "team-rws-sensoren",
+    "matrix": "@boris-van-vliet:rijk.chat",
+    "avatar": "BV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, RWS"
+      }
+    ]
+  },
+  {
+    "id": "jelle-kaya",
+    "name": "Jelle Kaya",
+    "role": "Information security officer",
+    "org": "rws",
+    "team": "team-rws-inspectie",
+    "matrix": "@jelle-kaya:rijk.chat",
+    "avatar": "JK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, RWS"
+      }
+    ]
+  },
+  {
+    "id": "anne-mol",
+    "name": "Anne Mol",
+    "role": "Business analist",
+    "org": "rws",
+    "team": "team-rws-platform",
+    "matrix": "@anne-mol:rijk.chat",
+    "avatar": "AM",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, RWS"
+      }
+    ]
+  },
+  {
     "id": "ilias-van-es",
     "name": "Ilias Van Es",
     "role": "Database administrator",
-    "org": "logius",
-    "team": "team-koop-wetten",
+    "org": "ind",
+    "team": "team-ind-aanvragen",
     "matrix": "@ilias-van-es:rijk.chat",
     "avatar": "IV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, LOGIUS"
+        "what": "Database administrator, IND"
       }
     ]
   },
@@ -4949,14 +4949,14 @@ export const people = [
     "id": "joost-wagenaar",
     "name": "Joost Wagenaar",
     "role": "Platform engineer",
-    "org": "logius",
-    "team": "team-koop-wetten",
+    "org": "ind",
+    "team": "team-ind-dossiers",
     "matrix": "@joost-wagenaar:rijk.chat",
     "avatar": "JW",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, LOGIUS"
+        "what": "Platform engineer, IND"
       }
     ]
   },
@@ -4964,14 +4964,14 @@ export const people = [
     "id": "eva-lubbers",
     "name": "Eva Lubbers",
     "role": "Frontend developer",
-    "org": "logius",
-    "team": "team-koop-officielebekendmakingen",
+    "org": "ind",
+    "team": "team-ind-iam",
     "matrix": "@eva-lubbers:rijk.chat",
     "avatar": "EL",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, LOGIUS"
+        "what": "Frontend developer, IND"
       }
     ]
   },
@@ -4979,14 +4979,14 @@ export const people = [
     "id": "stijn-erdem",
     "name": "Stijn Erdem",
     "role": "Security engineer",
-    "org": "logius",
-    "team": "team-koop-officielebekendmakingen",
+    "org": "ind",
+    "team": "team-ind-data",
     "matrix": "@stijn-erdem:rijk.chat",
     "avatar": "SE",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, LOGIUS"
+        "what": "Security engineer, IND"
       }
     ]
   },
@@ -4995,7 +4995,7 @@ export const people = [
     "name": "Aisha Slootweg",
     "role": "Tech lead",
     "org": "logius",
-    "team": "team-koop-officielebekendmakingen",
+    "team": "team-logius-digid",
     "matrix": "@aisha-slootweg:rijk.chat",
     "avatar": "AS",
     "history": [
@@ -5010,7 +5010,7 @@ export const people = [
     "name": "Pieter Asik",
     "role": "Scrum master",
     "org": "logius",
-    "team": "team-koop-officielebekendmakingen",
+    "team": "team-logius-digikoppeling",
     "matrix": "@pieter-asik:rijk.chat",
     "avatar": "PA",
     "history": [
@@ -5025,7 +5025,7 @@ export const people = [
     "name": "Rachid El Amrani",
     "role": "Information security officer",
     "org": "logius",
-    "team": "team-koop-officielebekendmakingen",
+    "team": "team-logius-machtigen",
     "matrix": "@rachid-el-amrani:rijk.chat",
     "avatar": "RE",
     "history": [
@@ -5040,7 +5040,7 @@ export const people = [
     "name": "Hala Ozturk",
     "role": "Business analist",
     "org": "logius",
-    "team": "team-koop-officielebekendmakingen",
+    "team": "team-logius-stelsel",
     "matrix": "@hala-ozturk:rijk.chat",
     "avatar": "HO",
     "history": [
@@ -5054,14 +5054,14 @@ export const people = [
     "id": "cornelis-maas",
     "name": "Cornelis Maas",
     "role": "Database administrator",
-    "org": "dpc",
-    "team": "team-dpc-rijksoverheid",
+    "org": "dictu",
+    "team": "team-dictu-hosting",
     "matrix": "@cornelis-maas:rijk.chat",
     "avatar": "CM",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Database administrator, DPC"
+        "what": "Database administrator, DICTU"
       }
     ]
   },
@@ -5069,14 +5069,14 @@ export const people = [
     "id": "saskia-veenstra",
     "name": "Saskia Veenstra",
     "role": "Platform engineer",
-    "org": "dpc",
-    "team": "team-dpc-rijksoverheid",
+    "org": "dictu",
+    "team": "team-dictu-werkplek",
     "matrix": "@saskia-veenstra:rijk.chat",
     "avatar": "SV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Platform engineer, DPC"
+        "what": "Platform engineer, DICTU"
       }
     ]
   },
@@ -5084,14 +5084,14 @@ export const people = [
     "id": "floris-arslan",
     "name": "Floris Arslan",
     "role": "Frontend developer",
-    "org": "dpc",
-    "team": "team-dpc-rijksoverheid",
+    "org": "dictu",
+    "team": "team-dictu-security",
     "matrix": "@floris-arslan:rijk.chat",
     "avatar": "FA",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Frontend developer, DPC"
+        "what": "Frontend developer, DICTU"
       }
     ]
   },
@@ -5099,14 +5099,14 @@ export const people = [
     "id": "roel-roeloffzen",
     "name": "Roel Roeloffzen",
     "role": "Security engineer",
-    "org": "dpc",
-    "team": "team-dpc-rijksoverheid",
+    "org": "dictu",
+    "team": "team-dictu-data",
     "matrix": "@roel-roeloffzen:rijk.chat",
     "avatar": "RR",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, DPC"
+        "what": "Security engineer, DICTU"
       }
     ]
   },
@@ -5114,14 +5114,14 @@ export const people = [
     "id": "vincent-van-loon",
     "name": "Vincent Van Loon",
     "role": "Tech lead",
-    "org": "dpc",
-    "team": "team-dpc-rijksoverheid",
+    "org": "rvig",
+    "team": "team-rvig-brp",
     "matrix": "@vincent-van-loon:rijk.chat",
     "avatar": "VV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, DPC"
+        "what": "Tech lead, RvIG"
       }
     ]
   },
@@ -5129,14 +5129,14 @@ export const people = [
     "id": "sophie-lammers",
     "name": "Sophie Lammers",
     "role": "Scrum master",
-    "org": "dpc",
-    "team": "team-dpc-rijksoverheid",
+    "org": "rvig",
+    "team": "team-rvig-reisdocumenten",
     "matrix": "@sophie-lammers:rijk.chat",
     "avatar": "SL",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, DPC"
+        "what": "Scrum master, RvIG"
       }
     ]
   },
@@ -5144,14 +5144,14 @@ export const people = [
     "id": "indy-nijhuis",
     "name": "Indy Nijhuis",
     "role": "Information security officer",
-    "org": "dpc",
-    "team": "team-dpc-rijksoverheid",
+    "org": "rvig",
+    "team": "team-rvig-iam",
     "matrix": "@indy-nijhuis:rijk.chat",
     "avatar": "IN",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, DPC"
+        "what": "Information security officer, RvIG"
       }
     ]
   },
@@ -5159,10 +5159,370 @@ export const people = [
     "id": "finn-holwerda",
     "name": "Finn Holwerda",
     "role": "Business analist",
-    "org": "dpc",
-    "team": "team-dpc-content",
+    "org": "jio",
+    "team": "team-jio-platform",
     "matrix": "@finn-holwerda:rijk.chat",
     "avatar": "FH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, JIO"
+      }
+    ]
+  },
+  {
+    "id": "wessel-naber",
+    "name": "Wessel Naber",
+    "role": "Database administrator",
+    "org": "jio",
+    "team": "team-jio-keten",
+    "matrix": "@wessel-naber:rijk.chat",
+    "avatar": "WN",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, JIO"
+      }
+    ]
+  },
+  {
+    "id": "britt-veldhuis",
+    "name": "Britt Veldhuis",
+    "role": "Platform engineer",
+    "org": "jio",
+    "team": "team-jio-security",
+    "matrix": "@britt-veldhuis:rijk.chat",
+    "avatar": "BV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, JIO"
+      }
+    ]
+  },
+  {
+    "id": "abdel-mulder",
+    "name": "Abdel Mulder",
+    "role": "Frontend developer",
+    "org": "cjib",
+    "team": "team-cjib-inning",
+    "matrix": "@abdel-mulder:rijk.chat",
+    "avatar": "AM",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, CJIB"
+      }
+    ]
+  },
+  {
+    "id": "dilan-janssen",
+    "name": "Dilan Janssen",
+    "role": "Security engineer",
+    "org": "cjib",
+    "team": "team-cjib-sanctie",
+    "matrix": "@dilan-janssen:rijk.chat",
+    "avatar": "DJ",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, CJIB"
+      }
+    ]
+  },
+  {
+    "id": "sven-huisman",
+    "name": "Sven Huisman",
+    "role": "Tech lead",
+    "org": "cjib",
+    "team": "team-cjib-data",
+    "matrix": "@sven-huisman:rijk.chat",
+    "avatar": "SH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, CJIB"
+      }
+    ]
+  },
+  {
+    "id": "hugo-vink",
+    "name": "Hugo Vink",
+    "role": "Scrum master",
+    "org": "svb",
+    "team": "team-svb-aow",
+    "matrix": "@hugo-vink:rijk.chat",
+    "avatar": "HV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, SVB"
+      }
+    ]
+  },
+  {
+    "id": "anouk-ennaji",
+    "name": "Anouk Ennaji",
+    "role": "Information security officer",
+    "org": "svb",
+    "team": "team-svb-kinderbijslag",
+    "matrix": "@anouk-ennaji:rijk.chat",
+    "avatar": "AE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, SVB"
+      }
+    ]
+  },
+  {
+    "id": "fatima-roos",
+    "name": "Fatima Roos",
+    "role": "Business analist",
+    "org": "svb",
+    "team": "team-svb-gegevens",
+    "matrix": "@fatima-roos:rijk.chat",
+    "avatar": "FR",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, SVB"
+      }
+    ]
+  },
+  {
+    "id": "bilal-bruins",
+    "name": "Bilal Bruins",
+    "role": "Database administrator",
+    "org": "svb",
+    "team": "team-svb-platform",
+    "matrix": "@bilal-bruins:rijk.chat",
+    "avatar": "BB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, SVB"
+      }
+    ]
+  },
+  {
+    "id": "zeynep-van-der-veen",
+    "name": "Zeynep Van der Veen",
+    "role": "Platform engineer",
+    "org": "kvk",
+    "team": "team-kvk-handelsregister",
+    "matrix": "@zeynep-van-der-veen:rijk.chat",
+    "avatar": "ZV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, KVK"
+      }
+    ]
+  },
+  {
+    "id": "willem-mohamed",
+    "name": "Willem Mohamed",
+    "role": "Frontend developer",
+    "org": "kvk",
+    "team": "team-kvk-api",
+    "matrix": "@willem-mohamed:rijk.chat",
+    "avatar": "WM",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, KVK"
+      }
+    ]
+  },
+  {
+    "id": "kees-van-os",
+    "name": "Kees Van Os",
+    "role": "Security engineer",
+    "org": "kvk",
+    "team": "team-kvk-ondernemersplein",
+    "matrix": "@kees-van-os:rijk.chat",
+    "avatar": "KV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, KVK"
+      }
+    ]
+  },
+  {
+    "id": "carla-el-khattabi",
+    "name": "Carla El Khattabi",
+    "role": "Tech lead",
+    "org": "ienw",
+    "team": "team-ienw-kenteken",
+    "matrix": "@carla-el-khattabi:rijk.chat",
+    "avatar": "CE",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, IenW"
+      }
+    ]
+  },
+  {
+    "id": "niels-wielinga",
+    "name": "Niels Wielinga",
+    "role": "Scrum master",
+    "org": "ienw",
+    "team": "team-ienw-voertuig",
+    "matrix": "@niels-wielinga:rijk.chat",
+    "avatar": "NW",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, IenW"
+      }
+    ]
+  },
+  {
+    "id": "koen-hendriks",
+    "name": "Koen Hendriks",
+    "role": "Information security officer",
+    "org": "ienw",
+    "team": "team-ienw-data",
+    "matrix": "@koen-hendriks:rijk.chat",
+    "avatar": "KH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, IenW"
+      }
+    ]
+  },
+  {
+    "id": "roos-hofman",
+    "name": "Roos Hofman",
+    "role": "Business analist",
+    "org": "cbs",
+    "team": "team-cbs-statline",
+    "matrix": "@roos-hofman:rijk.chat",
+    "avatar": "RH",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, CBS"
+      }
+    ]
+  },
+  {
+    "id": "mila-willems",
+    "name": "Mila Willems",
+    "role": "Database administrator",
+    "org": "cbs",
+    "team": "team-cbs-microdata",
+    "matrix": "@mila-willems:rijk.chat",
+    "avatar": "MW",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, CBS"
+      }
+    ]
+  },
+  {
+    "id": "sem-demir",
+    "name": "Sem Demir",
+    "role": "Platform engineer",
+    "org": "cbs",
+    "team": "team-cbs-platform",
+    "matrix": "@sem-demir:rijk.chat",
+    "avatar": "SD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, CBS"
+      }
+    ]
+  },
+  {
+    "id": "ahmed-van-der-velde",
+    "name": "Ahmed Van der Velde",
+    "role": "Frontend developer",
+    "org": "cbs",
+    "team": "team-cbs-privacy",
+    "matrix": "@ahmed-van-der-velde:rijk.chat",
+    "avatar": "AV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, CBS"
+      }
+    ]
+  },
+  {
+    "id": "mats-groen",
+    "name": "Mats Groen",
+    "role": "Security engineer",
+    "org": "justid",
+    "team": "team-justid-documentatie",
+    "matrix": "@mats-groen:rijk.chat",
+    "avatar": "MG",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, Justid"
+      }
+    ]
+  },
+  {
+    "id": "puck-tuinstra",
+    "name": "Puck Tuinstra",
+    "role": "Tech lead",
+    "org": "justid",
+    "team": "team-justid-vog",
+    "matrix": "@puck-tuinstra:rijk.chat",
+    "avatar": "PT",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, Justid"
+      }
+    ]
+  },
+  {
+    "id": "hatice-schipper",
+    "name": "Hatice Schipper",
+    "role": "Scrum master",
+    "org": "logius",
+    "team": "team-koop-wetten",
+    "matrix": "@hatice-schipper:rijk.chat",
+    "avatar": "HS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "emma-polat",
+    "name": "Emma Polat",
+    "role": "Information security officer",
+    "org": "logius",
+    "team": "team-koop-officielebekendmakingen",
+    "matrix": "@emma-polat:rijk.chat",
+    "avatar": "EP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, LOGIUS"
+      }
+    ]
+  },
+  {
+    "id": "lars-korteweg",
+    "name": "Lars Korteweg",
+    "role": "Business analist",
+    "org": "dpc",
+    "team": "team-dpc-rijksoverheid",
+    "matrix": "@lars-korteweg:rijk.chat",
+    "avatar": "LK",
     "history": [
       {
         "period": "2022–nu",
@@ -5171,13 +5531,13 @@ export const people = [
     ]
   },
   {
-    "id": "wessel-naber",
-    "name": "Wessel Naber",
+    "id": "femke-bulut",
+    "name": "Femke Bulut",
     "role": "Database administrator",
     "org": "dpc",
     "team": "team-dpc-content",
-    "matrix": "@wessel-naber:rijk.chat",
-    "avatar": "WN",
+    "matrix": "@femke-bulut:rijk.chat",
+    "avatar": "FB",
     "history": [
       {
         "period": "2022–nu",
@@ -5186,133 +5546,13 @@ export const people = [
     ]
   },
   {
-    "id": "britt-veldhuis",
-    "name": "Britt Veldhuis",
-    "role": "Platform engineer",
-    "org": "dpc",
-    "team": "team-dpc-content",
-    "matrix": "@britt-veldhuis:rijk.chat",
-    "avatar": "BV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, DPC"
-      }
-    ]
-  },
-  {
-    "id": "abdel-mulder",
-    "name": "Abdel Mulder",
-    "role": "Frontend developer",
-    "org": "dji",
-    "team": "team-dji-detentie",
-    "matrix": "@abdel-mulder:rijk.chat",
-    "avatar": "AM",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, DJI"
-      }
-    ]
-  },
-  {
-    "id": "dilan-janssen",
-    "name": "Dilan Janssen",
-    "role": "Security engineer",
-    "org": "dji",
-    "team": "team-dji-detentie",
-    "matrix": "@dilan-janssen:rijk.chat",
-    "avatar": "DJ",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, DJI"
-      }
-    ]
-  },
-  {
-    "id": "sven-huisman",
-    "name": "Sven Huisman",
-    "role": "Tech lead",
-    "org": "dji",
-    "team": "team-dji-detentie",
-    "matrix": "@sven-huisman:rijk.chat",
-    "avatar": "SH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, DJI"
-      }
-    ]
-  },
-  {
-    "id": "hugo-vink",
-    "name": "Hugo Vink",
-    "role": "Scrum master",
-    "org": "dji",
-    "team": "team-dji-detentie",
-    "matrix": "@hugo-vink:rijk.chat",
-    "avatar": "HV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, DJI"
-      }
-    ]
-  },
-  {
-    "id": "anouk-ennaji",
-    "name": "Anouk Ennaji",
-    "role": "Information security officer",
-    "org": "dji",
-    "team": "team-dji-data",
-    "matrix": "@anouk-ennaji:rijk.chat",
-    "avatar": "AE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, DJI"
-      }
-    ]
-  },
-  {
-    "id": "fatima-roos",
-    "name": "Fatima Roos",
-    "role": "Business analist",
-    "org": "dji",
-    "team": "team-dji-data",
-    "matrix": "@fatima-roos:rijk.chat",
-    "avatar": "FR",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, DJI"
-      }
-    ]
-  },
-  {
-    "id": "bilal-bruins",
-    "name": "Bilal Bruins",
-    "role": "Database administrator",
-    "org": "dji",
-    "team": "team-dji-data",
-    "matrix": "@bilal-bruins:rijk.chat",
-    "avatar": "BB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, DJI"
-      }
-    ]
-  },
-  {
-    "id": "zeynep-van-der-veen",
-    "name": "Zeynep Van der Veen",
+    "id": "sara-visser",
+    "name": "Sara Visser",
     "role": "Platform engineer",
     "org": "dji",
-    "team": "team-dji-data",
-    "matrix": "@zeynep-van-der-veen:rijk.chat",
-    "avatar": "ZV",
+    "team": "team-dji-detentie",
+    "matrix": "@sara-visser:rijk.chat",
+    "avatar": "SV",
     "history": [
       {
         "period": "2022–nu",
@@ -5321,13 +5561,13 @@ export const people = [
     ]
   },
   {
-    "id": "willem-mohamed",
-    "name": "Willem Mohamed",
+    "id": "mehmet-kok",
+    "name": "Mehmet Kok",
     "role": "Frontend developer",
     "org": "dji",
     "team": "team-dji-data",
-    "matrix": "@willem-mohamed:rijk.chat",
-    "avatar": "WM",
+    "matrix": "@mehmet-kok:rijk.chat",
+    "avatar": "MK",
     "history": [
       {
         "period": "2022–nu",
@@ -5336,257 +5576,17 @@ export const people = [
     ]
   },
   {
-    "id": "kees-van-os",
-    "name": "Kees Van Os",
-    "role": "Security engineer",
-    "org": "cbr",
-    "team": "team-cbr-rijbewijs",
-    "matrix": "@kees-van-os:rijk.chat",
-    "avatar": "KV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, CBR"
-      }
-    ]
-  },
-  {
-    "id": "carla-el-khattabi",
-    "name": "Carla El Khattabi",
-    "role": "Tech lead",
-    "org": "cbr",
-    "team": "team-cbr-rijbewijs",
-    "matrix": "@carla-el-khattabi:rijk.chat",
-    "avatar": "CE",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, CBR"
-      }
-    ]
-  },
-  {
-    "id": "niels-wielinga",
-    "name": "Niels Wielinga",
-    "role": "Scrum master",
-    "org": "cbr",
-    "team": "team-cbr-rijbewijs",
-    "matrix": "@niels-wielinga:rijk.chat",
-    "avatar": "NW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, CBR"
-      }
-    ]
-  },
-  {
-    "id": "koen-hendriks",
-    "name": "Koen Hendriks",
-    "role": "Information security officer",
-    "org": "cbr",
-    "team": "team-cbr-rijbewijs",
-    "matrix": "@koen-hendriks:rijk.chat",
-    "avatar": "KH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, CBR"
-      }
-    ]
-  },
-  {
-    "id": "roos-hofman",
-    "name": "Roos Hofman",
-    "role": "Business analist",
-    "org": "cbr",
-    "team": "team-cbr-rijbewijs",
-    "matrix": "@roos-hofman:rijk.chat",
-    "avatar": "RH",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, CBR"
-      }
-    ]
-  },
-  {
-    "id": "mila-willems",
-    "name": "Mila Willems",
-    "role": "Database administrator",
-    "org": "cbr",
-    "team": "team-cbr-rijbewijs",
-    "matrix": "@mila-willems:rijk.chat",
-    "avatar": "MW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, CBR"
-      }
-    ]
-  },
-  {
-    "id": "sem-demir",
-    "name": "Sem Demir",
-    "role": "Platform engineer",
-    "org": "cbr",
-    "team": "team-cbr-reservering",
-    "matrix": "@sem-demir:rijk.chat",
-    "avatar": "SD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, CBR"
-      }
-    ]
-  },
-  {
-    "id": "ahmed-van-der-velde",
-    "name": "Ahmed Van der Velde",
-    "role": "Frontend developer",
-    "org": "cbr",
-    "team": "team-cbr-reservering",
-    "matrix": "@ahmed-van-der-velde:rijk.chat",
-    "avatar": "AV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, CBR"
-      }
-    ]
-  },
-  {
-    "id": "mats-groen",
-    "name": "Mats Groen",
-    "role": "Security engineer",
-    "org": "cbr",
-    "team": "team-cbr-reservering",
-    "matrix": "@mats-groen:rijk.chat",
-    "avatar": "MG",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, CBR"
-      }
-    ]
-  },
-  {
-    "id": "puck-tuinstra",
-    "name": "Puck Tuinstra",
-    "role": "Tech lead",
-    "org": "cbr",
-    "team": "team-cbr-reservering",
-    "matrix": "@puck-tuinstra:rijk.chat",
-    "avatar": "PT",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, CBR"
-      }
-    ]
-  },
-  {
-    "id": "hatice-schipper",
-    "name": "Hatice Schipper",
-    "role": "Scrum master",
-    "org": "cbr",
-    "team": "team-cbr-reservering",
-    "matrix": "@hatice-schipper:rijk.chat",
-    "avatar": "HS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, CBR"
-      }
-    ]
-  },
-  {
-    "id": "emma-polat",
-    "name": "Emma Polat",
-    "role": "Information security officer",
-    "org": "cbr",
-    "team": "team-cbr-reservering",
-    "matrix": "@emma-polat:rijk.chat",
-    "avatar": "EP",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, CBR"
-      }
-    ]
-  },
-  {
-    "id": "lars-korteweg",
-    "name": "Lars Korteweg",
-    "role": "Business analist",
-    "org": "cbr",
-    "team": "team-cbr-reservering",
-    "matrix": "@lars-korteweg:rijk.chat",
-    "avatar": "LK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, CBR"
-      }
-    ]
-  },
-  {
-    "id": "femke-bulut",
-    "name": "Femke Bulut",
-    "role": "Database administrator",
-    "org": "acm",
-    "team": "team-acm-toezicht",
-    "matrix": "@femke-bulut:rijk.chat",
-    "avatar": "FB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, ACM"
-      }
-    ]
-  },
-  {
-    "id": "sara-visser",
-    "name": "Sara Visser",
-    "role": "Platform engineer",
-    "org": "acm",
-    "team": "team-acm-toezicht",
-    "matrix": "@sara-visser:rijk.chat",
-    "avatar": "SV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, ACM"
-      }
-    ]
-  },
-  {
-    "id": "mehmet-kok",
-    "name": "Mehmet Kok",
-    "role": "Frontend developer",
-    "org": "acm",
-    "team": "team-acm-toezicht",
-    "matrix": "@mehmet-kok:rijk.chat",
-    "avatar": "MK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, ACM"
-      }
-    ]
-  },
-  {
     "id": "imane-van-der-heijden",
     "name": "Imane Van der Heijden",
     "role": "Security engineer",
-    "org": "afm",
-    "team": "team-afm-toezicht",
+    "org": "cbr",
+    "team": "team-cbr-rijbewijs",
     "matrix": "@imane-van-der-heijden:rijk.chat",
     "avatar": "IV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, AFM"
+        "what": "Security engineer, CBR"
       }
     ]
   },
@@ -5594,14 +5594,14 @@ export const people = [
     "id": "fatih-van-den-heuvel",
     "name": "Fatih Van den Heuvel",
     "role": "Tech lead",
-    "org": "afm",
-    "team": "team-afm-toezicht",
+    "org": "cbr",
+    "team": "team-cbr-reservering",
     "matrix": "@fatih-van-den-heuvel:rijk.chat",
     "avatar": "FV",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, AFM"
+        "what": "Tech lead, CBR"
       }
     ]
   },
@@ -5609,14 +5609,14 @@ export const people = [
     "id": "dirk-sahin",
     "name": "Dirk Sahin",
     "role": "Scrum master",
-    "org": "afm",
-    "team": "team-afm-toezicht",
+    "org": "acm",
+    "team": "team-acm-toezicht",
     "matrix": "@dirk-sahin:rijk.chat",
     "avatar": "DS",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, AFM"
+        "what": "Scrum master, ACM"
       }
     ]
   },
@@ -5654,130 +5654,10 @@ export const people = [
     "id": "maarten-theunissen",
     "name": "Maarten Theunissen",
     "role": "Database administrator",
-    "org": "ksa",
-    "team": "team-ksa-handhaving",
+    "org": "nza",
+    "team": "team-nza-zorgdata",
     "matrix": "@maarten-theunissen:rijk.chat",
     "avatar": "MT",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, Ksa"
-      }
-    ]
-  },
-  {
-    "id": "tess-strik",
-    "name": "Tess Strik",
-    "role": "Platform engineer",
-    "org": "ksa",
-    "team": "team-ksa-handhaving",
-    "matrix": "@tess-strik:rijk.chat",
-    "avatar": "TS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, Ksa"
-      }
-    ]
-  },
-  {
-    "id": "veerle-van-zanten",
-    "name": "Veerle Van Zanten",
-    "role": "Frontend developer",
-    "org": "ksa",
-    "team": "team-ksa-handhaving",
-    "matrix": "@veerle-van-zanten:rijk.chat",
-    "avatar": "VV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, Ksa"
-      }
-    ]
-  },
-  {
-    "id": "marit-wubben",
-    "name": "Marit Wubben",
-    "role": "Security engineer",
-    "org": "ksa",
-    "team": "team-ksa-handhaving",
-    "matrix": "@marit-wubben:rijk.chat",
-    "avatar": "MW",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, Ksa"
-      }
-    ]
-  },
-  {
-    "id": "teun-snijders",
-    "name": "Teun Snijders",
-    "role": "Tech lead",
-    "org": "nza",
-    "team": "team-nza-zorgdata",
-    "matrix": "@teun-snijders:rijk.chat",
-    "avatar": "TS",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, NZa"
-      }
-    ]
-  },
-  {
-    "id": "ties-de-boer",
-    "name": "Ties De Boer",
-    "role": "Scrum master",
-    "org": "nza",
-    "team": "team-nza-zorgdata",
-    "matrix": "@ties-de-boer:rijk.chat",
-    "avatar": "TD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, NZa"
-      }
-    ]
-  },
-  {
-    "id": "romy-kuipers",
-    "name": "Romy Kuipers",
-    "role": "Information security officer",
-    "org": "nza",
-    "team": "team-nza-zorgdata",
-    "matrix": "@romy-kuipers:rijk.chat",
-    "avatar": "RK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, NZa"
-      }
-    ]
-  },
-  {
-    "id": "younes-prins",
-    "name": "Younes Prins",
-    "role": "Business analist",
-    "org": "nza",
-    "team": "team-nza-zorgdata",
-    "matrix": "@younes-prins:rijk.chat",
-    "avatar": "YP",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, NZa"
-      }
-    ]
-  },
-  {
-    "id": "bram-smeets",
-    "name": "Bram Smeets",
-    "role": "Database administrator",
-    "org": "nza",
-    "team": "team-nza-zorgdata",
-    "matrix": "@bram-smeets:rijk.chat",
-    "avatar": "BS",
     "history": [
       {
         "period": "2022–nu",
@@ -5786,133 +5666,13 @@ export const people = [
     ]
   },
   {
-    "id": "ruben-karaca",
-    "name": "Ruben Karaca",
-    "role": "Platform engineer",
-    "org": "nza",
-    "team": "team-nza-zorgdata",
-    "matrix": "@ruben-karaca:rijk.chat",
-    "avatar": "RK",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Platform engineer, NZa"
-      }
-    ]
-  },
-  {
-    "id": "yara-van-beek",
-    "name": "Yara Van Beek",
-    "role": "Frontend developer",
-    "org": "fin",
-    "team": "team-fin-financieel",
-    "matrix": "@yara-van-beek:rijk.chat",
-    "avatar": "YV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Frontend developer, Fin"
-      }
-    ]
-  },
-  {
-    "id": "youssef-reijnders",
-    "name": "Youssef Reijnders",
-    "role": "Security engineer",
-    "org": "fin",
-    "team": "team-fin-financieel",
-    "matrix": "@youssef-reijnders:rijk.chat",
-    "avatar": "YR",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Security engineer, Fin"
-      }
-    ]
-  },
-  {
-    "id": "karim-van-dam",
-    "name": "Karim Van Dam",
-    "role": "Tech lead",
-    "org": "fin",
-    "team": "team-fin-financieel",
-    "matrix": "@karim-van-dam:rijk.chat",
-    "avatar": "KV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Tech lead, Fin"
-      }
-    ]
-  },
-  {
-    "id": "samira-doornbos",
-    "name": "Samira Doornbos",
-    "role": "Scrum master",
-    "org": "fin",
-    "team": "team-fin-financieel",
-    "matrix": "@samira-doornbos:rijk.chat",
-    "avatar": "SD",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Scrum master, Fin"
-      }
-    ]
-  },
-  {
-    "id": "bouchra-bijl",
-    "name": "Bouchra Bijl",
-    "role": "Information security officer",
-    "org": "fin",
-    "team": "team-fin-financieel",
-    "matrix": "@bouchra-bijl:rijk.chat",
-    "avatar": "BB",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Information security officer, Fin"
-      }
-    ]
-  },
-  {
-    "id": "johan-charradi",
-    "name": "Johan Charradi",
-    "role": "Business analist",
-    "org": "fin",
-    "team": "team-fin-financieel",
-    "matrix": "@johan-charradi:rijk.chat",
-    "avatar": "JC",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Business analist, Fin"
-      }
-    ]
-  },
-  {
-    "id": "petra-verschuren",
-    "name": "Petra Verschuren",
-    "role": "Database administrator",
-    "org": "fin",
-    "team": "team-fin-financieel",
-    "matrix": "@petra-verschuren:rijk.chat",
-    "avatar": "PV",
-    "history": [
-      {
-        "period": "2022–nu",
-        "what": "Database administrator, Fin"
-      }
-    ]
-  },
-  {
-    "id": "tobias-peters",
-    "name": "Tobias Peters",
+    "id": "tess-strik",
+    "name": "Tess Strik",
     "role": "Platform engineer",
     "org": "fin",
-    "team": "team-fin-platform",
-    "matrix": "@tobias-peters:rijk.chat",
-    "avatar": "TP",
+    "team": "team-fin-financieel",
+    "matrix": "@tess-strik:rijk.chat",
+    "avatar": "TS",
     "history": [
       {
         "period": "2022–nu",
@@ -5921,13 +5681,13 @@ export const people = [
     ]
   },
   {
-    "id": "wouter-bakkal",
-    "name": "Wouter Bakkal",
+    "id": "veerle-van-zanten",
+    "name": "Veerle Van Zanten",
     "role": "Frontend developer",
     "org": "fin",
     "team": "team-fin-platform",
-    "matrix": "@wouter-bakkal:rijk.chat",
-    "avatar": "WB",
+    "matrix": "@veerle-van-zanten:rijk.chat",
+    "avatar": "VV",
     "history": [
       {
         "period": "2022–nu",
@@ -5936,17 +5696,257 @@ export const people = [
     ]
   },
   {
+    "id": "marit-wubben",
+    "name": "Marit Wubben",
+    "role": "Security engineer",
+    "org": "szw",
+    "team": "team-szw-regelingen",
+    "matrix": "@marit-wubben:rijk.chat",
+    "avatar": "MW",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, SZW"
+      }
+    ]
+  },
+  {
+    "id": "teun-snijders",
+    "name": "Teun Snijders",
+    "role": "Tech lead",
+    "org": "vws",
+    "team": "team-vws-zorgregister",
+    "matrix": "@teun-snijders:rijk.chat",
+    "avatar": "TS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, VWS"
+      }
+    ]
+  },
+  {
+    "id": "ties-de-boer",
+    "name": "Ties De Boer",
+    "role": "Scrum master",
+    "org": "vws",
+    "team": "team-vws-data",
+    "matrix": "@ties-de-boer:rijk.chat",
+    "avatar": "TD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, VWS"
+      }
+    ]
+  },
+  {
+    "id": "romy-kuipers",
+    "name": "Romy Kuipers",
+    "role": "Information security officer",
+    "org": "jenv",
+    "team": "team-jenv-keten",
+    "matrix": "@romy-kuipers:rijk.chat",
+    "avatar": "RK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, JenV"
+      }
+    ]
+  },
+  {
+    "id": "younes-prins",
+    "name": "Younes Prins",
+    "role": "Business analist",
+    "org": "ocw",
+    "team": "team-ocw-cultuurdata",
+    "matrix": "@younes-prins:rijk.chat",
+    "avatar": "YP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, OCW"
+      }
+    ]
+  },
+  {
+    "id": "bram-smeets",
+    "name": "Bram Smeets",
+    "role": "Database administrator",
+    "org": "lnv",
+    "team": "team-lnv-natuur",
+    "matrix": "@bram-smeets:rijk.chat",
+    "avatar": "BS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, LNV"
+      }
+    ]
+  },
+  {
+    "id": "ruben-karaca",
+    "name": "Ruben Karaca",
+    "role": "Platform engineer",
+    "org": "ezk",
+    "team": "team-ezk-ondernemen",
+    "matrix": "@ruben-karaca:rijk.chat",
+    "avatar": "RK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, EZK"
+      }
+    ]
+  },
+  {
+    "id": "yara-van-beek",
+    "name": "Yara Van Beek",
+    "role": "Frontend developer",
+    "org": "kgg",
+    "team": "team-kgg-energie",
+    "matrix": "@yara-van-beek:rijk.chat",
+    "avatar": "YV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, KGG"
+      }
+    ]
+  },
+  {
+    "id": "youssef-reijnders",
+    "name": "Youssef Reijnders",
+    "role": "Security engineer",
+    "org": "az",
+    "team": "team-az-comms",
+    "matrix": "@youssef-reijnders:rijk.chat",
+    "avatar": "YR",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Security engineer, AZ"
+      }
+    ]
+  },
+  {
+    "id": "karim-van-dam",
+    "name": "Karim Van Dam",
+    "role": "Tech lead",
+    "org": "bz",
+    "team": "team-bz-consulair",
+    "matrix": "@karim-van-dam:rijk.chat",
+    "avatar": "KV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Tech lead, BZ"
+      }
+    ]
+  },
+  {
+    "id": "samira-doornbos",
+    "name": "Samira Doornbos",
+    "role": "Scrum master",
+    "org": "def",
+    "team": "team-def-secinfra",
+    "matrix": "@samira-doornbos:rijk.chat",
+    "avatar": "SD",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master, Def"
+      }
+    ]
+  },
+  {
+    "id": "bouchra-bijl",
+    "name": "Bouchra Bijl",
+    "role": "Information security officer",
+    "org": "aenm",
+    "team": "team-aenm-keten",
+    "matrix": "@bouchra-bijl:rijk.chat",
+    "avatar": "BB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Information security officer, AenM"
+      }
+    ]
+  },
+  {
+    "id": "johan-charradi",
+    "name": "Johan Charradi",
+    "role": "Business analist",
+    "org": "dhc",
+    "team": "team-dhc-geschillen",
+    "matrix": "@johan-charradi:rijk.chat",
+    "avatar": "JC",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist, DHC"
+      }
+    ]
+  },
+  {
+    "id": "petra-verschuren",
+    "name": "Petra Verschuren",
+    "role": "Database administrator",
+    "org": "ez",
+    "team": "team-ez-markt",
+    "matrix": "@petra-verschuren:rijk.chat",
+    "avatar": "PV",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Database administrator, EZ"
+      }
+    ]
+  },
+  {
+    "id": "tobias-peters",
+    "name": "Tobias Peters",
+    "role": "Platform engineer",
+    "org": "bzk",
+    "team": "team-bzk-iam",
+    "matrix": "@tobias-peters:rijk.chat",
+    "avatar": "TP",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Platform engineer, BZK"
+      }
+    ]
+  },
+  {
+    "id": "wouter-bakkal",
+    "name": "Wouter Bakkal",
+    "role": "Frontend developer",
+    "org": "bzk",
+    "team": "team-bzk-security",
+    "matrix": "@wouter-bakkal:rijk.chat",
+    "avatar": "WB",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Frontend developer, BZK"
+      }
+    ]
+  },
+  {
     "id": "erik-scholten",
     "name": "Erik Scholten",
     "role": "Security engineer",
-    "org": "fin",
-    "team": "team-fin-platform",
+    "org": "rijksict",
+    "team": "team-rijksict-docs",
     "matrix": "@erik-scholten:rijk.chat",
     "avatar": "ES",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Security engineer, Fin"
+        "what": "Security engineer, RIJKSICT"
       }
     ]
   },
@@ -5954,14 +5954,14 @@ export const people = [
     "id": "lara-ben-ali",
     "name": "Lara Ben Ali",
     "role": "Tech lead",
-    "org": "szw",
-    "team": "team-szw-regelingen",
+    "org": "rijksict",
+    "team": "team-rijksict-iam",
     "matrix": "@lara-ben-ali:rijk.chat",
     "avatar": "LB",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Tech lead, SZW"
+        "what": "Tech lead, RIJKSICT"
       }
     ]
   },
@@ -5969,14 +5969,14 @@ export const people = [
     "id": "fleur-ouali",
     "name": "Fleur Ouali",
     "role": "Scrum master",
-    "org": "szw",
-    "team": "team-szw-regelingen",
+    "org": "logius",
+    "team": "team-logius-docs",
     "matrix": "@fleur-ouali:rijk.chat",
     "avatar": "FO",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Scrum master, SZW"
+        "what": "Scrum master, LOGIUS"
       }
     ]
   },
@@ -5984,14 +5984,14 @@ export const people = [
     "id": "luuk-dekker",
     "name": "Luuk Dekker",
     "role": "Information security officer",
-    "org": "szw",
-    "team": "team-szw-regelingen",
+    "org": "bd",
+    "team": "team-bd-inning",
     "matrix": "@luuk-dekker:rijk.chat",
     "avatar": "LD",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Information security officer, SZW"
+        "what": "Information security officer, BD"
       }
     ]
   },
@@ -5999,14 +5999,14 @@ export const people = [
     "id": "pim-linders",
     "name": "Pim Linders",
     "role": "Business analist",
-    "org": "szw",
-    "team": "team-szw-regelingen",
+    "org": "bd",
+    "team": "team-bd-aangifte",
     "matrix": "@pim-linders:rijk.chat",
     "avatar": "PL",
     "history": [
       {
         "period": "2022–nu",
-        "what": "Business analist, SZW"
+        "what": "Business analist, BD"
       }
     ]
   }
@@ -6107,7 +6107,9 @@ export const teams = [
     "members": [
       "sanne-de-vries",
       "thijs-van-dijk",
-      "maud-vermeulen"
+      "cornelis-willems",
+      "robin-dogan",
+      "luuk-dekker"
     ],
     "owns": {
       "apps": [
@@ -6130,17 +6132,18 @@ export const teams = [
     "org": "bd",
     "matrix": "#bd-aangifte:rijk.chat",
     "members": [
+      "maud-vermeulen",
       "mohammed-van-vliet",
-      "ans-kaya",
-      "amira-mol",
-      "omar-van-es"
+      "saskia-demir",
+      "fenna-timmermans",
+      "pim-linders"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "mohammed-van-vliet",
+    "oncall": "maud-vermeulen",
     "archetype": "product"
   },
   {
@@ -6149,11 +6152,10 @@ export const teams = [
     "org": "bd",
     "matrix": "#bd-gegevens:rijk.chat",
     "members": [
-      "henk-wagenaar",
-      "marieke-lubbers",
-      "yvonne-erdem",
-      "sander-slootweg",
-      "mark-asik"
+      "ans-kaya",
+      "amira-mol",
+      "floris-van-der-velde",
+      "sterre-evers"
     ],
     "owns": {
       "apps": [
@@ -6167,7 +6169,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "henk-wagenaar",
+    "oncall": "ans-kaya",
     "archetype": "gegevens"
   },
   {
@@ -6176,12 +6178,10 @@ export const teams = [
     "org": "bd",
     "matrix": "#bd-fraude:rijk.chat",
     "members": [
-      "julia-el-amrani",
-      "liv-ozturk",
-      "mees-maas",
-      "khalid-veenstra",
-      "lieke-arslan",
-      "isa-roeloffzen"
+      "omar-van-es",
+      "henk-wagenaar",
+      "roel-groen",
+      "levi-van-rijn"
     ],
     "owns": {
       "apps": [
@@ -6193,7 +6193,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "julia-el-amrani",
+    "oncall": "omar-van-es",
     "archetype": "data"
   },
   {
@@ -6202,20 +6202,17 @@ export const teams = [
     "org": "bd",
     "matrix": "#bd-iam:rijk.chat",
     "members": [
-      "selin-van-loon",
-      "daan-lammers",
-      "iris-nijhuis",
-      "jeroen-holwerda",
-      "noor-naber",
-      "esra-veldhuis",
-      "tariq-mulder"
+      "marieke-lubbers",
+      "yvonne-erdem",
+      "vincent-tuinstra",
+      "gijs-van-ginkel"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "selin-van-loon",
+    "oncall": "marieke-lubbers",
     "archetype": "iam"
   },
   {
@@ -6224,9 +6221,10 @@ export const teams = [
     "org": "bd",
     "matrix": "#bd-platform:rijk.chat",
     "members": [
-      "soumaya-janssen",
-      "jan-huisman",
-      "ingrid-vink"
+      "sander-slootweg",
+      "mark-asik",
+      "sophie-schipper",
+      "olivier-sikkema"
     ],
     "owns": {
       "apps": [
@@ -6242,7 +6240,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "soumaya-janssen",
+    "oncall": "sander-slootweg",
     "archetype": "platform"
   },
   {
@@ -6251,10 +6249,10 @@ export const teams = [
     "org": "duo",
     "matrix": "#duo-studiefinanciering:rijk.chat",
     "members": [
-      "jasper-ennaji",
-      "robin-roos",
-      "fenna-bruins",
-      "sterre-van-der-veen"
+      "julia-el-amrani",
+      "liv-ozturk",
+      "indy-polat",
+      "senna-vreeswijk"
     ],
     "owns": {
       "apps": [
@@ -6272,7 +6270,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "jasper-ennaji",
+    "oncall": "julia-el-amrani",
     "archetype": "betalingen"
   },
   {
@@ -6281,11 +6279,10 @@ export const teams = [
     "org": "duo",
     "matrix": "#duo-register:rijk.chat",
     "members": [
-      "levi-mohamed",
-      "gijs-van-os",
-      "olivier-el-khattabi",
-      "senna-wielinga",
-      "meryem-hendriks"
+      "mees-maas",
+      "khalid-veenstra",
+      "finn-korteweg",
+      "meryem-pijnenburg"
     ],
     "owns": {
       "apps": [
@@ -6298,7 +6295,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "levi-mohamed",
+    "oncall": "mees-maas",
     "archetype": "gegevens"
   },
   {
@@ -6307,12 +6304,10 @@ export const teams = [
     "org": "duo",
     "matrix": "#duo-examens:rijk.chat",
     "members": [
-      "lotte-hofman",
-      "tim-willems",
-      "bas-demir",
-      "nadia-van-der-velde",
-      "layla-groen",
-      "hassan-tuinstra"
+      "lieke-arslan",
+      "isa-roeloffzen",
+      "wessel-bulut",
+      "lotte-bos"
     ],
     "owns": {
       "apps": [
@@ -6323,7 +6318,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "lotte-hofman",
+    "oncall": "lieke-arslan",
     "archetype": "product"
   },
   {
@@ -6332,20 +6327,17 @@ export const teams = [
     "org": "duo",
     "matrix": "#duo-data:rijk.chat",
     "members": [
-      "said-schipper",
-      "gerard-polat",
-      "wilma-korteweg",
-      "casper-bulut",
-      "bart-visser",
-      "suze-kok",
-      "nina-van-der-heijden"
+      "selin-van-loon",
+      "daan-lammers",
+      "britt-visser",
+      "tim-van-den-berg"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "said-schipper",
+    "oncall": "selin-van-loon",
     "archetype": "data"
   },
   {
@@ -6354,9 +6346,10 @@ export const teams = [
     "org": "duo",
     "matrix": "#duo-platform:rijk.chat",
     "members": [
-      "loes-van-den-heuvel",
-      "boris-sahin",
-      "jelle-driessen"
+      "iris-nijhuis",
+      "jeroen-holwerda",
+      "abdel-kok",
+      "bas-postma"
     ],
     "owns": {
       "apps": [
@@ -6369,7 +6362,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "loes-van-den-heuvel",
+    "oncall": "iris-nijhuis",
     "archetype": "platform"
   },
   {
@@ -6378,10 +6371,10 @@ export const teams = [
     "org": "uwv",
     "matrix": "#uwv-uitkeringen:rijk.chat",
     "members": [
-      "anne-faber",
-      "ilias-theunissen",
-      "joost-strik",
-      "eva-van-zanten"
+      "noor-naber",
+      "esra-veldhuis",
+      "dilan-van-der-heijden",
+      "nadia-el-idrissi"
     ],
     "owns": {
       "apps": [
@@ -6392,7 +6385,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "anne-faber",
+    "oncall": "noor-naber",
     "archetype": "betalingen"
   },
   {
@@ -6401,18 +6394,17 @@ export const teams = [
     "org": "uwv",
     "matrix": "#uwv-werk:rijk.chat",
     "members": [
-      "stijn-wubben",
-      "aisha-snijders",
-      "pieter-de-boer",
-      "rachid-kuipers",
-      "hala-prins"
+      "tariq-mulder",
+      "soumaya-janssen",
+      "sven-van-den-heuvel",
+      "layla-boutaleb"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "stijn-wubben",
+    "oncall": "tariq-mulder",
     "archetype": "product"
   },
   {
@@ -6421,12 +6413,10 @@ export const teams = [
     "org": "uwv",
     "matrix": "#uwv-gegevens:rijk.chat",
     "members": [
-      "cornelis-smeets",
-      "saskia-karaca",
-      "floris-van-beek",
-      "roel-reijnders",
-      "vincent-van-dam",
-      "sophie-doornbos"
+      "jan-huisman",
+      "ingrid-vink",
+      "hugo-sahin",
+      "hassan-blom"
     ],
     "owns": {
       "apps": [
@@ -6439,7 +6429,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "cornelis-smeets",
+    "oncall": "jan-huisman",
     "archetype": "gegevens"
   },
   {
@@ -6448,13 +6438,10 @@ export const teams = [
     "org": "uwv",
     "matrix": "#uwv-arbeidsmarkt:rijk.chat",
     "members": [
-      "indy-bijl",
-      "finn-charradi",
-      "wessel-verschuren",
-      "britt-peters",
-      "abdel-bakkal",
-      "dilan-scholten",
-      "sven-ben-ali"
+      "jasper-ennaji",
+      "robin-roos",
+      "anouk-driessen",
+      "said-heijmans"
     ],
     "owns": {
       "apps": [
@@ -6465,7 +6452,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "indy-bijl",
+    "oncall": "jasper-ennaji",
     "archetype": "data"
   },
   {
@@ -6474,16 +6461,17 @@ export const teams = [
     "org": "uwv",
     "matrix": "#uwv-platform:rijk.chat",
     "members": [
-      "hugo-ouali",
-      "anouk-dekker",
-      "fatima-linders"
+      "fenna-bruins",
+      "sterre-van-der-veen",
+      "fatima-faber",
+      "gerard-koning"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "hugo-ouali",
+    "oncall": "fenna-bruins",
     "archetype": "platform"
   },
   {
@@ -6492,10 +6480,10 @@ export const teams = [
     "org": "rvo",
     "matrix": "#rvo-subsidies:rijk.chat",
     "members": [
-      "bilal-verbruggen",
-      "zeynep-cetin",
-      "willem-van-der-plas",
-      "kees-cinar"
+      "levi-mohamed",
+      "gijs-van-os",
+      "bilal-theunissen",
+      "wilma-hamid"
     ],
     "owns": {
       "apps": [
@@ -6508,7 +6496,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "bilal-verbruggen",
+    "oncall": "levi-mohamed",
     "archetype": "betalingen"
   },
   {
@@ -6517,18 +6505,17 @@ export const teams = [
     "org": "rvo",
     "matrix": "#rvo-vergunningen:rijk.chat",
     "members": [
-      "carla-bakker",
-      "niels-brouwer",
-      "koen-schouten",
-      "roos-sanders",
-      "mila-celik"
+      "olivier-el-khattabi",
+      "senna-wielinga",
+      "zeynep-strik",
+      "casper-diks"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "carla-bakker",
+    "oncall": "olivier-el-khattabi",
     "archetype": "uitvoering"
   },
   {
@@ -6537,12 +6524,10 @@ export const teams = [
     "org": "rvo",
     "matrix": "#rvo-geodata:rijk.chat",
     "members": [
-      "sem-van-der-laan",
-      "ahmed-wijnands",
-      "mats-engelen",
-      "puck-van-hattem",
-      "hatice-gunes",
-      "emma-geerts"
+      "meryem-hendriks",
+      "lotte-hofman",
+      "willem-van-zanten",
+      "bart-akkaya"
     ],
     "owns": {
       "apps": [
@@ -6557,7 +6542,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "sem-van-der-laan",
+    "oncall": "meryem-hendriks",
     "archetype": "data"
   },
   {
@@ -6566,13 +6551,10 @@ export const teams = [
     "org": "rvo",
     "matrix": "#rvo-portaal:rijk.chat",
     "members": [
-      "lars-kraaijeveld",
-      "femke-meijer",
-      "sara-de-wit",
-      "mehmet-koster",
-      "imane-gerritsen",
-      "fatih-korkmaz",
-      "dirk-verbeek"
+      "tim-willems",
+      "bas-demir",
+      "kees-wubben",
+      "suze-de-vries"
     ],
     "owns": {
       "apps": [
@@ -6596,7 +6578,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "lars-kraaijeveld",
+    "oncall": "tim-willems",
     "archetype": "product"
   },
   {
@@ -6605,16 +6587,17 @@ export const teams = [
     "org": "rws",
     "matrix": "#rws-areaal:rijk.chat",
     "members": [
-      "annemarie-van-wijk",
-      "quinten-de-groot",
-      "maarten-berends"
+      "nadia-van-der-velde",
+      "layla-groen",
+      "carla-snijders",
+      "nina-van-dijk"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "annemarie-van-wijk",
+    "oncall": "nadia-van-der-velde",
     "archetype": "gegevens"
   },
   {
@@ -6623,10 +6606,10 @@ export const teams = [
     "org": "rws",
     "matrix": "#rws-verkeer:rijk.chat",
     "members": [
-      "tess-tromp",
-      "veerle-bouazza",
-      "marit-roozendaal",
-      "teun-vos"
+      "hassan-tuinstra",
+      "said-schipper",
+      "niels-de-boer",
+      "loes-vermeulen"
     ],
     "owns": {
       "apps": [
@@ -6643,7 +6626,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "tess-tromp",
+    "oncall": "hassan-tuinstra",
     "archetype": "product"
   },
   {
@@ -6652,11 +6635,10 @@ export const teams = [
     "org": "rws",
     "matrix": "#rws-sensoren:rijk.chat",
     "members": [
-      "ties-van-der-meer",
-      "romy-de-lange",
-      "younes-bouali",
-      "bram-el-hadioui",
-      "ruben-van-der-wal"
+      "gerard-polat",
+      "wilma-korteweg",
+      "koen-kuipers",
+      "boris-van-vliet"
     ],
     "owns": {
       "apps": [
@@ -6672,7 +6654,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "ties-van-der-meer",
+    "oncall": "gerard-polat",
     "archetype": "data"
   },
   {
@@ -6681,12 +6663,10 @@ export const teams = [
     "org": "rws",
     "matrix": "#rws-inspectie:rijk.chat",
     "members": [
-      "yara-goossens",
-      "youssef-van-driel",
-      "karim-bakhti",
-      "samira-renkema",
-      "bouchra-yildiz",
-      "johan-jansen"
+      "casper-bulut",
+      "bart-visser",
+      "roos-prins",
+      "jelle-kaya"
     ],
     "owns": {
       "apps": [
@@ -6699,7 +6679,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "yara-goossens",
+    "oncall": "casper-bulut",
     "archetype": "inspectie"
   },
   {
@@ -6708,13 +6688,10 @@ export const teams = [
     "org": "rws",
     "matrix": "#rws-platform:rijk.chat",
     "members": [
-      "petra-dijkstra",
-      "tobias-van-leeuwen",
-      "wouter-hoekstra",
-      "erik-aydin",
-      "lara-kuiper",
-      "fleur-stam",
-      "luuk-bosman"
+      "suze-kok",
+      "nina-van-der-heijden",
+      "mila-smeets",
+      "anne-mol"
     ],
     "owns": {
       "apps": [
@@ -6730,7 +6707,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "petra-dijkstra",
+    "oncall": "suze-kok",
     "archetype": "platform"
   },
   {
@@ -6739,16 +6716,17 @@ export const teams = [
     "org": "ind",
     "matrix": "#ind-aanvragen:rijk.chat",
     "members": [
-      "pim-donker",
-      "demi-tekin",
-      "driss-buitenhuis"
+      "loes-van-den-heuvel",
+      "boris-sahin",
+      "sem-karaca",
+      "ilias-van-es"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "pim-donker",
+    "oncall": "loes-van-den-heuvel",
     "archetype": "product"
   },
   {
@@ -6757,10 +6735,10 @@ export const teams = [
     "org": "ind",
     "matrix": "#ind-dossiers:rijk.chat",
     "members": [
-      "sanne-van-bommel",
-      "thijs-smit",
-      "maud-yilmaz",
-      "mohammed-verhoeven"
+      "jelle-driessen",
+      "anne-faber",
+      "ahmed-van-beek",
+      "joost-wagenaar"
     ],
     "owns": {
       "apps": [
@@ -6780,7 +6758,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "sanne-van-bommel",
+    "oncall": "jelle-driessen",
     "archetype": "uitvoering"
   },
   {
@@ -6789,11 +6767,10 @@ export const teams = [
     "org": "ind",
     "matrix": "#ind-iam:rijk.chat",
     "members": [
-      "ans-wolters",
-      "amira-dogan",
-      "omar-timmermans",
-      "henk-evers",
-      "marieke-van-rijn"
+      "ilias-theunissen",
+      "joost-strik",
+      "mats-reijnders",
+      "eva-lubbers"
     ],
     "owns": {
       "apps": [
@@ -6807,7 +6784,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "ans-wolters",
+    "oncall": "ilias-theunissen",
     "archetype": "iam"
   },
   {
@@ -6816,12 +6793,10 @@ export const teams = [
     "org": "ind",
     "matrix": "#ind-data:rijk.chat",
     "members": [
-      "yvonne-van-ginkel",
-      "sander-sikkema",
-      "mark-vreeswijk",
-      "julia-pijnenburg",
-      "liv-bos",
-      "mees-van-den-berg"
+      "eva-van-zanten",
+      "stijn-wubben",
+      "puck-van-dam",
+      "stijn-erdem"
     ],
     "owns": {
       "apps": [
@@ -6841,7 +6816,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "yvonne-van-ginkel",
+    "oncall": "eva-van-zanten",
     "archetype": "data"
   },
   {
@@ -6850,13 +6825,10 @@ export const teams = [
     "org": "logius",
     "matrix": "#logius-digid:rijk.chat",
     "members": [
-      "khalid-postma",
-      "lieke-el-idrissi",
-      "isa-boutaleb",
-      "selin-blom",
-      "daan-heijmans",
-      "iris-koning",
-      "jeroen-hamid"
+      "aisha-snijders",
+      "pieter-de-boer",
+      "hatice-doornbos",
+      "aisha-slootweg"
     ],
     "owns": {
       "apps": [
@@ -6869,7 +6841,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "khalid-postma",
+    "oncall": "aisha-snijders",
     "archetype": "iam"
   },
   {
@@ -6878,16 +6850,17 @@ export const teams = [
     "org": "logius",
     "matrix": "#logius-digikoppeling:rijk.chat",
     "members": [
-      "noor-diks",
-      "esra-akkaya",
-      "tariq-de-vries"
+      "rachid-kuipers",
+      "hala-prins",
+      "emma-bijl",
+      "pieter-asik"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "noor-diks",
+    "oncall": "rachid-kuipers",
     "archetype": "platform"
   },
   {
@@ -6896,17 +6869,17 @@ export const teams = [
     "org": "logius",
     "matrix": "#logius-machtigen:rijk.chat",
     "members": [
-      "soumaya-van-dijk",
-      "jan-vermeulen",
-      "ingrid-van-vliet",
-      "jasper-kaya"
+      "cornelis-smeets",
+      "saskia-karaca",
+      "lars-charradi",
+      "rachid-el-amrani"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "soumaya-van-dijk",
+    "oncall": "cornelis-smeets",
     "archetype": "iam"
   },
   {
@@ -6915,11 +6888,10 @@ export const teams = [
     "org": "logius",
     "matrix": "#logius-stelsel:rijk.chat",
     "members": [
-      "robin-mol",
-      "fenna-van-es",
-      "sterre-wagenaar",
-      "levi-lubbers",
-      "gijs-erdem"
+      "floris-van-beek",
+      "roel-reijnders",
+      "femke-verschuren",
+      "hala-ozturk"
     ],
     "owns": {
       "apps": [
@@ -6932,7 +6904,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "robin-mol",
+    "oncall": "floris-van-beek",
     "archetype": "gegevens"
   },
   {
@@ -6941,12 +6913,10 @@ export const teams = [
     "org": "dictu",
     "matrix": "#dictu-hosting:rijk.chat",
     "members": [
-      "olivier-slootweg",
-      "senna-asik",
-      "meryem-el-amrani",
-      "lotte-ozturk",
-      "tim-maas",
-      "bas-veenstra"
+      "vincent-van-dam",
+      "sophie-doornbos",
+      "sara-peters",
+      "cornelis-maas"
     ],
     "owns": {
       "apps": [
@@ -6957,7 +6927,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "olivier-slootweg",
+    "oncall": "vincent-van-dam",
     "archetype": "platform"
   },
   {
@@ -6966,13 +6936,10 @@ export const teams = [
     "org": "dictu",
     "matrix": "#dictu-werkplek:rijk.chat",
     "members": [
-      "nadia-arslan",
-      "layla-roeloffzen",
-      "hassan-van-loon",
-      "said-lammers",
-      "gerard-nijhuis",
-      "wilma-holwerda",
-      "casper-naber"
+      "indy-bijl",
+      "finn-charradi",
+      "mehmet-bakkal",
+      "saskia-veenstra"
     ],
     "owns": {
       "apps": [
@@ -6987,7 +6954,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "nadia-arslan",
+    "oncall": "indy-bijl",
     "archetype": "product"
   },
   {
@@ -6996,16 +6963,17 @@ export const teams = [
     "org": "dictu",
     "matrix": "#dictu-security:rijk.chat",
     "members": [
-      "bart-veldhuis",
-      "suze-mulder",
-      "nina-janssen"
+      "wessel-verschuren",
+      "britt-peters",
+      "imane-scholten",
+      "floris-arslan"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "bart-veldhuis",
+    "oncall": "wessel-verschuren",
     "archetype": "security"
   },
   {
@@ -7014,10 +6982,10 @@ export const teams = [
     "org": "dictu",
     "matrix": "#dictu-data:rijk.chat",
     "members": [
-      "loes-huisman",
-      "boris-vink",
-      "jelle-ennaji",
-      "anne-roos"
+      "abdel-bakkal",
+      "dilan-scholten",
+      "fatih-ben-ali",
+      "roel-roeloffzen"
     ],
     "owns": {
       "apps": [
@@ -7032,7 +7000,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "loes-huisman",
+    "oncall": "abdel-bakkal",
     "archetype": "data"
   },
   {
@@ -7041,11 +7009,10 @@ export const teams = [
     "org": "rvig",
     "matrix": "#rvig-brp:rijk.chat",
     "members": [
-      "ilias-bruins",
-      "joost-van-der-veen",
-      "eva-mohamed",
-      "stijn-van-os",
-      "aisha-el-khattabi"
+      "sven-ben-ali",
+      "hugo-ouali",
+      "dirk-ouali",
+      "vincent-van-loon"
     ],
     "owns": {
       "apps": [
@@ -7062,7 +7029,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "ilias-bruins",
+    "oncall": "sven-ben-ali",
     "archetype": "gegevens"
   },
   {
@@ -7071,19 +7038,17 @@ export const teams = [
     "org": "rvig",
     "matrix": "#rvig-reisdocumenten:rijk.chat",
     "members": [
-      "pieter-wielinga",
-      "rachid-hendriks",
-      "hala-hofman",
-      "cornelis-willems",
-      "saskia-demir",
-      "floris-van-der-velde"
+      "anouk-dekker",
+      "fatima-linders",
+      "annemarie-dekker",
+      "sophie-lammers"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "pieter-wielinga",
+    "oncall": "anouk-dekker",
     "archetype": "product"
   },
   {
@@ -7092,13 +7057,10 @@ export const teams = [
     "org": "rvig",
     "matrix": "#rvig-iam:rijk.chat",
     "members": [
-      "roel-groen",
-      "vincent-tuinstra",
-      "sophie-schipper",
-      "indy-polat",
-      "finn-korteweg",
-      "wessel-bulut",
-      "britt-visser"
+      "bilal-verbruggen",
+      "zeynep-cetin",
+      "quinten-linders",
+      "indy-nijhuis"
     ],
     "owns": {
       "apps": [
@@ -7111,7 +7073,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "roel-groen",
+    "oncall": "bilal-verbruggen",
     "archetype": "iam"
   },
   {
@@ -7120,9 +7082,10 @@ export const teams = [
     "org": "jio",
     "matrix": "#jio-platform:rijk.chat",
     "members": [
-      "abdel-kok",
-      "dilan-van-der-heijden",
-      "sven-van-den-heuvel"
+      "willem-van-der-plas",
+      "kees-cinar",
+      "maarten-verbruggen",
+      "finn-holwerda"
     ],
     "owns": {
       "apps": [
@@ -7134,7 +7097,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "abdel-kok",
+    "oncall": "willem-van-der-plas",
     "archetype": "platform"
   },
   {
@@ -7143,10 +7106,10 @@ export const teams = [
     "org": "jio",
     "matrix": "#jio-keten:rijk.chat",
     "members": [
-      "hugo-sahin",
-      "anouk-driessen",
-      "fatima-faber",
-      "bilal-theunissen"
+      "carla-bakker",
+      "niels-brouwer",
+      "tess-cetin",
+      "wessel-naber"
     ],
     "owns": {
       "apps": [
@@ -7159,7 +7122,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "hugo-sahin",
+    "oncall": "carla-bakker",
     "archetype": "uitvoering"
   },
   {
@@ -7168,11 +7131,10 @@ export const teams = [
     "org": "jio",
     "matrix": "#jio-security:rijk.chat",
     "members": [
-      "zeynep-strik",
-      "willem-van-zanten",
-      "kees-wubben",
-      "carla-snijders",
-      "niels-de-boer"
+      "koen-schouten",
+      "roos-sanders",
+      "veerle-van-der-plas",
+      "britt-veldhuis"
     ],
     "owns": {
       "apps": [
@@ -7188,7 +7150,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "zeynep-strik",
+    "oncall": "koen-schouten",
     "archetype": "security"
   },
   {
@@ -7197,12 +7159,10 @@ export const teams = [
     "org": "cjib",
     "matrix": "#cjib-inning:rijk.chat",
     "members": [
-      "koen-kuipers",
-      "roos-prins",
-      "mila-smeets",
-      "sem-karaca",
-      "ahmed-van-beek",
-      "mats-reijnders"
+      "mila-celik",
+      "sem-van-der-laan",
+      "marit-cinar",
+      "abdel-mulder"
     ],
     "owns": {
       "apps": [
@@ -7217,7 +7177,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "koen-kuipers",
+    "oncall": "mila-celik",
     "archetype": "betalingen"
   },
   {
@@ -7226,20 +7186,17 @@ export const teams = [
     "org": "cjib",
     "matrix": "#cjib-sanctie:rijk.chat",
     "members": [
-      "puck-van-dam",
-      "hatice-doornbos",
-      "emma-bijl",
-      "lars-charradi",
-      "femke-verschuren",
-      "sara-peters",
-      "mehmet-bakkal"
+      "ahmed-wijnands",
+      "mats-engelen",
+      "teun-bakker",
+      "dilan-janssen"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "puck-van-dam",
+    "oncall": "ahmed-wijnands",
     "archetype": "uitvoering"
   },
   {
@@ -7248,9 +7205,10 @@ export const teams = [
     "org": "cjib",
     "matrix": "#cjib-data:rijk.chat",
     "members": [
-      "imane-scholten",
-      "fatih-ben-ali",
-      "dirk-ouali"
+      "puck-van-hattem",
+      "hatice-gunes",
+      "ties-brouwer",
+      "sven-huisman"
     ],
     "owns": {
       "apps": [
@@ -7261,7 +7219,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "imane-scholten",
+    "oncall": "puck-van-hattem",
     "archetype": "data"
   },
   {
@@ -7270,17 +7228,17 @@ export const teams = [
     "org": "svb",
     "matrix": "#svb-aow:rijk.chat",
     "members": [
-      "annemarie-dekker",
-      "quinten-linders",
-      "maarten-verbruggen",
-      "tess-cetin"
+      "emma-geerts",
+      "lars-kraaijeveld",
+      "romy-schouten",
+      "hugo-vink"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "annemarie-dekker",
+    "oncall": "emma-geerts",
     "archetype": "betalingen"
   },
   {
@@ -7289,11 +7247,10 @@ export const teams = [
     "org": "svb",
     "matrix": "#svb-kinderbijslag:rijk.chat",
     "members": [
-      "veerle-van-der-plas",
-      "marit-cinar",
-      "teun-bakker",
-      "ties-brouwer",
-      "romy-schouten"
+      "femke-meijer",
+      "sara-de-wit",
+      "younes-sanders",
+      "anouk-ennaji"
     ],
     "owns": {
       "apps": [
@@ -7306,7 +7263,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "veerle-van-der-plas",
+    "oncall": "femke-meijer",
     "archetype": "betalingen"
   },
   {
@@ -7315,12 +7272,10 @@ export const teams = [
     "org": "svb",
     "matrix": "#svb-gegevens:rijk.chat",
     "members": [
-      "younes-sanders",
+      "mehmet-koster",
+      "imane-gerritsen",
       "bram-celik",
-      "ruben-van-der-laan",
-      "yara-wijnands",
-      "youssef-engelen",
-      "karim-van-hattem"
+      "fatima-roos"
     ],
     "owns": {
       "apps": [
@@ -7332,7 +7287,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "younes-sanders",
+    "oncall": "mehmet-koster",
     "archetype": "gegevens"
   },
   {
@@ -7341,13 +7296,10 @@ export const teams = [
     "org": "svb",
     "matrix": "#svb-platform:rijk.chat",
     "members": [
-      "samira-gunes",
-      "bouchra-geerts",
-      "johan-kraaijeveld",
-      "petra-meijer",
-      "tobias-de-wit",
-      "wouter-koster",
-      "erik-gerritsen"
+      "fatih-korkmaz",
+      "dirk-verbeek",
+      "ruben-van-der-laan",
+      "bilal-bruins"
     ],
     "owns": {
       "apps": [
@@ -7360,7 +7312,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "samira-gunes",
+    "oncall": "fatih-korkmaz",
     "archetype": "platform"
   },
   {
@@ -7369,9 +7321,10 @@ export const teams = [
     "org": "kvk",
     "matrix": "#kvk-handelsregister:rijk.chat",
     "members": [
-      "lara-korkmaz",
-      "fleur-verbeek",
-      "luuk-van-wijk"
+      "annemarie-van-wijk",
+      "quinten-de-groot",
+      "yara-wijnands",
+      "zeynep-van-der-veen"
     ],
     "owns": {
       "apps": [
@@ -7382,7 +7335,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "lara-korkmaz",
+    "oncall": "annemarie-van-wijk",
     "archetype": "gegevens"
   },
   {
@@ -7391,10 +7344,10 @@ export const teams = [
     "org": "kvk",
     "matrix": "#kvk-api:rijk.chat",
     "members": [
-      "pim-de-groot",
-      "demi-berends",
-      "driss-tromp",
-      "sanne-bouazza"
+      "maarten-berends",
+      "tess-tromp",
+      "youssef-engelen",
+      "willem-mohamed"
     ],
     "owns": {
       "apps": [
@@ -7405,7 +7358,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "pim-de-groot",
+    "oncall": "maarten-berends",
     "archetype": "data"
   },
   {
@@ -7414,18 +7367,17 @@ export const teams = [
     "org": "kvk",
     "matrix": "#kvk-ondernemersplein:rijk.chat",
     "members": [
-      "thijs-roozendaal",
-      "maud-vos",
-      "mohammed-van-der-meer",
-      "ans-de-lange",
-      "amira-bouali"
+      "veerle-bouazza",
+      "marit-roozendaal",
+      "karim-van-hattem",
+      "kees-van-os"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "thijs-roozendaal",
+    "oncall": "veerle-bouazza",
     "archetype": "product"
   },
   {
@@ -7434,12 +7386,10 @@ export const teams = [
     "org": "ienw",
     "matrix": "#ienw-kenteken:rijk.chat",
     "members": [
-      "omar-el-hadioui",
-      "henk-van-der-wal",
-      "marieke-goossens",
-      "yvonne-van-driel",
-      "sander-bakhti",
-      "mark-renkema"
+      "teun-vos",
+      "ties-van-der-meer",
+      "samira-gunes",
+      "carla-el-khattabi"
     ],
     "owns": {
       "apps": [
@@ -7451,7 +7401,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "omar-el-hadioui",
+    "oncall": "teun-vos",
     "archetype": "gegevens"
   },
   {
@@ -7460,13 +7410,10 @@ export const teams = [
     "org": "ienw",
     "matrix": "#ienw-voertuig:rijk.chat",
     "members": [
-      "julia-yildiz",
-      "liv-jansen",
-      "mees-dijkstra",
-      "khalid-van-leeuwen",
-      "lieke-hoekstra",
-      "isa-aydin",
-      "selin-kuiper"
+      "romy-de-lange",
+      "younes-bouali",
+      "bouchra-geerts",
+      "niels-wielinga"
     ],
     "owns": {
       "apps": [
@@ -7485,7 +7432,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "julia-yildiz",
+    "oncall": "romy-de-lange",
     "archetype": "product"
   },
   {
@@ -7494,9 +7441,10 @@ export const teams = [
     "org": "ienw",
     "matrix": "#ienw-data:rijk.chat",
     "members": [
-      "daan-stam",
-      "iris-bosman",
-      "jeroen-donker"
+      "bram-el-hadioui",
+      "ruben-van-der-wal",
+      "johan-kraaijeveld",
+      "koen-hendriks"
     ],
     "owns": {
       "apps": [
@@ -7509,7 +7457,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "daan-stam",
+    "oncall": "bram-el-hadioui",
     "archetype": "data"
   },
   {
@@ -7518,10 +7466,10 @@ export const teams = [
     "org": "cbs",
     "matrix": "#cbs-statline:rijk.chat",
     "members": [
-      "noor-tekin",
-      "esra-buitenhuis",
-      "tariq-van-bommel",
-      "soumaya-smit"
+      "yara-goossens",
+      "youssef-van-driel",
+      "petra-meijer",
+      "roos-hofman"
     ],
     "owns": {
       "apps": [
@@ -7540,7 +7488,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "noor-tekin",
+    "oncall": "yara-goossens",
     "archetype": "data"
   },
   {
@@ -7549,11 +7497,10 @@ export const teams = [
     "org": "cbs",
     "matrix": "#cbs-microdata:rijk.chat",
     "members": [
-      "jan-yilmaz",
-      "ingrid-verhoeven",
-      "jasper-wolters",
-      "robin-dogan",
-      "fenna-timmermans"
+      "karim-bakhti",
+      "samira-renkema",
+      "tobias-de-wit",
+      "mila-willems"
     ],
     "owns": {
       "apps": [
@@ -7570,7 +7517,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "jan-yilmaz",
+    "oncall": "karim-bakhti",
     "archetype": "data"
   },
   {
@@ -7579,12 +7526,10 @@ export const teams = [
     "org": "cbs",
     "matrix": "#cbs-platform:rijk.chat",
     "members": [
-      "sterre-evers",
-      "levi-van-rijn",
-      "gijs-van-ginkel",
-      "olivier-sikkema",
-      "senna-vreeswijk",
-      "meryem-pijnenburg"
+      "bouchra-yildiz",
+      "johan-jansen",
+      "wouter-koster",
+      "sem-demir"
     ],
     "owns": {
       "apps": [
@@ -7601,7 +7546,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "sterre-evers",
+    "oncall": "bouchra-yildiz",
     "archetype": "platform"
   },
   {
@@ -7610,20 +7555,17 @@ export const teams = [
     "org": "cbs",
     "matrix": "#cbs-privacy:rijk.chat",
     "members": [
-      "lotte-bos",
-      "tim-van-den-berg",
-      "bas-postma",
-      "nadia-el-idrissi",
-      "layla-boutaleb",
-      "hassan-blom",
-      "said-heijmans"
+      "petra-dijkstra",
+      "tobias-van-leeuwen",
+      "erik-gerritsen",
+      "ahmed-van-der-velde"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "lotte-bos",
+    "oncall": "petra-dijkstra",
     "archetype": "security"
   },
   {
@@ -7632,9 +7574,10 @@ export const teams = [
     "org": "justid",
     "matrix": "#justid-documentatie:rijk.chat",
     "members": [
-      "gerard-koning",
-      "wilma-hamid",
-      "casper-diks"
+      "wouter-hoekstra",
+      "erik-aydin",
+      "lara-korkmaz",
+      "mats-groen"
     ],
     "owns": {
       "apps": [
@@ -7647,7 +7590,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "gerard-koning",
+    "oncall": "wouter-hoekstra",
     "archetype": "gegevens"
   },
   {
@@ -7656,17 +7599,17 @@ export const teams = [
     "org": "justid",
     "matrix": "#justid-vog:rijk.chat",
     "members": [
-      "bart-akkaya",
-      "suze-de-vries",
-      "nina-van-dijk",
-      "loes-vermeulen"
+      "lara-kuiper",
+      "fleur-stam",
+      "fleur-verbeek",
+      "puck-tuinstra"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "bart-akkaya",
+    "oncall": "lara-kuiper",
     "archetype": "product"
   },
   {
@@ -7675,11 +7618,10 @@ export const teams = [
     "org": "logius",
     "matrix": "#koop-wetten:rijk.chat",
     "members": [
-      "boris-van-vliet",
-      "jelle-kaya",
-      "anne-mol",
-      "ilias-van-es",
-      "joost-wagenaar"
+      "luuk-bosman",
+      "pim-donker",
+      "luuk-van-wijk",
+      "hatice-schipper"
     ],
     "owns": {
       "apps": [
@@ -7691,7 +7633,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "boris-van-vliet",
+    "oncall": "luuk-bosman",
     "archetype": "docs"
   },
   {
@@ -7700,12 +7642,10 @@ export const teams = [
     "org": "logius",
     "matrix": "#koop-officielebekendmakingen:rijk.chat",
     "members": [
-      "eva-lubbers",
-      "stijn-erdem",
-      "aisha-slootweg",
-      "pieter-asik",
-      "rachid-el-amrani",
-      "hala-ozturk"
+      "demi-tekin",
+      "driss-buitenhuis",
+      "pim-de-groot",
+      "emma-polat"
     ],
     "owns": {
       "apps": [
@@ -7718,7 +7658,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "eva-lubbers",
+    "oncall": "demi-tekin",
     "archetype": "docs"
   },
   {
@@ -7727,13 +7667,10 @@ export const teams = [
     "org": "dpc",
     "matrix": "#dpc-rijksoverheid:rijk.chat",
     "members": [
-      "cornelis-maas",
-      "saskia-veenstra",
-      "floris-arslan",
-      "roel-roeloffzen",
-      "vincent-van-loon",
-      "sophie-lammers",
-      "indy-nijhuis"
+      "sanne-van-bommel",
+      "thijs-smit",
+      "demi-berends",
+      "lars-korteweg"
     ],
     "owns": {
       "apps": [
@@ -7746,7 +7683,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "cornelis-maas",
+    "oncall": "sanne-van-bommel",
     "archetype": "product"
   },
   {
@@ -7755,9 +7692,10 @@ export const teams = [
     "org": "dpc",
     "matrix": "#dpc-content:rijk.chat",
     "members": [
-      "finn-holwerda",
-      "wessel-naber",
-      "britt-veldhuis"
+      "maud-yilmaz",
+      "mohammed-verhoeven",
+      "driss-tromp",
+      "femke-bulut"
     ],
     "owns": {
       "apps": [
@@ -7768,7 +7706,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "finn-holwerda",
+    "oncall": "maud-yilmaz",
     "archetype": "docs"
   },
   {
@@ -7777,17 +7715,17 @@ export const teams = [
     "org": "dji",
     "matrix": "#dji-detentie:rijk.chat",
     "members": [
-      "abdel-mulder",
-      "dilan-janssen",
-      "sven-huisman",
-      "hugo-vink"
+      "ans-wolters",
+      "amira-dogan",
+      "sanne-bouazza",
+      "sara-visser"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "abdel-mulder",
+    "oncall": "ans-wolters",
     "archetype": "uitvoering"
   },
   {
@@ -7796,18 +7734,17 @@ export const teams = [
     "org": "dji",
     "matrix": "#dji-data:rijk.chat",
     "members": [
-      "anouk-ennaji",
-      "fatima-roos",
-      "bilal-bruins",
-      "zeynep-van-der-veen",
-      "willem-mohamed"
+      "omar-timmermans",
+      "henk-evers",
+      "thijs-roozendaal",
+      "mehmet-kok"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "anouk-ennaji",
+    "oncall": "omar-timmermans",
     "archetype": "data"
   },
   {
@@ -7816,12 +7753,10 @@ export const teams = [
     "org": "cbr",
     "matrix": "#cbr-rijbewijs:rijk.chat",
     "members": [
-      "kees-van-os",
-      "carla-el-khattabi",
-      "niels-wielinga",
-      "koen-hendriks",
-      "roos-hofman",
-      "mila-willems"
+      "marieke-van-rijn",
+      "yvonne-van-ginkel",
+      "maud-vos",
+      "imane-van-der-heijden"
     ],
     "owns": {
       "apps": [
@@ -7840,7 +7775,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "kees-van-os",
+    "oncall": "marieke-van-rijn",
     "archetype": "product"
   },
   {
@@ -7849,20 +7784,17 @@ export const teams = [
     "org": "cbr",
     "matrix": "#cbr-reservering:rijk.chat",
     "members": [
-      "sem-demir",
-      "ahmed-van-der-velde",
-      "mats-groen",
-      "puck-tuinstra",
-      "hatice-schipper",
-      "emma-polat",
-      "lars-korteweg"
+      "sander-sikkema",
+      "mark-vreeswijk",
+      "mohammed-van-der-meer",
+      "fatih-van-den-heuvel"
     ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": "sem-demir",
+    "oncall": "sander-sikkema",
     "archetype": "product"
   },
   {
@@ -7871,9 +7803,10 @@ export const teams = [
     "org": "acm",
     "matrix": "#acm-toezicht:rijk.chat",
     "members": [
-      "femke-bulut",
-      "sara-visser",
-      "mehmet-kok"
+      "julia-pijnenburg",
+      "liv-bos",
+      "ans-de-lange",
+      "dirk-sahin"
     ],
     "owns": {
       "apps": [
@@ -7890,7 +7823,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "femke-bulut",
+    "oncall": "julia-pijnenburg",
     "archetype": "inspectie"
   },
   {
@@ -7899,9 +7832,9 @@ export const teams = [
     "org": "afm",
     "matrix": "#afm-toezicht:rijk.chat",
     "members": [
-      "imane-van-der-heijden",
-      "fatih-van-den-heuvel",
-      "dirk-sahin",
+      "mees-van-den-berg",
+      "khalid-postma",
+      "amira-bouali",
       "annemarie-driessen"
     ],
     "owns": {
@@ -7909,7 +7842,7 @@ export const teams = [
       "instances": [],
       "racks": []
     },
-    "oncall": "imane-van-der-heijden",
+    "oncall": "mees-van-den-berg",
     "archetype": "inspectie"
   },
   {
@@ -7918,11 +7851,10 @@ export const teams = [
     "org": "ksa",
     "matrix": "#ksa-handhaving:rijk.chat",
     "members": [
-      "quinten-faber",
-      "maarten-theunissen",
-      "tess-strik",
-      "veerle-van-zanten",
-      "marit-wubben"
+      "lieke-el-idrissi",
+      "isa-boutaleb",
+      "omar-el-hadioui",
+      "quinten-faber"
     ],
     "owns": {
       "apps": [
@@ -7934,7 +7866,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "quinten-faber",
+    "oncall": "lieke-el-idrissi",
     "archetype": "inspectie"
   },
   {
@@ -7943,12 +7875,10 @@ export const teams = [
     "org": "nza",
     "matrix": "#nza-zorgdata:rijk.chat",
     "members": [
-      "teun-snijders",
-      "ties-de-boer",
-      "romy-kuipers",
-      "younes-prins",
-      "bram-smeets",
-      "ruben-karaca"
+      "selin-blom",
+      "daan-heijmans",
+      "henk-van-der-wal",
+      "maarten-theunissen"
     ],
     "owns": {
       "apps": [
@@ -7965,7 +7895,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "teun-snijders",
+    "oncall": "selin-blom",
     "archetype": "data"
   },
   {
@@ -7974,13 +7904,10 @@ export const teams = [
     "org": "fin",
     "matrix": "#fin-financieel:rijk.chat",
     "members": [
-      "yara-van-beek",
-      "youssef-reijnders",
-      "karim-van-dam",
-      "samira-doornbos",
-      "bouchra-bijl",
-      "johan-charradi",
-      "petra-verschuren"
+      "iris-koning",
+      "jeroen-hamid",
+      "marieke-goossens",
+      "tess-strik"
     ],
     "owns": {
       "apps": [
@@ -7993,7 +7920,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "yara-van-beek",
+    "oncall": "iris-koning",
     "archetype": "betalingen"
   },
   {
@@ -8002,9 +7929,10 @@ export const teams = [
     "org": "fin",
     "matrix": "#fin-platform:rijk.chat",
     "members": [
-      "tobias-peters",
-      "wouter-bakkal",
-      "erik-scholten"
+      "noor-diks",
+      "esra-akkaya",
+      "yvonne-van-driel",
+      "veerle-van-zanten"
     ],
     "owns": {
       "apps": [
@@ -8016,7 +7944,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "tobias-peters",
+    "oncall": "noor-diks",
     "archetype": "platform"
   },
   {
@@ -8025,10 +7953,10 @@ export const teams = [
     "org": "szw",
     "matrix": "#szw-regelingen:rijk.chat",
     "members": [
-      "lara-ben-ali",
-      "fleur-ouali",
-      "luuk-dekker",
-      "pim-linders"
+      "tariq-de-vries",
+      "soumaya-van-dijk",
+      "sander-bakhti",
+      "marit-wubben"
     ],
     "owns": {
       "apps": [
@@ -8044,7 +7972,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": "lara-ben-ali",
+    "oncall": "tariq-de-vries",
     "archetype": "uitvoering"
   },
   {
@@ -8052,7 +7980,12 @@ export const teams = [
     "name": "Zorgregister & CIBG",
     "org": "vws",
     "matrix": "#vws-zorgregister:rijk.chat",
-    "members": [],
+    "members": [
+      "jan-vermeulen",
+      "ingrid-van-vliet",
+      "mark-renkema",
+      "teun-snijders"
+    ],
     "owns": {
       "apps": [
         "app-vaccinatieregister"
@@ -8063,7 +7996,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "jan-vermeulen",
     "archetype": "gegevens"
   },
   {
@@ -8071,7 +8004,12 @@ export const teams = [
     "name": "Volksgezondheid Data",
     "org": "vws",
     "matrix": "#vws-data:rijk.chat",
-    "members": [],
+    "members": [
+      "jasper-kaya",
+      "robin-mol",
+      "julia-yildiz",
+      "ties-de-boer"
+    ],
     "owns": {
       "apps": [
         "app-aanbestedingsportaal"
@@ -8081,7 +8019,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "jasper-kaya",
     "archetype": "data"
   },
   {
@@ -8089,7 +8027,12 @@ export const teams = [
     "name": "Strafrechtketen-integratie",
     "org": "jenv",
     "matrix": "#jenv-keten:rijk.chat",
-    "members": [],
+    "members": [
+      "fenna-van-es",
+      "sterre-wagenaar",
+      "liv-jansen",
+      "romy-kuipers"
+    ],
     "owns": {
       "apps": [
         "app-jeugdzorg-dossier",
@@ -8104,7 +8047,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "fenna-van-es",
     "archetype": "uitvoering"
   },
   {
@@ -8112,7 +8055,12 @@ export const teams = [
     "name": "Cultuur- & Erfgoeddata",
     "org": "ocw",
     "matrix": "#ocw-cultuurdata:rijk.chat",
-    "members": [],
+    "members": [
+      "levi-lubbers",
+      "gijs-erdem",
+      "mees-dijkstra",
+      "younes-prins"
+    ],
     "owns": {
       "apps": [
         "app-ci-runnerpool",
@@ -8126,7 +8074,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "levi-lubbers",
     "archetype": "data"
   },
   {
@@ -8134,13 +8082,18 @@ export const teams = [
     "name": "Natuurregister & Stikstof",
     "org": "lnv",
     "matrix": "#lnv-natuur:rijk.chat",
-    "members": [],
+    "members": [
+      "olivier-slootweg",
+      "senna-asik",
+      "khalid-van-leeuwen",
+      "bram-smeets"
+    ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "olivier-slootweg",
     "archetype": "gegevens"
   },
   {
@@ -8148,7 +8101,12 @@ export const teams = [
     "name": "Ondernemersdiensten",
     "org": "ezk",
     "matrix": "#ezk-ondernemen:rijk.chat",
-    "members": [],
+    "members": [
+      "meryem-el-amrani",
+      "lotte-ozturk",
+      "lieke-hoekstra",
+      "ruben-karaca"
+    ],
     "owns": {
       "apps": [
         "app-bijstandsuitkering",
@@ -8161,7 +8119,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "meryem-el-amrani",
     "archetype": "product"
   },
   {
@@ -8169,7 +8127,12 @@ export const teams = [
     "name": "Energiedata & Verduurzaming",
     "org": "kgg",
     "matrix": "#kgg-energie:rijk.chat",
-    "members": [],
+    "members": [
+      "tim-maas",
+      "bas-veenstra",
+      "isa-aydin",
+      "yara-van-beek"
+    ],
     "owns": {
       "apps": [
         "app-parkeervergunning",
@@ -8183,7 +8146,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "tim-maas",
     "archetype": "data"
   },
   {
@@ -8191,7 +8154,12 @@ export const teams = [
     "name": "Communicatieplatform AZ",
     "org": "az",
     "matrix": "#az-comms:rijk.chat",
-    "members": [],
+    "members": [
+      "nadia-arslan",
+      "layla-roeloffzen",
+      "selin-kuiper",
+      "youssef-reijnders"
+    ],
     "owns": {
       "apps": [
         "app-handelsregister-zoeker"
@@ -8203,7 +8171,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "nadia-arslan",
     "archetype": "docs"
   },
   {
@@ -8211,7 +8179,12 @@ export const teams = [
     "name": "Consulaire Dienstverlening",
     "org": "bz",
     "matrix": "#bz-consulair:rijk.chat",
-    "members": [],
+    "members": [
+      "hassan-van-loon",
+      "said-lammers",
+      "daan-stam",
+      "karim-van-dam"
+    ],
     "owns": {
       "apps": [
         "app-capaciteitsplanner-dc"
@@ -8222,7 +8195,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "hassan-van-loon",
     "archetype": "product"
   },
   {
@@ -8230,7 +8203,12 @@ export const teams = [
     "name": "Beveiligde Infrastructuur",
     "org": "def",
     "matrix": "#def-secinfra:rijk.chat",
-    "members": [],
+    "members": [
+      "gerard-nijhuis",
+      "wilma-holwerda",
+      "iris-bosman",
+      "samira-doornbos"
+    ],
     "owns": {
       "apps": [
         "app-kadaster-viewer"
@@ -8242,7 +8220,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "gerard-nijhuis",
     "archetype": "security"
   },
   {
@@ -8250,7 +8228,12 @@ export const teams = [
     "name": "Migratieketen-voorzieningen",
     "org": "aenm",
     "matrix": "#aenm-keten:rijk.chat",
-    "members": [],
+    "members": [
+      "casper-naber",
+      "bart-veldhuis",
+      "jeroen-donker",
+      "bouchra-bijl"
+    ],
     "owns": {
       "apps": [
         "app-huurtoeslag-rekenen"
@@ -8261,7 +8244,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "casper-naber",
     "archetype": "uitvoering"
   },
   {
@@ -8269,7 +8252,12 @@ export const teams = [
     "name": "Geschilbeslechting Huur",
     "org": "dhc",
     "matrix": "#dhc-geschillen:rijk.chat",
-    "members": [],
+    "members": [
+      "suze-mulder",
+      "nina-janssen",
+      "noor-tekin",
+      "johan-charradi"
+    ],
     "owns": {
       "apps": [
         "app-nldd-componenten"
@@ -8280,7 +8268,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "suze-mulder",
     "archetype": "uitvoering"
   },
   {
@@ -8288,13 +8276,18 @@ export const teams = [
     "name": "Marktdiensten EZ",
     "org": "ez",
     "matrix": "#ez-markt:rijk.chat",
-    "members": [],
+    "members": [
+      "loes-huisman",
+      "boris-vink",
+      "esra-buitenhuis",
+      "petra-verschuren"
+    ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "loes-huisman",
     "archetype": "product"
   },
   {
@@ -8302,13 +8295,18 @@ export const teams = [
     "name": "Rijksbreed IAM & Toegang",
     "org": "bzk",
     "matrix": "#bzk-iam:rijk.chat",
-    "members": [],
+    "members": [
+      "jelle-ennaji",
+      "anne-roos",
+      "tariq-van-bommel",
+      "tobias-peters"
+    ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "jelle-ennaji",
     "archetype": "iam"
   },
   {
@@ -8316,13 +8314,18 @@ export const teams = [
     "name": "Informatiebeveiliging BZK",
     "org": "bzk",
     "matrix": "#bzk-security:rijk.chat",
-    "members": [],
+    "members": [
+      "ilias-bruins",
+      "joost-van-der-veen",
+      "soumaya-smit",
+      "wouter-bakkal"
+    ],
     "owns": {
       "apps": [],
       "instances": [],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "ilias-bruins",
     "archetype": "security"
   },
   {
@@ -8330,7 +8333,12 @@ export const teams = [
     "name": "Documentatie & Developer Experience",
     "org": "rijksict",
     "matrix": "#rijksict-docs:rijk.chat",
-    "members": [],
+    "members": [
+      "eva-mohamed",
+      "stijn-van-os",
+      "jan-yilmaz",
+      "erik-scholten"
+    ],
     "owns": {
       "apps": [
         "app-inspectierapport-generator"
@@ -8340,7 +8348,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "eva-mohamed",
     "archetype": "docs"
   },
   {
@@ -8348,7 +8356,12 @@ export const teams = [
     "name": "Gilde IAM & Federatie",
     "org": "rijksict",
     "matrix": "#rijksict-iam:rijk.chat",
-    "members": [],
+    "members": [
+      "aisha-el-khattabi",
+      "pieter-wielinga",
+      "ingrid-verhoeven",
+      "lara-ben-ali"
+    ],
     "owns": {
       "apps": [
         "app-inkomenstoets"
@@ -8359,7 +8372,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "aisha-el-khattabi",
     "archetype": "iam"
   },
   {
@@ -8367,7 +8380,12 @@ export const teams = [
     "name": "Standaarden & Documentatie",
     "org": "logius",
     "matrix": "#logius-docs:rijk.chat",
-    "members": [],
+    "members": [
+      "rachid-hendriks",
+      "hala-hofman",
+      "jasper-wolters",
+      "fleur-ouali"
+    ],
     "owns": {
       "apps": [
         "app-ww-aanvraag",
@@ -8383,7 +8401,7 @@ export const teams = [
       ],
       "racks": []
     },
-    "oncall": null,
+    "oncall": "rachid-hendriks",
     "archetype": "docs"
   }
 ];
@@ -8425,22 +8443,46 @@ export const oncall = [
   },
   {
     "team": "team-bd-aangifte",
-    "person": "mohammed-van-vliet",
+    "person": "maud-vermeulen",
     "until": "ma 9:00",
     "escalation": [
-      "ans-kaya"
+      "mohammed-van-vliet"
     ]
   },
   {
     "team": "team-bd-gegevens",
-    "person": "henk-wagenaar",
+    "person": "ans-kaya",
     "until": "ma 9:00",
     "escalation": [
-      "marieke-lubbers"
+      "amira-mol"
     ]
   },
   {
     "team": "team-bd-fraude",
+    "person": "omar-van-es",
+    "until": "ma 9:00",
+    "escalation": [
+      "henk-wagenaar"
+    ]
+  },
+  {
+    "team": "team-bd-iam",
+    "person": "marieke-lubbers",
+    "until": "ma 9:00",
+    "escalation": [
+      "yvonne-erdem"
+    ]
+  },
+  {
+    "team": "team-bd-platform",
+    "person": "sander-slootweg",
+    "until": "ma 9:00",
+    "escalation": [
+      "mark-asik"
+    ]
+  },
+  {
+    "team": "team-duo-studiefinanciering",
     "person": "julia-el-amrani",
     "until": "ma 9:00",
     "escalation": [
@@ -8448,7 +8490,23 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-bd-iam",
+    "team": "team-duo-register",
+    "person": "mees-maas",
+    "until": "ma 9:00",
+    "escalation": [
+      "khalid-veenstra"
+    ]
+  },
+  {
+    "team": "team-duo-examens",
+    "person": "lieke-arslan",
+    "until": "ma 9:00",
+    "escalation": [
+      "isa-roeloffzen"
+    ]
+  },
+  {
+    "team": "team-duo-data",
     "person": "selin-van-loon",
     "until": "ma 9:00",
     "escalation": [
@@ -8456,15 +8514,39 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-bd-platform",
-    "person": "soumaya-janssen",
+    "team": "team-duo-platform",
+    "person": "iris-nijhuis",
     "until": "ma 9:00",
     "escalation": [
-      "jan-huisman"
+      "jeroen-holwerda"
     ]
   },
   {
-    "team": "team-duo-studiefinanciering",
+    "team": "team-uwv-uitkeringen",
+    "person": "noor-naber",
+    "until": "ma 9:00",
+    "escalation": [
+      "esra-veldhuis"
+    ]
+  },
+  {
+    "team": "team-uwv-werk",
+    "person": "tariq-mulder",
+    "until": "ma 9:00",
+    "escalation": [
+      "soumaya-janssen"
+    ]
+  },
+  {
+    "team": "team-uwv-gegevens",
+    "person": "jan-huisman",
+    "until": "ma 9:00",
+    "escalation": [
+      "ingrid-vink"
+    ]
+  },
+  {
+    "team": "team-uwv-arbeidsmarkt",
     "person": "jasper-ennaji",
     "until": "ma 9:00",
     "escalation": [
@@ -8472,7 +8554,15 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-duo-register",
+    "team": "team-uwv-platform",
+    "person": "fenna-bruins",
+    "until": "ma 9:00",
+    "escalation": [
+      "sterre-van-der-veen"
+    ]
+  },
+  {
+    "team": "team-rvo-subsidies",
     "person": "levi-mohamed",
     "until": "ma 9:00",
     "escalation": [
@@ -8480,23 +8570,71 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-duo-examens",
-    "person": "lotte-hofman",
+    "team": "team-rvo-vergunningen",
+    "person": "olivier-el-khattabi",
     "until": "ma 9:00",
     "escalation": [
-      "tim-willems"
+      "senna-wielinga"
     ]
   },
   {
-    "team": "team-duo-data",
-    "person": "said-schipper",
+    "team": "team-rvo-geodata",
+    "person": "meryem-hendriks",
     "until": "ma 9:00",
     "escalation": [
-      "gerard-polat"
+      "lotte-hofman"
     ]
   },
   {
-    "team": "team-duo-platform",
+    "team": "team-rvo-portaal",
+    "person": "tim-willems",
+    "until": "ma 9:00",
+    "escalation": [
+      "bas-demir"
+    ]
+  },
+  {
+    "team": "team-rws-areaal",
+    "person": "nadia-van-der-velde",
+    "until": "ma 9:00",
+    "escalation": [
+      "layla-groen"
+    ]
+  },
+  {
+    "team": "team-rws-verkeer",
+    "person": "hassan-tuinstra",
+    "until": "ma 9:00",
+    "escalation": [
+      "said-schipper"
+    ]
+  },
+  {
+    "team": "team-rws-sensoren",
+    "person": "gerard-polat",
+    "until": "ma 9:00",
+    "escalation": [
+      "wilma-korteweg"
+    ]
+  },
+  {
+    "team": "team-rws-inspectie",
+    "person": "casper-bulut",
+    "until": "ma 9:00",
+    "escalation": [
+      "bart-visser"
+    ]
+  },
+  {
+    "team": "team-rws-platform",
+    "person": "suze-kok",
+    "until": "ma 9:00",
+    "escalation": [
+      "nina-van-der-heijden"
+    ]
+  },
+  {
+    "team": "team-ind-aanvragen",
     "person": "loes-van-den-heuvel",
     "until": "ma 9:00",
     "escalation": [
@@ -8504,23 +8642,47 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-uwv-uitkeringen",
-    "person": "anne-faber",
+    "team": "team-ind-dossiers",
+    "person": "jelle-driessen",
     "until": "ma 9:00",
     "escalation": [
-      "ilias-theunissen"
+      "anne-faber"
     ]
   },
   {
-    "team": "team-uwv-werk",
-    "person": "stijn-wubben",
+    "team": "team-ind-iam",
+    "person": "ilias-theunissen",
     "until": "ma 9:00",
     "escalation": [
-      "aisha-snijders"
+      "joost-strik"
     ]
   },
   {
-    "team": "team-uwv-gegevens",
+    "team": "team-ind-data",
+    "person": "eva-van-zanten",
+    "until": "ma 9:00",
+    "escalation": [
+      "stijn-wubben"
+    ]
+  },
+  {
+    "team": "team-logius-digid",
+    "person": "aisha-snijders",
+    "until": "ma 9:00",
+    "escalation": [
+      "pieter-de-boer"
+    ]
+  },
+  {
+    "team": "team-logius-digikoppeling",
+    "person": "rachid-kuipers",
+    "until": "ma 9:00",
+    "escalation": [
+      "hala-prins"
+    ]
+  },
+  {
+    "team": "team-logius-machtigen",
     "person": "cornelis-smeets",
     "until": "ma 9:00",
     "escalation": [
@@ -8528,7 +8690,23 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-uwv-arbeidsmarkt",
+    "team": "team-logius-stelsel",
+    "person": "floris-van-beek",
+    "until": "ma 9:00",
+    "escalation": [
+      "roel-reijnders"
+    ]
+  },
+  {
+    "team": "team-dictu-hosting",
+    "person": "vincent-van-dam",
+    "until": "ma 9:00",
+    "escalation": [
+      "sophie-doornbos"
+    ]
+  },
+  {
+    "team": "team-dictu-werkplek",
     "person": "indy-bijl",
     "until": "ma 9:00",
     "escalation": [
@@ -8536,15 +8714,39 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-uwv-platform",
-    "person": "hugo-ouali",
+    "team": "team-dictu-security",
+    "person": "wessel-verschuren",
     "until": "ma 9:00",
     "escalation": [
-      "anouk-dekker"
+      "britt-peters"
     ]
   },
   {
-    "team": "team-rvo-subsidies",
+    "team": "team-dictu-data",
+    "person": "abdel-bakkal",
+    "until": "ma 9:00",
+    "escalation": [
+      "dilan-scholten"
+    ]
+  },
+  {
+    "team": "team-rvig-brp",
+    "person": "sven-ben-ali",
+    "until": "ma 9:00",
+    "escalation": [
+      "hugo-ouali"
+    ]
+  },
+  {
+    "team": "team-rvig-reisdocumenten",
+    "person": "anouk-dekker",
+    "until": "ma 9:00",
+    "escalation": [
+      "fatima-linders"
+    ]
+  },
+  {
+    "team": "team-rvig-iam",
     "person": "bilal-verbruggen",
     "until": "ma 9:00",
     "escalation": [
@@ -8552,7 +8754,15 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-rvo-vergunningen",
+    "team": "team-jio-platform",
+    "person": "willem-van-der-plas",
+    "until": "ma 9:00",
+    "escalation": [
+      "kees-cinar"
+    ]
+  },
+  {
+    "team": "team-jio-keten",
     "person": "carla-bakker",
     "until": "ma 9:00",
     "escalation": [
@@ -8560,23 +8770,71 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-rvo-geodata",
-    "person": "sem-van-der-laan",
+    "team": "team-jio-security",
+    "person": "koen-schouten",
     "until": "ma 9:00",
     "escalation": [
-      "ahmed-wijnands"
+      "roos-sanders"
     ]
   },
   {
-    "team": "team-rvo-portaal",
-    "person": "lars-kraaijeveld",
+    "team": "team-cjib-inning",
+    "person": "mila-celik",
     "until": "ma 9:00",
     "escalation": [
-      "femke-meijer"
+      "sem-van-der-laan"
     ]
   },
   {
-    "team": "team-rws-areaal",
+    "team": "team-cjib-sanctie",
+    "person": "ahmed-wijnands",
+    "until": "ma 9:00",
+    "escalation": [
+      "mats-engelen"
+    ]
+  },
+  {
+    "team": "team-cjib-data",
+    "person": "puck-van-hattem",
+    "until": "ma 9:00",
+    "escalation": [
+      "hatice-gunes"
+    ]
+  },
+  {
+    "team": "team-svb-aow",
+    "person": "emma-geerts",
+    "until": "ma 9:00",
+    "escalation": [
+      "lars-kraaijeveld"
+    ]
+  },
+  {
+    "team": "team-svb-kinderbijslag",
+    "person": "femke-meijer",
+    "until": "ma 9:00",
+    "escalation": [
+      "sara-de-wit"
+    ]
+  },
+  {
+    "team": "team-svb-gegevens",
+    "person": "mehmet-koster",
+    "until": "ma 9:00",
+    "escalation": [
+      "imane-gerritsen"
+    ]
+  },
+  {
+    "team": "team-svb-platform",
+    "person": "fatih-korkmaz",
+    "until": "ma 9:00",
+    "escalation": [
+      "dirk-verbeek"
+    ]
+  },
+  {
+    "team": "team-kvk-handelsregister",
     "person": "annemarie-van-wijk",
     "until": "ma 9:00",
     "escalation": [
@@ -8584,23 +8842,47 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-rws-verkeer",
-    "person": "tess-tromp",
+    "team": "team-kvk-api",
+    "person": "maarten-berends",
     "until": "ma 9:00",
     "escalation": [
-      "veerle-bouazza"
+      "tess-tromp"
     ]
   },
   {
-    "team": "team-rws-sensoren",
-    "person": "ties-van-der-meer",
+    "team": "team-kvk-ondernemersplein",
+    "person": "veerle-bouazza",
     "until": "ma 9:00",
     "escalation": [
-      "romy-de-lange"
+      "marit-roozendaal"
     ]
   },
   {
-    "team": "team-rws-inspectie",
+    "team": "team-ienw-kenteken",
+    "person": "teun-vos",
+    "until": "ma 9:00",
+    "escalation": [
+      "ties-van-der-meer"
+    ]
+  },
+  {
+    "team": "team-ienw-voertuig",
+    "person": "romy-de-lange",
+    "until": "ma 9:00",
+    "escalation": [
+      "younes-bouali"
+    ]
+  },
+  {
+    "team": "team-ienw-data",
+    "person": "bram-el-hadioui",
+    "until": "ma 9:00",
+    "escalation": [
+      "ruben-van-der-wal"
+    ]
+  },
+  {
+    "team": "team-cbs-statline",
     "person": "yara-goossens",
     "until": "ma 9:00",
     "escalation": [
@@ -8608,7 +8890,23 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-rws-platform",
+    "team": "team-cbs-microdata",
+    "person": "karim-bakhti",
+    "until": "ma 9:00",
+    "escalation": [
+      "samira-renkema"
+    ]
+  },
+  {
+    "team": "team-cbs-platform",
+    "person": "bouchra-yildiz",
+    "until": "ma 9:00",
+    "escalation": [
+      "johan-jansen"
+    ]
+  },
+  {
+    "team": "team-cbs-privacy",
     "person": "petra-dijkstra",
     "until": "ma 9:00",
     "escalation": [
@@ -8616,15 +8914,39 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-ind-aanvragen",
-    "person": "pim-donker",
+    "team": "team-justid-documentatie",
+    "person": "wouter-hoekstra",
     "until": "ma 9:00",
     "escalation": [
-      "demi-tekin"
+      "erik-aydin"
     ]
   },
   {
-    "team": "team-ind-dossiers",
+    "team": "team-justid-vog",
+    "person": "lara-kuiper",
+    "until": "ma 9:00",
+    "escalation": [
+      "fleur-stam"
+    ]
+  },
+  {
+    "team": "team-koop-wetten",
+    "person": "luuk-bosman",
+    "until": "ma 9:00",
+    "escalation": [
+      "pim-donker"
+    ]
+  },
+  {
+    "team": "team-koop-officielebekendmakingen",
+    "person": "demi-tekin",
+    "until": "ma 9:00",
+    "escalation": [
+      "driss-buitenhuis"
+    ]
+  },
+  {
+    "team": "team-dpc-rijksoverheid",
     "person": "sanne-van-bommel",
     "until": "ma 9:00",
     "escalation": [
@@ -8632,7 +8954,15 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-ind-iam",
+    "team": "team-dpc-content",
+    "person": "maud-yilmaz",
+    "until": "ma 9:00",
+    "escalation": [
+      "mohammed-verhoeven"
+    ]
+  },
+  {
+    "team": "team-dji-detentie",
     "person": "ans-wolters",
     "until": "ma 9:00",
     "escalation": [
@@ -8640,23 +8970,71 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-ind-data",
-    "person": "yvonne-van-ginkel",
+    "team": "team-dji-data",
+    "person": "omar-timmermans",
     "until": "ma 9:00",
     "escalation": [
-      "sander-sikkema"
+      "henk-evers"
     ]
   },
   {
-    "team": "team-logius-digid",
-    "person": "khalid-postma",
+    "team": "team-cbr-rijbewijs",
+    "person": "marieke-van-rijn",
     "until": "ma 9:00",
     "escalation": [
-      "lieke-el-idrissi"
+      "yvonne-van-ginkel"
     ]
   },
   {
-    "team": "team-logius-digikoppeling",
+    "team": "team-cbr-reservering",
+    "person": "sander-sikkema",
+    "until": "ma 9:00",
+    "escalation": [
+      "mark-vreeswijk"
+    ]
+  },
+  {
+    "team": "team-acm-toezicht",
+    "person": "julia-pijnenburg",
+    "until": "ma 9:00",
+    "escalation": [
+      "liv-bos"
+    ]
+  },
+  {
+    "team": "team-afm-toezicht",
+    "person": "mees-van-den-berg",
+    "until": "ma 9:00",
+    "escalation": [
+      "khalid-postma"
+    ]
+  },
+  {
+    "team": "team-ksa-handhaving",
+    "person": "lieke-el-idrissi",
+    "until": "ma 9:00",
+    "escalation": [
+      "isa-boutaleb"
+    ]
+  },
+  {
+    "team": "team-nza-zorgdata",
+    "person": "selin-blom",
+    "until": "ma 9:00",
+    "escalation": [
+      "daan-heijmans"
+    ]
+  },
+  {
+    "team": "team-fin-financieel",
+    "person": "iris-koning",
+    "until": "ma 9:00",
+    "escalation": [
+      "jeroen-hamid"
+    ]
+  },
+  {
+    "team": "team-fin-platform",
     "person": "noor-diks",
     "until": "ma 9:00",
     "escalation": [
@@ -8664,23 +9042,47 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-logius-machtigen",
-    "person": "soumaya-van-dijk",
+    "team": "team-szw-regelingen",
+    "person": "tariq-de-vries",
     "until": "ma 9:00",
     "escalation": [
-      "jan-vermeulen"
+      "soumaya-van-dijk"
     ]
   },
   {
-    "team": "team-logius-stelsel",
-    "person": "robin-mol",
+    "team": "team-vws-zorgregister",
+    "person": "jan-vermeulen",
     "until": "ma 9:00",
     "escalation": [
-      "fenna-van-es"
+      "ingrid-van-vliet"
     ]
   },
   {
-    "team": "team-dictu-hosting",
+    "team": "team-vws-data",
+    "person": "jasper-kaya",
+    "until": "ma 9:00",
+    "escalation": [
+      "robin-mol"
+    ]
+  },
+  {
+    "team": "team-jenv-keten",
+    "person": "fenna-van-es",
+    "until": "ma 9:00",
+    "escalation": [
+      "sterre-wagenaar"
+    ]
+  },
+  {
+    "team": "team-ocw-cultuurdata",
+    "person": "levi-lubbers",
+    "until": "ma 9:00",
+    "escalation": [
+      "gijs-erdem"
+    ]
+  },
+  {
+    "team": "team-lnv-natuur",
     "person": "olivier-slootweg",
     "until": "ma 9:00",
     "escalation": [
@@ -8688,7 +9090,23 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-dictu-werkplek",
+    "team": "team-ezk-ondernemen",
+    "person": "meryem-el-amrani",
+    "until": "ma 9:00",
+    "escalation": [
+      "lotte-ozturk"
+    ]
+  },
+  {
+    "team": "team-kgg-energie",
+    "person": "tim-maas",
+    "until": "ma 9:00",
+    "escalation": [
+      "bas-veenstra"
+    ]
+  },
+  {
+    "team": "team-az-comms",
     "person": "nadia-arslan",
     "until": "ma 9:00",
     "escalation": [
@@ -8696,15 +9114,39 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-dictu-security",
-    "person": "bart-veldhuis",
+    "team": "team-bz-consulair",
+    "person": "hassan-van-loon",
     "until": "ma 9:00",
     "escalation": [
-      "suze-mulder"
+      "said-lammers"
     ]
   },
   {
-    "team": "team-dictu-data",
+    "team": "team-def-secinfra",
+    "person": "gerard-nijhuis",
+    "until": "ma 9:00",
+    "escalation": [
+      "wilma-holwerda"
+    ]
+  },
+  {
+    "team": "team-aenm-keten",
+    "person": "casper-naber",
+    "until": "ma 9:00",
+    "escalation": [
+      "bart-veldhuis"
+    ]
+  },
+  {
+    "team": "team-dhc-geschillen",
+    "person": "suze-mulder",
+    "until": "ma 9:00",
+    "escalation": [
+      "nina-janssen"
+    ]
+  },
+  {
+    "team": "team-ez-markt",
     "person": "loes-huisman",
     "until": "ma 9:00",
     "escalation": [
@@ -8712,7 +9154,15 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-rvig-brp",
+    "team": "team-bzk-iam",
+    "person": "jelle-ennaji",
+    "until": "ma 9:00",
+    "escalation": [
+      "anne-roos"
+    ]
+  },
+  {
+    "team": "team-bzk-security",
     "person": "ilias-bruins",
     "until": "ma 9:00",
     "escalation": [
@@ -8720,315 +9170,27 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-rvig-reisdocumenten",
-    "person": "pieter-wielinga",
+    "team": "team-rijksict-docs",
+    "person": "eva-mohamed",
     "until": "ma 9:00",
     "escalation": [
-      "rachid-hendriks"
+      "stijn-van-os"
     ]
   },
   {
-    "team": "team-rvig-iam",
-    "person": "roel-groen",
+    "team": "team-rijksict-iam",
+    "person": "aisha-el-khattabi",
     "until": "ma 9:00",
     "escalation": [
-      "vincent-tuinstra"
+      "pieter-wielinga"
     ]
   },
   {
-    "team": "team-jio-platform",
-    "person": "abdel-kok",
+    "team": "team-logius-docs",
+    "person": "rachid-hendriks",
     "until": "ma 9:00",
     "escalation": [
-      "dilan-van-der-heijden"
-    ]
-  },
-  {
-    "team": "team-jio-keten",
-    "person": "hugo-sahin",
-    "until": "ma 9:00",
-    "escalation": [
-      "anouk-driessen"
-    ]
-  },
-  {
-    "team": "team-jio-security",
-    "person": "zeynep-strik",
-    "until": "ma 9:00",
-    "escalation": [
-      "willem-van-zanten"
-    ]
-  },
-  {
-    "team": "team-cjib-inning",
-    "person": "koen-kuipers",
-    "until": "ma 9:00",
-    "escalation": [
-      "roos-prins"
-    ]
-  },
-  {
-    "team": "team-cjib-sanctie",
-    "person": "puck-van-dam",
-    "until": "ma 9:00",
-    "escalation": [
-      "hatice-doornbos"
-    ]
-  },
-  {
-    "team": "team-cjib-data",
-    "person": "imane-scholten",
-    "until": "ma 9:00",
-    "escalation": [
-      "fatih-ben-ali"
-    ]
-  },
-  {
-    "team": "team-svb-aow",
-    "person": "annemarie-dekker",
-    "until": "ma 9:00",
-    "escalation": [
-      "quinten-linders"
-    ]
-  },
-  {
-    "team": "team-svb-kinderbijslag",
-    "person": "veerle-van-der-plas",
-    "until": "ma 9:00",
-    "escalation": [
-      "marit-cinar"
-    ]
-  },
-  {
-    "team": "team-svb-gegevens",
-    "person": "younes-sanders",
-    "until": "ma 9:00",
-    "escalation": [
-      "bram-celik"
-    ]
-  },
-  {
-    "team": "team-svb-platform",
-    "person": "samira-gunes",
-    "until": "ma 9:00",
-    "escalation": [
-      "bouchra-geerts"
-    ]
-  },
-  {
-    "team": "team-kvk-handelsregister",
-    "person": "lara-korkmaz",
-    "until": "ma 9:00",
-    "escalation": [
-      "fleur-verbeek"
-    ]
-  },
-  {
-    "team": "team-kvk-api",
-    "person": "pim-de-groot",
-    "until": "ma 9:00",
-    "escalation": [
-      "demi-berends"
-    ]
-  },
-  {
-    "team": "team-kvk-ondernemersplein",
-    "person": "thijs-roozendaal",
-    "until": "ma 9:00",
-    "escalation": [
-      "maud-vos"
-    ]
-  },
-  {
-    "team": "team-ienw-kenteken",
-    "person": "omar-el-hadioui",
-    "until": "ma 9:00",
-    "escalation": [
-      "henk-van-der-wal"
-    ]
-  },
-  {
-    "team": "team-ienw-voertuig",
-    "person": "julia-yildiz",
-    "until": "ma 9:00",
-    "escalation": [
-      "liv-jansen"
-    ]
-  },
-  {
-    "team": "team-ienw-data",
-    "person": "daan-stam",
-    "until": "ma 9:00",
-    "escalation": [
-      "iris-bosman"
-    ]
-  },
-  {
-    "team": "team-cbs-statline",
-    "person": "noor-tekin",
-    "until": "ma 9:00",
-    "escalation": [
-      "esra-buitenhuis"
-    ]
-  },
-  {
-    "team": "team-cbs-microdata",
-    "person": "jan-yilmaz",
-    "until": "ma 9:00",
-    "escalation": [
-      "ingrid-verhoeven"
-    ]
-  },
-  {
-    "team": "team-cbs-platform",
-    "person": "sterre-evers",
-    "until": "ma 9:00",
-    "escalation": [
-      "levi-van-rijn"
-    ]
-  },
-  {
-    "team": "team-cbs-privacy",
-    "person": "lotte-bos",
-    "until": "ma 9:00",
-    "escalation": [
-      "tim-van-den-berg"
-    ]
-  },
-  {
-    "team": "team-justid-documentatie",
-    "person": "gerard-koning",
-    "until": "ma 9:00",
-    "escalation": [
-      "wilma-hamid"
-    ]
-  },
-  {
-    "team": "team-justid-vog",
-    "person": "bart-akkaya",
-    "until": "ma 9:00",
-    "escalation": [
-      "suze-de-vries"
-    ]
-  },
-  {
-    "team": "team-koop-wetten",
-    "person": "boris-van-vliet",
-    "until": "ma 9:00",
-    "escalation": [
-      "jelle-kaya"
-    ]
-  },
-  {
-    "team": "team-koop-officielebekendmakingen",
-    "person": "eva-lubbers",
-    "until": "ma 9:00",
-    "escalation": [
-      "stijn-erdem"
-    ]
-  },
-  {
-    "team": "team-dpc-rijksoverheid",
-    "person": "cornelis-maas",
-    "until": "ma 9:00",
-    "escalation": [
-      "saskia-veenstra"
-    ]
-  },
-  {
-    "team": "team-dpc-content",
-    "person": "finn-holwerda",
-    "until": "ma 9:00",
-    "escalation": [
-      "wessel-naber"
-    ]
-  },
-  {
-    "team": "team-dji-detentie",
-    "person": "abdel-mulder",
-    "until": "ma 9:00",
-    "escalation": [
-      "dilan-janssen"
-    ]
-  },
-  {
-    "team": "team-dji-data",
-    "person": "anouk-ennaji",
-    "until": "ma 9:00",
-    "escalation": [
-      "fatima-roos"
-    ]
-  },
-  {
-    "team": "team-cbr-rijbewijs",
-    "person": "kees-van-os",
-    "until": "ma 9:00",
-    "escalation": [
-      "carla-el-khattabi"
-    ]
-  },
-  {
-    "team": "team-cbr-reservering",
-    "person": "sem-demir",
-    "until": "ma 9:00",
-    "escalation": [
-      "ahmed-van-der-velde"
-    ]
-  },
-  {
-    "team": "team-acm-toezicht",
-    "person": "femke-bulut",
-    "until": "ma 9:00",
-    "escalation": [
-      "sara-visser"
-    ]
-  },
-  {
-    "team": "team-afm-toezicht",
-    "person": "imane-van-der-heijden",
-    "until": "ma 9:00",
-    "escalation": [
-      "fatih-van-den-heuvel"
-    ]
-  },
-  {
-    "team": "team-ksa-handhaving",
-    "person": "quinten-faber",
-    "until": "ma 9:00",
-    "escalation": [
-      "maarten-theunissen"
-    ]
-  },
-  {
-    "team": "team-nza-zorgdata",
-    "person": "teun-snijders",
-    "until": "ma 9:00",
-    "escalation": [
-      "ties-de-boer"
-    ]
-  },
-  {
-    "team": "team-fin-financieel",
-    "person": "yara-van-beek",
-    "until": "ma 9:00",
-    "escalation": [
-      "youssef-reijnders"
-    ]
-  },
-  {
-    "team": "team-fin-platform",
-    "person": "tobias-peters",
-    "until": "ma 9:00",
-    "escalation": [
-      "wouter-bakkal"
-    ]
-  },
-  {
-    "team": "team-szw-regelingen",
-    "person": "lara-ben-ali",
-    "until": "ma 9:00",
-    "escalation": [
-      "fleur-ouali"
+      "hala-hofman"
     ]
   }
 ];
@@ -21774,7 +21936,7 @@ export const releases = [
     "app": "app-vergunningchecker",
     "version": "v1.6.0",
     "env": "prod",
-    "by": "pim-de-groot",
+    "by": "maarten-berends",
     "when": "di 14:00",
     "notes": "Reguliere release"
   },
@@ -21783,7 +21945,7 @@ export const releases = [
     "app": "app-reisdocument-aanvraag",
     "version": "v1.9.0",
     "env": "prod",
-    "by": "lara-korkmaz",
+    "by": "annemarie-van-wijk",
     "when": "vr 8:03",
     "notes": "Reguliere release"
   },
@@ -21792,7 +21954,7 @@ export const releases = [
     "app": "app-subsidieportaal-rvo",
     "version": "v1.2.0",
     "env": "prod",
-    "by": "levi-mohamed",
+    "by": "mees-maas",
     "when": "wo 11:00",
     "notes": "Reguliere release"
   },
@@ -21801,7 +21963,7 @@ export const releases = [
     "app": "app-aow-uitkering",
     "version": "v1.5.0",
     "env": "prod",
-    "by": "sem-van-der-laan",
+    "by": "meryem-hendriks",
     "when": "gisteren 14:03",
     "notes": "Reguliere release"
   },
@@ -21810,7 +21972,7 @@ export const releases = [
     "app": "app-bezwaarafhandeling",
     "version": "v1.8.0",
     "env": "prod",
-    "by": "loes-huisman",
+    "by": "abdel-bakkal",
     "when": "do 8:00",
     "notes": "Reguliere release"
   },
@@ -21819,7 +21981,7 @@ export const releases = [
     "app": "app-verblijfsvergunning",
     "version": "v1.1.0",
     "env": "prod",
-    "by": "cornelis-maas",
+    "by": "sanne-van-bommel",
     "when": "di 11:03",
     "notes": "Reguliere release"
   },
@@ -21828,7 +21990,7 @@ export const releases = [
     "app": "app-eherkenning-broker",
     "version": "v1.4.0",
     "env": "prod",
-    "by": "femke-bulut",
+    "by": "julia-pijnenburg",
     "when": "vr 14:00",
     "notes": "Reguliere release"
   },
@@ -21837,7 +21999,7 @@ export const releases = [
     "app": "app-adrescheck-bag",
     "version": "v1.7.0",
     "env": "prod",
-    "by": "veerle-van-der-plas",
+    "by": "femke-meijer",
     "when": "wo 8:03",
     "notes": "Reguliere release"
   },
@@ -21846,7 +22008,7 @@ export const releases = [
     "app": "app-incasso-cjib",
     "version": "v1.0.0",
     "env": "prod",
-    "by": "jasper-ennaji",
+    "by": "julia-el-amrani",
     "when": "gisteren 11:00",
     "notes": "Reguliere release"
   },
@@ -21855,7 +22017,7 @@ export const releases = [
     "app": "app-loonheffing",
     "version": "v1.3.0",
     "env": "prod",
-    "by": "henk-wagenaar",
+    "by": "ans-kaya",
     "when": "do 14:03",
     "notes": "Reguliere release"
   },
@@ -21864,7 +22026,7 @@ export const releases = [
     "app": "app-zorgverzekeraar-koppeling",
     "version": "v1.6.0",
     "env": "prod",
-    "by": "ans",
+    "by": "meryem-el-amrani",
     "when": "di 8:00",
     "notes": "Reguliere release"
   },
@@ -21873,7 +22035,7 @@ export const releases = [
     "app": "app-onderwijsregistratie",
     "version": "v1.9.0",
     "env": "prod",
-    "by": "femke-bulut",
+    "by": "julia-pijnenburg",
     "when": "vr 11:03",
     "notes": "Reguliere release"
   },
@@ -21882,7 +22044,7 @@ export const releases = [
     "app": "app-studielening-rekentool",
     "version": "v1.2.0",
     "env": "prod",
-    "by": "indy-bijl",
+    "by": "jasper-ennaji",
     "when": "wo 14:00",
     "notes": "Reguliere release"
   },
@@ -21891,7 +22053,7 @@ export const releases = [
     "app": "app-milieumelding",
     "version": "v1.5.0",
     "env": "prod",
-    "by": "yvonne-van-ginkel",
+    "by": "eva-van-zanten",
     "when": "gisteren 8:03",
     "notes": "Reguliere release"
   },
@@ -21900,7 +22062,7 @@ export const releases = [
     "app": "app-parkeervergunning",
     "version": "v1.8.0",
     "env": "prod",
-    "by": "ans",
+    "by": "tim-maas",
     "when": "do 11:00",
     "notes": "Reguliere release"
   },
@@ -21909,7 +22071,7 @@ export const releases = [
     "app": "app-statistiek-dashboard-cbs",
     "version": "v1.1.0",
     "env": "prod",
-    "by": "koen-kuipers",
+    "by": "mila-celik",
     "when": "di 14:03",
     "notes": "Reguliere release"
   },
@@ -21918,7 +22080,7 @@ export const releases = [
     "app": "app-anonimisering-pipeline",
     "version": "v1.4.0",
     "env": "prod",
-    "by": "yvonne-van-ginkel",
+    "by": "eva-van-zanten",
     "when": "vr 8:00",
     "notes": "Reguliere release"
   },
@@ -21927,7 +22089,7 @@ export const releases = [
     "app": "app-betaalbatch-generator",
     "version": "v1.7.0",
     "env": "prod",
-    "by": "olivier-slootweg",
+    "by": "vincent-van-dam",
     "when": "wo 11:03",
     "notes": "Reguliere release"
   },
@@ -21936,7 +22098,7 @@ export const releases = [
     "app": "app-risicoscoring",
     "version": "v1.0.0",
     "env": "prod",
-    "by": "ilias-bruins",
+    "by": "sven-ben-ali",
     "when": "gisteren 14:00",
     "notes": "Reguliere release"
   },
@@ -21945,7 +22107,7 @@ export const releases = [
     "app": "app-secretsmanager",
     "version": "v1.3.0",
     "env": "prod",
-    "by": "lotte-hofman",
+    "by": "lieke-arslan",
     "when": "do 8:03",
     "notes": "Reguliere release"
   },
@@ -21954,7 +22116,7 @@ export const releases = [
     "app": "app-oidc-provider",
     "version": "v1.6.0",
     "env": "prod",
-    "by": "koen-kuipers",
+    "by": "mila-celik",
     "when": "di 11:00",
     "notes": "Reguliere release"
   },
@@ -21963,7 +22125,7 @@ export const releases = [
     "app": "app-statuspagina",
     "version": "v1.9.0",
     "env": "prod",
-    "by": "levi-mohamed",
+    "by": "mees-maas",
     "when": "vr 14:03",
     "notes": "Reguliere release"
   },
@@ -21972,7 +22134,7 @@ export const releases = [
     "app": "app-deploy-orchestrator",
     "version": "v1.2.0",
     "env": "prod",
-    "by": "anne-faber",
+    "by": "noor-naber",
     "when": "wo 8:00",
     "notes": "Reguliere release"
   },
@@ -21981,7 +22143,7 @@ export const releases = [
     "app": "app-config-store",
     "version": "v1.5.0",
     "env": "prod",
-    "by": "sterre-evers",
+    "by": "bouchra-yildiz",
     "when": "gisteren 11:03",
     "notes": "Reguliere release"
   },
@@ -21990,7 +22152,7 @@ export const releases = [
     "app": "app-documentatiesite",
     "version": "v1.8.0",
     "env": "prod",
-    "by": "imane-scholten",
+    "by": "puck-van-hattem",
     "when": "do 14:00",
     "notes": "Reguliere release"
   },
@@ -21999,7 +22161,7 @@ export const releases = [
     "app": "app-toegankelijkheid-scanner",
     "version": "v1.1.0",
     "env": "prod",
-    "by": "cornelis-maas",
+    "by": "sanne-van-bommel",
     "when": "di 8:03",
     "notes": "Reguliere release"
   },
@@ -22008,7 +22170,7 @@ export const releases = [
     "app": "app-berichtenbox",
     "version": "v1.4.0",
     "env": "prod",
-    "by": "sterre-evers",
+    "by": "bouchra-yildiz",
     "when": "vr 11:00",
     "notes": "Reguliere release"
   },
@@ -22017,7 +22179,7 @@ export const releases = [
     "app": "app-vragenlijst-engine",
     "version": "v1.7.0",
     "env": "prod",
-    "by": "teun-snijders",
+    "by": "selin-blom",
     "when": "wo 14:03",
     "notes": "Reguliere release"
   },
@@ -22026,7 +22188,7 @@ export const releases = [
     "app": "app-notificatieservice",
     "version": "v1.0.0",
     "env": "prod",
-    "by": "nadia-arslan",
+    "by": "indy-bijl",
     "when": "gisteren 8:00",
     "notes": "Reguliere release"
   },
@@ -22035,7 +22197,7 @@ export const releases = [
     "app": "app-ideal-koppeling",
     "version": "v1.3.0",
     "env": "prod",
-    "by": "ans-wolters",
+    "by": "ilias-theunissen",
     "when": "do 11:03",
     "notes": "Reguliere release"
   },
@@ -22044,7 +22206,7 @@ export const releases = [
     "app": "app-stelselcatalogus",
     "version": "v1.6.0",
     "env": "prod",
-    "by": "noor-tekin",
+    "by": "yara-goossens",
     "when": "di 14:00",
     "notes": "Reguliere release"
   },
@@ -22053,7 +22215,7 @@ export const releases = [
     "app": "app-fsc-inway",
     "version": "v1.9.0",
     "env": "prod",
-    "by": "finn-holwerda",
+    "by": "maud-yilmaz",
     "when": "vr 8:03",
     "notes": "Reguliere release"
   },
@@ -22062,7 +22224,7 @@ export const releases = [
     "app": "app-aanbestedingsportaal",
     "version": "v1.2.0",
     "env": "prod",
-    "by": "ans",
+    "by": "jasper-kaya",
     "when": "wo 11:00",
     "notes": "Reguliere release"
   },
@@ -22071,7 +22233,7 @@ export const releases = [
     "app": "app-personeelsdossier",
     "version": "v1.5.0",
     "env": "prod",
-    "by": "koen-kuipers",
+    "by": "mila-celik",
     "when": "gisteren 14:03",
     "notes": "Reguliere release"
   },
@@ -22089,7 +22251,7 @@ export const releases = [
     "app": "app-handtekening-validatie",
     "version": "v1.1.0",
     "env": "prod",
-    "by": "ans",
+    "by": "rachid-hendriks",
     "when": "di 11:03",
     "notes": "Reguliere release"
   },
@@ -22098,7 +22260,7 @@ export const releases = [
     "app": "app-kostenrapportage",
     "version": "v1.4.0",
     "env": "prod",
-    "by": "noor-tekin",
+    "by": "yara-goossens",
     "when": "vr 14:00",
     "notes": "Reguliere release"
   },
@@ -22107,7 +22269,7 @@ export const releases = [
     "app": "app-inspectierapport-generator",
     "version": "v1.7.0",
     "env": "prod",
-    "by": "ans",
+    "by": "eva-mohamed",
     "when": "wo 8:03",
     "notes": "Reguliere release"
   },
@@ -22116,7 +22278,7 @@ export const releases = [
     "app": "app-wob-verzoek",
     "version": "v1.0.0",
     "env": "prod",
-    "by": "veerle-van-der-plas",
+    "by": "femke-meijer",
     "when": "gisteren 11:00",
     "notes": "Reguliere release"
   }
@@ -22430,7 +22592,7 @@ export const ciJobs = [
     "pool": "pool-shared",
     "status": "passed",
     "duration": "1m00s",
-    "by": "noor-tekin",
+    "by": "yara-goossens",
     "at": "0 min geleden"
   },
   {
@@ -22441,7 +22603,7 @@ export const ciJobs = [
     "pool": "pool-arm",
     "status": "passed",
     "duration": "2m10s",
-    "by": "ans",
+    "by": "aisha-el-khattabi",
     "at": "1 min geleden"
   },
   {
@@ -22452,7 +22614,7 @@ export const ciJobs = [
     "pool": "pool-toeslagen",
     "status": "running",
     "duration": "3m20s",
-    "by": "ans",
+    "by": "meryem-el-amrani",
     "at": "2 min geleden"
   },
   {
@@ -22463,7 +22625,7 @@ export const ciJobs = [
     "pool": "pool-apeldoorn",
     "status": "queued",
     "duration": "4m30s",
-    "by": "ans",
+    "by": "rachid-hendriks",
     "at": "3 min geleden"
   },
   {
@@ -22474,7 +22636,7 @@ export const ciJobs = [
     "pool": "pool-g0",
     "status": "failing",
     "duration": "5m40s",
-    "by": "ans",
+    "by": "rachid-hendriks",
     "at": "4 min geleden"
   },
   {
@@ -22485,7 +22647,7 @@ export const ciJobs = [
     "pool": "pool-g1",
     "status": "passed",
     "duration": "1m50s",
-    "by": "henk-wagenaar",
+    "by": "ans-kaya",
     "at": "5 min geleden"
   },
   {
@@ -22496,7 +22658,7 @@ export const ciJobs = [
     "pool": "pool-g2",
     "status": "passed",
     "duration": "2m00s",
-    "by": "ans",
+    "by": "casper-naber",
     "at": "6 min geleden"
   },
   {
@@ -22507,7 +22669,7 @@ export const ciJobs = [
     "pool": "pool-g3",
     "status": "running",
     "duration": "3m10s",
-    "by": "jasper-ennaji",
+    "by": "julia-el-amrani",
     "at": "7 min geleden"
   },
   {
@@ -22518,7 +22680,7 @@ export const ciJobs = [
     "pool": "pool-g4",
     "status": "queued",
     "duration": "4m20s",
-    "by": "lars-kraaijeveld",
+    "by": "tim-willems",
     "at": "8 min geleden"
   },
   {
@@ -22529,7 +22691,7 @@ export const ciJobs = [
     "pool": "pool-g5",
     "status": "failing",
     "duration": "5m30s",
-    "by": "lara-ben-ali",
+    "by": "tariq-de-vries",
     "at": "9 min geleden"
   },
   {
@@ -22540,7 +22702,7 @@ export const ciJobs = [
     "pool": "pool-g6",
     "status": "passed",
     "duration": "1m40s",
-    "by": "kees-van-os",
+    "by": "marieke-van-rijn",
     "at": "10 min geleden"
   },
   {
@@ -22551,7 +22713,7 @@ export const ciJobs = [
     "pool": "pool-g7",
     "status": "passed",
     "duration": "2m50s",
-    "by": "ans",
+    "by": "jan-vermeulen",
     "at": "11 min geleden"
   },
   {
@@ -22562,7 +22724,7 @@ export const ciJobs = [
     "pool": "pool-shared",
     "status": "running",
     "duration": "3m00s",
-    "by": "julia-el-amrani",
+    "by": "omar-van-es",
     "at": "12 min geleden"
   },
   {
@@ -22573,7 +22735,7 @@ export const ciJobs = [
     "pool": "pool-arm",
     "status": "queued",
     "duration": "4m10s",
-    "by": "boris-van-vliet",
+    "by": "luuk-bosman",
     "at": "13 min geleden"
   },
   {
@@ -22584,7 +22746,7 @@ export const ciJobs = [
     "pool": "pool-toeslagen",
     "status": "failing",
     "duration": "5m20s",
-    "by": "tobias-peters",
+    "by": "noor-diks",
     "at": "14 min geleden"
   },
   {
@@ -22595,7 +22757,7 @@ export const ciJobs = [
     "pool": "pool-apeldoorn",
     "status": "passed",
     "duration": "1m30s",
-    "by": "omar-el-hadioui",
+    "by": "teun-vos",
     "at": "15 min geleden"
   },
   {
@@ -22606,7 +22768,7 @@ export const ciJobs = [
     "pool": "pool-g0",
     "status": "passed",
     "duration": "2m40s",
-    "by": "julia-yildiz",
+    "by": "romy-de-lange",
     "at": "16 min geleden"
   },
   {
@@ -22617,7 +22779,7 @@ export const ciJobs = [
     "pool": "pool-g1",
     "status": "running",
     "duration": "3m50s",
-    "by": "ans",
+    "by": "fenna-van-es",
     "at": "17 min geleden"
   },
   {
@@ -22628,7 +22790,7 @@ export const ciJobs = [
     "pool": "pool-g2",
     "status": "queued",
     "duration": "4m00s",
-    "by": "kees-van-os",
+    "by": "marieke-van-rijn",
     "at": "18 min geleden"
   },
   {
@@ -22639,7 +22801,7 @@ export const ciJobs = [
     "pool": "pool-g3",
     "status": "failing",
     "duration": "5m10s",
-    "by": "julia-yildiz",
+    "by": "romy-de-lange",
     "at": "19 min geleden"
   },
   {
@@ -22650,7 +22812,7 @@ export const ciJobs = [
     "pool": "pool-g4",
     "status": "passed",
     "duration": "1m20s",
-    "by": "noor-tekin",
+    "by": "yara-goossens",
     "at": "20 min geleden"
   },
   {
@@ -22661,7 +22823,7 @@ export const ciJobs = [
     "pool": "pool-g5",
     "status": "passed",
     "duration": "2m30s",
-    "by": "yvonne-van-ginkel",
+    "by": "eva-van-zanten",
     "at": "21 min geleden"
   },
   {
@@ -22672,7 +22834,7 @@ export const ciJobs = [
     "pool": "pool-g6",
     "status": "running",
     "duration": "3m40s",
-    "by": "teun-snijders",
+    "by": "selin-blom",
     "at": "22 min geleden"
   },
   {
@@ -22683,7 +22845,7 @@ export const ciJobs = [
     "pool": "pool-g7",
     "status": "queued",
     "duration": "4m50s",
-    "by": "ans",
+    "by": "levi-lubbers",
     "at": "23 min geleden"
   },
   {
@@ -22694,7 +22856,7 @@ export const ciJobs = [
     "pool": "pool-shared",
     "status": "failing",
     "duration": "5m00s",
-    "by": "ans",
+    "by": "suze-mulder",
     "at": "24 min geleden"
   },
   {
@@ -22705,7 +22867,7 @@ export const ciJobs = [
     "pool": "pool-arm",
     "status": "passed",
     "duration": "1m10s",
-    "by": "ilias-bruins",
+    "by": "sven-ben-ali",
     "at": "25 min geleden"
   },
   {
@@ -22716,7 +22878,7 @@ export const ciJobs = [
     "pool": "pool-toeslagen",
     "status": "passed",
     "duration": "2m20s",
-    "by": "ties-van-der-meer",
+    "by": "gerard-polat",
     "at": "26 min geleden"
   },
   {
@@ -22738,7 +22900,7 @@ export const ciJobs = [
     "pool": "pool-g0",
     "status": "queued",
     "duration": "4m40s",
-    "by": "quinten-faber",
+    "by": "lieke-el-idrissi",
     "at": "28 min geleden"
   },
   {
@@ -22749,7 +22911,7 @@ export const ciJobs = [
     "pool": "pool-g1",
     "status": "failing",
     "duration": "5m50s",
-    "by": "younes-sanders",
+    "by": "mehmet-koster",
     "at": "29 min geleden"
   }
 ];
@@ -22807,7 +22969,7 @@ export const incidents = [
     "service": "app-kentekencheck",
     "team": "team-cbs-statline",
     "opened": "vandaag 8:10",
-    "oncall": "noor-tekin",
+    "oncall": "yara-goossens",
     "timeline": [
       {
         "at": "09:00",
@@ -22827,7 +22989,7 @@ export const incidents = [
     "service": "app-inkomenstoets",
     "team": "team-rijksict-iam",
     "opened": "gisteren 9:11",
-    "oncall": "ans",
+    "oncall": "aisha-el-khattabi",
     "timeline": [
       {
         "at": "09:01",
@@ -22847,7 +23009,7 @@ export const incidents = [
     "service": "app-bijstandsuitkering",
     "team": "team-ezk-ondernemen",
     "opened": "di 10:12",
-    "oncall": "ans",
+    "oncall": "meryem-el-amrani",
     "timeline": [
       {
         "at": "09:02",
@@ -22867,7 +23029,7 @@ export const incidents = [
     "service": "app-ww-aanvraag",
     "team": "team-logius-docs",
     "opened": "wo 11:13",
-    "oncall": "ans",
+    "oncall": "rachid-hendriks",
     "timeline": [
       {
         "at": "09:03",
@@ -22887,7 +23049,7 @@ export const incidents = [
     "service": "app-kinderbijslag",
     "team": "team-logius-docs",
     "opened": "vandaag 12:14",
-    "oncall": "ans",
+    "oncall": "rachid-hendriks",
     "timeline": [
       {
         "at": "09:04",
@@ -22907,7 +23069,7 @@ export const incidents = [
     "service": "app-rijbewijs-vernieuwen",
     "team": "team-bd-gegevens",
     "opened": "gisteren 13:15",
-    "oncall": "henk-wagenaar",
+    "oncall": "ans-kaya",
     "timeline": [
       {
         "at": "09:05",
@@ -22927,7 +23089,7 @@ export const incidents = [
     "service": "app-huurtoeslag-rekenen",
     "team": "team-aenm-keten",
     "opened": "di 14:10",
-    "oncall": "ans",
+    "oncall": "casper-naber",
     "timeline": [
       {
         "at": "09:06",
@@ -22947,7 +23109,7 @@ export const incidents = [
     "service": "app-bsn-validatie",
     "team": "team-duo-studiefinanciering",
     "opened": "wo 15:11",
-    "oncall": "jasper-ennaji",
+    "oncall": "julia-el-amrani",
     "timeline": [
       {
         "at": "09:07",
@@ -22967,7 +23129,7 @@ export const incidents = [
     "service": "app-brp-bevraging",
     "team": "team-rvo-portaal",
     "opened": "vandaag 16:12",
-    "oncall": "lars-kraaijeveld",
+    "oncall": "tim-willems",
     "timeline": [
       {
         "at": "09:08",
@@ -22987,7 +23149,7 @@ export const incidents = [
     "service": "app-boete-bezwaar",
     "team": "team-szw-regelingen",
     "opened": "gisteren 17:13",
-    "oncall": "lara-ben-ali",
+    "oncall": "tariq-de-vries",
     "timeline": [
       {
         "at": "09:00",
@@ -23007,7 +23169,7 @@ export const incidents = [
     "service": "app-zorgtoeslag-portaal",
     "team": "team-cbr-rijbewijs",
     "opened": "di 8:14",
-    "oncall": "kees-van-os",
+    "oncall": "marieke-van-rijn",
     "timeline": [
       {
         "at": "09:01",
@@ -23027,7 +23189,7 @@ export const incidents = [
     "service": "app-vaccinatieregister",
     "team": "team-vws-zorgregister",
     "opened": "wo 9:15",
-    "oncall": "ans",
+    "oncall": "jan-vermeulen",
     "timeline": [
       {
         "at": "09:02",
@@ -23047,7 +23209,7 @@ export const incidents = [
     "service": "app-diplomaregister",
     "team": "team-bd-fraude",
     "opened": "vandaag 10:10",
-    "oncall": "julia-el-amrani",
+    "oncall": "omar-van-es",
     "timeline": [
       {
         "at": "09:03",
@@ -23067,7 +23229,7 @@ export const incidents = [
     "service": "app-omgevingsloket",
     "team": "team-koop-wetten",
     "opened": "gisteren 11:11",
-    "oncall": "boris-van-vliet",
+    "oncall": "luuk-bosman",
     "timeline": [
       {
         "at": "09:04",
@@ -23087,7 +23249,7 @@ export const incidents = [
     "service": "app-waterschapsheffing",
     "team": "team-fin-platform",
     "opened": "di 12:12",
-    "oncall": "tobias-peters",
+    "oncall": "noor-diks",
     "timeline": [
       {
         "at": "09:05",
@@ -23107,7 +23269,7 @@ export const incidents = [
     "service": "app-rijksbegroting-explorer",
     "team": "team-ienw-kenteken",
     "opened": "wo 13:13",
-    "oncall": "omar-el-hadioui",
+    "oncall": "teun-vos",
     "timeline": [
       {
         "at": "09:06",
@@ -23127,7 +23289,7 @@ export const incidents = [
     "service": "app-etl-basisregisters",
     "team": "team-ienw-voertuig",
     "opened": "vandaag 14:14",
-    "oncall": "julia-yildiz",
+    "oncall": "romy-de-lange",
     "timeline": [
       {
         "at": "09:07",
@@ -23147,7 +23309,7 @@ export const incidents = [
     "service": "app-archief-export",
     "team": "team-jenv-keten",
     "opened": "gisteren 15:15",
-    "oncall": "ans",
+    "oncall": "fenna-van-es",
     "timeline": [
       {
         "at": "09:08",
@@ -23167,7 +23329,7 @@ export const incidents = [
     "service": "app-sepa-incasso-job",
     "team": "team-cbr-rijbewijs",
     "opened": "di 16:10",
-    "oncall": "kees-van-os",
+    "oncall": "marieke-van-rijn",
     "timeline": [
       {
         "at": "09:00",
@@ -23187,7 +23349,7 @@ export const incidents = [
     "service": "app-sanctielijst-check",
     "team": "team-ienw-voertuig",
     "opened": "wo 17:11",
-    "oncall": "julia-yildiz",
+    "oncall": "romy-de-lange",
     "timeline": [
       {
         "at": "09:01",
@@ -23207,7 +23369,7 @@ export const incidents = [
     "service": "app-audit-logboek",
     "team": "team-cbs-statline",
     "opened": "vandaag 8:12",
-    "oncall": "noor-tekin",
+    "oncall": "yara-goossens",
     "timeline": [
       {
         "at": "09:02",
@@ -23227,7 +23389,7 @@ export const incidents = [
     "service": "app-rollenmatrix",
     "team": "team-ind-data",
     "opened": "gisteren 9:13",
-    "oncall": "yvonne-van-ginkel",
+    "oncall": "eva-van-zanten",
     "timeline": [
       {
         "at": "09:03",
@@ -23247,7 +23409,7 @@ export const incidents = [
     "service": "app-monitoring-collector",
     "team": "team-nza-zorgdata",
     "opened": "di 10:14",
-    "oncall": "teun-snijders",
+    "oncall": "selin-blom",
     "timeline": [
       {
         "at": "09:04",
@@ -23267,7 +23429,7 @@ export const incidents = [
     "service": "app-ci-runnerpool",
     "team": "team-ocw-cultuurdata",
     "opened": "wo 11:15",
-    "oncall": "ans",
+    "oncall": "levi-lubbers",
     "timeline": [
       {
         "at": "09:05",
@@ -23287,7 +23449,7 @@ export const incidents = [
     "service": "app-nldd-componenten",
     "team": "team-dhc-geschillen",
     "opened": "vandaag 12:10",
-    "oncall": "ans",
+    "oncall": "suze-mulder",
     "timeline": [
       {
         "at": "09:06",
@@ -23307,7 +23469,7 @@ export const incidents = [
     "service": "app-api-catalogus",
     "team": "team-rvig-brp",
     "opened": "gisteren 13:11",
-    "oncall": "ilias-bruins",
+    "oncall": "sven-ben-ali",
     "timeline": [
       {
         "at": "09:07",
@@ -23327,7 +23489,7 @@ export const incidents = [
     "service": "app-pdf-generator",
     "team": "team-rws-sensoren",
     "opened": "di 14:12",
-    "oncall": "ties-van-der-meer",
+    "oncall": "gerard-polat",
     "timeline": [
       {
         "at": "09:08",
@@ -23367,7 +23529,7 @@ export const incidents = [
     "service": "app-afspraakplanner",
     "team": "team-ksa-handhaving",
     "opened": "vandaag 16:14",
-    "oncall": "quinten-faber",
+    "oncall": "lieke-el-idrissi",
     "timeline": [
       {
         "at": "09:01",
@@ -23387,7 +23549,7 @@ export const incidents = [
     "service": "app-sms-gateway",
     "team": "team-svb-gegevens",
     "opened": "gisteren 17:15",
-    "oncall": "younes-sanders",
+    "oncall": "mehmet-koster",
     "timeline": [
       {
         "at": "09:02",
@@ -30410,7 +30572,7 @@ export const trajecten = [
     "status": "concept",
     "branch": "werkloosheid-1000003",
     "members": [
-      "veerle-van-der-plas"
+      "femke-meijer"
     ],
     "team": "team-svb-kinderbijslag",
     "opened": "deze week"
@@ -30422,7 +30584,7 @@ export const trajecten = [
     "status": "concept",
     "branch": "omgevingswet-1000005",
     "members": [
-      "ilias-bruins"
+      "sven-ben-ali"
     ],
     "team": "team-rvig-brp",
     "opened": "deze week"
@@ -30434,7 +30596,7 @@ export const trajecten = [
     "status": "concept",
     "branch": "kieswet-1000007",
     "members": [
-      "sanne"
+      "nadia-arslan"
     ],
     "team": "team-az-comms",
     "opened": "deze week"
@@ -30446,7 +30608,7 @@ export const trajecten = [
     "status": "concept",
     "branch": "wmo-2015-100000b",
     "members": [
-      "sanne"
+      "hassan-van-loon"
     ],
     "team": "team-bz-consulair",
     "opened": "deze week"
@@ -30458,7 +30620,7 @@ export const trajecten = [
     "status": "concept",
     "branch": "vreemdelinge-100000d",
     "members": [
-      "carla-bakker"
+      "olivier-el-khattabi"
     ],
     "team": "team-rvo-vergunningen",
     "opened": "deze week"
@@ -30470,7 +30632,7 @@ export const trajecten = [
     "status": "concept",
     "branch": "successiewet-100000f",
     "members": [
-      "robin-mol"
+      "floris-van-beek"
     ],
     "team": "team-logius-stelsel",
     "opened": "deze week"
@@ -30482,7 +30644,7 @@ export const trajecten = [
     "status": "concept",
     "branch": "regeling-ken-1000011",
     "members": [
-      "stijn-wubben"
+      "tariq-mulder"
     ],
     "team": "team-uwv-werk",
     "opened": "deze week"
@@ -30494,7 +30656,7 @@ export const trajecten = [
     "status": "concept",
     "branch": "regeling-stu-1000012",
     "members": [
-      "boris-van-vliet"
+      "luuk-bosman"
     ],
     "team": "team-koop-wetten",
     "opened": "deze week"

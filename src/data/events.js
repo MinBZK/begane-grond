@@ -170,3 +170,54 @@ export const eventSeed = [
   { type: 'traject.created', severity: 'info', team: 'team-toeslagen', actor: 'sanne', title: 'Traject geopend: Huurtoeslagwet machine-leesbaar', resource: 'huurtoeslag-7b1e4d22', target: '/wetten/huurtoeslagwet', at: 'vandaag 08:30' },
   { type: 'register.connected', severity: 'success', team: 'team-toeslagen', actor: 'sanne', title: 'Inkomensgegevens aangesloten op Toeslagenmotor', resource: 'inkomen', target: '/registers/inkomen', at: 'di 13:15' },
 ];
+
+// Build a larger historical backlog from the scaled seed entities, so the
+// notification stream and audit feed feel real at platform scale. Deterministic
+// (index-driven, no randomness). Appended AFTER the curated eventSeed above, so
+// the canonical first events that the bell/inbox demo relies on stay stable.
+export function extraHistoricalEvents(seed) {
+  const out = [];
+  const teamName = (id) => seed.teams.find((t) => t.id === id)?.name || id;
+  const firstMember = (teamId) => seed.teams.find((t) => t.id === teamId)?.members?.[0] || 'system';
+  const days = ['vandaag', 'gisteren', 'ma', 'di', 'wo', 'do', 'vr'];
+  const hhmm = (i) => `${8 + (i % 11)}:${(10 + (i % 49)).toString()}`;
+  const at = (i) => `${days[i % days.length]} ${hhmm(i)}`;
+  let n = 0;
+  // deploys + releases
+  for (const r of seed.releases || []) {
+    const app = seed.apps.find((a) => a.id === r.app);
+    out.push({ type: 'deploy.completed', severity: 'success', team: app?.team, actor: r.by, title: `${app?.name || r.app} ${r.version} naar prod`, resource: r.app, target: `/apps/${r.app}`, at: r.when || at(n++) });
+  }
+  // incidents
+  for (const inc of seed.incidents || []) {
+    const t = inc.status === 'resolved' ? 'incident.resolved' : inc.status === 'mitigated' ? 'incident.mitigated' : 'incident.opened';
+    const sev = inc.status === 'resolved' ? 'success' : inc.severity === 'sev1' || inc.severity === 'sev2' ? 'critical' : 'warning';
+    out.push({ type: t, severity: sev, team: inc.team, actor: inc.oncall || 'system', title: `${inc.title} (${inc.severity})`, resource: inc.id, target: `/incidenten/${inc.id}`, at: inc.opened || at(n++) });
+  }
+  // vulnerabilities
+  for (const v of (seed.vulnerabilities || []).slice(0, 16)) {
+    out.push({ type: v.status === 'opgelost' ? 'vuln.resolved' : 'vuln.detected', severity: v.status === 'opgelost' ? 'success' : 'critical', team: v.team, actor: 'system', title: `${v.cve} in ${seed.repos.find((r) => r.id === v.repo)?.name || v.repo}`, resource: v.repo, target: '/security/kwetsbaarheden', at: at(n++) });
+  }
+  // secrets rotated
+  for (const s of (seed.secrets || []).slice(0, 16)) {
+    out.push({ type: 'secret.rotated', severity: 'info', team: s.team, actor: firstMember(s.team), title: `${s.name} geroteerd`, resource: s.id, target: '/secrets', at: at(n++) });
+  }
+  // wetten published / trajecten
+  for (const w of (seed.wetten || []).filter((x) => x.status === 'gepubliceerd').slice(0, 8)) {
+    out.push({ type: 'wet.published', severity: 'success', team: w.owner, actor: firstMember(w.owner), title: `${w.name} gepubliceerd naar corpus`, resource: w.id, target: `/wetten/${w.id}`, at: at(n++) });
+  }
+  // infra provisioned (a sample of instances)
+  for (const inst of (seed.instances || []).filter((_, i) => i % 9 === 0).slice(0, 18)) {
+    out.push({ type: 'infra.instance.ready', severity: 'success', team: inst.team, actor: firstMember(inst.team), title: `${inst.name} is gereed`, resource: inst.id, target: `/infra/instances/${inst.id}`, at: at(n++) });
+  }
+  // workplace rollouts (a sample)
+  for (const wp of (seed.workplaces || []).filter((w) => w.status === 'in gebruik').slice(0, 12)) {
+    const p = seed.people.find((x) => x.id === wp.person);
+    out.push({ type: 'workplace.provisioned', severity: 'success', team: p?.team, actor: 'system', title: `Werkplek ${wp.id} uitgerold aan ${p?.name || wp.person}`, resource: wp.id, target: `/werkplekken/${wp.id}`, at: at(n++) });
+  }
+  // cost budget exceeded for over-budget teams
+  for (const b of (seed.budgets || []).filter((x) => x.spent > x.budget).slice(0, 10)) {
+    out.push({ type: 'cost.budget-exceeded', severity: 'warning', team: b.team, actor: 'system', title: `${teamName(b.team)} over budget: € ${b.spent} / € ${b.budget}`, resource: b.team, target: '/kosten/budgetten', at: at(n++) });
+  }
+  return out;
+}

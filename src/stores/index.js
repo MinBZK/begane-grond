@@ -4,7 +4,7 @@
 // clickable demo needs. Domain views read these arrays and call these helpers.
 import { defineStore } from 'pinia';
 import * as seed from '../data/seed.js';
-import { eventSeed, eventTypeMap, eventSources, SEVERITIES } from '../data/events.js';
+import { eventSeed, extraHistoricalEvents, eventTypeMap, eventSources, SEVERITIES } from '../data/events.js';
 
 // Deep clone the seed so the store owns mutable copies (refresh resets it).
 const clone = (v) => JSON.parse(JSON.stringify(v));
@@ -77,10 +77,13 @@ export const usePlatformStore = defineStore('platform', {
     // backlog; new events are appended live by emit() from every domain action.
     // Each event: { id, type, severity, source, label, icon, team, actor,
     //   title, resource, target, at, read, muted }.
-    events: eventSeed.map((e, i) => {
+    // Curated canonical events first (the bell/inbox demo relies on these),
+    // then a larger generated backlog from the scaled seed so the stream is
+    // believable at platform scale.
+    events: [...eventSeed, ...extraHistoricalEvents(seed)].map((e, i) => {
       const meta = eventTypeMap[e.type] || {};
       return {
-        id: `evt-${5000 - i}`,
+        id: `evt-${9000 - i}`,
         read: i > 2, // first few unread so the bell shows activity on load
         muted: false,
         source: meta.source,

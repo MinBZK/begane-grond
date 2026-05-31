@@ -74,7 +74,7 @@ function kindLabel(kind) {
 
     <nldd-container layout="grid" column-count="3" gap="16">
       <MetricCard :value="store.instances.length" label="Instances" :sub="`${prodCount} in productie`" icon="rectangle-stack" />
-      <MetricCard :value="`€${totalCost}`" label="Maandkosten" sub="alle instances samen" icon="euro-sign" />
+      <MetricCard :value="`€ ${totalCost.toLocaleString('nl-NL')}`" label="Maandkosten" sub="alle instances samen" icon="euro-sign" />
       <MetricCard :value="kinds.length" label="Soorten dienst" sub="in gebruik" icon="cloud" />
     </nldd-container>
 

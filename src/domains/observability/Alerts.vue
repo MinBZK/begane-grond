@@ -92,7 +92,7 @@ function alertLinks(a) {
         v-if="kpis.worst"
         :value="kpis.worst.budgetLeft + '%'"
         label="Laagste error-budget"
-        :sub="kpis.worst.service"
+        :sub="store.appById(kpis.worst.service)?.name || kpis.worst.service"
         icon="arrow-up-arrow-down"
       />
       <MetricCard :value="store.slos.length" label="Diensten met SLO" sub="gemeten beschikbaarheid" icon="shield-check-mark" to="/observability" />
