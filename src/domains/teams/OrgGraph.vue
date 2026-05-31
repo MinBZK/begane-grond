@@ -24,39 +24,35 @@ function hueFor(id) {
   return h;
 }
 
+// At Rijksoverheid scale the full org -> team -> person expansion is hundreds
+// of nodes and unreadable. Default view is org -> team. Selecting one org
+// (the focus) additionally fans out that org's teams into their people, so the
+// graph stays legible and you drill in on demand.
+const focusOrg = ref('');
+
+// Orgs that host at least one team, sorted by team count (busiest first).
+const orgsWithTeams = computed(() =>
+  store.organisations
+    .filter((o) => store.teams.some((t) => t.org === o.id))
+    .map((o) => ({ ...o, teamCount: store.teams.filter((t) => t.org === o.id).length }))
+    .sort((a, b) => b.teamCount - a.teamCount),
+);
+
 const graph = computed(() => {
   const nodes = [];
   const edges = [];
-
-  // Only orgs that host at least one team.
-  const orgsWithTeams = store.organisations.filter((o) =>
-    store.teams.some((t) => t.org === o.id),
-  );
-
-  // Vertical cursors per column so rows stack neatly.
   let teamRow = 0;
-  let personRow = 0;
 
-  orgsWithTeams.forEach((org, oi) => {
+  orgsWithTeams.value.forEach((org) => {
     const orgTeams = store.teams.filter((t) => t.org === org.id);
-    // Center the org vertically against its block of teams.
-    const orgY = teamRow * ROW + ((orgTeams.length - 1) * ROW) / 2;
-
-    nodes.push({
-      id: `org-${org.id}`,
-      type: 'input',
-      data: { label: org.name, kind: 'org', short: org.short },
-      position: { x: COL.org, y: orgY },
-      sourcePosition: Position.Right,
-      class: 'rp-node rp-node-org',
-      style: { '--rp-hue': hueFor(org.id) },
-    });
+    const isFocus = focusOrg.value === org.id;
+    const orgTeamStart = teamRow;
 
     orgTeams.forEach((team) => {
       const teamY = teamRow * ROW;
       nodes.push({
         id: `team-${team.id}`,
-        data: { label: team.name, kind: 'team', ref: team.id, sub: `${team.members.length} leden` },
+        data: { label: team.name, kind: 'team', ref: team.id, sub: `${team.members.length} ${team.members.length === 1 ? 'lid' : 'leden'}` },
         position: { x: COL.team, y: teamY },
         sourcePosition: Position.Right,
         targetPosition: Position.Left,
@@ -67,60 +63,75 @@ const graph = computed(() => {
         id: `e-${org.id}-${team.id}`,
         source: `org-${org.id}`,
         target: `team-${team.id}`,
-        animated: false,
         markerEnd: MarkerType.ArrowClosed,
         style: { stroke: 'var(--rp-edge, #9aa6b2)' },
       });
 
-      team.members.forEach((pid) => {
-        const person = store.personById(pid);
-        if (!person) return;
-        const personY = personRow * ROW;
-        nodes.push({
-          id: `person-${person.id}`,
-          type: 'output',
-          data: { label: person.name, kind: 'person', ref: person.id, sub: person.role, avatar: person.avatar },
-          position: { x: COL.person, y: personY },
-          targetPosition: Position.Left,
-          class: 'rp-node rp-node-person',
-          style: { '--rp-hue': hueFor(person.id) },
+      if (isFocus) {
+        // Expand this org's teams into their members.
+        team.members.forEach((pid, mi) => {
+          const person = store.personById(pid);
+          if (!person) return;
+          const personY = teamY + mi * 38;
+          nodes.push({
+            id: `person-${person.id}`,
+            type: 'output',
+            data: { label: person.name, kind: 'person', ref: person.id, sub: person.role, avatar: person.avatar },
+            position: { x: COL.person, y: personY },
+            targetPosition: Position.Left,
+            class: 'rp-node rp-node-person',
+            style: { '--rp-hue': hueFor(person.id) },
+          });
+          edges.push({
+            id: `e-${team.id}-${person.id}`,
+            source: `team-${team.id}`,
+            target: `person-${person.id}`,
+            markerEnd: MarkerType.ArrowClosed,
+            style: { stroke: 'var(--rp-edge, #9aa6b2)' },
+          });
         });
-        edges.push({
-          id: `e-${team.id}-${person.id}`,
-          source: `team-${team.id}`,
-          target: `person-${person.id}`,
-          markerEnd: MarkerType.ArrowClosed,
-          style: { stroke: 'var(--rp-edge, #9aa6b2)' },
-        });
-        personRow += 1;
-      });
-
-      // Make sure the team column never overlaps: advance the team cursor to at
-      // least where this team's people ended.
-      teamRow = Math.max(teamRow + 1, personRow);
+        teamRow += Math.max(1, team.members.length);
+      } else {
+        teamRow += 1;
+      }
     });
-    if (oi >= 0) {
-      // Keep person and team cursors loosely aligned between orgs.
-      personRow = Math.max(personRow, teamRow);
-    }
+
+    // Org node centred against its block of teams.
+    const orgY = (orgTeamStart * ROW + (teamRow - 1) * ROW) / 2;
+    nodes.push({
+      id: `org-${org.id}`,
+      type: 'input',
+      data: { label: org.name, kind: 'org', short: org.short, ref: org.id, count: org.teamCount },
+      position: { x: COL.org, y: orgY },
+      sourcePosition: Position.Right,
+      class: 'rp-node rp-node-org',
+      style: { '--rp-hue': hueFor(org.id) },
+    });
+    teamRow += 1; // gap between orgs
   });
 
   return { nodes, edges };
 });
 
+const flowKey = ref(0);
+
 function onNodeClick({ node }) {
   if (node.data?.kind === 'team') router.push(`/teams/${node.data.ref}`);
   else if (node.data?.kind === 'person') router.push(`/teams/mensen/${node.data.ref}`);
+  else if (node.data?.kind === 'org') setFocus(focusOrg.value === node.data.ref ? '' : node.data.ref);
 }
 
-const flowKey = ref(0);
+function setFocus(id) {
+  focusOrg.value = id;
+  flowKey.value += 1; // remount so fit-view re-runs on the new node set
+}
 </script>
 
 <template>
   <div class="rp-page">
     <PageHeader
       title="Organisatiegraaf"
-      lede="Organisatie naar team naar persoon. Klik op een team of persoon om door te navigeren."
+      lede="Organisatie naar team. Klik een organisatie aan om de teams uit te klappen naar hun mensen, of kies er een hieronder."
       :crumbs="[{ text: 'Rijksplatform', href: '/' }, { text: 'Teams & mensen', href: '/teams' }, { text: 'Organisatie', href: '/teams/organisatie' }]"
     >
       <template #actions>
@@ -129,10 +140,20 @@ const flowKey = ref(0);
       </template>
     </PageHeader>
 
-    <div class="rp-legend">
-      <span class="rp-legend-item"><span class="rp-legend-dot rp-legend-org"></span>Organisatie</span>
-      <span class="rp-legend-item"><span class="rp-legend-dot rp-legend-team"></span>Team</span>
-      <span class="rp-legend-item"><span class="rp-legend-dot rp-legend-person"></span>Persoon</span>
+    <div class="rp-org-controls">
+      <div class="rp-legend">
+        <span class="rp-legend-item"><span class="rp-legend-dot rp-legend-org"></span>Organisatie</span>
+        <span class="rp-legend-item"><span class="rp-legend-dot rp-legend-team"></span>Team</span>
+        <span class="rp-legend-item"><span class="rp-legend-dot rp-legend-person"></span>Persoon</span>
+      </div>
+      <nldd-dropdown>
+        <select :value="focusOrg" @change="(e) => setFocus(e.target.value)" aria-label="Organisatie uitklappen">
+          <option value="">Alle organisaties (org → team)</option>
+          <option v-for="o in orgsWithTeams" :key="o.id" :value="o.id">
+            {{ o.name }} ({{ o.teamCount }} teams) — klap mensen uit
+          </option>
+        </select>
+      </nldd-dropdown>
     </div>
 
     <nldd-spacer size="12" />
@@ -151,12 +172,13 @@ const flowKey = ref(0);
         >
           <Background pattern-color="#cdd5df" :gap="22" />
           <template #node-input="{ data }">
-            <div class="rp-vnode rp-vnode-org" :style="{ '--rp-hue': 220 }">
+            <div class="rp-vnode rp-vnode-org" :class="{ 'rp-vnode-focus': focusOrg === data.ref }" :style="{ '--rp-hue': 220 }">
               <nldd-icon name="apartment-building" aria-hidden="true"></nldd-icon>
               <div class="rp-vnode-text">
                 <strong>{{ data.short }}</strong>
-                <small>{{ data.label }}</small>
+                <small>{{ data.count }} teams</small>
               </div>
+              <nldd-icon :name="focusOrg === data.ref ? 'chevron-down' : 'chevron-right'" aria-hidden="true" class="rp-vnode-go"></nldd-icon>
             </div>
           </template>
           <template #node-default="{ data }">
@@ -191,6 +213,20 @@ const flowKey = ref(0);
 </template>
 
 <style scoped>
+.rp-org-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.rp-org-controls nldd-dropdown {
+  min-width: 22rem;
+}
+.rp-vnode-focus {
+  outline: 2px solid var(--semantics-actions-primary-default-background-color, #154273);
+  outline-offset: 1px;
+}
 .rp-legend {
   display: flex;
   gap: 1.25rem;
