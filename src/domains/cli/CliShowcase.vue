@@ -112,7 +112,7 @@ rp werkplek lock wp-0003          # op afstand vergrendelen`,
     id: 'fleet',
     title: 'rp fleet',
     icon: 'ship-wheel',
-    lede: 'Fleet-shift via stuc: één wijziging als PR over al je repositories tegelijk.',
+    lede: 'Fleet-shift, native in rp: één wijziging als PR over al je repositories tegelijk.',
     to: '/fleet/' + (activeCampaign.value?.id || 'camp-securitytxt'),
     toText: 'Open de campagne',
     code: `# Maak een campagne aan en rol hem uit over meerdere repos
@@ -185,21 +185,23 @@ const globalFlags = [
   { flag: '--profile <naam>', desc: 'Wissel tussen opgeslagen auth-profielen.' },
 ];
 
-// --- Sibling tooling --------------------------------------------------------
-const siblingTools = [
+// --- Native commando's ------------------------------------------------------
+// Geen losse tools om los te installeren of apart in te loggen: deze
+// functionaliteit zit native in rp. Fleet-transformaties zijn `rp fleet`,
+// FSC-tokens zijn `rp koppelvlak token` — zelfde binary, zelfde auth, zelfde
+// config als al het andere.
+const subTools = [
   {
-    name: 'stuc',
+    name: 'rp fleet',
     icon: 'folder-stack',
-    desc: 'De fleet-shift-engine onder rp fleet. Draait massa-PRs over honderden repos met regex- of file-templates.',
-    repo: 'rijksict/stuc',
-    cmd: 'stuc run --campaign security-txt --dry-run',
+    desc: 'Fleet-shift, native in rp: één wijziging als PR over honderden repos tegelijk, met regex- of file-templates. Geen aparte tool nodig.',
+    cmd: 'rp fleet run --campaign security-txt --dry-run',
   },
   {
-    name: 'zad-cli',
+    name: 'rp koppelvlak token',
     icon: 'shield-check-mark',
-    desc: 'Zaakgericht Authenticatie & Data: haalt korte-levensduur OIN-tokens op voor FSC-koppelvlakken. rp leent zijn auth hiervan.',
-    repo: 'rijksict/zad-cli',
-    cmd: 'zad token --oin 00000001823288444000 --service "Paspoort API"',
+    desc: 'OIN-tokens voor FSC-koppelvlakken, native in rp en met dezelfde auth als de rest. Geen losse login, geen los te beheren credential.',
+    cmd: 'rp koppelvlak token --oin 00000001823288444000 --service "Paspoort API"',
   },
 ];
 
@@ -342,14 +344,14 @@ function copy(text) {
 
     <nldd-spacer size="32" />
 
-    <!-- Sibling tooling ----------------------------------------------------- -->
-    <nldd-title size="3"><h2>Gerelateerde tooling</h2></nldd-title>
+    <!-- Native commando's --------------------------------------------------- -->
+    <nldd-title size="3"><h2>Alles native in <code>rp</code></h2></nldd-title>
     <nldd-rich-text>
-      <p>De <code>rp</code>-CLI staat op de schouders van twee open-source-bouwstenen.</p>
+      <p>Geen losse tools om apart te installeren of in te loggen. Functionaliteit die elders een eigen CLI zou zijn, zit hier gewoon als subcommando van <code>rp</code> — zelfde binary, zelfde auth, zelfde config.</p>
     </nldd-rich-text>
     <nldd-spacer size="16" />
     <nldd-collection layout="grid" item-width="420px">
-      <nldd-card v-for="t in siblingTools" :key="t.name" :accessible-label="t.name">
+      <nldd-card v-for="t in subTools" :key="t.name" :accessible-label="t.name">
         <nldd-container padding="20">
           <div class="rp-group-head">
             <nldd-icon :name="t.icon" aria-hidden="true" class="rp-group-icon"></nldd-icon>
@@ -360,11 +362,6 @@ function copy(text) {
           </div>
           <nldd-spacer size="12" />
           <nldd-code-viewer language="bash">{{ t.cmd }}</nldd-code-viewer>
-          <nldd-spacer size="10" />
-          <a :href="'https://code.overheid.nl/' + t.repo" class="rp-group-link">
-            <nldd-icon name="folder-stack" aria-hidden="true"></nldd-icon>
-            <span>code.overheid.nl/{{ t.repo }}</span>
-          </a>
         </nldd-container>
       </nldd-card>
     </nldd-collection>
