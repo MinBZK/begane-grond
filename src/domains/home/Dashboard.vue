@@ -275,12 +275,11 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
 .rp-shortcut {
   display: block;
   height: 100%;
-  padding: 1rem;
-  border-radius: 10px;
-  border: 1px solid var(--semantics-dividers-color);
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
   text-decoration: none;
   color: inherit;
-  transition: background 0.12s ease, border-color 0.12s ease;
+  transition: background 0.12s ease;
 }
 .rp-shortcut:hover {
   background: var(--semantics-surfaces-tinted-background-color);
