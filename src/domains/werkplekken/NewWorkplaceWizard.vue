@@ -3,13 +3,14 @@
 // the person, the hardware model, the OS image, a software profile/role and the
 // encryption/MDM policy, then calls store.provisionWorkplace and watches the
 // fake status chain (besteld -> provisioning -> geleverd -> in gebruik) animate.
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import Wizard from '../../components/shared/Wizard.vue';
+import { usePresentation } from '../../presentation/usePresentation.js';
 
 const store = usePlatformStore();
 const route = useRoute();
@@ -104,6 +105,17 @@ const cliCommand = computed(
   () =>
     `rp werkplek provision \\\n  --person ${form.value.person} \\\n  --model ${form.value.model} \\\n  --image ${form.value.image} \\\n  --profile ${form.value.profile}${form.value.encrypted ? ' \\\n  --encrypted' : ''}${form.value.mdm ? ' \\\n  --mdm' : ''}`,
 );
+
+// Presentation mode can auto-drive this wizard on stage. The form here is a ref,
+// so the inner object is exposed (the driver mutates exposed.form.value).
+const wizardRef = ref(null);
+const wizardApi = {
+  next: () => wizardRef.value?.next(),
+  goTo: (i) => wizardRef.value?.goTo(i),
+};
+const presentation = usePresentation();
+onMounted(() => presentation.registerWizard('werkplek', { form, wizardRef: wizardApi, finish }));
+onBeforeUnmount(() => presentation.unregisterWizard('werkplek'));
 </script>
 
 <template>
@@ -182,7 +194,7 @@ const cliCommand = computed(
     </div>
 
     <!-- Wizard -->
-    <Wizard v-else :steps="steps" finish-label="Uitrollen" @finish="finish">
+    <Wizard v-else ref="wizardRef" :steps="steps" finish-label="Uitrollen" @finish="finish">
       <template #default="{ step }">
         <!-- Step 1: person (search-as-you-type, scales to a large directory) -->
         <div v-if="step === 0">

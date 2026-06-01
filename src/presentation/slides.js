@@ -12,7 +12,8 @@
 //     gov?,                // government-specific callout (Dutch), shown apart
 //     route?,              // demo route to navigate to (router.push)
 //     emit?,               // { type, title, severity? } -> store.emit(...)
-//     drive?,              // { wizard: 'order' | 'app' | 'wet' } auto-run flow
+//     drive?,              // { wizard: 'order'|'app'|'wet'|'werkplek'|
+//                          //   'promotie'|'campagne'|'llm' } auto-run flow
 //     highlight?,          // CSS selector to pulse on the demo side
 //     note?,               // short speaker note (Dutch), not projected
 //   }
@@ -37,25 +38,36 @@ export const slides = [
   {
     id: 'overheid-techbedrijf',
     title: 'De overheid is een techbedrijf',
-    lead: 'Alleen noemt niemand het zo.',
+    lead: 'Het grootste en meest complexe softwarebedrijf van Nederland. Alleen noemt niemand het zo.',
     bullets: [
       'Belasting, toeslagen, uitkeringen, paspoorten: dat is software, op enorme schaal.',
-      'Complexer dan menig scale-up, met miljoenen gebruikers die niet weg kunnen.',
+      'De Belastingdienst verwerkt jaarlijks meer dan 10 miljoen aangiftes, met honderden wijzigingen per jaar.',
       'Er is geen kant-en-klaar product voor de Toeslagenberekening. Je kunt het niet kopen.',
     ],
-    note: 'Geen jargon. Begin bij iets dat iedereen kent: een toeslag, een paspoort. Daar zit code achter.',
+    note: 'These van het essay, bijna letterlijk. Begin bij iets dat iedereen kent: een toeslag, een paspoort. Daar zit code achter.',
   },
   {
     id: 'uitbesteden-vastloopt',
-    title: 'Waarom uitbesteden vastloopt',
+    title: 'Inkopen werkt niet',
     lead: 'Een platform is de gedeelde basislaag waarop teams hun software bouwen.',
     bullets: [
-      'Twee derde van de grote overheids-IT loopt uit in tijd of geld.',
-      '1,6 miljard euro budgetoverschrijding, en dan werkt het vaak nog niet.',
+      'Twee op de drie grote IT-projecten van de overheid lopen vertraging op.',
+      'Miljarden aan budgetoverschrijding, en dan werkt het vaak nog niet.',
       'De wereld is te ingewikkeld om vooraf dicht te timmeren in een bestek.',
       'Vendor lock-in: eenmaal binnen kom je er niet meer uit.',
     ],
     note: 'Eerste keer dat ik "platform" definieer. Doe het langzaam: de basislaag, niet de app zelf.',
+  },
+  {
+    id: 'ai-kantelt',
+    title: 'AI kantelt koop versus bouw',
+    lead: 'Code wordt goedkoop. Dat verandert de rekensom.',
+    bullets: [
+      'Wat je vroeger kocht omdat zelf bouwen te duur was, bouw je nu zelf.',
+      'AI-assistentie maakt een klein team verrassend productief.',
+      'Maar goedkope code zonder platform is een berg techniek-schuld in wording.',
+    ],
+    note: 'De kanteling uit het essay. Zelf bouwen wint, mits er een platform onder ligt dat het veilig houdt.',
   },
   {
     id: 'geplaveide-weg',
@@ -183,6 +195,20 @@ export const slides = [
     note: 'Kort houden. Dit is de motor, niet de show.',
   },
   {
+    id: 'promoten',
+    title: 'Promoten met gates, live',
+    lead: 'Een release een stap opschuiven, met de controles erbij.',
+    bullets: [
+      'Van acceptatie naar productie, maar alleen als de gates groen zijn.',
+      'Tests, security en een goedgekeurde wijziging worden afgevinkt.',
+      'De pijplijn bouwt, test, scant en deployt voor je ogen.',
+    ],
+    gov: 'Kwaliteit en governance als afdwingbare gates, niet als handtekening op een formulier.',
+    route: '/environments/promotie/app-toeslagen',
+    drive: { wizard: 'promotie' },
+    note: 'De gates worden automatisch bevestigd en de deploy-pijplijn draait. Laat de stages oplichten.',
+  },
+  {
     id: 'teams-oncall',
     title: 'Teams, mensen en on-call',
     lead: 'Achter elke dienst staan mensen.',
@@ -193,6 +219,20 @@ export const slides = [
     ],
     route: '/teams/on-call',
     note: 'Het mensen-argument: betere tools houden betere ontwikkelaars binnen.',
+  },
+  {
+    id: 'werkplek-uitrollen',
+    title: 'Werkplek uitrollen, live',
+    lead: 'Een nieuwe collega, op dag één productief.',
+    bullets: [
+      'Kies de medewerker, het toestel en het profiel.',
+      'Versleuteld en MDM-beheerd, want de BIO schrijft het voor.',
+      'Van bestelling tot werkende laptop, in één doorlopende stroom.',
+    ],
+    gov: 'Encryptie en MDM staan standaard aan. De Rijksbaseline is ingebouwd, niet optioneel.',
+    route: '/werkplekken/nieuw',
+    drive: { wizard: 'werkplek' },
+    note: 'Laat de werkplek-wizard zelf lopen. Het punt: ook hardware-uitrol hoort bij het platform.',
   },
   {
     id: 'observability',
@@ -263,6 +303,20 @@ export const slides = [
     note: 'Paradepaardje één. Het punt: standaarden als code verslaan een stapel beleids-PDF’s.',
   },
   {
+    id: 'fleet-campagne',
+    title: 'Eén wijziging, hele vloot, live',
+    lead: 'Een nieuwe standaard uitrollen over alle repositories tegelijk.',
+    bullets: [
+      'Beschrijf de wijziging één keer, het platform opent overal een pull request.',
+      'Een versie-bump of een security.txt, in honderden repos in één keer.',
+      'Zo wordt een standaard echt afgedwongen, niet alleen opgeschreven.',
+    ],
+    gov: 'Een beleidswijziging wordt een codewijziging die je over de hele Rijksvloot uitrolt.',
+    route: '/fleet/nieuw',
+    drive: { wizard: 'campagne' },
+    note: 'Laat de campagne-wizard lopen. Dit maakt "standaarden als code" concreet: een PR in elke repo.',
+  },
+  {
     id: 'basisregistraties',
     title: 'Basisregistraties',
     lead: 'De bronnen van waarheid van de overheid.',
@@ -325,6 +379,20 @@ export const slides = [
     ],
     route: '/cli',
     note: 'Voor de developers in de zaal. rp is het bewijs dat alles ook automatiseerbaar is.',
+  },
+  {
+    id: 'llm-afnemen',
+    title: 'Soevereine LLM, live',
+    lead: 'Een AI-sleutel afnemen die binnen het Rijk blijft.',
+    bullets: [
+      'Kies een model, een team en het doel, en de gateway regelt de rest.',
+      'Prompts en data verlaten de eigen omgeving niet.',
+      'AI als platformdienst, met classificatie en herkomst ingebouwd.',
+    ],
+    gov: 'Een eigen LLM-gateway: geen overheidsdata naar een model van een ander.',
+    route: '/ai/llm',
+    drive: { wizard: 'llm' },
+    note: 'Laat de LLM-wizard zelf lopen. Het punt: zelfs AI is een afdwingbare, soevereine platformdienst.',
   },
   {
     id: 'ai-skills',

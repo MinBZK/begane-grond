@@ -68,4 +68,63 @@ export const wizardScripts = {
     { wait: 500 },
     { finish: true },
   ],
+
+  // NewWorkplaceWizard: 6 steps (Medewerker, Hardware, Image, Profiel, Policy, Bevestigen).
+  // The form is a ref; the driver mutates the inner object.
+  werkplek: [
+    { wait: 600 },
+    { set: 'person', value: 'fatima' },
+    { next: true },
+    { set: 'model', value: 'framework-13' },
+    { next: true },
+    { set: 'image', value: 'autonoom-13' },
+    { next: true },
+    { set: 'profile', value: 'developer' },
+    { next: true },
+    { set: 'encrypted', value: true },
+    { set: 'mdm', value: true },
+    { next: true },
+    { wait: 500 },
+    { finish: true },
+  ],
+
+  // NewCampaignWizard: 5 steps (Type, Doel-repos, Definitie, Preview, Uitrollen).
+  // Defaults already set a regex codemod over a couple of repos.
+  campagne: [
+    { wait: 600 },
+    { set: 'title', value: 'NLDD 0.9 over de hele vloot' },
+    { next: true },
+    { next: true },
+    { next: true },
+    { next: true },
+    { wait: 500 },
+    { finish: true },
+  ],
+
+  // PromotionWizard: 3 steps (Omgevingen, Gates, Deploy). No single form: we
+  // acknowledge the gates and run the deploy pipeline via exposed helpers.
+  promotie: [
+    { wait: 800 },
+    { next: true },
+    { wait: 400 },
+    { call: 'ackAll' },
+    { next: true },
+    { wait: 400 },
+    { call: 'runDeploy' },
+  ],
+
+  // LlmCatalog: gated behind wizardOpen, then 4 steps (Model, Eigenaar,
+  // Doel & classificatie, Samenvatting). Open it first, then walk through.
+  llm: [
+    { wait: 600 },
+    { call: 'openWizard' },
+    { wait: 700 },
+    { next: true },
+    { set: 'team', value: 'team-platform' },
+    { next: true },
+    { set: 'purpose', value: 'AI-assistent in de IDE' },
+    { next: true },
+    { wait: 500 },
+    { finish: true },
+  ],
 };

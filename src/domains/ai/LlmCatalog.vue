@@ -3,10 +3,11 @@
 // metadata, a procurement wizard that fakes an LLM instance via store.orderInstance
 // (kind 'llm') and yields a masked API key + endpoint, plus a per-team
 // token/cost mock. This is the "afname" side of the AI domain.
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import Wizard from '../../components/shared/Wizard.vue';
+import { usePresentation } from '../../presentation/usePresentation.js';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -203,6 +204,20 @@ function resetWizard() {
   revealed.value = false;
   teamQuery.value = '';
 }
+
+// Presentation mode can auto-drive this wizard on stage. The wizard is gated
+// behind wizardOpen, so we expose an open() helper the drive script calls first.
+const wizardRef = ref(null);
+const wizardApi = {
+  next: () => wizardRef.value?.next(),
+  goTo: (i) => wizardRef.value?.goTo(i),
+};
+function openWizard() {
+  wizardOpen.value = true;
+}
+const presentation = usePresentation();
+onMounted(() => presentation.registerWizard('llm', { form, wizardRef: wizardApi, finish, openWizard }));
+onBeforeUnmount(() => presentation.unregisterWizard('llm'));
 </script>
 
 <template>
@@ -324,7 +339,7 @@ function resetWizard() {
       </div>
 
       <!-- The wizard -->
-      <Wizard v-else :steps="wizardSteps" finish-label="Key aanmaken" @finish="finish">
+      <Wizard v-else ref="wizardRef" :steps="wizardSteps" finish-label="Key aanmaken" @finish="finish">
         <template #default="{ step }">
           <!-- Step 0: model -->
           <div v-if="step === 0">

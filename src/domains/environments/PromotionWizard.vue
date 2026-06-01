@@ -5,7 +5,7 @@
 // green, security green, and a change approval when the target is prod). Step 3
 // plays a faked deploy pipeline (build -> test -> scan -> deploy) and, on
 // finish, calls store.promote() so the matrix and release history update live.
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
@@ -13,6 +13,7 @@ import StatusBadge from '../../components/shared/StatusBadge.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import Wizard from '../../components/shared/Wizard.vue';
+import { usePresentation } from '../../presentation/usePresentation.js';
 
 const route = useRoute();
 const router = useRouter();
@@ -165,6 +166,31 @@ function pipelineLabel(id) {
   if (s === 'ready') return 'klaar';
   return 'wacht';
 }
+
+// Presentation mode can auto-drive this wizard on stage. It has no single form,
+// so we expose the helpers a drive script needs: acknowledge every gate and run
+// the deploy pipeline. A minimal form object is provided for the driver guard.
+const wizardRef = ref(null);
+const wizardApi = {
+  next: () => wizardRef.value?.next(),
+  goTo: (i) => wizardRef.value?.goTo(i),
+};
+function ackAll() {
+  const next = { ...acknowledged.value };
+  gates.value.forEach((g) => { next[g.id] = true; });
+  acknowledged.value = next;
+}
+const presentation = usePresentation();
+onMounted(() =>
+  presentation.registerWizard('promotie', {
+    form: {},
+    wizardRef: wizardApi,
+    finish: () => router.push('/environments'),
+    ackAll,
+    runDeploy,
+  }),
+);
+onBeforeUnmount(() => presentation.unregisterWizard('promotie'));
 </script>
 
 <template>
@@ -193,7 +219,7 @@ function pipelineLabel(id) {
 
     <div v-else class="rp-promote-grid">
       <div>
-        <Wizard :steps="steps" finish-label="Sluiten" @finish="router.push('/environments')">
+        <Wizard ref="wizardRef" :steps="steps" finish-label="Sluiten" @finish="router.push('/environments')">
           <template #default="{ step, go }">
             <!-- STEP 1: choose environments -->
             <div v-if="step === 0">

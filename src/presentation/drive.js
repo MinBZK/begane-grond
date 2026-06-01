@@ -21,6 +21,33 @@ const TYPE_SETTLE_MS = 500; // brief pause once a field is fully typed
 // Promise-based sleep. setTimeout is allowed; Date/now/random are not.
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// A no-op control used when a script is run without a presenter control token.
+const NO_CONTROL = { aborted: false, isPaused: () => false };
+
+// Sleep in small slices so we can react to abort/pause mid-delay. While paused,
+// it holds (without counting down) until resumed or aborted. Returns false when
+// the run was aborted, true otherwise.
+async function controlledDelay(ms, control) {
+  const SLICE = 80;
+  let remaining = ms;
+  // First, drain any time while honoring pause/abort.
+  while (remaining > 0) {
+    if (control.aborted) return false;
+    if (control.isPaused()) {
+      await delay(SLICE);
+      continue; // paused time does not count down
+    }
+    const slice = Math.min(SLICE, remaining);
+    await delay(slice);
+    remaining -= slice;
+  }
+  // If we became paused exactly at the boundary, hold here too.
+  while (control.isPaused() && !control.aborted) {
+    await delay(SLICE);
+  }
+  return !control.aborted;
+}
+
 // Read a nested value by dot/array path, returning undefined if missing.
 function getPath(target, path) {
   if (!target || typeof path !== 'string') return undefined;
@@ -28,16 +55,18 @@ function getPath(target, path) {
 }
 
 // Type a string into a path character by character so it reads as live typing.
-async function typeInto(target, path, value) {
+// Honors the control token so typing pauses/aborts with the presenter.
+async function typeInto(target, path, value, control) {
   // Clear the field first, then grow it one character at a time.
   setPath(target, path, '');
   let current = '';
   for (const ch of String(value)) {
+    if (control.aborted) return;
     current += ch;
     setPath(target, path, current);
-    await delay(TYPE_CHAR_DELAY_MS);
+    if (!(await controlledDelay(TYPE_CHAR_DELAY_MS, control))) return;
   }
-  await delay(TYPE_SETTLE_MS);
+  await controlledDelay(TYPE_SETTLE_MS, control);
 }
 
 // Set a value on a nested path inside `target`. Supports dot paths and numeric
@@ -60,19 +89,26 @@ function setPath(target, path, value) {
 }
 
 // Run a drive script against an exposed wizard. Never throws: any failure is
-// logged and swallowed so the presentation cannot crash.
-export async function runScript(exposed, script) {
+// logged and swallowed so the presentation cannot crash. The optional control
+// token lets the presenter pause, resume or abort the run mid-flight.
+export async function runScript(exposed, script, control = NO_CONTROL) {
   // Silently bail if the wizard is not (yet) wired up.
   if (!exposed?.wizardRef || !exposed?.form) return;
   if (!Array.isArray(script)) return;
 
+  // Some wizards keep their form in a ref; mutate the inner object in that case.
+  const form = exposed.form && exposed.form.value !== undefined && typeof exposed.form.value === 'object'
+    ? exposed.form.value
+    : exposed.form;
+
   for (const step of script) {
+    if (control.aborted) return;
     try {
       if (!step || typeof step !== 'object') continue;
 
       // Pure pause: no extra standard delay afterwards.
       if (typeof step.wait === 'number') {
-        await delay(step.wait);
+        await controlledDelay(step.wait, control);
         continue;
       }
 
@@ -80,17 +116,17 @@ export async function runScript(exposed, script) {
 
       if (typeof step.set === 'string') {
         // A string going into a string field is typed out so it looks live.
-        const existing = getPath(exposed.form, step.set);
+        const existing = getPath(form, step.set);
         const typeable =
           typeof step.value === 'string' && (typeof existing === 'string' || existing === undefined);
         if (typeable && step.value.length) {
-          await typeInto(exposed.form, step.set, step.value);
+          await typeInto(form, step.set, step.value, control);
         } else {
-          setPath(exposed.form, step.set, step.value);
+          setPath(form, step.set, step.value);
         }
       } else if (typeof step.toggle === 'string') {
         // Idempotent push into an array field.
-        const field = exposed.form[step.toggle];
+        const field = form[step.toggle];
         if (Array.isArray(field) && !field.includes(step.value)) {
           field.push(step.value);
         }
@@ -111,9 +147,11 @@ export async function runScript(exposed, script) {
         advancing = true;
       }
 
+      if (control.aborted) return;
+
       // Pause between steps so mutations are visible; linger longer on a step
       // change so the audience can register the new screen before edits start.
-      await delay(advancing ? STEP_ADVANCE_DELAY_MS : DEFAULT_STEP_DELAY_MS);
+      await controlledDelay(advancing ? STEP_ADVANCE_DELAY_MS : DEFAULT_STEP_DELAY_MS, control);
     } catch (error) {
       console.warn('[presentation/drive] step failed', step, error);
     }

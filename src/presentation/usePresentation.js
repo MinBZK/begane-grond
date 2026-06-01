@@ -10,10 +10,18 @@ const active = ref(false)
 const index = ref(0)
 const autoplay = ref(false)
 
+// Drive state for the on-screen "animation running" indicator and its controls.
+const driving = ref(false) // a wizard flow is auto-running on the right
+const drivePaused = ref(false) // the running flow is paused by the presenter
+
 let _router = null
 let _store = null
 const _wizards = new Map()
 let _autoTimer = null
+
+// A control token shared with the active drive run. Bumping the id aborts the
+// previous run (e.g. when the presenter moves to another slide mid-animation).
+let _driveControl = { id: 0, aborted: false, isPaused: () => drivePaused.value }
 
 const current = computed(() => slides[index.value])
 const total = computed(() => slides.length)
@@ -53,29 +61,67 @@ function applyHighlight(selector) {
   }
 }
 
+// Abort any drive currently running and reset the indicator.
+function cancelDrive() {
+  _driveControl.aborted = true
+  driving.value = false
+  drivePaused.value = false
+}
+
 // Wait for a registered wizard, then auto-run its scripted flow.
 async function driveWizard(name) {
+  // Start a fresh control token; the previous run (if any) sees aborted=true.
+  _driveControl.aborted = true
+  const control = { id: _driveControl.id + 1, aborted: false, isPaused: () => drivePaused.value }
+  _driveControl = control
+  drivePaused.value = false
   try {
     // Poll until the wizard registers itself (max ~40 attempts).
     let attempts = 0
-    while (!_wizards.has(name) && attempts < 40) {
+    while (!_wizards.has(name) && attempts < 40 && !control.aborted) {
       attempts += 1
       await delay(50)
       await nextTick()
     }
-    if (!_wizards.has(name)) return
+    if (control.aborted || !_wizards.has(name)) return
     const script = wizardScripts[name]
     if (!script) return
-    await runScript(_wizards.get(name), script)
+    driving.value = true
+    await runScript(_wizards.get(name), script, control)
   } catch (e) {
     // Ignore: a failed drive should never break the presentation.
+  } finally {
+    // Only clear the indicator if we are still the active run.
+    if (_driveControl === control) {
+      driving.value = false
+      drivePaused.value = false
+    }
   }
+}
+
+// Presenter controls for the running animation.
+function pauseDrive() {
+  if (driving.value) drivePaused.value = true
+}
+function resumeDrive() {
+  drivePaused.value = false
+}
+function toggleDrive() {
+  if (!driving.value) return
+  drivePaused.value = !drivePaused.value
+}
+// Skip the rest of the running animation (abort it immediately).
+function skipDrive() {
+  cancelDrive()
 }
 
 // Run everything attached to slide i: navigate, emit, highlight and drive.
 async function runSlide(i) {
   const s = slides[i]
   if (!s) return
+
+  // Moving to a new slide aborts any animation still running on the old one.
+  cancelDrive()
 
   // Navigate to the slide's demo route, or just update the query in place.
   if (s.route && _router.currentRoute.value.path !== s.route) {
@@ -134,6 +180,7 @@ async function start(fromIndex = 0) {
 function stop() {
   active.value = false
   autoplay.value = false
+  cancelDrive()
   if (_autoTimer) {
     clearInterval(_autoTimer)
     _autoTimer = null
@@ -183,6 +230,8 @@ export function usePresentation() {
     current,
     total,
     autoplay,
+    driving,
+    drivePaused,
     init,
     start,
     stop,
@@ -190,6 +239,10 @@ export function usePresentation() {
     prev,
     goto,
     toggleAutoplay,
+    pauseDrive,
+    resumeDrive,
+    toggleDrive,
+    skipDrive,
     registerWizard,
     unregisterWizard,
   }

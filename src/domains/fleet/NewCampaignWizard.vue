@@ -6,12 +6,13 @@
 //   4) preview      — faked per-repo dry-run diffs in <nldd-code>
 //   5) rollout      — on finish: store.createCampaign + store.runCampaign
 // After finish we show a live rollout screen and a CliHint with the rp command.
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import Wizard from '../../components/shared/Wizard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import CliHint from '../../components/shared/CliHint.vue';
+import { usePresentation } from '../../presentation/usePresentation.js';
 
 const store = usePlatformStore();
 
@@ -165,6 +166,16 @@ const wizardSteps = [
   { title: 'Preview' },
   { title: 'Uitrollen' },
 ];
+
+// Presentation mode can auto-drive this wizard on stage.
+const wizardRef = ref(null);
+const wizardApi = {
+  next: () => wizardRef.value?.next(),
+  goTo: (i) => wizardRef.value?.goTo(i),
+};
+const presentation = usePresentation();
+onMounted(() => presentation.registerWizard('campagne', { form, wizardRef: wizardApi, finish }));
+onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
 </script>
 
 <template>
@@ -215,7 +226,7 @@ const wizardSteps = [
     </div>
 
     <!-- The wizard -->
-    <Wizard v-else :steps="wizardSteps" finish-label="Uitrollen" @finish="finish">
+    <Wizard v-else ref="wizardRef" :steps="wizardSteps" finish-label="Uitrollen" @finish="finish">
       <template #default="{ step }">
         <!-- Step 0: type -->
         <div v-if="step === 0">
