@@ -60,8 +60,8 @@ function hueFor(id) {
   <div class="rp-page">
     <PageHeader
       title="Mensen"
-      lede="Iedereen die op het Rijksplatform werkt, met rol, organisatie en team."
-      :crumbs="[{ text: 'Rijksplatform', href: '/' }, { text: 'Teams & mensen', href: '/teams' }, { text: 'Mensen', href: '/teams/mensen' }]"
+      lede="Iedereen die op het Begane Grond werkt, met rol, organisatie en team."
+      :crumbs="[{ text: 'Begane Grond', href: '/' }, { text: 'Teams & mensen', href: '/teams' }, { text: 'Mensen', href: '/teams/mensen' }]"
     >
       <template #actions>
         <nldd-button variant="secondary" text="Teams" start-icon="person-2" @click="$router.push('/teams')" />

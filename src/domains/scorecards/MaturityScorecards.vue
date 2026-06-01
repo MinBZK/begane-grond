@@ -93,7 +93,7 @@ const dist = computed(() => {
 });
 
 const crumbs = [
-  { text: 'Rijksplatform', href: '/' },
+  { text: 'Begane Grond', href: '/' },
   { text: 'Scorecards', href: '/scorecards' },
 ];
 </script>

@@ -50,7 +50,7 @@ const lastOrdered = ref('');
       title="Hardware-catalogus"
       lede="Alle uitgeefbare devices: autonome Linux-laptops, modulaire Framework-laptops, zware dev-workstations, tablets en diensttelefoons. Versleuteld en MDM-beheerd. Bestel direct of laat een medewerker uitrollen."
       :crumbs="[
-        { text: 'Rijksplatform', href: '/' },
+        { text: 'Begane Grond', href: '/' },
         { text: 'Werkplekken', href: '/werkplekken' },
         { text: 'Hardware', href: '/werkplekken/hardware' },
       ]"

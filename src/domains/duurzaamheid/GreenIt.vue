@@ -1,5 +1,5 @@
 <script setup>
-// Green IT for the Rijksplatform. Where /kosten reads the platform through a
+// Green IT for the Begane Grond. Where /kosten reads the platform through a
 // euro lens, this screen reads the exact same instances through an *energy and
 // CO2* lens: estimated kWh and emissions per service/app, rolled up per team,
 // trended over the year, and tied back to MVI (maatschappelijk verantwoord
@@ -284,7 +284,7 @@ function exportFootprint() {
   <div class="rp-page">
     <PageHeader
       title="Green IT"
-      lede="Energie- en CO2-voetafdruk van het Rijksplatform. Verbruik per dienst en team, afgeleid uit de afgenomen infra en de PUE van elk datacenter, met een koppeling naar maatschappelijk verantwoord inkopen (MVI)."
+      lede="Energie- en CO2-voetafdruk van het Begane Grond. Verbruik per dienst en team, afgeleid uit de afgenomen infra en de PUE van elk datacenter, met een koppeling naar maatschappelijk verantwoord inkopen (MVI)."
       :crumbs="[{ text: 'Platform', href: '/' }, { text: 'Duurzaamheid', href: '/duurzaamheid' }]"
     >
       <template #actions>

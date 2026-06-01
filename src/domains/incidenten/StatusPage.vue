@@ -106,7 +106,7 @@ function toggleAll() {
   <div class="rp-page">
     <PageHeader
       title="Statuspagina"
-      lede="Publiek overzicht van de operationele status van alle Rijksplatform-diensten."
+      lede="Publiek overzicht van de operationele status van alle Begane Grond-diensten."
       :crumbs="[
         { text: 'Platform', href: '/' },
         { text: 'Incidenten', href: '/incidenten' },

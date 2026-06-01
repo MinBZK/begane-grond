@@ -218,7 +218,7 @@ function scoreColor(score) {
     <nldd-title size="3"><h2>Standaarden-marktplaats</h2></nldd-title>
     <nldd-rich-text>
       <p>
-        Het Rijksplatform werkt &lsquo;open en volgens de standaarden&rsquo;. Elke standaard hieronder
+        Het Begane Grond werkt &lsquo;open en volgens de standaarden&rsquo;. Elke standaard hieronder
         is een afspraak die je app via de golden path automatisch erft. Klik door voor de
         naleving per applicatie en de onderbouwing waar iets nog niet voldoet.
       </p>

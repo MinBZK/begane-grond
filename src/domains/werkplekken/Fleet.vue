@@ -95,7 +95,7 @@ function goDetail(id) {
       title="Werkplek-vloot"
       lede="Alle uitgerolde Rijkslaptops, hun toegewezen medewerker en hun nalevingsstatus. Klik een werkplek aan voor de levenscyclus."
       :crumbs="[
-        { text: 'Rijksplatform', href: '/' },
+        { text: 'Begane Grond', href: '/' },
         { text: 'Werkplekken', href: '/werkplekken' },
       ]"
     >

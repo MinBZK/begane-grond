@@ -1,5 +1,5 @@
 <script setup>
-// The opening dashboard of the Rijksplatform. It stitches the layers together:
+// The opening dashboard of the Begane Grond. It stitches the layers together:
 // a row of KPI metric cards, the clickable layer-stack (physical -> infra ->
 // apps), a recent-activity feed from the audit log, and shortcuts to the
 // wizards. This is the first thing the demo shows, so it must feel alive and
@@ -65,7 +65,7 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
 <template>
   <div class="rp-page">
     <PageHeader
-      title="Rijksplatform"
+      title="Begane Grond"
       :lede="`Welkom ${me?.name?.split(' ')[0] || ''} — één plek voor fysieke infra, diensten, applicaties en teams van de Rijksoverheid.`"
     >
       <template #actions>

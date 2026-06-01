@@ -16,7 +16,7 @@ const router = createRouter({
 });
 
 router.afterEach((to) => {
-  const base = 'Rijksplatform';
+  const base = 'Begane Grond';
   document.title = to.meta?.title ? `${to.meta.title} · ${base}` : base;
 });
 

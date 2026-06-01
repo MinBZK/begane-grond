@@ -177,7 +177,7 @@ function quadrantLabelPos(q) {
   <div class="rp-page">
     <PageHeader
       title="Tech radar"
-      lede="Het technologie-kompas van het Rijksplatform. Vier kwadranten (talen, tools, platforms, technieken) tegen vier ringen van advies (adopt, trial, assess, hold). Klik een blip voor het advies."
+      lede="Het technologie-kompas van het Begane Grond. Vier kwadranten (talen, tools, platforms, technieken) tegen vier ringen van advies (adopt, trial, assess, hold). Klik een blip voor het advies."
       :crumbs="[
         { text: 'Platform', href: '/' },
         { text: 'Tech radar', href: '/tech-radar' },

@@ -1,5 +1,5 @@
 <script setup>
-// The API catalog: every koppelvlak (interface) the Rijksplatform offers, with
+// The API catalog: every koppelvlak (interface) the Begane Grond offers, with
 // version, owning team, ADR (API Design Rules) compliance, rate limit and
 // lifecycle status. Each row links through to the owning team and exposes an
 // OpenAPI spec panel with a copy-able base URL and an `rp` CLI hint. A search
@@ -96,7 +96,7 @@ const relatedApps = computed(() => {
   <div class="rp-page">
     <PageHeader
       title="API-catalogus"
-      lede="Alle koppelvlakken van het Rijksplatform op één plek. Versie, eigenaar, ADR-naleving, rate-limit en status. Klik een API open voor de OpenAPI-specificatie."
+      lede="Alle koppelvlakken van het Begane Grond op één plek. Versie, eigenaar, ADR-naleving, rate-limit en status. Klik een API open voor de OpenAPI-specificatie."
       :crumbs="[
         { text: 'Platform', href: '/' },
         { text: 'Koppelvlakken', href: '/koppelvlakken' },

@@ -37,7 +37,7 @@ const README = {
   'repo-paspoort': {
     tagline: 'Service voor het aanvragen en muteren van reisdocumenten.',
     body: [
-      'De Paspoortaanvraag-service verwerkt aanvragen voor paspoorten en identiteitskaarten. De service draait op het Rijksplatform en koppelt via FSC met de BRP en de Reisdocumentenadministratie (RAAS).',
+      'De Paspoortaanvraag-service verwerkt aanvragen voor paspoorten en identiteitskaarten. De service draait op het Begane Grond en koppelt via FSC met de BRP en de Reisdocumentenadministratie (RAAS).',
       'Geschreven in Rust (Axum) met een Postgres-backend. Migraties via sqlx, gedragstests via Cucumber. De service is intern omdat zij persoonsgegevens en documentnummers verwerkt.',
     ],
     run: 'cargo run --bin paspoort-api',
@@ -53,7 +53,7 @@ const README = {
   'repo-platformportaal': {
     tagline: 'Het internal developer platform dat je nu bekijkt.',
     body: [
-      'Het Platformportaal is de selfservice-frontend van het Rijksplatform: infra bestellen, apps aanmaken, werkplekken uitrollen en de fysieke laag tot in het rack volgen.',
+      'Het Platformportaal is de selfservice-frontend van het Begane Grond: infra bestellen, apps aanmaken, werkplekken uitrollen en de fysieke laag tot in het rack volgen.',
       'Gebouwd met Vue 3 en het NLDD design system. Toegankelijk volgens WCAG 2.2 AA, getest met pa11y in CI.',
     ],
     run: 'npm install && npm run dev',

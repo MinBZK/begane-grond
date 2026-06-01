@@ -80,7 +80,7 @@ const chatOpen = ref(false);
       :title="team.name"
       :lede="`${org ? org.name : team.org} · ${members.length} ${members.length === 1 ? 'lid' : 'leden'}`"
       :crumbs="[
-        { text: 'Rijksplatform', href: '/' },
+        { text: 'Begane Grond', href: '/' },
         { text: 'Teams & mensen', href: '/teams' },
         { text: team.name, href: `/teams/${team.id}` },
       ]"

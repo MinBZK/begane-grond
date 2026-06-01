@@ -79,7 +79,7 @@ function reset() {
   <div class="rp-page">
     <PageHeader
       title="Software-catalogus"
-      lede="Alle applicaties van het Rijksplatform op één plek. Elke applicatie hangt aan een team, een repository en de infra waarop hij draait."
+      lede="Alle applicaties van het Begane Grond op één plek. Elke applicatie hangt aan een team, een repository en de infra waarop hij draait."
       :crumbs="[{ text: 'Home', href: '/' }, { text: 'Applicaties', href: '/apps' }]"
     >
       <template #actions>

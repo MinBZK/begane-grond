@@ -1,5 +1,5 @@
 <script setup>
-// API explorer: an OpenAPI-style mock of the Rijksplatform REST API. The same
+// API explorer: an OpenAPI-style mock of the Begane Grond REST API. The same
 // actions that the `rp` CLI exposes are available as HTTP endpoints. Users can
 // browse endpoints per domain (method, path, request/response samples), mint a
 // masked personal access token (kept in component state, not the store), and
@@ -273,7 +273,7 @@ jobs:
   promote:
     runs-on: rijksict-runner          # eigen CI-runner in DC Den Haag
     steps:
-      - name: Promoot release via Rijksplatform-API
+      - name: Promoot release via Begane Grond-API
         env:
           RIJKSPLATFORM_TOKEN: \${{ secrets.RIJKSPLATFORM_TOKEN }}
         run: |
@@ -300,7 +300,7 @@ const openapiUrl = `${BASE}/openapi.json`;
   <div class="rp-page">
     <PageHeader
       title="API-explorer"
-      lede="De REST-API achter het Rijksplatform. Dezelfde acties als de rp-CLI, maar als HTTP-endpoints, handig voor eigen integraties en CI. Volgt de API Design Rules (ADR), met OAuth2-bearer-tokens."
+      lede="De REST-API achter het Begane Grond. Dezelfde acties als de rp-CLI, maar als HTTP-endpoints, handig voor eigen integraties en CI. Volgt de API Design Rules (ADR), met OAuth2-bearer-tokens."
       :crumbs="[
         { text: 'Home', href: '/' },
         { text: 'CLI & API', href: '/cli' },

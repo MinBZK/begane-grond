@@ -112,7 +112,7 @@ const cliCommand = computed(
       title="Werkplek uitrollen"
       lede="Rol in een paar stappen een autonome, versleutelde en MDM-beheerde Rijkslaptop uit voor een medewerker."
       :crumbs="[
-        { text: 'Rijksplatform', href: '/' },
+        { text: 'Begane Grond', href: '/' },
         { text: 'Werkplekken', href: '/werkplekken' },
         { text: 'Uitrollen', href: '/werkplekken/nieuw' },
       ]"

@@ -132,7 +132,7 @@ function setFocus(id) {
     <PageHeader
       title="Organisatiegraaf"
       lede="Organisatie naar team. Klik een organisatie aan om de teams uit te klappen naar hun mensen, of kies er een hieronder."
-      :crumbs="[{ text: 'Rijksplatform', href: '/' }, { text: 'Teams & mensen', href: '/teams' }, { text: 'Organisatie', href: '/teams/organisatie' }]"
+      :crumbs="[{ text: 'Begane Grond', href: '/' }, { text: 'Teams & mensen', href: '/teams' }, { text: 'Organisatie', href: '/teams/organisatie' }]"
     >
       <template #actions>
         <nldd-button variant="secondary" text="Teams" start-icon="person-2" @click="$router.push('/teams')" />

@@ -111,7 +111,7 @@ onBeforeUnmount(() => {
   <nldd-page>
     <nldd-skip-link slot="header" href="#hoofdinhoud" text="Direct naar de inhoud">
       <nldd-top-navigation-bar
-        logo-title="Rijksplatform"
+        logo-title="Begane Grond"
         logo-subtitle="developer platform voor de Rijksoverheid"
         logo-href="/"
         website-href="/"
@@ -176,7 +176,7 @@ onBeforeUnmount(() => {
     <div slot="footer">
       <nldd-page-footer>
         <nldd-page-footer-legal-bar accessible-label="Juridisch">
-          <nldd-page-footer-legal-bar-item slot="start" text="Rijksplatform — demo / mock-up" />
+          <nldd-page-footer-legal-bar-item slot="start" text="Begane Grond — demo / mock-up" />
           <nldd-page-footer-legal-bar-item slot="end" text="Toegankelijkheid" href="/standaarden" />
         </nldd-page-footer-legal-bar>
       </nldd-page-footer>

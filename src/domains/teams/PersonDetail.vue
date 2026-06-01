@@ -69,7 +69,7 @@ const chatOpen = ref(false);
       :title="person.name"
       :lede="person.role"
       :crumbs="[
-        { text: 'Rijksplatform', href: '/' },
+        { text: 'Begane Grond', href: '/' },
         { text: 'Mensen', href: '/teams/mensen' },
         { text: person.name, href: `/teams/mensen/${person.id}` },
       ]"

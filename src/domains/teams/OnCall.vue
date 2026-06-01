@@ -79,7 +79,7 @@ function hueFor(id) {
     <PageHeader
       title="On-call"
       lede="Platform-breed piket. Wie draagt de pieper per team, wie staat erachter en welke incidenten lopen."
-      :crumbs="[{ text: 'Rijksplatform', href: '/' }, { text: 'Teams & mensen', href: '/teams' }, { text: 'On-call', href: '/teams/on-call' }]"
+      :crumbs="[{ text: 'Begane Grond', href: '/' }, { text: 'Teams & mensen', href: '/teams' }, { text: 'On-call', href: '/teams/on-call' }]"
     >
       <template #actions>
         <nldd-button variant="secondary" text="Teams" start-icon="person-2" @click="$router.push('/teams')" />

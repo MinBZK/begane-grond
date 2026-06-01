@@ -1,5 +1,5 @@
 <script setup>
-// "Leren & onboarding" — the front door for people new to the Rijksplatform.
+// "Leren & onboarding" — the front door for people new to the Begane Grond.
 // Combines the operational onboarding paths from the store (interactive
 // step-by-step checklists), a searchable docs hub of runbooks and guides, and
 // curriculum-style learning paths for the government standards (accessibility,
@@ -67,8 +67,8 @@ const meLinks = computed(() => {
   <div class="rp-page">
     <PageHeader
       title="Leren & onboarding"
-      lede="Word wegwijs op het Rijksplatform. Volg een onboarding-pad, doorzoek de docs-hub en haal je standaarden-badges binnen."
-      :crumbs="[{ text: 'Rijksplatform', href: '/' }, { text: 'Leren', href: '/leren' }]"
+      lede="Word wegwijs op het Begane Grond. Volg een onboarding-pad, doorzoek de docs-hub en haal je standaarden-badges binnen."
+      :crumbs="[{ text: 'Begane Grond', href: '/' }, { text: 'Leren', href: '/leren' }]"
     >
       <template #actions>
         <nldd-button variant="secondary" text="Docs-hub" start-icon="books-vertical" @click="$router.push('/leren#docs')" />

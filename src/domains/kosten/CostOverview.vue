@@ -1,5 +1,5 @@
 <script setup>
-// Cost overview (showback / FinOps) for the Rijksplatform. It aggregates the
+// Cost overview (showback / FinOps) for the Begane Grond. It aggregates the
 // real per-instance monthly cost (instances[].costMonth) and the per-team
 // rollup (costByTeam) into total platform spend, a per-team breakdown drawn as
 // an SVG donut + bar chart, a 6-month trend sparkline, and a showback table
@@ -223,7 +223,7 @@ function showMoreShowback() {
   <div class="rp-page">
     <PageHeader
       title="Kosten"
-      lede="Showback en FinOps voor het Rijksplatform. Wie betaalt voor welke dienst, hoe ontwikkelt de uitgave zich, en wat is de energievoetafdruk per instance."
+      lede="Showback en FinOps voor het Begane Grond. Wie betaalt voor welke dienst, hoe ontwikkelt de uitgave zich, en wat is de energievoetafdruk per instance."
       :crumbs="[{ text: 'Platform', href: '/' }, { text: 'Kosten', href: '/kosten' }]"
     >
       <template #actions>

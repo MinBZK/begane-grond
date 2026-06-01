@@ -85,8 +85,8 @@ function resetLimit() {
   <div class="rp-page">
     <PageHeader
       title="Teams & mensen"
-      lede="De teams die het Rijksplatform bouwen en draaien. Klik door naar leden, eigenaarschap en piket."
-      :crumbs="[{ text: 'Rijksplatform', href: '/' }, { text: 'Teams & mensen', href: '/teams' }]"
+      lede="De teams die het Begane Grond bouwen en draaien. Klik door naar leden, eigenaarschap en piket."
+      :crumbs="[{ text: 'Begane Grond', href: '/' }, { text: 'Teams & mensen', href: '/teams' }]"
     >
       <template #actions>
         <nldd-button variant="secondary" text="Alle mensen" start-icon="person-2" @click="$router.push('/teams/mensen')" />

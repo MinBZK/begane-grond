@@ -17,7 +17,7 @@ const me = computed(() => store.currentPerson);
 const myTeam = computed(() => store.teamOfPerson(store.currentUser));
 
 // --- Install / auth block (top of the page) ---------------------------------
-const installCmd = `# Installeer de Rijksplatform-CLI (one-liner, geverifieerd via PKIoverheid)
+const installCmd = `# Installeer de Begane Grond-CLI (one-liner, geverifieerd via PKIoverheid)
 curl -fsSL https://cli.rijks.app/install.sh | sh
 
 # Of via de pakketbeheerder van je autonome werkplek
@@ -257,7 +257,7 @@ function copy(text) {
 <template>
   <div class="rp-page">
     <PageHeader
-      title="rp — de Rijksplatform-CLI"
+      title="rp — de Begane Grond-CLI"
       lede="Alles in dit portaal kan ook vanaf de terminal. Eén binary, OIDC-login met je Rijkspas, en een commando per platformlaag. Gemaakt om in scripts en CI te gebruiken."
       :crumbs="[
         { text: 'Home', href: '/' },

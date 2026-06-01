@@ -118,7 +118,7 @@ const handoverTarget = computed(() =>
       :title="person?.name ? `Werkplek van ${person.name}` : wp.id"
       :lede="`${model?.name || wp.model} · image ${image?.name || wp.image}`"
       :crumbs="[
-        { text: 'Rijksplatform', href: '/' },
+        { text: 'Begane Grond', href: '/' },
         { text: 'Werkplekken', href: '/werkplekken' },
         { text: wp.id, href: `/werkplekken/${wp.id}` },
       ]"
