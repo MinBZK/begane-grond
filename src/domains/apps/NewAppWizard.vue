@@ -3,13 +3,14 @@
 // choose which infra to provision, configure the repository, and review. On
 // finish it calls store.createApp(...) which also scaffolds a repo and orders
 // the selected infra, then shows a success screen with deep links + CLI hint.
-import { ref, reactive, computed, onMounted } from 'vue';
+import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import Wizard from '../../components/shared/Wizard.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
+import { usePresentation } from '../../presentation/usePresentation.js';
 
 const store = usePlatformStore();
 const route = useRoute();
@@ -132,6 +133,18 @@ const successLinks = computed(() => {
 
 // Step validity gates so the primary button never produces a broken app.
 const canFinish = computed(() => form.template && form.name.trim() && form.team);
+
+// Presentation mode can auto-drive this wizard on stage.
+const wizardRef = ref(null);
+const wizardApi = {
+  next: () => wizardRef.value?.next(),
+  goTo: (i) => wizardRef.value?.goTo(i),
+};
+const presentation = usePresentation();
+onMounted(() =>
+  presentation.registerWizard('app', { form, wizardRef: wizardApi, finish: onFinish, pickTemplate, toggleInfra }),
+);
+onBeforeUnmount(() => presentation.unregisterWizard('app'));
 </script>
 
 <template>
@@ -207,6 +220,7 @@ const canFinish = computed(() => form.template && form.name.trim() && form.team)
     <!-- Wizard -->
     <Wizard
       v-else
+      ref="wizardRef"
       :steps="[
         { title: 'Golden path' },
         { title: 'Basis' },

@@ -3,13 +3,14 @@
 // Walks owner team -> environment -> size/plan -> datacenter -> name -> summary,
 // then calls store.orderInstance(...) on finish and shows a live status screen
 // that tracks the requested -> provisioning -> ready chain the store drives.
-import { ref, reactive, computed, watch } from 'vue';
+import { ref, reactive, computed, watch, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import Wizard from '../../components/shared/Wizard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import CliHint from '../../components/shared/CliHint.vue';
+import { usePresentation } from '../../presentation/usePresentation.js';
 
 const route = useRoute();
 const store = usePlatformStore();
@@ -128,6 +129,18 @@ const wizardSteps = [
   { title: 'Naam' },
   { title: 'Samenvatting' },
 ];
+
+// Presentation mode can auto-drive this wizard on stage. The exposed wizardRef
+// delegates to the live <Wizard> instance so the driver can call next()/goTo()
+// without worrying about ref timing.
+const wizardRef = ref(null);
+const wizardApi = {
+  next: () => wizardRef.value?.next(),
+  goTo: (i) => wizardRef.value?.goTo(i),
+};
+const presentation = usePresentation();
+onMounted(() => presentation.registerWizard('order', { form, wizardRef: wizardApi, finish }));
+onBeforeUnmount(() => presentation.unregisterWizard('order'));
 </script>
 
 <template>
@@ -202,7 +215,7 @@ const wizardSteps = [
     </div>
 
     <!-- The wizard itself -->
-    <Wizard v-else :steps="wizardSteps" finish-label="Aanvragen" @finish="finish">
+    <Wizard v-else ref="wizardRef" :steps="wizardSteps" finish-label="Aanvragen" @finish="finish">
       <template #default="{ step }">
         <!-- Step 0: owner team + optional app -->
         <div v-if="step === 0">

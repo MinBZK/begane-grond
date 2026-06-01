@@ -10,8 +10,10 @@ import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import LayerStack from './LayerStack.vue';
+import { usePresentation } from '../../presentation/usePresentation.js';
 
 const store = usePlatformStore();
+const presentation = usePresentation();
 
 const me = computed(() => store.currentPerson);
 const myTeam = computed(() => (me.value ? store.teamById(me.value.team) : null));
@@ -66,9 +68,10 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
   <div class="rp-page">
     <PageHeader
       title="Begane Grond"
-      :lede="`Welkom ${me?.name?.split(' ')[0] || ''} — één plek voor fysieke infra, diensten, applicaties en teams van de Rijksoverheid.`"
+      :lede="`Welkom ${me?.name?.split(' ')[0] || ''}, één plek voor fysieke infra, diensten, applicaties en teams van de Rijksoverheid.`"
     >
       <template #actions>
+        <nldd-button variant="secondary" text="Presentatie" start-icon="play" @click="presentation.start(0)" />
         <nldd-button variant="secondary" text="Mijn spullen" start-icon="person" @click="$router.push('/zelf')" />
         <nldd-button variant="primary" text="Nieuwe applicatie" start-icon="plus" @click="$router.push('/apps/nieuw')" />
       </template>

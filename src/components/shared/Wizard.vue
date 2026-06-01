@@ -20,6 +20,12 @@ function next() {
 function prev() {
   if (current.value > 0) current.value--;
 }
+function goTo(i) {
+  if (i >= 0 && i < props.steps.length) current.value = i;
+}
+
+// Imperative API so presentation mode can auto-drive the wizard on stage.
+defineExpose({ next, prev, goTo, current, isLast });
 </script>
 
 <template>

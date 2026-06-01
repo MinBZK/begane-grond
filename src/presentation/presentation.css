@@ -1,0 +1,47 @@
+/*
+ * Global (unscoped) presentation styles.
+ * Active only when <html> carries the .rp-presenting class.
+ * The deck is a fixed overlay on the left (40vw); the app is shifted
+ * right and chrome is hidden, without touching AppShell scripts.
+ */
+
+/* Shift the app to the right of the deck overlay. */
+html.rp-presenting body {
+  padding-left: 40vw;
+}
+
+/* The side navigation stays visible in presentation mode: it is part of the
+   story (it shows the breadth of the platform), so we keep it on screen. */
+
+/* Hide the page footer to keep the demo focused. */
+html.rp-presenting nldd-page-footer {
+  display: none;
+}
+
+/* Highlight pulse applied to a target element via CSS class. */
+.rp-present-pulse {
+  animation: rp-present-pulse 1.2s ease-in-out;
+}
+
+/* Swelling box-shadow/outline in Rijksblauw, transparent at both ends. */
+@keyframes rp-present-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(21, 66, 115, 0);
+    outline: 2px solid rgba(21, 66, 115, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(21, 66, 115, 0.45);
+    outline: 2px solid rgba(21, 66, 115, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(21, 66, 115, 0);
+    outline: 2px solid rgba(21, 66, 115, 0);
+  }
+}
+
+/* On narrow screens the deck stacks; do not reserve left padding. */
+@media (max-width: 1024px) {
+  html.rp-presenting body {
+    padding-left: 0;
+  }
+}

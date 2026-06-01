@@ -5,12 +5,13 @@
 // preview, to a published law deployed as a running service. On finish it
 // actually mutates the store: harvest/createTraject, enrichWet, runScenarios,
 // publishWet, deployWetAsService, then shows a success screen with deep links.
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import Wizard from '../../components/shared/Wizard.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
+import { usePresentation } from '../../presentation/usePresentation.js';
 
 const store = usePlatformStore();
 
@@ -133,6 +134,18 @@ const successLinks = computed(() => {
 });
 
 const selectedTeam = computed(() => store.teamById(form.team));
+
+// Presentation mode can auto-drive this wizard on stage.
+const wizardRef = ref(null);
+const wizardApi = {
+  next: () => wizardRef.value?.next(),
+  goTo: (i) => wizardRef.value?.goTo(i),
+};
+const presentation = usePresentation();
+onMounted(() =>
+  presentation.registerWizard('wet', { form, wizardRef: wizardApi, finish: onFinish, addInput, addOutput }),
+);
+onBeforeUnmount(() => presentation.unregisterWizard('wet'));
 </script>
 
 <template>
@@ -207,6 +220,7 @@ const selectedTeam = computed(() => store.teamById(form.team));
     <!-- Wizard -->
     <Wizard
       v-else
+      ref="wizardRef"
       :steps="[
         { title: 'Bron' },
         { title: 'Traject' },
