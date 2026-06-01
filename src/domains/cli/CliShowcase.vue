@@ -30,7 +30,7 @@ rp --version
 const authCmd = `# Log in via je Rijkspas / OIDC (NL GOV profiel). Opent de browser.
 rp auth login
 #  → Browser geopend op https://login.rijks.app/device
-#  → Ingelogd als ${me.value?.name || 'Ans Bakker'} (${me.value?.matrix || '@ans:rijk.chat'})
+#  → Ingelogd als ${me.value?.name || 'Anne Schuth'} (${me.value?.matrix || '@anne:rijk.chat'})
 #  → Actief team: ${myTeam.value?.name || 'Platform Engineering'}
 
 rp auth status

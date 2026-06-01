@@ -21,13 +21,13 @@ const store = usePlatformStore();
 const draft = ref('');
 const scroller = ref(null);
 
-const me = () => store.currentPerson?.name || 'Ans Bakker';
+const me = () => store.currentPerson?.name || 'Anne Schuth';
 
 const defaultSeed = () => {
   if (props.kind === 'room') {
     return [
       { from: 'Fatima El Amrani', text: 'Piket is overgedragen, alerts staan groen.', mine: false },
-      { from: 'Ans Bakker', text: 'Top. Ik pak de NLDD-bump in het portaal vandaag op.', mine: true },
+      { from: 'Anne Schuth', text: 'Top. Ik pak de NLDD-bump in het portaal vandaag op.', mine: true },
       { from: 'Pieter Jansen', text: 'Koppelvlak-certificaat verloopt over 30 dagen, staat op de planning.', mine: false },
     ];
   }

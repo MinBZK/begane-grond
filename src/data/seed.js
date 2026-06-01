@@ -203,12 +203,12 @@ export const organisations = [
 export const people = [
   {
     "id": "ans",
-    "name": "Ans Bakker",
+    "name": "Anne Schuth",
     "role": "Platform engineer",
     "org": "rijksict",
     "team": "team-platform",
-    "matrix": "@ans:rijk.chat",
-    "avatar": "AB",
+    "matrix": "@anne:rijk.chat",
+    "avatar": "AS",
     "history": [
       {
         "period": "2023–nu",

@@ -30,6 +30,13 @@ defineProps({
   text-decoration: none;
   color: inherit;
   display: block;
+  height: 100%;
+}
+/* Stretch the card to fill its grid/flex cell so KPIs in a row are equal height
+   even when some have a sub-label and others do not. */
+.rp-metric-link nldd-card {
+  display: block;
+  height: 100%;
 }
 .rp-metric-top {
   display: flex;

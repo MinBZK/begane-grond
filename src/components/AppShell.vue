@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
               <nldd-menu-item text="Donker" type="radio" :selected="theme === 'dark' || undefined" @click="setTheme('dark')"></nldd-menu-item>
             </nldd-menu>
           </nldd-menu-bar-item>
-          <nldd-menu-bar-item text="Ans Bakker" icon="person-circle" href="/zelf"></nldd-menu-bar-item>
+          <nldd-menu-bar-item :text="store.currentPerson?.name || 'Anne Schuth'" icon="person-circle" href="/zelf"></nldd-menu-bar-item>
         </nldd-menu-bar>
       </nldd-top-navigation-bar>
     </nldd-skip-link>
