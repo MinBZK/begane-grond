@@ -15,7 +15,6 @@ const layers = computed(() => [
     sub: 'Wat burgers en ambtenaren gebruiken',
     icon: 'rectangle-stack',
     to: '/apps',
-    accent: 'var(--rp-layer-apps)',
     count: store.apps.length,
     countLabel: 'apps',
     chips: store.apps.slice(0, 4).map((a) => ({ text: a.name, to: `/apps/${a.id}` })),
@@ -26,7 +25,6 @@ const layers = computed(() => [
     sub: 'Kubernetes, databases, brokers, LLM',
     icon: 'cylinder-split',
     to: '/infra/instances',
-    accent: 'var(--rp-layer-infra)',
     count: store.instances.length,
     countLabel: 'instances',
     chips: store.instances.slice(0, 4).map((i) => ({ text: i.name, to: `/infra/instances/${i.id}` })),
@@ -37,7 +35,6 @@ const layers = computed(() => [
     sub: 'Datacenters, racks, bekabeling, inkoop',
     icon: 'apartment-building',
     to: '/fysiek',
-    accent: 'var(--rp-layer-fysiek)',
     count: store.racks.length,
     countLabel: 'racks',
     chips: store.datacenters.map((d) => ({ text: d.name, to: `/fysiek/datacenters/${d.id}` })),
@@ -52,7 +49,7 @@ const layers = computed(() => [
       :key="layer.key"
       :to="layer.to"
       class="rp-layer"
-      :style="{ '--rp-accent': layer.accent, zIndex: layers.length - idx }"
+      :style="{ zIndex: layers.length - idx }"
     >
       <div class="rp-layer-icon">
         <nldd-icon :name="layer.icon" aria-hidden="true"></nldd-icon>
@@ -92,33 +89,27 @@ const layers = computed(() => [
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.1rem;
-  border-radius: 14px;
+  border-radius: 10px;
   text-decoration: none;
   color: inherit;
   border: 1px solid var(--semantics-dividers-color);
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--rp-accent) 10%, transparent), transparent 55%),
-    var(--semantics-surfaces-default-background-color, #fff);
-  border-left: 5px solid var(--rp-accent);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  background: var(--semantics-surfaces-default-background-color, #fff);
+  transition: background 0.12s ease, border-color 0.12s ease;
 }
 .rp-layer:hover {
-  transform: translateX(3px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-layer-icon {
   flex: 0 0 auto;
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: 10px;
+  width: 2.4rem;
+  height: 2.4rem;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, var(--rp-accent) 18%, transparent);
 }
 .rp-layer-icon nldd-icon {
   width: 1.4rem;
   height: 1.4rem;
-  color: var(--rp-accent);
+  opacity: 0.65;
 }
 .rp-layer-body {
   flex: 1 1 auto;
@@ -137,7 +128,7 @@ const layers = computed(() => [
 .rp-layer-count {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--rp-accent);
+  opacity: 0.6;
 }
 .rp-layer-sub {
   font-size: 0.85rem;

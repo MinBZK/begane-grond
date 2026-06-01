@@ -26,16 +26,19 @@ defineProps({
 </template>
 
 <style scoped>
+/* Stretch to fill the grid/flex cell so KPIs in a row are equal height even when
+   some have a sub-label and others do not. The host overrides the parent grid's
+   alignment with align-self: stretch; the nldd-card host is flex-column with a
+   flex-grow:1 inner card, so giving it 100% height makes the white surface fill. */
 .rp-metric-link {
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
   height: 100%;
+  align-self: stretch;
 }
-/* Stretch the card to fill its grid/flex cell so KPIs in a row are equal height
-   even when some have a sub-label and others do not. */
 .rp-metric-link nldd-card {
-  display: block;
+  width: 100%;
   height: 100%;
 }
 .rp-metric-top {
