@@ -6,6 +6,8 @@
 // one step at a time:
 //
 //   { set, value }     assign value to form[set] (dot-path, e.g. 'inputs.0.register')
+//                      add { type: true } to type a free-text value out live;
+//                      omit it for <select>/choice-grid values (set instantly)
 //   { toggle, value }  call the wizard's toggle helper with value
 //   { call, args }     call a named exposed helper with the given args array
 //   { next: true }     advance to the next wizard step
@@ -28,7 +30,7 @@ export const wizardScripts = {
     { next: true },
     { set: 'dc', value: 'dc-denhaag' },
     { next: true },
-    { set: 'name', value: 'postgres-demo-acc' },
+    { set: 'name', value: 'postgres-demo-acc', type: true },
     { next: true },
     { wait: 500 },
     { finish: true },
@@ -39,9 +41,9 @@ export const wizardScripts = {
     { wait: 600 },
     { call: 'pickTemplate', args: ['tpl-rust-api'] },
     { next: true },
-    { set: 'name', value: 'Demo-dienst' },
+    { set: 'name', value: 'Demo-dienst', type: true },
     { set: 'team', value: 'team-platform' },
-    { set: 'description', value: 'Demo-microservice' },
+    { set: 'description', value: 'Demo-microservice', type: true },
     { next: true },
     // The chosen golden path (tpl-rust-api) already pre-selects postgres and
     // kubernetes via pickTemplate, so we add kafka here to show a live tick.
@@ -92,7 +94,7 @@ export const wizardScripts = {
   // Defaults already set a regex codemod over a couple of repos.
   campagne: [
     { wait: 600 },
-    { set: 'title', value: 'NLDD 0.9 over de hele vloot' },
+    { set: 'title', value: 'NLDD 0.9 over de hele vloot', type: true },
     { next: true },
     { next: true },
     { next: true },
@@ -122,7 +124,7 @@ export const wizardScripts = {
     { next: true },
     { set: 'team', value: 'team-platform' },
     { next: true },
-    { set: 'purpose', value: 'AI-assistent in de IDE' },
+    { set: 'purpose', value: 'AI-assistent in de IDE', type: true },
     { next: true },
     { wait: 500 },
     { finish: true },

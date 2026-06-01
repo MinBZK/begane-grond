@@ -26,8 +26,9 @@ const NO_CONTROL = { aborted: false, isPaused: () => false };
 
 // Sleep in small slices so we can react to abort/pause mid-delay. While paused,
 // it holds (without counting down) until resumed or aborted. Returns false when
-// the run was aborted, true otherwise.
-async function controlledDelay(ms, control) {
+// the run was aborted, true otherwise. Exported so wizard helpers driven via
+// { call } can share the same pause/abort-aware pacing.
+export async function controlledDelay(ms, control) {
   const SLICE = 80;
   let remaining = ms;
   // First, drain any time while honoring pause/abort.
@@ -115,11 +116,12 @@ export async function runScript(exposed, script, control = NO_CONTROL) {
       let advancing = false;
 
       if (typeof step.set === 'string') {
-        // A string going into a string field is typed out so it looks live.
-        const existing = getPath(form, step.set);
-        const typeable =
-          typeof step.value === 'string' && (typeof existing === 'string' || existing === undefined);
-        if (typeable && step.value.length) {
+        // Only free-text fields are typed character by character. Values bound
+        // to a <select> or a choice grid are set instantly to avoid a flash of
+        // an unmatched option; mark those with { type: false } (the default for
+        // anything not opted in). Opt a text field in with { type: true }.
+        const isString = typeof step.value === 'string';
+        if (step.type === true && isString && step.value.length) {
           await typeInto(form, step.set, step.value, control);
         } else {
           setPath(form, step.set, step.value);
@@ -134,7 +136,10 @@ export async function runScript(exposed, script, control = NO_CONTROL) {
         const helper = exposed[step.call];
         if (typeof helper === 'function') {
           const args = Array.isArray(step.args) ? step.args : [];
-          await helper(...args);
+          // Pass the control token as the first argument so long-running async
+          // helpers (e.g. a deploy pipeline) can honor pause/abort. Helpers that
+          // do not need it simply ignore the extra leading argument.
+          await helper(control, ...args);
         }
       } else if (step.next === true) {
         await exposed.wizardRef.next?.();

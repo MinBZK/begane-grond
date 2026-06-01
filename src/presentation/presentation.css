@@ -45,3 +45,12 @@ html.rp-presenting nldd-page-footer {
     padding-left: 0;
   }
 }
+
+/* Respect reduced-motion: keep the highlight visible but stop the animation. */
+@media (prefers-reduced-motion: reduce) {
+  .rp-present-pulse {
+    animation: none;
+    outline: 2px solid rgba(21, 66, 115, 0.9);
+    outline-offset: 2px;
+  }
+}

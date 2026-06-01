@@ -160,7 +160,7 @@ onBeforeUnmount(() => {
 
       <div class="footer">
         <div class="footer-row">
-          <span class="counter">{{ counter }}</span>
+          <span class="counter" :aria-label="`Slide ${index + 1} van ${total}`">{{ counter }}</span>
           <div class="nav-buttons">
             <button
               type="button"
@@ -199,8 +199,10 @@ onBeforeUnmount(() => {
           </div>
         </div>
         <div class="hints">
-          <span class="hint">Esc om te sluiten</span>
-          <span v-if="p.driving.value" class="hint hint-autoplay">spatie = pauze</span>
+          <span class="hint">Esc sluit</span>
+          <span class="hint">f volledig scherm</span>
+          <span class="hint">a autoplay</span>
+          <span v-if="p.driving.value" class="hint hint-autoplay">spatie pauzeert</span>
           <span v-if="p.autoplay.value" class="hint hint-autoplay">autoplay aan</span>
         </div>
       </div>
@@ -227,17 +229,20 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   padding: 3rem 2.75rem 1.5rem;
-  overflow: auto;
+  overflow: hidden;
   box-sizing: border-box;
   box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
 }
 
+/* The content area is the only scroll region, so the footer (counter, nav) and
+   progress bar stay visible even when a slide's text is taller than the panel. */
 .content {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   min-height: 0;
+  overflow: auto;
 }
 
 .gov-pill {
@@ -298,7 +303,8 @@ onBeforeUnmount(() => {
   font-size: 0.85rem;
   line-height: 1.4;
   margin: 0;
-  color: rgba(255, 255, 255, 0.55);
+  /* 0.7 clears WCAG AA (4.5:1) over the Rijksblauw panel. */
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footer {
@@ -353,10 +359,12 @@ onBeforeUnmount(() => {
 
 .hints {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   font-family: 'RijksSans', system-ui, sans-serif;
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.55);
+  /* 0.7 clears WCAG AA over the Rijksblauw panel. */
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .hint-autoplay {
@@ -393,6 +401,13 @@ onBeforeUnmount(() => {
 @keyframes drive-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.25; }
+}
+
+/* Reduced-motion: the running/paused color already conveys state, drop the blink. */
+@media (prefers-reduced-motion: reduce) {
+  .drive-dot {
+    animation: none;
+  }
 }
 
 .drive-label {

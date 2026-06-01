@@ -88,7 +88,7 @@ export const slides = [
     bullets: [
       'Een database nodig? Bestel hem zelf, hij staat er binnen minuten.',
       'Geen ticket, geen wachtrij, geen e-mail naar beheer.',
-      'Platform-teams op Spotify waren 2,3x actiever en deployden 2x vaker, in 17% minder doorlooptijd.',
+      'Op Spotify waren teams met een platform eronder 2,3 keer zo actief, met dezelfde mensen.',
     ],
     route: '/infra',
     note: 'De multiplier is het zakelijke argument. 2,3x meer output uit dezelfde mensen.',

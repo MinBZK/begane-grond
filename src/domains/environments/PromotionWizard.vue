@@ -14,6 +14,7 @@ import RelationLinks from '../../components/shared/RelationLinks.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import Wizard from '../../components/shared/Wizard.vue';
 import { usePresentation } from '../../presentation/usePresentation.js';
+import { controlledDelay } from '../../presentation/drive.js';
 
 const route = useRoute();
 const router = useRouter();
@@ -117,25 +118,41 @@ const pipelineStatus = ref({});
 const deploying = ref(false);
 const done = ref(false);
 
+// Deterministic id suffix for a recorded release (no clock API in this path).
+let _releaseSeq = 0;
+function releaseSeq() {
+  _releaseSeq += 1;
+  return `${appId.value}-${toEnv.value}-${_releaseSeq}`;
+}
+
 function resetPipeline() {
   pipelineStatus.value = {};
   done.value = false;
 }
 
-async function runDeploy() {
+// `maybeControl` is a drive control token when auto-driven in presentation mode,
+// or a MouseEvent when triggered by the button. Only treat it as a control when
+// it carries the expected shape, so the pipeline is pause/abort-aware on stage.
+async function runDeploy(maybeControl) {
   if (deploying.value || done.value) return;
+  const control =
+    maybeControl && typeof maybeControl.isPaused === 'function'
+      ? maybeControl
+      : { aborted: false, isPaused: () => false };
   deploying.value = true;
   resetPipeline();
   for (const stage of PIPELINE) {
+    if (control.aborted) { deploying.value = false; return; }
     pipelineStatus.value = { ...pipelineStatus.value, [stage.id]: 'running' };
     // eslint-disable-next-line no-await-in-loop
-    await new Promise((r) => setTimeout(r, 850));
+    await controlledDelay(850, control);
+    if (control.aborted) { deploying.value = false; return; }
     pipelineStatus.value = { ...pipelineStatus.value, [stage.id]: 'ready' };
   }
   // Commit the promotion to the store and record a release line.
   store.promote(appId.value, fromEnv.value, toEnv.value);
   store.releases.unshift({
-    id: `rel-${Date.now()}`,
+    id: `rel-${releaseSeq()}`,
     app: appId.value,
     version: fromVersion.value,
     env: toEnv.value,

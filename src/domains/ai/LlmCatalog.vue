@@ -157,8 +157,13 @@ function teamName(id) {
 // A plausibly-masked key + endpoint produced on finish. The real value is
 // "shown once" in spirit; we mask all but the prefix.
 const apiKey = ref('');
+// Deterministic key suffix derived from the order, so no random API is used
+// (the body is masked anyway). Mirrors the seed-hashing idiom used elsewhere.
 function genKey() {
-  const rand = Math.random().toString(36).slice(2, 10);
+  const seed = `${form.model}:${form.team}:${form.env}`;
+  let h = 0;
+  for (let i = 0; i < seed.length; i += 1) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  const rand = h.toString(36).padStart(8, '0').slice(0, 8);
   return `llm_sk_live_${rand}`;
 }
 const maskedKey = computed(() => {
