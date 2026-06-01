@@ -50,10 +50,10 @@ const actorPerson = (id) => store.personById(id);
 
 // --- Wizard shortcuts ---
 const shortcuts = [
-  { title: 'Nieuwe applicatie', desc: 'Golden path: repo, CI en infra in één keer', icon: 'rectangle-stack', to: '/apps/nieuw', accent: 'var(--rp-layer-apps)' },
-  { title: 'Dienst afnemen', desc: 'Kubernetes, database of broker uit de catalogus', icon: 'cylinder-split', to: '/infra', accent: 'var(--rp-layer-infra)' },
-  { title: 'Werkplek uitrollen', desc: 'Autonome Linux-laptop voor een collega', icon: 'person-circle', to: '/werkplekken/nieuw', accent: 'var(--rp-layer-fysiek)' },
-  { title: 'Fleet-campagne', desc: 'Eén wijziging over alle repos uitrollen', icon: 'ship-wheel', to: '/fleet/nieuw', accent: 'var(--rp-accent-brand, #7c3aed)' },
+  { title: 'Nieuwe applicatie', desc: 'Golden path: repo, CI en infra in één keer', icon: 'rectangle-stack', to: '/apps/nieuw' },
+  { title: 'Dienst afnemen', desc: 'Kubernetes, database of broker uit de catalogus', icon: 'cylinder-split', to: '/infra' },
+  { title: 'Werkplek uitrollen', desc: 'Autonome Linux-laptop voor een collega', icon: 'person-circle', to: '/werkplekken/nieuw' },
+  { title: 'Fleet-campagne', desc: 'Eén wijziging over alle repos uitrollen', icon: 'ship-wheel', to: '/fleet/nieuw' },
 ];
 
 // --- Platform health snapshot for the side rail ---
@@ -114,13 +114,12 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
           <nldd-container padding="24">
             <nldd-title size="4"><h2>Snel aan de slag</h2></nldd-title>
             <nldd-spacer size="16" />
-            <nldd-collection layout="grid" item-width="240px">
+            <div class="rp-shortcut-grid">
               <router-link
                 v-for="s in shortcuts"
                 :key="s.to"
                 :to="s.to"
                 class="rp-shortcut"
-                :style="{ '--rp-accent': s.accent }"
               >
                 <div class="rp-shortcut-icon">
                   <nldd-icon :name="s.icon" aria-hidden="true"></nldd-icon>
@@ -131,7 +130,7 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
                   Start <nldd-icon name="arrow-right" aria-hidden="true"></nldd-icon>
                 </div>
               </router-link>
-            </nldd-collection>
+            </div>
           </nldd-container>
         </nldd-card>
       </section>
@@ -261,35 +260,40 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
   opacity: 0.5;
 }
 
-/* Shortcuts */
+/* Shortcuts: an even grid so 4 cards fill the row instead of leaving an orphan
+   wrapping underneath. Collapses to 2 columns on narrow screens. */
+.rp-shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+@media (max-width: 560px) {
+  .rp-shortcut-grid {
+    grid-template-columns: 1fr;
+  }
+}
 .rp-shortcut {
   display: block;
   height: 100%;
   padding: 1rem;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid var(--semantics-dividers-color);
-  border-top: 4px solid var(--rp-accent);
   text-decoration: none;
   color: inherit;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  transition: background 0.12s ease, border-color 0.12s ease;
 }
 .rp-shortcut:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-shortcut-icon {
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 9px;
-  display: grid;
-  place-items: center;
-  background: color-mix(in srgb, var(--rp-accent) 16%, transparent);
-  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
 .rp-shortcut-icon nldd-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--rp-accent);
+  width: 1.3rem;
+  height: 1.3rem;
+  opacity: 0.6;
 }
 .rp-shortcut-title {
   font-weight: 700;
@@ -297,17 +301,16 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
 .rp-shortcut-desc {
   font-size: 0.82rem;
   opacity: 0.7;
-  margin-top: 0.2rem;
-  min-height: 2.4em;
+  margin-top: 0.15rem;
 }
 .rp-shortcut-cta {
-  margin-top: 0.6rem;
+  margin-top: 0.75rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--rp-accent);
+  color: var(--semantics-actions-primary-default-background-color, #154273);
 }
 .rp-shortcut-cta nldd-icon {
   width: 0.95rem;
