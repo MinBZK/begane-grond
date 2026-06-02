@@ -377,7 +377,7 @@ export const slides = [
   },
   {
     id: 'cli-rp',
-    title: 'De CLI: rp',
+    title: 'De CLI: bg',
     lead: 'Het hele platform in één commando.',
     bullets: [
       'Alles wat je klikt kun je ook scripten.',
