@@ -29,10 +29,10 @@ function meta(id) {
 const GOV_PATHS = [
   {
     id: 'gov-regelrecht',
-    name: 'RegelRecht-dienst',
+    name: 'Wet of beleid uitvoeren',
     icon: 'certificate',
-    desc: 'Een wet als geteste, draaiende dienst. De wettekst zelf is de bron: geharvest uit wetten.overheid.nl, machine-leesbaar gemaakt en uitgerold.',
-    tags: ['BWB-harvest', 'machine-leesbaar', 'Given/When/Then'],
+    desc: 'Een applicatie die wet- en regelgeving uitvoert (RegelRecht). De wettekst zelf is de bron: geharvest uit wetten.overheid.nl, machine-leesbaar gemaakt en uitgerold als geteste, draaiende dienst.',
+    tags: ['RegelRecht', 'BWB-harvest', 'Given/When/Then'],
     to: '/wetten/nieuw',
     cta: 'Start bij de wet',
   },

@@ -364,8 +364,8 @@ export const slides = [
   },
   {
     id: 'wet-naar-systeem',
-    title: 'Van wet naar systeem',
-    lead: 'De wet zelf is de bron.',
+    title: 'Wet- en regelgeving uitvoeren',
+    lead: 'Een applicatie die een wet of beleidsregel uitvoert, met de wettekst als bron.',
     bullets: [
       'Geharvest uit wetten.overheid.nl, rechtstreeks uit de BWB.',
       'Machine-leesbaar gemaakt, getest en uitgerold.',
@@ -374,11 +374,11 @@ export const slides = [
     gov: 'De wettekst als single source of truth. Verandert de wet, dan verandert de dienst, herleidbaar.',
     route: '/wetten',
     emit: { type: 'wet.published', title: 'Wet gepubliceerd in het corpus' },
-    note: 'Het paradepaardje. De wet is geen los document meer maar de bron van de code.',
+    note: 'Het paradepaardje. Pitch het plat: een app die wet of beleid uitvoert. De wet is geen los document meer maar de bron van de code.',
   },
   {
     id: 'wet-draaiende-dienst',
-    title: 'Wet als draaiende dienst, live',
+    title: 'Wet of beleid uitvoeren, live',
     lead: 'Van wettekst tot geteste draaiende dienst.',
     bullets: [
       'Selecteer de wet en het platform leidt je naar een werkend systeem.',

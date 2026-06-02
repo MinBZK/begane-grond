@@ -216,12 +216,12 @@ export const domains = [
   {
     key: 'wetten',
     path: '/wetten',
-    label: 'Wetten (RegelRecht)',
+    label: 'Wet uitvoeren',
     icon: 'certificate',
     wave: 'C',
     routes: [
-      { path: '/wetten', name: 'wetten', view: () => import('./domains/wetten/Wetten.vue'), title: 'Wetten-corpus' },
-      { path: '/wetten/nieuw', name: 'wetten-nieuw', view: () => import('./domains/wetten/NewWetWizard.vue'), title: 'Wet naar systeem' },
+      { path: '/wetten', name: 'wetten', view: () => import('./domains/wetten/Wetten.vue'), title: 'Wet uitvoeren' },
+      { path: '/wetten/nieuw', name: 'wetten-nieuw', view: () => import('./domains/wetten/NewWetWizard.vue'), title: 'Wet of beleid uitvoeren' },
       { path: '/wetten/:id', name: 'wetten-detail', view: () => import('./domains/wetten/WetDetail.vue'), title: 'Wet' },
     ],
   },

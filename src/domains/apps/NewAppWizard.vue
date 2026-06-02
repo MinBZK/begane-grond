@@ -56,10 +56,10 @@ const INFRA = [
 const GOV_PATHS = [
   {
     id: 'gov-regelrecht',
-    name: 'RegelRecht-dienst',
+    name: 'Wet of beleid uitvoeren',
     icon: 'certificate',
-    desc: 'Een wet als geteste, draaiende dienst. De wettekst is de bron.',
-    tags: ['BWB-harvest', 'machine-leesbaar', 'Given/When/Then'],
+    desc: 'Een applicatie die wet- en regelgeving uitvoert, met de wettekst als bron (RegelRecht).',
+    tags: ['RegelRecht', 'BWB-harvest', 'machine-leesbaar'],
     to: '/wetten/nieuw',
     cta: 'Start bij de wet',
   },

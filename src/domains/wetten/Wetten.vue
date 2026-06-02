@@ -58,11 +58,11 @@ function wetName(id) {
 <template>
   <div class="rp-page">
     <PageHeader
-      title="Wetten-corpus"
-      lede="Machine-leesbare wetuitvoering (RegelRecht). Elke wet is hier vertaald naar uitvoerbare logica: definities, invoer uit basisregistraties en uitkomsten. Vanaf de geharveste tekst tot een draaiende dienst, met scenario's die bewijzen dat de uitvoering klopt."
+      title="Wet- en regelgeving uitvoeren"
+      lede="Applicaties die een wet of beleidsregel uitvoeren, met de wettekst als bron (RegelRecht). Elke wet is vertaald naar uitvoerbare logica: definities, invoer uit basisregistraties en uitkomsten. Vanaf de geharveste tekst tot een draaiende dienst, met scenario's die bewijzen dat de uitvoering klopt."
       :crumbs="[
         { text: 'Platform', href: '/' },
-        { text: 'Wetten (RegelRecht)', href: '/wetten' },
+        { text: 'Wet uitvoeren', href: '/wetten' },
       ]"
     >
       <template #actions>

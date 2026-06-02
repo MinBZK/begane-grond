@@ -316,7 +316,7 @@ function scoreColor(score) {
                 <nldd-icon name="certificate" aria-hidden="true"></nldd-icon>
               </div>
               <div class="rp-std-titles">
-                <nldd-title size="5"><h3>Machine-leesbare wet (RegelRecht)</h3></nldd-title>
+                <nldd-title size="5"><h3>Wet- en regelgeving uitvoeren</h3></nldd-title>
                 <span class="rp-std-kind">Juridisch</span>
               </div>
               <nldd-tag color="accent" size="md">RegelRecht</nldd-tag>
