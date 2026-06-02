@@ -78,7 +78,7 @@ export const slides = [
     lead: 'Om concreet te maken wat ik bedoel, lopen we door één platform heen.',
     bullets: [
       'Begane Grond: een ontwikkelplatform voor de Rijksoverheid.',
-      'Je bouwt de begane grond op het fundament: het ijzer eronder.',
+      'Je bouwt de begane grond op het fundament.',
       'Dat fundament is een soevereine cloud voor het Rijk, waar we nu aan werken.',
       'Let op: dit is een demo, een proof of concept, om het gesprek te kunnen voeren.',
     ],
