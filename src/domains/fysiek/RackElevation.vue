@@ -136,7 +136,7 @@ const cableColumns = [
       :title="`Rack ${rack.label}`"
       :lede="`${rack.heightU}U rack in ${dc?.name}, ${alley?.name}. Eigenaar: ${team?.name || rack.team}.`"
       :crumbs="[
-        { text: 'Fysieke infra', href: '/fysiek' },
+        { text: 'Fundament', href: '/fysiek' },
         { text: dc?.name || 'Datacenter', href: `/fysiek/datacenters/${rack.dc}` },
         { text: 'Zaalindeling', href: `/fysiek/datacenters/${rack.dc}/floor` },
         { text: rack.label, href: `/fysiek/racks/${rack.id}` },

@@ -100,7 +100,7 @@ function aisleLabel(aisle) {
       :title="dc.name"
       :lede="`Soeverein datacenter in ${dc.city}. Redundantie ${dc.redundancy}, uplinks ${dc.uplinks}.`"
       :crumbs="[
-        { text: 'Fysieke infra', href: '/fysiek' },
+        { text: 'Fundament', href: '/fysiek' },
         { text: 'Datacenters', href: '/fysiek' },
         { text: dc.name, href: `/fysiek/datacenters/${dc.id}` },
       ]"

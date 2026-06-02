@@ -112,7 +112,7 @@ function openRack(rid) {
     <PageHeader
       title="Netwerktopologie"
       lede="Spine-leaf fabric van de serverzalen. Spines bovenin, leaf-switches per rack, en de aangesloten racks onderaan. Klik een leaf of rack om de elevatie te openen."
-      :crumbs="[{ text: 'Fysieke infra', href: '/fysiek' }, { text: 'Netwerk', href: '/fysiek/netwerk' }]"
+      :crumbs="[{ text: 'Fundament', href: '/fysiek' }, { text: 'Netwerk', href: '/fysiek/netwerk' }]"
     >
       <template #actions>
         <nldd-button variant="secondary" text="Naar datacenters" start-icon="apartment-building" href="/fysiek"></nldd-button>

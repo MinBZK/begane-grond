@@ -32,7 +32,7 @@ export const domains = [
   {
     key: 'fysiek',
     path: '/fysiek',
-    label: 'Fysieke infra',
+    label: 'Fundament',
     icon: 'apartment-building',
     wave: 'A',
     routes: [

@@ -113,7 +113,7 @@ export const slides = [
   },
   {
     id: 'fysiek-ijzer',
-    title: 'Fysiek: het ijzer',
+    title: 'Fundament: het ijzer',
     lead: 'Onder de software staat echte hardware.',
     bullets: [
       'Eigen datacenters, geen black box bij een onbekende leverancier.',

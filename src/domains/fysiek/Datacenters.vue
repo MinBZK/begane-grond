@@ -40,7 +40,7 @@ function barColor(p) {
     <PageHeader
       title="Datacenters"
       lede="Eigen, soevereine datacenters van het Rijk. Capaciteit, energie-efficiëntie (PUE) en bezetting in één oogopslag."
-      :crumbs="[{ text: 'Fysieke infra', href: '/fysiek' }, { text: 'Datacenters', href: '/fysiek' }]"
+      :crumbs="[{ text: 'Fundament', href: '/fysiek' }, { text: 'Datacenters', href: '/fysiek' }]"
     >
       <template #actions>
         <nldd-button variant="secondary" text="Netwerktopologie" start-icon="arrow-up-arrow-down" href="/fysiek/netwerk"></nldd-button>

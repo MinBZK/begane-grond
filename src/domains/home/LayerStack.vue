@@ -31,7 +31,7 @@ const layers = computed(() => [
   },
   {
     key: 'fysiek',
-    title: 'Fysieke infra',
+    title: 'Fundament',
     sub: 'Datacenters, racks, bekabeling, inkoop',
     icon: 'apartment-building',
     to: '/fysiek',

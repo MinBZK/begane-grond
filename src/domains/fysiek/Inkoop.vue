@@ -97,7 +97,7 @@ const chart = computed(() => {
     <PageHeader
       title="Inkoop & capaciteitsplanning"
       lede="Lopende inkooporders voor hardware en racks, met een doorkijk naar de benodigde capaciteit. Tijdig bijbestellen voorkomt dat de zalen vollopen."
-      :crumbs="[{ text: 'Fysieke infra', href: '/fysiek' }, { text: 'Inkoop & planning', href: '/fysiek/inkoop' }]"
+      :crumbs="[{ text: 'Fundament', href: '/fysiek' }, { text: 'Inkoop & planning', href: '/fysiek/inkoop' }]"
     >
       <template #actions>
         <nldd-button variant="secondary" text="Naar datacenters" start-icon="apartment-building" href="/fysiek"></nldd-button>

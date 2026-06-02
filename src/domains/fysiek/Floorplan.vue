@@ -76,7 +76,7 @@ function open(rid) {
       :title="`Zaalindeling — ${dc.name}`"
       lede="Hot-aisle / cold-aisle indeling van de serverzaal. Rode rijen voeren warme lucht af, blauwe rijen zuigen koude lucht aan. Klik een rack voor de elevatie."
       :crumbs="[
-        { text: 'Fysieke infra', href: '/fysiek' },
+        { text: 'Fundament', href: '/fysiek' },
         { text: dc.name, href: `/fysiek/datacenters/${dc.id}` },
         { text: 'Zaalindeling', href: `/fysiek/datacenters/${dc.id}/floor` },
       ]"
