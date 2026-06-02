@@ -316,11 +316,11 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
                that route to the specialized flow elsewhere on the platform. -->
           <nldd-spacer size="24" />
           <div class="rp-gov-head">
-            <nldd-icon name="bank" aria-hidden="true"></nldd-icon>
-            <div>
-              <strong>Specifiek voor de overheid</strong>
-              <span>Geen kale steiger, maar de bouwstenen die het Rijk uniek maakt. Deze starten in hun eigen flow.</span>
-            </div>
+            <strong>
+              <nldd-icon name="bank" aria-hidden="true"></nldd-icon>
+              Specifiek voor de overheid
+            </strong>
+            <span>Geen kale steiger, maar de bouwstenen die het Rijk uniek maakt. Deze starten in hun eigen flow.</span>
           </div>
           <nldd-spacer size="12" />
           <div class="rp-tpl-grid">
@@ -533,9 +533,9 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
 .rp-tpl-choice-desc { font-size: 0.85rem; opacity: 0.75; }
 .rp-tpl-choice-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
 
-.rp-gov-head { display: flex; align-items: flex-start; gap: 0.6rem; }
-.rp-gov-head > nldd-icon { width: 1.3rem; height: 1.3rem; flex: none; margin-top: 0.1rem; color: var(--semantics-actions-primary-default-background-color, #154273); }
-.rp-gov-head div { display: flex; flex-direction: column; gap: 0.15rem; }
+.rp-gov-head { display: flex; flex-direction: column; gap: 0.15rem; }
+.rp-gov-head strong { display: inline-flex; align-items: center; gap: 0.4rem; }
+.rp-gov-head strong nldd-icon { width: 1.2rem; height: 1.2rem; color: var(--semantics-actions-primary-default-background-color, #154273); }
 .rp-gov-head span { font-size: 0.85rem; opacity: 0.75; }
 .rp-gov-choice { text-decoration: none; color: inherit; }
 .rp-gov-choice:hover { border-color: var(--semantics-actions-primary-default-background-color, #154273); }
