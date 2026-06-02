@@ -9397,8 +9397,8 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-01",
-        "watts": 180,
+        "label": "leaf-sw-02",
+        "watts": 209,
         "status": "ok"
       },
       {
@@ -9413,37 +9413,91 @@ export const racks = [
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "k8s-node-01",
-        "team": "team-platform",
-        "watts": 420,
-        "status": "ok"
+        "label": "compute-dh-a1-01",
+        "watts": 404,
+        "status": "ok",
+        "team": "team-platform"
       },
       {
         "u": 8,
         "height": 2,
         "type": "server",
-        "label": "k8s-node-02",
-        "team": "team-platform",
-        "watts": 415,
-        "status": "ok"
+        "label": "compute-dh-a1-02",
+        "watts": 357,
+        "status": "ok",
+        "team": "team-platform"
       },
       {
         "u": 10,
         "height": 2,
         "type": "server",
-        "label": "pg-primary-01",
-        "team": "team-data",
-        "watts": 380,
-        "status": "warn"
+        "label": "compute-dh-a1-03",
+        "watts": 373,
+        "status": "ok",
+        "team": "team-platform"
       },
       {
-        "u": 20,
+        "u": 13,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-a1-04",
+        "watts": 337,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 16,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-a1-05",
+        "watts": 205,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 18,
         "height": 4,
         "type": "server",
-        "label": "storage-01",
-        "team": "team-platform",
-        "watts": 600,
-        "status": "ok"
+        "label": "storage-dh-a1-06",
+        "watts": 539,
+        "status": "warn",
+        "team": "team-platform"
+      },
+      {
+        "u": 22,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-a1-07",
+        "watts": 318,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 24,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-a1-08",
+        "watts": 233,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 25,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-a1-09",
+        "watts": 440,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 28,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-a1-10",
+        "watts": 379,
+        "status": "ok",
+        "team": "team-platform"
       }
     ]
   },
@@ -9468,34 +9522,41 @@ export const racks = [
         "height": 2,
         "type": "switch",
         "label": "leaf-sw-02",
-        "watts": 180,
+        "watts": 154,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
-        "height": 2,
-        "type": "server",
-        "label": "kafka-broker-01",
-        "team": "team-data",
-        "watts": 360,
+        "height": 8,
+        "type": "gpu",
+        "label": "hgx-h200-dh-a2-01",
+        "team": "team-platform",
+        "watts": 10200,
         "status": "ok"
       },
       {
-        "u": 8,
-        "height": 2,
-        "type": "server",
-        "label": "kafka-broker-02",
-        "team": "team-data",
-        "watts": 360,
+        "u": 15,
+        "height": 8,
+        "type": "gpu",
+        "label": "hgx-h200-dh-a2-02",
+        "team": "team-platform",
+        "watts": 10200,
         "status": "ok"
       },
       {
-        "u": 12,
-        "height": 2,
-        "type": "server",
-        "label": "pg-replica-01",
-        "team": "team-data",
-        "watts": 370,
+        "u": 24,
+        "height": 1,
+        "type": "switch",
+        "label": "ai-fabric-dh-a2",
+        "watts": 240,
         "status": "ok"
       }
     ]
@@ -9517,12 +9578,54 @@ export const racks = [
         "status": "ok"
       },
       {
-        "u": 6,
+        "u": 2,
         "height": 2,
-        "type": "server",
-        "label": "k8s-node-03",
+        "type": "switch",
+        "label": "leaf-sw-02",
+        "watts": 205,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
+        "status": "ok"
+      },
+      {
+        "u": 6,
+        "height": 4,
+        "type": "gpu",
+        "label": "h200-infer-dh-a3-01",
         "team": "team-platform",
-        "watts": 410,
+        "watts": 5600,
+        "status": "ok"
+      },
+      {
+        "u": 11,
+        "height": 4,
+        "type": "gpu",
+        "label": "h200-infer-dh-a3-02",
+        "team": "team-platform",
+        "watts": 5600,
+        "status": "ok"
+      },
+      {
+        "u": 16,
+        "height": 4,
+        "type": "gpu",
+        "label": "b200-infer-dh-a3-03",
+        "team": "team-platform",
+        "watts": 6100,
+        "status": "ok"
+      },
+      {
+        "u": 21,
+        "height": 1,
+        "type": "switch",
+        "label": "ai-fabric-dh-a3",
+        "watts": 240,
         "status": "ok"
       }
     ]
@@ -9536,21 +9639,154 @@ export const racks = [
     "team": "team-burgerzaken",
     "units": [
       {
+        "u": 1,
+        "height": 1,
+        "type": "pdu",
+        "label": "PDU-A",
+        "watts": 0,
+        "status": "ok"
+      },
+      {
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-03",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 204,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-b1-01",
+        "watts": 233,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 8,
         "height": 2,
         "type": "server",
-        "label": "app-node-01",
-        "team": "team-burgerzaken",
-        "watts": 330,
-        "status": "ok"
+        "label": "compute-dh-b1-02",
+        "watts": 436,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b1-03",
+        "watts": 395,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 14,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-b1-04",
+        "watts": 166,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 15,
+        "height": 4,
+        "type": "server",
+        "label": "storage-dh-b1-05",
+        "watts": 542,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 19,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-b1-06",
+        "watts": 235,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 20,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b1-07",
+        "watts": 363,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 22,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-b1-08",
+        "watts": 216,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b1-09",
+        "watts": 321,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 25,
+        "height": 4,
+        "type": "server",
+        "label": "storage-dh-b1-10",
+        "watts": 524,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 29,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-b1-11",
+        "watts": 239,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 30,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b1-12",
+        "watts": 373,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 32,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-b1-13",
+        "watts": 201,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 34,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-b1-14",
+        "watts": 212,
+        "status": "ok",
+        "team": "team-burgerzaken"
       }
     ]
   },
@@ -9561,7 +9797,131 @@ export const racks = [
     "label": "DH-B2",
     "heightU": 42,
     "team": "team-burgerzaken",
-    "units": []
+    "units": [
+      {
+        "u": 1,
+        "height": 1,
+        "type": "pdu",
+        "label": "PDU-A",
+        "watts": 0,
+        "status": "ok"
+      },
+      {
+        "u": 2,
+        "height": 2,
+        "type": "switch",
+        "label": "leaf-sw-01",
+        "watts": 177,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
+        "status": "ok"
+      },
+      {
+        "u": 6,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b2-01",
+        "watts": 440,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 8,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b2-02",
+        "watts": 320,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 11,
+        "height": 4,
+        "type": "server",
+        "label": "storage-dh-b2-03",
+        "watts": 606,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 15,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b2-04",
+        "watts": 401,
+        "status": "warn",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 17,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b2-05",
+        "watts": 425,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 20,
+        "height": 4,
+        "type": "server",
+        "label": "storage-dh-b2-06",
+        "watts": 609,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 25,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b2-07",
+        "watts": 458,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 27,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-b2-08",
+        "watts": 260,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 28,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-b2-09",
+        "watts": 181,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b2-10",
+        "watts": 382,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      },
+      {
+        "u": 31,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-b2-11",
+        "watts": 340,
+        "status": "ok",
+        "team": "team-burgerzaken"
+      }
+    ]
   },
   {
     "id": "r-ap-a1",
@@ -9572,12 +9932,53 @@ export const racks = [
     "team": "team-platform",
     "units": [
       {
-        "u": 6,
+        "u": 1,
+        "height": 1,
+        "type": "pdu",
+        "label": "PDU-A",
+        "watts": 0,
+        "status": "ok"
+      },
+      {
+        "u": 2,
         "height": 2,
-        "type": "server",
-        "label": "k8s-node-ap-01",
+        "type": "switch",
+        "label": "leaf-sw-02",
+        "watts": 159,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
+        "status": "ok"
+      },
+      {
+        "u": 6,
+        "height": 6,
+        "type": "gpu",
+        "label": "h200-node-ap-a1-01",
         "team": "team-platform",
-        "watts": 400,
+        "watts": 8400,
+        "status": "ok"
+      },
+      {
+        "u": 13,
+        "height": 6,
+        "type": "gpu",
+        "label": "h200-node-ap-a1-02",
+        "team": "team-platform",
+        "watts": 8400,
+        "status": "ok"
+      },
+      {
+        "u": 20,
+        "height": 1,
+        "type": "switch",
+        "label": "ai-fabric-ap-a1",
+        "watts": 240,
         "status": "ok"
       }
     ]
@@ -9589,7 +9990,167 @@ export const racks = [
     "label": "AP-A2",
     "heightU": 42,
     "team": "team-data",
-    "units": []
+    "units": [
+      {
+        "u": 1,
+        "height": 1,
+        "type": "pdu",
+        "label": "PDU-A",
+        "watts": 0,
+        "status": "ok"
+      },
+      {
+        "u": 2,
+        "height": 2,
+        "type": "switch",
+        "label": "leaf-sw-01",
+        "watts": 183,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
+        "status": "ok"
+      },
+      {
+        "u": 6,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-a2-01",
+        "watts": 360,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 9,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-a2-02",
+        "watts": 236,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 10,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-a2-03",
+        "watts": 255,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-a2-04",
+        "watts": 336,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 13,
+        "height": 4,
+        "type": "server",
+        "label": "storage-ap-a2-05",
+        "watts": 614,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 18,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-a2-06",
+        "watts": 189,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 19,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-a2-07",
+        "watts": 317,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 22,
+        "height": 4,
+        "type": "server",
+        "label": "storage-ap-a2-08",
+        "watts": 634,
+        "status": "warn",
+        "team": "team-data"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-a2-09",
+        "watts": 388,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 28,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-a2-10",
+        "watts": 385,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 30,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-a2-11",
+        "watts": 360,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 32,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-a2-12",
+        "watts": 325,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 34,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-a2-13",
+        "watts": 256,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 35,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-a2-14",
+        "watts": 206,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 37,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-a2-15",
+        "watts": 332,
+        "status": "ok",
+        "team": "team-data"
+      }
+    ]
   },
   {
     "id": "r-dh-c1",
@@ -9611,17 +10172,42 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-7",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 208,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
-        "height": 2,
-        "type": "server",
-        "label": "node-7-01",
-        "team": "team-rvo-vergunningen",
-        "watts": 400,
+        "height": 8,
+        "type": "gpu",
+        "label": "gb200-nvl-dh-c1-01",
+        "team": "team-platform",
+        "watts": 13200,
+        "status": "ok"
+      },
+      {
+        "u": 15,
+        "height": 8,
+        "type": "gpu",
+        "label": "gb200-nvl-dh-c1-02",
+        "team": "team-platform",
+        "watts": 13200,
+        "status": "ok"
+      },
+      {
+        "u": 24,
+        "height": 1,
+        "type": "switch",
+        "label": "ai-fabric-dh-c1",
+        "watts": 240,
         "status": "ok"
       }
     ]
@@ -9646,17 +10232,42 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-8",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 168,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
-        "height": 2,
-        "type": "server",
-        "label": "node-8-01",
-        "team": "team-rws-areaal",
-        "watts": 400,
+        "height": 8,
+        "type": "gpu",
+        "label": "hgx-b200-dh-c2-01",
+        "team": "team-platform",
+        "watts": 11800,
+        "status": "ok"
+      },
+      {
+        "u": 15,
+        "height": 8,
+        "type": "gpu",
+        "label": "hgx-b200-dh-c2-02",
+        "team": "team-platform",
+        "watts": 11800,
+        "status": "ok"
+      },
+      {
+        "u": 24,
+        "height": 1,
+        "type": "switch",
+        "label": "ai-fabric-dh-c2",
+        "watts": 240,
         "status": "ok"
       }
     ]
@@ -9681,18 +10292,134 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-9",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 179,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-9-01",
-        "team": "team-rws-inspectie",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-dh-c3-01",
+        "watts": 397,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 8,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c3-02",
+        "watts": 390,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c3-03",
+        "watts": 365,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 13,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-c3-04",
+        "watts": 206,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 14,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-c3-05",
+        "watts": 239,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 15,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-c3-06",
+        "watts": 219,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 16,
+        "height": 4,
+        "type": "server",
+        "label": "storage-dh-c3-07",
+        "watts": 683,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 20,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c3-08",
+        "watts": 404,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 23,
+        "height": 4,
+        "type": "server",
+        "label": "storage-dh-c3-09",
+        "watts": 627,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c3-10",
+        "watts": 399,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 29,
+        "height": 4,
+        "type": "server",
+        "label": "storage-dh-c3-11",
+        "watts": 692,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 34,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-c3-12",
+        "watts": 214,
+        "status": "ok",
+        "team": "team-rws-inspectie"
+      },
+      {
+        "u": 35,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c3-13",
+        "watts": 322,
+        "status": "ok",
+        "team": "team-rws-inspectie"
       }
     ]
   },
@@ -9716,18 +10443,125 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-10",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 165,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-10-01",
-        "team": "team-ind-dossiers",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-dh-c4-01",
+        "watts": 346,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 8,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c4-02",
+        "watts": 364,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c4-03",
+        "watts": 397,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 14,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-c4-04",
+        "watts": 184,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 15,
+        "height": 1,
+        "type": "server",
+        "label": "compute-dh-c4-05",
+        "watts": 256,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 16,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c4-06",
+        "watts": 392,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 19,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c4-07",
+        "watts": 337,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 21,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c4-08",
+        "watts": 396,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c4-09",
+        "watts": 360,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 25,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c4-10",
+        "watts": 474,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c4-11",
+        "watts": 410,
+        "status": "ok",
+        "team": "team-ind-dossiers"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-dh-c4-12",
+        "watts": 399,
+        "status": "ok",
+        "team": "team-ind-dossiers"
       }
     ]
   },
@@ -9751,18 +10585,152 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-11",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 191,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b1-01",
+        "watts": 241,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 7,
         "height": 2,
         "type": "server",
-        "label": "node-11-01",
-        "team": "team-logius-digid",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-ap-b1-02",
+        "watts": 386,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 10,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b1-03",
+        "watts": 189,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 11,
+        "height": 4,
+        "type": "server",
+        "label": "storage-ap-b1-04",
+        "watts": 602,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 15,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b1-05",
+        "watts": 411,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 17,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b1-06",
+        "watts": 437,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 19,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b1-07",
+        "watts": 318,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 21,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b1-08",
+        "watts": 214,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 23,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b1-09",
+        "watts": 208,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 24,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b1-10",
+        "watts": 399,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b1-11",
+        "watts": 379,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 28,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b1-12",
+        "watts": 228,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 30,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b1-13",
+        "watts": 242,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 32,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b1-14",
+        "watts": 206,
+        "status": "ok",
+        "team": "team-logius-digid"
+      },
+      {
+        "u": 33,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b1-15",
+        "watts": 388,
+        "status": "crit",
+        "team": "team-logius-digid"
       }
     ]
   },
@@ -9786,18 +10754,170 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-12",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 197,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b2-01",
+        "watts": 238,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 7,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b2-02",
+        "watts": 216,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 8,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b2-03",
+        "watts": 172,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 9,
         "height": 2,
         "type": "server",
-        "label": "node-12-01",
-        "team": "team-logius-stelsel",
+        "label": "compute-ap-b2-04",
+        "watts": 419,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 12,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b2-05",
+        "watts": 360,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 14,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b2-06",
         "watts": 400,
-        "status": "ok"
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 16,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b2-07",
+        "watts": 234,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 18,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b2-08",
+        "watts": 356,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 20,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b2-09",
+        "watts": 343,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 22,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b2-10",
+        "watts": 388,
+        "status": "warn",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 25,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b2-11",
+        "watts": 187,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b2-12",
+        "watts": 337,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 28,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b2-13",
+        "watts": 200,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 30,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b2-14",
+        "watts": 375,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 32,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b2-15",
+        "watts": 332,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 34,
+        "height": 1,
+        "type": "server",
+        "label": "compute-ap-b2-16",
+        "watts": 204,
+        "status": "ok",
+        "team": "team-logius-stelsel"
+      },
+      {
+        "u": 35,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b2-17",
+        "watts": 346,
+        "status": "ok",
+        "team": "team-logius-stelsel"
       }
     ]
   },
@@ -9821,18 +10941,116 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-13",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 208,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-13-01",
-        "team": "team-dictu-security",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-ap-b3-01",
+        "watts": 379,
+        "status": "ok",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 9,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b3-02",
+        "watts": 417,
+        "status": "ok",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b3-03",
+        "watts": 382,
+        "status": "ok",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 13,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b3-04",
+        "watts": 367,
+        "status": "ok",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 15,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b3-05",
+        "watts": 448,
+        "status": "warn",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 18,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b3-06",
+        "watts": 304,
+        "status": "ok",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 20,
+        "height": 4,
+        "type": "server",
+        "label": "storage-ap-b3-07",
+        "watts": 542,
+        "status": "ok",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 24,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b3-08",
+        "watts": 317,
+        "status": "ok",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b3-09",
+        "watts": 406,
+        "status": "ok",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 28,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b3-10",
+        "watts": 350,
+        "status": "ok",
+        "team": "team-dictu-security"
+      },
+      {
+        "u": 30,
+        "height": 4,
+        "type": "server",
+        "label": "storage-ap-b3-11",
+        "watts": 648,
+        "status": "ok",
+        "team": "team-dictu-security"
       }
     ]
   },
@@ -9856,18 +11074,134 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-14",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 150,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-14-01",
-        "team": "team-rvig-reisdocumenten",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-ap-b4-01",
+        "watts": 323,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 8,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-02",
+        "watts": 419,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-03",
+        "watts": 403,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 14,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-04",
+        "watts": 307,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 17,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-05",
+        "watts": 390,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 19,
+        "height": 4,
+        "type": "server",
+        "label": "storage-ap-b4-06",
+        "watts": 694,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 24,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-07",
+        "watts": 326,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-08",
+        "watts": 405,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-09",
+        "watts": 353,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 31,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-10",
+        "watts": 432,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 33,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-11",
+        "watts": 329,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 36,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-12",
+        "watts": 312,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
+      },
+      {
+        "u": 39,
+        "height": 2,
+        "type": "server",
+        "label": "compute-ap-b4-13",
+        "watts": 465,
+        "status": "ok",
+        "team": "team-rvig-reisdocumenten"
       }
     ]
   },
@@ -9891,18 +11225,89 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-15",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 160,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-15-01",
-        "team": "team-jio-keten",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-zw-a1-01",
+        "watts": 385,
+        "status": "ok",
+        "team": "team-jio-keten"
+      },
+      {
+        "u": 8,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a1-02",
+        "watts": 238,
+        "status": "ok",
+        "team": "team-jio-keten"
+      },
+      {
+        "u": 10,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-a1-03",
+        "watts": 538,
+        "status": "ok",
+        "team": "team-jio-keten"
+      },
+      {
+        "u": 15,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a1-04",
+        "watts": 371,
+        "status": "ok",
+        "team": "team-jio-keten"
+      },
+      {
+        "u": 17,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a1-05",
+        "watts": 384,
+        "status": "ok",
+        "team": "team-jio-keten"
+      },
+      {
+        "u": 19,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-a1-06",
+        "watts": 668,
+        "status": "ok",
+        "team": "team-jio-keten"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a1-07",
+        "watts": 344,
+        "status": "ok",
+        "team": "team-jio-keten"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a1-08",
+        "watts": 371,
+        "status": "ok",
+        "team": "team-jio-keten"
       }
     ]
   },
@@ -9926,18 +11331,143 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-16",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 197,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a2-01",
+        "watts": 233,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 7,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a2-02",
+        "watts": 189,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 8,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a2-03",
+        "watts": 179,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 9,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a2-04",
+        "watts": 202,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 10,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a2-05",
+        "watts": 216,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 12,
         "height": 2,
         "type": "server",
-        "label": "node-16-01",
-        "team": "team-cjib-sanctie",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-zw-a2-06",
+        "watts": 351,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 15,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a2-07",
+        "watts": 175,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 17,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a2-08",
+        "watts": 361,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 19,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-a2-09",
+        "watts": 523,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a2-10",
+        "watts": 304,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 25,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a2-11",
+        "watts": 305,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a2-12",
+        "watts": 387,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a2-13",
+        "watts": 378,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
+      },
+      {
+        "u": 31,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-a2-14",
+        "watts": 610,
+        "status": "ok",
+        "team": "team-cjib-sanctie"
       }
     ]
   },
@@ -9961,18 +11491,152 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-17",
+        "label": "leaf-sw-01",
         "watts": 175,
         "status": "ok"
       },
       {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
+        "status": "ok"
+      },
+      {
         "u": 6,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-a3-01",
+        "watts": 575,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 10,
         "height": 2,
         "type": "server",
-        "label": "node-17-01",
-        "team": "team-svb-kinderbijslag",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-zw-a3-02",
+        "watts": 428,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 12,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a3-03",
+        "watts": 342,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 15,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a3-04",
+        "watts": 181,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 16,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-a3-05",
+        "watts": 625,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 20,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a3-06",
+        "watts": 203,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 22,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a3-07",
+        "watts": 429,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 25,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a3-08",
+        "watts": 184,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a3-09",
+        "watts": 349,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a3-10",
+        "watts": 371,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 31,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a3-11",
+        "watts": 233,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 32,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a3-12",
+        "watts": 191,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 34,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a3-13",
+        "watts": 167,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 35,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a3-14",
+        "watts": 184,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
+      },
+      {
+        "u": 36,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a3-15",
+        "watts": 203,
+        "status": "ok",
+        "team": "team-svb-kinderbijslag"
       }
     ]
   },
@@ -9996,18 +11660,143 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-18",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 173,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-18-01",
-        "team": "team-kvk-handelsregister",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-zw-a4-01",
+        "watts": 479,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 8,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a4-02",
+        "watts": 412,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a4-03",
+        "watts": 308,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 13,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a4-04",
+        "watts": 404,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 15,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-a4-05",
+        "watts": 630,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 19,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a4-06",
+        "watts": 190,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 21,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a4-07",
+        "watts": 230,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 22,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a4-08",
+        "watts": 357,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 24,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a4-09",
+        "watts": 355,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a4-10",
+        "watts": 409,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 29,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a4-11",
+        "watts": 177,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 30,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-a4-12",
+        "watts": 372,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 32,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-a4-13",
+        "watts": 163,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
+      },
+      {
+        "u": 33,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-a4-14",
+        "watts": 544,
+        "status": "ok",
+        "team": "team-kvk-handelsregister"
       }
     ]
   },
@@ -10031,18 +11820,125 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-19",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 177,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-b1-01",
+        "watts": 527,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 11,
         "height": 2,
         "type": "server",
-        "label": "node-19-01",
-        "team": "team-ienw-kenteken",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-zw-b1-02",
+        "watts": 440,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 13,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b1-03",
+        "watts": 360,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 16,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b1-04",
+        "watts": 324,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 19,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b1-05",
+        "watts": 304,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 22,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b1-06",
+        "watts": 205,
+        "status": "warn",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b1-07",
+        "watts": 407,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 26,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b1-08",
+        "watts": 210,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 27,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b1-09",
+        "watts": 209,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 28,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b1-10",
+        "watts": 180,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 30,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b1-11",
+        "watts": 345,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
+      },
+      {
+        "u": 32,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b1-12",
+        "watts": 204,
+        "status": "ok",
+        "team": "team-ienw-kenteken"
       }
     ]
   },
@@ -10066,18 +11962,125 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-20",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 153,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b2-01",
+        "watts": 196,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 7,
         "height": 2,
         "type": "server",
-        "label": "node-20-01",
-        "team": "team-cbs-statline",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-zw-b2-02",
+        "watts": 388,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 9,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b2-03",
+        "watts": 223,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 10,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b2-04",
+        "watts": 198,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 12,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-b2-05",
+        "watts": 523,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 16,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b2-06",
+        "watts": 183,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 17,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b2-07",
+        "watts": 313,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 20,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b2-08",
+        "watts": 455,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 23,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-b2-09",
+        "watts": 699,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 28,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b2-10",
+        "watts": 469,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 31,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b2-11",
+        "watts": 330,
+        "status": "ok",
+        "team": "team-cbs-statline"
+      },
+      {
+        "u": 33,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-b2-12",
+        "watts": 626,
+        "status": "ok",
+        "team": "team-cbs-statline"
       }
     ]
   },
@@ -10101,18 +12104,152 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-21",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 176,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b3-01",
+        "watts": 248,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 7,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b3-02",
+        "watts": 231,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 8,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b3-03",
+        "watts": 166,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 10,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b3-04",
+        "watts": 237,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 11,
         "height": 2,
         "type": "server",
-        "label": "node-21-01",
-        "team": "team-cbs-privacy",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-zw-b3-05",
+        "watts": 355,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 14,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b3-06",
+        "watts": 340,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 16,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b3-07",
+        "watts": 175,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 18,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b3-08",
+        "watts": 184,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 20,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b3-09",
+        "watts": 376,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 23,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-b3-10",
+        "watts": 525,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 27,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-b3-11",
+        "watts": 562,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 31,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b3-12",
+        "watts": 331,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 34,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b3-13",
+        "watts": 195,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 35,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b3-14",
+        "watts": 420,
+        "status": "ok",
+        "team": "team-cbs-privacy"
+      },
+      {
+        "u": 38,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b3-15",
+        "watts": 384,
+        "status": "ok",
+        "team": "team-cbs-privacy"
       }
     ]
   },
@@ -10136,18 +12273,107 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-22",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 201,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-b4-01",
+        "watts": 614,
+        "status": "ok",
+        "team": "team-koop-wetten"
+      },
+      {
+        "u": 10,
         "height": 2,
         "type": "server",
-        "label": "node-22-01",
-        "team": "team-koop-wetten",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-zw-b4-02",
+        "watts": 366,
+        "status": "ok",
+        "team": "team-koop-wetten"
+      },
+      {
+        "u": 12,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b4-03",
+        "watts": 313,
+        "status": "ok",
+        "team": "team-koop-wetten"
+      },
+      {
+        "u": 14,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b4-04",
+        "watts": 395,
+        "status": "ok",
+        "team": "team-koop-wetten"
+      },
+      {
+        "u": 17,
+        "height": 4,
+        "type": "server",
+        "label": "storage-zw-b4-05",
+        "watts": 679,
+        "status": "ok",
+        "team": "team-koop-wetten"
+      },
+      {
+        "u": 22,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b4-06",
+        "watts": 187,
+        "status": "ok",
+        "team": "team-koop-wetten"
+      },
+      {
+        "u": 24,
+        "height": 1,
+        "type": "server",
+        "label": "compute-zw-b4-07",
+        "watts": 216,
+        "status": "ok",
+        "team": "team-koop-wetten"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b4-08",
+        "watts": 407,
+        "status": "ok",
+        "team": "team-koop-wetten"
+      },
+      {
+        "u": 28,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b4-09",
+        "watts": 436,
+        "status": "ok",
+        "team": "team-koop-wetten"
+      },
+      {
+        "u": 30,
+        "height": 2,
+        "type": "server",
+        "label": "compute-zw-b4-10",
+        "watts": 423,
+        "status": "ok",
+        "team": "team-koop-wetten"
       }
     ]
   },
@@ -10171,18 +12397,134 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-23",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 166,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-23-01",
-        "team": "team-dpc-content",
+        "label": "compute-gr-a1-01",
+        "watts": 318,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 9,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a1-02",
+        "watts": 430,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a1-03",
+        "watts": 382,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 14,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a1-04",
+        "watts": 332,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 16,
+        "height": 4,
+        "type": "server",
+        "label": "storage-gr-a1-05",
+        "watts": 540,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 20,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a1-06",
+        "watts": 382,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 23,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a1-07",
+        "watts": 259,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 25,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a1-08",
+        "watts": 195,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 26,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a1-09",
+        "watts": 204,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 27,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a1-10",
+        "watts": 223,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 28,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a1-11",
         "watts": 400,
-        "status": "ok"
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 31,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a1-12",
+        "watts": 221,
+        "status": "ok",
+        "team": "team-dpc-content"
+      },
+      {
+        "u": 33,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a1-13",
+        "watts": 381,
+        "status": "ok",
+        "team": "team-dpc-content"
       }
     ]
   },
@@ -10206,18 +12548,116 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-24",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 150,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-24-01",
-        "team": "team-cbr-rijbewijs",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-gr-a2-01",
+        "watts": 325,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 8,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a2-02",
+        "watts": 347,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a2-03",
+        "watts": 437,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 13,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a2-04",
+        "watts": 358,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 16,
+        "height": 4,
+        "type": "server",
+        "label": "storage-gr-a2-05",
+        "watts": 665,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 21,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a2-06",
+        "watts": 175,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 22,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a2-07",
+        "watts": 203,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 24,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a2-08",
+        "watts": 472,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a2-09",
+        "watts": 382,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 28,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a2-10",
+        "watts": 185,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
+      },
+      {
+        "u": 30,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a2-11",
+        "watts": 361,
+        "status": "ok",
+        "team": "team-cbr-rijbewijs"
       }
     ]
   },
@@ -10241,18 +12681,170 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-25",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 195,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a3-01",
+        "watts": 224,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 7,
         "height": 2,
         "type": "server",
-        "label": "node-25-01",
-        "team": "team-afm-toezicht",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-gr-a3-02",
+        "watts": 396,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 9,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a3-03",
+        "watts": 259,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 10,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-04",
+        "watts": 374,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 12,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a3-05",
+        "watts": 174,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 13,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a3-06",
+        "watts": 239,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 14,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-07",
+        "watts": 326,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 16,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-08",
+        "watts": 399,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 18,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-09",
+        "watts": 338,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 21,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-10",
+        "watts": 394,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-11",
+        "watts": 316,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 25,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-12",
+        "watts": 425,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-13",
+        "watts": 411,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-14",
+        "watts": 317,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 31,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a3-15",
+        "watts": 319,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 33,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a3-16",
+        "watts": 226,
+        "status": "ok",
+        "team": "team-afm-toezicht"
+      },
+      {
+        "u": 34,
+        "height": 4,
+        "type": "server",
+        "label": "storage-gr-a3-17",
+        "watts": 626,
+        "status": "ok",
+        "team": "team-afm-toezicht"
       }
     ]
   },
@@ -10276,18 +12868,125 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-26",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 159,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-26-01",
-        "team": "team-fin-financieel",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-gr-a4-01",
+        "watts": 331,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 8,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a4-02",
+        "watts": 459,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 10,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a4-03",
+        "watts": 164,
+        "status": "warn",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 11,
+        "height": 4,
+        "type": "server",
+        "label": "storage-gr-a4-04",
+        "watts": 655,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 16,
+        "height": 4,
+        "type": "server",
+        "label": "storage-gr-a4-05",
+        "watts": 536,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 20,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a4-06",
+        "watts": 328,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 22,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a4-07",
+        "watts": 359,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 24,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a4-08",
+        "watts": 437,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 26,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a4-09",
+        "watts": 235,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 27,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-a4-10",
+        "watts": 223,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a4-11",
+        "watts": 471,
+        "status": "ok",
+        "team": "team-fin-financieel"
+      },
+      {
+        "u": 32,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-a4-12",
+        "watts": 374,
+        "status": "ok",
+        "team": "team-fin-financieel"
       }
     ]
   },
@@ -10311,18 +13010,116 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-27",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 178,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b1-01",
+        "watts": 239,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 7,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b1-02",
+        "watts": 198,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 9,
+        "height": 4,
+        "type": "server",
+        "label": "storage-gr-b1-03",
+        "watts": 613,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 13,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b1-04",
+        "watts": 184,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 14,
         "height": 2,
         "type": "server",
-        "label": "node-27-01",
-        "team": "team-vws-zorgregister",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-gr-b1-05",
+        "watts": 419,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 16,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b1-06",
+        "watts": 411,
+        "status": "warn",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 18,
+        "height": 4,
+        "type": "server",
+        "label": "storage-gr-b1-07",
+        "watts": 601,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b1-08",
+        "watts": 395,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 25,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b1-09",
+        "watts": 401,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 28,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b1-10",
+        "watts": 342,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
+      },
+      {
+        "u": 30,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b1-11",
+        "watts": 207,
+        "status": "ok",
+        "team": "team-vws-zorgregister"
       }
     ]
   },
@@ -10346,18 +13143,125 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-28",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 166,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b2-01",
+        "watts": 200,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 7,
         "height": 2,
         "type": "server",
-        "label": "node-28-01",
-        "team": "team-ocw-cultuurdata",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-gr-b2-02",
+        "watts": 358,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 9,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b2-03",
+        "watts": 193,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 10,
+        "height": 4,
+        "type": "server",
+        "label": "storage-gr-b2-04",
+        "watts": 532,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 14,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b2-05",
+        "watts": 387,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 16,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b2-06",
+        "watts": 379,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 18,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b2-07",
+        "watts": 315,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 21,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b2-08",
+        "watts": 232,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 22,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b2-09",
+        "watts": 253,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 24,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b2-10",
+        "watts": 411,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b2-11",
+        "watts": 446,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
+      },
+      {
+        "u": 28,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b2-12",
+        "watts": 364,
+        "status": "ok",
+        "team": "team-ocw-cultuurdata"
       }
     ]
   },
@@ -10381,18 +13285,116 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-29",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 182,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b3-01",
+        "watts": 230,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 7,
         "height": 2,
         "type": "server",
-        "label": "node-29-01",
-        "team": "team-kgg-energie",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-gr-b3-02",
+        "watts": 399,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 10,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b3-03",
+        "watts": 405,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 12,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b3-04",
+        "watts": 405,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 15,
+        "height": 4,
+        "type": "server",
+        "label": "storage-gr-b3-05",
+        "watts": 676,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 19,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b3-06",
+        "watts": 418,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 21,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b3-07",
+        "watts": 394,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b3-08",
+        "watts": 389,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 25,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b3-09",
+        "watts": 436,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b3-10",
+        "watts": 406,
+        "status": "ok",
+        "team": "team-kgg-energie"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b3-11",
+        "watts": 356,
+        "status": "ok",
+        "team": "team-kgg-energie"
       }
     ]
   },
@@ -10416,18 +13418,143 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-30",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 183,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-30-01",
-        "team": "team-def-secinfra",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-gr-b4-01",
+        "watts": 377,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 8,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b4-02",
+        "watts": 180,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 9,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b4-03",
+        "watts": 385,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 11,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b4-04",
+        "watts": 197,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 12,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b4-05",
+        "watts": 426,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 14,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b4-06",
+        "watts": 193,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 15,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b4-07",
+        "watts": 380,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 17,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b4-08",
+        "watts": 343,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 20,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b4-09",
+        "watts": 371,
+        "status": "crit",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 22,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b4-10",
+        "watts": 464,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 24,
+        "height": 1,
+        "type": "server",
+        "label": "compute-gr-b4-11",
+        "watts": 165,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b4-12",
+        "watts": 369,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b4-13",
+        "watts": 302,
+        "status": "ok",
+        "team": "team-def-secinfra"
+      },
+      {
+        "u": 31,
+        "height": 2,
+        "type": "server",
+        "label": "compute-gr-b4-14",
+        "watts": 395,
+        "status": "ok",
+        "team": "team-def-secinfra"
       }
     ]
   },
@@ -10451,18 +13578,152 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-31",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 197,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-31-01",
-        "team": "team-ez-markt",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-mt-a1-01",
+        "watts": 335,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 8,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a1-02",
+        "watts": 469,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 10,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a1-03",
+        "watts": 358,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 13,
+        "height": 1,
+        "type": "server",
+        "label": "compute-mt-a1-04",
+        "watts": 191,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 14,
+        "height": 1,
+        "type": "server",
+        "label": "compute-mt-a1-05",
+        "watts": 179,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 16,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a1-06",
+        "watts": 343,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 18,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a1-07",
+        "watts": 309,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 20,
+        "height": 1,
+        "type": "server",
+        "label": "compute-mt-a1-08",
+        "watts": 200,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 21,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a1-09",
+        "watts": 317,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a1-10",
+        "watts": 364,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 26,
+        "height": 1,
+        "type": "server",
+        "label": "compute-mt-a1-11",
+        "watts": 260,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a1-12",
+        "watts": 392,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 30,
+        "height": 1,
+        "type": "server",
+        "label": "compute-mt-a1-13",
+        "watts": 212,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 31,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a1-14",
+        "watts": 328,
+        "status": "ok",
+        "team": "team-ez-markt"
+      },
+      {
+        "u": 34,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a1-15",
+        "watts": 428,
+        "status": "ok",
+        "team": "team-ez-markt"
       }
     ]
   },
@@ -10486,18 +13747,125 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-32",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 152,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-32-01",
-        "team": "team-nldd-docs",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-mt-a2-01",
+        "watts": 405,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 9,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a2-02",
+        "watts": 393,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a2-03",
+        "watts": 423,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 13,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a2-04",
+        "watts": 348,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 15,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a2-05",
+        "watts": 371,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 17,
+        "height": 1,
+        "type": "server",
+        "label": "compute-mt-a2-06",
+        "watts": 228,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 18,
+        "height": 1,
+        "type": "server",
+        "label": "compute-mt-a2-07",
+        "watts": 206,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 19,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a2-08",
+        "watts": 405,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 21,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a2-09",
+        "watts": 374,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 23,
+        "height": 4,
+        "type": "server",
+        "label": "storage-mt-a2-10",
+        "watts": 637,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 27,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a2-11",
+        "watts": 325,
+        "status": "ok",
+        "team": "team-nldd-docs"
+      },
+      {
+        "u": 29,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a2-12",
+        "watts": 470,
+        "status": "ok",
+        "team": "team-nldd-docs"
       }
     ]
   },
@@ -10521,18 +13889,98 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-33",
-        "watts": 175,
+        "label": "leaf-sw-02",
+        "watts": 201,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-33-01",
-        "team": "team-platform",
-        "watts": 400,
-        "status": "ok"
+        "label": "compute-mt-a3-01",
+        "watts": 442,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 8,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a3-02",
+        "watts": 382,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 11,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a3-03",
+        "watts": 327,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 13,
+        "height": 1,
+        "type": "server",
+        "label": "compute-mt-a3-04",
+        "watts": 232,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 14,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a3-05",
+        "watts": 414,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 17,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a3-06",
+        "watts": 311,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 19,
+        "height": 4,
+        "type": "server",
+        "label": "storage-mt-a3-07",
+        "watts": 637,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a3-08",
+        "watts": 418,
+        "status": "ok",
+        "team": "team-platform"
+      },
+      {
+        "u": 25,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a3-09",
+        "watts": 428,
+        "status": "ok",
+        "team": "team-platform"
       }
     ]
   },
@@ -10556,18 +14004,98 @@ export const racks = [
         "u": 2,
         "height": 2,
         "type": "switch",
-        "label": "leaf-sw-34",
-        "watts": 175,
+        "label": "leaf-sw-01",
+        "watts": 153,
+        "status": "ok"
+      },
+      {
+        "u": 4,
+        "height": 1,
+        "type": "patch",
+        "label": "patchpanel-01",
+        "watts": 0,
         "status": "ok"
       },
       {
         "u": 6,
         "height": 2,
         "type": "server",
-        "label": "node-34-01",
-        "team": "team-data",
+        "label": "compute-mt-a4-01",
+        "watts": 395,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 8,
+        "height": 4,
+        "type": "server",
+        "label": "storage-mt-a4-02",
+        "watts": 528,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 13,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a4-03",
+        "watts": 319,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 15,
+        "height": 1,
+        "type": "server",
+        "label": "compute-mt-a4-04",
+        "watts": 207,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 16,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a4-05",
+        "watts": 373,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 18,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a4-06",
+        "watts": 440,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 20,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a4-07",
+        "watts": 376,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 23,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a4-08",
+        "watts": 399,
+        "status": "ok",
+        "team": "team-data"
+      },
+      {
+        "u": 26,
+        "height": 2,
+        "type": "server",
+        "label": "compute-mt-a4-09",
         "watts": 400,
-        "status": "ok"
+        "status": "ok",
+        "team": "team-data"
       }
     ]
   }

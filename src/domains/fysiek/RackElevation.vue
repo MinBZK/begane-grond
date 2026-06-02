@@ -65,13 +65,14 @@ function ledColor(status) {
 function typeColor(type) {
   return {
     server: 'rgba(33,99,196,0.14)',
+    gpu: 'rgba(224,140,0,0.20)',
     switch: 'rgba(120,72,200,0.16)',
     pdu: 'rgba(80,80,80,0.12)',
     patch: 'rgba(33,150,120,0.14)',
   }[type] || 'rgba(0,0,0,0.05)';
 }
 function typeLabel(type) {
-  return { server: 'Server', switch: 'Switch', pdu: 'PDU', patch: 'Patchpaneel', blank: 'Blank' }[type] || type;
+  return { server: 'Server', gpu: 'AI / GPU', switch: 'Switch', pdu: 'PDU', patch: 'Patchpaneel', blank: 'Blank' }[type] || type;
 }
 
 // --- Place device dialog ---
@@ -325,6 +326,7 @@ const cableColumns = [
           <nldd-dropdown>
             <select :value="form.type" @change="(e) => (form.type = e.target.value)">
               <option value="server">Server</option>
+              <option value="gpu">AI / GPU</option>
               <option value="switch">Switch</option>
               <option value="pdu">PDU</option>
               <option value="patch">Patchpaneel</option>
@@ -335,7 +337,7 @@ const cableColumns = [
           <nldd-form-field label="Hoogte (U)">
             <nldd-dropdown>
               <select :value="form.height" @change="(e) => { form.height = e.target.value; form.u = freeStarts[0] || ''; }">
-                <option v-for="h in [1, 2, 4]" :key="h" :value="h">{{ h }}U</option>
+                <option v-for="h in [1, 2, 4, 6, 8]" :key="h" :value="h">{{ h }}U</option>
               </select>
             </nldd-dropdown>
           </nldd-form-field>
