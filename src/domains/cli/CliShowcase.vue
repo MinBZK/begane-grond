@@ -229,6 +229,156 @@ bg wet deploy huurtoeslagwet --template rust-api`,
 bg register show brp
 bg register connect inkomen --field toetsingsinkomen --app app-toeslagen`,
   },
+  {
+    id: 'data',
+    title: 'bg data',
+    icon: 'chart-x-y-axis-line',
+    lede: 'Datasetcatalogus met kwaliteitslabels en lineage van wet tot dienst.',
+    to: '/data',
+    toText: 'Open de datasetcatalogus',
+    code: `# Datasets met hun kwaliteitslabel (goud/zilver/brons)
+bg data list --label goud
+bg data show ds-toetsingsinkomen-2026
+
+# Volg de herkomst en zie of de bron achterloopt
+bg data lineage ds-toetsingsinkomen-2026
+bg data refresh-log ds-vergunningen-historie   # loopt 60 dagen achter
+
+# Publiceer als open data (open tenzij)
+bg data publish ds-statline-demografie --open`,
+  },
+  {
+    id: 'datacontract',
+    title: 'bg datacontract',
+    icon: 'pencil-on-square',
+    lede: 'De afspraak tussen bron en afnemer: schema, SLA, doelbinding en bewaartermijn.',
+    to: '/datacontracten',
+    toText: 'Open de datacontracten',
+    code: `bg datacontract list --status actief
+bg datacontract show dc-inkomen-toeslagen
+bg datacontract new --dataset ds-adressen-bag --consumer app-vergunningchecker \\
+  --doelbinding "Adrescontrole" --sla 99.9% --bewaartermijn "10 jaar"`,
+  },
+  {
+    id: 'algoritme',
+    title: 'bg algoritme',
+    icon: 'sparkles',
+    lede: 'Het algoritmeregister: AI in productie met impact- en discriminatietoets.',
+    to: '/algoritmes',
+    toText: 'Open het algoritmeregister',
+    code: `bg algoritme list --type llm
+bg algoritme show alg-toeslagen-risico
+bg algoritme register "Risico-indicatie" --app app-toeslagen \\
+  --type ml --human-in-the-loop --impacttoets uitgevoerd`,
+  },
+  {
+    id: 'privacy',
+    title: 'bg verwerking',
+    icon: 'lock-closed',
+    lede: 'Het verwerkingenregister (AVG art. 30) en de DPIA-status per verwerking.',
+    to: '/verwerkingen',
+    toText: 'Open het verwerkingenregister',
+    code: `bg verwerking list --dpia vereist
+bg verwerking show vwk-toeslagen-vaststelling
+bg verwerking dpia start vwk-vergunningverlening`,
+  },
+  {
+    id: 'dns',
+    title: 'bg dns',
+    icon: 'globe',
+    lede: 'Domeinen en DNS: records beheren, DNSSEC aanzetten, internet.nl-score zien.',
+    to: '/dns',
+    toText: 'Open Domeinen & DNS',
+    code: `# Domein registreren en records beheren
+bg dns add nieuwedienst.overheid.nl --app app-omgevingsloket
+bg dns record add dom-toeslagen --type A --name @ --value 145.21.0.10
+bg dns record list dom-toeslagen
+
+# DNSSEC aanzetten en valideren
+bg dns dnssec enable dom-studie
+bg dns verify dom-toeslagen          # internet.nl-score`,
+  },
+  {
+    id: 'cert',
+    title: 'bg cert',
+    icon: 'certificate',
+    lede: 'PKIoverheid-certificaten als self-service, met automatische vernieuwing.',
+    to: '/secrets/certificaten',
+    toText: 'Open de certificaten',
+    code: `# Certificaat aanvragen (CSR + TSP + installatie, in één commando)
+bg cert request --cn *.nieuwedienst.overheid.nl \\
+  --tsp KPN --oin 00000001823288444000 --auto-renew
+
+bg cert list --ca pkioverheid --expiring 30
+bg cert renew cert-2                  # nu vernieuwen
+bg cert auto-renew on cert-verlopen-1`,
+  },
+  {
+    id: 'artefact',
+    title: 'bg artefact',
+    icon: 'folder-stack',
+    lede: 'Het artefactregister: images en packages met SBOM en provenance.',
+    to: '/artefacten',
+    toText: 'Open het artefactregister',
+    code: `bg artefact list --signed
+bg artefact verify art-toeslagenmotor-3.4.1   # handtekening en SLSA-niveau
+bg sbom show art-toeslagenmotor-3.4.1          # CycloneDX, componenten en CVE's`,
+  },
+  {
+    id: 'component',
+    title: 'bg component',
+    icon: 'puzzle-piece',
+    lede: 'Common Ground: herbruikbare componenten overnemen in plaats van zelf bouwen.',
+    to: '/componenten',
+    toText: 'Open de componenten',
+    code: `bg component search bsn
+bg component show comp-brp-bevraging          # 22x hergebruikt
+bg component add comp-nldd-formulier --team ${myTeam.value?.id || 'team-platform'}`,
+  },
+  {
+    id: 'flag',
+    title: 'bg flag',
+    icon: 'flag',
+    lede: 'Feature flags: geleidelijke uitrol, experimenten en kill-switches.',
+    to: '/flags',
+    toText: 'Open de feature flags',
+    code: `bg flag list --app app-toeslagen
+bg flag rollout nieuwe-inkomenstoets --percent 50
+bg flag off killswitch-betalen        # noodschakelaar`,
+  },
+  {
+    id: 'inloggen',
+    title: 'bg login',
+    icon: 'person-circle',
+    lede: 'Inlogmethoden koppelen: DigiD, eHerkenning, eIDAS en machtigen.',
+    to: '/inloggen',
+    toText: 'Open de inlogmethoden',
+    code: `bg login list
+bg login show login-digid             # betrouwbaarheidsniveaus, gekoppelde diensten
+bg login connect login-digid --app app-omgevingsloket --niveau Substantieel`,
+  },
+  {
+    id: 'inkoop',
+    title: 'bg inkoop',
+    icon: 'tag',
+    lede: 'Software- en SaaS-inkoop onder ARBIT/ARVODI, met lock-in en exit-strategie.',
+    to: '/software-inkoop',
+    toText: 'Open de software-inkoop',
+    code: `bg inkoop list --lockin hoog
+bg inkoop show sw-2026-002            # contract, exit-strategie
+bg inkoop exit-plan sw-2026-004`,
+  },
+  {
+    id: 'toegankelijkheid',
+    title: 'bg toegankelijkheid',
+    icon: 'eyeglasses',
+    lede: 'Toegankelijkheidsverklaringen (DigiToegankelijk) met WCAG-status.',
+    to: '/toegankelijkheid',
+    toText: 'Open toegankelijkheid',
+    code: `bg toegankelijkheid list --status "voldoet gedeeltelijk"
+bg toegankelijkheid show tv-toeslagen
+bg toegankelijkheid scan app-vergunningchecker   # WCAG 2.2 AA`,
+  },
 ]);
 
 // --- Quick reference: global flags ------------------------------------------
