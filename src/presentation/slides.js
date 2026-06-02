@@ -83,6 +83,7 @@ export const slides = [
       'Met een platform eronder: minuten in plaats van maanden.',
     ],
     route: '/apps/templates',
+    emit: { type: 'repo.created', title: 'Nieuwe dienst gescaffold via golden path' },
     note: 'Wijs op de templates rechts. De geplaveide weg is letterlijk klikbaar.',
   },
   {
@@ -95,6 +96,7 @@ export const slides = [
       'Op Spotify waren teams met een platform eronder 2,3 keer zo actief, met dezelfde mensen.',
     ],
     route: '/infra',
+    emit: { type: 'infra.instance.requested', title: 'PostgreSQL aangevraagd uit de catalogus' },
     note: 'De multiplier is het zakelijke argument. 2,3x meer output uit dezelfde mensen.',
   },
   {
@@ -120,6 +122,7 @@ export const slides = [
     ],
     gov: 'Data blijft in Nederland. Soevereiniteit begint bij het ijzer dat je zelf bezit.',
     route: '/fysiek',
+    emit: { type: 'capacity.warning', title: 'Datacenter Den Haag: 78% rackcapaciteit' },
     note: 'Het verrast mensen dat een platform ook tastbaar is. Laat de datacenters zien.',
   },
   {
@@ -132,6 +135,7 @@ export const slides = [
       'Transparantie van wettekst tot stroomstekker.',
     ],
     route: '/fysiek/racks/r-dh-a1',
+    emit: { type: 'cooling.alert', title: 'Rack r-dh-a1: koeling binnen marge' },
     note: 'Inzoomen op rack r-dh-a1 in Den Haag. Dit is de bodem van de stack.',
   },
   {
@@ -158,6 +162,7 @@ export const slides = [
       'Eén catalogus voor alles wat er draait.',
     ],
     route: '/apps',
+    emit: { type: 'app.created', title: 'Nieuwe applicatie geregistreerd in de catalogus' },
     note: 'Bruggetje: hoe komt zo’n app er eigenlijk? Dat doen we nu live.',
   },
   {
@@ -184,6 +189,7 @@ export const slides = [
     ],
     gov: 'Open-tenzij, op een eigen forge. Geen broncode in een buitenlandse cloud, soevereiniteit by design.',
     route: '/code',
+    emit: { type: 'pr.opened', title: 'Pull request geopend op code.overheid.nl' },
     note: 'Forgejo is open source en zelf-gehost. Dat is het hele punt: geen afhankelijkheid van een platform van een ander.',
   },
   {
@@ -196,6 +202,7 @@ export const slides = [
       'De lopende band onder de geplaveide weg.',
     ],
     route: '/environments/runners',
+    emit: { type: 'runner.scaled', title: 'Runner-pool opgeschaald naar de wachtrij' },
     note: 'Kort houden. Dit is de motor, niet de show.',
   },
   {
@@ -222,6 +229,7 @@ export const slides = [
       'Goed gereedschap trekt goed vakmanschap aan.',
     ],
     route: '/teams/on-call',
+    emit: { type: 'oncall.handover', title: 'On-call overgedragen aan het volgende team' },
     note: 'Het mensen-argument: betere tools houden betere ontwikkelaars binnen.',
   },
   {
@@ -248,6 +256,7 @@ export const slides = [
       'Inzicht standaard aan, niet als duur achteraf-project.',
     ],
     route: '/observability',
+    emit: { type: 'alert.firing', title: 'SLO-alert: latency boven de drempel' },
     note: 'Opmaat naar het incident. Eerst laten zien dat we kunnen kijken, dan gaat er iets stuk.',
   },
   {
@@ -277,6 +286,7 @@ export const slides = [
       'Sturen op geld zonder de innovatie af te knijpen.',
     ],
     route: '/kosten',
+    emit: { type: 'cost.anomaly', title: 'Kostenanomalie gedetecteerd bij een team' },
     note: 'Self-service kan eng klinken voor controllers. Dit is het antwoord: volledige kostentransparantie.',
   },
   {
@@ -290,6 +300,7 @@ export const slides = [
     ],
     gov: 'BIO als default. Compliance ingebakken in de geplaveide weg, niet als bijlage bij een rapport.',
     route: '/security',
+    emit: { type: 'compliance.dropped', title: 'Compliance-score gedaald, actie vereist' },
     note: 'Kernzin van het essay: compliance als default. Dit is het hart van het overheidsverhaal.',
   },
   {
@@ -303,6 +314,8 @@ export const slides = [
     ],
     gov: 'Open standaarden van de Rijksoverheid, eenmalig ingebouwd en overal afgedwongen.',
     route: '/standaarden',
+    emit: { type: 'standard.updated', title: 'NLDD design system bijgewerkt naar 0.9' },
+    highlight: '.rp-page',
     highlight: '.rp-page',
     note: 'Paradepaardje één. Het punt: standaarden als code verslaan een stapel beleids-PDF’s.',
   },
@@ -331,6 +344,8 @@ export const slides = [
     ],
     gov: 'AVG-proof bevragen: alleen wat mag, met OIN-authenticatie en een spoor terug naar de bron.',
     route: '/registers',
+    emit: { type: 'register.connected', title: 'Dienst aangesloten op de BRP' },
+    highlight: '.rp-page',
     note: 'Paradepaardje twee. Wijs op de BRP-velden: bsn, geboortedatum, verblijfadres. Niet "leeftijd", dat staat er niet.',
   },
   {
@@ -344,6 +359,7 @@ export const slides = [
     ],
     gov: 'Een verbindende platformlaag over bestaande overheidsbouwstenen heen. Daarvoor is mandaat nodig.',
     route: '/koppelvlakken/fsc',
+    emit: { type: 'register.connected', title: 'Vertrouwde koppeling via FSC tot stand gebracht' },
     note: 'De bouwstenen bestaan al. Wat ontbrak is de verbindende laag. Dat is precies wat een platform doet.',
   },
   {
@@ -357,6 +373,7 @@ export const slides = [
     ],
     gov: 'De wettekst als single source of truth. Verandert de wet, dan verandert de dienst, herleidbaar.',
     route: '/wetten',
+    emit: { type: 'wet.published', title: 'Wet gepubliceerd in het corpus' },
     note: 'Het paradepaardje. De wet is geen los document meer maar de bron van de code.',
   },
   {
@@ -408,6 +425,7 @@ export const slides = [
       'Ruig terrein wordt begaanbaar, bergen worden heuvels.',
     ],
     route: '/ai/skills',
+    emit: { type: 'ai.skill.installed', title: 'Skill geïnstalleerd voor het team' },
     note: 'De AI-wending uit het essay. Het platform is juist nu cruciaal: het maakt goedkope code ook veilig.',
   },
   {
@@ -420,6 +438,7 @@ export const slides = [
       'Goed gereedschap trekt goed vakmanschap aan, en houdt het binnen.',
     ],
     route: '/',
+    emit: { type: 'deploy.completed', title: 'Platform-release uitgerold' },
     note: 'Afsluiten waar we begonnen. Terug naar de naam: de begane grond onder de hele Rijksoverheid.',
   },
 ];
