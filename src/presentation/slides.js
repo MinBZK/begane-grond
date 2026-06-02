@@ -78,8 +78,9 @@ export const slides = [
     lead: 'Om concreet te maken wat ik bedoel, lopen we door één platform heen.',
     bullets: [
       'Begane Grond: een ontwikkelplatform voor de Rijksoverheid.',
-      'Ruig terrein wordt begaanbaar, bergen worden heuvels.',
-      'Een vaste laag waarop teams bouwen, in plaats van elke keer opnieuw beginnen.',
+      'Je bouwt de begane grond op het fundament: het ijzer eronder.',
+      'Dat fundament is een soevereine cloud voor het Rijk, waar we nu aan werken.',
+      'Let op: dit is een demo, een proof of concept, om het gesprek te kunnen voeren.',
     ],
     route: '/',
   },
@@ -429,7 +430,7 @@ export const slides = [
     lead: 'De overheid is een techbedrijf. Laten we ons ook zo organiseren.',
     bullets: [
       'Platform engineering: de gedeelde basislaag waarop teams bouwen.',
-      'Begane Grond liet zien hoe dat er voor de Rijksoverheid uitziet.',
+      'Begane Grond liet zien hoe dat er voor de Rijksoverheid uit kan zien.',
     ],
     link: { href: 'https://anneschuth.nl', label: 'anneschuth.nl' },
     full: true,
