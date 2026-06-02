@@ -28,7 +28,7 @@ function closeInbox() {
 // --- Side navigation, grouped by build wave ---
 const groups = computed(() => {
   // 'H' is the top group (the overviews) and renders without a header label.
-  const order = ['H', 'A', 'P', 'B', 'C', 'D'];
+  const order = ['H', 'A', 'D', 'G', 'I', 'O', 'R', 'M'];
   return order
     .map((w) => ({
       wave: w,
