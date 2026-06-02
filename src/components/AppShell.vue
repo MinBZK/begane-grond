@@ -8,11 +8,13 @@ import { useRoute, useRouter } from 'vue-router';
 import { domains, waveLabels } from '../nav.js';
 import { commandItems } from '../lib/commands.js';
 import { usePlatformStore } from '../stores/index.js';
+import { usePresentation } from '../presentation/usePresentation.js';
 import NotificationInbox from './shared/NotificationInbox.vue';
 
 const route = useRoute();
 const router = useRouter();
 const store = usePlatformStore();
+const presentation = usePresentation();
 
 // --- Notification bell ---
 const inboxOpen = ref(false);
@@ -182,6 +184,13 @@ onBeforeUnmount(() => {
           <nldd-page-footer-legal-bar-item slot="start" text="Begane Grond — demo / mock-up" />
           <nldd-page-footer-legal-bar-item slot="end" text="Toegankelijkheid" href="/standaarden" />
         </nldd-page-footer-legal-bar>
+        <div class="rp-footer-present">
+          <button type="button" class="rp-present-link" @click="presentation.start(0)">
+            <nldd-icon name="caret-right" aria-hidden="true"></nldd-icon>
+            Presentatie starten
+            <span class="rp-present-hint">Shift + P</span>
+          </button>
+        </div>
       </nldd-page-footer>
     </div>
   </nldd-page>
@@ -272,6 +281,40 @@ onBeforeUnmount(() => {
 }
 .rp-inbox-pop-all {
   font-size: 0.88rem;
+}
+.rp-footer-present {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 1rem 0.25rem;
+}
+.rp-present-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--semantics-text-subtle-color, #5a6573);
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+}
+.rp-present-link:hover {
+  color: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-surfaces-tinted-background-color);
+}
+.rp-present-link nldd-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+.rp-present-hint {
+  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+  opacity: 0.6;
+  border: 1px solid var(--semantics-dividers-color);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
 }
 </style>
 
