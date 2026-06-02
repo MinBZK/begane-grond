@@ -17,14 +17,14 @@ export const docs = [
   },
   {
     id: 'doc-golden-path',
-    title: 'Golden path: nieuwe service opzetten',
+    title: 'Gebaand pad: nieuwe service opzetten',
     kind: 'guide',
     category: 'Applicaties',
     minutes: 9,
     icon: 'rectangle-stack',
     updated: '1 week geleden',
     summary: 'Genereer een service uit een template, koppel infra en krijg CI in één keer groen.',
-    keywords: ['golden path', 'template', 'steiger', 'scaffold', 'service', 'ci', 'app'],
+    keywords: ['gebaand pad', 'golden path', 'template', 'steiger', 'scaffold', 'service', 'ci', 'app'],
   },
   {
     id: 'doc-runbook-incident',

@@ -466,7 +466,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('wet'));
           <nldd-spacer size="16" />
           <nldd-inline-dialog
             title="Wat er gebeurt bij publiceren"
-            supporting-text="De wet wordt machine-leesbaar opgeslagen, de scenario's gedraaid, gepubliceerd naar het corpus en als dienst uitgerold via de golden path: een repository met CI, een database en de YAML-uitvoering."
+            supporting-text="De wet wordt machine-leesbaar opgeslagen, de scenario's gedraaid, gepubliceerd naar het corpus en als dienst uitgerold via het gebaande pad: een repository met CI, een database en de YAML-uitvoering."
           ></nldd-inline-dialog>
 
           <CliHint :command="`rp wet deploy ${wetLabel.toLowerCase().replace(/\\s+/g, '-')} --template rust-api`" label="Liever via de CLI? Dit commando doet hetzelfde:" />

@@ -75,9 +75,9 @@ rp infra delete pg-burgerzaken-staging --yes`,
     id: 'app',
     title: 'rp app',
     icon: 'rectangle-stack',
-    lede: 'De golden path: nieuwe applicatie met repo, CI en optioneel infra in één commando.',
+    lede: 'Het gebaande pad: nieuwe applicatie met repo, CI en optioneel infra in één commando.',
     to: '/apps/nieuw',
-    toText: 'Open de golden path',
+    toText: 'Open het gebaande pad',
     code: `# Zet een nieuwe service op vanuit een steiger (maakt repo + CI + infra)
 rp app new "Inkomstenmonitor" \\
   --team ${myTeam.value?.id || 'team-platform'} \\
@@ -409,7 +409,7 @@ function copy(text) {
       :links="[
         { text: 'API-explorer (zelfde acties, als REST)', to: '/cli/api', icon: 'link' },
         { text: 'Infra-catalogus', to: '/infra/order/postgres', icon: 'rectangle-stack' },
-        { text: 'Golden path: nieuwe app', to: '/apps/nieuw', icon: 'plus' },
+        { text: 'Gebaand pad: nieuwe app', to: '/apps/nieuw', icon: 'plus' },
         { text: 'Piketrooster', to: '/teams/on-call', icon: 'heart' },
         { text: 'LLM-gateway', to: '/ai/llm', icon: 'sparkles' },
       ]"

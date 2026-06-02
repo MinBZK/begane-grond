@@ -52,7 +52,7 @@ const actorPerson = (id) => store.personById(id);
 
 // --- Wizard shortcuts ---
 const shortcuts = [
-  { title: 'Nieuwe applicatie', desc: 'Golden path: repo, CI en infra in één keer', icon: 'rectangle-stack', to: '/apps/nieuw' },
+  { title: 'Nieuwe applicatie', desc: 'Gebaand pad: repo, CI en infra in één keer', icon: 'rectangle-stack', to: '/apps/nieuw' },
   { title: 'Dienst afnemen', desc: 'Kubernetes, database of broker uit de catalogus', icon: 'cylinder-split', to: '/infra' },
   { title: 'Werkplek uitrollen', desc: 'Autonome Linux-laptop voor een collega', icon: 'person-circle', to: '/werkplekken/nieuw' },
   { title: 'Fleet-campagne', desc: 'Eén wijziging over alle repos uitrollen', icon: 'ship-wheel', to: '/fleet/nieuw' },

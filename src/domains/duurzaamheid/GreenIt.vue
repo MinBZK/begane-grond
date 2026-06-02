@@ -248,7 +248,7 @@ const recommendations = computed(() => {
   recs.push({
     id: 'rec-greencoding',
     icon: 'sparkles',
-    title: 'Green coding in de golden paths',
+    title: 'Green coding in de gebaande paden',
     detail: 'Efficiëntere queries, caching en rechtschalen van pods verlagen het verbruik bij de bron. Opnemen als scorecard-criterium.',
     saving: totalKwh.value * 0.08,
     color: '#7c3aed',

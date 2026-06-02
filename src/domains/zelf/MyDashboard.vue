@@ -374,7 +374,7 @@ function rotate(secretId) {
             <nldd-title size="5"><h3>Snelacties</h3></nldd-title>
             <nldd-spacer size="12" />
             <div class="rp-shortcuts">
-              <router-link to="/apps/nieuw" class="rp-shortcut"><nldd-icon name="sparkles" aria-hidden="true"></nldd-icon> Nieuwe app (golden path)</router-link>
+              <router-link to="/apps/nieuw" class="rp-shortcut"><nldd-icon name="sparkles" aria-hidden="true"></nldd-icon> Nieuwe app (gebaand pad)</router-link>
               <router-link to="/infra/order/postgres" class="rp-shortcut"><nldd-icon name="cylinder-split" aria-hidden="true"></nldd-icon> Database afnemen</router-link>
               <router-link to="/infra/order/kubernetes" class="rp-shortcut"><nldd-icon name="ship-wheel" aria-hidden="true"></nldd-icon> Kubernetes afnemen</router-link>
               <router-link to="/werkplekken/nieuw" class="rp-shortcut"><nldd-icon name="cloud" aria-hidden="true"></nldd-icon> Werkplek aanvragen</router-link>

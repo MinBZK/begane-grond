@@ -75,16 +75,16 @@ export const slides = [
   },
   {
     id: 'geplaveide-weg',
-    title: 'De geplaveide weg',
-    lead: 'Golden paths: de makkelijke route is meteen de juiste route.',
+    title: 'Het gebaande pad',
+    lead: 'Gebaande paden: de makkelijke route is meteen de juiste route.',
     bullets: [
       'Begin niet bij een leeg scherm, maar bij een werkend startpunt.',
       'Nu duurt het 93 dagen om een nieuwe dienst in productie te krijgen.',
       'Met een platform eronder: minuten in plaats van maanden.',
     ],
     route: '/apps/templates',
-    emit: { type: 'repo.created', title: 'Nieuwe dienst opgezet via golden path' },
-    note: 'Wijs op de templates rechts. De geplaveide weg is letterlijk klikbaar.',
+    emit: { type: 'repo.created', title: 'Nieuwe dienst opgezet via gebaand pad' },
+    note: 'Wijs op de steigers rechts. Het gebaande pad is letterlijk klikbaar.',
   },
   {
     id: 'self-service',
@@ -167,10 +167,10 @@ export const slides = [
   },
   {
     id: 'nieuwe-app',
-    title: 'Nieuwe app via de geplaveide weg',
+    title: 'Nieuwe app via het gebaande pad',
     lead: 'Van niets naar een werkend project, live.',
     bullets: [
-      'Kies een golden path en de rest staat klaar.',
+      'Kies een gebaand pad en de rest staat klaar.',
       'Repository, pipeline en standaarden zitten er al in.',
       'De makkelijke keuze is meteen de veilige keuze.',
     ],
@@ -199,7 +199,7 @@ export const slides = [
     bullets: [
       'Elke wijziging wordt automatisch gebouwd en gecontroleerd.',
       'Capaciteit die je deelt in plaats van per team opnieuw optuigt.',
-      'De lopende band onder de geplaveide weg.',
+      'De lopende band onder het gebaande pad.',
     ],
     route: '/environments/runners',
     emit: { type: 'runner.scaled', title: 'Runner-pool opgeschaald naar de wachtrij' },
@@ -298,7 +298,7 @@ export const slides = [
       'Afgedwongen via pull requests, niet via goede voornemens.',
       'Eenmaal goed ingeregeld, voor iedereen tegelijk.',
     ],
-    gov: 'BIO als default. Compliance ingebakken in de geplaveide weg, niet als bijlage bij een rapport.',
+    gov: 'BIO als default. Compliance ingebakken in het gebaande pad, niet als bijlage bij een rapport.',
     route: '/security',
     emit: { type: 'compliance.dropped', title: 'Compliance-score gedaald, actie vereist' },
     note: 'Kernzin van het essay: compliance als default. Dit is het hart van het overheidsverhaal.',
@@ -396,7 +396,7 @@ export const slides = [
     bullets: [
       'Alles wat je klikt kun je ook scripten.',
       'Voor wie liever in de terminal woont dan in een dashboard.',
-      'Eén tool die de geplaveide weg in tekstvorm geeft.',
+      'Eén tool die het gebaande pad in tekstvorm geeft.',
     ],
     route: '/cli',
     note: 'Voor de developers in de zaal. rp is het bewijs dat alles ook automatiseerbaar is.',

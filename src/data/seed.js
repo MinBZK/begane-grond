@@ -28337,7 +28337,7 @@ export const learningPaths = [
     "id": "lp-prod",
     "name": "Eerste service in productie",
     "steps": [
-      "App via golden path",
+      "App via gebaand pad",
       "Infra afnemen",
       "CI groen",
       "Promoten naar prod"

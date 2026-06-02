@@ -96,7 +96,7 @@ const groups = computed(() => [
       {
         method: 'POST',
         path: '/apps',
-        summary: 'Golden path: maak app + repo + CI',
+        summary: 'Gebaand pad: maak app + repo + CI',
         request: { name: 'Inkomstenmonitor', team: 'team-platform', template: 'tpl-rust-api', withInfra: ['postgres', 'redis'], visibility: 'open' },
         status: 201,
         response: { app: { id: 'app-1041', name: 'Inkomstenmonitor', repo: 'repo-1042' }, repoUrl: 'https://code.overheid.nl/rijksict/inkomstenmonitor' },

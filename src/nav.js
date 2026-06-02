@@ -66,7 +66,7 @@ export const domains = [
     routes: [
       { path: '/apps', name: 'apps', view: () => import('./domains/apps/Catalog.vue'), title: 'Software-catalogus' },
       { path: '/apps/nieuw', name: 'apps-nieuw', view: () => import('./domains/apps/NewAppWizard.vue'), title: 'Nieuwe applicatie' },
-      { path: '/apps/templates', name: 'apps-templates', view: () => import('./domains/apps/Templates.vue'), title: 'Golden paths' },
+      { path: '/apps/templates', name: 'apps-templates', view: () => import('./domains/apps/Templates.vue'), title: 'Gebaande paden' },
       { path: '/apps/:id', name: 'apps-detail', view: () => import('./domains/apps/AppDetail.vue'), title: 'Applicatie' },
     ],
   },

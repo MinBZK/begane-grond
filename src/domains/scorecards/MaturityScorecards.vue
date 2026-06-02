@@ -215,7 +215,7 @@ const crumbs = [
         <nldd-spacer size="8" />
         <nldd-rich-text>
           <p>
-            Elke app doorloopt zeven checks tegen de golden path. Het aandeel geslaagde
+            Elke app doorloopt zeven checks tegen het gebaande pad. Het aandeel geslaagde
             checks bepaalt het niveau: vanaf 60% zilver, vanaf 85% goud. De handmatig
             toegekende maturity-grade in de catalogus geldt als bodem en kan een niveau
             alleen verhogen, nooit verlagen. Een rood punt linkt door naar het scherm

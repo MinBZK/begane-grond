@@ -203,7 +203,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
   <div class="rp-page">
     <PageHeader
       title="Nieuwe applicatie"
-      lede="De golden path: van leeg scherm naar een werkende repository met CI, infra en het design system. In een paar stappen klaar."
+      lede="Het gebaande pad: van leeg scherm naar een werkende repository met CI, infra en het design system. In een paar stappen klaar."
       :crumbs="[{ text: 'Home', href: '/' }, { text: 'Applicaties', href: '/apps' }, { text: 'Nieuw', href: '/apps/nieuw' }]"
     />
 
@@ -219,7 +219,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
               <nldd-title size="3"><h2>{{ created.app.name }} is aangemaakt</h2></nldd-title>
               <nldd-rich-text>
                 <p>
-                  De golden path is uitgerold. De repository staat klaar, CI draait groen en
+                  Het gebaande pad is uitgerold. De repository staat klaar, CI draait groen en
                   <template v-if="createdInstances.length">de gekozen infra wordt nu geprovisioned.</template>
                   <template v-else>er is nog geen infra afgenomen.</template>
                 </p>
@@ -274,7 +274,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
       v-else
       ref="wizardRef"
       :steps="[
-        { title: 'Golden path' },
+        { title: 'Gebaand pad' },
         { title: 'Basis' },
         { title: 'Infra' },
         { title: 'Repository' },
@@ -286,7 +286,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
       <template #default="{ step, go }">
         <!-- Step 0: template -->
         <div v-if="step === 0">
-          <nldd-title size="4"><h2>Kies een golden path</h2></nldd-title>
+          <nldd-title size="4"><h2>Kies een gebaand pad</h2></nldd-title>
           <nldd-spacer size="6" />
           <nldd-rich-text><p>Het startpunt bepaalt de taal, de steiger en welke checks meekomen.</p></nldd-rich-text>
           <nldd-spacer size="16" />
@@ -474,7 +474,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
             </nldd-list-item>
             <nldd-list-item @click="go(0)">
               <nldd-icon-cell slot="start" name="sparkles"></nldd-icon-cell>
-              <nldd-title-cell overline="Golden path" :text="selectedTemplate?.name || 'geen'"></nldd-title-cell>
+              <nldd-title-cell overline="Gebaand pad" :text="selectedTemplate?.name || 'geen'"></nldd-title-cell>
             </nldd-list-item>
             <nldd-list-item @click="go(1)">
               <nldd-icon-cell slot="start" name="person-2"></nldd-icon-cell>
@@ -494,7 +494,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
           <nldd-inline-dialog
             v-if="!canFinish"
             title="Nog niet compleet"
-            supporting-text="Kies een golden path en geef de applicatie een naam voordat je hem aanmaakt."
+            supporting-text="Kies een gebaand pad en geef de applicatie een naam voordat je hem aanmaakt."
           ></nldd-inline-dialog>
 
           <CliHint :command="cliCommand" label="Liever via de CLI? Dit commando doet hetzelfde:" />

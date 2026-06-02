@@ -219,7 +219,7 @@ function scoreColor(score) {
     <nldd-rich-text>
       <p>
         Het Begane Grond werkt &lsquo;open en volgens de standaarden&rsquo;. Elke standaard hieronder
-        is een afspraak die je app via de golden path automatisch erft. Klik door voor de
+        is een afspraak die je app via het gebaande pad automatisch erft. Klik door voor de
         naleving per applicatie en de onderbouwing waar iets nog niet voldoet.
       </p>
     </nldd-rich-text>

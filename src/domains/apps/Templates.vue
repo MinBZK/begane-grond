@@ -91,19 +91,19 @@ const usageByTemplate = computed(() => {
 <template>
   <div class="rp-page">
     <PageHeader
-      title="Golden paths"
-      lede="De aanbevolen startpunten voor een nieuwe applicatie. Een golden path levert een werkende repository met CI, tests en het design system, zodat een team binnen minuten productief is."
-      :crumbs="[{ text: 'Home', href: '/' }, { text: 'Applicaties', href: '/apps' }, { text: 'Golden paths', href: '/apps/templates' }]"
+      title="Gebaande paden"
+      lede="De aanbevolen startpunten voor een nieuwe applicatie. Een gebaand pad levert een werkende repository met CI, tests en het design system, zodat een team binnen minuten productief is."
+      :crumbs="[{ text: 'Home', href: '/' }, { text: 'Applicaties', href: '/apps' }, { text: 'Gebaande paden', href: '/apps/templates' }]"
     >
       <template #actions>
         <router-link to="/apps/nieuw">
-          <nldd-button variant="primary" text="Start een golden path" start-icon="plus"></nldd-button>
+          <nldd-button variant="primary" text="Start een gebaand pad" start-icon="plus"></nldd-button>
         </router-link>
       </template>
     </PageHeader>
 
     <nldd-container layout="grid" column-count="3" gap="16">
-      <MetricCard :value="store.templates.length + GOV_PATHS.length" label="Golden paths" sub="beschikbaar" icon="books-vertical" />
+      <MetricCard :value="store.templates.length + GOV_PATHS.length" label="Gebaande paden" sub="beschikbaar" icon="books-vertical" />
       <MetricCard value="< 10 min" label="Tijd tot eerste commit" sub="gemiddeld" icon="clock" />
       <MetricCard value="EUPL-1.2" label="Standaardlicentie" sub="open-tenzij" icon="certificate" />
     </nldd-container>
@@ -158,7 +158,7 @@ const usageByTemplate = computed(() => {
           <nldd-spacer size="16" />
 
           <router-link :to="`/apps/nieuw?template=${tpl.id}`">
-            <nldd-button variant="primary" text="Gebruik deze golden path" end-icon="arrow-right"></nldd-button>
+            <nldd-button variant="primary" text="Gebruik dit gebaande pad" end-icon="arrow-right"></nldd-button>
           </router-link>
         </nldd-container>
       </nldd-card>
@@ -170,7 +170,7 @@ const usageByTemplate = computed(() => {
     <nldd-spacer size="6" />
     <nldd-rich-text>
       <p>
-        Geen kale steiger, maar de bouwstenen die het Rijk uniek maken. Deze golden paths
+        Geen kale steiger, maar de bouwstenen die het Rijk uniek maken. Deze gebaande paden
         starten in hun eigen flow elders op het platform en laten zien hoe alles samenhangt:
         van wet tot register tot koppelvlak.
       </p>
@@ -211,7 +211,7 @@ const usageByTemplate = computed(() => {
 
     <nldd-inline-dialog
       title="Open-tenzij"
-      supporting-text="Elke golden path zet standaard een EUPL-1.2 repository op met CONTRIBUTING.md en een security.txt. Sluiten kan, maar vraagt een motivatie."
+      supporting-text="Elk gebaand pad zet standaard een EUPL-1.2 repository op met CONTRIBUTING.md en een security.txt. Sluiten kan, maar vraagt een motivatie."
     ></nldd-inline-dialog>
   </div>
 </template>

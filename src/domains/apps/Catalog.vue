@@ -84,7 +84,7 @@ function reset() {
     >
       <template #actions>
         <router-link to="/apps/templates">
-          <nldd-button variant="secondary" text="Golden paths" start-icon="books-vertical"></nldd-button>
+          <nldd-button variant="secondary" text="Gebaande paden" start-icon="books-vertical"></nldd-button>
         </router-link>
         <router-link to="/apps/nieuw">
           <nldd-button variant="primary" text="Nieuwe applicatie" start-icon="plus"></nldd-button>
@@ -94,7 +94,7 @@ function reset() {
 
     <nldd-container layout="grid" column-count="3" gap="16">
       <MetricCard :value="total" label="Applicaties" sub="in de catalogus" icon="rectangle-stack" />
-      <MetricCard :value="goldCount" label="Goud" sub="volwassen golden path" icon="starburst-filled" />
+      <MetricCard :value="goldCount" label="Goud" sub="volgt het gebaande pad" icon="starburst-filled" />
       <MetricCard :value="warnCount" label="Aandacht" sub="health niet groen" icon="exclamation-triangle" />
     </nldd-container>
 
