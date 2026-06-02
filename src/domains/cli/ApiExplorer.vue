@@ -620,6 +620,7 @@ const openapiUrl = `${BASE}/openapi.json`;
   overflow: hidden;
 }
 .rp-ep-row {
+  box-sizing: border-box;
   width: 100%;
   display: flex;
   align-items: center;

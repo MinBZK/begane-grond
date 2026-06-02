@@ -508,6 +508,7 @@ function focus(card, cell) {
   gap: 0.4rem;
 }
 .rp-control {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: 0.55rem;

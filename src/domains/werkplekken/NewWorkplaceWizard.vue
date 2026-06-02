@@ -408,6 +408,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('werkplek'));
   align-items: flex-start;
   gap: 0.75rem;
   text-align: left;
+  box-sizing: border-box;
   padding: 0.9rem 1rem;
   border-radius: 10px;
   border: 1.5px solid var(--semantics-dividers-color);

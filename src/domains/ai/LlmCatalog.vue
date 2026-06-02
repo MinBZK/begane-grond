@@ -767,6 +767,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('llm'));
   gap: 0.75rem;
   text-align: left;
   width: 100%;
+  box-sizing: border-box;
   padding: 0.7rem 1rem;
   border-radius: 10px;
   border: 1.5px solid var(--semantics-dividers-color);
@@ -775,6 +776,9 @@ onBeforeUnmount(() => presentation.unregisterWizard('llm'));
   font: inherit;
   color: inherit;
   transition: border-color 0.12s ease, background 0.12s ease;
+}
+.rp-pick-main strong {
+  overflow-wrap: anywhere;
 }
 .rp-pick:hover {
   background: var(--semantics-surfaces-tinted-background-color);

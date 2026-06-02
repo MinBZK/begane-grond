@@ -457,6 +457,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
   gap: 0.5rem;
 }
 .rp-repo-row {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: 0.6rem;

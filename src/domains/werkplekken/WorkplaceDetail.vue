@@ -425,6 +425,7 @@ const handoverTarget = computed(() =>
   align-items: flex-start;
   gap: 0.75rem;
   text-align: left;
+  box-sizing: border-box;
   padding: 0.75rem 0.9rem;
   border-radius: 10px;
   border: 1.5px solid var(--semantics-dividers-color);

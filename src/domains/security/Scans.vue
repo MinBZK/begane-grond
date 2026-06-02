@@ -410,6 +410,7 @@ const auditMoreCount = computed(() => Math.max(0, auditMatches.value.length - au
   text-decoration: underline;
 }
 .rp-cell {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: 0.4rem;

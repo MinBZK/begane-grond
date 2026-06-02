@@ -176,6 +176,7 @@ const kpis = computed(() => {
   margin: 0 0.15rem;
 }
 .rp-bar {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   height: 0.7rem;

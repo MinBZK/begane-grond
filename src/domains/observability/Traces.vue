@@ -329,6 +329,7 @@ const critical = computed(() => trace.value.spans.reduce((m, s) => Math.max(m, s
   overflow: hidden;
 }
 .rp-span-row {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: 0;

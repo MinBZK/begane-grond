@@ -240,6 +240,7 @@ const cliCommand = computed(() => {
   font-variant-numeric: tabular-nums;
 }
 .rp-bar {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   height: 0.85rem;

@@ -328,6 +328,7 @@ function appForSecret(sec) {
   gap: 1rem;
 }
 .rp-team-row {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: 0.6rem;
