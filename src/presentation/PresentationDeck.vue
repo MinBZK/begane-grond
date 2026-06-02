@@ -93,7 +93,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="deck" role="region" aria-label="Presentatie">
+  <div class="deck" :class="{ full: p.isFull.value }" role="region" aria-label="Presentatie">
     <!-- Too narrow: cannot run the deck here. -->
     <div v-if="!wideEnough" class="too-small">
       <div class="too-small-card">
@@ -107,29 +107,38 @@ onBeforeUnmount(() => {
     <!-- The actual slide panel. -->
     <template v-else>
       <div class="content">
-        <span v-if="current && current.gov" class="gov-pill">
-          Specifiek voor de overheid
-        </span>
+        <!-- Main story block, vertically centered in the available space. -->
+        <div class="content-main">
+          <span v-if="current && current.gov" class="gov-pill">
+            Specifiek voor de overheid
+          </span>
 
-        <h1 v-if="current" class="title">{{ current.title }}</h1>
+          <h1 v-if="current" class="title">{{ current.title }}</h1>
 
-        <p v-if="current && current.lead" class="lead">{{ current.lead }}</p>
+          <p v-if="current && current.lead" class="lead">{{ current.lead }}</p>
 
-        <ul
-          v-if="current && current.bullets && current.bullets.length"
-          class="bullets"
+          <ul
+            v-if="current && current.bullets && current.bullets.length"
+            class="bullets"
+          >
+            <li v-for="(b, i) in current.bullets" :key="i">{{ b }}</li>
+          </ul>
+        </div>
+
+        <!-- Government callout and speaker note sit at the foot of the slide. -->
+        <div
+          v-if="current && ((current.gov && typeof current.gov === 'string') || current.note)"
+          class="content-foot"
         >
-          <li v-for="(b, i) in current.bullets" :key="i">{{ b }}</li>
-        </ul>
+          <p
+            v-if="current.gov && typeof current.gov === 'string'"
+            class="gov-explain"
+          >
+            {{ current.gov }}
+          </p>
 
-        <p
-          v-if="current && current.gov && typeof current.gov === 'string'"
-          class="gov-explain"
-        >
-          {{ current.gov }}
-        </p>
-
-        <p v-if="current && current.note" class="note">{{ current.note }}</p>
+          <p v-if="current.note" class="note">{{ current.note }}</p>
+        </div>
       </div>
 
       <!-- Live animation indicator + controls, shown while a wizard auto-runs. -->
@@ -232,6 +241,16 @@ onBeforeUnmount(() => {
   overflow: hidden;
   box-sizing: border-box;
   box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
+  /* Animate the move between full-width intro and the left rail. */
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Intro slides: the deck spans the screen; content sits in a centered column
+   so the full-width text does not stretch uncomfortably wide. */
+.deck.full {
+  width: 100vw;
+  padding: 4rem clamp(3rem, 12vw, 14rem) 2rem;
 }
 
 /* The content area is the only scroll region, so the footer (counter, nav) and
@@ -240,18 +259,39 @@ onBeforeUnmount(() => {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
   min-height: 0;
   overflow: auto;
+}
+
+/* The story block grows to fill the panel and centers its content vertically,
+   so a slide never clings to the top with a blue void beneath it. */
+.content-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+}
+
+/* Government callout and speaker note are pinned at the foot, away from the
+   story, with a hairline divider so they read as secondary. */
+.content-foot {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .gov-pill {
   align-self: flex-start;
   font-family: 'RijksSans', system-ui, sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  padding: 0.3rem 0.75rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.16);
   color: #fff;
@@ -260,49 +300,55 @@ onBeforeUnmount(() => {
 .title {
   font-family: 'RijksoverheidSerif', Georgia, serif;
   font-weight: 700;
-  font-size: clamp(2rem, 3.2vw, 3.2rem);
-  line-height: 1.1;
+  font-size: clamp(2.6rem, 4.2vw, 4.2rem);
+  line-height: 1.08;
   margin: 0;
   color: #fff;
 }
 
 .lead {
   font-family: 'RijksSans', system-ui, sans-serif;
-  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
-  line-height: 1.45;
+  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+  line-height: 1.4;
   margin: 0;
-  color: rgba(255, 255, 255, 0.92);
+  color: #fff;
+  font-weight: 500;
 }
 
 .bullets {
   font-family: 'RijksSans', system-ui, sans-serif;
-  font-size: clamp(1rem, 1.25vw, 1.2rem);
-  line-height: 1.5;
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+  line-height: 1.45;
   margin: 0;
-  padding-left: 1.25rem;
+  padding-left: 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  color: rgba(255, 255, 255, 0.95);
+  gap: 0.85rem;
+  color: rgba(255, 255, 255, 0.96);
 }
 
 .bullets li::marker {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bullets li {
+  padding-left: 0.25rem;
 }
 
 .gov-explain {
   font-family: 'RijksSans', system-ui, sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   line-height: 1.45;
   margin: 0;
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .note {
   font-family: 'RijksSans', system-ui, sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   line-height: 1.4;
   margin: 0;
+  font-style: italic;
   /* 0.7 clears WCAG AA (4.5:1) over the Rijksblauw panel. */
   color: rgba(255, 255, 255, 0.7);
 }

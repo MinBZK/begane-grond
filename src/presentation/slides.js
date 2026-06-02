@@ -33,6 +33,7 @@ export const slides = [
       'Vandaag: wat platform engineering is, en waarom de overheid het nodig heeft.',
     ],
     route: '/',
+    full: true,
     note: 'Rustig openen. De naam is de belofte: de grond onder iedereens voeten effen maken.',
   },
   {
@@ -44,6 +45,7 @@ export const slides = [
       'De Belastingdienst verwerkt jaarlijks meer dan 10 miljoen aangiftes, met honderden wijzigingen per jaar.',
       'Er is geen kant-en-klaar product voor de Toeslagenberekening. Je kunt het niet kopen.',
     ],
+    full: true,
     note: 'These van het essay, bijna letterlijk. Begin bij iets dat iedereen kent: een toeslag, een paspoort. Daar zit code achter.',
   },
   {
@@ -56,6 +58,7 @@ export const slides = [
       'De wereld is te ingewikkeld om vooraf dicht te timmeren in een bestek.',
       'Vendor lock-in: eenmaal binnen kom je er niet meer uit.',
     ],
+    full: true,
     note: 'Eerste keer dat ik "platform" definieer. Doe het langzaam: de basislaag, niet de app zelf.',
   },
   {
@@ -67,6 +70,7 @@ export const slides = [
       'AI-assistentie maakt een klein team verrassend productief.',
       'Maar goedkope code zonder platform is een berg techniek-schuld in wording.',
     ],
+    full: true,
     note: 'De kanteling uit het essay. Zelf bouwen wint, mits er een platform onder ligt dat het veilig houdt.',
   },
   {

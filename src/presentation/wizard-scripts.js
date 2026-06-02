@@ -55,19 +55,57 @@ export const wizardScripts = {
     { finish: true },
   ],
 
-  // NewWetWizard: 6 steps (Bron, Traject, Machine-leesbaar, Scenario, Uitvoeren, Publiceren).
-  // Defaults already cover the source (harvest mode, BWBR0008659).
+  // NewWetWizard: the showcase. 6 steps (Bron, Traject, Machine-leesbaar,
+  // Scenario, Uitvoeren, Publiceren). Every step is populated visibly so the
+  // audience sees a law turn into a running, tested service end to end. The
+  // story: the Huurtoeslagwet, whose right-to-allowance reads income from the
+  // inkomensregister and household from the BRP.
   wet: [
+    { wait: 900 },
+    // Step 0: Bron. Re-type the BWB id and the law name so the harvest reads live.
+    { set: 'bwbId', value: 'BWBR0008659', type: true },
+    { wait: 300 },
+    { set: 'harvestName', value: 'Wet op de huurtoeslag', type: true },
+    { wait: 700 },
+    { next: true },
+    // Step 1: Traject. Name the working space and add a jurist next to the dev.
+    { set: 'trajectName', value: 'Huurtoeslag machine-leesbaar', type: true },
+    { wait: 300 },
+    { call: 'toggleMember', args: ['joost'] },
+    { wait: 300 },
+    { set: 'team', value: 'team-toeslagen' },
     { wait: 600 },
     { next: true },
-    { set: 'team', value: 'team-toeslagen' },
-    { next: true },
-    { set: 'inputs.0.register', value: 'brp' },
-    { set: 'inputs.0.output', value: 'geboortedatum' },
-    { next: true },
-    { next: true },
-    { next: true },
+    // Step 2: Machine-leesbaar. Two outcomes, two inputs bound to registers.
+    { set: 'outputs.0.name', value: 'heeft_recht_op_huurtoeslag', type: true },
+    { wait: 300 },
+    { call: 'addOutput' },
+    { set: 'outputs.1.name', value: 'hoogte_toeslag', type: true },
+    { wait: 400 },
+    { set: 'inputs.0.register', value: 'inkomen' },
+    { wait: 350 },
+    { set: 'inputs.0.output', value: 'toetsingsinkomen' },
     { wait: 500 },
+    { call: 'addInput' },
+    { wait: 350 },
+    { set: 'inputs.1.register', value: 'brp' },
+    { wait: 350 },
+    { set: 'inputs.1.output', value: 'partner' },
+    { wait: 800 },
+    { next: true },
+    // Step 3: Scenario. A concrete Given/When/Then, typed out.
+    { set: 'scenario.name', value: 'Alleenstaande met laag inkomen', type: true },
+    { wait: 300 },
+    { set: 'scenario.given', value: 'geen partner, toetsingsinkomen 22.000 euro', type: true },
+    { wait: 300 },
+    { set: 'scenario.then', value: 'recht op huurtoeslag, hoogte berekend', type: true },
+    { wait: 800 },
+    { next: true },
+    // Step 4: Uitvoeren. The engine runs the scenario green; let it land.
+    { wait: 2000 },
+    { next: true },
+    // Step 5: Publiceren and deploy as a running service.
+    { wait: 900 },
     { finish: true },
   ],
 

@@ -25,6 +25,9 @@ let _driveControl = { id: 0, aborted: false, isPaused: () => drivePaused.value }
 
 const current = computed(() => slides[index.value])
 const total = computed(() => slides.length)
+// Intro slides render the deck full-width; once a demo is relevant the deck
+// animates to the left rail and the app slides in on the right.
+const isFull = computed(() => active.value && !!slides[index.value]?.full)
 
 // Small promise-based delay helper. setTimeout is allowed; no clock/random API.
 function delay(ms) {
@@ -123,6 +126,10 @@ async function runSlide(i) {
   // Moving to a new slide aborts any animation still running on the old one.
   cancelDrive()
 
+  // Full-width intro vs. left-rail demo mode. Toggling the class drives a CSS
+  // width transition on the deck and the app's left padding.
+  document.documentElement.classList.toggle('rp-presenting-full', !!s.full)
+
   // Navigate to the slide's demo route, or just update the query in place.
   if (s.route && _router.currentRoute.value.path !== s.route) {
     _router.push({ path: s.route, query: presentQuery(i) })
@@ -186,6 +193,7 @@ function stop() {
     _autoTimer = null
   }
   document.documentElement.classList.remove('rp-presenting')
+  document.documentElement.classList.remove('rp-presenting-full')
   if (_router) {
     const query = { ...(_router.currentRoute.value.query || {}) }
     delete query.present
@@ -229,6 +237,7 @@ export function usePresentation() {
     index,
     current,
     total,
+    isFull,
     autoplay,
     driving,
     drivePaused,

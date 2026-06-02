@@ -143,7 +143,14 @@ const wizardApi = {
 };
 const presentation = usePresentation();
 onMounted(() =>
-  presentation.registerWizard('wet', { form, wizardRef: wizardApi, finish: onFinish, addInput, addOutput }),
+  presentation.registerWizard('wet', {
+    form,
+    wizardRef: wizardApi,
+    finish: onFinish,
+    addInput,
+    addOutput,
+    toggleMember,
+  }),
 );
 onBeforeUnmount(() => presentation.unregisterWizard('wet'));
 </script>

@@ -5,9 +5,16 @@
  * right and chrome is hidden, without touching AppShell scripts.
  */
 
-/* Shift the app to the right of the deck overlay. */
+/* Shift the app to the right of the deck overlay. The transition animates the
+   move when the deck switches between full-width intro and the left rail. */
 html.rp-presenting body {
   padding-left: 40vw;
+  transition: padding-left 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Intro slides: the deck covers the screen and the app is not shifted. */
+html.rp-presenting-full body {
+  padding-left: 0;
 }
 
 /* The side navigation stays visible in presentation mode: it is part of the
