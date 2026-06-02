@@ -25,12 +25,15 @@ function closeInbox() {
 
 // --- Side navigation, grouped by build wave ---
 const groups = computed(() => {
-  const order = ['A', 'B', 'C', 'D'];
-  return order.map((w) => ({
-    wave: w,
-    label: waveLabels[w],
-    domains: domains.filter((d) => d.wave === w),
-  }));
+  // 'H' is the top group (the overviews) and renders without a header label.
+  const order = ['H', 'A', 'B', 'C', 'D'];
+  return order
+    .map((w) => ({
+      wave: w,
+      label: waveLabels[w] || '',
+      domains: domains.filter((d) => d.wave === w),
+    }))
+    .filter((g) => g.domains.length);
 });
 
 const activeDomain = computed(() => route.meta?.domain || 'home');
@@ -153,7 +156,7 @@ onBeforeUnmount(() => {
       <div class="rp-shell-grid">
         <nav class="rp-sidenav" aria-label="Hoofdnavigatie">
           <template v-for="group in groups" :key="group.wave">
-            <p class="rp-sidenav-group">{{ group.label }}</p>
+            <p v-if="group.label" class="rp-sidenav-group">{{ group.label }}</p>
             <ul>
               <li v-for="d in group.domains" :key="d.key">
                 <router-link

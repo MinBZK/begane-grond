@@ -14,7 +14,7 @@ export const domains = [
     path: '/',
     label: 'Overzicht',
     icon: 'house',
-    wave: 'A',
+    wave: 'H',
     routes: [
       { path: '/', name: 'home', view: () => import('./domains/home/Dashboard.vue'), title: 'Overzicht' },
     ],
@@ -24,7 +24,7 @@ export const domains = [
     path: '/zelf',
     label: 'Mijn overzicht',
     icon: 'person',
-    wave: 'D',
+    wave: 'H',
     routes: [
       { path: '/zelf', name: 'zelf', view: () => import('./domains/zelf/MyDashboard.vue'), title: 'Mijn overzicht' },
     ],
@@ -252,7 +252,7 @@ export const domains = [
     path: '/notificaties',
     label: 'Notificaties',
     icon: 'envelope',
-    wave: 'C',
+    wave: 'B',
     routes: [
       { path: '/notificaties', name: 'notificaties', view: () => import('./domains/notificaties/Channels.vue'), title: 'Notificaties' },
     ],
