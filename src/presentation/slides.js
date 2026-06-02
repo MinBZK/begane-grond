@@ -311,6 +311,19 @@ export const slides = [
     emit: { type: 'compliance.dropped', title: 'Compliance-score gedaald, actie vereist' },
   },
   {
+    id: 'certificaten',
+    title: 'Een certificaat in seconden, live',
+    lead: 'Een PKIoverheid-certificaat was weken handwerk. Nu een gebaand pad dat zichzelf vernieuwt.',
+    bullets: [
+      'Vroeger: zelf een CSR maken, aanvragen bij een TSP, wachten, handmatig installeren.',
+      'En dan de vernieuwing vergeten, waardoor de dienst omvalt.',
+      'Nu: een aanvraag, automatisch uitgegeven en gekoppeld, auto-vernieuwing standaard aan.',
+    ],
+    gov: 'PKIoverheid van papieren proces naar self-service. Verlopen door vergeten kan niet meer.',
+    route: '/secrets/certificaten',
+    drive: { wizard: 'cert' },
+  },
+  {
     id: 'standaarden',
     title: 'Standaarden',
     lead: 'Standaard als code, afgedwongen via pull requests.',

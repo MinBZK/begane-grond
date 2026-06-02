@@ -153,6 +153,26 @@ export const wizardScripts = {
     { call: 'runDeploy' },
   ],
 
+  // Certificates: gated behind a request panel, then 3 steps (Domein, TSP en
+  // OIN, Uitgeven). Open the panel, fill the domain and TSP live, then run the
+  // issuance pipeline (CSR -> TSP -> uitgifte -> installatie) so the audience
+  // sees a PKIoverheid certificate go from request to installed in seconds.
+  cert: [
+    { wait: 600 },
+    { call: 'openRequest' },
+    { wait: 700 },
+    { set: 'cn', value: '*.nieuwedienst.overheid.nl', type: true },
+    { wait: 400 },
+    { set: 'service', value: 'app-omgevingsloket' },
+    { wait: 500 },
+    { next: true },
+    { set: 'tsp', value: 'KPN' },
+    { wait: 600 },
+    { next: true },
+    { wait: 500 },
+    { call: 'runIssue' },
+  ],
+
   // LlmCatalog: gated behind wizardOpen, then 4 steps (Model, Eigenaar,
   // Doel & classificatie, Samenvatting). Open it first, then walk through.
   llm: [

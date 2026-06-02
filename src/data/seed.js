@@ -28810,117 +28810,240 @@ export const secrets = [
 
 export const certificates = [
   {
+    "id": "cert-aanvraag-1",
+    "cn": "*.nieuwedienst.overheid.nl",
+    "ca": "PKIoverheid",
+    "expires": "n.v.t.",
+    "service": "app-omgevingsloket",
+    "status": "aangevraagd",
+    "tsp": "KPN",
+    "oin": "00000001823288444000",
+    "keyType": "ECDSA P-384",
+    "autoRenew": true,
+    "requested": "2 dagen geleden, wacht op TSP-validatie"
+  },
+  {
+    "id": "cert-verlopen-1",
+    "cn": "*.milieumelding.overheid.nl",
+    "ca": "PKIoverheid",
+    "expires": "verlopen",
+    "service": "app-milieumelding",
+    "status": "verlopen",
+    "tsp": "Digidentity",
+    "oin": "00000001821002193000",
+    "keyType": "RSA 2048",
+    "autoRenew": false,
+    "requested": "handmatig aangevraagd, vernieuwing vergeten"
+  },
+  {
     "id": "cert-1",
     "cn": "*.rijks.app",
     "ca": "PKIoverheid",
     "expires": "over 120 dagen",
-    "service": "app-platformportaal"
+    "service": "app-platformportaal",
+    "status": "geldig",
+    "tsp": "KPN",
+    "oin": "00000001002564440000",
+    "keyType": "RSA 2048",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-2",
     "cn": "api.datadeling.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 30 dagen",
-    "service": "app-datadeling"
+    "service": "app-datadeling",
+    "status": "verloopt binnenkort",
+    "tsp": "KPN",
+    "oin": "00000001003214345000",
+    "keyType": "RSA 2048",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g0",
     "cn": "*.kentekencheck.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 20 dagen",
-    "service": "app-kentekencheck"
+    "service": "app-kentekencheck",
+    "status": "verloopt binnenkort",
+    "tsp": "Digidentity",
+    "oin": "00000001003214345000",
+    "keyType": "RSA 2048",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g1",
     "cn": "*.kadaster-viewer.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 28 dagen",
-    "service": "app-kadaster-viewer"
+    "service": "app-kadaster-viewer",
+    "status": "verloopt binnenkort",
+    "tsp": "Digidentity",
+    "oin": "00000001821002193000",
+    "keyType": "RSA 2048",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g2",
     "cn": "*.bezwaarafhandeling.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 36 dagen",
-    "service": "app-bezwaarafhandeling"
+    "service": "app-bezwaarafhandeling",
+    "status": "geldig",
+    "tsp": "QuoVadis",
+    "oin": "00000001003214345000",
+    "keyType": "ECDSA P-384",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g3",
     "cn": "*.bsn-validatie.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 44 dagen",
-    "service": "app-bsn-validatie"
+    "service": "app-bsn-validatie",
+    "status": "geldig",
+    "tsp": "Digidentity",
+    "oin": "00000001002564440000",
+    "keyType": "ECDSA P-384",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g4",
     "cn": "*.belastingaangifte-ib.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 52 dagen",
-    "service": "app-belastingaangifte-ib"
+    "service": "app-belastingaangifte-ib",
+    "status": "geldig",
+    "tsp": "QuoVadis",
+    "oin": "00000001821002193000",
+    "keyType": "RSA 2048",
+    "autoRenew": false,
+    "requested": "handmatig aangevraagd"
   },
   {
     "id": "cert-g5",
     "cn": "*.onderwijsregistratie.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 60 dagen",
-    "service": "app-onderwijsregistratie"
+    "service": "app-onderwijsregistratie",
+    "status": "geldig",
+    "tsp": "QuoVadis",
+    "oin": "00000001002564440000",
+    "keyType": "ECDSA P-384",
+    "autoRenew": false,
+    "requested": "handmatig aangevraagd"
   },
   {
     "id": "cert-g6",
     "cn": "*.waterschapsheffing.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 68 dagen",
-    "service": "app-waterschapsheffing"
+    "service": "app-waterschapsheffing",
+    "status": "geldig",
+    "tsp": "QuoVadis",
+    "oin": "00000001003214345000",
+    "keyType": "RSA 2048",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g7",
     "cn": "*.datakwaliteit-monitor.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 76 dagen",
-    "service": "app-datakwaliteit-monitor"
+    "service": "app-datakwaliteit-monitor",
+    "status": "geldig",
+    "tsp": "Digidentity",
+    "oin": "00000001821002193000",
+    "keyType": "ECDSA P-384",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g8",
     "cn": "*.risicoscoring.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 84 dagen",
-    "service": "app-risicoscoring"
+    "service": "app-risicoscoring",
+    "status": "geldig",
+    "tsp": "KPN",
+    "oin": "00000001003214345000",
+    "keyType": "RSA 2048",
+    "autoRenew": false,
+    "requested": "handmatig aangevraagd"
   },
   {
     "id": "cert-g9",
     "cn": "*.rollenmatrix.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 92 dagen",
-    "service": "app-rollenmatrix"
+    "service": "app-rollenmatrix",
+    "status": "geldig",
+    "tsp": "QuoVadis",
+    "oin": "00000001003214345000",
+    "keyType": "ECDSA P-384",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g10",
     "cn": "*.feature-flags.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 100 dagen",
-    "service": "app-feature-flags"
+    "service": "app-feature-flags",
+    "status": "geldig",
+    "tsp": "KPN",
+    "oin": "00000001821002193000",
+    "keyType": "RSA 2048",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g11",
     "cn": "*.toegankelijkheid-scanner.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 108 dagen",
-    "service": "app-toegankelijkheid-scanner"
+    "service": "app-toegankelijkheid-scanner",
+    "status": "geldig",
+    "tsp": "Digidentity",
+    "oin": "00000001821002193000",
+    "keyType": "ECDSA P-384",
+    "autoRenew": true,
+    "requested": "automatisch vernieuwd op T-21"
   },
   {
     "id": "cert-g12",
     "cn": "*.afspraakplanner.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 116 dagen",
-    "service": "app-afspraakplanner"
+    "service": "app-afspraakplanner",
+    "status": "geldig",
+    "tsp": "KPN",
+    "oin": "00000001821002193000",
+    "keyType": "ECDSA P-384",
+    "autoRenew": false,
+    "requested": "handmatig aangevraagd"
   },
   {
     "id": "cert-g13",
     "cn": "*.gegevensmakelaar.overheid.nl",
     "ca": "PKIoverheid",
     "expires": "over 124 dagen",
-    "service": "app-gegevensmakelaar"
+    "service": "app-gegevensmakelaar",
+    "status": "geldig",
+    "tsp": "Digidentity",
+    "oin": "00000001002564440000",
+    "keyType": "RSA 2048",
+    "autoRenew": false,
+    "requested": "handmatig aangevraagd"
   }
+
 ];
 
 export const apis = [

@@ -472,6 +472,46 @@ export const usePlatformStore = defineStore('platform', {
       }
     },
 
+    // --- PKIoverheid certificate lifecycle ---
+    // Self-service request: the platform generates the CSR, submits it to the
+    // TSP and installs the certificate. What used to be a multi-week manual
+    // request becomes one action, with auto-renewal on by default.
+    requestCertificate({ cn, service, tsp, oin, autoRenew = true }) {
+      const slug = (cn || 'nieuw').replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+      const cert = {
+        id: `cert-${slug}`,
+        cn,
+        ca: 'PKIoverheid',
+        expires: 'over 365 dagen',
+        service: service || null,
+        status: 'geldig',
+        tsp: tsp || 'KPN',
+        oin: oin || '00000001823288444000',
+        keyType: 'ECDSA P-384',
+        autoRenew,
+        requested: 'zojuist via self-service uitgegeven',
+      };
+      this.certificates.unshift(cert);
+      this.audit('certificaat aangevraagd', cn);
+      this.emit('cert.issued', { title: `Certificaat ${cn} uitgegeven door ${cert.tsp}`, resource: cert.id, target: '/secrets/certificaten', team: 'team-platform' });
+      return cert;
+    },
+    renewCertificate(id) {
+      const cert = this.certificates.find((c) => c.id === id);
+      if (!cert) return;
+      cert.expires = 'over 365 dagen';
+      cert.status = 'geldig';
+      cert.requested = 'zojuist vernieuwd';
+      this.audit('certificaat vernieuwd', cert.cn);
+      this.emit('cert.renewed', { title: `Certificaat ${cert.cn} vernieuwd`, resource: cert.id, target: '/secrets/certificaten', team: 'team-platform' });
+    },
+    toggleCertAutoRenew(id) {
+      const cert = this.certificates.find((c) => c.id === id);
+      if (!cert) return;
+      cert.autoRenew = !cert.autoRenew;
+      this.audit(cert.autoRenew ? 'auto-vernieuwing aan' : 'auto-vernieuwing uit', cert.cn);
+    },
+
     // --- Domains & DNS management ---
     // Register a new government domain. A fresh domain starts without DNSSEC and
     // without an internet.nl score, so the work to get it compliant is visible.
