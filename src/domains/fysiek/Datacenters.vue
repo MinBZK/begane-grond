@@ -16,6 +16,11 @@ const totalUsed = computed(() => store.datacenters.reduce((s, d) => s + d.usedKw
 // total). The capacity sum lives in the sub-label.
 const totalRacks = computed(() => store.racks.length);
 const rackCapacity = computed(() => store.datacenters.reduce((s, d) => s + d.racks, 0));
+
+// Aggregated compute capacity across all installed hardware.
+const cap = computed(() => store.computeCapacity());
+const vcpuLabel = computed(() => `${(cap.value.vcpu / 1000).toFixed(1)}k`);
+const memTb = computed(() => Math.round(cap.value.memGB / 1024));
 const dcOperationeel = computed(() => store.datacenters.filter((d) => d.status === 'operationeel').length);
 const dcInAanbouw = computed(() => store.datacenters.filter((d) => d.status === 'in aanbouw').length);
 const avgPue = computed(() => {
@@ -53,6 +58,9 @@ function barColor(p) {
       <MetricCard :value="`${totalUsed} kW`" :label="`van ${totalCapacity} kW capaciteit`" :sub="`${Math.round((totalUsed / totalCapacity) * 100)}% benut`" icon="cloud" />
       <MetricCard :value="totalRacks" label="Racks in productie" :sub="`${rackCapacity} rackposities capaciteit`" icon="rectangle-stack" />
       <MetricCard :value="avgPue" label="Gemiddelde PUE" sub="lager is beter" icon="starburst-filled" />
+      <MetricCard :value="vcpuLabel" label="Rekenkracht" :sub="`vCPU over ${cap.computeNodes} compute-nodes`" icon="cylinder-split" />
+      <MetricCard :value="`${memTb} TB`" label="Werkgeheugen" sub="RAM over alle nodes" icon="rectangle-stack" />
+      <MetricCard :value="cap.gpus" label="GPU's" :sub="`AI-versnellers in ${cap.gpuNodes} nodes`" icon="sparkles" />
     </nldd-collection>
 
     <nldd-spacer size="28" />

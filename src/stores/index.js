@@ -107,6 +107,26 @@ export const usePlatformStore = defineStore('platform', {
     instanceById: (s) => (id) => s.instances.find((i) => i.id === id),
     orgById: (s) => (id) => s.organisations.find((o) => o.id === id),
 
+    // --- Physical compute capacity, aggregated from the rack units ---
+    // Sums vCPU, memory (GB), GPUs and raw storage (TB) across all installed
+    // hardware. Optionally scoped to a single datacenter.
+    computeCapacity: (s) => (dc) => {
+      const racks = dc ? s.racks.filter((r) => r.dc === dc) : s.racks;
+      const acc = { vcpu: 0, memGB: 0, gpus: 0, storageTB: 0, computeNodes: 0, gpuNodes: 0, storageNodes: 0 };
+      for (const r of racks) {
+        for (const u of r.units) {
+          acc.vcpu += u.vcpu || 0;
+          acc.memGB += u.memGB || 0;
+          acc.gpus += u.gpuCount || 0;
+          acc.storageTB += u.storageTB || 0;
+          if (u.type === 'gpu') acc.gpuNodes += 1;
+          else if (u.type === 'server' && (u.label || '').startsWith('storage')) acc.storageNodes += 1;
+          else if (u.type === 'server') acc.computeNodes += 1;
+        }
+      }
+      return acc;
+    },
+
     // --- Cross-relation helpers (the backbone of the demo) ---
     racksByDatacenter: (s) => (dc) => s.racks.filter((r) => r.dc === dc),
     alleysByDatacenter: (s) => (dc) => s.alleys.filter((a) => a.dc === dc),

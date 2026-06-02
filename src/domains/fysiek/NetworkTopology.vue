@@ -74,7 +74,7 @@ const model = computed(() => {
   racks.forEach((r, idx) => {
     const id = `rack-${r.id}`;
     const x = rackStartX + idx * rackGap;
-    const serverCount = r.units.filter((u) => u.type === 'server').length;
+    const nodeCount = r.units.filter((u) => u.type === 'server' || u.type === 'gpu').length;
     nodes.push({
       id,
       type: 'rack',
@@ -82,9 +82,8 @@ const model = computed(() => {
       data: {
         label: r.label,
         rack: r.id,
-        servers: serverCount,
+        nodes: nodeCount,
         team: store.teamById(r.team)?.name || r.team,
-        aisle: store.alleys.find((a) => a.id === r.alley)?.aisle,
       },
     });
     // Wire to a leaf in the same alley, else the first leaf.
@@ -181,7 +180,7 @@ function openRack(rid) {
               <nldd-icon name="rectangle-stack" aria-hidden="true"></nldd-icon>
               <div class="rp-node-main">
                 <span class="rp-node-title">{{ data.label }}</span>
-                <span class="rp-node-sub">{{ data.servers }} servers · {{ data.team }}</span>
+                <span class="rp-node-sub">{{ data.nodes }} nodes · {{ data.team }}</span>
               </div>
             </div>
           </template>
@@ -189,8 +188,7 @@ function openRack(rid) {
           <Panel position="top-left" class="rp-topo-legend">
             <div><span class="rp-leg-dot rp-leg-spine"></span> Spine</div>
             <div><span class="rp-leg-dot rp-leg-leaf"></span> Leaf-switch</div>
-            <div><span class="rp-leg-dot rp-leg-rackcold"></span> Rack (cold aisle)</div>
-            <div><span class="rp-leg-dot rp-leg-rackhot"></span> Rack (hot aisle)</div>
+            <div><span class="rp-leg-dot rp-leg-rack"></span> Rack</div>
           </Panel>
         </VueFlow>
       </div>
@@ -319,8 +317,7 @@ function openRack(rid) {
 }
 .rp-leg-spine { background: #154273; }
 .rp-leg-leaf { background: rgba(120, 72, 200, 0.7); }
-.rp-leg-rackcold { background: rgba(33, 99, 196, 0.5); }
-.rp-leg-rackhot { background: rgba(213, 43, 30, 0.5); }
+.rp-leg-rack { background: rgba(33, 99, 196, 0.5); }
 .rp-fade {
   opacity: 0.65;
   font-size: 0.86rem;

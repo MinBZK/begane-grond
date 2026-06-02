@@ -9416,7 +9416,9 @@ export const racks = [
         "label": "compute-dh-a1-01",
         "watts": 404,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 8,
@@ -9425,7 +9427,9 @@ export const racks = [
         "label": "compute-dh-a1-02",
         "watts": 357,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 10,
@@ -9434,7 +9438,9 @@ export const racks = [
         "label": "compute-dh-a1-03",
         "watts": 373,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 13,
@@ -9443,7 +9449,9 @@ export const racks = [
         "label": "compute-dh-a1-04",
         "watts": 337,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 16,
@@ -9452,7 +9460,9 @@ export const racks = [
         "label": "compute-dh-a1-05",
         "watts": 205,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 18,
@@ -9461,7 +9471,10 @@ export const racks = [
         "label": "storage-dh-a1-06",
         "watts": 539,
         "status": "warn",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 32,
+        "memGB": 640,
+        "storageTB": 210
       },
       {
         "u": 22,
@@ -9470,7 +9483,9 @@ export const racks = [
         "label": "compute-dh-a1-07",
         "watts": 318,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 128,
+        "memGB": 768
       },
       {
         "u": 24,
@@ -9479,7 +9494,9 @@ export const racks = [
         "label": "compute-dh-a1-08",
         "watts": 233,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 64,
+        "memGB": 768
       },
       {
         "u": 25,
@@ -9488,7 +9505,9 @@ export const racks = [
         "label": "compute-dh-a1-09",
         "watts": 440,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 28,
@@ -9497,7 +9516,9 @@ export const racks = [
         "label": "compute-dh-a1-10",
         "watts": 379,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 160,
+        "memGB": 896
       }
     ]
   },
@@ -9540,7 +9561,12 @@ export const racks = [
         "label": "hgx-h200-dh-a2-01",
         "team": "team-platform",
         "watts": 10200,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 160,
+        "memGB": 5120
       },
       {
         "u": 15,
@@ -9549,7 +9575,12 @@ export const racks = [
         "label": "hgx-h200-dh-a2-02",
         "team": "team-platform",
         "watts": 10200,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 160,
+        "memGB": 5120
       },
       {
         "u": 24,
@@ -9600,7 +9631,12 @@ export const racks = [
         "label": "h200-infer-dh-a3-01",
         "team": "team-platform",
         "watts": 5600,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 160,
+        "memGB": 5120
       },
       {
         "u": 11,
@@ -9609,7 +9645,12 @@ export const racks = [
         "label": "h200-infer-dh-a3-02",
         "team": "team-platform",
         "watts": 5600,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 112,
+        "memGB": 2048
       },
       {
         "u": 16,
@@ -9618,7 +9659,12 @@ export const racks = [
         "label": "b200-infer-dh-a3-03",
         "team": "team-platform",
         "watts": 6100,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 128,
+        "memGB": 3072
       },
       {
         "u": 21,
@@ -9669,7 +9715,9 @@ export const racks = [
         "label": "compute-dh-b1-01",
         "watts": 233,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 128,
+        "memGB": 768
       },
       {
         "u": 8,
@@ -9678,7 +9726,9 @@ export const racks = [
         "label": "compute-dh-b1-02",
         "watts": 436,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 160,
+        "memGB": 256
       },
       {
         "u": 11,
@@ -9687,7 +9737,9 @@ export const racks = [
         "label": "compute-dh-b1-03",
         "watts": 395,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 14,
@@ -9696,7 +9748,9 @@ export const racks = [
         "label": "compute-dh-b1-04",
         "watts": 166,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 15,
@@ -9705,7 +9759,10 @@ export const racks = [
         "label": "storage-dh-b1-05",
         "watts": 542,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 48,
+        "memGB": 512,
+        "storageTB": 300
       },
       {
         "u": 19,
@@ -9714,7 +9771,9 @@ export const racks = [
         "label": "compute-dh-b1-06",
         "watts": 235,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 64,
+        "memGB": 768
       },
       {
         "u": 20,
@@ -9723,7 +9782,9 @@ export const racks = [
         "label": "compute-dh-b1-07",
         "watts": 363,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 22,
@@ -9732,7 +9793,9 @@ export const racks = [
         "label": "compute-dh-b1-08",
         "watts": 216,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 23,
@@ -9741,7 +9804,9 @@ export const racks = [
         "label": "compute-dh-b1-09",
         "watts": 321,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 160,
+        "memGB": 896
       },
       {
         "u": 25,
@@ -9750,7 +9815,10 @@ export const racks = [
         "label": "storage-dh-b1-10",
         "watts": 524,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 80,
+        "memGB": 384,
+        "storageTB": 150
       },
       {
         "u": 29,
@@ -9759,7 +9827,9 @@ export const racks = [
         "label": "compute-dh-b1-11",
         "watts": 239,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 64,
+        "memGB": 384
       },
       {
         "u": 30,
@@ -9768,7 +9838,9 @@ export const racks = [
         "label": "compute-dh-b1-12",
         "watts": 373,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 32,
@@ -9777,7 +9849,9 @@ export const racks = [
         "label": "compute-dh-b1-13",
         "watts": 201,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 34,
@@ -9786,7 +9860,9 @@ export const racks = [
         "label": "compute-dh-b1-14",
         "watts": 212,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 160,
+        "memGB": 256
       }
     ]
   },
@@ -9829,7 +9905,9 @@ export const racks = [
         "label": "compute-dh-b2-01",
         "watts": 440,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 8,
@@ -9838,7 +9916,9 @@ export const racks = [
         "label": "compute-dh-b2-02",
         "watts": 320,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 11,
@@ -9847,7 +9927,10 @@ export const racks = [
         "label": "storage-dh-b2-03",
         "watts": 606,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 48,
+        "memGB": 512,
+        "storageTB": 300
       },
       {
         "u": 15,
@@ -9856,7 +9939,9 @@ export const racks = [
         "label": "compute-dh-b2-04",
         "watts": 401,
         "status": "warn",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 96,
+        "memGB": 768
       },
       {
         "u": 17,
@@ -9865,7 +9950,9 @@ export const racks = [
         "label": "compute-dh-b2-05",
         "watts": 425,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 160,
+        "memGB": 256
       },
       {
         "u": 20,
@@ -9874,7 +9961,10 @@ export const racks = [
         "label": "storage-dh-b2-06",
         "watts": 609,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 32,
+        "memGB": 384,
+        "storageTB": 150
       },
       {
         "u": 25,
@@ -9883,7 +9973,9 @@ export const racks = [
         "label": "compute-dh-b2-07",
         "watts": 458,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 192,
+        "memGB": 384
       },
       {
         "u": 27,
@@ -9892,7 +9984,9 @@ export const racks = [
         "label": "compute-dh-b2-08",
         "watts": 260,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 28,
@@ -9901,7 +9995,9 @@ export const racks = [
         "label": "compute-dh-b2-09",
         "watts": 181,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 29,
@@ -9910,7 +10006,9 @@ export const racks = [
         "label": "compute-dh-b2-10",
         "watts": 382,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 31,
@@ -9919,7 +10017,9 @@ export const racks = [
         "label": "compute-dh-b2-11",
         "watts": 340,
         "status": "ok",
-        "team": "team-burgerzaken"
+        "team": "team-burgerzaken",
+        "vcpu": 192,
+        "memGB": 256
       }
     ]
   },
@@ -9962,7 +10062,12 @@ export const racks = [
         "label": "h200-node-ap-a1-01",
         "team": "team-platform",
         "watts": 8400,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 160,
+        "memGB": 5120
       },
       {
         "u": 13,
@@ -9971,7 +10076,12 @@ export const racks = [
         "label": "h200-node-ap-a1-02",
         "team": "team-platform",
         "watts": 8400,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 128,
+        "memGB": 3072
       },
       {
         "u": 20,
@@ -10022,7 +10132,9 @@ export const racks = [
         "label": "compute-ap-a2-01",
         "watts": 360,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 9,
@@ -10031,7 +10143,9 @@ export const racks = [
         "label": "compute-ap-a2-02",
         "watts": 236,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 10,
@@ -10040,7 +10154,9 @@ export const racks = [
         "label": "compute-ap-a2-03",
         "watts": 255,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 11,
@@ -10049,7 +10165,9 @@ export const racks = [
         "label": "compute-ap-a2-04",
         "watts": 336,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 192,
+        "memGB": 384
       },
       {
         "u": 13,
@@ -10058,7 +10176,10 @@ export const racks = [
         "label": "storage-ap-a2-05",
         "watts": 614,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 64,
+        "memGB": 384,
+        "storageTB": 150
       },
       {
         "u": 18,
@@ -10067,7 +10188,9 @@ export const racks = [
         "label": "compute-ap-a2-06",
         "watts": 189,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 19,
@@ -10076,7 +10199,9 @@ export const racks = [
         "label": "compute-ap-a2-07",
         "watts": 317,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 22,
@@ -10085,7 +10210,10 @@ export const racks = [
         "label": "storage-ap-a2-08",
         "watts": 634,
         "status": "warn",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 96,
+        "memGB": 256,
+        "storageTB": 120
       },
       {
         "u": 26,
@@ -10094,7 +10222,9 @@ export const racks = [
         "label": "compute-ap-a2-09",
         "watts": 388,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 28,
@@ -10103,7 +10233,9 @@ export const racks = [
         "label": "compute-ap-a2-10",
         "watts": 385,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 30,
@@ -10112,7 +10244,9 @@ export const racks = [
         "label": "compute-ap-a2-11",
         "watts": 360,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 32,
@@ -10121,7 +10255,9 @@ export const racks = [
         "label": "compute-ap-a2-12",
         "watts": 325,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 34,
@@ -10130,7 +10266,9 @@ export const racks = [
         "label": "compute-ap-a2-13",
         "watts": 256,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 128,
+        "memGB": 512
       },
       {
         "u": 35,
@@ -10139,7 +10277,9 @@ export const racks = [
         "label": "compute-ap-a2-14",
         "watts": 206,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 37,
@@ -10148,7 +10288,9 @@ export const racks = [
         "label": "compute-ap-a2-15",
         "watts": 332,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 128,
+        "memGB": 384
       }
     ]
   },
@@ -10191,7 +10333,12 @@ export const racks = [
         "label": "gb200-nvl-dh-c1-01",
         "team": "team-platform",
         "watts": 13200,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 160,
+        "memGB": 5120
       },
       {
         "u": 15,
@@ -10200,7 +10347,12 @@ export const racks = [
         "label": "gb200-nvl-dh-c1-02",
         "team": "team-platform",
         "watts": 13200,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 112,
+        "memGB": 2048
       },
       {
         "u": 24,
@@ -10251,7 +10403,12 @@ export const racks = [
         "label": "hgx-b200-dh-c2-01",
         "team": "team-platform",
         "watts": 11800,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 128,
+        "memGB": 3072
       },
       {
         "u": 15,
@@ -10260,7 +10417,12 @@ export const racks = [
         "label": "hgx-b200-dh-c2-02",
         "team": "team-platform",
         "watts": 11800,
-        "status": "ok"
+        "status": "ok",
+        "gpuCount": 8,
+        "gpuModel": "H200",
+        "gpuMemGB": 192,
+        "vcpu": 144,
+        "memGB": 4096
       },
       {
         "u": 24,
@@ -10311,7 +10473,9 @@ export const racks = [
         "label": "compute-dh-c3-01",
         "watts": 397,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 8,
@@ -10320,7 +10484,9 @@ export const racks = [
         "label": "compute-dh-c3-02",
         "watts": 390,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 11,
@@ -10329,7 +10495,9 @@ export const racks = [
         "label": "compute-dh-c3-03",
         "watts": 365,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 13,
@@ -10338,7 +10506,9 @@ export const racks = [
         "label": "compute-dh-c3-04",
         "watts": 206,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 14,
@@ -10347,7 +10517,9 @@ export const racks = [
         "label": "compute-dh-c3-05",
         "watts": 239,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 160,
+        "memGB": 640
       },
       {
         "u": 15,
@@ -10356,7 +10528,9 @@ export const racks = [
         "label": "compute-dh-c3-06",
         "watts": 219,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 16,
@@ -10365,7 +10539,10 @@ export const racks = [
         "label": "storage-dh-c3-07",
         "watts": 683,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 96,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 20,
@@ -10374,7 +10551,9 @@ export const racks = [
         "label": "compute-dh-c3-08",
         "watts": 404,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 23,
@@ -10383,7 +10562,10 @@ export const racks = [
         "label": "storage-dh-c3-09",
         "watts": 627,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 48,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 27,
@@ -10392,7 +10574,9 @@ export const racks = [
         "label": "compute-dh-c3-10",
         "watts": 399,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 29,
@@ -10401,7 +10585,10 @@ export const racks = [
         "label": "storage-dh-c3-11",
         "watts": 692,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 48,
+        "memGB": 640,
+        "storageTB": 210
       },
       {
         "u": 34,
@@ -10410,7 +10597,9 @@ export const racks = [
         "label": "compute-dh-c3-12",
         "watts": 214,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 35,
@@ -10419,7 +10608,9 @@ export const racks = [
         "label": "compute-dh-c3-13",
         "watts": 322,
         "status": "ok",
-        "team": "team-rws-inspectie"
+        "team": "team-rws-inspectie",
+        "vcpu": 192,
+        "memGB": 512
       }
     ]
   },
@@ -10462,7 +10653,9 @@ export const racks = [
         "label": "compute-dh-c4-01",
         "watts": 346,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 8,
@@ -10471,7 +10664,9 @@ export const racks = [
         "label": "compute-dh-c4-02",
         "watts": 364,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 11,
@@ -10480,7 +10675,9 @@ export const racks = [
         "label": "compute-dh-c4-03",
         "watts": 397,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 14,
@@ -10489,7 +10686,9 @@ export const racks = [
         "label": "compute-dh-c4-04",
         "watts": 184,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 15,
@@ -10498,7 +10697,9 @@ export const racks = [
         "label": "compute-dh-c4-05",
         "watts": 256,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 16,
@@ -10507,7 +10708,9 @@ export const racks = [
         "label": "compute-dh-c4-06",
         "watts": 392,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 19,
@@ -10516,7 +10719,9 @@ export const racks = [
         "label": "compute-dh-c4-07",
         "watts": 337,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 21,
@@ -10525,7 +10730,9 @@ export const racks = [
         "label": "compute-dh-c4-08",
         "watts": 396,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 128,
+        "memGB": 512
       },
       {
         "u": 23,
@@ -10534,7 +10741,9 @@ export const racks = [
         "label": "compute-dh-c4-09",
         "watts": 360,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 25,
@@ -10543,7 +10752,9 @@ export const racks = [
         "label": "compute-dh-c4-10",
         "watts": 474,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 27,
@@ -10552,7 +10763,9 @@ export const racks = [
         "label": "compute-dh-c4-11",
         "watts": 410,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 29,
@@ -10561,7 +10774,9 @@ export const racks = [
         "label": "compute-dh-c4-12",
         "watts": 399,
         "status": "ok",
-        "team": "team-ind-dossiers"
+        "team": "team-ind-dossiers",
+        "vcpu": 160,
+        "memGB": 256
       }
     ]
   },
@@ -10604,7 +10819,9 @@ export const racks = [
         "label": "compute-ap-b1-01",
         "watts": 241,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 7,
@@ -10613,7 +10830,9 @@ export const racks = [
         "label": "compute-ap-b1-02",
         "watts": 386,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 160,
+        "memGB": 768
       },
       {
         "u": 10,
@@ -10622,7 +10841,9 @@ export const racks = [
         "label": "compute-ap-b1-03",
         "watts": 189,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 11,
@@ -10631,7 +10852,10 @@ export const racks = [
         "label": "storage-ap-b1-04",
         "watts": 602,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 80,
+        "memGB": 256,
+        "storageTB": 240
       },
       {
         "u": 15,
@@ -10640,7 +10864,9 @@ export const racks = [
         "label": "compute-ap-b1-05",
         "watts": 411,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 17,
@@ -10649,7 +10875,9 @@ export const racks = [
         "label": "compute-ap-b1-06",
         "watts": 437,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 19,
@@ -10658,7 +10886,9 @@ export const racks = [
         "label": "compute-ap-b1-07",
         "watts": 318,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 192,
+        "memGB": 896
       },
       {
         "u": 21,
@@ -10667,7 +10897,9 @@ export const racks = [
         "label": "compute-ap-b1-08",
         "watts": 214,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 128,
+        "memGB": 256
       },
       {
         "u": 23,
@@ -10676,7 +10908,9 @@ export const racks = [
         "label": "compute-ap-b1-09",
         "watts": 208,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 24,
@@ -10685,7 +10919,9 @@ export const racks = [
         "label": "compute-ap-b1-10",
         "watts": 399,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 26,
@@ -10694,7 +10930,9 @@ export const racks = [
         "label": "compute-ap-b1-11",
         "watts": 379,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 28,
@@ -10703,7 +10941,9 @@ export const racks = [
         "label": "compute-ap-b1-12",
         "watts": 228,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 30,
@@ -10712,7 +10952,9 @@ export const racks = [
         "label": "compute-ap-b1-13",
         "watts": 242,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 32,
@@ -10721,7 +10963,9 @@ export const racks = [
         "label": "compute-ap-b1-14",
         "watts": 206,
         "status": "ok",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 160,
+        "memGB": 896
       },
       {
         "u": 33,
@@ -10730,7 +10974,9 @@ export const racks = [
         "label": "compute-ap-b1-15",
         "watts": 388,
         "status": "crit",
-        "team": "team-logius-digid"
+        "team": "team-logius-digid",
+        "vcpu": 96,
+        "memGB": 384
       }
     ]
   },
@@ -10773,7 +11019,9 @@ export const racks = [
         "label": "compute-ap-b2-01",
         "watts": 238,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 7,
@@ -10782,7 +11030,9 @@ export const racks = [
         "label": "compute-ap-b2-02",
         "watts": 216,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 8,
@@ -10791,7 +11041,9 @@ export const racks = [
         "label": "compute-ap-b2-03",
         "watts": 172,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 9,
@@ -10800,7 +11052,9 @@ export const racks = [
         "label": "compute-ap-b2-04",
         "watts": 419,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 12,
@@ -10809,7 +11063,9 @@ export const racks = [
         "label": "compute-ap-b2-05",
         "watts": 360,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 14,
@@ -10818,7 +11074,9 @@ export const racks = [
         "label": "compute-ap-b2-06",
         "watts": 400,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 16,
@@ -10827,7 +11085,9 @@ export const racks = [
         "label": "compute-ap-b2-07",
         "watts": 234,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 18,
@@ -10836,7 +11096,9 @@ export const racks = [
         "label": "compute-ap-b2-08",
         "watts": 356,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 20,
@@ -10845,7 +11107,9 @@ export const racks = [
         "label": "compute-ap-b2-09",
         "watts": 343,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 22,
@@ -10854,7 +11118,9 @@ export const racks = [
         "label": "compute-ap-b2-10",
         "watts": 388,
         "status": "warn",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 96,
+        "memGB": 768
       },
       {
         "u": 25,
@@ -10863,7 +11129,9 @@ export const racks = [
         "label": "compute-ap-b2-11",
         "watts": 187,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 64,
+        "memGB": 768
       },
       {
         "u": 26,
@@ -10872,7 +11140,9 @@ export const racks = [
         "label": "compute-ap-b2-12",
         "watts": 337,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 192,
+        "memGB": 384
       },
       {
         "u": 28,
@@ -10881,7 +11151,9 @@ export const racks = [
         "label": "compute-ap-b2-13",
         "watts": 200,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 96,
+        "memGB": 768
       },
       {
         "u": 30,
@@ -10890,7 +11162,9 @@ export const racks = [
         "label": "compute-ap-b2-14",
         "watts": 375,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 32,
@@ -10899,7 +11173,9 @@ export const racks = [
         "label": "compute-ap-b2-15",
         "watts": 332,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 34,
@@ -10908,7 +11184,9 @@ export const racks = [
         "label": "compute-ap-b2-16",
         "watts": 204,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 128,
+        "memGB": 512
       },
       {
         "u": 35,
@@ -10917,7 +11195,9 @@ export const racks = [
         "label": "compute-ap-b2-17",
         "watts": 346,
         "status": "ok",
-        "team": "team-logius-stelsel"
+        "team": "team-logius-stelsel",
+        "vcpu": 192,
+        "memGB": 640
       }
     ]
   },
@@ -10960,7 +11240,9 @@ export const racks = [
         "label": "compute-ap-b3-01",
         "watts": 379,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 9,
@@ -10969,7 +11251,9 @@ export const racks = [
         "label": "compute-ap-b3-02",
         "watts": 417,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 11,
@@ -10978,7 +11262,9 @@ export const racks = [
         "label": "compute-ap-b3-03",
         "watts": 382,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 13,
@@ -10987,7 +11273,9 @@ export const racks = [
         "label": "compute-ap-b3-04",
         "watts": 367,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 15,
@@ -10996,7 +11284,9 @@ export const racks = [
         "label": "compute-ap-b3-05",
         "watts": 448,
         "status": "warn",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 96,
+        "memGB": 640
       },
       {
         "u": 18,
@@ -11005,7 +11295,9 @@ export const racks = [
         "label": "compute-ap-b3-06",
         "watts": 304,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 20,
@@ -11014,7 +11306,10 @@ export const racks = [
         "label": "storage-ap-b3-07",
         "watts": 542,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 96,
+        "memGB": 512,
+        "storageTB": 300
       },
       {
         "u": 24,
@@ -11023,7 +11318,9 @@ export const racks = [
         "label": "compute-ap-b3-08",
         "watts": 317,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 160,
+        "memGB": 640
       },
       {
         "u": 26,
@@ -11032,7 +11329,9 @@ export const racks = [
         "label": "compute-ap-b3-09",
         "watts": 406,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 28,
@@ -11041,7 +11340,9 @@ export const racks = [
         "label": "compute-ap-b3-10",
         "watts": 350,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 30,
@@ -11050,7 +11351,10 @@ export const racks = [
         "label": "storage-ap-b3-11",
         "watts": 648,
         "status": "ok",
-        "team": "team-dictu-security"
+        "team": "team-dictu-security",
+        "vcpu": 64,
+        "memGB": 256,
+        "storageTB": 240
       }
     ]
   },
@@ -11093,7 +11397,9 @@ export const racks = [
         "label": "compute-ap-b4-01",
         "watts": 323,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 8,
@@ -11102,7 +11408,9 @@ export const racks = [
         "label": "compute-ap-b4-02",
         "watts": 419,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 11,
@@ -11111,7 +11419,9 @@ export const racks = [
         "label": "compute-ap-b4-03",
         "watts": 403,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 14,
@@ -11120,7 +11430,9 @@ export const racks = [
         "label": "compute-ap-b4-04",
         "watts": 307,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 96,
+        "memGB": 640
       },
       {
         "u": 17,
@@ -11129,7 +11441,9 @@ export const racks = [
         "label": "compute-ap-b4-05",
         "watts": 390,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 19,
@@ -11138,7 +11452,10 @@ export const racks = [
         "label": "storage-ap-b4-06",
         "watts": 694,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 64,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 24,
@@ -11147,7 +11464,9 @@ export const racks = [
         "label": "compute-ap-b4-07",
         "watts": 326,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 27,
@@ -11156,7 +11475,9 @@ export const racks = [
         "label": "compute-ap-b4-08",
         "watts": 405,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 29,
@@ -11165,7 +11486,9 @@ export const racks = [
         "label": "compute-ap-b4-09",
         "watts": 353,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 64,
+        "memGB": 384
       },
       {
         "u": 31,
@@ -11174,7 +11497,9 @@ export const racks = [
         "label": "compute-ap-b4-10",
         "watts": 432,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 128,
+        "memGB": 256
       },
       {
         "u": 33,
@@ -11183,7 +11508,9 @@ export const racks = [
         "label": "compute-ap-b4-11",
         "watts": 329,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 36,
@@ -11192,7 +11519,9 @@ export const racks = [
         "label": "compute-ap-b4-12",
         "watts": 312,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 96,
+        "memGB": 768
       },
       {
         "u": 39,
@@ -11201,7 +11530,9 @@ export const racks = [
         "label": "compute-ap-b4-13",
         "watts": 465,
         "status": "ok",
-        "team": "team-rvig-reisdocumenten"
+        "team": "team-rvig-reisdocumenten",
+        "vcpu": 160,
+        "memGB": 896
       }
     ]
   },
@@ -11244,7 +11575,9 @@ export const racks = [
         "label": "compute-zw-a1-01",
         "watts": 385,
         "status": "ok",
-        "team": "team-jio-keten"
+        "team": "team-jio-keten",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 8,
@@ -11253,7 +11586,9 @@ export const racks = [
         "label": "compute-zw-a1-02",
         "watts": 238,
         "status": "ok",
-        "team": "team-jio-keten"
+        "team": "team-jio-keten",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 10,
@@ -11262,7 +11597,10 @@ export const racks = [
         "label": "storage-zw-a1-03",
         "watts": 538,
         "status": "ok",
-        "team": "team-jio-keten"
+        "team": "team-jio-keten",
+        "vcpu": 64,
+        "memGB": 512,
+        "storageTB": 300
       },
       {
         "u": 15,
@@ -11271,7 +11609,9 @@ export const racks = [
         "label": "compute-zw-a1-04",
         "watts": 371,
         "status": "ok",
-        "team": "team-jio-keten"
+        "team": "team-jio-keten",
+        "vcpu": 160,
+        "memGB": 896
       },
       {
         "u": 17,
@@ -11280,7 +11620,9 @@ export const racks = [
         "label": "compute-zw-a1-05",
         "watts": 384,
         "status": "ok",
-        "team": "team-jio-keten"
+        "team": "team-jio-keten",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 19,
@@ -11289,7 +11631,10 @@ export const racks = [
         "label": "storage-zw-a1-06",
         "watts": 668,
         "status": "ok",
-        "team": "team-jio-keten"
+        "team": "team-jio-keten",
+        "vcpu": 48,
+        "memGB": 256,
+        "storageTB": 240
       },
       {
         "u": 23,
@@ -11298,7 +11643,9 @@ export const racks = [
         "label": "compute-zw-a1-07",
         "watts": 344,
         "status": "ok",
-        "team": "team-jio-keten"
+        "team": "team-jio-keten",
+        "vcpu": 128,
+        "memGB": 512
       },
       {
         "u": 26,
@@ -11307,7 +11654,9 @@ export const racks = [
         "label": "compute-zw-a1-08",
         "watts": 371,
         "status": "ok",
-        "team": "team-jio-keten"
+        "team": "team-jio-keten",
+        "vcpu": 96,
+        "memGB": 256
       }
     ]
   },
@@ -11350,7 +11699,9 @@ export const racks = [
         "label": "compute-zw-a2-01",
         "watts": 233,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 7,
@@ -11359,7 +11710,9 @@ export const racks = [
         "label": "compute-zw-a2-02",
         "watts": 189,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 8,
@@ -11368,7 +11721,9 @@ export const racks = [
         "label": "compute-zw-a2-03",
         "watts": 179,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 9,
@@ -11377,7 +11732,9 @@ export const racks = [
         "label": "compute-zw-a2-04",
         "watts": 202,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 10,
@@ -11386,7 +11743,9 @@ export const racks = [
         "label": "compute-zw-a2-05",
         "watts": 216,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 12,
@@ -11395,7 +11754,9 @@ export const racks = [
         "label": "compute-zw-a2-06",
         "watts": 351,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 15,
@@ -11404,7 +11765,9 @@ export const racks = [
         "label": "compute-zw-a2-07",
         "watts": 175,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 17,
@@ -11413,7 +11776,9 @@ export const racks = [
         "label": "compute-zw-a2-08",
         "watts": 361,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 19,
@@ -11422,7 +11787,10 @@ export const racks = [
         "label": "storage-zw-a2-09",
         "watts": 523,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 32,
+        "memGB": 384,
+        "storageTB": 150
       },
       {
         "u": 23,
@@ -11431,7 +11799,9 @@ export const racks = [
         "label": "compute-zw-a2-10",
         "watts": 304,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 25,
@@ -11440,7 +11810,9 @@ export const racks = [
         "label": "compute-zw-a2-11",
         "watts": 305,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 96,
+        "memGB": 768
       },
       {
         "u": 27,
@@ -11449,7 +11821,9 @@ export const racks = [
         "label": "compute-zw-a2-12",
         "watts": 387,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 29,
@@ -11458,7 +11832,9 @@ export const racks = [
         "label": "compute-zw-a2-13",
         "watts": 378,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 31,
@@ -11467,7 +11843,10 @@ export const racks = [
         "label": "storage-zw-a2-14",
         "watts": 610,
         "status": "ok",
-        "team": "team-cjib-sanctie"
+        "team": "team-cjib-sanctie",
+        "vcpu": 48,
+        "memGB": 384,
+        "storageTB": 150
       }
     ]
   },
@@ -11510,7 +11889,10 @@ export const racks = [
         "label": "storage-zw-a3-01",
         "watts": 575,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 32,
+        "memGB": 256,
+        "storageTB": 120
       },
       {
         "u": 10,
@@ -11519,7 +11901,9 @@ export const racks = [
         "label": "compute-zw-a3-02",
         "watts": 428,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 128,
+        "memGB": 256
       },
       {
         "u": 12,
@@ -11528,7 +11912,9 @@ export const racks = [
         "label": "compute-zw-a3-03",
         "watts": 342,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 15,
@@ -11537,7 +11923,9 @@ export const racks = [
         "label": "compute-zw-a3-04",
         "watts": 181,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 16,
@@ -11546,7 +11934,10 @@ export const racks = [
         "label": "storage-zw-a3-05",
         "watts": 625,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 64,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 20,
@@ -11555,7 +11946,9 @@ export const racks = [
         "label": "compute-zw-a3-06",
         "watts": 203,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 22,
@@ -11564,7 +11957,9 @@ export const racks = [
         "label": "compute-zw-a3-07",
         "watts": 429,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 25,
@@ -11573,7 +11968,9 @@ export const racks = [
         "label": "compute-zw-a3-08",
         "watts": 184,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 27,
@@ -11582,7 +11979,9 @@ export const racks = [
         "label": "compute-zw-a3-09",
         "watts": 349,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 64,
+        "memGB": 384
       },
       {
         "u": 29,
@@ -11591,7 +11990,9 @@ export const racks = [
         "label": "compute-zw-a3-10",
         "watts": 371,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 96,
+        "memGB": 768
       },
       {
         "u": 31,
@@ -11600,7 +12001,9 @@ export const racks = [
         "label": "compute-zw-a3-11",
         "watts": 233,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 160,
+        "memGB": 640
       },
       {
         "u": 32,
@@ -11609,7 +12012,9 @@ export const racks = [
         "label": "compute-zw-a3-12",
         "watts": 191,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 160,
+        "memGB": 768
       },
       {
         "u": 34,
@@ -11618,7 +12023,9 @@ export const racks = [
         "label": "compute-zw-a3-13",
         "watts": 167,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 35,
@@ -11627,7 +12034,9 @@ export const racks = [
         "label": "compute-zw-a3-14",
         "watts": 184,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 64,
+        "memGB": 384
       },
       {
         "u": 36,
@@ -11636,7 +12045,9 @@ export const racks = [
         "label": "compute-zw-a3-15",
         "watts": 203,
         "status": "ok",
-        "team": "team-svb-kinderbijslag"
+        "team": "team-svb-kinderbijslag",
+        "vcpu": 128,
+        "memGB": 384
       }
     ]
   },
@@ -11679,7 +12090,9 @@ export const racks = [
         "label": "compute-zw-a4-01",
         "watts": 479,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 8,
@@ -11688,7 +12101,9 @@ export const racks = [
         "label": "compute-zw-a4-02",
         "watts": 412,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 160,
+        "memGB": 896
       },
       {
         "u": 11,
@@ -11697,7 +12112,9 @@ export const racks = [
         "label": "compute-zw-a4-03",
         "watts": 308,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 13,
@@ -11706,7 +12123,9 @@ export const racks = [
         "label": "compute-zw-a4-04",
         "watts": 404,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 15,
@@ -11715,7 +12134,10 @@ export const racks = [
         "label": "storage-zw-a4-05",
         "watts": 630,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 64,
+        "memGB": 512,
+        "storageTB": 300
       },
       {
         "u": 19,
@@ -11724,7 +12146,9 @@ export const racks = [
         "label": "compute-zw-a4-06",
         "watts": 190,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 21,
@@ -11733,7 +12157,9 @@ export const racks = [
         "label": "compute-zw-a4-07",
         "watts": 230,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 192,
+        "memGB": 896
       },
       {
         "u": 22,
@@ -11742,7 +12168,9 @@ export const racks = [
         "label": "compute-zw-a4-08",
         "watts": 357,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 160,
+        "memGB": 768
       },
       {
         "u": 24,
@@ -11751,7 +12179,9 @@ export const racks = [
         "label": "compute-zw-a4-09",
         "watts": 355,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 192,
+        "memGB": 896
       },
       {
         "u": 27,
@@ -11760,7 +12190,9 @@ export const racks = [
         "label": "compute-zw-a4-10",
         "watts": 409,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 128,
+        "memGB": 512
       },
       {
         "u": 29,
@@ -11769,7 +12201,9 @@ export const racks = [
         "label": "compute-zw-a4-11",
         "watts": 177,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 128,
+        "memGB": 512
       },
       {
         "u": 30,
@@ -11778,7 +12212,9 @@ export const racks = [
         "label": "compute-zw-a4-12",
         "watts": 372,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 192,
+        "memGB": 384
       },
       {
         "u": 32,
@@ -11787,7 +12223,9 @@ export const racks = [
         "label": "compute-zw-a4-13",
         "watts": 163,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 33,
@@ -11796,7 +12234,10 @@ export const racks = [
         "label": "storage-zw-a4-14",
         "watts": 544,
         "status": "ok",
-        "team": "team-kvk-handelsregister"
+        "team": "team-kvk-handelsregister",
+        "vcpu": 64,
+        "memGB": 640,
+        "storageTB": 330
       }
     ]
   },
@@ -11839,7 +12280,10 @@ export const racks = [
         "label": "storage-zw-b1-01",
         "watts": 527,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 48,
+        "memGB": 384,
+        "storageTB": 150
       },
       {
         "u": 11,
@@ -11848,7 +12292,9 @@ export const racks = [
         "label": "compute-zw-b1-02",
         "watts": 440,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 13,
@@ -11857,7 +12303,9 @@ export const racks = [
         "label": "compute-zw-b1-03",
         "watts": 360,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 16,
@@ -11866,7 +12314,9 @@ export const racks = [
         "label": "compute-zw-b1-04",
         "watts": 324,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 64,
+        "memGB": 384
       },
       {
         "u": 19,
@@ -11875,7 +12325,9 @@ export const racks = [
         "label": "compute-zw-b1-05",
         "watts": 304,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 128,
+        "memGB": 768
       },
       {
         "u": 22,
@@ -11884,7 +12336,9 @@ export const racks = [
         "label": "compute-zw-b1-06",
         "watts": 205,
         "status": "warn",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 96,
+        "memGB": 640
       },
       {
         "u": 23,
@@ -11893,7 +12347,9 @@ export const racks = [
         "label": "compute-zw-b1-07",
         "watts": 407,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 26,
@@ -11902,7 +12358,9 @@ export const racks = [
         "label": "compute-zw-b1-08",
         "watts": 210,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 27,
@@ -11911,7 +12369,9 @@ export const racks = [
         "label": "compute-zw-b1-09",
         "watts": 209,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 28,
@@ -11920,7 +12380,9 @@ export const racks = [
         "label": "compute-zw-b1-10",
         "watts": 180,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 30,
@@ -11929,7 +12391,9 @@ export const racks = [
         "label": "compute-zw-b1-11",
         "watts": 345,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 160,
+        "memGB": 256
       },
       {
         "u": 32,
@@ -11938,7 +12402,9 @@ export const racks = [
         "label": "compute-zw-b1-12",
         "watts": 204,
         "status": "ok",
-        "team": "team-ienw-kenteken"
+        "team": "team-ienw-kenteken",
+        "vcpu": 64,
+        "memGB": 768
       }
     ]
   },
@@ -11981,7 +12447,9 @@ export const racks = [
         "label": "compute-zw-b2-01",
         "watts": 196,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 96,
+        "memGB": 640
       },
       {
         "u": 7,
@@ -11990,7 +12458,9 @@ export const racks = [
         "label": "compute-zw-b2-02",
         "watts": 388,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 64,
+        "memGB": 768
       },
       {
         "u": 9,
@@ -11999,7 +12469,9 @@ export const racks = [
         "label": "compute-zw-b2-03",
         "watts": 223,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 10,
@@ -12008,7 +12480,9 @@ export const racks = [
         "label": "compute-zw-b2-04",
         "watts": 198,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 12,
@@ -12017,7 +12491,10 @@ export const racks = [
         "label": "storage-zw-b2-05",
         "watts": 523,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 64,
+        "memGB": 512,
+        "storageTB": 300
       },
       {
         "u": 16,
@@ -12026,7 +12503,9 @@ export const racks = [
         "label": "compute-zw-b2-06",
         "watts": 183,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 160,
+        "memGB": 896
       },
       {
         "u": 17,
@@ -12035,7 +12514,9 @@ export const racks = [
         "label": "compute-zw-b2-07",
         "watts": 313,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 20,
@@ -12044,7 +12525,9 @@ export const racks = [
         "label": "compute-zw-b2-08",
         "watts": 455,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 23,
@@ -12053,7 +12536,10 @@ export const racks = [
         "label": "storage-zw-b2-09",
         "watts": 699,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 80,
+        "memGB": 640,
+        "storageTB": 210
       },
       {
         "u": 28,
@@ -12062,7 +12548,9 @@ export const racks = [
         "label": "compute-zw-b2-10",
         "watts": 469,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 31,
@@ -12071,7 +12559,9 @@ export const racks = [
         "label": "compute-zw-b2-11",
         "watts": 330,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 33,
@@ -12080,7 +12570,10 @@ export const racks = [
         "label": "storage-zw-b2-12",
         "watts": 626,
         "status": "ok",
-        "team": "team-cbs-statline"
+        "team": "team-cbs-statline",
+        "vcpu": 64,
+        "memGB": 384,
+        "storageTB": 270
       }
     ]
   },
@@ -12123,7 +12616,9 @@ export const racks = [
         "label": "compute-zw-b3-01",
         "watts": 248,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 7,
@@ -12132,7 +12627,9 @@ export const racks = [
         "label": "compute-zw-b3-02",
         "watts": 231,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 160,
+        "memGB": 768
       },
       {
         "u": 8,
@@ -12141,7 +12638,9 @@ export const racks = [
         "label": "compute-zw-b3-03",
         "watts": 166,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 10,
@@ -12150,7 +12649,9 @@ export const racks = [
         "label": "compute-zw-b3-04",
         "watts": 237,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 128,
+        "memGB": 768
       },
       {
         "u": 11,
@@ -12159,7 +12660,9 @@ export const racks = [
         "label": "compute-zw-b3-05",
         "watts": 355,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 128,
+        "memGB": 768
       },
       {
         "u": 14,
@@ -12168,7 +12671,9 @@ export const racks = [
         "label": "compute-zw-b3-06",
         "watts": 340,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 16,
@@ -12177,7 +12682,9 @@ export const racks = [
         "label": "compute-zw-b3-07",
         "watts": 175,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 18,
@@ -12186,7 +12693,9 @@ export const racks = [
         "label": "compute-zw-b3-08",
         "watts": 184,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 192,
+        "memGB": 896
       },
       {
         "u": 20,
@@ -12195,7 +12704,9 @@ export const racks = [
         "label": "compute-zw-b3-09",
         "watts": 376,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 23,
@@ -12204,7 +12715,10 @@ export const racks = [
         "label": "storage-zw-b3-10",
         "watts": 525,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 96,
+        "memGB": 640,
+        "storageTB": 210
       },
       {
         "u": 27,
@@ -12213,7 +12727,10 @@ export const racks = [
         "label": "storage-zw-b3-11",
         "watts": 562,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 80,
+        "memGB": 256,
+        "storageTB": 240
       },
       {
         "u": 31,
@@ -12222,7 +12739,9 @@ export const racks = [
         "label": "compute-zw-b3-12",
         "watts": 331,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 34,
@@ -12231,7 +12750,9 @@ export const racks = [
         "label": "compute-zw-b3-13",
         "watts": 195,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 160,
+        "memGB": 640
       },
       {
         "u": 35,
@@ -12240,7 +12761,9 @@ export const racks = [
         "label": "compute-zw-b3-14",
         "watts": 420,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 38,
@@ -12249,7 +12772,9 @@ export const racks = [
         "label": "compute-zw-b3-15",
         "watts": 384,
         "status": "ok",
-        "team": "team-cbs-privacy"
+        "team": "team-cbs-privacy",
+        "vcpu": 96,
+        "memGB": 640
       }
     ]
   },
@@ -12292,7 +12817,10 @@ export const racks = [
         "label": "storage-zw-b4-01",
         "watts": 614,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 64,
+        "memGB": 384,
+        "storageTB": 150
       },
       {
         "u": 10,
@@ -12301,7 +12829,9 @@ export const racks = [
         "label": "compute-zw-b4-02",
         "watts": 366,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 12,
@@ -12310,7 +12840,9 @@ export const racks = [
         "label": "compute-zw-b4-03",
         "watts": 313,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 14,
@@ -12319,7 +12851,9 @@ export const racks = [
         "label": "compute-zw-b4-04",
         "watts": 395,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 64,
+        "memGB": 384
       },
       {
         "u": 17,
@@ -12328,7 +12862,10 @@ export const racks = [
         "label": "storage-zw-b4-05",
         "watts": 679,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 96,
+        "memGB": 512,
+        "storageTB": 300
       },
       {
         "u": 22,
@@ -12337,7 +12874,9 @@ export const racks = [
         "label": "compute-zw-b4-06",
         "watts": 187,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 160,
+        "memGB": 640
       },
       {
         "u": 24,
@@ -12346,7 +12885,9 @@ export const racks = [
         "label": "compute-zw-b4-07",
         "watts": 216,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 26,
@@ -12355,7 +12896,9 @@ export const racks = [
         "label": "compute-zw-b4-08",
         "watts": 407,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 28,
@@ -12364,7 +12907,9 @@ export const racks = [
         "label": "compute-zw-b4-09",
         "watts": 436,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 30,
@@ -12373,7 +12918,9 @@ export const racks = [
         "label": "compute-zw-b4-10",
         "watts": 423,
         "status": "ok",
-        "team": "team-koop-wetten"
+        "team": "team-koop-wetten",
+        "vcpu": 64,
+        "memGB": 896
       }
     ]
   },
@@ -12416,7 +12963,9 @@ export const racks = [
         "label": "compute-gr-a1-01",
         "watts": 318,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 9,
@@ -12425,7 +12974,9 @@ export const racks = [
         "label": "compute-gr-a1-02",
         "watts": 430,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 11,
@@ -12434,7 +12985,9 @@ export const racks = [
         "label": "compute-gr-a1-03",
         "watts": 382,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 160,
+        "memGB": 256
       },
       {
         "u": 14,
@@ -12443,7 +12996,9 @@ export const racks = [
         "label": "compute-gr-a1-04",
         "watts": 332,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 16,
@@ -12452,7 +13007,10 @@ export const racks = [
         "label": "storage-gr-a1-05",
         "watts": 540,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 48,
+        "memGB": 256,
+        "storageTB": 120
       },
       {
         "u": 20,
@@ -12461,7 +13019,9 @@ export const racks = [
         "label": "compute-gr-a1-06",
         "watts": 382,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 23,
@@ -12470,7 +13030,9 @@ export const racks = [
         "label": "compute-gr-a1-07",
         "watts": 259,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 160,
+        "memGB": 768
       },
       {
         "u": 25,
@@ -12479,7 +13041,9 @@ export const racks = [
         "label": "compute-gr-a1-08",
         "watts": 195,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 26,
@@ -12488,7 +13052,9 @@ export const racks = [
         "label": "compute-gr-a1-09",
         "watts": 204,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 27,
@@ -12497,7 +13063,9 @@ export const racks = [
         "label": "compute-gr-a1-10",
         "watts": 223,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 192,
+        "memGB": 384
       },
       {
         "u": 28,
@@ -12506,7 +13074,9 @@ export const racks = [
         "label": "compute-gr-a1-11",
         "watts": 400,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 64,
+        "memGB": 384
       },
       {
         "u": 31,
@@ -12515,7 +13085,9 @@ export const racks = [
         "label": "compute-gr-a1-12",
         "watts": 221,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 33,
@@ -12524,7 +13096,9 @@ export const racks = [
         "label": "compute-gr-a1-13",
         "watts": 381,
         "status": "ok",
-        "team": "team-dpc-content"
+        "team": "team-dpc-content",
+        "vcpu": 192,
+        "memGB": 768
       }
     ]
   },
@@ -12567,7 +13141,9 @@ export const racks = [
         "label": "compute-gr-a2-01",
         "watts": 325,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 8,
@@ -12576,7 +13152,9 @@ export const racks = [
         "label": "compute-gr-a2-02",
         "watts": 347,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 11,
@@ -12585,7 +13163,9 @@ export const racks = [
         "label": "compute-gr-a2-03",
         "watts": 437,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 13,
@@ -12594,7 +13174,9 @@ export const racks = [
         "label": "compute-gr-a2-04",
         "watts": 358,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 16,
@@ -12603,7 +13185,10 @@ export const racks = [
         "label": "storage-gr-a2-05",
         "watts": 665,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 48,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 21,
@@ -12612,7 +13197,9 @@ export const racks = [
         "label": "compute-gr-a2-06",
         "watts": 175,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 64,
+        "memGB": 384
       },
       {
         "u": 22,
@@ -12621,7 +13208,9 @@ export const racks = [
         "label": "compute-gr-a2-07",
         "watts": 203,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 24,
@@ -12630,7 +13219,9 @@ export const racks = [
         "label": "compute-gr-a2-08",
         "watts": 472,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 26,
@@ -12639,7 +13230,9 @@ export const racks = [
         "label": "compute-gr-a2-09",
         "watts": 382,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 28,
@@ -12648,7 +13241,9 @@ export const racks = [
         "label": "compute-gr-a2-10",
         "watts": 185,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 96,
+        "memGB": 640
       },
       {
         "u": 30,
@@ -12657,7 +13252,9 @@ export const racks = [
         "label": "compute-gr-a2-11",
         "watts": 361,
         "status": "ok",
-        "team": "team-cbr-rijbewijs"
+        "team": "team-cbr-rijbewijs",
+        "vcpu": 192,
+        "memGB": 512
       }
     ]
   },
@@ -12700,7 +13297,9 @@ export const racks = [
         "label": "compute-gr-a3-01",
         "watts": 224,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 7,
@@ -12709,7 +13308,9 @@ export const racks = [
         "label": "compute-gr-a3-02",
         "watts": 396,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 160,
+        "memGB": 256
       },
       {
         "u": 9,
@@ -12718,7 +13319,9 @@ export const racks = [
         "label": "compute-gr-a3-03",
         "watts": 259,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 10,
@@ -12727,7 +13330,9 @@ export const racks = [
         "label": "compute-gr-a3-04",
         "watts": 374,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 12,
@@ -12736,7 +13341,9 @@ export const racks = [
         "label": "compute-gr-a3-05",
         "watts": 174,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 13,
@@ -12745,7 +13352,9 @@ export const racks = [
         "label": "compute-gr-a3-06",
         "watts": 239,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 192,
+        "memGB": 896
       },
       {
         "u": 14,
@@ -12754,7 +13363,9 @@ export const racks = [
         "label": "compute-gr-a3-07",
         "watts": 326,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 16,
@@ -12763,7 +13374,9 @@ export const racks = [
         "label": "compute-gr-a3-08",
         "watts": 399,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 18,
@@ -12772,7 +13385,9 @@ export const racks = [
         "label": "compute-gr-a3-09",
         "watts": 338,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 128,
+        "memGB": 256
       },
       {
         "u": 21,
@@ -12781,7 +13396,9 @@ export const racks = [
         "label": "compute-gr-a3-10",
         "watts": 394,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 23,
@@ -12790,7 +13407,9 @@ export const racks = [
         "label": "compute-gr-a3-11",
         "watts": 316,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 25,
@@ -12799,7 +13418,9 @@ export const racks = [
         "label": "compute-gr-a3-12",
         "watts": 425,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 27,
@@ -12808,7 +13429,9 @@ export const racks = [
         "label": "compute-gr-a3-13",
         "watts": 411,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 29,
@@ -12817,7 +13440,9 @@ export const racks = [
         "label": "compute-gr-a3-14",
         "watts": 317,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 31,
@@ -12826,7 +13451,9 @@ export const racks = [
         "label": "compute-gr-a3-15",
         "watts": 319,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 33,
@@ -12835,7 +13462,9 @@ export const racks = [
         "label": "compute-gr-a3-16",
         "watts": 226,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 34,
@@ -12844,7 +13473,10 @@ export const racks = [
         "label": "storage-gr-a3-17",
         "watts": 626,
         "status": "ok",
-        "team": "team-afm-toezicht"
+        "team": "team-afm-toezicht",
+        "vcpu": 80,
+        "memGB": 640,
+        "storageTB": 210
       }
     ]
   },
@@ -12887,7 +13519,9 @@ export const racks = [
         "label": "compute-gr-a4-01",
         "watts": 331,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 96,
+        "memGB": 768
       },
       {
         "u": 8,
@@ -12896,7 +13530,9 @@ export const racks = [
         "label": "compute-gr-a4-02",
         "watts": 459,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 10,
@@ -12905,7 +13541,9 @@ export const racks = [
         "label": "compute-gr-a4-03",
         "watts": 164,
         "status": "warn",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 192,
+        "memGB": 384
       },
       {
         "u": 11,
@@ -12914,7 +13552,10 @@ export const racks = [
         "label": "storage-gr-a4-04",
         "watts": 655,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 64,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 16,
@@ -12923,7 +13564,10 @@ export const racks = [
         "label": "storage-gr-a4-05",
         "watts": 536,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 80,
+        "memGB": 384,
+        "storageTB": 270
       },
       {
         "u": 20,
@@ -12932,7 +13576,9 @@ export const racks = [
         "label": "compute-gr-a4-06",
         "watts": 328,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 22,
@@ -12941,7 +13587,9 @@ export const racks = [
         "label": "compute-gr-a4-07",
         "watts": 359,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 24,
@@ -12950,7 +13598,9 @@ export const racks = [
         "label": "compute-gr-a4-08",
         "watts": 437,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 26,
@@ -12959,7 +13609,9 @@ export const racks = [
         "label": "compute-gr-a4-09",
         "watts": 235,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 27,
@@ -12968,7 +13620,9 @@ export const racks = [
         "label": "compute-gr-a4-10",
         "watts": 223,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 29,
@@ -12977,7 +13631,9 @@ export const racks = [
         "label": "compute-gr-a4-11",
         "watts": 471,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 160,
+        "memGB": 256
       },
       {
         "u": 32,
@@ -12986,7 +13642,9 @@ export const racks = [
         "label": "compute-gr-a4-12",
         "watts": 374,
         "status": "ok",
-        "team": "team-fin-financieel"
+        "team": "team-fin-financieel",
+        "vcpu": 128,
+        "memGB": 896
       }
     ]
   },
@@ -13029,7 +13687,9 @@ export const racks = [
         "label": "compute-gr-b1-01",
         "watts": 239,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 7,
@@ -13038,7 +13698,9 @@ export const racks = [
         "label": "compute-gr-b1-02",
         "watts": 198,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 9,
@@ -13047,7 +13709,10 @@ export const racks = [
         "label": "storage-gr-b1-03",
         "watts": 613,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 96,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 13,
@@ -13056,7 +13721,9 @@ export const racks = [
         "label": "compute-gr-b1-04",
         "watts": 184,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 14,
@@ -13065,7 +13732,9 @@ export const racks = [
         "label": "compute-gr-b1-05",
         "watts": 419,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 96,
+        "memGB": 640
       },
       {
         "u": 16,
@@ -13074,7 +13743,9 @@ export const racks = [
         "label": "compute-gr-b1-06",
         "watts": 411,
         "status": "warn",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 64,
+        "memGB": 896
       },
       {
         "u": 18,
@@ -13083,7 +13754,10 @@ export const racks = [
         "label": "storage-gr-b1-07",
         "watts": 601,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 64,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 23,
@@ -13092,7 +13766,9 @@ export const racks = [
         "label": "compute-gr-b1-08",
         "watts": 395,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 25,
@@ -13101,7 +13777,9 @@ export const racks = [
         "label": "compute-gr-b1-09",
         "watts": 401,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 28,
@@ -13110,7 +13788,9 @@ export const racks = [
         "label": "compute-gr-b1-10",
         "watts": 342,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 128,
+        "memGB": 256
       },
       {
         "u": 30,
@@ -13119,7 +13799,9 @@ export const racks = [
         "label": "compute-gr-b1-11",
         "watts": 207,
         "status": "ok",
-        "team": "team-vws-zorgregister"
+        "team": "team-vws-zorgregister",
+        "vcpu": 64,
+        "memGB": 512
       }
     ]
   },
@@ -13162,7 +13844,9 @@ export const racks = [
         "label": "compute-gr-b2-01",
         "watts": 200,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 7,
@@ -13171,7 +13855,9 @@ export const racks = [
         "label": "compute-gr-b2-02",
         "watts": 358,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 9,
@@ -13180,7 +13866,9 @@ export const racks = [
         "label": "compute-gr-b2-03",
         "watts": 193,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 10,
@@ -13189,7 +13877,10 @@ export const racks = [
         "label": "storage-gr-b2-04",
         "watts": 532,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 64,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 14,
@@ -13198,7 +13889,9 @@ export const racks = [
         "label": "compute-gr-b2-05",
         "watts": 387,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 16,
@@ -13207,7 +13900,9 @@ export const racks = [
         "label": "compute-gr-b2-06",
         "watts": 379,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 64,
+        "memGB": 384
       },
       {
         "u": 18,
@@ -13216,7 +13911,9 @@ export const racks = [
         "label": "compute-gr-b2-07",
         "watts": 315,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 21,
@@ -13225,7 +13922,9 @@ export const racks = [
         "label": "compute-gr-b2-08",
         "watts": 232,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 22,
@@ -13234,7 +13933,9 @@ export const racks = [
         "label": "compute-gr-b2-09",
         "watts": 253,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 24,
@@ -13243,7 +13944,9 @@ export const racks = [
         "label": "compute-gr-b2-10",
         "watts": 411,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 160,
+        "memGB": 256
       },
       {
         "u": 26,
@@ -13252,7 +13955,9 @@ export const racks = [
         "label": "compute-gr-b2-11",
         "watts": 446,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 160,
+        "memGB": 896
       },
       {
         "u": 28,
@@ -13261,7 +13966,9 @@ export const racks = [
         "label": "compute-gr-b2-12",
         "watts": 364,
         "status": "ok",
-        "team": "team-ocw-cultuurdata"
+        "team": "team-ocw-cultuurdata",
+        "vcpu": 64,
+        "memGB": 640
       }
     ]
   },
@@ -13304,7 +14011,9 @@ export const racks = [
         "label": "compute-gr-b3-01",
         "watts": 230,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 7,
@@ -13313,7 +14022,9 @@ export const racks = [
         "label": "compute-gr-b3-02",
         "watts": 399,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 10,
@@ -13322,7 +14033,9 @@ export const racks = [
         "label": "compute-gr-b3-03",
         "watts": 405,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 12,
@@ -13331,7 +14044,9 @@ export const racks = [
         "label": "compute-gr-b3-04",
         "watts": 405,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 128,
+        "memGB": 256
       },
       {
         "u": 15,
@@ -13340,7 +14055,10 @@ export const racks = [
         "label": "storage-gr-b3-05",
         "watts": 676,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 32,
+        "memGB": 384,
+        "storageTB": 150
       },
       {
         "u": 19,
@@ -13349,7 +14067,9 @@ export const racks = [
         "label": "compute-gr-b3-06",
         "watts": 418,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 21,
@@ -13358,7 +14078,9 @@ export const racks = [
         "label": "compute-gr-b3-07",
         "watts": 394,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 160,
+        "memGB": 640
       },
       {
         "u": 23,
@@ -13367,7 +14089,9 @@ export const racks = [
         "label": "compute-gr-b3-08",
         "watts": 389,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 25,
@@ -13376,7 +14100,9 @@ export const racks = [
         "label": "compute-gr-b3-09",
         "watts": 436,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 27,
@@ -13385,7 +14111,9 @@ export const racks = [
         "label": "compute-gr-b3-10",
         "watts": 406,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 29,
@@ -13394,7 +14122,9 @@ export const racks = [
         "label": "compute-gr-b3-11",
         "watts": 356,
         "status": "ok",
-        "team": "team-kgg-energie"
+        "team": "team-kgg-energie",
+        "vcpu": 160,
+        "memGB": 384
       }
     ]
   },
@@ -13437,7 +14167,9 @@ export const racks = [
         "label": "compute-gr-b4-01",
         "watts": 377,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 128,
+        "memGB": 256
       },
       {
         "u": 8,
@@ -13446,7 +14178,9 @@ export const racks = [
         "label": "compute-gr-b4-02",
         "watts": 180,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 192,
+        "memGB": 384
       },
       {
         "u": 9,
@@ -13455,7 +14189,9 @@ export const racks = [
         "label": "compute-gr-b4-03",
         "watts": 385,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 11,
@@ -13464,7 +14200,9 @@ export const racks = [
         "label": "compute-gr-b4-04",
         "watts": 197,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 160,
+        "memGB": 768
       },
       {
         "u": 12,
@@ -13473,7 +14211,9 @@ export const racks = [
         "label": "compute-gr-b4-05",
         "watts": 426,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 96,
+        "memGB": 768
       },
       {
         "u": 14,
@@ -13482,7 +14222,9 @@ export const racks = [
         "label": "compute-gr-b4-06",
         "watts": 193,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 64,
+        "memGB": 640
       },
       {
         "u": 15,
@@ -13491,7 +14233,9 @@ export const racks = [
         "label": "compute-gr-b4-07",
         "watts": 380,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 17,
@@ -13500,7 +14244,9 @@ export const racks = [
         "label": "compute-gr-b4-08",
         "watts": 343,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 20,
@@ -13509,7 +14255,9 @@ export const racks = [
         "label": "compute-gr-b4-09",
         "watts": 371,
         "status": "crit",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 160,
+        "memGB": 896
       },
       {
         "u": 22,
@@ -13518,7 +14266,9 @@ export const racks = [
         "label": "compute-gr-b4-10",
         "watts": 464,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 24,
@@ -13527,7 +14277,9 @@ export const racks = [
         "label": "compute-gr-b4-11",
         "watts": 165,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 26,
@@ -13536,7 +14288,9 @@ export const racks = [
         "label": "compute-gr-b4-12",
         "watts": 369,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 29,
@@ -13545,7 +14299,9 @@ export const racks = [
         "label": "compute-gr-b4-13",
         "watts": 302,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 31,
@@ -13554,7 +14310,9 @@ export const racks = [
         "label": "compute-gr-b4-14",
         "watts": 395,
         "status": "ok",
-        "team": "team-def-secinfra"
+        "team": "team-def-secinfra",
+        "vcpu": 160,
+        "memGB": 256
       }
     ]
   },
@@ -13597,7 +14355,9 @@ export const racks = [
         "label": "compute-mt-a1-01",
         "watts": 335,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 96,
+        "memGB": 896
       },
       {
         "u": 8,
@@ -13606,7 +14366,9 @@ export const racks = [
         "label": "compute-mt-a1-02",
         "watts": 469,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 10,
@@ -13615,7 +14377,9 @@ export const racks = [
         "label": "compute-mt-a1-03",
         "watts": 358,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 160,
+        "memGB": 640
       },
       {
         "u": 13,
@@ -13624,7 +14388,9 @@ export const racks = [
         "label": "compute-mt-a1-04",
         "watts": 191,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 96,
+        "memGB": 256
       },
       {
         "u": 14,
@@ -13633,7 +14399,9 @@ export const racks = [
         "label": "compute-mt-a1-05",
         "watts": 179,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 16,
@@ -13642,7 +14410,9 @@ export const racks = [
         "label": "compute-mt-a1-06",
         "watts": 343,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 128,
+        "memGB": 768
       },
       {
         "u": 18,
@@ -13651,7 +14421,9 @@ export const racks = [
         "label": "compute-mt-a1-07",
         "watts": 309,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 96,
+        "memGB": 640
       },
       {
         "u": 20,
@@ -13660,7 +14432,9 @@ export const racks = [
         "label": "compute-mt-a1-08",
         "watts": 200,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 160,
+        "memGB": 512
       },
       {
         "u": 21,
@@ -13669,7 +14443,9 @@ export const racks = [
         "label": "compute-mt-a1-09",
         "watts": 317,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 96,
+        "memGB": 512
       },
       {
         "u": 23,
@@ -13678,7 +14454,9 @@ export const racks = [
         "label": "compute-mt-a1-10",
         "watts": 364,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 26,
@@ -13687,7 +14465,9 @@ export const racks = [
         "label": "compute-mt-a1-11",
         "watts": 260,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 128,
+        "memGB": 896
       },
       {
         "u": 27,
@@ -13696,7 +14476,9 @@ export const racks = [
         "label": "compute-mt-a1-12",
         "watts": 392,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 192,
+        "memGB": 768
       },
       {
         "u": 30,
@@ -13705,7 +14487,9 @@ export const racks = [
         "label": "compute-mt-a1-13",
         "watts": 212,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 31,
@@ -13714,7 +14498,9 @@ export const racks = [
         "label": "compute-mt-a1-14",
         "watts": 328,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 160,
+        "memGB": 896
       },
       {
         "u": 34,
@@ -13723,7 +14509,9 @@ export const racks = [
         "label": "compute-mt-a1-15",
         "watts": 428,
         "status": "ok",
-        "team": "team-ez-markt"
+        "team": "team-ez-markt",
+        "vcpu": 128,
+        "memGB": 896
       }
     ]
   },
@@ -13766,7 +14554,9 @@ export const racks = [
         "label": "compute-mt-a2-01",
         "watts": 405,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 9,
@@ -13775,7 +14565,9 @@ export const racks = [
         "label": "compute-mt-a2-02",
         "watts": 393,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 11,
@@ -13784,7 +14576,9 @@ export const racks = [
         "label": "compute-mt-a2-03",
         "watts": 423,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 160,
+        "memGB": 896
       },
       {
         "u": 13,
@@ -13793,7 +14587,9 @@ export const racks = [
         "label": "compute-mt-a2-04",
         "watts": 348,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 15,
@@ -13802,7 +14598,9 @@ export const racks = [
         "label": "compute-mt-a2-05",
         "watts": 371,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 17,
@@ -13811,7 +14609,9 @@ export const racks = [
         "label": "compute-mt-a2-06",
         "watts": 228,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 96,
+        "memGB": 384
       },
       {
         "u": 18,
@@ -13820,7 +14620,9 @@ export const racks = [
         "label": "compute-mt-a2-07",
         "watts": 206,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 192,
+        "memGB": 512
       },
       {
         "u": 19,
@@ -13829,7 +14631,9 @@ export const racks = [
         "label": "compute-mt-a2-08",
         "watts": 405,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 21,
@@ -13838,7 +14642,9 @@ export const racks = [
         "label": "compute-mt-a2-09",
         "watts": 374,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 23,
@@ -13847,7 +14653,10 @@ export const racks = [
         "label": "storage-mt-a2-10",
         "watts": 637,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 64,
+        "memGB": 640,
+        "storageTB": 330
       },
       {
         "u": 27,
@@ -13856,7 +14665,9 @@ export const racks = [
         "label": "compute-mt-a2-11",
         "watts": 325,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 160,
+        "memGB": 384
       },
       {
         "u": 29,
@@ -13865,7 +14676,9 @@ export const racks = [
         "label": "compute-mt-a2-12",
         "watts": 470,
         "status": "ok",
-        "team": "team-nldd-docs"
+        "team": "team-nldd-docs",
+        "vcpu": 192,
+        "memGB": 768
       }
     ]
   },
@@ -13908,7 +14721,9 @@ export const racks = [
         "label": "compute-mt-a3-01",
         "watts": 442,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 128,
+        "memGB": 640
       },
       {
         "u": 8,
@@ -13917,7 +14732,9 @@ export const racks = [
         "label": "compute-mt-a3-02",
         "watts": 382,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 96,
+        "memGB": 640
       },
       {
         "u": 11,
@@ -13926,7 +14743,9 @@ export const racks = [
         "label": "compute-mt-a3-03",
         "watts": 327,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 13,
@@ -13935,7 +14754,9 @@ export const racks = [
         "label": "compute-mt-a3-04",
         "watts": 232,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 14,
@@ -13944,7 +14765,9 @@ export const racks = [
         "label": "compute-mt-a3-05",
         "watts": 414,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 192,
+        "memGB": 640
       },
       {
         "u": 17,
@@ -13953,7 +14776,9 @@ export const racks = [
         "label": "compute-mt-a3-06",
         "watts": 311,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 64,
+        "memGB": 256
       },
       {
         "u": 19,
@@ -13962,7 +14787,10 @@ export const racks = [
         "label": "storage-mt-a3-07",
         "watts": 637,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 80,
+        "memGB": 256,
+        "storageTB": 240
       },
       {
         "u": 23,
@@ -13971,7 +14799,9 @@ export const racks = [
         "label": "compute-mt-a3-08",
         "watts": 418,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 192,
+        "memGB": 384
       },
       {
         "u": 25,
@@ -13980,7 +14810,9 @@ export const racks = [
         "label": "compute-mt-a3-09",
         "watts": 428,
         "status": "ok",
-        "team": "team-platform"
+        "team": "team-platform",
+        "vcpu": 96,
+        "memGB": 896
       }
     ]
   },
@@ -14023,7 +14855,9 @@ export const racks = [
         "label": "compute-mt-a4-01",
         "watts": 395,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 192,
+        "memGB": 256
       },
       {
         "u": 8,
@@ -14032,7 +14866,10 @@ export const racks = [
         "label": "storage-mt-a4-02",
         "watts": 528,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 96,
+        "memGB": 512,
+        "storageTB": 180
       },
       {
         "u": 13,
@@ -14041,7 +14878,9 @@ export const racks = [
         "label": "compute-mt-a4-03",
         "watts": 319,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 192,
+        "memGB": 896
       },
       {
         "u": 15,
@@ -14050,7 +14889,9 @@ export const racks = [
         "label": "compute-mt-a4-04",
         "watts": 207,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 128,
+        "memGB": 768
       },
       {
         "u": 16,
@@ -14059,7 +14900,9 @@ export const racks = [
         "label": "compute-mt-a4-05",
         "watts": 373,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 64,
+        "memGB": 512
       },
       {
         "u": 18,
@@ -14068,7 +14911,9 @@ export const racks = [
         "label": "compute-mt-a4-06",
         "watts": 440,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 160,
+        "memGB": 768
       },
       {
         "u": 20,
@@ -14077,7 +14922,9 @@ export const racks = [
         "label": "compute-mt-a4-07",
         "watts": 376,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 192,
+        "memGB": 896
       },
       {
         "u": 23,
@@ -14086,7 +14933,9 @@ export const racks = [
         "label": "compute-mt-a4-08",
         "watts": 399,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 128,
+        "memGB": 384
       },
       {
         "u": 26,
@@ -14095,7 +14944,9 @@ export const racks = [
         "label": "compute-mt-a4-09",
         "watts": 400,
         "status": "ok",
-        "team": "team-data"
+        "team": "team-data",
+        "vcpu": 160,
+        "memGB": 384
       }
     ]
   }
