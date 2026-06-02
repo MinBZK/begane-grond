@@ -619,7 +619,7 @@ function exportFootprint() {
           <nldd-tag color="neutral" size="md">Recyclebaar verpakkingsmateriaal</nldd-tag>
         </div>
 
-        <CliHint command="rp green report --by service --period maand --format csv" label="Hetzelfde rapport via de CLI:" />
+        <CliHint command="bg green report --by service --period maand --format csv" label="Hetzelfde rapport via de CLI:" />
       </nldd-container>
     </nldd-card>
   </div>

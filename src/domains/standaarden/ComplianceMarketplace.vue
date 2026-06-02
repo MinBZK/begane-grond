@@ -376,7 +376,7 @@ function scoreColor(score) {
     />
 
     <nldd-spacer size="24" />
-    <CliHint command="rp compliance check --all --format table" label="Genereer dit overzicht ook via de CLI:" />
+    <CliHint command="bg compliance check --all --format table" label="Genereer dit overzicht ook via de CLI:" />
 
     <!-- Standard detail modal -->
     <nldd-modal-dialog v-if="selected" :open="true" @close="close">
@@ -420,7 +420,7 @@ function scoreColor(score) {
         <nldd-spacer size="20" />
         <RelationLinks v-if="detailLinks.length" title="Doorklikken naar apps" :links="detailLinks" />
 
-        <CliHint :command="'rp compliance check --standard ' + selected.id" label="Toets deze standaard ook via de CLI:" />
+        <CliHint :command="'bg compliance check --standard ' + selected.id" label="Toets deze standaard ook via de CLI:" />
       </div>
     </nldd-modal-dialog>
   </div>

@@ -138,11 +138,11 @@ function toggleInfra(kind) {
 // honest about what will be created.
 const repoSlug = computed(() => {
   const base = form.name.trim().toLowerCase().replace(/\s+/g, '-') || 'nieuwe-app';
-  return `rijksict/${base}`;
+  return `nldd/${base}`;
 });
 
 const cliCommand = computed(() => {
-  const parts = [`rp app new "${form.name || 'mijn-app'}"`];
+  const parts = [`bg app new "${form.name || 'mijn-app'}"`];
   parts.push(`--team ${form.team}`);
   if (form.template) parts.push(`--template ${form.template}`);
   if (form.infra.length) parts.push(`--with-infra ${form.infra.join(',')}`);

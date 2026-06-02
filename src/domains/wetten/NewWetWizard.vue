@@ -88,7 +88,7 @@ const validOutputs = computed(() =>
 
 const cliCommand = computed(() => {
   const id = created.value?.wet?.id || wetLabel.value.toLowerCase().replace(/\s+/g, '-');
-  return `rp wet deploy ${id} --template rust-api`;
+  return `bg wet deploy ${id} --template rust-api`;
 });
 
 // --- Finish: actually create everything ---
@@ -469,7 +469,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('wet'));
             supporting-text="De wet wordt machine-leesbaar opgeslagen, de scenario's gedraaid, gepubliceerd naar het corpus en als dienst uitgerold via het gebaande pad: een repository met CI, een database en de YAML-uitvoering."
           ></nldd-inline-dialog>
 
-          <CliHint :command="`rp wet deploy ${wetLabel.toLowerCase().replace(/\\s+/g, '-')} --template rust-api`" label="Liever via de CLI? Dit commando doet hetzelfde:" />
+          <CliHint :command="`bg wet deploy ${wetLabel.toLowerCase().replace(/\\s+/g, '-')} --template rust-api`" label="Liever via de CLI? Dit commando doet hetzelfde:" />
         </div>
       </template>
     </Wizard>

@@ -133,7 +133,7 @@ function setLevel(l) {
 }
 
 const cliCommand = computed(() => {
-  const parts = ['rp obs logs'];
+  const parts = ['bg obs logs'];
   if (serviceFilter.value !== 'all') parts.push(`--service ${serviceFilter.value}`);
   if (levelFilter.value !== 'all') parts.push(`--level ${levelFilter.value.toLowerCase()}`);
   if (query.value) parts.push(`--grep "${query.value}"`);

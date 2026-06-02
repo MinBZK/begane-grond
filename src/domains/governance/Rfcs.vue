@@ -156,7 +156,7 @@ const crumbs = [
         title="RFC aangemaakt"
         :supporting-text="`${lastCreatedId} staat nu als concept in het register en in het audit-log.`"
       ></nldd-inline-dialog>
-      <CliHint command="rp rfc new --title &quot;...&quot;" />
+      <CliHint command="bg rfc new --title &quot;...&quot;" />
       <nldd-spacer size="24" />
     </template>
 

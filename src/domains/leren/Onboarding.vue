@@ -32,7 +32,7 @@ const prodPath = computed(() => store.learningPaths.find((p) => p.id === 'lp-pro
 const newDevMeta = [
   { hint: 'Bestel een autonome Linux-werkplek en wacht op uitrol.', to: '/werkplekken/nieuw', linkText: 'Werkplek aanvragen', icon: 'house' },
   { hint: 'Vind je teamrepo in de code-catalogus en clone hem.', to: '/code', linkText: 'Naar de repos', icon: 'folder-stack' },
-  { hint: 'Volg de README en draai de service lokaal met de rp-CLI.', to: '/cli', linkText: 'rp-CLI openen', icon: 'terminal' },
+  { hint: 'Volg de README en draai de service lokaal met de bg-CLI.', to: '/cli', linkText: 'bg-CLI openen', icon: 'terminal' },
   { hint: 'Open een merge request en laat CI groen worden.', to: '/code', linkText: 'Open een PR', icon: 'arrow-up-arrow-down' },
 ];
 const prodMeta = [
@@ -173,7 +173,7 @@ const meLinks = computed(() => {
     <nldd-spacer size="32" />
 
     <CliHint
-      command="rp learn start nieuwe-developer"
+      command="bg learn start nieuwe-developer"
       label="Start een onboarding-pad ook vanaf de CLI:"
     />
   </div>

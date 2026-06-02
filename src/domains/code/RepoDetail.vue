@@ -69,10 +69,10 @@ const README = {
   'repo-stuc': {
     tagline: 'Open-source engine achter rijksbrede fleet-transformaties.',
     body: [
-      'STUC is de engine die rijksbrede transformaties over repositories uitvoert (codemods, FSC-koppelingen, logging-middleware). Teams gebruiken hem niet rechtstreeks: het loopt via rp fleet, zodat campagnes overal hetzelfde verlopen.',
-      'Geschreven in Python, ontwikkeld in de open onder EUPL-1.2. De engine staat los op code.overheid.nl, maar het gebruik zit native in rp.',
+      'STUC is de engine die rijksbrede transformaties over repositories uitvoert (codemods, FSC-koppelingen, logging-middleware). Teams gebruiken hem niet rechtstreeks: het loopt via bg fleet, zodat campagnes overal hetzelfde verlopen.',
+      'Geschreven in Python, ontwikkeld in de open onder EUPL-1.2. De engine staat los op code.overheid.nl, maar het gebruik zit native in bg.',
     ],
-    run: 'rp fleet campaign run camp-securitytxt',
+    run: 'bg fleet campaign run camp-securitytxt',
   },
 };
 

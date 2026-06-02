@@ -241,7 +241,7 @@ function fmtOin(oin) {
 
     <nldd-spacer size="24" />
 
-    <CliHint command="rp koppelvlak token --oin 00000001823288444000 --service &quot;Paspoort API&quot;" label="Vraag een OIN-token aan voor een koppelvlak via de CLI:" />
+    <CliHint command="bg koppelvlak token --oin 00000001823288444000 --service &quot;Paspoort API&quot;" label="Vraag een OIN-token aan voor een koppelvlak via de CLI:" />
   </div>
 </template>
 

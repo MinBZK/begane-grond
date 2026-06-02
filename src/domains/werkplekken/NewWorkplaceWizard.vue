@@ -27,10 +27,10 @@ const steps = [
 
 // Software profiles map a role to a curated set of pre-installed tooling.
 const profiles = [
-  { id: 'developer', name: 'Developer', icon: 'terminal', tools: ['VS Code', 'Podman', 'rp CLI', 'kubectl'] },
+  { id: 'developer', name: 'Developer', icon: 'terminal', tools: ['VS Code', 'Podman', 'bg CLI', 'kubectl'] },
   { id: 'data', name: 'Data engineer', icon: 'cylinder-split', tools: ['uv', 'DBeaver', 'JupyterLab'] },
   { id: 'office', name: 'Kantoor', icon: 'apartment-building', tools: ['LibreOffice', 'Rijkshuisstijl-fonts'] },
-  { id: 'sre', name: 'SRE / Ops', icon: 'gear', tools: ['kubectl', 'k9s', 'Grafana Agent', 'rp CLI'] },
+  { id: 'sre', name: 'SRE / Ops', icon: 'gear', tools: ['kubectl', 'k9s', 'Grafana Agent', 'bg CLI'] },
 ];
 
 const form = ref({
@@ -103,7 +103,7 @@ function finish() {
 
 const cliCommand = computed(
   () =>
-    `rp werkplek provision \\\n  --person ${form.value.person} \\\n  --model ${form.value.model} \\\n  --image ${form.value.image} \\\n  --profile ${form.value.profile}${form.value.encrypted ? ' \\\n  --encrypted' : ''}${form.value.mdm ? ' \\\n  --mdm' : ''}`,
+    `bg werkplek provision \\\n  --person ${form.value.person} \\\n  --model ${form.value.model} \\\n  --image ${form.value.image} \\\n  --profile ${form.value.profile}${form.value.encrypted ? ' \\\n  --encrypted' : ''}${form.value.mdm ? ' \\\n  --mdm' : ''}`,
 );
 
 // Presentation mode can auto-drive this wizard on stage. The form here is a ref,

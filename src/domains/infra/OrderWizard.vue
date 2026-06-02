@@ -82,7 +82,7 @@ const cliCommand = computed(() => {
   if (!ordered.value) return '';
   const i = ordered.value;
   const appPart = i.app ? ` --app ${i.app}` : '';
-  return `rp infra order ${i.kind} --name ${i.name} --team ${i.team} --env ${i.env} --size ${i.size} --dc ${i.dc}${appPart}`;
+  return `bg infra order ${i.kind} --name ${i.name} --team ${i.team} --env ${i.env} --size ${i.size} --dc ${i.dc}${appPart}`;
 });
 
 const STEPS = [

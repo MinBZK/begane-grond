@@ -172,7 +172,7 @@ const relations = computed(() => {
     </div>
 
     <nldd-spacer size="24" />
-    <CliHint :command="`rp register show ${register.id}\nrp register connect ${register.id} --field ${register.fields[0]} --app app-toeslagen`" />
+    <CliHint :command="`bg register show ${register.id}\nbg register connect ${register.id} --field ${register.fields[0]} --app app-toeslagen`" />
   </div>
 
   <div v-else class="rp-page">

@@ -273,7 +273,7 @@ const auditMoreCount = computed(() => Math.max(0, auditMatches.value.length - au
 
     <nldd-spacer size="16" />
 
-    <CliHint command="rp fleet run --campaign securityscan --dry-run" label="Scannen kan ook in CI of via de CLI:" />
+    <CliHint command="bg fleet run --campaign securityscan --dry-run" label="Scannen kan ook in CI of via de CLI:" />
 
     <nldd-spacer size="32" />
 

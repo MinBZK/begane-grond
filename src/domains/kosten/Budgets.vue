@@ -279,7 +279,7 @@ function bumpBudget(teamId, delta) {
               <span class="rp-budget-more-count">nog {{ moreCount }} meer</span>
             </div>
 
-            <CliHint command="rp budget set --team team-toeslagen --amount 320" label="Budget bijstellen via de CLI:" />
+            <CliHint command="bg budget set --team team-toeslagen --amount 320" label="Budget bijstellen via de CLI:" />
           </nldd-container>
         </nldd-card>
       </section>

@@ -1,6 +1,6 @@
 <script setup>
 // API explorer: an OpenAPI-style mock of the Begane Grond REST API. The same
-// actions that the `rp` CLI exposes are available as HTTP endpoints. Users can
+// actions that the `bg` CLI exposes are available as HTTP endpoints. Users can
 // browse endpoints per domain (method, path, request/response samples), mint a
 // masked personal access token (kept in component state, not the store), and
 // copy a Forgejo Actions snippet that drives the API from CI.
@@ -15,7 +15,7 @@ import RelationLinks from '../../components/shared/RelationLinks.vue';
 const store = usePlatformStore();
 const router = useRouter();
 
-const BASE = 'https://api.rijks.app/v1';
+const BASE = 'https://api.bg.rijks.app/v1';
 
 // Pretty-print a JS object as a JSON string for the code blocks.
 const j = (obj) => JSON.stringify(obj, null, 2);
@@ -99,7 +99,7 @@ const groups = computed(() => [
         summary: 'Gebaand pad: maak app + repo + CI',
         request: { name: 'Inkomstenmonitor', team: 'team-platform', template: 'tpl-rust-api', withInfra: ['postgres', 'redis'], visibility: 'open' },
         status: 201,
-        response: { app: { id: 'app-1041', name: 'Inkomstenmonitor', repo: 'repo-1042' }, repoUrl: 'https://code.overheid.nl/rijksict/inkomstenmonitor' },
+        response: { app: { id: 'app-1041', name: 'Inkomstenmonitor', repo: 'repo-1042' }, repoUrl: 'https://code.overheid.nl/nldd/inkomstenmonitor' },
       },
       {
         method: 'POST',
@@ -271,14 +271,14 @@ on:
 
 jobs:
   promote:
-    runs-on: rijksict-runner          # eigen CI-runner in DC Den Haag
+    runs-on: nldd-runner          # eigen CI-runner in DC Den Haag
     steps:
       - name: Promoot release via Begane Grond-API
         env:
           RIJKSPLATFORM_TOKEN: \${{ secrets.RIJKSPLATFORM_TOKEN }}
         run: |
           curl -fsS -X POST \\
-            https://api.rijks.app/v1/apps/app-paspoort/promote \\
+            https://api.bg.rijks.app/v1/apps/app-paspoort/promote \\
             -H "Authorization: Bearer $RIJKSPLATFORM_TOKEN" \\
             -H "Content-Type: application/json" \\
             -d '{"from":"test","to":"acc"}'
@@ -287,7 +287,7 @@ jobs:
         env:
           RIJKSPLATFORM_TOKEN: \${{ secrets.RIJKSPLATFORM_TOKEN }}
         run: |
-          rp infra watch pg-burgerzaken-staging --timeout 5m --output json`;
+          bg infra watch pg-burgerzaken-staging --timeout 5m --output json`;
 
 const ghSecretCmd = `fj secret set RIJKSPLATFORM_TOKEN \\
   --repo minbzk/paspoort \\
@@ -300,7 +300,7 @@ const openapiUrl = `${BASE}/openapi.json`;
   <div class="rp-page">
     <PageHeader
       title="API-explorer"
-      lede="De REST-API achter het Begane Grond. Dezelfde acties als de rp-CLI, maar als HTTP-endpoints, handig voor eigen integraties en CI. Volgt de API Design Rules (ADR), met OAuth2-bearer-tokens."
+      lede="De REST-API achter het Begane Grond. Dezelfde acties als de bg-CLI, maar als HTTP-endpoints, handig voor eigen integraties en CI. Volgt de API Design Rules (ADR), met OAuth2-bearer-tokens."
       :crumbs="[
         { text: 'Home', href: '/' },
         { text: 'CLI & API', href: '/cli' },
@@ -310,7 +310,7 @@ const openapiUrl = `${BASE}/openapi.json`;
       <template #actions>
         <nldd-button
           variant="secondary"
-          text="rp-CLI"
+          text="bg-CLI"
           start-icon="terminal"
           @click="router.push('/cli')"
         ></nldd-button>
@@ -504,7 +504,7 @@ const openapiUrl = `${BASE}/openapi.json`;
           <nldd-rich-text>
             <p>
               Zet je token als repository-secret en stuur de API aan vanuit Forgejo Actions
-              op code.overheid.nl. De rp-CLI is op de eigen runners voorgeïnstalleerd.
+              op code.overheid.nl. De bg-CLI is op de eigen runners voorgeïnstalleerd.
             </p>
           </nldd-rich-text>
           <nldd-spacer size="14" />
@@ -529,7 +529,7 @@ const openapiUrl = `${BASE}/openapi.json`;
     <RelationLinks
       title="Verder klikken"
       :links="[
-        { text: 'rp-CLI (zelfde acties op de terminal)', to: '/cli', icon: 'terminal' },
+        { text: 'bg-CLI (zelfde acties op de terminal)', to: '/cli', icon: 'terminal' },
         { text: 'Koppelvlakken & FSC', to: '/apps', icon: 'link' },
         { text: 'Infra-catalogus', to: '/infra/order/postgres', icon: 'rectangle-stack' },
         { text: 'LLM-gateway', to: '/ai/llm', icon: 'sparkles' },
@@ -538,7 +538,7 @@ const openapiUrl = `${BASE}/openapi.json`;
 
     <nldd-spacer size="24" />
     <CliHint
-      command="rp api token create --name ci-deploy --scope apps:write --output json"
+      command="bg api token create --name ci-deploy --scope apps:write --output json"
       label="Liever vanaf de CLI? Maak hetzelfde token zo aan:"
     />
   </div>

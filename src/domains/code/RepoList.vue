@@ -215,7 +215,7 @@ function appName(repo) {
 
     <nldd-spacer size="24" />
 
-    <CliHint command="rp repo list --visibility open" label="Hetzelfde overzicht via de CLI:" />
+    <CliHint command="bg repo list --visibility open" label="Hetzelfde overzicht via de CLI:" />
   </div>
 </template>
 

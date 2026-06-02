@@ -1,6 +1,6 @@
 <script setup>
 // A KPI tile: big number, label, optional sublabel/trend and icon. Used on the
-// home dashboard, "Mijn spullen", cost overview, etc.
+// home dashboard, "Mijn overzicht", cost overview, etc.
 defineProps({
   value: { type: [String, Number], required: true },
   label: { type: String, required: true },

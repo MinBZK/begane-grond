@@ -22,11 +22,11 @@ export const domains = [
   {
     key: 'zelf',
     path: '/zelf',
-    label: 'Mijn spullen',
+    label: 'Mijn overzicht',
     icon: 'person',
     wave: 'D',
     routes: [
-      { path: '/zelf', name: 'zelf', view: () => import('./domains/zelf/MyDashboard.vue'), title: 'Mijn spullen' },
+      { path: '/zelf', name: 'zelf', view: () => import('./domains/zelf/MyDashboard.vue'), title: 'Mijn overzicht' },
     ],
   },
   {

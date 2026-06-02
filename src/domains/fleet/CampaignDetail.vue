@@ -107,7 +107,7 @@ const PR_STATE = { merged: 'merged', open: 'open', failing: 'failing', pending: 
 const cliCommand = computed(() => {
   const c = campaign.value;
   if (!c) return '';
-  return `rp fleet campaign status ${c.id}`;
+  return `bg fleet campaign status ${c.id}`;
 });
 </script>
 

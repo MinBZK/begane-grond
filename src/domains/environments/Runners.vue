@@ -176,14 +176,14 @@ function toggleStandby(r) {
         <nldd-spacer size="10" />
         <nldd-code-viewer language="yaml">{{ `jobs:
   test:
-    runs-on: rijksict-runner   # pool 'shared', node k8s-node-01 @ rack DH-A1
+    runs-on: nldd-runner   # pool 'shared', node k8s-node-01 @ rack DH-A1
     steps:
       - run: just check` }}</nldd-code-viewer>
       </nldd-container>
     </nldd-card>
 
     <nldd-spacer size="20" />
-    <CliHint command="rp runner scale shared --jobs 16" />
+    <CliHint command="bg runner scale shared --jobs 16" />
   </div>
 </template>
 

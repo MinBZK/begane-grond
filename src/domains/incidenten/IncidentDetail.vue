@@ -222,7 +222,7 @@ function childPos(idx, len) {
       <RelationLinks title="Doorklikken" :links="relationLinks" />
 
       <CliHint
-        :command="`rp incident ack ${incident.id}`"
+        :command="`bg incident ack ${incident.id}`"
         label="Bevestigen kan ook via de CLI:"
       />
     </template>

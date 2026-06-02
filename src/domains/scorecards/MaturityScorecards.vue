@@ -231,7 +231,7 @@ const crumbs = [
         </div>
         <nldd-spacer size="16" />
         <CliHint
-          command="rp scorecard app-toeslagen"
+          command="bg scorecard app-toeslagen"
           label="Bekijk een scorecard via de CLI:"
         />
       </nldd-container>

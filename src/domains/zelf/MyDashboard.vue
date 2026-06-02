@@ -1,5 +1,5 @@
 <script setup>
-// "Mijn spullen": a personal landing page for the logged-in demo user
+// "Mijn overzicht": a personal landing page for the logged-in demo user
 // (store.currentPerson). It stitches the whole platform together from one
 // person's point of view: their teams, apps, infra, workplace, on-call status,
 // open actions that need attention, and shortcuts into the golden paths.
@@ -149,7 +149,7 @@ function rotate(secretId) {
     <PageHeader
       :title="`Welkom, ${me.name.split(' ')[0]}`"
       :lede="`${me.role}${myOrg ? ' bij ' + myOrg.name : ''}. Alles wat van jou en je team is, op één plek.`"
-      :crumbs="[{ text: 'Home', href: '/' }, { text: 'Mijn spullen', href: '/zelf' }]"
+      :crumbs="[{ text: 'Home', href: '/' }, { text: 'Mijn overzicht', href: '/zelf' }]"
     >
       <template #actions>
         <nldd-button variant="secondary" text="Nieuwe app" start-icon="plus" @click="$router.push('/apps/nieuw')" />
@@ -388,15 +388,11 @@ function rotate(secretId) {
 
     <nldd-spacer size="24" />
 
-    <CliHint command="rp whoami --mine" label="Hetzelfde overzicht via de CLI:" />
+    <CliHint command="bg whoami --mine" label="Hetzelfde overzicht via de CLI:" />
   </div>
 </template>
 
 <style scoped>
-.rp-page {
-  max-width: 1200px;
-}
-
 /* Identity strip */
 .rp-identity {
   display: flex;

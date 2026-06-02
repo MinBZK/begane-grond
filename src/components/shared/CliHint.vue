@@ -1,6 +1,6 @@
 <script setup>
 // The cross-cutting "ook via de CLI" pattern: shows the equivalent
-// `rp` command for whatever the user just did, in an NLDD code block with a
+// `bg` command for whatever the user just did, in an NLDD code block with a
 // copy button. Drop this under any action/wizard end screen.
 defineProps({
   command: { type: String, required: true },

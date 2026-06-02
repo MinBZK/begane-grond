@@ -209,7 +209,7 @@ const nvdUrl = (cve) => `https://nvd.nist.gov/vuln/detail/${cve}`;
 
           <nldd-spacer size="16" />
 
-          <CliHint :command="`rp vuln show ${selected.cve}`" label="Bekijk de kwetsbaarheid in de CLI:" />
+          <CliHint :command="`bg vuln show ${selected.cve}`" label="Bekijk de kwetsbaarheid in de CLI:" />
         </nldd-container>
       </nldd-card>
 

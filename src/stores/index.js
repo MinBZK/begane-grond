@@ -318,9 +318,9 @@ export const usePlatformStore = defineStore('platform', {
       const repoId = nextId('repo');
       const slug = name.toLowerCase().replace(/\s+/g, '-');
       // Repo namespace follows the team's organisation, not a fixed prefix.
-      const orgNs = { bzk: 'minbzk', dictu: 'dictu', logius: 'logius', rvig: 'rvig', rijksict: 'rijksict' };
+      const orgNs = { bzk: 'minbzk', dictu: 'dictu', logius: 'logius', rvig: 'rvig', nldd: 'nldd' };
       const teamObj = this.teamById(team);
-      const ns = orgNs[teamObj?.org] || 'rijksict';
+      const ns = orgNs[teamObj?.org] || 'nldd';
       // App type follows the template: frontend/docs templates are websites.
       const type = /vue|nldd|astro|docs/.test(template || '') ? 'website' : 'service';
       this.repos.push({ id: repoId, name: `${ns}/${slug}`, visibility, lang: template?.includes('rust') ? 'Rust' : template?.includes('python') ? 'Python' : 'Vue', stars: 0, openPrs: 0, openIssues: 0, ci: 'green', license: 'EUPL-1.2', app: id });

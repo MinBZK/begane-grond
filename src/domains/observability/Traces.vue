@@ -243,7 +243,7 @@ const critical = computed(() => trace.value.spans.reduce((m, s) => Math.max(m, s
       supporting-text="Klik op een balk in de waterfall om de attributen en doorklik-links te zien."
     ></nldd-inline-dialog>
 
-    <CliHint :command="'rp obs trace ' + trace.id" label="Haal deze trace op via de CLI:" />
+    <CliHint :command="'bg obs trace ' + trace.id" label="Haal deze trace op via de CLI:" />
   </div>
 </template>
 

@@ -488,7 +488,7 @@ function showMoreShowback() {
           Geen instances gevonden voor deze zoekopdracht of dit datacenter.
         </p>
 
-        <CliHint command="rp cost showback --by team --period maand" label="Hetzelfde overzicht via de CLI:" />
+        <CliHint command="bg cost showback --by team --period maand" label="Hetzelfde overzicht via de CLI:" />
       </nldd-container>
     </nldd-card>
   </div>

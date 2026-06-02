@@ -542,7 +542,7 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
 
     <nldd-spacer size="20" />
     <CliHint
-      command="rp notify subscribe deploy.completed --team team-platform"
+      command="bg notify subscribe deploy.completed --team team-platform"
       label="Abonneer een team op een event-type via de CLI:"
     />
   </div>

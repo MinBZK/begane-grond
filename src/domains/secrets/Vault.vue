@@ -2,7 +2,7 @@
 // Secrets vault: every team's secrets grouped in an expandable tree. Values are
 // always masked; the only thing you can do is rotate, which flips the "rotated"
 // label live via the store and writes to the audit log. Mirrors the real CLI
-// (`rp secret rotate …`) so the demo reads like the actual platform.
+// (`bg secret rotate …`) so the demo reads like the actual platform.
 import { ref, computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
@@ -297,8 +297,8 @@ function appForSecret(sec) {
     <CliHint
       :command="
         lastRotated
-          ? `rp secret rotate ${lastRotated.name}`
-          : 'rp secret rotate paspoort/db-password'
+          ? `bg secret rotate ${lastRotated.name}`
+          : 'bg secret rotate paspoort/db-password'
       "
       label="Roteren kan ook via de CLI:"
     />

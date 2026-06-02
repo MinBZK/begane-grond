@@ -168,7 +168,7 @@ function genKey() {
 }
 const maskedKey = computed(() => {
   if (!apiKey.value) return '';
-  // Mask the body, keep the prefix and the last 4 chars (matches rp ai key create).
+  // Mask the body, keep the prefix and the last 4 chars (matches bg ai key create).
   return `${apiKey.value.slice(0, 12)}${'•'.repeat(16)}${apiKey.value.slice(-4)}`;
 });
 const endpoint = computed(() => {
@@ -179,7 +179,7 @@ const revealed = ref(false);
 
 const cliCommand = computed(() => {
   if (!ordered.value) return '';
-  return `rp ai key create --model ${form.model} --team ${form.team} --env ${form.env}${form.app ? ` --app ${form.app}` : ''}`;
+  return `bg ai key create --model ${form.model} --team ${form.team} --env ${form.env}${form.app ? ` --app ${form.app}` : ''}`;
 });
 
 const usageSnippet = computed(() => {

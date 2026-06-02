@@ -2,7 +2,7 @@
 // The API catalog: every koppelvlak (interface) the Begane Grond offers, with
 // version, owning team, ADR (API Design Rules) compliance, rate limit and
 // lifecycle status. Each row links through to the owning team and exposes an
-// OpenAPI spec panel with a copy-able base URL and an `rp` CLI hint. A search
+// OpenAPI spec panel with a copy-able base URL and an `bg` CLI hint. A search
 // field plus a status filter keep the catalog navigable as it grows.
 import { ref, computed, watch } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
@@ -241,7 +241,7 @@ const relatedApps = computed(() => {
             ]"
           />
 
-          <CliHint :command="`rp api describe ${slug(selected)} --version ${selected.version}`" label="Bekijk dit koppelvlak ook via de CLI:" />
+          <CliHint :command="`bg api describe ${slug(selected)} --version ${selected.version}`" label="Bekijk dit koppelvlak ook via de CLI:" />
         </nldd-container>
       </nldd-card>
     </template>

@@ -94,14 +94,14 @@ export const docs = [
   },
   {
     id: 'doc-cli',
-    title: 'De rp-CLI installeren en inloggen',
+    title: 'De bg-CLI installeren en inloggen',
     kind: 'referentie',
     category: 'Tooling',
     minutes: 6,
     icon: 'terminal',
     updated: '6 dagen geleden',
-    summary: 'Installeer de rp-CLI, log in met je rijksaccount en koppel je standaardteam.',
-    keywords: ['cli', 'rp', 'terminal', 'login', 'installatie', 'tooling'],
+    summary: 'Installeer de bg-CLI, log in met je rijksaccount en koppel je standaardteam.',
+    keywords: ['cli', 'bg', 'rp', 'terminal', 'login', 'installatie', 'tooling'],
   },
   {
     id: 'doc-infra',

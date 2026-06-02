@@ -361,7 +361,7 @@ const cableColumns = [
 
     <CliHint
       v-if="placed"
-      :command="`rp rack place ${rack.id} --label ${placed.label} --type ${placed.type} --u ${placed.u} --height ${placed.height}`"
+      :command="`bg rack place ${rack.id} --label ${placed.label} --type ${placed.type} --u ${placed.u} --height ${placed.height}`"
       :label="`Geplaatst: ${placed.label}. Dit kan ook via de CLI:`"
     />
   </div>

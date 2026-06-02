@@ -3,7 +3,7 @@
 // AI toward compliance with Dutch government standards. Modelled on
 // github.com/developer-overheid-nl/skills-marketplace, a neutral marketplace
 // of plugins (each bundling "skills", i.e. AI capabilities) installable into
-// rp code or a Claude-Code-style editor such as Cursor. This is the missing
+// bg code or a Claude-Code-style editor such as Cursor. This is the missing
 // link between the platform's AI offering and its standards: the assistant
 // learns the standard you must meet.
 import { ref, computed } from 'vue';
@@ -99,8 +99,8 @@ function standardName(id) {
     <nldd-spacer size="16" />
     <nldd-container layout="grid" column-count="2" md-column-count="1" gap="12">
       <nldd-inline-dialog
-        title="Installeer via rp, niet als losse tool"
-        supporting-text="Op het platform installeer je een plugin met rp ai skill install, met team-context, dataclassificatie en audit. rp gebruikt onder water dezelfde marketplace. Rechtstreeks in je editor, zoals Cursor, kan ook buiten het platform om."
+        title="Installeer via bg, niet als losse tool"
+        supporting-text="Op het platform installeer je een plugin met bg ai skill install, met team-context, dataclassificatie en audit. bg gebruikt onder water dezelfde marketplace. Rechtstreeks in je editor, zoals Cursor, kan ook buiten het platform om."
       ></nldd-inline-dialog>
       <nldd-inline-dialog
         title="Informatieve samenvattingen, geen officiële standaard"
@@ -221,7 +221,7 @@ function standardName(id) {
     </template>
 
     <nldd-spacer size="24" />
-    <CliHint command="rp ai skill install standaarden --team team-platform" />
+    <CliHint command="bg ai skill install standaarden --team team-platform" />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <script setup>
 // The personal notification inbox, fed by the store's event bus. Used in the
-// top-nav bell popover and on the "Mijn spullen" dashboard. Shows the current
+// top-nav bell popover and on the "Mijn overzicht" dashboard. Shows the current
 // user's relevant events (their team + critical platform-wide), with severity
 // dots, deep links, mark-as-read and a severity filter.
 import { ref, computed } from 'vue';

@@ -24,9 +24,9 @@ export const organisations = [
     "short": "RvIG"
   },
   {
-    "id": "rijksict",
-    "name": "RijksICT Gilde",
-    "short": "RIJKSICT"
+    "id": "nldd",
+    "name": "Nederlandse Digitale Dienst",
+    "short": "NLDD"
   },
   {
     "id": "bd",
@@ -205,7 +205,7 @@ export const people = [
     "id": "ans",
     "name": "Anne Schuth",
     "role": "Platform engineer",
-    "org": "rijksict",
+    "org": "nldd",
     "team": "team-platform",
     "matrix": "@anne:rijk.chat",
     "avatar": "AS",
@@ -239,7 +239,7 @@ export const people = [
     "id": "fatima",
     "name": "Fatima El Amrani",
     "role": "SRE",
-    "org": "rijksict",
+    "org": "nldd",
     "team": "team-platform",
     "matrix": "@fatima:rijk.chat",
     "avatar": "FA",
@@ -3044,8 +3044,8 @@ export const people = [
     "id": "eva-mohamed",
     "name": "Eva Mohamed",
     "role": "Frontend developer",
-    "org": "rijksict",
-    "team": "team-rijksict-docs",
+    "org": "nldd",
+    "team": "team-nldd-docs",
     "matrix": "@eva-mohamed:rijk.chat",
     "avatar": "EM",
     "history": [
@@ -3059,8 +3059,8 @@ export const people = [
     "id": "stijn-van-os",
     "name": "Stijn Van Os",
     "role": "Security engineer",
-    "org": "rijksict",
-    "team": "team-rijksict-docs",
+    "org": "nldd",
+    "team": "team-nldd-docs",
     "matrix": "@stijn-van-os:rijk.chat",
     "avatar": "SV",
     "history": [
@@ -3074,8 +3074,8 @@ export const people = [
     "id": "aisha-el-khattabi",
     "name": "Aisha El Khattabi",
     "role": "Tech lead",
-    "org": "rijksict",
-    "team": "team-rijksict-iam",
+    "org": "nldd",
+    "team": "team-nldd-iam",
     "matrix": "@aisha-el-khattabi:rijk.chat",
     "avatar": "AE",
     "history": [
@@ -3089,8 +3089,8 @@ export const people = [
     "id": "pieter-wielinga",
     "name": "Pieter Wielinga",
     "role": "Scrum master",
-    "org": "rijksict",
-    "team": "team-rijksict-iam",
+    "org": "nldd",
+    "team": "team-nldd-iam",
     "matrix": "@pieter-wielinga:rijk.chat",
     "avatar": "PW",
     "history": [
@@ -4514,8 +4514,8 @@ export const people = [
     "id": "jan-yilmaz",
     "name": "Jan Yilmaz",
     "role": "Tech lead",
-    "org": "rijksict",
-    "team": "team-rijksict-docs",
+    "org": "nldd",
+    "team": "team-nldd-docs",
     "matrix": "@jan-yilmaz:rijk.chat",
     "avatar": "JY",
     "history": [
@@ -4529,8 +4529,8 @@ export const people = [
     "id": "ingrid-verhoeven",
     "name": "Ingrid Verhoeven",
     "role": "Scrum master",
-    "org": "rijksict",
-    "team": "team-rijksict-iam",
+    "org": "nldd",
+    "team": "team-nldd-iam",
     "matrix": "@ingrid-verhoeven:rijk.chat",
     "avatar": "IV",
     "history": [
@@ -5939,8 +5939,8 @@ export const people = [
     "id": "erik-scholten",
     "name": "Erik Scholten",
     "role": "Security engineer",
-    "org": "rijksict",
-    "team": "team-rijksict-docs",
+    "org": "nldd",
+    "team": "team-nldd-docs",
     "matrix": "@erik-scholten:rijk.chat",
     "avatar": "ES",
     "history": [
@@ -5954,8 +5954,8 @@ export const people = [
     "id": "lara-ben-ali",
     "name": "Lara Ben Ali",
     "role": "Tech lead",
-    "org": "rijksict",
-    "team": "team-rijksict-iam",
+    "org": "nldd",
+    "team": "team-nldd-iam",
     "matrix": "@lara-ben-ali:rijk.chat",
     "avatar": "LB",
     "history": [
@@ -6016,7 +6016,7 @@ export const teams = [
   {
     "id": "team-platform",
     "name": "Platform Engineering",
-    "org": "rijksict",
+    "org": "nldd",
     "matrix": "#platform:rijk.chat",
     "members": [
       "ans",
@@ -8329,10 +8329,10 @@ export const teams = [
     "archetype": "security"
   },
   {
-    "id": "team-rijksict-docs",
+    "id": "team-nldd-docs",
     "name": "Documentatie & Developer Experience",
-    "org": "rijksict",
-    "matrix": "#rijksict-docs:rijk.chat",
+    "org": "nldd",
+    "matrix": "#nldd-docs:rijk.chat",
     "members": [
       "eva-mohamed",
       "stijn-van-os",
@@ -8352,10 +8352,10 @@ export const teams = [
     "archetype": "docs"
   },
   {
-    "id": "team-rijksict-iam",
+    "id": "team-nldd-iam",
     "name": "Gilde IAM & Federatie",
-    "org": "rijksict",
-    "matrix": "#rijksict-iam:rijk.chat",
+    "org": "nldd",
+    "matrix": "#nldd-iam:rijk.chat",
     "members": [
       "aisha-el-khattabi",
       "pieter-wielinga",
@@ -9170,7 +9170,7 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-rijksict-docs",
+    "team": "team-nldd-docs",
     "person": "eva-mohamed",
     "until": "ma 9:00",
     "escalation": [
@@ -9178,7 +9178,7 @@ export const oncall = [
     ]
   },
   {
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "person": "aisha-el-khattabi",
     "until": "ma 9:00",
     "escalation": [
@@ -10472,7 +10472,7 @@ export const racks = [
     "alley": "mt-a",
     "label": "MT-A2",
     "heightU": 42,
-    "team": "team-rijksict-docs",
+    "team": "team-nldd-docs",
     "units": [
       {
         "u": 1,
@@ -10495,7 +10495,7 @@ export const racks = [
         "height": 2,
         "type": "server",
         "label": "node-32-01",
-        "team": "team-rijksict-docs",
+        "team": "team-nldd-docs",
         "watts": 400,
         "status": "ok"
       }
@@ -11236,7 +11236,7 @@ export const instances = [
     "id": "redis-inkomenstoets-prod",
     "kind": "redis",
     "name": "redis-inkomenstoets-prod",
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "app": "app-inkomenstoets",
     "env": "prod",
     "size": "XL",
@@ -11249,7 +11249,7 @@ export const instances = [
     "id": "postgres-inkomenstoets-dev",
     "kind": "postgres",
     "name": "postgres-inkomenstoets-dev",
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "app": "app-inkomenstoets",
     "env": "dev",
     "size": "S",
@@ -14109,7 +14109,7 @@ export const instances = [
     "id": "kubernetes-inspectierapport-generator-test",
     "kind": "kubernetes",
     "name": "kubernetes-inspectierapport-generator-test",
-    "team": "team-rijksict-docs",
+    "team": "team-nldd-docs",
     "app": "app-inspectierapport-generator",
     "env": "test",
     "size": "M",
@@ -14362,7 +14362,7 @@ export const apps = [
   {
     "id": "app-inkomenstoets",
     "name": "Inkomenstoets",
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "type": "service",
     "stack": [
       "Rust",
@@ -15815,7 +15815,7 @@ export const apps = [
   {
     "id": "app-inspectierapport-generator",
     "name": "Inspectierapport-generator",
-    "team": "team-rijksict-docs",
+    "team": "team-nldd-docs",
     "type": "service",
     "stack": [
       "Python",
@@ -15966,7 +15966,7 @@ export const repos = [
   },
   {
     "id": "repo-platformportaal",
-    "name": "rijksict/platformportaal",
+    "name": "nldd/platformportaal",
     "visibility": "open",
     "lang": "Vue",
     "stars": 41,
@@ -15990,7 +15990,7 @@ export const repos = [
   },
   {
     "id": "repo-stuc",
-    "name": "rijksict/stuc",
+    "name": "nldd/stuc",
     "visibility": "open",
     "lang": "Python",
     "stars": 67,
@@ -16002,7 +16002,7 @@ export const repos = [
   },
   {
     "id": "repo-kentekencheck",
-    "name": "rijksict/kentekencheck",
+    "name": "nldd/kentekencheck",
     "visibility": "intern",
     "lang": "Go",
     "stars": 28,
@@ -16014,7 +16014,7 @@ export const repos = [
   },
   {
     "id": "repo-studiefinanciering-portaal",
-    "name": "rijksict/studiefinanciering-portaal",
+    "name": "nldd/studiefinanciering-portaal",
     "visibility": "open",
     "lang": "Vue",
     "stars": 35,
@@ -16026,7 +16026,7 @@ export const repos = [
   },
   {
     "id": "repo-vergunningchecker",
-    "name": "rijksict/vergunningchecker",
+    "name": "nldd/vergunningchecker",
     "visibility": "open",
     "lang": "Python",
     "stars": 42,
@@ -16038,7 +16038,7 @@ export const repos = [
   },
   {
     "id": "repo-inkomenstoets",
-    "name": "rijksict/inkomenstoets",
+    "name": "nldd/inkomenstoets",
     "visibility": "open",
     "lang": "Rust",
     "stars": 49,
@@ -16062,7 +16062,7 @@ export const repos = [
   },
   {
     "id": "repo-reisdocument-aanvraag",
-    "name": "rijksict/reisdocument-aanvraag",
+    "name": "nldd/reisdocument-aanvraag",
     "visibility": "open",
     "lang": "React",
     "stars": 63,
@@ -16074,7 +16074,7 @@ export const repos = [
   },
   {
     "id": "repo-bijstandsuitkering",
-    "name": "rijksict/bijstandsuitkering",
+    "name": "nldd/bijstandsuitkering",
     "visibility": "open",
     "lang": "Java",
     "stars": 70,
@@ -16086,7 +16086,7 @@ export const repos = [
   },
   {
     "id": "repo-kadaster-viewer",
-    "name": "rijksict/kadaster-viewer",
+    "name": "nldd/kadaster-viewer",
     "visibility": "open",
     "lang": "Vue",
     "stars": 77,
@@ -16098,7 +16098,7 @@ export const repos = [
   },
   {
     "id": "repo-subsidieportaal-rvo",
-    "name": "rijksict/subsidieportaal-rvo",
+    "name": "nldd/subsidieportaal-rvo",
     "visibility": "intern",
     "lang": "React",
     "stars": 84,
@@ -16122,7 +16122,7 @@ export const repos = [
   },
   {
     "id": "repo-inspectieplanner-ilt",
-    "name": "rijksict/inspectieplanner-ilt",
+    "name": "nldd/inspectieplanner-ilt",
     "visibility": "open",
     "lang": "Python",
     "stars": 8,
@@ -16134,7 +16134,7 @@ export const repos = [
   },
   {
     "id": "repo-aow-uitkering",
-    "name": "rijksict/aow-uitkering",
+    "name": "nldd/aow-uitkering",
     "visibility": "open",
     "lang": "Java",
     "stars": 15,
@@ -16158,7 +16158,7 @@ export const repos = [
   },
   {
     "id": "repo-woz-bezwaar",
-    "name": "rijksict/woz-bezwaar",
+    "name": "nldd/woz-bezwaar",
     "visibility": "open",
     "lang": "Vue",
     "stars": 29,
@@ -16182,7 +16182,7 @@ export const repos = [
   },
   {
     "id": "repo-rijbewijs-vernieuwen",
-    "name": "rijksict/rijbewijs-vernieuwen",
+    "name": "nldd/rijbewijs-vernieuwen",
     "visibility": "open",
     "lang": "React",
     "stars": 43,
@@ -16194,7 +16194,7 @@ export const repos = [
   },
   {
     "id": "repo-naturalisatie-aanvraag",
-    "name": "rijksict/naturalisatie-aanvraag",
+    "name": "nldd/naturalisatie-aanvraag",
     "visibility": "intern",
     "lang": "Rust",
     "stars": 50,
@@ -16206,7 +16206,7 @@ export const repos = [
   },
   {
     "id": "repo-verblijfsvergunning",
-    "name": "rijksict/verblijfsvergunning",
+    "name": "nldd/verblijfsvergunning",
     "visibility": "open",
     "lang": "Java",
     "stars": 57,
@@ -16218,7 +16218,7 @@ export const repos = [
   },
   {
     "id": "repo-huurtoeslag-rekenen",
-    "name": "rijksict/huurtoeslag-rekenen",
+    "name": "nldd/huurtoeslag-rekenen",
     "visibility": "open",
     "lang": "Rust",
     "stars": 64,
@@ -16230,7 +16230,7 @@ export const repos = [
   },
   {
     "id": "repo-digid-koppeling",
-    "name": "rijksict/digid-koppeling",
+    "name": "nldd/digid-koppeling",
     "visibility": "open",
     "lang": "Go",
     "stars": 71,
@@ -16242,7 +16242,7 @@ export const repos = [
   },
   {
     "id": "repo-eherkenning-broker",
-    "name": "rijksict/eherkenning-broker",
+    "name": "nldd/eherkenning-broker",
     "visibility": "intern",
     "lang": "Go",
     "stars": 78,
@@ -16254,7 +16254,7 @@ export const repos = [
   },
   {
     "id": "repo-bsn-validatie",
-    "name": "rijksict/bsn-validatie",
+    "name": "nldd/bsn-validatie",
     "visibility": "open",
     "lang": "Rust",
     "stars": 85,
@@ -16266,7 +16266,7 @@ export const repos = [
   },
   {
     "id": "repo-iban-validatie",
-    "name": "rijksict/iban-validatie",
+    "name": "nldd/iban-validatie",
     "visibility": "open",
     "lang": "Go",
     "stars": 2,
@@ -16278,7 +16278,7 @@ export const repos = [
   },
   {
     "id": "repo-adrescheck-bag",
-    "name": "rijksict/adrescheck-bag",
+    "name": "nldd/adrescheck-bag",
     "visibility": "open",
     "lang": "Go",
     "stars": 9,
@@ -16290,7 +16290,7 @@ export const repos = [
   },
   {
     "id": "repo-brp-bevraging",
-    "name": "rijksict/brp-bevraging",
+    "name": "nldd/brp-bevraging",
     "visibility": "intern",
     "lang": "Rust",
     "stars": 16,
@@ -16302,7 +16302,7 @@ export const repos = [
   },
   {
     "id": "repo-handelsregister-zoeker",
-    "name": "rijksict/handelsregister-zoeker",
+    "name": "nldd/handelsregister-zoeker",
     "visibility": "open",
     "lang": "Vue",
     "stars": 23,
@@ -16314,7 +16314,7 @@ export const repos = [
   },
   {
     "id": "repo-incasso-cjib",
-    "name": "rijksict/incasso-cjib",
+    "name": "nldd/incasso-cjib",
     "visibility": "open",
     "lang": "Java",
     "stars": 30,
@@ -16326,7 +16326,7 @@ export const repos = [
   },
   {
     "id": "repo-boete-bezwaar",
-    "name": "rijksict/boete-bezwaar",
+    "name": "nldd/boete-bezwaar",
     "visibility": "open",
     "lang": "React",
     "stars": 37,
@@ -16338,7 +16338,7 @@ export const repos = [
   },
   {
     "id": "repo-belastingaangifte-ib",
-    "name": "rijksict/belastingaangifte-ib",
+    "name": "nldd/belastingaangifte-ib",
     "visibility": "intern",
     "lang": "Java",
     "stars": 44,
@@ -16350,7 +16350,7 @@ export const repos = [
   },
   {
     "id": "repo-loonheffing",
-    "name": "rijksict/loonheffing",
+    "name": "nldd/loonheffing",
     "visibility": "open",
     "lang": "Java",
     "stars": 51,
@@ -16362,7 +16362,7 @@ export const repos = [
   },
   {
     "id": "repo-zorgtoeslag-portaal",
-    "name": "rijksict/zorgtoeslag-portaal",
+    "name": "nldd/zorgtoeslag-portaal",
     "visibility": "open",
     "lang": "Vue",
     "stars": 58,
@@ -16374,7 +16374,7 @@ export const repos = [
   },
   {
     "id": "repo-pgb-beheer",
-    "name": "rijksict/pgb-beheer",
+    "name": "nldd/pgb-beheer",
     "visibility": "open",
     "lang": "Python",
     "stars": 65,
@@ -16386,7 +16386,7 @@ export const repos = [
   },
   {
     "id": "repo-zorgverzekeraar-koppeling",
-    "name": "rijksict/zorgverzekeraar-koppeling",
+    "name": "nldd/zorgverzekeraar-koppeling",
     "visibility": "intern",
     "lang": "Go",
     "stars": 72,
@@ -16398,7 +16398,7 @@ export const repos = [
   },
   {
     "id": "repo-vaccinatieregister",
-    "name": "rijksict/vaccinatieregister",
+    "name": "nldd/vaccinatieregister",
     "visibility": "open",
     "lang": "Rust",
     "stars": 79,
@@ -16410,7 +16410,7 @@ export const repos = [
   },
   {
     "id": "repo-jeugdzorg-dossier",
-    "name": "rijksict/jeugdzorg-dossier",
+    "name": "nldd/jeugdzorg-dossier",
     "visibility": "open",
     "lang": "Python",
     "stars": 86,
@@ -16422,7 +16422,7 @@ export const repos = [
   },
   {
     "id": "repo-onderwijsregistratie",
-    "name": "rijksict/onderwijsregistratie",
+    "name": "nldd/onderwijsregistratie",
     "visibility": "open",
     "lang": "Java",
     "stars": 3,
@@ -16434,7 +16434,7 @@ export const repos = [
   },
   {
     "id": "repo-diplomaregister",
-    "name": "rijksict/diplomaregister",
+    "name": "nldd/diplomaregister",
     "visibility": "intern",
     "lang": "Go",
     "stars": 10,
@@ -16458,7 +16458,7 @@ export const repos = [
   },
   {
     "id": "repo-studielening-rekentool",
-    "name": "rijksict/studielening-rekentool",
+    "name": "nldd/studielening-rekentool",
     "visibility": "open",
     "lang": "React",
     "stars": 24,
@@ -16494,7 +16494,7 @@ export const repos = [
   },
   {
     "id": "repo-milieumelding",
-    "name": "rijksict/milieumelding",
+    "name": "nldd/milieumelding",
     "visibility": "open",
     "lang": "Python",
     "stars": 45,
@@ -16506,7 +16506,7 @@ export const repos = [
   },
   {
     "id": "repo-waterschapsheffing",
-    "name": "rijksict/waterschapsheffing",
+    "name": "nldd/waterschapsheffing",
     "visibility": "open",
     "lang": "Java",
     "stars": 52,
@@ -16530,7 +16530,7 @@ export const repos = [
   },
   {
     "id": "repo-parkeervergunning",
-    "name": "rijksict/parkeervergunning",
+    "name": "nldd/parkeervergunning",
     "visibility": "intern",
     "lang": "React",
     "stars": 66,
@@ -16542,7 +16542,7 @@ export const repos = [
   },
   {
     "id": "repo-rijksbegroting-explorer",
-    "name": "rijksict/rijksbegroting-explorer",
+    "name": "nldd/rijksbegroting-explorer",
     "visibility": "open",
     "lang": "Vue",
     "stars": 73,
@@ -16554,7 +16554,7 @@ export const repos = [
   },
   {
     "id": "repo-open-data-portaal",
-    "name": "rijksict/open-data-portaal",
+    "name": "nldd/open-data-portaal",
     "visibility": "open",
     "lang": "React",
     "stars": 80,
@@ -16566,7 +16566,7 @@ export const repos = [
   },
   {
     "id": "repo-statistiek-dashboard-cbs",
-    "name": "rijksict/statistiek-dashboard-cbs",
+    "name": "nldd/statistiek-dashboard-cbs",
     "visibility": "open",
     "lang": "Vue",
     "stars": 87,
@@ -16578,7 +16578,7 @@ export const repos = [
   },
   {
     "id": "repo-etl-basisregisters",
-    "name": "rijksict/etl-basisregisters",
+    "name": "nldd/etl-basisregisters",
     "visibility": "intern",
     "lang": "Python",
     "stars": 4,
@@ -16602,7 +16602,7 @@ export const repos = [
   },
   {
     "id": "repo-anonimisering-pipeline",
-    "name": "rijksict/anonimisering-pipeline",
+    "name": "nldd/anonimisering-pipeline",
     "visibility": "open",
     "lang": "Rust",
     "stars": 18,
@@ -16614,7 +16614,7 @@ export const repos = [
   },
   {
     "id": "repo-archief-export",
-    "name": "rijksict/archief-export",
+    "name": "nldd/archief-export",
     "visibility": "open",
     "lang": "Go",
     "stars": 25,
@@ -16626,7 +16626,7 @@ export const repos = [
   },
   {
     "id": "repo-nachtelijke-batchrun",
-    "name": "rijksict/nachtelijke-batchrun",
+    "name": "nldd/nachtelijke-batchrun",
     "visibility": "intern",
     "lang": "Java",
     "stars": 32,
@@ -16650,7 +16650,7 @@ export const repos = [
   },
   {
     "id": "repo-sepa-incasso-job",
-    "name": "rijksict/sepa-incasso-job",
+    "name": "nldd/sepa-incasso-job",
     "visibility": "open",
     "lang": "Go",
     "stars": 46,
@@ -16662,7 +16662,7 @@ export const repos = [
   },
   {
     "id": "repo-fraudedetectie",
-    "name": "rijksict/fraudedetectie",
+    "name": "nldd/fraudedetectie",
     "visibility": "open",
     "lang": "Python",
     "stars": 53,
@@ -16686,7 +16686,7 @@ export const repos = [
   },
   {
     "id": "repo-sanctielijst-check",
-    "name": "rijksict/sanctielijst-check",
+    "name": "nldd/sanctielijst-check",
     "visibility": "open",
     "lang": "Go",
     "stars": 67,
@@ -16698,7 +16698,7 @@ export const repos = [
   },
   {
     "id": "repo-pki-certificaatbeheer",
-    "name": "rijksict/pki-certificaatbeheer",
+    "name": "nldd/pki-certificaatbeheer",
     "visibility": "open",
     "lang": "Go",
     "stars": 74,
@@ -16710,7 +16710,7 @@ export const repos = [
   },
   {
     "id": "repo-secretsmanager",
-    "name": "rijksict/secretsmanager",
+    "name": "nldd/secretsmanager",
     "visibility": "open",
     "lang": "Rust",
     "stars": 81,
@@ -16722,7 +16722,7 @@ export const repos = [
   },
   {
     "id": "repo-audit-logboek",
-    "name": "rijksict/audit-logboek",
+    "name": "nldd/audit-logboek",
     "visibility": "intern",
     "lang": "Go",
     "stars": 88,
@@ -16734,7 +16734,7 @@ export const repos = [
   },
   {
     "id": "repo-toegangsbeheer",
-    "name": "rijksict/toegangsbeheer",
+    "name": "nldd/toegangsbeheer",
     "visibility": "open",
     "lang": "Go",
     "stars": 5,
@@ -16746,7 +16746,7 @@ export const repos = [
   },
   {
     "id": "repo-oidc-provider",
-    "name": "rijksict/oidc-provider",
+    "name": "nldd/oidc-provider",
     "visibility": "open",
     "lang": "Go",
     "stars": 12,
@@ -16758,7 +16758,7 @@ export const repos = [
   },
   {
     "id": "repo-rollenmatrix",
-    "name": "rijksict/rollenmatrix",
+    "name": "nldd/rollenmatrix",
     "visibility": "open",
     "lang": "Go",
     "stars": 19,
@@ -16770,7 +16770,7 @@ export const repos = [
   },
   {
     "id": "repo-servicedesk-portaal",
-    "name": "rijksict/servicedesk-portaal",
+    "name": "nldd/servicedesk-portaal",
     "visibility": "intern",
     "lang": "Vue",
     "stars": 26,
@@ -16782,7 +16782,7 @@ export const repos = [
   },
   {
     "id": "repo-statuspagina",
-    "name": "rijksict/statuspagina",
+    "name": "nldd/statuspagina",
     "visibility": "open",
     "lang": "React",
     "stars": 33,
@@ -16794,7 +16794,7 @@ export const repos = [
   },
   {
     "id": "repo-monitoring-collector",
-    "name": "rijksict/monitoring-collector",
+    "name": "nldd/monitoring-collector",
     "visibility": "open",
     "lang": "Go",
     "stars": 40,
@@ -16806,7 +16806,7 @@ export const repos = [
   },
   {
     "id": "repo-logaggregatie",
-    "name": "rijksict/logaggregatie",
+    "name": "nldd/logaggregatie",
     "visibility": "open",
     "lang": "Go",
     "stars": 47,
@@ -16818,7 +16818,7 @@ export const repos = [
   },
   {
     "id": "repo-deploy-orchestrator",
-    "name": "rijksict/deploy-orchestrator",
+    "name": "nldd/deploy-orchestrator",
     "visibility": "intern",
     "lang": "Go",
     "stars": 54,
@@ -16830,7 +16830,7 @@ export const repos = [
   },
   {
     "id": "repo-ci-runnerpool",
-    "name": "rijksict/ci-runnerpool",
+    "name": "nldd/ci-runnerpool",
     "visibility": "open",
     "lang": "Go",
     "stars": 61,
@@ -16842,7 +16842,7 @@ export const repos = [
   },
   {
     "id": "repo-feature-flags",
-    "name": "rijksict/feature-flags",
+    "name": "nldd/feature-flags",
     "visibility": "open",
     "lang": "Go",
     "stars": 68,
@@ -16854,7 +16854,7 @@ export const repos = [
   },
   {
     "id": "repo-config-store",
-    "name": "rijksict/config-store",
+    "name": "nldd/config-store",
     "visibility": "open",
     "lang": "Rust",
     "stars": 75,
@@ -16866,7 +16866,7 @@ export const repos = [
   },
   {
     "id": "repo-nldd-componenten",
-    "name": "rijksict/nldd-componenten",
+    "name": "nldd/nldd-componenten",
     "visibility": "intern",
     "lang": "React",
     "stars": 82,
@@ -16878,7 +16878,7 @@ export const repos = [
   },
   {
     "id": "repo-huisstijl-bibliotheek",
-    "name": "rijksict/huisstijl-bibliotheek",
+    "name": "nldd/huisstijl-bibliotheek",
     "visibility": "open",
     "lang": "Vue",
     "stars": 89,
@@ -16890,7 +16890,7 @@ export const repos = [
   },
   {
     "id": "repo-documentatiesite",
-    "name": "rijksict/documentatiesite",
+    "name": "nldd/documentatiesite",
     "visibility": "open",
     "lang": "React",
     "stars": 6,
@@ -16914,7 +16914,7 @@ export const repos = [
   },
   {
     "id": "repo-standaarden-checker",
-    "name": "rijksict/standaarden-checker",
+    "name": "nldd/standaarden-checker",
     "visibility": "intern",
     "lang": "Python",
     "stars": 20,
@@ -16926,7 +16926,7 @@ export const repos = [
   },
   {
     "id": "repo-toegankelijkheid-scanner",
-    "name": "rijksict/toegankelijkheid-scanner",
+    "name": "nldd/toegankelijkheid-scanner",
     "visibility": "open",
     "lang": "Python",
     "stars": 27,
@@ -16938,7 +16938,7 @@ export const repos = [
   },
   {
     "id": "repo-pdf-generator",
-    "name": "rijksict/pdf-generator",
+    "name": "nldd/pdf-generator",
     "visibility": "open",
     "lang": "Rust",
     "stars": 34,
@@ -16950,7 +16950,7 @@ export const repos = [
   },
   {
     "id": "repo-brief-generator",
-    "name": "rijksict/brief-generator",
+    "name": "nldd/brief-generator",
     "visibility": "open",
     "lang": "Java",
     "stars": 41,
@@ -16962,7 +16962,7 @@ export const repos = [
   },
   {
     "id": "repo-berichtenbox",
-    "name": "rijksict/berichtenbox",
+    "name": "nldd/berichtenbox",
     "visibility": "intern",
     "lang": "Java",
     "stars": 48,
@@ -16974,7 +16974,7 @@ export const repos = [
   },
   {
     "id": "repo-mijnoverheid-portaal",
-    "name": "rijksict/mijnoverheid-portaal",
+    "name": "nldd/mijnoverheid-portaal",
     "visibility": "open",
     "lang": "Vue",
     "stars": 55,
@@ -16986,7 +16986,7 @@ export const repos = [
   },
   {
     "id": "repo-formulierenbouwer",
-    "name": "rijksict/formulierenbouwer",
+    "name": "nldd/formulierenbouwer",
     "visibility": "open",
     "lang": "React",
     "stars": 62,
@@ -16998,7 +16998,7 @@ export const repos = [
   },
   {
     "id": "repo-vragenlijst-engine",
-    "name": "rijksict/vragenlijst-engine",
+    "name": "nldd/vragenlijst-engine",
     "visibility": "open",
     "lang": "Go",
     "stars": 69,
@@ -17010,7 +17010,7 @@ export const repos = [
   },
   {
     "id": "repo-afspraakplanner",
-    "name": "rijksict/afspraakplanner",
+    "name": "nldd/afspraakplanner",
     "visibility": "intern",
     "lang": "Vue",
     "stars": 76,
@@ -17022,7 +17022,7 @@ export const repos = [
   },
   {
     "id": "repo-wachtrij-manager",
-    "name": "rijksict/wachtrij-manager",
+    "name": "nldd/wachtrij-manager",
     "visibility": "open",
     "lang": "Go",
     "stars": 83,
@@ -17046,7 +17046,7 @@ export const repos = [
   },
   {
     "id": "repo-sms-gateway",
-    "name": "rijksict/sms-gateway",
+    "name": "nldd/sms-gateway",
     "visibility": "open",
     "lang": "Go",
     "stars": 7,
@@ -17058,7 +17058,7 @@ export const repos = [
   },
   {
     "id": "repo-betaalverzoek",
-    "name": "rijksict/betaalverzoek",
+    "name": "nldd/betaalverzoek",
     "visibility": "intern",
     "lang": "Java",
     "stars": 14,
@@ -17070,7 +17070,7 @@ export const repos = [
   },
   {
     "id": "repo-ideal-koppeling",
-    "name": "rijksict/ideal-koppeling",
+    "name": "nldd/ideal-koppeling",
     "visibility": "open",
     "lang": "Go",
     "stars": 21,
@@ -17082,7 +17082,7 @@ export const repos = [
   },
   {
     "id": "repo-machtigingenregister",
-    "name": "rijksict/machtigingenregister",
+    "name": "nldd/machtigingenregister",
     "visibility": "open",
     "lang": "Go",
     "stars": 28,
@@ -17094,7 +17094,7 @@ export const repos = [
   },
   {
     "id": "repo-gegevensmakelaar",
-    "name": "rijksict/gegevensmakelaar",
+    "name": "nldd/gegevensmakelaar",
     "visibility": "open",
     "lang": "Rust",
     "stars": 35,
@@ -17106,7 +17106,7 @@ export const repos = [
   },
   {
     "id": "repo-stelselcatalogus",
-    "name": "rijksict/stelselcatalogus",
+    "name": "nldd/stelselcatalogus",
     "visibility": "intern",
     "lang": "Vue",
     "stars": 42,
@@ -17118,7 +17118,7 @@ export const repos = [
   },
   {
     "id": "repo-terugmeldvoorziening",
-    "name": "rijksict/terugmeldvoorziening",
+    "name": "nldd/terugmeldvoorziening",
     "visibility": "open",
     "lang": "Go",
     "stars": 49,
@@ -17130,7 +17130,7 @@ export const repos = [
   },
   {
     "id": "repo-digikoppeling-adapter",
-    "name": "rijksict/digikoppeling-adapter",
+    "name": "nldd/digikoppeling-adapter",
     "visibility": "open",
     "lang": "Java",
     "stars": 56,
@@ -17142,7 +17142,7 @@ export const repos = [
   },
   {
     "id": "repo-fsc-inway",
-    "name": "rijksict/fsc-inway",
+    "name": "nldd/fsc-inway",
     "visibility": "open",
     "lang": "Go",
     "stars": 63,
@@ -17154,7 +17154,7 @@ export const repos = [
   },
   {
     "id": "repo-cloudevents-broker",
-    "name": "rijksict/cloudevents-broker",
+    "name": "nldd/cloudevents-broker",
     "visibility": "intern",
     "lang": "Go",
     "stars": 70,
@@ -17166,7 +17166,7 @@ export const repos = [
   },
   {
     "id": "repo-subsidie-aanvraag",
-    "name": "rijksict/subsidie-aanvraag",
+    "name": "nldd/subsidie-aanvraag",
     "visibility": "open",
     "lang": "Vue",
     "stars": 77,
@@ -17178,7 +17178,7 @@ export const repos = [
   },
   {
     "id": "repo-aanbestedingsportaal",
-    "name": "rijksict/aanbestedingsportaal",
+    "name": "nldd/aanbestedingsportaal",
     "visibility": "open",
     "lang": "React",
     "stars": 84,
@@ -17190,7 +17190,7 @@ export const repos = [
   },
   {
     "id": "repo-inkooporder-verwerking",
-    "name": "rijksict/inkooporder-verwerking",
+    "name": "nldd/inkooporder-verwerking",
     "visibility": "open",
     "lang": "Java",
     "stars": 1,
@@ -17202,7 +17202,7 @@ export const repos = [
   },
   {
     "id": "repo-factuurverwerking",
-    "name": "rijksict/factuurverwerking",
+    "name": "nldd/factuurverwerking",
     "visibility": "intern",
     "lang": "Java",
     "stars": 8,
@@ -17214,7 +17214,7 @@ export const repos = [
   },
   {
     "id": "repo-personeelsdossier",
-    "name": "rijksict/personeelsdossier",
+    "name": "nldd/personeelsdossier",
     "visibility": "open",
     "lang": "Java",
     "stars": 15,
@@ -17226,7 +17226,7 @@ export const repos = [
   },
   {
     "id": "repo-verlofaanvraag",
-    "name": "rijksict/verlofaanvraag",
+    "name": "nldd/verlofaanvraag",
     "visibility": "open",
     "lang": "Vue",
     "stars": 22,
@@ -17250,7 +17250,7 @@ export const repos = [
   },
   {
     "id": "repo-rooster-uitvoering",
-    "name": "rijksict/rooster-uitvoering",
+    "name": "nldd/rooster-uitvoering",
     "visibility": "intern",
     "lang": "Python",
     "stars": 36,
@@ -17262,7 +17262,7 @@ export const repos = [
   },
   {
     "id": "repo-zaaksysteem",
-    "name": "rijksict/zaaksysteem",
+    "name": "nldd/zaaksysteem",
     "visibility": "open",
     "lang": "Java",
     "stars": 43,
@@ -17274,7 +17274,7 @@ export const repos = [
   },
   {
     "id": "repo-documentmanagement",
-    "name": "rijksict/documentmanagement",
+    "name": "nldd/documentmanagement",
     "visibility": "open",
     "lang": "Go",
     "stars": 50,
@@ -17298,7 +17298,7 @@ export const repos = [
   },
   {
     "id": "repo-virusscanner-gateway",
-    "name": "rijksict/virusscanner-gateway",
+    "name": "nldd/virusscanner-gateway",
     "visibility": "intern",
     "lang": "Go",
     "stars": 64,
@@ -17310,7 +17310,7 @@ export const repos = [
   },
   {
     "id": "repo-backup-scheduler",
-    "name": "rijksict/backup-scheduler",
+    "name": "nldd/backup-scheduler",
     "visibility": "open",
     "lang": "Go",
     "stars": 71,
@@ -17322,7 +17322,7 @@ export const repos = [
   },
   {
     "id": "repo-kostenrapportage",
-    "name": "rijksict/kostenrapportage",
+    "name": "nldd/kostenrapportage",
     "visibility": "open",
     "lang": "Python",
     "stars": 78,
@@ -17334,7 +17334,7 @@ export const repos = [
   },
   {
     "id": "repo-capaciteitsplanner-dc",
-    "name": "rijksict/capaciteitsplanner-dc",
+    "name": "nldd/capaciteitsplanner-dc",
     "visibility": "open",
     "lang": "Vue",
     "stars": 85,
@@ -17346,7 +17346,7 @@ export const repos = [
   },
   {
     "id": "repo-energieverbruik-monitor",
-    "name": "rijksict/energieverbruik-monitor",
+    "name": "nldd/energieverbruik-monitor",
     "visibility": "intern",
     "lang": "Go",
     "stars": 2,
@@ -17358,7 +17358,7 @@ export const repos = [
   },
   {
     "id": "repo-inspectierapport-generator",
-    "name": "rijksict/inspectierapport-generator",
+    "name": "nldd/inspectierapport-generator",
     "visibility": "open",
     "lang": "Python",
     "stars": 9,
@@ -17370,7 +17370,7 @@ export const repos = [
   },
   {
     "id": "repo-handhavingsdossier",
-    "name": "rijksict/handhavingsdossier",
+    "name": "nldd/handhavingsdossier",
     "visibility": "open",
     "lang": "Java",
     "stars": 16,
@@ -17382,7 +17382,7 @@ export const repos = [
   },
   {
     "id": "repo-klachtenregistratie",
-    "name": "rijksict/klachtenregistratie",
+    "name": "nldd/klachtenregistratie",
     "visibility": "open",
     "lang": "Vue",
     "stars": 23,
@@ -17394,7 +17394,7 @@ export const repos = [
   },
   {
     "id": "repo-wob-verzoek",
-    "name": "rijksict/wob-verzoek",
+    "name": "nldd/wob-verzoek",
     "visibility": "intern",
     "lang": "React",
     "stars": 30,
@@ -17418,7 +17418,7 @@ export const repos = [
   },
   {
     "id": "repo-besluitenregister",
-    "name": "rijksict/besluitenregister",
+    "name": "nldd/besluitenregister",
     "visibility": "open",
     "lang": "Go",
     "stars": 44,
@@ -22291,7 +22291,7 @@ export const runners = [
     "team": "team-platform",
     "kind": "gedeeld",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "x64"
     ],
@@ -22311,7 +22311,7 @@ export const runners = [
     "team": "team-platform",
     "kind": "gedeeld",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "arm64"
     ],
@@ -22351,7 +22351,7 @@ export const runners = [
     "team": "team-platform",
     "kind": "gedeeld",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "x64",
       "dr"
@@ -22372,7 +22372,7 @@ export const runners = [
     "team": "team-platform",
     "kind": "gedeeld",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "arm64"
     ],
@@ -22392,7 +22392,7 @@ export const runners = [
     "team": "team-data",
     "kind": "team",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "x64"
     ],
@@ -22412,7 +22412,7 @@ export const runners = [
     "team": "team-ind-dossiers",
     "kind": "gedeeld",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "x64"
     ],
@@ -22432,7 +22432,7 @@ export const runners = [
     "team": "team-rvig-reisdocumenten",
     "kind": "team",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "arm64"
     ],
@@ -22452,7 +22452,7 @@ export const runners = [
     "team": "team-kvk-handelsregister",
     "kind": "gedeeld",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "x64"
     ],
@@ -22472,7 +22472,7 @@ export const runners = [
     "team": "team-koop-wetten",
     "kind": "team",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "x64"
     ],
@@ -22492,7 +22492,7 @@ export const runners = [
     "team": "team-fin-financieel",
     "kind": "gedeeld",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "arm64"
     ],
@@ -22512,7 +22512,7 @@ export const runners = [
     "team": "team-def-secinfra",
     "kind": "team",
     "labels": [
-      "rijksict-runner",
+      "nldd-runner",
       "linux",
       "x64"
     ],
@@ -22987,7 +22987,7 @@ export const incidents = [
     "severity": "sev2",
     "status": "mitigated",
     "service": "app-inkomenstoets",
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "opened": "gisteren 9:11",
     "oncall": "aisha-el-khattabi",
     "timeline": [
@@ -24145,7 +24145,7 @@ export const secrets = [
     "id": "sec-g1",
     "name": "inkomenstoets/db-password",
     "type": "API-key",
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "rotated": "2 dagen geleden",
     "expires": "over 31 dagen"
   },
@@ -24540,7 +24540,7 @@ export const apis = [
     "id": "api-g2",
     "name": "Inkomenstoets API",
     "version": "v3",
-    "owner": "team-rijksict-iam",
+    "owner": "team-nldd-iam",
     "adr": true,
     "rateLimit": "50/s",
     "status": "beta"
@@ -25080,7 +25080,7 @@ export const apis = [
     "id": "api-g62",
     "name": "Inspectierapport-generator API",
     "version": "v3",
-    "owner": "team-rijksict-docs",
+    "owner": "team-nldd-docs",
     "adr": true,
     "rateLimit": "50/s",
     "status": "beta"
@@ -25876,12 +25876,12 @@ export const costByTeam = [
     "trend": "+12%"
   },
   {
-    "team": "team-rijksict-docs",
+    "team": "team-nldd-docs",
     "month": 789,
     "trend": "-3%"
   },
   {
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "month": 691,
     "trend": "+4%"
   },
@@ -26244,12 +26244,12 @@ export const budgets = [
     "spent": 397
   },
   {
-    "team": "team-rijksict-docs",
+    "team": "team-nldd-docs",
     "budget": 710,
     "spent": 789
   },
   {
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "budget": 830,
     "spent": 691
   },
@@ -27135,15 +27135,15 @@ export const channels = [
   },
   {
     "id": "ch-g95",
-    "team": "team-rijksict-docs",
+    "team": "team-nldd-docs",
     "type": "email",
-    "target": "team-rijksict-docs@rijk.nl"
+    "target": "team-nldd-docs@rijk.nl"
   },
   {
     "id": "ch-g96",
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "type": "Matrix",
-    "target": "#rijksict-iam:rijk.chat"
+    "target": "#nldd-iam:rijk.chat"
   },
   {
     "id": "ch-g97",
@@ -27861,17 +27861,17 @@ export const subscriptions = [
   },
   {
     "id": "sub-g142",
-    "team": "team-rijksict-docs",
+    "team": "team-nldd-docs",
     "event": "incident.opened"
   },
   {
     "id": "sub-g143",
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "event": "cost.budget-exceeded"
   },
   {
     "id": "sub-g144",
-    "team": "team-rijksict-iam",
+    "team": "team-nldd-iam",
     "event": "vuln.detected"
   },
   {
@@ -28194,7 +28194,7 @@ export const skillPlugins = [
     "publisher": "developer-overheid-nl",
     "skills": 10,
     "desc": "API Design Rules, Digikoppeling, OAuth NL, FSC en andere Logius-standaarden als AI-skills.",
-    "install": "rp ai skill install standaarden --team team-platform",
+    "install": "bg ai skill install standaarden --team team-platform",
     "altInstall": "claude plugin install standaarden@overheid-plugins",
     "standards": [
       "std-adr"
@@ -28211,7 +28211,7 @@ export const skillPlugins = [
     "publisher": "developer-overheid-nl",
     "skills": 14,
     "desc": "De 14 richtlijnen van de Nederlandse Richtlijn Digitale Systemen, van privacy tot open source.",
-    "install": "rp ai skill install nerds --team team-platform",
+    "install": "bg ai skill install nerds --team team-platform",
     "altInstall": "claude plugin install nerds@overheid-plugins",
     "standards": [
       "std-bio",
@@ -28229,7 +28229,7 @@ export const skillPlugins = [
     "publisher": "developer-overheid-nl",
     "skills": 6,
     "desc": "Geonovum geo-standaarden: OGC API, metadata, informatiemodellen (NEN 3610, IMGeo).",
-    "install": "rp ai skill install geo --team team-data",
+    "install": "bg ai skill install geo --team team-data",
     "altInstall": "claude plugin install geo@overheid-plugins",
     "standards": [],
     "platforms": [
@@ -28244,7 +28244,7 @@ export const skillPlugins = [
     "publisher": "developer-overheid-nl",
     "skills": 5,
     "desc": "internet.nl web- en mailstandaarden: HTTPS, DNSSEC, DMARC, DKIM, SPF, security.txt.",
-    "install": "rp ai skill install internet --team team-platform",
+    "install": "bg ai skill install internet --team team-platform",
     "altInstall": "claude plugin install internet@overheid-plugins",
     "standards": [
       "std-internetnl"
@@ -28258,10 +28258,10 @@ export const skillPlugins = [
   {
     "id": "design",
     "name": "NLDD Design System",
-    "publisher": "rijksict",
+    "publisher": "nldd",
     "skills": 4,
     "desc": "Skills voor het NLDD design system: componenten kiezen, tokens en toegankelijke patronen.",
-    "install": "rp ai skill install design --team team-platform",
+    "install": "bg ai skill install design --team team-platform",
     "altInstall": "claude plugin install design@overheid-plugins",
     "standards": [
       "std-nldd"
@@ -28278,7 +28278,7 @@ export const skillPlugins = [
     "publisher": "developer-overheid-nl",
     "skills": 2,
     "desc": "Skills om zelf plugins te publiceren en de marketplace.json gesynchroniseerd te houden.",
-    "install": "rp ai skill install marketplace --team team-platform",
+    "install": "bg ai skill install marketplace --team team-platform",
     "altInstall": "claude plugin install marketplace@overheid-plugins",
     "standards": [],
     "platforms": [

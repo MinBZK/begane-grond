@@ -65,7 +65,7 @@ rediss://default@${host}:6380/0`,
         code: `# S3-compatible endpoint
 AWS_ENDPOINT_URL=https://${host}:9000
 AWS_S3_BUCKET=${i.name}
-# sleutels via: rp secret get ${i.team.replace('team-', '')}/objectstore`,
+# sleutels via: bg secret get ${i.team.replace('team-', '')}/objectstore`,
       };
     case 'mail':
       return {
@@ -79,7 +79,7 @@ SMTP_AUTH=login`,
       return {
         language: 'bash',
         code: `# Kubeconfig context
-rp infra kubeconfig ${i.name} >> ~/.kube/config
+bg infra kubeconfig ${i.name} >> ~/.kube/config
 kubectl config use-context ${i.name}
 kubectl get nodes`,
       };
@@ -88,7 +88,7 @@ kubectl get nodes`,
         language: 'bash',
         code: `# OpenAI-compatibele gateway (soeverein)
 OPENAI_BASE_URL=https://llm.rijks.internal/v1
-OPENAI_API_KEY=$(rp secret get ${i.team.replace('team-', '')}/llm-gateway-key)
+OPENAI_API_KEY=$(bg secret get ${i.team.replace('team-', '')}/llm-gateway-key)
 # model: ${i.size}`,
       };
     default:
@@ -229,7 +229,7 @@ const relationLinks = computed(() => {
                 <nldd-button variant="secondary" text="Verwijderen" start-icon="dismiss" @click="doDelete"></nldd-button>
               </div>
               <nldd-spacer size="16" />
-              <CliHint :command="`rp infra scale ${instance.name} --plus 1`" />
+              <CliHint :command="`bg infra scale ${instance.name} --plus 1`" />
             </nldd-container>
           </nldd-card>
 

@@ -162,7 +162,7 @@ const lastOrdered = ref('');
     <nldd-spacer size="24" />
 
     <CliHint
-      :command="`rp werkplek hardware list${lastOrdered ? '\\nrp werkplek provision --model ' + lastOrdered : ''}`"
+      :command="`bg werkplek hardware list${lastOrdered ? '\\nbg werkplek provision --model ' + lastOrdered : ''}`"
       label="Bekijk of bestel hardware ook via de CLI:"
     />
   </div>

@@ -400,7 +400,7 @@ function quadrantLabelPos(q) {
 
     <nldd-spacer size="24" />
 
-    <CliHint command="rp radar list --ring adopt" label="Toon alle 'adopt'-technologieën via de CLI" />
+    <CliHint command="bg radar list --ring adopt" label="Toon alle 'adopt'-technologieën via de CLI" />
   </div>
 </template>
 

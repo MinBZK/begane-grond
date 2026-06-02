@@ -168,7 +168,7 @@ const soonest = computed(() => {
     <nldd-spacer size="24" />
 
     <CliHint
-      command="rp cert list --ca pkioverheid"
+      command="bg cert list --ca pkioverheid"
       label="Certificaten opvragen via de CLI:"
     />
   </div>

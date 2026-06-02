@@ -366,7 +366,7 @@ function relLinks(d) {
           <RelationLinks title="Doorklikken" :links="relLinks(selected)" />
         </div>
 
-        <CliHint :command="'rp obs dashboard ' + selected.app.id + ' --window 1h'" label="Open dit dashboard ook via de CLI:" />
+        <CliHint :command="'bg obs dashboard ' + selected.app.id + ' --window 1h'" label="Open dit dashboard ook via de CLI:" />
       </div>
     </nldd-modal-dialog>
   </div>

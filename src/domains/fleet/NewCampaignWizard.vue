@@ -5,7 +5,7 @@
 //   3) definition   — regex+replacement / LLM-prompt / file to add
 //   4) preview      — faked per-repo dry-run diffs in <nldd-code>
 //   5) rollout      — on finish: store.createCampaign + store.runCampaign
-// After finish we show a live rollout screen and a CliHint with the rp command.
+// After finish we show a live rollout screen and a CliHint with the bg command.
 import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
@@ -140,12 +140,12 @@ const cliCommand = computed(() => {
   const t = form.type;
   const repoArgs = targetRepos.value.map((r) => r.name).join(' ');
   if (t === 'regex') {
-    return `rp fleet campaign run --type regex \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --match '${form.pattern}' --replace '${form.replacement}' --glob '${form.glob}' \\\n  --repos ${repoArgs}`;
+    return `bg fleet campaign run --type regex \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --match '${form.pattern}' --replace '${form.replacement}' --glob '${form.glob}' \\\n  --repos ${repoArgs}`;
   }
   if (t === 'llm') {
-    return `rp fleet campaign run --type llm --model claude-gateway \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --prompt "${form.prompt.slice(0, 60)}…" \\\n  --repos ${repoArgs}`;
+    return `bg fleet campaign run --type llm --model claude-gateway \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --prompt "${form.prompt.slice(0, 60)}…" \\\n  --repos ${repoArgs}`;
   }
-  return `rp fleet campaign run --type file-creation \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --add ${form.filePath} \\\n  --repos ${repoArgs}`;
+  return `bg fleet campaign run --type file-creation \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --add ${form.filePath} \\\n  --repos ${repoArgs}`;
 });
 
 function finish() {
@@ -311,9 +311,9 @@ onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
             ></nldd-button>
           </div>
 
-          <!-- Platform code search (rp code search) -->
+          <!-- Platform code search (bg code search) -->
           <div v-else>
-            <nldd-form-field label="Code-zoekopdracht (rp code search)">
+            <nldd-form-field label="Code-zoekopdracht (bg code search)">
               <nldd-text-field
                 :value="form.searchQuery"
                 @input="(e) => (form.searchQuery = e.target.value)"

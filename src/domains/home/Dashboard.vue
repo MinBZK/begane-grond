@@ -72,7 +72,7 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
     >
       <template #actions>
         <nldd-button variant="secondary" text="Presentatie" start-icon="caret-right" @click="presentation.start(0)" />
-        <nldd-button variant="secondary" text="Mijn spullen" start-icon="person" @click="$router.push('/zelf')" />
+        <nldd-button variant="secondary" text="Mijn overzicht" start-icon="person" @click="$router.push('/zelf')" />
         <nldd-button variant="primary" text="Nieuwe applicatie" start-icon="plus" @click="$router.push('/apps/nieuw')" />
       </template>
     </PageHeader>

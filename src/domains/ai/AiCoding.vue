@@ -17,20 +17,20 @@ const store = usePlatformStore();
 // --- In-IDE assistant offerings -------------------------------------------
 const assistants = [
   {
-    id: 'rp-code',
-    name: 'rp code (CLI-agent)',
-    tagline: 'Agentische assistent in de terminal, Claude-Code-stijl',
-    desc: 'Leest je repo, draait tests, opent PRs. Praat met het platform via MCP.',
+    id: 'bg-code',
+    name: 'bg code (opencode)',
+    tagline: 'Start opencode, kant-en-klaar voor de overheid',
+    desc: 'Geen eigen tool: bg code start de open-source agent opencode, vooraf ingesteld op de soevereine LLM-gateway, SSO Rijk en de platform-MCP-tools. Leest je repo, draait tests, opent PRs.',
     model: 'Overheids-LLM L',
     badge: 'aanbevolen',
     badgeColor: 'success',
     icon: 'terminal',
   },
   {
-    id: 'rp-copilot',
-    name: 'IDE-completions',
-    tagline: 'Inline code-suggesties in VS Code en JetBrains',
-    desc: 'Copilot-stijl autocomplete op een soeverein model, geen code naar buiten.',
+    id: 'bg-ide',
+    name: 'Assistent in je IDE',
+    tagline: 'Chat en inline suggesties in VS Code en JetBrains',
+    desc: 'Liever niet in de terminal? Dezelfde soevereine modellen en MCP-tools werken ook als extensie in je IDE, met Copilot-stijl autocomplete. Geen code naar buiten.',
     model: 'Overheids-LLM S',
     badge: 'GA',
     badgeColor: 'accent',
@@ -51,42 +51,42 @@ const assistants = [
 // --- MCP tools the platform exposes to the assistant ----------------------
 const mcpTools = [
   {
-    name: 'rp.infra.order',
+    name: 'bg.infra.order',
     desc: 'Neem een infra-dienst af (Postgres, Kafka, LLM-key) namens je team.',
     scope: 'schrijft',
     example: '"Geef me een Postgres-acceptatie voor app-toeslagen"',
     icon: 'cloud',
   },
   {
-    name: 'rp.oncall.who',
+    name: 'bg.oncall.who',
     desc: 'Zoek op wie nu piket heeft voor een team of dienst.',
     scope: 'leest',
     example: '"Wie is on-call voor Toeslagen?"',
     icon: 'person-circle',
   },
   {
-    name: 'rp.app.promote',
+    name: 'bg.app.promote',
     desc: 'Promoot een release van acceptatie naar productie, met gate-checks.',
     scope: 'schrijft',
     example: '"Promoot paspoort van acc naar prod"',
     icon: 'arrow-up-arrow-down',
   },
   {
-    name: 'rp.incident.list',
+    name: 'bg.incident.list',
     desc: 'Haal de status van lopende incidenten op.',
     scope: 'leest',
     example: '"Wat is de status van inc-2024-017?"',
     icon: 'exclamation-triangle',
   },
   {
-    name: 'rp.repo.search',
+    name: 'bg.repo.search',
     desc: 'Zoek door code en repos op code.overheid.nl.',
     scope: 'leest',
     example: '"Waar wordt BSN-validatie gedaan?"',
     icon: 'magnifier',
   },
   {
-    name: 'rp.fleet.campaign',
+    name: 'bg.fleet.campaign',
     desc: 'Start een fleet-shift campagne over meerdere repos.',
     scope: 'schrijft',
     example: '"Voeg security.txt toe aan alle open repos"',
@@ -100,7 +100,7 @@ const agentRuns = ref([
   {
     id: 'run-8841',
     task: 'Voert fleet-campagne uit: security.txt (RFC 9116)',
-    tool: 'rp.fleet.campaign',
+    tool: 'bg.fleet.campaign',
     by: 'fatima',
     status: 'actief',
     progress: 62,
@@ -110,7 +110,7 @@ const agentRuns = ref([
   {
     id: 'run-8839',
     task: 'Genereert runbook voor inc-2024-017',
-    tool: 'rp.incident.list',
+    tool: 'bg.incident.list',
     by: 'sanne',
     status: 'actief',
     progress: 40,
@@ -120,7 +120,7 @@ const agentRuns = ref([
   {
     id: 'run-8835',
     task: 'Bumpt NLDD design-system naar 0.9 in platformportaal',
-    tool: 'rp.repo.search',
+    tool: 'bg.repo.search',
     by: 'ans',
     status: 'afgerond',
     progress: 100,
@@ -130,7 +130,7 @@ const agentRuns = ref([
   {
     id: 'run-8830',
     task: 'Stelt schaal-advies op voor kafka-toeslagen-prod',
-    tool: 'rp.infra.order',
+    tool: 'bg.infra.order',
     by: 'sanne',
     status: 'mitigated',
     progress: 88,
@@ -248,9 +248,9 @@ const governance = [
 
     <nldd-spacer size="32" />
 
-    <!-- In-IDE assistant offerings -->
-    <nldd-title size="3"><h2>De assistent in je IDE</h2></nldd-title>
-    <nldd-rich-text><p>Drie smaken, allemaal op platform-modellen. Je code verlaat de Rijksomgeving niet.</p></nldd-rich-text>
+    <!-- Coding assistant offerings: terminal (opencode) and in-IDE -->
+    <nldd-title size="3"><h2>De codeerassistent</h2></nldd-title>
+    <nldd-rich-text><p>In de terminal met opencode of gewoon in je IDE, allemaal op soevereine platform-modellen. Je code verlaat de Rijksomgeving niet.</p></nldd-rich-text>
     <nldd-spacer size="16" />
     <nldd-collection layout="grid" item-width="340px">
       <nldd-card v-for="a in assistants" :key="a.id" :accessible-label="a.name">
@@ -274,7 +274,7 @@ const governance = [
     </nldd-collection>
 
     <nldd-spacer size="16" />
-    <CliHint command="rp code install --ide vscode --model overheids-llm-l" label="Installeer de CLI-agent:" />
+    <CliHint command="bg code" label="Start opencode, geconfigureerd voor de overheid:" />
 
     <nldd-spacer size="36" />
 

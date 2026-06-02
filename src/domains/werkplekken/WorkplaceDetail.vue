@@ -278,7 +278,7 @@ const handoverTarget = computed(() =>
               ></nldd-button>
             </div>
 
-            <CliHint :command="`rp werkplek reimage ${wp.id}\\nrp werkplek transfer ${wp.id} --to <person>\\nrp werkplek revoke ${wp.id}`" />
+            <CliHint :command="`bg werkplek reimage ${wp.id}\\nbg werkplek transfer ${wp.id} --to <person>\\nbg werkplek revoke ${wp.id}`" />
           </nldd-container>
         </nldd-card>
       </div>
