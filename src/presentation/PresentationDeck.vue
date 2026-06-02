@@ -198,7 +198,10 @@ onBeforeUnmount(() => {
 
       <div class="footer">
         <div class="footer-row">
-          <span class="counter" :aria-label="`Slide ${index + 1} van ${total}`">{{ counter }}</span>
+          <span class="counter-wrap">
+            <span class="counter" :aria-label="`Slide ${index + 1} van ${total}`">{{ counter }}</span>
+            <span v-if="current && current.skippable" class="optional-chip">optioneel</span>
+          </span>
           <div class="nav-buttons">
             <button
               type="button"
@@ -432,11 +435,30 @@ onBeforeUnmount(() => {
   justify-content: space-between;
 }
 
+.counter-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 .counter {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.95rem;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.85);
+}
+
+/* Presenter cue: this slide can be cut when the talk runs short. */
+.optional-chip {
+  font-family: 'RijksSans', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .nav-buttons {

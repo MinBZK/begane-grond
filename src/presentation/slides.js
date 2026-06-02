@@ -15,13 +15,22 @@
 //     route?,              // demo route to navigate to (router.push)
 //     emit?,               // { type, title, severity? } -> store.emit(...)
 //     drive?,              // { wizard: 'order'|'app'|'wet'|'werkplek'|
-//                          //   'promotie'|'campagne'|'llm' } auto-run flow
+//                          //   'promotie'|'campagne'|'llm'|'cert' } auto-run flow
 //     highlight?,          // CSS selector to pulse on the demo side
 //     link?,               // { href, label } shown as a closing link on the slide
 //     speaker?,            // presenter name (title slide)
 //     affiliation?,        // presenter affiliation (title slide)
 //     showDate?,           // render today's date on the slide (title slide)
+//     full?,               // full-width intro/closing slide (no left rail)
+//     skippable?,          // mark as optional, cut first when running short
 //   }
+//
+// The story builds from basic, standard platform functionality (paved paths,
+// self-service, the stack, build and CI) up through operating and securing it,
+// and only then into the government-specific layers (basisregistraties, data
+// quality, law as code, the mandatory registers). That arc is deliberate: the
+// audience first sees a platform any modern software shop would recognize, then
+// the parts that are unique to running the state.
 //
 // All UI text is Dutch; identifiers and comments are English. No clock or
 // random APIs are used here (the codebase forbids them); the deck is fully
@@ -47,6 +56,7 @@ export const slides = [
       'De Belastingdienst verwerkt jaarlijks meer dan 10 miljoen aangiftes, met honderden wijzigingen per jaar.',
       'Er is geen kant-en-klaar product voor de Toeslagenberekening. Je kunt het niet kopen.',
     ],
+    emit: { type: 'deploy.completed', title: 'app-toeslagen v2.3.9 uitgerold naar productie' },
     full: true,
   },
   {
@@ -59,6 +69,11 @@ export const slides = [
       'De wereld is te ingewikkeld om vooraf dicht te timmeren in een bestek.',
       'Vendor lock-in: eenmaal binnen kom je er niet meer uit.',
     ],
+    emit: {
+      type: 'deploy.failed',
+      title: 'Groot inkooptraject opnieuw vertraagd',
+      severity: 'critical',
+    },
     full: true,
   },
   {
@@ -70,6 +85,7 @@ export const slides = [
       'AI-assistentie maakt een klein team verrassend productief.',
       'Maar goedkope code zonder platform is een berg techniek-schuld in wording.',
     ],
+    emit: { type: 'ai.skill.installed', title: 'AI-assistent geactiveerd voor het team' },
     full: true,
   },
   {
@@ -83,6 +99,7 @@ export const slides = [
       'Let op: dit is een demo, een proof of concept, om het gesprek te kunnen voeren.',
     ],
     route: '/',
+    highlight: '.rp-page',
   },
   {
     id: 'geplaveide-weg',
@@ -118,6 +135,8 @@ export const slides = [
       'Klik op een app en je ziet tot in welk rack hij draait.',
     ],
     route: '/',
+    highlight: '.rp-page',
+    skippable: true,
   },
   {
     id: 'fysiek-ijzer',
@@ -131,6 +150,7 @@ export const slides = [
     gov: 'Data blijft in Nederland. Soevereiniteit begint bij het ijzer dat je zelf bezit.',
     route: '/fysiek',
     emit: { type: 'capacity.warning', title: 'Datacenter Den Haag: 78% rackcapaciteit' },
+    skippable: true,
   },
   {
     id: 'tot-in-het-rack',
@@ -143,6 +163,7 @@ export const slides = [
     ],
     route: '/fysiek/racks/r-dh-a1',
     emit: { type: 'cooling.alert', title: 'Rack r-dh-a1: koeling binnen marge' },
+    skippable: true,
   },
   {
     id: 'infra-afnemen',
@@ -195,6 +216,19 @@ export const slides = [
     emit: { type: 'pr.opened', title: 'Pull request geopend op code.overheid.nl' },
   },
   {
+    id: 'cli-rp',
+    title: 'De CLI: bg',
+    lead: 'Het hele platform in één commando.',
+    bullets: [
+      'Alles wat je klikt kun je ook scripten.',
+      'Voor wie liever in de terminal woont dan in een dashboard.',
+      'Eén tool die het gebaande pad in tekstvorm geeft.',
+    ],
+    route: '/cli',
+    emit: { type: 'repo.created', title: 'Repository aangemaakt via bg new' },
+    skippable: true,
+  },
+  {
     id: 'ci-runners',
     title: 'CI-runners',
     lead: 'De machines die de code bouwen en testen.',
@@ -205,6 +239,7 @@ export const slides = [
     ],
     route: '/environments/runners',
     emit: { type: 'runner.scaled', title: 'Runner-pool opgeschaald naar de wachtrij' },
+    skippable: true,
   },
   {
     id: 'pijplijn-by-default',
@@ -233,6 +268,21 @@ export const slides = [
     drive: { wizard: 'promotie' },
   },
   {
+    id: 'artefacten',
+    title: 'Artefacten, SBOM en handtekeningen',
+    lead: 'Elk gebouwd artefact heeft een paklijst en een handtekening.',
+    bullets: [
+      'Een SBOM bij elke build: je weet precies wat erin zit.',
+      'Gesigneerd en herleidbaar tot de commit die het maakte.',
+      'Bij een nieuwe kwetsbaarheid zie je meteen welke diensten geraakt zijn.',
+    ],
+    gov: 'Transparantie in de toeleveringsketen als default. Bij een CVE is de impact in seconden bekend, niet na weken zoeken.',
+    route: '/artefacten',
+    emit: { type: 'scan.completed', title: 'SBOM gegenereerd en artefact gesigneerd' },
+    highlight: '.rp-page',
+    skippable: true,
+  },
+  {
     id: 'teams-oncall',
     title: 'Teams, mensen en on-call',
     lead: 'Achter elke dienst staan mensen.',
@@ -243,6 +293,7 @@ export const slides = [
     ],
     route: '/teams/on-call',
     emit: { type: 'oncall.handover', title: 'On-call overgedragen aan het volgende team' },
+    skippable: true,
   },
   {
     id: 'werkplek-uitrollen',
@@ -256,6 +307,7 @@ export const slides = [
     gov: 'Encryptie en MDM staan standaard aan. De Rijksbaseline is ingebouwd, niet optioneel.',
     route: '/werkplekken/nieuw',
     drive: { wizard: 'werkplek' },
+    skippable: true,
   },
   {
     id: 'observability',
@@ -268,6 +320,7 @@ export const slides = [
     ],
     route: '/observability',
     emit: { type: 'alert.firing', title: 'SLO-alert: latency boven de drempel' },
+    skippable: true,
   },
   {
     id: 'incident',
@@ -296,6 +349,7 @@ export const slides = [
     ],
     route: '/kosten',
     emit: { type: 'cost.anomaly', title: 'Kostenanomalie gedetecteerd bij een team' },
+    skippable: true,
   },
   {
     id: 'security-compliance',
@@ -311,19 +365,6 @@ export const slides = [
     emit: { type: 'compliance.dropped', title: 'Compliance-score gedaald, actie vereist' },
   },
   {
-    id: 'certificaten',
-    title: 'Een certificaat in seconden, live',
-    lead: 'Een PKIoverheid-certificaat was weken handwerk. Nu een gebaand pad dat zichzelf vernieuwt.',
-    bullets: [
-      'Vroeger: zelf een CSR maken, aanvragen bij een TSP, wachten, handmatig installeren.',
-      'En dan de vernieuwing vergeten, waardoor de dienst omvalt.',
-      'Nu: een aanvraag, automatisch uitgegeven en gekoppeld, auto-vernieuwing standaard aan.',
-    ],
-    gov: 'PKIoverheid van papieren proces naar self-service. Verlopen door vergeten kan niet meer.',
-    route: '/secrets/certificaten',
-    drive: { wizard: 'cert' },
-  },
-  {
     id: 'standaarden',
     title: 'Standaarden',
     lead: 'Standaard als code, afgedwongen via pull requests.',
@@ -336,6 +377,47 @@ export const slides = [
     route: '/standaarden',
     emit: { type: 'standard.updated', title: 'NLDD design system bijgewerkt naar 0.9' },
     highlight: '.rp-page',
+  },
+  {
+    id: 'inloggen',
+    title: 'Inloggen voor burger en ambtenaar',
+    lead: 'DigiD en eHerkenning als gebaand pad, niet als koppelproject per dienst.',
+    bullets: [
+      'Eén ingang voor authenticatie, hergebruikt door elke dienst.',
+      'Het niveau van zekerheid past zich aan de dienst aan.',
+      'Geen eigen wachtwoordendoosje per applicatie meer.',
+    ],
+    gov: 'DigiD en eHerkenning zijn verplicht. Het platform levert ze als dienst, niet als losse integratie per project.',
+    route: '/inloggen',
+    emit: { type: 'register.connected', title: 'Dienst aangesloten op DigiD' },
+    highlight: '.rp-page',
+  },
+  {
+    id: 'dns',
+    title: 'Domeinen en DNS, met DNSSEC aan',
+    lead: 'Een overheid.nl-domein aanvragen met de beveiliging meteen goed.',
+    bullets: [
+      'DNSSEC, SPF en DMARC staan standaard aan, niet als nazorg.',
+      'Eén plek voor alle domeinen van het Rijk, geen vergeten registraties.',
+      'Wat internet.nl test, levert het platform al ingebouwd.',
+    ],
+    gov: 'De open internetstandaarden van Forum Standaardisatie als default op elk overheidsdomein.',
+    route: '/dns',
+    emit: { type: 'standard.updated', title: 'DNSSEC ingeschakeld op nieuw domein' },
+    highlight: '.rp-page',
+  },
+  {
+    id: 'certificaten',
+    title: 'Een certificaat in seconden, live',
+    lead: 'Een PKIoverheid-certificaat was weken handwerk. Nu een gebaand pad dat zichzelf vernieuwt.',
+    bullets: [
+      'Vroeger: zelf een CSR maken, aanvragen bij een TSP, wachten, handmatig installeren.',
+      'En dan de vernieuwing vergeten, waardoor de dienst omvalt.',
+      'Nu: een aanvraag, automatisch uitgegeven en gekoppeld, auto-vernieuwing standaard aan.',
+    ],
+    gov: 'PKIoverheid van papieren proces naar self-service. Verlopen door vergeten kan niet meer.',
+    route: '/secrets/certificaten',
+    drive: { wizard: 'cert' },
   },
   {
     id: 'fleet-campagne',
@@ -378,6 +460,21 @@ export const slides = [
     highlight: '.rp-page',
   },
   {
+    id: 'datacontracten',
+    title: 'Datacontracten',
+    lead: 'Een dataset delen met een contract erop: wie mag wat, hoe vers, met welke garantie.',
+    bullets: [
+      'Niet ad-hoc een export mailen, maar een afdwingbaar contract tussen aanbieder en afnemer.',
+      'Versheid, schema en toegang staan vast en worden bewaakt.',
+      'Breekt de leverancier het schema, dan weet de afnemer het meteen.',
+    ],
+    gov: 'Gegevensdeling met afspraken die het platform handhaaft, niet met goede bedoelingen.',
+    route: '/datacontracten',
+    emit: { type: 'register.connected', title: 'Datacontract geactiveerd tussen aanbieder en afnemer' },
+    highlight: '.rp-page',
+    skippable: true,
+  },
+  {
     id: 'digikoppeling-fsc',
     title: 'Digikoppeling en FSC',
     lead: 'Vertrouwde koppelvlakken tussen organisaties.',
@@ -389,6 +486,7 @@ export const slides = [
     gov: 'Een verbindende platformlaag over bestaande overheidsbouwstenen heen. Daarvoor is mandaat nodig.',
     route: '/koppelvlakken/fsc',
     emit: { type: 'register.connected', title: 'Vertrouwde koppeling via FSC tot stand gebracht' },
+    skippable: true,
   },
   {
     id: 'wet-naar-systeem',
@@ -416,15 +514,62 @@ export const slides = [
     drive: { wizard: 'wet' },
   },
   {
-    id: 'cli-rp',
-    title: 'De CLI: bg',
-    lead: 'Het hele platform in één commando.',
+    id: 'algoritmes',
+    title: 'Algoritmeregister',
+    lead: 'Welke algoritmes nemen besluiten over burgers, en zijn ze verantwoord?',
     bullets: [
-      'Alles wat je klikt kun je ook scripten.',
-      'Voor wie liever in de terminal woont dan in een dashboard.',
-      'Eén tool die het gebaande pad in tekstvorm geeft.',
+      'Elk besluitvormend algoritme staat geregistreerd en uitlegbaar.',
+      'Gekoppeld aan de wet die het uitvoert en het team dat het beheert.',
+      'Transparantie is wettelijk verplicht, het platform maakt het zichtbaar.',
     ],
-    route: '/cli',
+    gov: 'Het wettelijk verplichte algoritmeregister, gekoppeld aan de dienst die het draait en de toetsen die het doorstond.',
+    route: '/algoritmes',
+    emit: { type: 'standard.updated', title: 'Algoritme geregistreerd en beoordeeld' },
+    highlight: '.rp-page',
+  },
+  {
+    id: 'verwerkingen',
+    title: 'Verwerkingen en DPIA',
+    lead: 'Welke persoonsgegevens verwerkt een dienst, en op welke grondslag?',
+    bullets: [
+      'Het verwerkingenregister komt uit de dienst zelf, niet uit een los Excel.',
+      'Een DPIA hangt aan de verwerking en wordt afgedwongen voor productie.',
+      'Privacy by design, herleidbaar tot de databron en de wet.',
+    ],
+    gov: 'Het AVG-verwerkingenregister als levend onderdeel van het platform, niet als jaarlijkse papieren exercitie.',
+    route: '/verwerkingen',
+    emit: { type: 'compliance.dropped', title: 'Productie geblokkeerd: DPIA ontbreekt' },
+    highlight: '.rp-page',
+  },
+  {
+    id: 'openbaarheid',
+    title: 'Woo en archivering',
+    lead: 'Openbaar maken en archiveren als ingebouwde functie, niet als handwerk.',
+    bullets: [
+      'Wat onder de Woo valt is al voorbereid op publicatie.',
+      'Archivering volgens de Archiefwet, automatisch en herleidbaar.',
+      'Transparantie is de norm, niet een verzoek dat maanden duurt.',
+    ],
+    gov: 'Woo en Archiefwet ingebakken in het gebaande pad, niet als losse afdeling die achteraf opruimt.',
+    route: '/openbaarheid',
+    emit: { type: 'standard.updated', title: 'Document gepubliceerd onder de Woo' },
+    highlight: '.rp-page',
+    skippable: true,
+  },
+  {
+    id: 'toegankelijkheid',
+    title: 'Toegankelijkheid, afgedwongen',
+    lead: 'WCAG 2.2 AA als check in de pijplijn, niet als verklaring achteraf.',
+    bullets: [
+      'Elke dienst heeft een toegankelijkheidsverklaring die klopt met de werkelijkheid.',
+      'Het NL Design System levert toegankelijke bouwstenen by default.',
+      'Faalt de check, dan haalt de dienst de productie-gate niet.',
+    ],
+    gov: 'EN 301 549 en WCAG zijn wettelijk verplicht. Het platform toetst ze automatisch in plaats van achteraf.',
+    route: '/toegankelijkheid',
+    emit: { type: 'compliance.dropped', title: 'Toegankelijkheidscheck gezakt, gate dicht' },
+    highlight: '.rp-page',
+    skippable: true,
   },
   {
     id: 'llm-afnemen',
@@ -450,6 +595,7 @@ export const slides = [
     ],
     route: '/ai/skills',
     emit: { type: 'ai.skill.installed', title: 'Skill geïnstalleerd voor het team' },
+    skippable: true,
   },
   {
     id: 'platform-als-product',
