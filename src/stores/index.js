@@ -472,6 +472,66 @@ export const usePlatformStore = defineStore('platform', {
       }
     },
 
+    // --- Domains & DNS management ---
+    // Register a new government domain. A fresh domain starts without DNSSEC and
+    // without an internet.nl score, so the work to get it compliant is visible.
+    addDomein({ fqdn, app, team }) {
+      const slug = fqdn.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+      const dom = {
+        id: `dom-${slug}`,
+        fqdn,
+        app: app || null,
+        team: team || 'team-platform',
+        dnssec: false,
+        tls: null,
+        internetnl: 0,
+        ipv6: false,
+        registrar: 'SIDN',
+        records: [{ type: 'A', name: '@', value: '145.21.0.0' }],
+        status: 'aandacht',
+      };
+      this.domeinen.unshift(dom);
+      this.audit('domein geregistreerd', fqdn);
+      this.emit('dns.domain.added', { title: `Domein ${fqdn} geregistreerd`, resource: dom.id, target: `/dns/${dom.id}`, team: dom.team });
+      return dom;
+    },
+    toggleDnssec(id) {
+      const dom = this.domeinById(id);
+      if (!dom) return;
+      dom.dnssec = !dom.dnssec;
+      if (dom.dnssec) {
+        // Enabling DNSSEC adds the signing record and lifts the internet.nl score.
+        if (!dom.records.some((r) => r.type === 'CAA')) {
+          dom.records.push({ type: 'CAA', name: '@', value: '0 issue pkioverheid.nl' });
+        }
+        dom.internetnl = Math.max(dom.internetnl, 90);
+        dom.status = dom.internetnl >= 80 ? 'actief' : 'aandacht';
+      } else {
+        dom.internetnl = Math.min(dom.internetnl, 75);
+        dom.status = 'aandacht';
+      }
+      this.audit(dom.dnssec ? 'DNSSEC ingeschakeld' : 'DNSSEC uitgeschakeld', dom.fqdn);
+      this.emit('dns.dnssec.changed', { title: `DNSSEC ${dom.dnssec ? 'aan' : 'uit'} voor ${dom.fqdn}`, resource: dom.id, target: `/dns/${dom.id}`, team: dom.team });
+    },
+    addDnsRecord(id, record) {
+      const dom = this.domeinById(id);
+      if (!dom) return;
+      dom.records.push({ type: record.type, name: record.name || '@', value: record.value });
+      this.audit('DNS-record toegevoegd', `${record.type} ${record.name || '@'} op ${dom.fqdn}`);
+    },
+    editDnsRecord(id, index, record) {
+      const dom = this.domeinById(id);
+      if (!dom || !dom.records[index]) return;
+      dom.records[index] = { type: record.type, name: record.name || '@', value: record.value };
+      this.audit('DNS-record gewijzigd', `${record.type} ${record.name || '@'} op ${dom.fqdn}`);
+    },
+    removeDnsRecord(id, index) {
+      const dom = this.domeinById(id);
+      if (!dom || !dom.records[index]) return;
+      const [removed] = dom.records.splice(index, 1);
+      this.audit('DNS-record verwijderd', `${removed.type} ${removed.name} op ${dom.fqdn}`);
+    },
+
     // --- Fleet-shift ---
     createCampaign(c) {
       const camp = { id: nextId('camp'), status: 'concept', progress: { open: 0, merged: 0, failing: 0 }, ...c };

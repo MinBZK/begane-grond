@@ -35366,7 +35366,144 @@ export const datasets = [
     open: true, openReason: "", sla: "99.5%", refresh: "maandelijks",
     format: ["JSON-API", "CSV"], consumers: [], apis: [], wetten: [],
     updated: "2026-05-01", description: "Geaggregeerde demografische statistieken, volledig openbaar via open data."
-  }
+  },
+  {
+    id: "ds-rijbewijzen-cbr", name: "Rijbewijsregister", team: "team-cbr-rijbewijs",
+    register: "kenteken", qualityLabel: "goud",
+    dimensions: { volledigheid: 97, actualiteit: 96, herleidbaarheid: 98, juistheid: 95, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "99.9%", refresh: "realtime",
+    format: ["JSON-API"], consumers: ["app-rijbewijs-vernieuwen"], apis: [], wetten: [],
+    updated: "2026-05-26", description: "Geldige rijbewijzen en categorieën uit het CBR-register."
+  },
+  {
+    id: "ds-studieschuld", name: "Studieschulden", team: "team-duo-studiefinanciering",
+    register: "duo-onderwijs", qualityLabel: "zilver",
+    dimensions: { volledigheid: 90, actualiteit: 84, herleidbaarheid: 88, juistheid: 86, avgClassificatie: "persoonsgegevens" },
+    open: false, openReason: "Bevat persoonsgegevens (AVG)", sla: "99.0%", refresh: "maandelijks",
+    format: ["JSON-API"], consumers: ["app-studiefinanciering-portaal", "app-studielening-rekentool"], apis: [], wetten: ["awir"],
+    updated: "2026-02-02", description: "Openstaande studieschuld per debiteur."
+  },
+  {
+    id: "ds-diploma-register", name: "Diplomaregister", team: "team-duo-register",
+    register: "duo-onderwijs", qualityLabel: "goud",
+    dimensions: { volledigheid: 98, actualiteit: 95, herleidbaarheid: 99, juistheid: 97, avgClassificatie: "persoonsgegevens" },
+    open: false, openReason: "Bevat persoonsgegevens (AVG)", sla: "99.5%", refresh: "dagelijks",
+    format: ["JSON-API"], consumers: ["app-diplomaregister", "app-naturalisatie-aanvraag"], apis: [], wetten: [],
+    updated: "2026-05-06", description: "Behaalde diploma's en getuigschriften uit DUO."
+  },
+  {
+    id: "ds-verblijfsvergunningen", name: "Verblijfsvergunningen", team: "team-ind-dossiers",
+    register: "brp", qualityLabel: "goud",
+    dimensions: { volledigheid: 96, actualiteit: 94, herleidbaarheid: 97, juistheid: 95, avgClassificatie: "bijzondere persoonsgegevens" },
+    open: false, openReason: "Bijzondere persoonsgegevens (AVG art. 9)", sla: "99.5%", refresh: "dagelijks",
+    format: ["JSON-API"], consumers: ["app-verblijfsvergunning", "app-naturalisatie-aanvraag"], apis: [], wetten: ["participatiewet"],
+    updated: "2026-05-17", description: "Actuele verblijfsstatus en vergunningen uit de IND-keten."
+  },
+  {
+    id: "ds-aow-rechten", name: "AOW-rechten", team: "team-data",
+    register: "svb-aow", qualityLabel: "goud",
+    dimensions: { volledigheid: 97, actualiteit: 93, herleidbaarheid: 96, juistheid: 95, avgClassificatie: "persoonsgegevens" },
+    open: false, openReason: "Bevat persoonsgegevens (AVG)", sla: "99.5%", refresh: "maandelijks",
+    format: ["JSON-API"], consumers: ["app-aow-uitkering"], apis: [], wetten: ["aow"],
+    updated: "2026-02-04", description: "Opgebouwde AOW-rechten per verzekerde."
+  },
+  {
+    id: "ds-dienstverbanden", name: "Dienstverbanden (UWV)", team: "team-data",
+    register: "uwv-dienstverband", qualityLabel: "zilver",
+    dimensions: { volledigheid: 89, actualiteit: 86, herleidbaarheid: 90, juistheid: 88, avgClassificatie: "persoonsgegevens" },
+    open: false, openReason: "Bevat persoonsgegevens (AVG)", sla: "99.0%", refresh: "wekelijks",
+    format: ["JSON-API"], consumers: ["app-ww-aanvraag", "app-bijstandsuitkering"], apis: [], wetten: ["werkloosheidswet"],
+    updated: "2026-05-22", description: "Actuele en historische dienstverbanden uit de polisadministratie."
+  },
+  {
+    id: "ds-omzetbelasting-aangiften", name: "Omzetbelasting-aangiften", team: "team-bd-aangifte",
+    register: "bd-omzetbelasting", qualityLabel: "goud",
+    dimensions: { volledigheid: 96, actualiteit: 97, herleidbaarheid: 98, juistheid: 96, avgClassificatie: "financiële gegevens" },
+    open: false, openReason: "Financiële persoonsgegevens (AVG)", sla: "99.5%", refresh: "dagelijks",
+    format: ["JSON-API"], consumers: ["app-aangifte-omzetbelasting"], apis: [], wetten: ["omzetbelasting-1968"],
+    updated: "2026-05-03", description: "Ingediende btw-aangiften per ondernemer."
+  },
+  {
+    id: "ds-geo-bgt", name: "Geo-objecten (BGT)", team: "team-data",
+    register: "bgt", qualityLabel: "goud",
+    dimensions: { volledigheid: 99, actualiteit: 92, herleidbaarheid: 99, juistheid: 97, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "99.9%", refresh: "wekelijks",
+    format: ["JSON-API"], consumers: ["app-omgevingsloket", "app-bouwvergunning"], apis: [], wetten: [],
+    updated: "2026-05-26", description: "Basisregistratie Grootschalige Topografie."
+  },
+  {
+    id: "ds-wkpb-beperkingen", name: "Publiekrechtelijke beperkingen", team: "team-data",
+    register: "kadaster-wkpb", qualityLabel: "zilver",
+    dimensions: { volledigheid: 88, actualiteit: 80, herleidbaarheid: 90, juistheid: 85, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "99.0%", refresh: "maandelijks",
+    format: ["JSON-API"], consumers: ["app-vergunningchecker", "app-kadaster-viewer"], apis: [], wetten: [],
+    updated: "2026-05-07", description: "Beperkingenbesluiten op onroerende zaken (WKPB)."
+  },
+  {
+    id: "ds-loonheffing", name: "Loonheffingsgegevens", team: "team-bd-gegevens",
+    register: "inkomen", qualityLabel: "zilver",
+    dimensions: { volledigheid: 91, actualiteit: 88, herleidbaarheid: 92, juistheid: 90, avgClassificatie: "financiële gegevens" },
+    open: false, openReason: "Financiële persoonsgegevens (AVG)", sla: "99.0%", refresh: "maandelijks",
+    format: ["JSON-API"], consumers: ["app-loonheffing", "app-inkomenstoets"], apis: [], wetten: ["inkomstenbelasting-2001"],
+    updated: "2026-02-16", description: "Ingehouden loonheffing per werknemer."
+  },
+  {
+    id: "ds-verkeersboetes", name: "Verkeersboetes", team: "team-cjib-sanctie",
+    register: "kenteken", qualityLabel: "zilver",
+    dimensions: { volledigheid: 90, actualiteit: 90, herleidbaarheid: 86, juistheid: 88, avgClassificatie: "persoonsgegevens" },
+    open: false, openReason: "Bevat persoonsgegevens (AVG)", sla: "99.0%", refresh: "dagelijks",
+    format: ["JSON-API"], consumers: ["app-verkeersboete-viewer", "app-incasso-cjib"], apis: [], wetten: [],
+    updated: "2026-05-10", description: "Opgelegde verkeersboetes gekoppeld aan kenteken."
+  },
+  {
+    id: "ds-vaccinaties", name: "Vaccinatiegegevens", team: "team-data",
+    register: "brp", qualityLabel: "brons",
+    dimensions: { volledigheid: 66, actualiteit: 60, herleidbaarheid: 72, juistheid: 68, avgClassificatie: "bijzondere persoonsgegevens" },
+    open: false, openReason: "Bijzondere persoonsgegevens (AVG art. 9)", sla: "98.0%", refresh: "wekelijks",
+    format: ["JSON-API"], consumers: ["app-vaccinatieregister"], apis: [], wetten: [],
+    updated: "2026-05-21", description: "Geregistreerde vaccinaties, dekking nog niet volledig."
+  },
+  {
+    id: "ds-milieumeldingen", name: "Milieumeldingen", team: "team-data",
+    register: "bag", qualityLabel: "brons",
+    dimensions: { volledigheid: 62, actualiteit: 55, herleidbaarheid: 70, juistheid: 64, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "97.0%", refresh: "maandelijks",
+    format: ["JSON-API"], consumers: ["app-milieumelding"], apis: [], wetten: [],
+    updated: "2026-01-17", description: "Meldingen over milieuovertredingen, deels ongestructureerd."
+  },
+  {
+    id: "ds-subsidies-rvo", name: "Subsidietoekenningen", team: "team-data",
+    register: "hr", qualityLabel: "zilver",
+    dimensions: { volledigheid: 87, actualiteit: 83, herleidbaarheid: 89, juistheid: 86, avgClassificatie: "financiële gegevens" },
+    open: false, openReason: "Financiële persoonsgegevens (AVG)", sla: "99.0%", refresh: "wekelijks",
+    format: ["JSON-API"], consumers: ["app-subsidieportaal-rvo", "app-subsidie-aanvraag"], apis: [], wetten: [],
+    updated: "2026-05-16", description: "Toegekende subsidies per onderneming."
+  },
+  {
+    id: "ds-waterschapsheffing", name: "Waterschapsheffingen", team: "team-data",
+    register: "woz", qualityLabel: "zilver",
+    dimensions: { volledigheid: 85, actualiteit: 82, herleidbaarheid: 88, juistheid: 84, avgClassificatie: "persoonsgegevens" },
+    open: false, openReason: "Bevat persoonsgegevens (AVG)", sla: "99.0%", refresh: "jaarlijks",
+    format: ["JSON-API"], consumers: ["app-waterschapsheffing"], apis: [], wetten: [],
+    updated: "2026-02-11", description: "Heffingsgrondslagen voor waterschapsbelasting."
+  },
+  {
+    id: "ds-leerplicht", name: "Leerplichtregistratie", team: "team-duo-register",
+    register: "duo-onderwijs", qualityLabel: "brons",
+    dimensions: { volledigheid: 68, actualiteit: 64, herleidbaarheid: 74, juistheid: 70, avgClassificatie: "bijzondere persoonsgegevens" },
+    open: false, openReason: "Bijzondere persoonsgegevens (AVG art. 9)", sla: "98.0%", refresh: "maandelijks",
+    format: ["JSON-API"], consumers: ["app-leerplicht-melding"], apis: [], wetten: [],
+    updated: "2026-03-11", description: "Verzuim- en leerplichtmeldingen, kwaliteit wisselt per gemeente."
+  },
+  {
+    id: "ds-pgb-budgetten", name: "PGB-budgetten", team: "team-data",
+    register: "brp", qualityLabel: "zilver",
+    dimensions: { volledigheid: 86, actualiteit: 84, herleidbaarheid: 87, juistheid: 85, avgClassificatie: "bijzondere persoonsgegevens" },
+    open: false, openReason: "Bijzondere persoonsgegevens (AVG art. 9)", sla: "99.0%", refresh: "maandelijks",
+    format: ["JSON-API"], consumers: ["app-pgb-beheer"], apis: [], wetten: ["participatiewet"],
+    updated: "2026-01-06", description: "Persoonsgebonden budgetten in de zorg."
+  },
+
 ];
 
 // --- Algoritmeregister: mandatory NL government register (2023) of algorithms
@@ -35428,7 +35565,112 @@ export const algoritmes = [
     humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: [],
     app: "app-vergunningchecker", status: "productie", published: "2025-10-05",
     publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/documentclassificatie-woo"
-  }
+  },
+  {
+    id: "alg-bijstand-rechtmatigheid", name: "Rechtmatigheidscontrole bijstand", team: "team-data",
+    doel: "Controle op rechtmatig gebruik van bijstand.", type: "ml", model: null,
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-dienstverbanden", "ds-huishoudsamenstelling"],
+    app: "app-bijstandsuitkering", status: "productie", published: "2024-09-01",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/bijstand-rechtmatigheid"
+  },
+  {
+    id: "alg-studiefinanciering-toekenning", name: "Toekenning studiefinanciering", team: "team-duo-studiefinanciering",
+    doel: "Berekenen recht op studiefinanciering.", type: "rule-based", model: null,
+    uitlegbaarheid: "hoog", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: false, besluitvorming: "bepalend", dataSources: ["ds-studieschuld", "ds-diploma-register"],
+    app: "app-studiefinanciering-portaal", status: "productie", published: "2023-08-15",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/studiefinanciering-toekenning"
+  },
+  {
+    id: "alg-ind-prioritering", name: "Prioritering asielaanvragen", team: "team-ind-aanvragen",
+    doel: "Volgorde van behandeling bepalen.", type: "ml", model: null,
+    uitlegbaarheid: "laag", impacttoets: "vereist", discriminatietoets: "vereist",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-verblijfsvergunningen"],
+    app: "app-verblijfsvergunning", status: "pilot", published: "2026-03-20",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/ind-prioritering"
+  },
+  {
+    id: "alg-boete-incasso", name: "Incassostrategie boetes", team: "team-cjib-inning",
+    doel: "Bepalen van de incassoroute per debiteur.", type: "ml", model: null,
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-verkeersboetes"],
+    app: "app-incasso-cjib", status: "productie", published: "2024-05-10",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/boete-incasso"
+  },
+  {
+    id: "alg-omzetbelasting-controle", name: "Aangiftecontrole btw", team: "team-bd-aangifte",
+    doel: "Detecteren van afwijkende btw-aangiften.", type: "ml", model: null,
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-omzetbelasting-aangiften"],
+    app: "app-aangifte-omzetbelasting", status: "productie", published: "2024-02-28",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/omzetbelasting-controle"
+  },
+  {
+    id: "alg-subsidie-classificatie", name: "Subsidieclassificatie", team: "team-data",
+    doel: "Subsidieaanvragen categoriseren.", type: "llm", model: "overheids-llm-l",
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "n.v.t.",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-subsidies-rvo", "ds-bedrijven-hr"],
+    app: "app-subsidieportaal-rvo", status: "productie", published: "2026-01-15",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/subsidie-classificatie"
+  },
+  {
+    id: "alg-bezwaar-routing", name: "Bezwaarrouting", team: "team-platform",
+    doel: "Bezwaren naar de juiste behandelaar routeren.", type: "llm", model: "overheids-llm-s",
+    uitlegbaarheid: "hoog", impacttoets: "uitgevoerd", discriminatietoets: "n.v.t.",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: [],
+    app: "app-bezwaarafhandeling", status: "productie", published: "2025-11-01",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/bezwaar-routing"
+  },
+  {
+    id: "alg-vergunning-risico", name: "Risicoweging vergunningen", team: "team-platform",
+    doel: "Risicovolle vergunningaanvragen markeren.", type: "ml", model: null,
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "vereist", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-vergunningen-historie", "ds-geo-bgt"],
+    app: "app-vergunningchecker", status: "pilot", published: "2026-04-22",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/vergunning-risico"
+  },
+  {
+    id: "alg-aow-leeftijd", name: "AOW-leeftijdbepaling", team: "team-data",
+    doel: "Vaststellen AOW-ingangsdatum.", type: "rule-based", model: null,
+    uitlegbaarheid: "hoog", impacttoets: "uitgevoerd", discriminatietoets: "n.v.t.",
+    humanInTheLoop: false, besluitvorming: "bepalend", dataSources: ["ds-aow-rechten", "ds-personen-brp"],
+    app: "app-aow-uitkering", status: "productie", published: "2023-04-01",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/aow-leeftijd"
+  },
+  {
+    id: "alg-ww-duur", name: "WW-duurberekening", team: "team-data",
+    doel: "Berekenen duur en hoogte WW-uitkering.", type: "rule-based", model: null,
+    uitlegbaarheid: "hoog", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: false, besluitvorming: "bepalend", dataSources: ["ds-dienstverbanden"],
+    app: "app-ww-aanvraag", status: "productie", published: "2023-07-12",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/ww-duur"
+  },
+  {
+    id: "alg-milieurisico", name: "Milieurisico-detectie", team: "team-data",
+    doel: "Signaleren van milieurisico's uit meldingen.", type: "ml", model: null,
+    uitlegbaarheid: "laag", impacttoets: "vereist", discriminatietoets: "vereist",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-milieumeldingen"],
+    app: "app-milieumelding", status: "pilot", published: "2026-05-15",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/milieurisico"
+  },
+  {
+    id: "alg-leerplicht-signaal", name: "Verzuimsignalering", team: "team-duo-register",
+    doel: "Signaleren van schoolverzuim.", type: "ml", model: null,
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-leerplicht"],
+    app: "app-leerplicht-melding", status: "productie", published: "2024-10-05",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/leerplicht-signaal"
+  },
+  {
+    id: "alg-vertaalhulp", name: "Vertaalhulp burgerbrieven", team: "team-platform",
+    doel: "Burgerbrieven vertalen naar eenvoudige taal.", type: "llm", model: "overheids-llm-eu",
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "n.v.t.",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: [],
+    app: "app-brief-generator", status: "productie", published: "2026-02-20",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/vertaalhulp"
+  },
+
 ];
 
 // --- Verwerkingenregister (AVG art. 30) + DPIA status. Each processing
@@ -35490,7 +35732,92 @@ export const verwerkingen = [
     betrokkenen: "Niet herleidbaar (geaggregeerd)", dataCategorieen: ["openbaar"],
     datasets: ["ds-statline-demografie"], registers: [],
     bewaartermijn: "onbepaald", dpiaStatus: "n.v.t.", risiconiveau: "laag", dpiaDate: ""
-  }
+  },
+  {
+    id: "vwk-bijstand-verstrekking", name: "Bijstand verstrekken", team: "team-data",
+    doel: "Bepalen recht op bijstand.", grondslag: "wettelijke verplichting", wet: "participatiewet",
+    betrokkenen: "Bijstandsgerechtigden", dataCategorieen: ["persoonsgegevens", "financiële gegevens"],
+    datasets: ["ds-dienstverbanden"], registers: ["brp", "inkomen"],
+    bewaartermijn: "7 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "hoog", dpiaDate: "2025-08-01"
+  },
+  {
+    id: "vwk-studiefinanciering", name: "Studiefinanciering verstrekken", team: "team-duo-studiefinanciering",
+    doel: "Toekennen studiefinanciering.", grondslag: "wettelijke verplichting", wet: null,
+    betrokkenen: "Studenten", dataCategorieen: ["persoonsgegevens"],
+    datasets: ["ds-diploma-register", "ds-studieschuld"], registers: ["duo-onderwijs"],
+    bewaartermijn: "5 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "gemiddeld", dpiaDate: "2025-03-10"
+  },
+  {
+    id: "vwk-verblijfsvergunning", name: "Verblijfsvergunning beoordelen", team: "team-ind-dossiers",
+    doel: "Beoordelen aanvraag verblijfsvergunning.", grondslag: "wettelijke verplichting", wet: null,
+    betrokkenen: "Vreemdelingen", dataCategorieen: ["bijzondere persoonsgegevens"],
+    datasets: ["ds-verblijfsvergunningen"], registers: ["brp"],
+    bewaartermijn: "10 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "hoog", dpiaDate: "2025-05-20"
+  },
+  {
+    id: "vwk-aow-uitkering", name: "AOW uitkeren", team: "team-data",
+    doel: "Vaststellen en uitbetalen AOW.", grondslag: "wettelijke verplichting", wet: "aow",
+    betrokkenen: "AOW-gerechtigden", dataCategorieen: ["persoonsgegevens", "financiële gegevens"],
+    datasets: ["ds-aow-rechten"], registers: ["brp"],
+    bewaartermijn: "7 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "gemiddeld", dpiaDate: "2025-01-15"
+  },
+  {
+    id: "vwk-ww-uitkering", name: "WW uitkeren", team: "team-data",
+    doel: "Vaststellen recht op WW.", grondslag: "wettelijke verplichting", wet: "werkloosheidswet",
+    betrokkenen: "Werkzoekenden", dataCategorieen: ["persoonsgegevens", "financiële gegevens"],
+    datasets: ["ds-dienstverbanden"], registers: ["uwv-dienstverband"],
+    bewaartermijn: "7 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "gemiddeld", dpiaDate: "2025-02-28"
+  },
+  {
+    id: "vwk-btw-aangifte", name: "Btw-aangifte verwerken", team: "team-bd-aangifte",
+    doel: "Verwerken en controleren btw-aangiften.", grondslag: "wettelijke verplichting", wet: "omzetbelasting-1968",
+    betrokkenen: "Ondernemers", dataCategorieen: ["financiële gegevens"],
+    datasets: ["ds-omzetbelasting-aangiften"], registers: ["bd-omzetbelasting", "hr"],
+    bewaartermijn: "7 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "gemiddeld", dpiaDate: "2025-04-12"
+  },
+  {
+    id: "vwk-verkeershandhaving", name: "Verkeershandhaving", team: "team-cjib-sanctie",
+    doel: "Opleggen en innen van verkeersboetes.", grondslag: "taak van algemeen belang", wet: null,
+    betrokkenen: "Voertuighouders", dataCategorieen: ["persoonsgegevens"],
+    datasets: ["ds-verkeersboetes"], registers: ["kenteken"],
+    bewaartermijn: "5 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "gemiddeld", dpiaDate: "2024-12-01"
+  },
+  {
+    id: "vwk-vaccinatie", name: "Vaccinatieregistratie", team: "team-data",
+    doel: "Bijhouden vaccinatiestatus.", grondslag: "toestemming", wet: null,
+    betrokkenen: "Gevaccineerden", dataCategorieen: ["bijzondere persoonsgegevens"],
+    datasets: ["ds-vaccinaties"], registers: ["brp"],
+    bewaartermijn: "20 jaar", dpiaStatus: "vereist", risiconiveau: "hoog", dpiaDate: ""
+  },
+  {
+    id: "vwk-subsidie", name: "Subsidie verstrekken", team: "team-data",
+    doel: "Beoordelen en toekennen subsidies.", grondslag: "taak van algemeen belang", wet: null,
+    betrokkenen: "Ondernemers en organisaties", dataCategorieen: ["financiële gegevens"],
+    datasets: ["ds-subsidies-rvo"], registers: ["hr"],
+    bewaartermijn: "10 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "laag", dpiaDate: "2025-06-30"
+  },
+  {
+    id: "vwk-pgb", name: "PGB-beheer", team: "team-data",
+    doel: "Beheren persoonsgebonden budgetten.", grondslag: "wettelijke verplichting", wet: "participatiewet",
+    betrokkenen: "Budgethouders", dataCategorieen: ["bijzondere persoonsgegevens"],
+    datasets: ["ds-pgb-budgetten"], registers: ["brp"],
+    bewaartermijn: "7 jaar", dpiaStatus: "vereist", risiconiveau: "hoog", dpiaDate: ""
+  },
+  {
+    id: "vwk-leerplicht", name: "Leerplichthandhaving", team: "team-duo-register",
+    doel: "Handhaven leerplicht.", grondslag: "taak van algemeen belang", wet: null,
+    betrokkenen: "Leerplichtigen", dataCategorieen: ["bijzondere persoonsgegevens"],
+    datasets: ["ds-leerplicht"], registers: [],
+    bewaartermijn: "5 jaar", dpiaStatus: "vereist", risiconiveau: "gemiddeld", dpiaDate: ""
+  },
+  {
+    id: "vwk-waterschapsheffing", name: "Waterschapsheffing innen", team: "team-data",
+    doel: "Vaststellen en innen heffingen.", grondslag: "wettelijke verplichting", wet: null,
+    betrokkenen: "Heffingsplichtigen", dataCategorieen: ["persoonsgegevens"],
+    datasets: ["ds-waterschapsheffing"], registers: ["woz"],
+    bewaartermijn: "7 jaar", dpiaStatus: "n.v.t.", risiconiveau: "laag", dpiaDate: ""
+  },
+
 ];
 
 // --- Woo (actieve openbaarmaking) + Archiefwet/e-Depot. Publication status of
@@ -35531,7 +35858,68 @@ export const wooDocuments = [
     type: "Woo-verzoek", wet: null, publicatiestatus: "in voorbereiding", publishedAt: "",
     pdcCategory: "beschikkingen", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
     eDepotStatus: "niet van toepassing", archiefDate: ""
-  }
+  },
+  {
+    id: "woo-besluit-2026-052", title: "Beleidsregels bijstand 2026", app: "app-bijstandsuitkering", team: "team-data",
+    type: "actieve openbaarmaking", wet: "participatiewet", publicatiestatus: "gepubliceerd", publishedAt: "2026-02-10",
+    pdcCategory: "beschikkingen", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "20 jaar",
+    eDepotStatus: "overgedragen", archiefDate: "2026-03-01"
+  },
+  {
+    id: "woo-besluit-2026-058", title: "Woo-verzoek algoritmegebruik IND", app: "app-verblijfsvergunning", team: "team-ind-dossiers",
+    type: "Woo-verzoek", wet: null, publicatiestatus: "gedeeltelijk", publishedAt: "2026-04-05",
+    pdcCategory: "onderzoeksrapporten", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
+    eDepotStatus: "gepland", archiefDate: ""
+  },
+  {
+    id: "woo-besluit-2026-061", title: "Jaarverslag Toeslagen 2025", app: "app-toeslagen", team: "team-toeslagen",
+    type: "actieve openbaarmaking", wet: null, publicatiestatus: "gepubliceerd", publishedAt: "2026-03-20",
+    pdcCategory: "jaarplannen en jaarverslagen", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "permanent",
+    eDepotStatus: "overgedragen", archiefDate: "2026-04-10"
+  },
+  {
+    id: "woo-besluit-2026-067", title: "Convenant gegevensdeling DUO", app: "app-diplomaregister", team: "team-duo-register",
+    type: "actieve openbaarmaking", wet: null, publicatiestatus: "gepubliceerd", publishedAt: "2026-01-30",
+    pdcCategory: "convenanten", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
+    eDepotStatus: "overgedragen", archiefDate: "2026-02-15"
+  },
+  {
+    id: "woo-besluit-2026-070", title: "Besluit inkoop AI-modellen", app: "app-platformportaal", team: "team-platform",
+    type: "Woo-verzoek", wet: null, publicatiestatus: "in voorbereiding", publishedAt: "",
+    pdcCategory: "beschikkingen", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
+    eDepotStatus: "niet van toepassing", archiefDate: ""
+  },
+  {
+    id: "woo-besluit-2026-073", title: "Beleidsregels studiefinanciering", app: "app-studiefinanciering-portaal", team: "team-duo-studiefinanciering",
+    type: "actieve openbaarmaking", wet: null, publicatiestatus: "gepubliceerd", publishedAt: "2026-02-25",
+    pdcCategory: "beschikkingen", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "20 jaar",
+    eDepotStatus: "gepland", archiefDate: ""
+  },
+  {
+    id: "woo-besluit-2026-079", title: "Onderzoeksrapport fraudedetectie", app: "app-aangifte-omzetbelasting", team: "team-bd-fraude",
+    type: "actieve openbaarmaking", wet: null, publicatiestatus: "in voorbereiding", publishedAt: "",
+    pdcCategory: "onderzoeksrapporten", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
+    eDepotStatus: "niet van toepassing", archiefDate: ""
+  },
+  {
+    id: "woo-besluit-2026-084", title: "Milieu-inspectierapporten Q1", app: "app-milieumelding", team: "team-data",
+    type: "actieve openbaarmaking", wet: null, publicatiestatus: "gepubliceerd", publishedAt: "2026-04-01",
+    pdcCategory: "inspectierapporten", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
+    eDepotStatus: "gepland", archiefDate: ""
+  },
+  {
+    id: "woo-besluit-2026-088", title: "Convenant CBS-microdata", app: "app-statistiek-dashboard-cbs", team: "team-cbs-statline",
+    type: "actieve openbaarmaking", wet: null, publicatiestatus: "gepubliceerd", publishedAt: "2026-03-05",
+    pdcCategory: "convenanten", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "permanent",
+    eDepotStatus: "overgedragen", archiefDate: "2026-03-25"
+  },
+  {
+    id: "woo-besluit-2026-091", title: "Woo-verzoek kentekenhandhaving", app: "app-kentekencheck", team: "team-cjib-sanctie",
+    type: "Woo-verzoek", wet: null, publicatiestatus: "gedeeltelijk", publishedAt: "2026-04-18",
+    pdcCategory: "beschikkingen", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "5 jaar",
+    eDepotStatus: "niet van toepassing", archiefDate: ""
+  },
+
 ];
 
 // --- Artefacten / provenance: the artifact and image registry that makes the
@@ -35602,7 +35990,782 @@ export const artefacten = [
       { name: "next", version: "14.2.3", license: "MIT" }
     ], vulns: [] },
     publishedAt: "2026-05-31"
+  },
+  {
+    id: "art-paspoort-4.6.5", name: "paspoort", kind: "container-image", version: "4.6.5",
+    digest: "sha256:a0d912…f65b", repo: "repo-paspoort", app: "app-paspoort", buildJob: "job-7778",
+    registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 331, deps: [{ name: "express", version: "4.19.2", license: "MIT" }, { name: "zod", version: "3.23.8", license: "MIT" }], vulns: [] },
+    publishedAt: "2026-05-03"
+  },
+  {
+    id: "art-bijstandsuitkering-2.8.4", name: "bijstandsuitkering", kind: "container-image", version: "2.8.4",
+    digest: "sha256:44d96d…0a12", repo: "repo-bijstandsuitkering", app: "app-bijstandsuitkering", buildJob: "job-7778",
+    registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 469, deps: [{ name: "tokio", version: "1.38.0", license: "MIT" }, { name: "serde", version: "1.0.203", license: "MIT/Apache-2.0" }], vulns: [] },
+    publishedAt: "2026-05-26"
+  },
+  {
+    id: "art-inkomenstoets-4.2.6", name: "inkomenstoets", kind: "container-image", version: "4.2.6",
+    digest: "sha256:854b38…bd4b", repo: "repo-inkomenstoets", app: "app-inkomenstoets", buildJob: "job-7778",
+    registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
+    slsaLevel: 2, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 468, deps: [{ name: "fastapi", version: "0.111.0", license: "MIT" }, { name: "pydantic", version: "2.7.1", license: "MIT" }], vulns: [] },
+    publishedAt: "2026-05-17"
+  },
+  {
+    id: "art-brp-bevraging-3.0.5", name: "brp-bevraging", kind: "package", version: "3.0.5",
+    digest: "sha256:82a820…327f", repo: "repo-brp-bevraging", app: "app-brp-bevraging", buildJob: "job-7778",
+    registry: "registry.overheid.nl/nldd", signed: true, signedBy: "fulcio:nldd",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 463, deps: [{ name: "axum", version: "0.7.5", license: "MIT" }, { name: "sqlx", version: "0.7.4", license: "MIT/Apache-2.0" }], vulns: [] },
+    publishedAt: "2026-05-12"
+  },
+  {
+    id: "art-bsn-validatie-4.3.0", name: "bsn-validatie", kind: "package", version: "4.3.0",
+    digest: "sha256:ed770e…b076", repo: "repo-bsn-validatie", app: "app-bsn-validatie", buildJob: "job-7778",
+    registry: "registry.overheid.nl/nldd", signed: true, signedBy: "fulcio:nldd",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 147, deps: [{ name: "tokio", version: "1.38.0", license: "MIT" }, { name: "serde", version: "1.0.203", license: "MIT/Apache-2.0" }], vulns: [] },
+    publishedAt: "2026-05-15"
+  },
+  {
+    id: "art-iban-validatie-3.2.1", name: "iban-validatie", kind: "package", version: "3.2.1",
+    digest: "sha256:9d7db4…7e21", repo: "repo-iban-validatie", app: "app-iban-validatie", buildJob: "job-7778",
+    registry: "registry.overheid.nl/nldd", signed: true, signedBy: "fulcio:nldd",
+    slsaLevel: 2, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 357, deps: [{ name: "axum", version: "0.7.5", license: "MIT" }, { name: "sqlx", version: "0.7.4", license: "MIT/Apache-2.0" }], vulns: [] },
+    publishedAt: "2026-05-03"
+  },
+  {
+    id: "art-betaalverzoek-4.5.0", name: "betaalverzoek", kind: "container-image", version: "4.5.0",
+    digest: "sha256:b79f01…7551", repo: "repo-betaalverzoek", app: "app-betaalverzoek", buildJob: "job-7778",
+    registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 260, deps: [{ name: "express", version: "4.19.2", license: "MIT" }, { name: "zod", version: "3.23.8", license: "MIT" }], vulns: [] },
+    publishedAt: "2026-05-04"
+  },
+  {
+    id: "art-berichtenbox-2.4.6", name: "berichtenbox", kind: "container-image", version: "2.4.6",
+    digest: "sha256:3fa84f…c5b2", repo: "repo-berichtenbox", app: "app-berichtenbox", buildJob: "job-7778",
+    registry: "registry.overheid.nl/logius", signed: true, signedBy: "fulcio:logius",
+    slsaLevel: 2, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 198, deps: [{ name: "express", version: "4.19.2", license: "MIT" }, { name: "zod", version: "3.23.8", license: "MIT" }], vulns: [] },
+    publishedAt: "2026-05-15"
+  },
+  {
+    id: "art-aangifte-omzetbelasting-2.3.7", name: "aangifte-omzetbelasting", kind: "container-image", version: "2.3.7",
+    digest: "sha256:6304d9…70da", repo: "repo-aangifte-omzetbelasting", app: "app-aangifte-omzetbelasting", buildJob: "job-7778",
+    registry: "registry.overheid.nl/bd", signed: true, signedBy: "fulcio:bd",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 466, deps: [{ name: "axum", version: "0.7.5", license: "MIT" }, { name: "sqlx", version: "0.7.4", license: "MIT/Apache-2.0" }], vulns: ["cve-1"] },
+    publishedAt: "2026-05-21"
+  },
+  {
+    id: "art-vergunningchecker-3.7.4", name: "vergunningchecker", kind: "container-image", version: "3.7.4",
+    digest: "sha256:74c0ac…3b8a", repo: "repo-vergunningchecker", app: "app-vergunningchecker", buildJob: "job-7778",
+    registry: "registry.overheid.nl/minbzk", signed: false, signedBy: "",
+    slsaLevel: 1, provenance: "ongetekend",
+    sbom: { format: "CycloneDX 1.5", components: 430, deps: [{ name: "tokio", version: "1.38.0", license: "MIT" }, { name: "serde", version: "1.0.203", license: "MIT/Apache-2.0" }], vulns: [] },
+    publishedAt: "2026-05-22"
+  },
+  {
+    id: "art-bezwaarafhandeling-3.9.2", name: "bezwaarafhandeling", kind: "container-image", version: "3.9.2",
+    digest: "sha256:56093c…07bb", repo: "repo-bezwaarafhandeling", app: "app-bezwaarafhandeling", buildJob: "job-7778",
+    registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
+    slsaLevel: 2, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 221, deps: [{ name: "fastapi", version: "0.111.0", license: "MIT" }, { name: "pydantic", version: "2.7.1", license: "MIT" }], vulns: [] },
+    publishedAt: "2026-05-05"
+  },
+  {
+    id: "art-digid-koppeling-2.0.7", name: "digid-koppeling", kind: "package", version: "2.0.7",
+    digest: "sha256:f593c3…3822", repo: "repo-digid-koppeling", app: "app-digid-koppeling", buildJob: "job-7778",
+    registry: "registry.overheid.nl/logius", signed: true, signedBy: "fulcio:logius",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 458, deps: [{ name: "axum", version: "0.7.5", license: "MIT" }, { name: "sqlx", version: "0.7.4", license: "MIT/Apache-2.0" }], vulns: [] },
+    publishedAt: "2026-05-21"
+  },
+  {
+    id: "art-eherkenning-broker-2.5.5", name: "eherkenning-broker", kind: "container-image", version: "2.5.5",
+    digest: "sha256:0982ce…57c0", repo: "repo-eherkenning-broker", app: "app-eherkenning-broker", buildJob: "job-7778",
+    registry: "registry.overheid.nl/logius", signed: false, signedBy: "",
+    slsaLevel: 1, provenance: "in afwachting",
+    sbom: { format: "CycloneDX 1.5", components: 449, deps: [{ name: "express", version: "4.19.2", license: "MIT" }, { name: "zod", version: "3.23.8", license: "MIT" }], vulns: [] },
+    publishedAt: "2026-05-02"
+  },
+  {
+    id: "art-diplomaregister-3.8.7", name: "diplomaregister", kind: "container-image", version: "3.8.7",
+    digest: "sha256:4042bf…2046", repo: "repo-diplomaregister", app: "app-diplomaregister", buildJob: "job-7778",
+    registry: "registry.overheid.nl/duo", signed: true, signedBy: "fulcio:duo",
+    slsaLevel: 2, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 258, deps: [{ name: "fastapi", version: "0.111.0", license: "MIT" }, { name: "pydantic", version: "2.7.1", license: "MIT" }], vulns: [] },
+    publishedAt: "2026-05-21"
+  },
+
+];
+
+
+// --- Login building blocks: DigiD, eHerkenning, eIDAS and machtigingen as a
+// first-class platform capability, not a stray API row. Each references the app
+// that exposes it and the assurance level (betrouwbaarheidsniveau). ---
+export const loginMethods = [
+  {
+    id: "login-digid", name: "DigiD", audience: "burgers", app: "app-digid-koppeling", team: "team-logius-digid",
+    levels: ["Midden", "Substantieel", "Hoog"], protocol: "SAML / OIDC", eidas: false,
+    machtigen: true, status: "productie", connectedApps: ["app-toeslagen", "app-paspoort", "app-ww-aanvraag", "app-bijstandsuitkering"],
+    description: "Inloggen voor burgers met oplopende betrouwbaarheidsniveaus, inclusief DigiD Machtigen voor gemachtigden."
+  },
+  {
+    id: "login-eherkenning", name: "eHerkenning", audience: "bedrijven", app: "app-eherkenning-broker", team: "team-logius-machtigen",
+    levels: ["EH3", "EH4"], protocol: "SAML", eidas: true,
+    machtigen: true, status: "productie", connectedApps: ["app-aangifte-omzetbelasting", "app-subsidieportaal-rvo"],
+    description: "Inloggen voor ondernemers en organisaties, met ketenmachtiging en koppeling aan het EU-knooppunt."
+  },
+  {
+    id: "login-eidas", name: "eIDAS", audience: "EU-burgers", app: "app-eherkenning-broker", team: "team-logius-machtigen",
+    levels: ["Substantieel", "Hoog"], protocol: "SAML (EU-knooppunt)", eidas: true,
+    machtigen: false, status: "productie", connectedApps: ["app-studiefinanciering-portaal"],
+    description: "Grensoverschrijdend inloggen voor burgers uit andere EU-lidstaten via het Nederlandse eIDAS-knooppunt."
+  },
+  {
+    id: "login-oidc-rijk", name: "SSO Rijk (OIDC)", audience: "ambtenaren", app: "app-oidc-provider", team: "team-nldd-iam",
+    levels: ["Substantieel"], protocol: "OIDC", eidas: false,
+    machtigen: false, status: "productie", connectedApps: ["app-platformportaal", "app-kentekencheck"],
+    description: "Interne single sign-on voor ambtenaren via het rijksbrede OIDC-knooppunt, gekoppeld aan de Rijkspas."
+  },
+  {
+    id: "login-machtigen", name: "Machtigen", audience: "gemachtigden", app: "app-digid-koppeling", team: "team-logius-machtigen",
+    levels: ["Substantieel", "Hoog"], protocol: "OIDC", eidas: false,
+    machtigen: true, status: "pilot", connectedApps: ["app-toeslagen", "app-aangifte-omzetbelasting"],
+    description: "Iemand anders namens jou laten handelen: vrijwillige en wettelijke vertegenwoordiging, voor burgers en bedrijven."
   }
+];
+
+// --- Domains & DNS: every service runs on an overheid.nl / rijksoverheid.nl
+// subdomain with DNSSEC, a PKIoverheid certificate and an internet.nl score.
+// Cross-links to the owning app, the certificate in /secrets, and standards. ---
+export const domeinen = [
+  {
+    id: "dom-toeslagen", fqdn: "toeslagen.nl", app: "app-toeslagen", team: "team-toeslagen",
+    dnssec: true, tls: "cert-2", internetnl: 100, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.10" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::10" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" },
+      { type: "MX", name: "@", value: "10 mail.overheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-platform", fqdn: "platform.rijks.app", app: "app-platformportaal", team: "team-platform",
+    dnssec: true, tls: "cert-1", internetnl: 100, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.20" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::20" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-kenteken", fqdn: "kentekencheck.overheid.nl", app: "app-kentekencheck", team: "team-data",
+    dnssec: true, tls: "cert-3", internetnl: 97, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.30" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::30" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-datadeling", fqdn: "api.datadeling.overheid.nl", app: "app-datadeling", team: "team-data",
+    dnssec: true, tls: "cert-2", internetnl: 94, ipv6: false, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.40" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-studie", fqdn: "studiefinanciering.nl", app: "app-studiefinanciering-portaal", team: "team-platform",
+    dnssec: false, tls: "cert-4", internetnl: 71, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.50" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::50" }
+    ],
+    status: "aandacht"
+  },
+  {
+    id: "dom-ww", fqdn: "ww-aanvraag.overheid.nl", app: "app-ww-aanvraag", team: "team-platform",
+    dnssec: true, tls: "cert-5", internetnl: 88, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.60" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::60" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-paspoort", fqdn: "paspoortaanvraag.nl", app: "app-paspoort", team: "team-burgerzaken",
+    dnssec: true, tls: "cert-1", internetnl: 100, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.125" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::7d" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-bijstand", fqdn: "bijstand.overheid.nl", app: "app-bijstandsuitkering", team: "team-data",
+    dnssec: true, tls: "cert-2", internetnl: 96, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.186" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::ba" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-aangifte", fqdn: "aangifte.belastingdienst.nl", app: "app-aangifte-omzetbelasting", team: "team-bd-aangifte",
+    dnssec: true, tls: "cert-3", internetnl: 100, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.127" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::7f" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-mijnoverheid", fqdn: "mijn.overheid.nl", app: "app-mijnoverheid-portaal", team: "team-platform",
+    dnssec: true, tls: "cert-4", internetnl: 100, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.53" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::35" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-berichtenbox", fqdn: "berichtenbox.overheid.nl", app: "app-berichtenbox", team: "team-platform",
+    dnssec: true, tls: "cert-2", internetnl: 98, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.21" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::15" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-rijbewijs", fqdn: "rijbewijs.overheid.nl", app: "app-rijbewijs-vernieuwen", team: "team-cbr-rijbewijs",
+    dnssec: true, tls: "cert-2", internetnl: 95, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.166" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::a6" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-verblijf", fqdn: "verblijfsvergunning.ind.nl", app: "app-verblijfsvergunning", team: "team-ind-dossiers",
+    dnssec: true, tls: "cert-3", internetnl: 92, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.107" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::6b" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-omgevingsloket", fqdn: "omgevingsloket.nl", app: "app-omgevingsloket", team: "team-platform",
+    dnssec: true, tls: "cert-1", internetnl: 90, ipv6: false, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.75" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-subsidie", fqdn: "subsidie.rvo.nl", app: "app-subsidieportaal-rvo", team: "team-data",
+    dnssec: true, tls: "cert-5", internetnl: 94, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.39" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::27" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-opendata", fqdn: "data.overheid.nl", app: "app-open-data-portaal", team: "team-data",
+    dnssec: true, tls: "cert-1", internetnl: 97, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.5" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::5" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-statistiek", fqdn: "statline.cbs.nl", app: "app-statistiek-dashboard-cbs", team: "team-cbs-statline",
+    dnssec: true, tls: "cert-4", internetnl: 99, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.183" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::b7" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-verkeersboete", fqdn: "verkeersboetes.cjib.nl", app: "app-verkeersboete-viewer", team: "team-cjib-sanctie",
+    dnssec: false, tls: "cert-3", internetnl: 73, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.77" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::4d" }
+    ],
+    status: "aandacht"
+  },
+  {
+    id: "dom-pgb", fqdn: "pgb.overheid.nl", app: "app-pgb-beheer", team: "team-data",
+    dnssec: true, tls: "cert-3", internetnl: 88, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.137" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::89" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-milieu", fqdn: "milieumelding.overheid.nl", app: "app-milieumelding", team: "team-data",
+    dnssec: false, tls: "cert-2", internetnl: 68, ipv6: false, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.141" }
+    ],
+    status: "aandacht"
+  },
+
+];
+
+// --- Software & SaaS procurement: the counterpart to hardware inkoop. Licenses
+// and services bought under ARBIT/ARVODI, with lock-in risk and an exit
+// strategy, so dependence on a vendor is an explicit, governed choice. ---
+export const softwareInkoop = [
+  {
+    id: "sw-2026-001", supplier: "Forgejo (zelf gehost)", product: "Forgejo Enterprise-support", category: "ontwikkeltooling",
+    amount: 45000, term: "1 jaar", contract: "ARVODI", lockin: "laag", exitStrategie: "Open source, data en repo's volledig portabel",
+    openSource: true, team: "team-platform", status: "actief"
+  },
+  {
+    id: "sw-2026-002", supplier: "Microsoft", product: "Microsoft 365 Rijk", category: "kantoorautomatisering",
+    amount: 1850000, term: "3 jaar", contract: "ARBIT", lockin: "hoog", exitStrategie: "Migratiepad naar open formaten in onderzoek",
+    openSource: false, team: "team-nldd-iam", status: "actief"
+  },
+  {
+    id: "sw-2026-003", supplier: "Elastic", product: "Elasticsearch-licentie", category: "observability",
+    amount: 220000, term: "1 jaar", contract: "ARVODI", lockin: "gemiddeld", exitStrategie: "OpenSearch als open alternatief beschikbaar",
+    openSource: false, team: "team-platform", status: "actief"
+  },
+  {
+    id: "sw-2026-004", supplier: "HashiCorp", product: "Vault Enterprise", category: "security",
+    amount: 310000, term: "2 jaar", contract: "ARBIT", lockin: "hoog", exitStrategie: "OpenBao-fork als exit-pad geborgd",
+    openSource: false, team: "team-nldd-iam", status: "heroverweging"
+  },
+  {
+    id: "sw-2026-005", supplier: "GitLab", product: "GitLab Ultimate", category: "ontwikkeltooling",
+    amount: 0, term: "n.v.t.", contract: "ARVODI", lockin: "hoog", exitStrategie: "Afgewezen: te hoge lock-in, Forgejo gekozen",
+    openSource: false, team: "team-platform", status: "afgewezen"
+  },
+  {
+    id: "sw-2026-006", supplier: "Geonovum", product: "PDOK-aansluiting", category: "geo",
+    amount: 60000, term: "1 jaar", contract: "ARVODI", lockin: "laag", exitStrategie: "Open standaarden (OGC API), geen vendor-binding",
+    openSource: true, team: "team-data", status: "actief"
+  },
+  {
+    id: "sw-2026-007", supplier: "Red Hat", product: "OpenShift-licentie", category: "container-platform",
+    amount: 980000, term: "3 jaar", contract: "ARBIT", lockin: "gemiddeld", exitStrategie: "Kubernetes-standaard, portabel naar andere distributies",
+    openSource: false, team: "team-dictu-hosting", status: "actief"
+  },
+  {
+    id: "sw-2026-008", supplier: "Atlassian", product: "Jira & Confluence", category: "projecttooling",
+    amount: 420000, term: "1 jaar", contract: "ARVODI", lockin: "hoog", exitStrategie: "Migratie naar open alternatief (OpenProject) onderzocht",
+    openSource: false, team: "team-platform", status: "heroverweging"
+  },
+  {
+    id: "sw-2026-009", supplier: "PostgreSQL (zelf gehost)", product: "PostgreSQL-support", category: "database",
+    amount: 75000, term: "1 jaar", contract: "ARVODI", lockin: "laag", exitStrategie: "Open source, volledige dataportabiliteit",
+    openSource: true, team: "team-platform", status: "actief"
+  },
+  {
+    id: "sw-2026-010", supplier: "Grafana Labs", product: "Grafana Enterprise", category: "observability",
+    amount: 160000, term: "2 jaar", contract: "ARVODI", lockin: "gemiddeld", exitStrategie: "Open-source-kern blijft beschikbaar",
+    openSource: true, team: "team-platform", status: "actief"
+  },
+  {
+    id: "sw-2026-011", supplier: "ServiceNow", product: "ITSM-platform", category: "servicemanagement",
+    amount: 2400000, term: "4 jaar", contract: "ARBIT", lockin: "hoog", exitStrategie: "Exit-pad in onderzoek, hoge afhankelijkheid",
+    openSource: false, team: "team-dictu-hosting", status: "heroverweging"
+  },
+  {
+    id: "sw-2026-012", supplier: "SIDN", product: "Domeinregistratie .nl", category: "dns",
+    amount: 35000, term: "1 jaar", contract: "ARVODI", lockin: "laag", exitStrategie: "Open standaarden, overdraagbaar naar andere registrar",
+    openSource: true, team: "team-platform", status: "actief"
+  },
+  {
+    id: "sw-2026-013", supplier: "Sentry (zelf gehost)", product: "Sentry self-hosted", category: "observability",
+    amount: 0, term: "n.v.t.", contract: "ARVODI", lockin: "laag", exitStrategie: "Open source, geen vendor-binding",
+    openSource: true, team: "team-platform", status: "actief"
+  },
+  {
+    id: "sw-2026-014", supplier: "Oracle", product: "Oracle Database", category: "database",
+    amount: 1650000, term: "3 jaar", contract: "ARBIT", lockin: "hoog", exitStrategie: "Migratie naar PostgreSQL gepland",
+    openSource: false, team: "team-bd-platform", status: "afgewezen"
+  },
+  {
+    id: "sw-2026-015", supplier: "Geonovum", product: "PDOK-uitbreiding", category: "geo",
+    amount: 90000, term: "1 jaar", contract: "ARVODI", lockin: "laag", exitStrategie: "Open standaarden (OGC API)",
+    openSource: true, team: "team-data", status: "actief"
+  },
+
+];
+
+// --- Reusable components (Common Ground: build once, use widely). A marketplace
+// of components teams can adopt instead of rebuilding, each with the teams that
+// already use it. ---
+export const componenten = [
+  {
+    id: "comp-brp-bevraging", name: "BRP-bevraging", kind: "bibliotheek", language: "Rust", repo: "repo-datadeling",
+    owner: "team-data", reuses: 14, register: "brp", license: "EUPL-1.2",
+    description: "Geteste client voor de BRP met ingebouwde AVG-logging en herkomstregistratie.",
+    usedBy: ["team-toeslagen", "team-burgerzaken", "team-platform"]
+  },
+  {
+    id: "comp-betalen", name: "Betaalmodule (iDEAL/incasso)", kind: "service", language: "Go", repo: "repo-platformportaal",
+    owner: "team-platform", reuses: 9, register: null, license: "EUPL-1.2",
+    description: "Herbruikbare betaal- en incassomodule met PSD2-koppeling en boekhoudkoppeling.",
+    usedBy: ["team-bd-inning", "team-cjib-inning"]
+  },
+  {
+    id: "comp-nldd-formulier", name: "NLDD-formulierbouwer", kind: "frontend-component", language: "Vue", repo: "repo-platformportaal",
+    owner: "team-platform", reuses: 31, register: null, license: "EUPL-1.2",
+    description: "Toegankelijke formulieren (WCAG 2.2 AA) op basis van het NLDD design system, met validatie.",
+    usedBy: ["team-toeslagen", "team-burgerzaken", "team-data"]
+  },
+  {
+    id: "comp-machtigen", name: "Machtigen-koppeling", kind: "bibliotheek", language: "Go", repo: "repo-datadeling",
+    owner: "team-logius-machtigen", reuses: 6, register: null, license: "EUPL-1.2",
+    description: "Standaardkoppeling voor DigiD Machtigen en ketenmachtiging eHerkenning.",
+    usedBy: ["team-toeslagen", "team-bd-aangifte"]
+  },
+  {
+    id: "comp-notificatie", name: "Notificatierouter", kind: "service", language: "Rust", repo: "repo-datadeling",
+    owner: "team-data", reuses: 12, register: null, license: "EUPL-1.2",
+    description: "Routeert notificaties naar de Berichtenbox, MijnOverheid en e-mail volgens de notificatiestandaard.",
+    usedBy: ["team-toeslagen", "team-burgerzaken", "team-platform", "team-data"]
+  },
+  {
+    id: "comp-bsn-validatie", name: "BSN-validatie", kind: "bibliotheek", language: "Rust", repo: "repo-bsn-validatie",
+    owner: "team-data", reuses: 22, register: null, license: "EUPL-1.2",
+    description: "Elfproef en geldigheidscontrole voor het BSN.",
+    usedBy: ["team-toeslagen", "team-burgerzaken", "team-bd-aangifte", "team-ind-aanvragen"]
+  },
+  {
+    id: "comp-iban-validatie", name: "IBAN-validatie", kind: "bibliotheek", language: "Rust", repo: "repo-iban-validatie",
+    owner: "team-platform", reuses: 18, register: null, license: "EUPL-1.2",
+    description: "Validatie en formattering van IBAN-rekeningnummers.",
+    usedBy: ["team-cjib-inning", "team-bd-inning", "team-toeslagen"]
+  },
+  {
+    id: "comp-digikoppeling", name: "Digikoppeling-adapter", kind: "service", language: "Go", repo: "repo-digikoppeling-adapter",
+    owner: "team-data", reuses: 11, register: null, license: "EUPL-1.2",
+    description: "Standaardadapter voor Digikoppeling ebMS en REST-API.",
+    usedBy: ["team-data", "team-burgerzaken", "team-bd-gegevens"]
+  },
+  {
+    id: "comp-pdf-generator", name: "PDF-brievengenerator", kind: "bibliotheek", language: "Rust", repo: "repo-brief-generator",
+    owner: "team-platform", reuses: 16, register: null, license: "EUPL-1.2",
+    description: "Toegankelijke PDF's volgens de rijkshuisstijl.",
+    usedBy: ["team-toeslagen", "team-cjib-inning", "team-duo-register"]
+  },
+  {
+    id: "comp-audit-log", name: "Audit-logging", kind: "bibliotheek", language: "Go", repo: "repo-audit-logboek",
+    owner: "team-bzk-security", reuses: 27, register: null, license: "EUPL-1.2",
+    description: "Onweerlegbare audit-logging met herkomstregistratie.",
+    usedBy: ["team-toeslagen", "team-bd-fraude", "team-data", "team-platform"]
+  },
+  {
+    id: "comp-zaak-api", name: "Zaak-API (Common Ground)", kind: "service", language: "Go", repo: "repo-zaaksysteem",
+    owner: "team-platform", reuses: 13, register: null, license: "EUPL-1.2",
+    description: "Referentie-implementatie van de Zaak-API standaard.",
+    usedBy: ["team-burgerzaken", "team-ind-dossiers"]
+  },
+  {
+    id: "comp-bag-bevraging", name: "BAG-bevraging", kind: "bibliotheek", language: "Rust", repo: "repo-adrescheck-bag",
+    owner: "team-data", reuses: 19, register: "bag", license: "EUPL-1.2",
+    description: "Adres- en pandgegevens uit de BAG met caching.",
+    usedBy: ["team-platform", "team-data", "team-ind-dossiers"]
+  },
+  {
+    id: "comp-kenteken-client", name: "Kentekenregister-client", kind: "bibliotheek", language: "Go", repo: "repo-kentekencheck",
+    owner: "team-ienw-kenteken", reuses: 8, register: "kenteken", license: "EUPL-1.2",
+    description: "Client voor het kentekenregister van de RDW.",
+    usedBy: ["team-cjib-sanctie", "team-data"]
+  },
+  {
+    id: "comp-handtekening", name: "Handtekening-validatie", kind: "service", language: "Rust", repo: "repo-digid-koppeling",
+    owner: "team-bzk-security", reuses: 14, register: null, license: "EUPL-1.2",
+    description: "Valideren van digitale handtekeningen (PKIoverheid).",
+    usedBy: ["team-burgerzaken", "team-bd-aangifte"]
+  },
+  {
+    id: "comp-statuspagina", name: "Statuspagina-component", kind: "frontend-component", language: "Vue", repo: "repo-platformportaal",
+    owner: "team-platform", reuses: 21, register: null, license: "EUPL-1.2",
+    description: "Herbruikbare publieke statuspagina met incidenten.",
+    usedBy: ["team-platform", "team-toeslagen", "team-data"]
+  },
+
+];
+
+// --- Feature flags / toggles: progressive delivery as a platform capability,
+// managed by the feature-flags service. Each flag has a rollout percentage and
+// the app it gates. ---
+export const featureFlags = [
+  {
+    id: "ff-nieuwe-inkomenstoets", name: "nieuwe-inkomenstoets", app: "app-toeslagen", team: "team-toeslagen",
+    rollout: 25, status: "uitrollend", kind: "release", description: "Nieuwe inkomenstoets-engine, geleidelijk uitgerold."
+  },
+  {
+    id: "ff-eidas-login", name: "eidas-login", app: "app-studiefinanciering-portaal", team: "team-platform",
+    rollout: 100, status: "aan", kind: "release", description: "eIDAS-inlog ingeschakeld voor EU-studenten."
+  },
+  {
+    id: "ff-experiment-uitleg", name: "experiment-besluituitleg", app: "app-toeslagen", team: "team-toeslagen",
+    rollout: 10, status: "experiment", kind: "experiment", description: "Tonen van een uitleg bij elk geautomatiseerd besluit."
+  },
+  {
+    id: "ff-donker-thema", name: "donker-thema", app: "app-platformportaal", team: "team-platform",
+    rollout: 50, status: "uitrollend", kind: "release", description: "Donker thema voor het platformportaal."
+  },
+  {
+    id: "ff-killswitch-betalen", name: "killswitch-betalen", app: "app-platformportaal", team: "team-platform",
+    rollout: 0, status: "uit", kind: "kill-switch", description: "Noodschakelaar om de betaalmodule direct uit te zetten."
+  },
+  {
+    id: "ff-nieuwe-zoek", name: "nieuwe-zoekfunctie", app: "app-kentekencheck", team: "team-data",
+    rollout: 75, status: "uitrollend", kind: "release", description: "Snellere zoekfunctie op het kentekenregister."
+  },
+  {
+    id: "ff-nieuwe-bezwaarflow", name: "nieuwe-bezwaarflow", app: "app-bezwaarafhandeling", team: "team-platform",
+    rollout: 40, status: "uitrollend", kind: "release", description: "Vernieuwde bezwaarafhandeling, geleidelijk uitgerold."
+  },
+  {
+    id: "ff-snellere-aangifte", name: "snellere-aangifte", app: "app-aangifte-omzetbelasting", team: "team-bd-aangifte",
+    rollout: 100, status: "aan", kind: "release", description: "Versnelde aangifteverwerking ingeschakeld."
+  },
+  {
+    id: "ff-experiment-chathulp", name: "experiment-chathulp", app: "app-mijnoverheid-portaal", team: "team-platform",
+    rollout: 15, status: "experiment", kind: "experiment", description: "Chathulp voor burgers, A/B-test."
+  },
+  {
+    id: "ff-killswitch-incasso", name: "killswitch-incasso", app: "app-incasso-cjib", team: "team-cjib-inning",
+    rollout: 0, status: "uit", kind: "kill-switch", description: "Noodschakelaar voor de incassobatch."
+  },
+  {
+    id: "ff-nieuwe-zoekindex", name: "nieuwe-zoekindex", app: "app-handelsregister-zoeker", team: "team-data",
+    rollout: 60, status: "uitrollend", kind: "release", description: "Snellere zoekindex op het handelsregister."
+  },
+  {
+    id: "ff-toegankelijke-formulieren", name: "toegankelijke-formulieren", app: "app-omgevingsloket", team: "team-platform",
+    rollout: 100, status: "aan", kind: "release", description: "Nieuwe toegankelijke formulieren (WCAG 2.2 AA)."
+  },
+  {
+    id: "ff-experiment-vooringevuld", name: "experiment-vooringevuld", app: "app-belastingaangifte-ib", team: "team-bd-aangifte",
+    rollout: 20, status: "experiment", kind: "experiment", description: "Vooringevulde aangifte uitbreiden met meer bronnen."
+  },
+  {
+    id: "ff-killswitch-notificaties", name: "killswitch-notificaties", app: "app-notificatieservice", team: "team-data",
+    rollout: 0, status: "uit", kind: "kill-switch", description: "Noodschakelaar voor uitgaande notificaties."
+  },
+  {
+    id: "ff-nieuwe-betaalmethode", name: "nieuwe-betaalmethode", app: "app-betaalverzoek", team: "team-platform",
+    rollout: 35, status: "uitrollend", kind: "release", description: "iDEAL 2.0 betaalmethode geleidelijk uitgerold."
+  },
+  {
+    id: "ff-experiment-uitlegtekst", name: "experiment-uitlegtekst", app: "app-bijstandsuitkering", team: "team-data",
+    rollout: 10, status: "experiment", kind: "experiment", description: "Eenvoudige-taal uitleg bij besluiten testen."
+  },
+
+];
+
+// --- Data contracts: the agreement between a data source and its consumers.
+// Per dataset-to-app coupling: the schema, the SLA, the allowed purpose and the
+// retention. Makes data sharing an explicit, governed contract. ---
+export const datacontracten = [
+  {
+    id: "dc-inkomen-toeslagen", dataset: "ds-toetsingsinkomen-2026", consumer: "app-toeslagen", provider: "team-toeslagen",
+    sla: "99.5%", schema: "v2.1", doelbinding: "Vaststellen recht op toeslag", grondslag: "awir",
+    bewaartermijn: "7 jaar", status: "actief", signed: "2025-09-15"
+  },
+  {
+    id: "dc-brp-toeslagen", dataset: "ds-personen-brp", consumer: "app-toeslagen", provider: "team-data",
+    sla: "99.95%", schema: "v3.0", doelbinding: "Verifiëren persoonsgegevens aanvrager", grondslag: "awir",
+    bewaartermijn: "7 jaar", status: "actief", signed: "2025-06-20"
+  },
+  {
+    id: "dc-huishouden-inkomenstoets", dataset: "ds-huishoudsamenstelling", consumer: "app-inkomenstoets", provider: "team-toeslagen",
+    sla: "99.0%", schema: "v1.4", doelbinding: "Bepalen huishoudsamenstelling", grondslag: "kinderbijslagwet",
+    bewaartermijn: "5 jaar", status: "actief", signed: "2025-04-02"
+  },
+  {
+    id: "dc-bag-vergunning", dataset: "ds-adressen-bag", consumer: "app-vergunningchecker", provider: "team-data",
+    sla: "99.9%", schema: "v2.0", doelbinding: "Controleren adres bij vergunningaanvraag", grondslag: null,
+    bewaartermijn: "10 jaar", status: "actief", signed: "2026-01-10"
+  },
+  {
+    id: "dc-kenteken-handhaving", dataset: "ds-kentekens-rdw", consumer: "app-kentekencheck", provider: "team-data",
+    sla: "99.9%", schema: "v1.2", doelbinding: "Controle voertuiggegevens", grondslag: null,
+    bewaartermijn: "90 dagen", status: "heronderhandeling", signed: "2024-11-30"
+  },
+  {
+    id: "dc-inkomen-historie", dataset: "ds-inkomen-historie", consumer: "app-inkomenstoets", provider: "team-toeslagen",
+    sla: "98.0%", schema: "v1.0", doelbinding: "Meerjarige inkomensvergelijking", grondslag: "awir",
+    bewaartermijn: "7 jaar", status: "concept", signed: ""
+  },
+  {
+    id: "dc-rijbewijs-cbr", dataset: "ds-rijbewijzen-cbr", consumer: "app-rijbewijs-vernieuwen", provider: "team-cbr-rijbewijs",
+    sla: "99.9%", schema: "v2.0", doelbinding: "Vernieuwen rijbewijs", grondslag: null,
+    bewaartermijn: "5 jaar", status: "actief", signed: "2025-10-01"
+  },
+  {
+    id: "dc-diploma-naturalisatie", dataset: "ds-diploma-register", consumer: "app-naturalisatie-aanvraag", provider: "team-duo-register",
+    sla: "99.5%", schema: "v1.3", doelbinding: "Inburgeringseis controleren", grondslag: null,
+    bewaartermijn: "10 jaar", status: "actief", signed: "2025-07-15"
+  },
+  {
+    id: "dc-verblijf-ind", dataset: "ds-verblijfsvergunningen", consumer: "app-verblijfsvergunning", provider: "team-ind-dossiers",
+    sla: "99.5%", schema: "v3.1", doelbinding: "Verblijfsstatus vaststellen", grondslag: "participatiewet",
+    bewaartermijn: "10 jaar", status: "actief", signed: "2025-05-20"
+  },
+  {
+    id: "dc-aow-svb", dataset: "ds-aow-rechten", consumer: "app-aow-uitkering", provider: "team-data",
+    sla: "99.5%", schema: "v2.2", doelbinding: "AOW vaststellen", grondslag: "aow",
+    bewaartermijn: "7 jaar", status: "actief", signed: "2025-01-10"
+  },
+  {
+    id: "dc-dienstverband-ww", dataset: "ds-dienstverbanden", consumer: "app-ww-aanvraag", provider: "team-data",
+    sla: "99.0%", schema: "v1.8", doelbinding: "WW-recht bepalen", grondslag: "werkloosheidswet",
+    bewaartermijn: "7 jaar", status: "actief", signed: "2025-02-28"
+  },
+  {
+    id: "dc-btw-aangifte", dataset: "ds-omzetbelasting-aangiften", consumer: "app-aangifte-omzetbelasting", provider: "team-bd-aangifte",
+    sla: "99.5%", schema: "v4.0", doelbinding: "Btw-aangifte verwerken", grondslag: "omzetbelasting-1968",
+    bewaartermijn: "7 jaar", status: "actief", signed: "2025-04-12"
+  },
+  {
+    id: "dc-geo-omgeving", dataset: "ds-geo-bgt", consumer: "app-omgevingsloket", provider: "team-data",
+    sla: "99.9%", schema: "v2.1", doelbinding: "Geo-context bij aanvraag", grondslag: null,
+    bewaartermijn: "permanent", status: "actief", signed: "2026-01-05"
+  },
+  {
+    id: "dc-loon-inkomen", dataset: "ds-loonheffing", consumer: "app-inkomenstoets", provider: "team-bd-gegevens",
+    sla: "99.0%", schema: "v1.5", doelbinding: "Inkomensbepaling", grondslag: "inkomstenbelasting-2001",
+    bewaartermijn: "7 jaar", status: "heronderhandeling", signed: "2024-09-30"
+  },
+  {
+    id: "dc-boete-incasso", dataset: "ds-verkeersboetes", consumer: "app-incasso-cjib", provider: "team-cjib-sanctie",
+    sla: "99.0%", schema: "v1.1", doelbinding: "Boete-inning", grondslag: null,
+    bewaartermijn: "5 jaar", status: "actief", signed: "2025-03-15"
+  },
+  {
+    id: "dc-subsidie-rvo", dataset: "ds-subsidies-rvo", consumer: "app-subsidie-aanvraag", provider: "team-data",
+    sla: "99.0%", schema: "v1.2", doelbinding: "Subsidiebeoordeling", grondslag: null,
+    bewaartermijn: "10 jaar", status: "concept", signed: ""
+  },
+  {
+    id: "dc-vaccinatie", dataset: "ds-vaccinaties", consumer: "app-vaccinatieregister", provider: "team-data",
+    sla: "98.0%", schema: "v0.9", doelbinding: "Vaccinatieregistratie", grondslag: null,
+    bewaartermijn: "20 jaar", status: "concept", signed: ""
+  },
+  {
+    id: "dc-leerplicht", dataset: "ds-leerplicht", consumer: "app-leerplicht-melding", provider: "team-duo-register",
+    sla: "98.0%", schema: "v1.0", doelbinding: "Verzuimsignalering", grondslag: null,
+    bewaartermijn: "5 jaar", status: "heronderhandeling", signed: "2024-11-20"
+  },
+
+];
+
+// --- Accessibility statements (DigiToegankelijk): the mandatory published
+// statement per service, with its WCAG status and the formal compliance label. ---
+export const toegankelijkheidsverklaringen = [
+  {
+    id: "tv-toeslagen", app: "app-toeslagen", team: "team-toeslagen", fqdn: "toeslagen.nl",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-03-01",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  },
+  {
+    id: "tv-platform", app: "app-platformportaal", team: "team-platform", fqdn: "platform.rijks.app",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-02-15",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  },
+  {
+    id: "tv-kenteken", app: "app-kentekencheck", team: "team-data", fqdn: "kentekencheck.overheid.nl",
+    status: "voldoet gedeeltelijk", wcagLevel: "AA", issues: 3, audited: "2026-01-20",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  },
+  {
+    id: "tv-studie", app: "app-studiefinanciering-portaal", team: "team-platform", fqdn: "studiefinanciering.nl",
+    status: "eerste maatregelen genomen", wcagLevel: "AA", issues: 11, audited: "2025-11-05",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  },
+  {
+    id: "tv-ww", app: "app-ww-aanvraag", team: "team-platform", fqdn: "ww-aanvraag.overheid.nl",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-04-10",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  },
+  {
+    id: "tv-bijstand", app: "app-bijstandsuitkering", team: "team-data", fqdn: "bijstand.overheid.nl",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-03-12",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/tv-bijstand"
+  },
+  {
+    id: "tv-aangifte", app: "app-aangifte-omzetbelasting", team: "team-bd-aangifte", fqdn: "aangifte.belastingdienst.nl",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-02-20",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/tv-aangifte"
+  },
+  {
+    id: "tv-mijnoverheid", app: "app-mijnoverheid-portaal", team: "team-platform", fqdn: "mijn.overheid.nl",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-04-01",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/tv-mijnoverheid"
+  },
+  {
+    id: "tv-rijbewijs", app: "app-rijbewijs-vernieuwen", team: "team-cbr-rijbewijs", fqdn: "rijbewijs.overheid.nl",
+    status: "voldoet gedeeltelijk", wcagLevel: "AA", issues: 2, audited: "2026-01-15",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/tv-rijbewijs"
+  },
+  {
+    id: "tv-verblijf", app: "app-verblijfsvergunning", team: "team-ind-dossiers", fqdn: "verblijfsvergunning.ind.nl",
+    status: "voldoet gedeeltelijk", wcagLevel: "AA", issues: 5, audited: "2025-12-10",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/tv-verblijf"
+  },
+  {
+    id: "tv-omgevingsloket", app: "app-omgevingsloket", team: "team-platform", fqdn: "omgevingsloket.nl",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-03-28",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/tv-omgevingsloket"
+  },
+  {
+    id: "tv-subsidie", app: "app-subsidieportaal-rvo", team: "team-data", fqdn: "subsidie.rvo.nl",
+    status: "voldoet gedeeltelijk", wcagLevel: "AA", issues: 4, audited: "2026-02-05",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/tv-subsidie"
+  },
+  {
+    id: "tv-verkeersboete", app: "app-verkeersboete-viewer", team: "team-cjib-sanctie", fqdn: "verkeersboetes.cjib.nl",
+    status: "eerste maatregelen genomen", wcagLevel: "AA", issues: 9, audited: "2025-10-20",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/tv-verkeersboete"
+  },
+  {
+    id: "tv-milieu", app: "app-milieumelding", team: "team-data", fqdn: "milieumelding.overheid.nl",
+    status: "eerste maatregelen genomen", wcagLevel: "AA", issues: 13, audited: "2025-09-15",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/tv-milieu"
+  },
+
 ];
 
 
@@ -35945,274 +37108,479 @@ export const datasetRefreshLog = {
         "status": "op tijd"
       }
     ]
+  },
+  "ds-rijbewijzen-cbr": {
+    "expected": "2026-05-27",
+    "behindDays": 6,
+    "runs": [
+      {
+        "date": "2026-05-26",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-25",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-24",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-23",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-22",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-21",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-studieschuld": {
+    "expected": "2026-03-04",
+    "behindDays": 90,
+    "runs": [
+      {
+        "date": "2026-02-02",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-01-03",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-12-04",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-11-04",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-10-05",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-diploma-register": {
+    "expected": "2026-05-07",
+    "behindDays": 26,
+    "runs": [
+      {
+        "date": "2026-05-06",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-05",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-04",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-03",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-02",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-01",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-verblijfsvergunningen": {
+    "expected": "2026-05-18",
+    "behindDays": 15,
+    "runs": [
+      {
+        "date": "2026-05-17",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-16",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-15",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-14",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-13",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-12",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-aow-rechten": {
+    "expected": "2026-03-06",
+    "behindDays": 88,
+    "runs": [
+      {
+        "date": "2026-02-04",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-01-05",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-12-06",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-11-06",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-10-07",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-dienstverbanden": {
+    "expected": "2026-05-29",
+    "behindDays": 4,
+    "runs": [
+      {
+        "date": "2026-05-22",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-15",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-08",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-01",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-24",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-17",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-omzetbelasting-aangiften": {
+    "expected": "2026-05-04",
+    "behindDays": 29,
+    "runs": [
+      {
+        "date": "2026-05-03",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-02",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-01",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-30",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-29",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-28",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-geo-bgt": {
+    "expected": "2026-06-02",
+    "behindDays": 0,
+    "runs": [
+      {
+        "date": "2026-05-26",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-19",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-12",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-05",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-28",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-21",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-wkpb-beperkingen": {
+    "expected": "2026-06-06",
+    "behindDays": 0,
+    "runs": [
+      {
+        "date": "2026-05-07",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-07",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-03-08",
+        "status": "vertraagd"
+      },
+      {
+        "date": "2026-02-06",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-01-07",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-loonheffing": {
+    "expected": "2026-03-18",
+    "behindDays": 76,
+    "runs": [
+      {
+        "date": "2026-02-16",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-01-17",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-12-18",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-11-18",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-10-19",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-verkeersboetes": {
+    "expected": "2026-05-11",
+    "behindDays": 22,
+    "runs": [
+      {
+        "date": "2026-05-10",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-09",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-08",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-07",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-06",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-05",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-vaccinaties": {
+    "expected": "2026-05-28",
+    "behindDays": 5,
+    "runs": [
+      {
+        "date": "2026-05-21",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-14",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-07",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-30",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-23",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-16",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-milieumeldingen": {
+    "expected": "2026-02-16",
+    "behindDays": 106,
+    "runs": [
+      {
+        "date": "2026-01-17",
+        "status": "te laat"
+      },
+      {
+        "date": "2025-12-18",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-11-18",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-10-19",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-09-19",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-subsidies-rvo": {
+    "expected": "2026-05-23",
+    "behindDays": 10,
+    "runs": [
+      {
+        "date": "2026-05-16",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-09",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-02",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-25",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-18",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-11",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-waterschapsheffing": {
+    "expected": "2027-02-11",
+    "behindDays": 0,
+    "runs": [
+      {
+        "date": "2026-02-11",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-02-11",
+        "status": "op tijd"
+      },
+      {
+        "date": "2024-02-12",
+        "status": "op tijd"
+      },
+      {
+        "date": "2023-02-12",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-leerplicht": {
+    "expected": "2026-04-10",
+    "behindDays": 53,
+    "runs": [
+      {
+        "date": "2026-03-11",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-02-09",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-01-10",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-12-11",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-11-11",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-pgb-budgetten": {
+    "expected": "2026-02-05",
+    "behindDays": 117,
+    "runs": [
+      {
+        "date": "2026-01-06",
+        "status": "te laat"
+      },
+      {
+        "date": "2025-12-07",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-11-07",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-10-08",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-09-08",
+        "status": "op tijd"
+      }
+    ]
   }
 };
-
-// --- Login building blocks: DigiD, eHerkenning, eIDAS and machtigingen as a
-// first-class platform capability, not a stray API row. Each references the app
-// that exposes it and the assurance level (betrouwbaarheidsniveau). ---
-export const loginMethods = [
-  {
-    id: "login-digid", name: "DigiD", audience: "burgers", app: "app-digid-koppeling", team: "team-logius-digid",
-    levels: ["Midden", "Substantieel", "Hoog"], protocol: "SAML / OIDC", eidas: false,
-    machtigen: true, status: "productie", connectedApps: ["app-toeslagen", "app-paspoort", "app-ww-aanvraag", "app-bijstandsuitkering"],
-    description: "Inloggen voor burgers met oplopende betrouwbaarheidsniveaus, inclusief DigiD Machtigen voor gemachtigden."
-  },
-  {
-    id: "login-eherkenning", name: "eHerkenning", audience: "bedrijven", app: "app-eherkenning-broker", team: "team-logius-machtigen",
-    levels: ["EH3", "EH4"], protocol: "SAML", eidas: true,
-    machtigen: true, status: "productie", connectedApps: ["app-aangifte-omzetbelasting", "app-subsidieportaal-rvo"],
-    description: "Inloggen voor ondernemers en organisaties, met ketenmachtiging en koppeling aan het EU-knooppunt."
-  },
-  {
-    id: "login-eidas", name: "eIDAS", audience: "EU-burgers", app: "app-eherkenning-broker", team: "team-logius-machtigen",
-    levels: ["Substantieel", "Hoog"], protocol: "SAML (EU-knooppunt)", eidas: true,
-    machtigen: false, status: "productie", connectedApps: ["app-studiefinanciering-portaal"],
-    description: "Grensoverschrijdend inloggen voor burgers uit andere EU-lidstaten via het Nederlandse eIDAS-knooppunt."
-  },
-  {
-    id: "login-oidc-rijk", name: "SSO Rijk (OIDC)", audience: "ambtenaren", app: "app-oidc-provider", team: "team-nldd-iam",
-    levels: ["Substantieel"], protocol: "OIDC", eidas: false,
-    machtigen: false, status: "productie", connectedApps: ["app-platformportaal", "app-kentekencheck"],
-    description: "Interne single sign-on voor ambtenaren via het rijksbrede OIDC-knooppunt, gekoppeld aan de Rijkspas."
-  },
-  {
-    id: "login-machtigen", name: "Machtigen", audience: "gemachtigden", app: "app-digid-koppeling", team: "team-logius-machtigen",
-    levels: ["Substantieel", "Hoog"], protocol: "OIDC", eidas: false,
-    machtigen: true, status: "pilot", connectedApps: ["app-toeslagen", "app-aangifte-omzetbelasting"],
-    description: "Iemand anders namens jou laten handelen: vrijwillige en wettelijke vertegenwoordiging, voor burgers en bedrijven."
-  }
-];
-
-// --- Domains & DNS: every service runs on an overheid.nl / rijksoverheid.nl
-// subdomain with DNSSEC, a PKIoverheid certificate and an internet.nl score.
-// Cross-links to the owning app, the certificate in /secrets, and standards. ---
-export const domeinen = [
-  {
-    id: "dom-toeslagen", fqdn: "toeslagen.nl", app: "app-toeslagen", team: "team-toeslagen",
-    dnssec: true, tls: "cert-2", internetnl: 100, ipv6: true, registrar: "SIDN",
-    records: [
-      { type: "A", name: "@", value: "145.21.0.10" },
-      { type: "AAAA", name: "@", value: "2a00:d00:ff::10" },
-      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" },
-      { type: "MX", name: "@", value: "10 mail.overheid.nl" }
-    ],
-    status: "actief"
-  },
-  {
-    id: "dom-platform", fqdn: "platform.rijks.app", app: "app-platformportaal", team: "team-platform",
-    dnssec: true, tls: "cert-1", internetnl: 100, ipv6: true, registrar: "SIDN",
-    records: [
-      { type: "A", name: "@", value: "145.21.0.20" },
-      { type: "AAAA", name: "@", value: "2a00:d00:ff::20" },
-      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
-    ],
-    status: "actief"
-  },
-  {
-    id: "dom-kenteken", fqdn: "kentekencheck.overheid.nl", app: "app-kentekencheck", team: "team-data",
-    dnssec: true, tls: "cert-3", internetnl: 97, ipv6: true, registrar: "SIDN",
-    records: [
-      { type: "A", name: "@", value: "145.21.0.30" },
-      { type: "AAAA", name: "@", value: "2a00:d00:ff::30" },
-      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
-    ],
-    status: "actief"
-  },
-  {
-    id: "dom-datadeling", fqdn: "api.datadeling.overheid.nl", app: "app-datadeling", team: "team-data",
-    dnssec: true, tls: "cert-2", internetnl: 94, ipv6: false, registrar: "SIDN",
-    records: [
-      { type: "A", name: "@", value: "145.21.0.40" },
-      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
-    ],
-    status: "actief"
-  },
-  {
-    id: "dom-studie", fqdn: "studiefinanciering.nl", app: "app-studiefinanciering-portaal", team: "team-platform",
-    dnssec: false, tls: "cert-4", internetnl: 71, ipv6: true, registrar: "SIDN",
-    records: [
-      { type: "A", name: "@", value: "145.21.0.50" },
-      { type: "AAAA", name: "@", value: "2a00:d00:ff::50" }
-    ],
-    status: "aandacht"
-  },
-  {
-    id: "dom-ww", fqdn: "ww-aanvraag.overheid.nl", app: "app-ww-aanvraag", team: "team-platform",
-    dnssec: true, tls: "cert-5", internetnl: 88, ipv6: true, registrar: "SIDN",
-    records: [
-      { type: "A", name: "@", value: "145.21.0.60" },
-      { type: "AAAA", name: "@", value: "2a00:d00:ff::60" },
-      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
-    ],
-    status: "actief"
-  }
-];
-
-// --- Software & SaaS procurement: the counterpart to hardware inkoop. Licenses
-// and services bought under ARBIT/ARVODI, with lock-in risk and an exit
-// strategy, so dependence on a vendor is an explicit, governed choice. ---
-export const softwareInkoop = [
-  {
-    id: "sw-2026-001", supplier: "Forgejo (zelf gehost)", product: "Forgejo Enterprise-support", category: "ontwikkeltooling",
-    amount: 45000, term: "1 jaar", contract: "ARVODI", lockin: "laag", exitStrategie: "Open source, data en repo's volledig portabel",
-    openSource: true, team: "team-platform", status: "actief"
-  },
-  {
-    id: "sw-2026-002", supplier: "Microsoft", product: "Microsoft 365 Rijk", category: "kantoorautomatisering",
-    amount: 1850000, term: "3 jaar", contract: "ARBIT", lockin: "hoog", exitStrategie: "Migratiepad naar open formaten in onderzoek",
-    openSource: false, team: "team-nldd-iam", status: "actief"
-  },
-  {
-    id: "sw-2026-003", supplier: "Elastic", product: "Elasticsearch-licentie", category: "observability",
-    amount: 220000, term: "1 jaar", contract: "ARVODI", lockin: "gemiddeld", exitStrategie: "OpenSearch als open alternatief beschikbaar",
-    openSource: false, team: "team-platform", status: "actief"
-  },
-  {
-    id: "sw-2026-004", supplier: "HashiCorp", product: "Vault Enterprise", category: "security",
-    amount: 310000, term: "2 jaar", contract: "ARBIT", lockin: "hoog", exitStrategie: "OpenBao-fork als exit-pad geborgd",
-    openSource: false, team: "team-nldd-iam", status: "heroverweging"
-  },
-  {
-    id: "sw-2026-005", supplier: "GitLab", product: "GitLab Ultimate", category: "ontwikkeltooling",
-    amount: 0, term: "n.v.t.", contract: "ARVODI", lockin: "hoog", exitStrategie: "Afgewezen: te hoge lock-in, Forgejo gekozen",
-    openSource: false, team: "team-platform", status: "afgewezen"
-  },
-  {
-    id: "sw-2026-006", supplier: "Geonovum", product: "PDOK-aansluiting", category: "geo",
-    amount: 60000, term: "1 jaar", contract: "ARVODI", lockin: "laag", exitStrategie: "Open standaarden (OGC API), geen vendor-binding",
-    openSource: true, team: "team-data", status: "actief"
-  }
-];
-
-// --- Reusable components (Common Ground: build once, use widely). A marketplace
-// of components teams can adopt instead of rebuilding, each with the teams that
-// already use it. ---
-export const componenten = [
-  {
-    id: "comp-brp-bevraging", name: "BRP-bevraging", kind: "bibliotheek", language: "Rust", repo: "repo-datadeling",
-    owner: "team-data", reuses: 14, register: "brp", license: "EUPL-1.2",
-    description: "Geteste client voor de BRP met ingebouwde AVG-logging en herkomstregistratie.",
-    usedBy: ["team-toeslagen", "team-burgerzaken", "team-platform"]
-  },
-  {
-    id: "comp-betalen", name: "Betaalmodule (iDEAL/incasso)", kind: "service", language: "Go", repo: "repo-platformportaal",
-    owner: "team-platform", reuses: 9, register: null, license: "EUPL-1.2",
-    description: "Herbruikbare betaal- en incassomodule met PSD2-koppeling en boekhoudkoppeling.",
-    usedBy: ["team-bd-inning", "team-cjib-inning"]
-  },
-  {
-    id: "comp-nldd-formulier", name: "NLDD-formulierbouwer", kind: "frontend-component", language: "Vue", repo: "repo-platformportaal",
-    owner: "team-platform", reuses: 31, register: null, license: "EUPL-1.2",
-    description: "Toegankelijke formulieren (WCAG 2.2 AA) op basis van het NLDD design system, met validatie.",
-    usedBy: ["team-toeslagen", "team-burgerzaken", "team-data"]
-  },
-  {
-    id: "comp-machtigen", name: "Machtigen-koppeling", kind: "bibliotheek", language: "Go", repo: "repo-datadeling",
-    owner: "team-logius-machtigen", reuses: 6, register: null, license: "EUPL-1.2",
-    description: "Standaardkoppeling voor DigiD Machtigen en ketenmachtiging eHerkenning.",
-    usedBy: ["team-toeslagen", "team-bd-aangifte"]
-  },
-  {
-    id: "comp-notificatie", name: "Notificatierouter", kind: "service", language: "Rust", repo: "repo-datadeling",
-    owner: "team-data", reuses: 12, register: null, license: "EUPL-1.2",
-    description: "Routeert notificaties naar de Berichtenbox, MijnOverheid en e-mail volgens de notificatiestandaard.",
-    usedBy: ["team-toeslagen", "team-burgerzaken", "team-platform", "team-data"]
-  }
-];
-
-// --- Feature flags / toggles: progressive delivery as a platform capability,
-// managed by the feature-flags service. Each flag has a rollout percentage and
-// the app it gates. ---
-export const featureFlags = [
-  {
-    id: "ff-nieuwe-inkomenstoets", name: "nieuwe-inkomenstoets", app: "app-toeslagen", team: "team-toeslagen",
-    rollout: 25, status: "uitrollend", kind: "release", description: "Nieuwe inkomenstoets-engine, geleidelijk uitgerold."
-  },
-  {
-    id: "ff-eidas-login", name: "eidas-login", app: "app-studiefinanciering-portaal", team: "team-platform",
-    rollout: 100, status: "aan", kind: "release", description: "eIDAS-inlog ingeschakeld voor EU-studenten."
-  },
-  {
-    id: "ff-experiment-uitleg", name: "experiment-besluituitleg", app: "app-toeslagen", team: "team-toeslagen",
-    rollout: 10, status: "experiment", kind: "experiment", description: "Tonen van een uitleg bij elk geautomatiseerd besluit."
-  },
-  {
-    id: "ff-donker-thema", name: "donker-thema", app: "app-platformportaal", team: "team-platform",
-    rollout: 50, status: "uitrollend", kind: "release", description: "Donker thema voor het platformportaal."
-  },
-  {
-    id: "ff-killswitch-betalen", name: "killswitch-betalen", app: "app-platformportaal", team: "team-platform",
-    rollout: 0, status: "uit", kind: "kill-switch", description: "Noodschakelaar om de betaalmodule direct uit te zetten."
-  },
-  {
-    id: "ff-nieuwe-zoek", name: "nieuwe-zoekfunctie", app: "app-kentekencheck", team: "team-data",
-    rollout: 75, status: "uitrollend", kind: "release", description: "Snellere zoekfunctie op het kentekenregister."
-  }
-];
-
-// --- Data contracts: the agreement between a data source and its consumers.
-// Per dataset-to-app coupling: the schema, the SLA, the allowed purpose and the
-// retention. Makes data sharing an explicit, governed contract. ---
-export const datacontracten = [
-  {
-    id: "dc-inkomen-toeslagen", dataset: "ds-toetsingsinkomen-2026", consumer: "app-toeslagen", provider: "team-toeslagen",
-    sla: "99.5%", schema: "v2.1", doelbinding: "Vaststellen recht op toeslag", grondslag: "awir",
-    bewaartermijn: "7 jaar", status: "actief", signed: "2025-09-15"
-  },
-  {
-    id: "dc-brp-toeslagen", dataset: "ds-personen-brp", consumer: "app-toeslagen", provider: "team-data",
-    sla: "99.95%", schema: "v3.0", doelbinding: "Verifiëren persoonsgegevens aanvrager", grondslag: "awir",
-    bewaartermijn: "7 jaar", status: "actief", signed: "2025-06-20"
-  },
-  {
-    id: "dc-huishouden-inkomenstoets", dataset: "ds-huishoudsamenstelling", consumer: "app-inkomenstoets", provider: "team-toeslagen",
-    sla: "99.0%", schema: "v1.4", doelbinding: "Bepalen huishoudsamenstelling", grondslag: "kinderbijslagwet",
-    bewaartermijn: "5 jaar", status: "actief", signed: "2025-04-02"
-  },
-  {
-    id: "dc-bag-vergunning", dataset: "ds-adressen-bag", consumer: "app-vergunningchecker", provider: "team-data",
-    sla: "99.9%", schema: "v2.0", doelbinding: "Controleren adres bij vergunningaanvraag", grondslag: null,
-    bewaartermijn: "10 jaar", status: "actief", signed: "2026-01-10"
-  },
-  {
-    id: "dc-kenteken-handhaving", dataset: "ds-kentekens-rdw", consumer: "app-kentekencheck", provider: "team-data",
-    sla: "99.9%", schema: "v1.2", doelbinding: "Controle voertuiggegevens", grondslag: null,
-    bewaartermijn: "90 dagen", status: "heronderhandeling", signed: "2024-11-30"
-  },
-  {
-    id: "dc-inkomen-historie", dataset: "ds-inkomen-historie", consumer: "app-inkomenstoets", provider: "team-toeslagen",
-    sla: "98.0%", schema: "v1.0", doelbinding: "Meerjarige inkomensvergelijking", grondslag: "awir",
-    bewaartermijn: "7 jaar", status: "concept", signed: ""
-  }
-];
-
-// --- Accessibility statements (DigiToegankelijk): the mandatory published
-// statement per service, with its WCAG status and the formal compliance label. ---
-export const toegankelijkheidsverklaringen = [
-  {
-    id: "tv-toeslagen", app: "app-toeslagen", team: "team-toeslagen", fqdn: "toeslagen.nl",
-    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-03-01",
-    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
-  },
-  {
-    id: "tv-platform", app: "app-platformportaal", team: "team-platform", fqdn: "platform.rijks.app",
-    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-02-15",
-    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
-  },
-  {
-    id: "tv-kenteken", app: "app-kentekencheck", team: "team-data", fqdn: "kentekencheck.overheid.nl",
-    status: "voldoet gedeeltelijk", wcagLevel: "AA", issues: 3, audited: "2026-01-20",
-    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
-  },
-  {
-    id: "tv-studie", app: "app-studiefinanciering-portaal", team: "team-platform", fqdn: "studiefinanciering.nl",
-    status: "eerste maatregelen genomen", wcagLevel: "AA", issues: 11, audited: "2025-11-05",
-    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
-  },
-  {
-    id: "tv-ww", app: "app-ww-aanvraag", team: "team-platform", fqdn: "ww-aanvraag.overheid.nl",
-    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-04-10",
-    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
-  }
-];

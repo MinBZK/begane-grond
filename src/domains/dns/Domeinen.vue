@@ -5,11 +5,29 @@
 // score and whether IPv6 is enabled. Click through to /dns/:id for the records,
 // the linked certificate and the standards.
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 
 const store = usePlatformStore();
+const router = useRouter();
+
+// --- Add a new domain (inline form) ---
+const adding = ref(false);
+const form = ref({ fqdn: '', app: '', team: 'team-platform' });
+const canSubmit = computed(() => /\.[a-z]{2,}$/i.test(form.value.fqdn.trim()));
+function submitDomein() {
+  if (!canSubmit.value) return;
+  const dom = store.addDomein({
+    fqdn: form.value.fqdn.trim(),
+    app: form.value.app || null,
+    team: form.value.team,
+  });
+  adding.value = false;
+  form.value = { fqdn: '', app: '', team: 'team-platform' };
+  router.push(`/dns/${dom.id}`);
+}
 
 const STATUSES = [
   { id: 'all', label: 'Alle' },
@@ -58,8 +76,50 @@ function scoreColor(score) {
     >
       <template #actions>
         <nldd-button variant="secondary" text="Certificaten" start-icon="lock-closed" href="/secrets/certificaten"></nldd-button>
+        <nldd-button variant="primary" text="Domein toevoegen" start-icon="plus" @click="adding = !adding"></nldd-button>
       </template>
     </PageHeader>
+
+    <template v-if="adding">
+      <nldd-card accessible-label="Domein toevoegen">
+        <nldd-container padding="20">
+          <nldd-title size="5"><h2>Nieuw domein registreren</h2></nldd-title>
+          <nldd-spacer size="12" />
+          <div class="rp-form-row">
+            <nldd-form-field label="Domeinnaam (fqdn)" class="rp-grow">
+              <nldd-text-field
+                placeholder="bijv. nieuwedienst.overheid.nl"
+                :value="form.fqdn"
+                @input="(e) => (form.fqdn = e.target.value)"
+              ></nldd-text-field>
+            </nldd-form-field>
+            <nldd-form-field label="Dienst (optioneel)">
+              <nldd-dropdown>
+                <select :value="form.app" @change="(e) => (form.app = e.target.value)">
+                  <option value="">Geen dienst</option>
+                  <option v-for="a in store.apps" :key="a.id" :value="a.id">{{ a.name }}</option>
+                </select>
+              </nldd-dropdown>
+            </nldd-form-field>
+            <nldd-form-field label="Team">
+              <nldd-dropdown>
+                <select :value="form.team" @change="(e) => (form.team = e.target.value)">
+                  <option v-for="t in store.teams" :key="t.id" :value="t.id">{{ t.name }}</option>
+                </select>
+              </nldd-dropdown>
+            </nldd-form-field>
+          </div>
+          <nldd-spacer size="8" />
+          <p class="rp-form-hint">Een nieuw domein start zonder DNSSEC en zonder internet.nl-score. Die schakel je daarna in op de domeinpagina.</p>
+          <nldd-spacer size="12" />
+          <nldd-button-group orientation="horizontal">
+            <nldd-button variant="primary" text="Registreren" start-icon="check-mark" :disabled="!canSubmit || undefined" @click="submitDomein"></nldd-button>
+            <nldd-button variant="secondary" text="Annuleren" @click="adding = false"></nldd-button>
+          </nldd-button-group>
+        </nldd-container>
+      </nldd-card>
+      <nldd-spacer size="24" />
+    </template>
 
     <nldd-container layout="grid" column-count="4" md-column-count="2" sm-column-count="1" gap="16">
       <MetricCard :value="store.domeinen.length" label="Domeinen" sub="in beheer" icon="globe" />
@@ -128,4 +188,7 @@ function scoreColor(score) {
 .rp-dom-icon { width: 1.6rem; height: 1.6rem; flex: 0 0 auto; opacity: 0.8; }
 .rp-dom-sub { margin: 0.1rem 0 0; font-size: 0.85rem; opacity: 0.65; }
 .rp-mono { font-variant-numeric: tabular-nums; font-family: ui-monospace, monospace; }
+.rp-form-row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-end; }
+.rp-grow { flex: 1 1 18rem; }
+.rp-form-hint { margin: 0; font-size: 0.85rem; opacity: 0.65; }
 </style>
