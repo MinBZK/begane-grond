@@ -49,6 +49,58 @@ const INFRA = [
   { kind: 'kubernetes', name: 'Kubernetes-namespace', icon: 'ship-wheel', desc: 'Namespace op het platformcluster' },
 ];
 
+// Government-specific golden paths. These are not generic scaffolding but
+// deliberate, compliant-by-default starting points that live elsewhere on the
+// platform. Picking one routes the team to the right specialized flow, so they
+// show how the building blocks connect rather than duplicating them here.
+const GOV_PATHS = [
+  {
+    id: 'gov-regelrecht',
+    name: 'RegelRecht-dienst',
+    icon: 'certificate',
+    desc: 'Een wet als geteste, draaiende dienst. De wettekst is de bron.',
+    tags: ['BWB-harvest', 'machine-leesbaar', 'Given/When/Then'],
+    to: '/wetten/nieuw',
+    cta: 'Start bij de wet',
+  },
+  {
+    id: 'gov-register',
+    name: 'Register-koppeling',
+    icon: 'cylinder-split',
+    desc: 'Een dienst die put uit de basisregistraties: BRP, BRK, BAG, HR.',
+    tags: ['BRP', 'BRK', 'OIN/TOOI'],
+    to: '/registers',
+    cta: 'Kies een register',
+  },
+  {
+    id: 'gov-fsc',
+    name: 'Digikoppeling / FSC',
+    icon: 'link',
+    desc: 'Een veilig koppelvlak tussen overheidsorganisaties, op vertrouwen.',
+    tags: ['Digikoppeling', 'FSC', 'PKIoverheid'],
+    to: '/koppelvlakken/fsc',
+    cta: 'Open koppelvlakken',
+  },
+  {
+    id: 'gov-notificaties',
+    name: 'Notificatie-service',
+    icon: 'envelope',
+    desc: 'Gebeurtenissen publiceren waar andere diensten op abonneren.',
+    tags: ['CloudEvents', 'pub/sub', 'abonnementen'],
+    to: '/notificaties',
+    cta: 'Open notificaties',
+  },
+  {
+    id: 'gov-standaarden',
+    name: 'Conform de standaarden',
+    icon: 'check-mark-circle',
+    desc: 'De afdwingbare defaults: NLDD, API Design Rules, WCAG 2.2 AA, BIO.',
+    tags: ['NLDD', 'ADR', 'WCAG', 'BIO'],
+    to: '/standaarden',
+    cta: 'Bekijk standaarden',
+  },
+];
+
 const form = reactive({
   template: '',
   name: '',
@@ -260,6 +312,37 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
             </button>
           </div>
 
+          <!-- Government-specific golden paths: deliberate, compliant defaults
+               that route to the specialized flow elsewhere on the platform. -->
+          <nldd-spacer size="24" />
+          <div class="rp-gov-head">
+            <nldd-icon name="bank" aria-hidden="true"></nldd-icon>
+            <div>
+              <strong>Specifiek voor de overheid</strong>
+              <span>Geen kale scaffolding, maar de bouwstenen die het Rijk uniek maakt. Deze starten in hun eigen flow.</span>
+            </div>
+          </div>
+          <nldd-spacer size="12" />
+          <div class="rp-tpl-grid">
+            <router-link
+              v-for="g in GOV_PATHS"
+              :key="g.id"
+              :to="g.to"
+              class="rp-tpl-choice rp-gov-choice"
+            >
+              <div class="rp-tpl-choice-head">
+                <nldd-icon :name="g.icon" aria-hidden="true"></nldd-icon>
+                <strong>{{ g.name }}</strong>
+                <nldd-icon name="arrow-right" class="rp-gov-arrow" aria-hidden="true"></nldd-icon>
+              </div>
+              <span class="rp-tpl-choice-desc">{{ g.desc }}</span>
+              <div class="rp-tpl-choice-tags">
+                <nldd-tag v-for="p in g.tags" :key="p" color="neutral" size="md">{{ p }}</nldd-tag>
+              </div>
+              <span class="rp-gov-cta">{{ g.cta }} →</span>
+            </router-link>
+          </div>
+
           <template v-if="selectedTemplate">
             <nldd-spacer size="20" />
             <div class="rp-preview">
@@ -449,6 +532,15 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
 .rp-tick { margin-left: auto; color: var(--semantics-feedback-success-icon-color, #2e7d32); }
 .rp-tpl-choice-desc { font-size: 0.85rem; opacity: 0.75; }
 .rp-tpl-choice-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+
+.rp-gov-head { display: flex; align-items: flex-start; gap: 0.6rem; }
+.rp-gov-head > nldd-icon { width: 1.3rem; height: 1.3rem; flex: none; margin-top: 0.1rem; color: var(--semantics-actions-primary-default-background-color, #154273); }
+.rp-gov-head div { display: flex; flex-direction: column; gap: 0.15rem; }
+.rp-gov-head span { font-size: 0.85rem; opacity: 0.75; }
+.rp-gov-choice { text-decoration: none; color: inherit; }
+.rp-gov-choice:hover { border-color: var(--semantics-actions-primary-default-background-color, #154273); }
+.rp-gov-arrow { margin-left: auto; width: 1rem; height: 1rem; opacity: 0.5; }
+.rp-gov-cta { font-size: 0.82rem; font-weight: 600; color: var(--semantics-actions-primary-default-background-color, #154273); margin-top: 0.15rem; }
 
 .rp-preview { border: 1px solid var(--semantics-dividers-color); border-radius: 10px; overflow: hidden; }
 .rp-preview-label {

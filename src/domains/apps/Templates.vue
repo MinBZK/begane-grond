@@ -23,6 +23,57 @@ function meta(id) {
   return META[id] || { icon: 'sparkles', lang: '—', batteries: [], time: '—' };
 }
 
+// Government-specific golden paths. These are opinionated, compliant-by-default
+// starting points that live elsewhere on the platform; the card routes there
+// instead of scaffolding a generic repository.
+const GOV_PATHS = [
+  {
+    id: 'gov-regelrecht',
+    name: 'RegelRecht-dienst',
+    icon: 'certificate',
+    desc: 'Een wet als geteste, draaiende dienst. De wettekst zelf is de bron: geharvest uit wetten.overheid.nl, machine-leesbaar gemaakt en uitgerold.',
+    tags: ['BWB-harvest', 'machine-leesbaar', 'Given/When/Then'],
+    to: '/wetten/nieuw',
+    cta: 'Start bij de wet',
+  },
+  {
+    id: 'gov-register',
+    name: 'Register-koppeling',
+    icon: 'cylinder-split',
+    desc: 'Een dienst die put uit de basisregistraties. Sluit aan op BRP, BRK, BAG of HR, met OIN/TOOI en AVG-classificatie geregeld.',
+    tags: ['BRP', 'BRK', 'BAG', 'OIN/TOOI'],
+    to: '/registers',
+    cta: 'Kies een register',
+  },
+  {
+    id: 'gov-fsc',
+    name: 'Digikoppeling / FSC',
+    icon: 'link',
+    desc: 'Een veilig koppelvlak tussen overheidsorganisaties. Vertrouwen tussen partijen via PKIoverheid, geen losse API-sleutels.',
+    tags: ['Digikoppeling', 'FSC', 'PKIoverheid'],
+    to: '/koppelvlakken/fsc',
+    cta: 'Open koppelvlakken',
+  },
+  {
+    id: 'gov-notificaties',
+    name: 'Notificatie-service',
+    icon: 'envelope',
+    desc: 'Publiceer gebeurtenissen waar andere diensten op kunnen abonneren, volgens het NL GOV CloudEvents-profiel.',
+    tags: ['CloudEvents', 'pub/sub', 'abonnementen'],
+    to: '/notificaties',
+    cta: 'Open notificaties',
+  },
+  {
+    id: 'gov-standaarden',
+    name: 'Conform de standaarden',
+    icon: 'check-mark-circle',
+    desc: 'De afdwingbare defaults van het Rijk in één plek: NLDD design system, API Design Rules, WCAG 2.2 AA en de BIO.',
+    tags: ['NLDD', 'ADR', 'WCAG 2.2', 'BIO'],
+    to: '/standaarden',
+    cta: 'Bekijk standaarden',
+  },
+];
+
 const usageByTemplate = computed(() => {
   // Best-effort: count apps whose stack matches the template's headline tech.
   const counts = {};
@@ -52,7 +103,7 @@ const usageByTemplate = computed(() => {
     </PageHeader>
 
     <nldd-container layout="grid" column-count="3" gap="16">
-      <MetricCard :value="store.templates.length" label="Golden paths" sub="beschikbaar" icon="books-vertical" />
+      <MetricCard :value="store.templates.length + GOV_PATHS.length" label="Golden paths" sub="beschikbaar" icon="books-vertical" />
       <MetricCard value="< 10 min" label="Tijd tot eerste commit" sub="gemiddeld" icon="clock" />
       <MetricCard value="EUPL-1.2" label="Standaardlicentie" sub="open-tenzij" icon="certificate" />
     </nldd-container>
@@ -113,6 +164,49 @@ const usageByTemplate = computed(() => {
       </nldd-card>
     </nldd-collection>
 
+    <nldd-spacer size="32" />
+
+    <nldd-title size="3"><h2>Specifiek voor de overheid</h2></nldd-title>
+    <nldd-spacer size="6" />
+    <nldd-rich-text>
+      <p>
+        Geen kale scaffolding, maar de bouwstenen die het Rijk uniek maken. Deze golden paths
+        starten in hun eigen flow elders op het platform en laten zien hoe alles samenhangt:
+        van wet tot register tot koppelvlak.
+      </p>
+    </nldd-rich-text>
+    <nldd-spacer size="16" />
+
+    <nldd-collection layout="grid" item-width="360px">
+      <router-link v-for="g in GOV_PATHS" :key="g.id" :to="g.to" class="rp-gov-link">
+        <nldd-card :accessible-label="g.name">
+          <nldd-container padding="24">
+            <div class="rp-tpl-head">
+              <div class="rp-tpl-icon rp-gov-icon">
+                <nldd-icon :name="g.icon" aria-hidden="true"></nldd-icon>
+              </div>
+              <div>
+                <nldd-title size="4"><h3>{{ g.name }}</h3></nldd-title>
+                <span class="rp-tpl-lang">Specifiek voor de overheid</span>
+              </div>
+            </div>
+
+            <nldd-spacer size="12" />
+            <nldd-rich-text><p>{{ g.desc }}</p></nldd-rich-text>
+            <nldd-spacer size="16" />
+
+            <div class="rp-tpl-section-label">Sluit aan op</div>
+            <div class="rp-tpl-tags">
+              <nldd-tag v-for="t in g.tags" :key="t" color="neutral" size="md">{{ t }}</nldd-tag>
+            </div>
+
+            <nldd-spacer size="16" />
+            <span class="rp-gov-cta">{{ g.cta }} →</span>
+          </nldd-container>
+        </nldd-card>
+      </router-link>
+    </nldd-collection>
+
     <nldd-spacer size="24" />
 
     <nldd-inline-dialog
@@ -151,4 +245,14 @@ const usageByTemplate = computed(() => {
 .rp-tpl-foot { display: flex; gap: 1rem; flex-wrap: wrap; }
 .rp-tpl-meta { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; opacity: 0.75; }
 .rp-tpl-meta nldd-icon { width: 1rem; height: 1rem; }
+
+.rp-gov-link { text-decoration: none; color: inherit; display: block; }
+.rp-gov-link nldd-card { transition: box-shadow 0.15s ease; }
+.rp-gov-link:hover nldd-card {
+  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color, #154273) inset;
+  border-radius: 12px;
+}
+.rp-gov-icon { background: var(--semantics-actions-primary-default-background-color, #154273); }
+.rp-gov-icon nldd-icon { color: #fff; }
+.rp-gov-cta { font-weight: 600; color: var(--semantics-actions-primary-default-background-color, #154273); }
 </style>
