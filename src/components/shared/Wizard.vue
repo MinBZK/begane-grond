@@ -7,6 +7,10 @@ import { ref, computed } from 'vue';
 const props = defineProps({
   steps: { type: Array, required: true }, // [{ title }]
   finishLabel: { type: String, default: 'Voltooien' },
+  // Hide the built-in prev/next footer on the last step when the step itself
+  // owns the final action (e.g. a "run pipeline" button). Prev/next still works
+  // on earlier steps.
+  hideFooterOnLast: { type: Boolean, default: false },
 });
 const emit = defineEmits(['finish']);
 
@@ -47,11 +51,13 @@ defineExpose({ next, prev, goTo, current, isLast });
       </nldd-container>
     </nldd-card>
 
-    <nldd-spacer size="16" />
-    <nldd-button-group orientation="horizontal">
-      <nldd-button v-if="current > 0" variant="secondary" text="Vorige" start-icon="chevron-left" @click="prev"></nldd-button>
-      <nldd-button variant="primary" :text="isLast ? finishLabel : 'Volgende'" :end-icon="isLast ? 'check-mark' : 'chevron-right'" @click="next"></nldd-button>
-    </nldd-button-group>
+    <template v-if="!(hideFooterOnLast && isLast)">
+      <nldd-spacer size="16" />
+      <nldd-button-group orientation="horizontal">
+        <nldd-button v-if="current > 0" variant="secondary" text="Vorige" start-icon="chevron-left" @click="prev"></nldd-button>
+        <nldd-button variant="primary" :text="isLast ? finishLabel : 'Volgende'" :end-icon="isLast ? 'check-mark' : 'chevron-right'" @click="next"></nldd-button>
+      </nldd-button-group>
+    </template>
   </div>
 </template>
 

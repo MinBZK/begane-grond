@@ -280,6 +280,14 @@ export const domains = [
     ],
   },
   {
+    key: 'certificaten',
+    path: '/secrets/certificaten',
+    label: 'Certificaten',
+    icon: 'certificate',
+    wave: 'A',
+    routes: [],
+  },
+  {
     key: 'componenten',
     path: '/componenten',
     label: 'Componenten',

@@ -134,7 +134,7 @@ function toggleAuto(id) {
   <div class="rp-page">
     <PageHeader
       title="PKIoverheid-certificaten"
-      lede="Een PKIoverheid-certificaat was een proces van weken: zelf een CSR maken, aanvragen bij een vertrouwensdienst (TSP), wachten, handmatig installeren en hopen dat niemand de vernieuwing vergeet. Hier is het een gebaand pad: in een keer aanvragen, en automatisch vernieuwen voordat het verloopt."
+      lede="TLS-certificaten van de PKIoverheid-keten, gekoppeld aan de domeinen en diensten die ze beveiligen. Zelf aanvragen en automatisch laten vernieuwen."
       :crumbs="[
         { text: 'Platform', href: '/' },
         { text: 'Secrets', href: '/secrets' },
@@ -146,42 +146,6 @@ function toggleAuto(id) {
         <nldd-button variant="primary" text="Certificaat aanvragen" start-icon="plus" @click="requesting = true"></nldd-button>
       </template>
     </PageHeader>
-
-    <!-- The contrast: manual ordeal vs golden path -->
-    <nldd-container layout="grid" column-count="2" md-column-count="1" gap="16">
-      <nldd-card accessible-label="Vroeger">
-        <nldd-container padding="20">
-          <div class="rp-vs-head rp-vs-old">
-            <nldd-icon name="exclamation-triangle" aria-hidden="true"></nldd-icon>
-            <nldd-title size="5"><h2>Vroeger: weken handwerk</h2></nldd-title>
-          </div>
-          <nldd-spacer size="10" />
-          <ul class="rp-vs-list">
-            <li>Handmatig een CSR genereren met de juiste subject en SAN's.</li>
-            <li>Aanvragen bij een TSP, OIN-validatie, dagen tot weken wachten.</li>
-            <li>Zelf installeren op de juiste plek en koppelen aan het domein.</li>
-            <li>Vernieuwing vergeten, certificaat verloopt, de dienst valt om.</li>
-          </ul>
-        </nldd-container>
-      </nldd-card>
-      <nldd-card accessible-label="Nu">
-        <nldd-container padding="20">
-          <div class="rp-vs-head rp-vs-new">
-            <nldd-icon name="check-mark-circle" aria-hidden="true"></nldd-icon>
-            <nldd-title size="5"><h2>Nu: een gebaand pad</h2></nldd-title>
-          </div>
-          <nldd-spacer size="10" />
-          <ul class="rp-vs-list">
-            <li>Een aanvraag: het platform maakt de CSR en regelt de TSP.</li>
-            <li>Uitgifte en installatie gebeuren automatisch, gekoppeld aan het domein.</li>
-            <li>Auto-vernieuwing op T-21 dagen, standaard aan.</li>
-            <li>Verlopen door vergeten kan niet meer.</li>
-          </ul>
-        </nldd-container>
-      </nldd-card>
-    </nldd-container>
-
-    <nldd-spacer size="24" />
 
     <nldd-container layout="grid" column-count="4" md-column-count="2" sm-column-count="1" gap="16">
       <MetricCard :value="total" label="Certificaten" sub="onder PKIoverheid" icon="certificate" />
@@ -197,7 +161,7 @@ function toggleAuto(id) {
       <nldd-card accessible-label="Certificaat aanvragen">
         <nldd-container padding="24">
           <template v-if="issued">
-            <div class="rp-vs-head rp-vs-new">
+            <div class="rp-issued-head">
               <nldd-icon name="check-mark-circle" aria-hidden="true"></nldd-icon>
               <nldd-title size="4"><h2>Certificaat uitgegeven</h2></nldd-title>
             </div>
@@ -212,7 +176,7 @@ function toggleAuto(id) {
             <nldd-button variant="secondary" text="Sluiten" @click="resetRequest"></nldd-button>
           </template>
 
-          <Wizard v-else ref="wizardRef" :steps="steps" finish-label="Sluiten" @finish="resetRequest">
+          <Wizard v-else ref="wizardRef" :steps="steps" finish-label="Sluiten" hide-footer-on-last @finish="resetRequest">
             <template #default="{ step }">
               <div v-if="step === 0">
                 <nldd-title size="5"><h3>Voor welk domein?</h3></nldd-title>
@@ -246,7 +210,7 @@ function toggleAuto(id) {
                   <nldd-text-field :value="form.oin" @input="(e) => (form.oin = e.target.value)"></nldd-text-field>
                 </nldd-form-field>
                 <nldd-spacer size="8" />
-                <p class="rp-form-hint">Het OIN wordt automatisch gevalideerd bij de TSP. Vroeger was dit de stap die dagen kostte.</p>
+                <p class="rp-form-hint">Het OIN wordt automatisch gevalideerd bij de TSP.</p>
               </div>
 
               <div v-else>
@@ -263,7 +227,10 @@ function toggleAuto(id) {
                   </template>
                 </div>
                 <nldd-spacer size="16" />
-                <nldd-button v-if="!issued" variant="primary" :text="issuing ? 'Bezig met uitgeven...' : 'Certificaat uitgeven'" start-icon="certificate" :disabled="issuing || undefined" @click="runIssue"></nldd-button>
+                <nldd-button-group orientation="horizontal">
+                  <nldd-button variant="secondary" text="Vorige" start-icon="chevron-left" :disabled="issuing || undefined" @click="wizardApi.goTo(1)"></nldd-button>
+                  <nldd-button variant="primary" :text="issuing ? 'Bezig met uitgeven...' : 'Certificaat uitgeven'" start-icon="certificate" :disabled="issuing || undefined" @click="runIssue"></nldd-button>
+                </nldd-button-group>
               </div>
             </template>
           </Wizard>
@@ -339,12 +306,8 @@ function toggleAuto(id) {
 <style scoped>
 .rp-page { display: block; }
 .rp-min-width-0 { min-width: 0; flex: 1 1 auto; }
-.rp-vs-head { display: flex; align-items: center; gap: 0.5rem; }
-.rp-vs-head nldd-icon { width: 1.3rem; height: 1.3rem; flex: 0 0 auto; }
-.rp-vs-old nldd-icon { color: #b35900; }
-.rp-vs-new nldd-icon { color: #2e8540; }
-.rp-vs-list { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.9rem; }
-.rp-vs-list li { opacity: 0.85; }
+.rp-issued-head { display: flex; align-items: center; gap: 0.5rem; }
+.rp-issued-head nldd-icon { width: 1.3rem; height: 1.3rem; flex: 0 0 auto; color: #2e8540; }
 .rp-kv { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 1rem; margin: 0; }
 .rp-kv dt { opacity: 0.6; font-size: 0.85rem; }
 .rp-kv dd { margin: 0; font-weight: 600; }
