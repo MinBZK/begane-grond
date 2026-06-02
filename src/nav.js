@@ -187,7 +187,6 @@ export const domains = [
     wave: 'B',
     routes: [
       { path: '/secrets', name: 'secrets', view: () => import('./domains/secrets/Vault.vue'), title: 'Secrets-kluis' },
-      { path: '/secrets/certificaten', name: 'secrets-certs', view: () => import('./domains/secrets/Certificates.vue'), title: 'Certificaten' },
     ],
   },
   {
@@ -285,7 +284,9 @@ export const domains = [
     label: 'Certificaten',
     icon: 'certificate',
     wave: 'A',
-    routes: [],
+    routes: [
+      { path: '/secrets/certificaten', name: 'secrets-certs', view: () => import('./domains/secrets/Certificates.vue'), title: 'Certificaten' },
+    ],
   },
   {
     key: 'componenten',
