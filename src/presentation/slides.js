@@ -83,7 +83,7 @@ export const slides = [
       'Met een platform eronder: minuten in plaats van maanden.',
     ],
     route: '/apps/templates',
-    emit: { type: 'repo.created', title: 'Nieuwe dienst gescaffold via golden path' },
+    emit: { type: 'repo.created', title: 'Nieuwe dienst opgezet via golden path' },
     note: 'Wijs op de templates rechts. De geplaveide weg is letterlijk klikbaar.',
   },
   {

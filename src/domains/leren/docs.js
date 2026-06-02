@@ -24,7 +24,7 @@ export const docs = [
     icon: 'rectangle-stack',
     updated: '1 week geleden',
     summary: 'Genereer een service uit een template, koppel infra en krijg CI in één keer groen.',
-    keywords: ['golden path', 'template', 'scaffold', 'service', 'ci', 'app'],
+    keywords: ['golden path', 'template', 'steiger', 'scaffold', 'service', 'ci', 'app'],
   },
   {
     id: 'doc-runbook-incident',

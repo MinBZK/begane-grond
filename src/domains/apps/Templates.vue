@@ -170,7 +170,7 @@ const usageByTemplate = computed(() => {
     <nldd-spacer size="6" />
     <nldd-rich-text>
       <p>
-        Geen kale scaffolding, maar de bouwstenen die het Rijk uniek maken. Deze golden paths
+        Geen kale steiger, maar de bouwstenen die het Rijk uniek maken. Deze golden paths
         starten in hun eigen flow elders op het platform en laten zien hoe alles samenhangt:
         van wet tot register tot koppelvlak.
       </p>
@@ -211,7 +211,7 @@ const usageByTemplate = computed(() => {
 
     <nldd-inline-dialog
       title="Open-tenzij"
-      supporting-text="Elke golden path scaffoldt standaard een EUPL-1.2 repository met CONTRIBUTING.md en een security.txt. Sluiten kan, maar vraagt een motivatie."
+      supporting-text="Elke golden path zet standaard een EUPL-1.2 repository op met CONTRIBUTING.md en een security.txt. Sluiten kan, maar vraagt een motivatie."
     ></nldd-inline-dialog>
   </div>
 </template>

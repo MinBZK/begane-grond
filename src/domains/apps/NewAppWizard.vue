@@ -288,7 +288,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
         <div v-if="step === 0">
           <nldd-title size="4"><h2>Kies een golden path</h2></nldd-title>
           <nldd-spacer size="6" />
-          <nldd-rich-text><p>Het startpunt bepaalt de taal, de scaffolding en welke checks meekomen.</p></nldd-rich-text>
+          <nldd-rich-text><p>Het startpunt bepaalt de taal, de steiger en welke checks meekomen.</p></nldd-rich-text>
           <nldd-spacer size="16" />
 
           <div class="rp-tpl-grid">
@@ -319,7 +319,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
             <nldd-icon name="bank" aria-hidden="true"></nldd-icon>
             <div>
               <strong>Specifiek voor de overheid</strong>
-              <span>Geen kale scaffolding, maar de bouwstenen die het Rijk uniek maakt. Deze starten in hun eigen flow.</span>
+              <span>Geen kale steiger, maar de bouwstenen die het Rijk uniek maakt. Deze starten in hun eigen flow.</span>
             </div>
           </div>
           <nldd-spacer size="12" />
@@ -346,7 +346,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
           <template v-if="selectedTemplate">
             <nldd-spacer size="20" />
             <div class="rp-preview">
-              <div class="rp-preview-label">Scaffolding-preview · {{ tplMeta(form.template).lang }}</div>
+              <div class="rp-preview-label">Steiger-preview · {{ tplMeta(form.template).lang }}</div>
               <pre class="rp-tree"><code>{{ tplMeta(form.template).tree.join('\n') }}</code></pre>
             </div>
           </template>

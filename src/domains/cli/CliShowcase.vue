@@ -78,7 +78,7 @@ rp infra delete pg-burgerzaken-staging --yes`,
     lede: 'De golden path: nieuwe applicatie met repo, CI en optioneel infra in één commando.',
     to: '/apps/nieuw',
     toText: 'Open de golden path',
-    code: `# Scaffold een nieuwe service vanuit een template (maakt repo + CI + infra)
+    code: `# Zet een nieuwe service op vanuit een steiger (maakt repo + CI + infra)
 rp app new "Inkomstenmonitor" \\
   --team ${myTeam.value?.id || 'team-platform'} \\
   --template tpl-rust-api \\
