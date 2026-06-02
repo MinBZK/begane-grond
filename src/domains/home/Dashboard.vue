@@ -71,7 +71,7 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
       :lede="`Welkom ${me?.name?.split(' ')[0] || ''}, één plek voor fysieke infra, diensten, applicaties en teams van de Rijksoverheid.`"
     >
       <template #actions>
-        <nldd-button variant="secondary" text="Presentatie" start-icon="play" @click="presentation.start(0)" />
+        <nldd-button variant="secondary" text="Presentatie" start-icon="caret-right" @click="presentation.start(0)" />
         <nldd-button variant="secondary" text="Mijn spullen" start-icon="person" @click="$router.push('/zelf')" />
         <nldd-button variant="primary" text="Nieuwe applicatie" start-icon="plus" @click="$router.push('/apps/nieuw')" />
       </template>
