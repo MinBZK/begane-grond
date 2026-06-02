@@ -174,7 +174,6 @@ function openRack(rid) {
           <template #node-rack="{ data }">
             <div
               class="rp-node rp-node-rack"
-              :class="data.aisle === 'hot' ? 'rp-node-hot' : 'rp-node-cold'"
               role="button" tabindex="0"
               @click="openRack(data.rack)" @keydown.enter="openRack(data.rack)"
             >

@@ -1,8 +1,11 @@
 <script setup>
-// SVG floorplan of a datacenter hall. Each alley is drawn as a row of rack
-// blocks, colour-coded by aisle orientation (hot = warm/red, cold = cool/blue).
-// Racks are clickable and route to the rack-elevation view. The fill colour of
-// each rack reflects how full it is (height units occupied vs 42U).
+// SVG floorplan of a datacenter hall, drawn as real hot-aisle/cold-aisle
+// containment: the coloured bands are the *aisles between* the rack rows, not
+// the rows themselves. Rows of racks sit between a cold aisle (front, where they
+// draw cool air) and a hot aisle (back, where they exhaust warm air). Aisles
+// alternate cold/hot so every row faces cold on one side and hot on the other.
+// Racks are clickable and route to the rack-elevation view. Their fill colour
+// reflects how full they are (height units occupied vs 42U).
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router';
@@ -20,7 +23,8 @@ const hovered = ref(null);
 
 // Geometry constants for the SVG grid.
 const PAD = 40;
-const ROW_GAP = 70;
+const AISLE_H = 30; // height of an aisle band between two rack rows
+const ROW_GAP = 10; // gap between a rack row and the adjacent aisle band
 const ROW_LABEL_W = 70;
 const RACK_W = 96;
 const RACK_H = 54;
@@ -36,12 +40,24 @@ function rackData(rid) {
   return { rack, usedU, watts, fill, hasWarn };
 }
 
-// Layout: each alley becomes one row; racks lay out left to right.
+// Layout interleaves aisle bands and rack rows:
+//   cold aisle / row / hot aisle / row / cold aisle / ...
+// With N rows there are N+1 aisles; they alternate starting and ending cold, so
+// each row's front faces a cold aisle and its back a hot aisle.
 const layout = computed(() => {
   const rows = [];
+  const aisles = [];
   let y = PAD;
   let maxX = PAD;
-  for (const alley of alleys.value) {
+
+  const addAisle = (i) => {
+    // Even aisle index = cold, odd = hot.
+    aisles.push({ id: `aisle-${i}`, y, aisle: i % 2 === 0 ? 'cold' : 'hot' });
+    y += AISLE_H + ROW_GAP;
+  };
+
+  addAisle(0); // cold aisle at the top
+  alleys.value.forEach((alley, ri) => {
     const racks = alley.racks.map((rid, idx) => {
       const x = PAD + ROW_LABEL_W + idx * (RACK_W + RACK_GAP);
       maxX = Math.max(maxX, x + RACK_W);
@@ -49,21 +65,23 @@ const layout = computed(() => {
     });
     rows.push({ alley, y, racks });
     y += RACK_H + ROW_GAP;
-  }
-  return { rows, width: maxX + PAD, height: y - ROW_GAP + RACK_H + PAD };
+    addAisle(ri + 1); // alternates: hot, cold, hot, ...
+  });
+
+  return { rows, aisles, width: maxX + PAD, height: y - ROW_GAP + PAD };
 });
 
 function aisleFill(aisle) {
-  return aisle === 'hot' ? 'rgba(213,43,30,0.10)' : 'rgba(33,99,196,0.10)';
+  return aisle === 'hot' ? 'rgba(213,43,30,0.12)' : 'rgba(33,99,196,0.12)';
 }
 function aisleStroke(aisle) {
   return aisle === 'hot' ? 'rgba(213,43,30,0.55)' : 'rgba(33,99,196,0.55)';
 }
-function rackFillColor(aisle, fill) {
-  // Base on aisle, intensity on how full the rack is.
-  const base = aisle === 'hot' ? '213,43,30' : '33,99,196';
-  const alpha = 0.18 + (fill / 100) * 0.55;
-  return `rgba(${base},${alpha.toFixed(2)})`;
+function rackFillColor(fill) {
+  // Neutral rack body; intensity reflects how full the rack is. The hot/cold
+  // story lives in the aisles and the front/back accent strips, not the body.
+  const alpha = 0.1 + (fill / 100) * 0.5;
+  return `rgba(21,66,115,${alpha.toFixed(2)})`;
 }
 function open(rid) {
   router.push(`/fysiek/racks/${rid}`);
@@ -74,7 +92,7 @@ function open(rid) {
   <div v-if="dc" class="rp-page">
     <PageHeader
       :title="`Zaalindeling — ${dc.name}`"
-      lede="Hot-aisle / cold-aisle indeling van de serverzaal. Rode rijen voeren warme lucht af, blauwe rijen zuigen koude lucht aan. Klik een rack voor de elevatie."
+      lede="Hot-aisle / cold-aisle indeling van de serverzaal. De gekleurde banen zijn de gangen tussen de rijen: blauw is een koude gang (koude lucht in), rood een warme gang (warme lucht uit). Elke rij racks staat met de voorkant aan een koude gang en de achterkant aan een warme gang. Klik een rack voor de elevatie."
       :crumbs="[
         { text: 'Fundament', href: '/fysiek' },
         { text: dc.name, href: `/fysiek/datacenters/${dc.id}` },
@@ -87,8 +105,8 @@ function open(rid) {
     </PageHeader>
 
     <div class="rp-legend">
-      <span class="rp-leg-item"><span class="rp-leg-swatch rp-leg-cold"></span> Cold aisle (koude lucht in)</span>
-      <span class="rp-leg-item"><span class="rp-leg-swatch rp-leg-hot"></span> Hot aisle (warme lucht uit)</span>
+      <span class="rp-leg-item"><span class="rp-leg-swatch rp-leg-cold"></span> Koude gang (koude lucht in)</span>
+      <span class="rp-leg-item"><span class="rp-leg-swatch rp-leg-hot"></span> Warme gang (warme lucht uit)</span>
       <span class="rp-leg-item"><span class="rp-leg-swatch rp-leg-warn"></span> Aandachtspunt in rack</span>
       <span class="rp-leg-item rp-leg-fade">Intensiteit = bezettingsgraad</span>
     </div>
@@ -112,24 +130,30 @@ function open(rid) {
               stroke="var(--semantics-dividers-color, #d6dbe1)" stroke-width="2" stroke-dasharray="6 6"
             />
 
-            <g v-for="row in layout.rows" :key="row.alley.id">
-              <!-- Aisle band behind the racks -->
+            <!-- Aisle bands: the coloured gangen between the rack rows -->
+            <g v-for="band in layout.aisles" :key="band.id">
               <rect
                 :x="PAD + ROW_LABEL_W - 8"
-                :y="row.y - 10"
+                :y="band.y"
                 :width="layout.width - (PAD + ROW_LABEL_W) - PAD + 16"
-                :height="RACK_H + 20"
-                rx="10"
-                :fill="aisleFill(row.alley.aisle)"
-                :stroke="aisleStroke(row.alley.aisle)"
+                :height="AISLE_H"
+                rx="8"
+                :fill="aisleFill(band.aisle)"
+                :stroke="aisleStroke(band.aisle)"
                 stroke-width="1"
               />
+              <text
+                :x="PAD"
+                :y="band.y + AISLE_H / 2 + 4"
+                class="rp-floor-aislelabel"
+                :class="band.aisle === 'hot' ? 'rp-t-hot' : 'rp-t-cold'"
+              >{{ band.aisle === 'hot' ? 'WARME GANG' : 'KOUDE GANG' }}</text>
+            </g>
 
+            <!-- Rack rows: racks sit between a cold (front) and hot (back) aisle -->
+            <g v-for="row in layout.rows" :key="row.alley.id">
               <!-- Row label -->
               <text :x="PAD" :y="row.y + RACK_H / 2 + 5" class="rp-floor-rowlabel">{{ row.alley.name }}</text>
-              <text :x="PAD" :y="row.y + RACK_H / 2 + 22" class="rp-floor-rowaisle" :class="row.alley.aisle === 'hot' ? 'rp-t-hot' : 'rp-t-cold'">
-                {{ row.alley.aisle === 'hot' ? 'HOT' : 'COLD' }}
-              </text>
 
               <!-- Racks -->
               <g
@@ -147,10 +171,10 @@ function open(rid) {
               >
                 <rect
                   :x="r.x" :y="r.y" :width="RACK_W" :height="RACK_H" rx="6"
-                  :fill="rackFillColor(row.alley.aisle, r.fill)"
-                  :stroke="aisleStroke(row.alley.aisle)" stroke-width="1.5"
+                  :fill="rackFillColor(r.fill)"
+                  stroke="rgba(21,66,115,0.5)" stroke-width="1.5"
                 />
-                <!-- fill bar at bottom of rack -->
+                <!-- fill bar -->
                 <rect
                   :x="r.x + 6" :y="r.y + RACK_H - 12" :width="RACK_W - 12" height="5" rx="2.5"
                   fill="rgba(0,0,0,0.08)"
@@ -159,10 +183,10 @@ function open(rid) {
                   :x="r.x + 6" :y="r.y + RACK_H - 12" :width="(RACK_W - 12) * (r.fill / 100)" height="5" rx="2.5"
                   fill="var(--semantics-actions-primary-default-background-color, #154273)"
                 />
-                <text :x="r.x + RACK_W / 2" :y="r.y + 22" text-anchor="middle" class="rp-floor-racklabel">{{ r.rack?.label }}</text>
+                <text :x="r.x + RACK_W / 2" :y="r.y + 23" text-anchor="middle" class="rp-floor-racklabel">{{ r.rack?.label }}</text>
                 <text :x="r.x + RACK_W / 2" :y="r.y + 36" text-anchor="middle" class="rp-floor-rackmeta">{{ r.fill }}% · {{ r.watts }}W</text>
                 <!-- warn dot -->
-                <circle v-if="r.hasWarn" :cx="r.x + RACK_W - 10" :cy="r.y + 10" r="4.5" fill="#e08c00" stroke="#fff" stroke-width="1" />
+                <circle v-if="r.hasWarn" :cx="r.x + RACK_W - 10" :cy="r.y + 11" r="4.5" fill="#e08c00" stroke="#fff" stroke-width="1" />
               </g>
             </g>
           </svg>
@@ -231,10 +255,10 @@ function open(rid) {
   font-weight: 700;
   fill: var(--semantics-text-default-color, #1a1a1a);
 }
-.rp-floor-rowaisle {
-  font-size: 10px;
+.rp-floor-aislelabel {
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
 }
 .rp-t-hot {
   fill: #d52b1e;

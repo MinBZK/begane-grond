@@ -86,12 +86,6 @@ const filteredInstances = computed(() => {
 const visibleInstances = computed(() => filteredInstances.value.slice(0, instLimit.value));
 const moreInstances = computed(() => Math.max(0, filteredInstances.value.length - instLimit.value));
 
-function aisleColor(aisle) {
-  return aisle === 'hot' ? 'critical' : 'accent';
-}
-function aisleLabel(aisle) {
-  return aisle === 'hot' ? 'Hot aisle' : 'Cold aisle';
-}
 </script>
 
 <template>
@@ -122,15 +116,15 @@ function aisleLabel(aisle) {
 
     <div class="rp-detail-grid">
       <div>
-        <nldd-title size="3"><h2>Rijen en aisles</h2></nldd-title>
-        <nldd-rich-text><p>Warmte-afvoer volgens het hot-aisle / cold-aisle principe. Rode rijen blazen warme lucht uit, blauwe rijen zuigen koude lucht aan.</p></nldd-rich-text>
+        <nldd-title size="3"><h2>Rijen en gangen</h2></nldd-title>
+        <nldd-rich-text><p>Warmte-afvoer volgens het hot-aisle / cold-aisle principe. Tussen de rijen liggen om en om koude en warme gangen: elke rij staat met de voorkant aan een koude gang en de achterkant aan een warme gang. Zie de zaalindeling voor de plattegrond.</p></nldd-rich-text>
         <nldd-spacer size="12" />
         <nldd-collection layout="grid" item-width="240px">
           <nldd-card v-for="alley in alleys" :key="alley.id" :accessible-label="alley.name">
             <nldd-container padding="16">
               <div class="rp-alley-head">
                 <nldd-title size="5"><h3>{{ alley.name }}</h3></nldd-title>
-                <nldd-tag :color="aisleColor(alley.aisle)" size="md">{{ aisleLabel(alley.aisle) }}</nldd-tag>
+                <nldd-tag color="neutral" size="md">{{ alley.racks.length }} racks</nldd-tag>
               </div>
               <nldd-spacer size="10" />
               <div class="rp-alley-racks">
@@ -139,7 +133,6 @@ function aisleLabel(aisle) {
                   :key="rid"
                   :to="`/fysiek/racks/${rid}`"
                   class="rp-alley-rack"
-                  :class="alley.aisle === 'hot' ? 'rp-hot' : 'rp-cold'"
                 >
                   {{ store.rackById(rid)?.label || rid }}
                 </router-link>
@@ -188,14 +181,16 @@ function aisleLabel(aisle) {
           <nldd-spacer size="28" />
           <nldd-title size="3"><h2>Lopende inkoop voor deze locatie</h2></nldd-title>
           <nldd-spacer size="12" />
-          <nldd-list>
-            <nldd-list-item v-for="p in procurement" :key="p.id">
-              <nldd-title-cell :text="p.item" :supporting-text="`${p.supplier} · ${p.lead} levertijd`"></nldd-title-cell>
-              <nldd-spacer-cell></nldd-spacer-cell>
-              <nldd-text-cell :text="`€ ${p.amount.toLocaleString('nl-NL')}`"></nldd-text-cell>
-              <nldd-icon-cell><StatusBadge :status="p.status" /></nldd-icon-cell>
-            </nldd-list-item>
-          </nldd-list>
+          <ul class="rp-proc-list">
+            <li v-for="p in procurement" :key="p.id" class="rp-proc-row">
+              <div class="rp-proc-main">
+                <span class="rp-proc-item">{{ p.item }}</span>
+                <span class="rp-proc-sub">{{ p.supplier }} · {{ p.lead }} levertijd</span>
+              </div>
+              <span class="rp-proc-amount rp-mono">€ {{ p.amount.toLocaleString('nl-NL') }}</span>
+              <StatusBadge :status="p.status" />
+            </li>
+          </ul>
         </template>
       </div>
 
@@ -292,14 +287,7 @@ function aisleLabel(aisle) {
   padding: 0.3rem 0.55rem;
   border-radius: 6px;
   border: 1px solid var(--semantics-dividers-color, #d6dbe1);
-}
-.rp-alley-rack.rp-hot {
-  background: rgba(213, 43, 30, 0.1);
-  border-color: rgba(213, 43, 30, 0.4);
-}
-.rp-alley-rack.rp-cold {
-  background: rgba(33, 99, 196, 0.1);
-  border-color: rgba(33, 99, 196, 0.4);
+  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.03));
 }
 .rp-alley-rack:hover {
   filter: brightness(0.96);
@@ -376,5 +364,38 @@ function aisleLabel(aisle) {
 .rp-mono {
   font-family: ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
+}
+.rp-proc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rp-proc-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--semantics-dividers-color, #d6dbe1);
+}
+.rp-proc-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.rp-proc-item {
+  font-weight: 600;
+}
+.rp-proc-sub {
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+.rp-proc-amount {
+  flex: none;
+  white-space: nowrap;
+}
+.rp-proc-row > :last-child {
+  flex: none;
 }
 </style>

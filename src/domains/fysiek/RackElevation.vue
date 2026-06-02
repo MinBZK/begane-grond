@@ -143,9 +143,6 @@ const cableColumns = [
       ]"
     >
       <template #actions>
-        <nldd-tag :color="alley?.aisle === 'hot' ? 'critical' : 'accent'" size="md">
-          {{ alley?.aisle === 'hot' ? 'Hot aisle' : 'Cold aisle' }}
-        </nldd-tag>
         <nldd-button variant="primary" text="Device plaatsen" start-icon="plus" @click="openPlace"></nldd-button>
       </template>
     </PageHeader>
@@ -256,10 +253,10 @@ const cableColumns = [
             <nldd-title size="5"><h3>Koeling en airflow</h3></nldd-title>
             <nldd-spacer size="12" />
             <div class="rp-cool-grid">
-              <div class="rp-cool-tile" :class="alley?.aisle === 'hot' ? 'rp-cool-hot' : 'rp-cool-cold'">
+              <div class="rp-cool-tile rp-cool-cold">
                 <nldd-icon name="cloud" aria-hidden="true"></nldd-icon>
-                <span class="rp-cool-val">{{ alley?.aisle === 'hot' ? 'Hot aisle' : 'Cold aisle' }}</span>
-                <span class="rp-cool-lbl">positie in {{ alley?.name }}</span>
+                <span class="rp-cool-val">Voor koud, achter warm</span>
+                <span class="rp-cool-lbl">containment in {{ alley?.name }}</span>
               </div>
               <div class="rp-cool-tile">
                 <span class="rp-cool-val">{{ (totalWatts / 1000 * 3.412).toFixed(1) }} kBTU/u</span>
@@ -279,7 +276,7 @@ const cableColumns = [
             <nldd-spacer size="14" />
             <nldd-rich-text>
               <p class="rp-fade">
-                Containment volgens hot-aisle/cold-aisle. Koude lucht wordt aan de voorzijde aangezogen, warme lucht via de achterzijde afgevoerd naar de {{ alley?.aisle === 'hot' ? 'warme' : 'naastgelegen warme' }} gang.
+                Containment volgens hot-aisle/cold-aisle. Koude lucht wordt aan de voorzijde aangezogen, warme lucht via de achterzijde afgevoerd naar de naastgelegen warme gang.
               </p>
             </nldd-rich-text>
           </nldd-container>
