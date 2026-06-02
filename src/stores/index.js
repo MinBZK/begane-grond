@@ -69,6 +69,11 @@ export const usePlatformStore = defineStore('platform', {
     wetten: clone(seed.wetten),
     trajecten: clone(seed.trajecten),
     scenarios: clone(seed.scenarios),
+    datasets: clone(seed.datasets),
+    algoritmes: clone(seed.algoritmes),
+    verwerkingen: clone(seed.verwerkingen),
+    wooDocuments: clone(seed.wooDocuments),
+    artefacten: clone(seed.artefacten),
     // The "logged in" demo user.
     currentUser: 'ans',
 
@@ -163,6 +168,41 @@ export const usePlatformStore = defineStore('platform', {
     // --- Registers (basisregistraties) ---
     registerById: (s) => (id) => s.registers.find((r) => r.id === id),
     consumersOfRegister: (s) => (registerId) => s.registerConsumers.filter((c) => c.register === registerId),
+
+    // --- Data (datasetcatalogus) ---
+    datasetById: (s) => (id) => s.datasets.find((d) => d.id === id),
+    datasetsByLabel: (s) => (label) => s.datasets.filter((d) => d.qualityLabel === label),
+    datasetsForRegister: (s) => (regId) => s.datasets.filter((d) => d.register === regId),
+    datasetsForApp: (s) => (appId) => s.datasets.filter((d) => (d.consumers || []).includes(appId)),
+    datasetsForWet: (s) => (wetId) => s.datasets.filter((d) => (d.wetten || []).includes(wetId)),
+    openDataCount: (s) => s.datasets.filter((d) => d.open).length,
+
+    // --- Algoritmeregister ---
+    algoritmeById: (s) => (id) => s.algoritmes.find((a) => a.id === id),
+    algoritmesByType: (s) => (type) => s.algoritmes.filter((a) => a.type === type),
+    algoritmesForApp: (s) => (appId) => s.algoritmes.filter((a) => a.app === appId),
+    algoritmesForModel: (s) => (modelId) => s.algoritmes.filter((a) => a.model === modelId),
+    algoritmesForDataset: (s) => (dsId) => s.algoritmes.filter((a) => (a.dataSources || []).includes(dsId)),
+
+    // --- Verwerkingen (AVG art. 30) ---
+    verwerkingById: (s) => (id) => s.verwerkingen.find((v) => v.id === id),
+    verwerkingenByDpia: (s) => (status) => s.verwerkingen.filter((v) => v.dpiaStatus === status),
+    verwerkingenForWet: (s) => (wetId) => s.verwerkingen.filter((v) => v.wet === wetId),
+    verwerkingenForDataset: (s) => (dsId) => s.verwerkingen.filter((v) => (v.datasets || []).includes(dsId)),
+
+    // --- Woo & archivering ---
+    wooDocumentById: (s) => (id) => s.wooDocuments.find((w) => w.id === id),
+    wooByStatus: (s) => (status) => s.wooDocuments.filter((w) => w.publicatiestatus === status),
+    wooForApp: (s) => (appId) => s.wooDocuments.filter((w) => w.app === appId),
+
+    // --- Artefacten / provenance ---
+    artefactById: (s) => (id) => s.artefacten.find((a) => a.id === id),
+    artefactsForRepo: (s) => (repoId) => s.artefacten.filter((a) => a.repo === repoId),
+    artefactsForApp: (s) => (appId) => s.artefacten.filter((a) => a.app === appId),
+    signedArtefactPct: (s) =>
+      s.artefacten.length
+        ? Math.round((s.artefacten.filter((a) => a.signed).length / s.artefacten.length) * 100)
+        : 0,
     registersForConsumer: (s) => (consumerId) =>
       s.registerConsumers
         .filter((c) => c.consumer === consumerId)

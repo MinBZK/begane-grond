@@ -24,7 +24,7 @@ const CAPABILITIES = [
   { label: 'CI & pijplijnen', where: 'Runner-pools op eigen hardware', to: '/environments/runners', icon: 'ship-wheel' },
   { label: 'Kwaliteit & coverage', where: 'Kwaliteits-gate in elke pijplijn', to: '/security/scans', icon: 'check-mark-circle' },
   { label: 'Dependencies & kwetsbaarheden', where: 'SBOM- en CVE-gate in elke pijplijn', to: '/security/kwetsbaarheden', icon: 'shield-check-mark' },
-  { label: 'Artefacten & images', where: 'Publiceren naar het register als pijplijn-stap', to: '/code', icon: 'folder-stack' },
+  { label: 'Artefacten & images', where: 'Ondertekend in het artefactregister', to: '/artefacten', icon: 'folder-stack' },
   { label: 'Kwaliteitsmetrics & conformiteit', where: 'Scorecards en beleids-gates', to: '/scorecards', icon: 'starburst-filled' },
   { label: 'Werk & wijzigingen', where: "RFC's, changes en incidents", to: '/governance/rfcs', icon: 'books-vertical' },
 ];

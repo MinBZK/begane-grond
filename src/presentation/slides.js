@@ -352,6 +352,19 @@ export const slides = [
     highlight: '.rp-page',
   },
   {
+    id: 'datakwaliteit',
+    title: 'Datakwaliteit met labels',
+    lead: 'Niet alleen waar de data vandaan komt, maar ook hoe goed die is. Goud, zilver, brons.',
+    bullets: [
+      'Elke dataset krijgt een kwaliteitslabel op volledigheid, actualiteit en herleidbaarheid.',
+      'Open tenzij: standaard openbaar, gesloten alleen met reden.',
+      'Lineage van wet tot dataset tot dienst, in één klik te volgen.',
+    ],
+    gov: 'Herleidbaarheid is een wettelijke eis, geen extraatje. Het label maakt zichtbaar of een bron geschikt is voor een besluit.',
+    route: '/data',
+    highlight: '.rp-page',
+  },
+  {
     id: 'digikoppeling-fsc',
     title: 'Digikoppeling en FSC',
     lead: 'Vertrouwde koppelvlakken tussen organisaties.',

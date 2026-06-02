@@ -133,6 +133,17 @@ export const domains = [
     ],
   },
   {
+    key: 'artefacten',
+    path: '/artefacten',
+    label: 'Artefacten',
+    icon: 'folder-stack',
+    wave: 'B',
+    routes: [
+      { path: '/artefacten', name: 'artefacten', view: () => import('./domains/artefacten/ArtefactRegistry.vue'), title: 'Artefactregister' },
+      { path: '/artefacten/:id', name: 'artefacten-detail', view: () => import('./domains/artefacten/ArtefactDetail.vue'), title: 'Artefact' },
+    ],
+  },
+  {
     key: 'runners',
     path: '/environments/runners',
     label: 'CI-runners',
@@ -225,6 +236,17 @@ export const domains = [
     ],
   },
   {
+    key: 'data',
+    path: '/data',
+    label: 'Datasets',
+    icon: 'chart-x-y-axis-line',
+    wave: 'A',
+    routes: [
+      { path: '/data', name: 'data', view: () => import('./domains/data/DatasetCatalog.vue'), title: 'Datasetcatalogus' },
+      { path: '/data/:id', name: 'data-detail', view: () => import('./domains/data/DatasetDetail.vue'), title: 'Dataset' },
+    ],
+  },
+  {
     key: 'wetten',
     path: '/wetten',
     label: 'Wet uitvoeren',
@@ -246,6 +268,39 @@ export const domains = [
       { path: '/governance', name: 'governance', view: () => import('./domains/governance/Gates.vue'), title: 'Beleids-gates' },
       { path: '/governance/rfcs', name: 'governance-rfcs', view: () => import('./domains/governance/Rfcs.vue'), title: "RFC's" },
       { path: '/governance/audit', name: 'governance-audit', view: () => import('./domains/governance/AuditLog.vue'), title: 'Audit-log' },
+    ],
+  },
+  {
+    key: 'algoritmes',
+    path: '/algoritmes',
+    label: 'Algoritmeregister',
+    icon: 'sparkles',
+    wave: 'C',
+    routes: [
+      { path: '/algoritmes', name: 'algoritmes', view: () => import('./domains/algoritmes/AlgoritmeRegister.vue'), title: 'Algoritmeregister' },
+      { path: '/algoritmes/:id', name: 'algoritmes-detail', view: () => import('./domains/algoritmes/AlgoritmeDetail.vue'), title: 'Algoritme' },
+    ],
+  },
+  {
+    key: 'verwerkingen',
+    path: '/verwerkingen',
+    label: 'Privacy & DPIA',
+    icon: 'lock-closed',
+    wave: 'C',
+    routes: [
+      { path: '/verwerkingen', name: 'verwerkingen', view: () => import('./domains/verwerkingen/Verwerkingenregister.vue'), title: 'Verwerkingenregister' },
+      { path: '/verwerkingen/:id', name: 'verwerkingen-detail', view: () => import('./domains/verwerkingen/VerwerkingDetail.vue'), title: 'Verwerking' },
+    ],
+  },
+  {
+    key: 'openbaarheid',
+    path: '/openbaarheid',
+    label: 'Woo & archief',
+    icon: 'file-text',
+    wave: 'C',
+    routes: [
+      { path: '/openbaarheid', name: 'openbaarheid', view: () => import('./domains/openbaarheid/Openbaarheid.vue'), title: 'Woo & archivering' },
+      { path: '/openbaarheid/:id', name: 'openbaarheid-detail', view: () => import('./domains/openbaarheid/WooDetail.vue'), title: 'Openbaarmaking' },
     ],
   },
   {

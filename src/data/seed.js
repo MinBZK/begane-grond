@@ -35265,3 +35265,342 @@ export const scenarios = [
     "status": "pass"
   }
 ];
+
+// --- Datasets: the data catalog (data.overheid.nl-equivalent) with quality
+// labels goud/zilver/brons. Each dataset references a real register (its
+// source), the laws that mandate it, and the apps that consume it, so the
+// lineage chain wet -> register -> dataset -> app is navigable. ---
+export const datasets = [
+  {
+    id: "ds-toetsingsinkomen-2026", name: "Toetsingsinkomens 2026", team: "team-toeslagen",
+    register: "inkomen", qualityLabel: "goud",
+    dimensions: { volledigheid: 98, actualiteit: 95, herleidbaarheid: 100, juistheid: 96, avgClassificatie: "bijzondere persoonsgegevens" },
+    open: false, openReason: "Bevat persoonsgegevens (AVG art. 9)", sla: "99.5%", refresh: "dagelijks",
+    format: ["JSON-API", "CSV"], consumers: ["app-toeslagen", "app-inkomenstoets"], apis: [], wetten: ["awir", "huurtoeslagwet"],
+    updated: "2026-05-28", description: "Toetsingsinkomens per BSN per belastingjaar, afgeleid uit de aangifte."
+  },
+  {
+    id: "ds-adressen-bag", name: "Adressen en panden (BAG)", team: "team-data",
+    register: "bag", qualityLabel: "goud",
+    dimensions: { volledigheid: 99, actualiteit: 97, herleidbaarheid: 100, juistheid: 98, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "99.9%", refresh: "dagelijks",
+    format: ["JSON-API", "GeoPackage"], consumers: ["app-vergunningchecker"], apis: [], wetten: ["participatiewet"],
+    updated: "2026-05-30", description: "Basisregistratie Adressen en Gebouwen: alle adressen en panden in Nederland."
+  },
+  {
+    id: "ds-kentekens-rdw", name: "Voertuigregistraties", team: "team-data",
+    register: "kenteken", qualityLabel: "goud",
+    dimensions: { volledigheid: 99, actualiteit: 99, herleidbaarheid: 95, juistheid: 97, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "99.9%", refresh: "realtime",
+    format: ["JSON-API"], consumers: ["app-kentekencheck"], apis: [], wetten: [],
+    updated: "2026-06-01", description: "Voertuig- en kentekengegevens uit het kentekenregister van de RDW."
+  },
+  {
+    id: "ds-huishoudsamenstelling", name: "Huishoudsamenstelling", team: "team-toeslagen",
+    register: "brp", qualityLabel: "zilver",
+    dimensions: { volledigheid: 88, actualiteit: 82, herleidbaarheid: 90, juistheid: 85, avgClassificatie: "persoonsgegevens" },
+    open: false, openReason: "Herleidbaar tot personen (AVG)", sla: "99.0%", refresh: "wekelijks",
+    format: ["JSON-API"], consumers: ["app-toeslagen", "app-inkomenstoets"], apis: [], wetten: ["awir", "kinderbijslagwet"],
+    updated: "2026-05-20", description: "Samenstelling van huishoudens, afgeleid uit de BRP voor toeslagberekeningen."
+  },
+  {
+    id: "ds-woz-waarden", name: "WOZ-waarden", team: "team-data",
+    register: "woz", qualityLabel: "zilver",
+    dimensions: { volledigheid: 91, actualiteit: 78, herleidbaarheid: 88, juistheid: 90, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "99.0%", refresh: "jaarlijks",
+    format: ["JSON-API", "CSV"], consumers: ["app-vergunningchecker"], apis: [], wetten: [],
+    updated: "2026-01-15", description: "WOZ-waarden van onroerende zaken, jaarlijks vastgesteld."
+  },
+  {
+    id: "ds-bedrijven-hr", name: "Bedrijvenregister (HR)", team: "team-data",
+    register: "hr", qualityLabel: "goud",
+    dimensions: { volledigheid: 97, actualiteit: 96, herleidbaarheid: 99, juistheid: 95, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "99.9%", refresh: "dagelijks",
+    format: ["JSON-API"], consumers: ["app-vergunningchecker"], apis: [], wetten: ["participatiewet"],
+    updated: "2026-05-29", description: "Handelsregister: alle ingeschreven ondernemingen en rechtspersonen."
+  },
+  {
+    id: "ds-eigendom-brk", name: "Eigendomsgegevens (BRK)", team: "team-data",
+    register: "brk", qualityLabel: "zilver",
+    dimensions: { volledigheid: 90, actualiteit: 85, herleidbaarheid: 92, juistheid: 88, avgClassificatie: "persoonsgegevens" },
+    open: false, openReason: "Eigendom is herleidbaar tot personen", sla: "99.0%", refresh: "wekelijks",
+    format: ["JSON-API"], consumers: ["app-vergunningchecker"], apis: [], wetten: [],
+    updated: "2026-05-12", description: "Kadastrale eigendomsgegevens uit de Basisregistratie Kadaster."
+  },
+  {
+    id: "ds-personen-brp", name: "Persoonsgegevens (BRP)", team: "team-toeslagen",
+    register: "brp", qualityLabel: "goud",
+    dimensions: { volledigheid: 99, actualiteit: 98, herleidbaarheid: 100, juistheid: 99, avgClassificatie: "bijzondere persoonsgegevens" },
+    open: false, openReason: "Persoonsgegevens (AVG)", sla: "99.95%", refresh: "realtime",
+    format: ["JSON-API"], consumers: ["app-toeslagen", "app-inkomenstoets"], apis: [], wetten: ["awir", "zorgtoeslagwet", "kinderbijslagwet"],
+    updated: "2026-06-01", description: "Gezaghebbende persoonsgegevens uit de Basisregistratie Personen."
+  },
+  {
+    id: "ds-vergunningen-historie", name: "Vergunningenhistorie", team: "team-platform",
+    register: "bag", qualityLabel: "brons",
+    dimensions: { volledigheid: 64, actualiteit: 58, herleidbaarheid: 72, juistheid: 70, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "97.0%", refresh: "maandelijks",
+    format: ["CSV"], consumers: ["app-vergunningchecker"], apis: [], wetten: [],
+    updated: "2026-03-04", description: "Historische vergunningbesluiten, deels nog niet gestructureerd ontsloten."
+  },
+  {
+    id: "ds-inkomen-historie", name: "Inkomenshistorie meerjarig", team: "team-toeslagen",
+    register: "inkomen", qualityLabel: "brons",
+    dimensions: { volledigheid: 68, actualiteit: 55, herleidbaarheid: 80, juistheid: 74, avgClassificatie: "bijzondere persoonsgegevens" },
+    open: false, openReason: "Bevat persoonsgegevens (AVG)", sla: "98.0%", refresh: "jaarlijks",
+    format: ["CSV"], consumers: ["app-inkomenstoets"], apis: [], wetten: ["awir"],
+    updated: "2025-12-01", description: "Meerjarige inkomenshistorie, niet alle jaren even volledig beschikbaar."
+  },
+  {
+    id: "ds-zorgpolissen", name: "Zorgpolissen", team: "team-toeslagen",
+    register: "brp", qualityLabel: "zilver",
+    dimensions: { volledigheid: 86, actualiteit: 89, herleidbaarheid: 84, juistheid: 87, avgClassificatie: "bijzondere persoonsgegevens" },
+    open: false, openReason: "Gezondheidsgerelateerd (AVG art. 9)", sla: "99.0%", refresh: "wekelijks",
+    format: ["JSON-API"], consumers: ["app-toeslagen"], apis: [], wetten: ["zorgtoeslagwet"],
+    updated: "2026-05-18", description: "Actieve zorgverzekeringspolissen, grondslag voor de zorgtoeslag."
+  },
+  {
+    id: "ds-statline-demografie", name: "Demografie open data (StatLine)", team: "team-data",
+    register: "woz", qualityLabel: "goud",
+    dimensions: { volledigheid: 96, actualiteit: 90, herleidbaarheid: 98, juistheid: 95, avgClassificatie: "openbaar" },
+    open: true, openReason: "", sla: "99.5%", refresh: "maandelijks",
+    format: ["JSON-API", "CSV"], consumers: [], apis: [], wetten: [],
+    updated: "2026-05-01", description: "Geaggregeerde demografische statistieken, volledig openbaar via open data."
+  }
+];
+
+// --- Algoritmeregister: mandatory NL government register (2023) of algorithms
+// and AI systems in production. Cross-links to datasets (data sources), LLM
+// models (for type 'llm'), and the app each runs in. ---
+export const algoritmes = [
+  {
+    id: "alg-toeslagen-risico", name: "Risico-indicatie toeslagen", team: "team-toeslagen",
+    doel: "Aanvragen selecteren voor handmatige controle.", type: "ml", model: null,
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-toetsingsinkomen-2026", "ds-huishoudsamenstelling"],
+    app: "app-toeslagen", status: "productie", published: "2024-02-01",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/risico-indicatie-toeslagen"
+  },
+  {
+    id: "alg-inkomenstoets", name: "Geautomatiseerde inkomenstoets", team: "team-toeslagen",
+    doel: "Recht op toeslag berekenen uit het toetsingsinkomen.", type: "rule-based", model: null,
+    uitlegbaarheid: "hoog", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: false, besluitvorming: "bepalend", dataSources: ["ds-toetsingsinkomen-2026", "ds-personen-brp"],
+    app: "app-inkomenstoets", status: "productie", published: "2023-06-15",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/inkomenstoets"
+  },
+  {
+    id: "alg-vergunning-classificatie", name: "Vergunningclassificatie", team: "team-platform",
+    doel: "Vergunningaanvragen automatisch categoriseren.", type: "llm", model: "overheids-llm-l",
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "vereist",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-vergunningen-historie", "ds-bedrijven-hr"],
+    app: "app-vergunningchecker", status: "pilot", published: "2026-04-10",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/vergunningclassificatie"
+  },
+  {
+    id: "alg-kenteken-ocr", name: "Kentekenherkenning", team: "team-data",
+    doel: "Kentekens herkennen uit camerabeelden.", type: "ml", model: null,
+    uitlegbaarheid: "laag", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-kentekens-rdw"],
+    app: "app-kentekencheck", status: "productie", published: "2023-11-20",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/kentekenherkenning"
+  },
+  {
+    id: "alg-fraudesignaal", name: "Fraudesignalering", team: "team-toeslagen",
+    doel: "Signalen van mogelijk onrechtmatig gebruik markeren.", type: "ml", model: null,
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "vereist", discriminatietoets: "vereist",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: ["ds-inkomen-historie", "ds-huishoudsamenstelling"],
+    app: "app-toeslagen", status: "pilot", published: "2026-05-01",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/fraudesignalering"
+  },
+  {
+    id: "alg-burgerbrief-assistent", name: "Burgerbrief-assistent", team: "team-platform",
+    doel: "Concept-antwoorden op burgervragen opstellen.", type: "llm", model: "overheids-llm-eu",
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "n.v.t.",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: [],
+    app: "app-vergunningchecker", status: "productie", published: "2026-02-12",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/burgerbrief-assistent"
+  },
+  {
+    id: "alg-documentclassificatie", name: "Documentclassificatie Woo", team: "team-platform",
+    doel: "Documenten classificeren voor actieve openbaarmaking.", type: "llm", model: "overheids-llm-l",
+    uitlegbaarheid: "gedeeltelijk", impacttoets: "uitgevoerd", discriminatietoets: "n.v.t.",
+    humanInTheLoop: true, besluitvorming: "ondersteunend", dataSources: [],
+    app: "app-vergunningchecker", status: "productie", published: "2025-10-05",
+    publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/documentclassificatie-woo"
+  }
+];
+
+// --- Verwerkingenregister (AVG art. 30) + DPIA status. Each processing
+// references its legal basis (wet), the datasets and registers it touches, and
+// its retention term. ---
+export const verwerkingen = [
+  {
+    id: "vwk-toeslagen-vaststelling", name: "Vaststellen recht op toeslag", team: "team-toeslagen",
+    doel: "Recht en hoogte van toeslag bepalen.", grondslag: "wettelijke verplichting", wet: "awir",
+    betrokkenen: "Aanvragers en toeslagpartners", dataCategorieen: ["bijzondere persoonsgegevens", "financiële gegevens"],
+    datasets: ["ds-toetsingsinkomen-2026", "ds-huishoudsamenstelling"], registers: ["brp", "inkomen"],
+    bewaartermijn: "7 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "hoog", dpiaDate: "2025-09-15"
+  },
+  {
+    id: "vwk-zorgtoeslag", name: "Zorgtoeslag verstrekken", team: "team-toeslagen",
+    doel: "Zorgtoeslag berekenen en uitkeren.", grondslag: "wettelijke verplichting", wet: "zorgtoeslagwet",
+    betrokkenen: "Verzekeringsplichtigen", dataCategorieen: ["bijzondere persoonsgegevens"],
+    datasets: ["ds-zorgpolissen", "ds-personen-brp"], registers: ["brp"],
+    bewaartermijn: "7 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "hoog", dpiaDate: "2025-06-20"
+  },
+  {
+    id: "vwk-kinderbijslag", name: "Kinderbijslag verstrekken", team: "team-toeslagen",
+    doel: "Kinderbijslag vaststellen en uitbetalen.", grondslag: "wettelijke verplichting", wet: "kinderbijslagwet",
+    betrokkenen: "Ouders en verzorgers", dataCategorieen: ["persoonsgegevens"],
+    datasets: ["ds-huishoudsamenstelling", "ds-personen-brp"], registers: ["brp"],
+    bewaartermijn: "5 jaar", dpiaStatus: "uitgevoerd", risiconiveau: "gemiddeld", dpiaDate: "2025-04-02"
+  },
+  {
+    id: "vwk-vergunningverlening", name: "Vergunningen verlenen", team: "team-platform",
+    doel: "Aanvragen voor vergunningen beoordelen.", grondslag: "taak van algemeen belang", wet: "participatiewet",
+    betrokkenen: "Aanvragers en bedrijven", dataCategorieen: ["persoonsgegevens"],
+    datasets: ["ds-bedrijven-hr", "ds-eigendom-brk"], registers: ["hr", "brk", "bag"],
+    bewaartermijn: "10 jaar", dpiaStatus: "vereist", risiconiveau: "gemiddeld", dpiaDate: ""
+  },
+  {
+    id: "vwk-handhaving-kenteken", name: "Handhaving op kenteken", team: "team-data",
+    doel: "Voertuigen controleren op naleving.", grondslag: "taak van algemeen belang", wet: null,
+    betrokkenen: "Voertuighouders", dataCategorieen: ["persoonsgegevens"],
+    datasets: ["ds-kentekens-rdw"], registers: ["kenteken"],
+    bewaartermijn: "90 dagen", dpiaStatus: "uitgevoerd", risiconiveau: "gemiddeld", dpiaDate: "2024-11-30"
+  },
+  {
+    id: "vwk-fraudeonderzoek", name: "Fraudeonderzoek toeslagen", team: "team-toeslagen",
+    doel: "Onderzoek naar mogelijk onrechtmatig gebruik.", grondslag: "wettelijke verplichting", wet: "awir",
+    betrokkenen: "Toeslagontvangers", dataCategorieen: ["bijzondere persoonsgegevens", "financiële gegevens"],
+    datasets: ["ds-inkomen-historie", "ds-huishoudsamenstelling"], registers: ["brp", "inkomen"],
+    bewaartermijn: "7 jaar", dpiaStatus: "vereist", risiconiveau: "hoog", dpiaDate: ""
+  },
+  {
+    id: "vwk-burgercorrespondentie", name: "Burgercorrespondentie", team: "team-platform",
+    doel: "Vragen van burgers beantwoorden.", grondslag: "taak van algemeen belang", wet: null,
+    betrokkenen: "Burgers die contact opnemen", dataCategorieen: ["persoonsgegevens"],
+    datasets: [], registers: ["brp"],
+    bewaartermijn: "2 jaar", dpiaStatus: "n.v.t.", risiconiveau: "laag", dpiaDate: ""
+  },
+  {
+    id: "vwk-statistiek", name: "Statistisch onderzoek", team: "team-data",
+    doel: "Beleid onderbouwen met geaggregeerde data.", grondslag: "taak van algemeen belang", wet: null,
+    betrokkenen: "Niet herleidbaar (geaggregeerd)", dataCategorieen: ["openbaar"],
+    datasets: ["ds-statline-demografie"], registers: [],
+    bewaartermijn: "onbepaald", dpiaStatus: "n.v.t.", risiconiveau: "laag", dpiaDate: ""
+  }
+];
+
+// --- Woo (actieve openbaarmaking) + Archiefwet/e-Depot. Publication status of
+// decisions and documents, plus their archiving lifecycle. ---
+export const wooDocuments = [
+  {
+    id: "woo-besluit-2026-014", title: "Besluit Woo-verzoek inkoop datacenters", app: "app-vergunningchecker", team: "team-platform",
+    type: "Woo-verzoek", wet: null, publicatiestatus: "gepubliceerd", publishedAt: "2026-03-12",
+    pdcCategory: "convenanten", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
+    eDepotStatus: "overgedragen", archiefDate: "2026-04-01"
+  },
+  {
+    id: "woo-besluit-2026-021", title: "Beleidsregels toeslagen 2026", app: "app-toeslagen", team: "team-toeslagen",
+    type: "actieve openbaarmaking", wet: "awir", publicatiestatus: "gepubliceerd", publishedAt: "2026-01-08",
+    pdcCategory: "beschikkingen", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "20 jaar",
+    eDepotStatus: "gepland", archiefDate: ""
+  },
+  {
+    id: "woo-besluit-2026-029", title: "Algoritmebeschrijving fraudesignalering", app: "app-toeslagen", team: "team-toeslagen",
+    type: "actieve openbaarmaking", wet: null, publicatiestatus: "in voorbereiding", publishedAt: "",
+    pdcCategory: "onderzoeksrapporten", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
+    eDepotStatus: "niet van toepassing", archiefDate: ""
+  },
+  {
+    id: "woo-besluit-2026-033", title: "Jaarverslag platform 2025", app: null, team: "team-platform",
+    type: "actieve openbaarmaking", wet: null, publicatiestatus: "gepubliceerd", publishedAt: "2026-02-28",
+    pdcCategory: "jaarplannen en jaarverslagen", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "permanent",
+    eDepotStatus: "overgedragen", archiefDate: "2026-03-15"
+  },
+  {
+    id: "woo-besluit-2026-040", title: "Convenant gegevensdeling RDW", app: "app-kentekencheck", team: "team-data",
+    type: "actieve openbaarmaking", wet: null, publicatiestatus: "gedeeltelijk", publishedAt: "2026-04-22",
+    pdcCategory: "convenanten", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
+    eDepotStatus: "gepland", archiefDate: ""
+  },
+  {
+    id: "woo-besluit-2026-047", title: "Inkoopdossier AI-hardware", app: null, team: "team-platform",
+    type: "Woo-verzoek", wet: null, publicatiestatus: "in voorbereiding", publishedAt: "",
+    pdcCategory: "beschikkingen", selectielijst: "Selectielijst Rijk 2020", bewaartermijn: "10 jaar",
+    eDepotStatus: "niet van toepassing", archiefDate: ""
+  }
+];
+
+// --- Artefacten / provenance: the artifact and image registry that makes the
+// pipeline's "Publiceren" and "Ondertekenen" stages real. Each artifact has a
+// digest, SBOM, signing/provenance status, and links back to its repo and app. ---
+export const artefacten = [
+  {
+    id: "art-toeslagenmotor-3.4.1", name: "toeslagenmotor", kind: "container-image", version: "3.4.1",
+    digest: "sha256:9f2c4e…a1b7", repo: "repo-toeslagen", app: "app-toeslagen", buildJob: "job-7778",
+    registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:team-toeslagen",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 412, deps: [
+      { name: "tokio", version: "1.38.0", license: "MIT" },
+      { name: "serde", version: "1.0.203", license: "MIT/Apache-2.0" },
+      { name: "axum", version: "0.7.5", license: "MIT" }
+    ], vulns: [] },
+    publishedAt: "2026-05-30"
+  },
+  {
+    id: "art-datadeling-2.1.0", name: "datadeling", kind: "container-image", version: "2.1.0",
+    digest: "sha256:3a91bd…77c2", repo: "repo-datadeling", app: "app-inkomenstoets", buildJob: "job-7778",
+    registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:team-data",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 308, deps: [
+      { name: "fastapi", version: "0.111.0", license: "MIT" },
+      { name: "pydantic", version: "2.7.1", license: "MIT" }
+    ], vulns: ["cve-1"] },
+    publishedAt: "2026-05-28"
+  },
+  {
+    id: "art-kentekencheck-1.9.2", name: "kentekencheck", kind: "container-image", version: "1.9.2",
+    digest: "sha256:cc01fe…2d40", repo: "repo-kentekencheck", app: "app-kentekencheck", buildJob: "job-7779",
+    registry: "registry.overheid.nl/rdw", signed: true, signedBy: "fulcio:team-data",
+    slsaLevel: 2, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 256, deps: [
+      { name: "express", version: "4.19.2", license: "MIT" },
+      { name: "sharp", version: "0.33.4", license: "Apache-2.0" }
+    ], vulns: [] },
+    publishedAt: "2026-06-01"
+  },
+  {
+    id: "art-nldd-ui-0.9.0", name: "nldd-ui", kind: "package", version: "0.9.0",
+    digest: "sha256:71aa90…ee15", repo: "repo-datadeling", app: "app-vergunningchecker", buildJob: "job-7780",
+    registry: "registry.overheid.nl/nldd", signed: true, signedBy: "fulcio:team-platform",
+    slsaLevel: 3, provenance: "geverifieerd",
+    sbom: { format: "CycloneDX 1.5", components: 184, deps: [
+      { name: "vue", version: "3.4.27", license: "MIT" },
+      { name: "lit", version: "3.1.4", license: "BSD-3-Clause" }
+    ], vulns: [] },
+    publishedAt: "2026-05-22"
+  },
+  {
+    id: "art-toeslagenmotor-3.3.0", name: "toeslagenmotor", kind: "container-image", version: "3.3.0",
+    digest: "sha256:5e8c12…b9a0", repo: "repo-toeslagen", app: "app-toeslagen", buildJob: "job-7777",
+    registry: "registry.overheid.nl/minbzk", signed: false, signedBy: "",
+    slsaLevel: 1, provenance: "ongetekend",
+    sbom: { format: "CycloneDX 1.5", components: 401, deps: [
+      { name: "tokio", version: "1.37.0", license: "MIT" }
+    ], vulns: ["cve-2"] },
+    publishedAt: "2026-04-18"
+  },
+  {
+    id: "art-vergunningchecker-0.6.1", name: "vergunningchecker", kind: "container-image", version: "0.6.1",
+    digest: "sha256:b204aa…1f33", repo: "repo-datadeling", app: "app-vergunningchecker", buildJob: "job-7781",
+    registry: "registry.overheid.nl/minbzk", signed: false, signedBy: "",
+    slsaLevel: 1, provenance: "in afwachting",
+    sbom: { format: "CycloneDX 1.5", components: 222, deps: [
+      { name: "next", version: "14.2.3", license: "MIT" }
+    ], vulns: [] },
+    publishedAt: "2026-05-31"
+  }
+];
