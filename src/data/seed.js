@@ -35947,3 +35947,272 @@ export const datasetRefreshLog = {
     ]
   }
 };
+
+// --- Login building blocks: DigiD, eHerkenning, eIDAS and machtigingen as a
+// first-class platform capability, not a stray API row. Each references the app
+// that exposes it and the assurance level (betrouwbaarheidsniveau). ---
+export const loginMethods = [
+  {
+    id: "login-digid", name: "DigiD", audience: "burgers", app: "app-digid-koppeling", team: "team-logius-digid",
+    levels: ["Midden", "Substantieel", "Hoog"], protocol: "SAML / OIDC", eidas: false,
+    machtigen: true, status: "productie", connectedApps: ["app-toeslagen", "app-paspoort", "app-ww-aanvraag", "app-bijstandsuitkering"],
+    description: "Inloggen voor burgers met oplopende betrouwbaarheidsniveaus, inclusief DigiD Machtigen voor gemachtigden."
+  },
+  {
+    id: "login-eherkenning", name: "eHerkenning", audience: "bedrijven", app: "app-eherkenning-broker", team: "team-logius-machtigen",
+    levels: ["EH3", "EH4"], protocol: "SAML", eidas: true,
+    machtigen: true, status: "productie", connectedApps: ["app-aangifte-omzetbelasting", "app-subsidieportaal-rvo"],
+    description: "Inloggen voor ondernemers en organisaties, met ketenmachtiging en koppeling aan het EU-knooppunt."
+  },
+  {
+    id: "login-eidas", name: "eIDAS", audience: "EU-burgers", app: "app-eherkenning-broker", team: "team-logius-machtigen",
+    levels: ["Substantieel", "Hoog"], protocol: "SAML (EU-knooppunt)", eidas: true,
+    machtigen: false, status: "productie", connectedApps: ["app-studiefinanciering-portaal"],
+    description: "Grensoverschrijdend inloggen voor burgers uit andere EU-lidstaten via het Nederlandse eIDAS-knooppunt."
+  },
+  {
+    id: "login-oidc-rijk", name: "SSO Rijk (OIDC)", audience: "ambtenaren", app: "app-oidc-provider", team: "team-nldd-iam",
+    levels: ["Substantieel"], protocol: "OIDC", eidas: false,
+    machtigen: false, status: "productie", connectedApps: ["app-platformportaal", "app-kentekencheck"],
+    description: "Interne single sign-on voor ambtenaren via het rijksbrede OIDC-knooppunt, gekoppeld aan de Rijkspas."
+  },
+  {
+    id: "login-machtigen", name: "Machtigen", audience: "gemachtigden", app: "app-digid-koppeling", team: "team-logius-machtigen",
+    levels: ["Substantieel", "Hoog"], protocol: "OIDC", eidas: false,
+    machtigen: true, status: "pilot", connectedApps: ["app-toeslagen", "app-aangifte-omzetbelasting"],
+    description: "Iemand anders namens jou laten handelen: vrijwillige en wettelijke vertegenwoordiging, voor burgers en bedrijven."
+  }
+];
+
+// --- Domains & DNS: every service runs on an overheid.nl / rijksoverheid.nl
+// subdomain with DNSSEC, a PKIoverheid certificate and an internet.nl score.
+// Cross-links to the owning app, the certificate in /secrets, and standards. ---
+export const domeinen = [
+  {
+    id: "dom-toeslagen", fqdn: "toeslagen.nl", app: "app-toeslagen", team: "team-toeslagen",
+    dnssec: true, tls: "cert-2", internetnl: 100, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.10" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::10" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" },
+      { type: "MX", name: "@", value: "10 mail.overheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-platform", fqdn: "platform.rijks.app", app: "app-platformportaal", team: "team-platform",
+    dnssec: true, tls: "cert-1", internetnl: 100, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.20" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::20" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-kenteken", fqdn: "kentekencheck.overheid.nl", app: "app-kentekencheck", team: "team-data",
+    dnssec: true, tls: "cert-3", internetnl: 97, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.30" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::30" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-datadeling", fqdn: "api.datadeling.overheid.nl", app: "app-datadeling", team: "team-data",
+    dnssec: true, tls: "cert-2", internetnl: 94, ipv6: false, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.40" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  },
+  {
+    id: "dom-studie", fqdn: "studiefinanciering.nl", app: "app-studiefinanciering-portaal", team: "team-platform",
+    dnssec: false, tls: "cert-4", internetnl: 71, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.50" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::50" }
+    ],
+    status: "aandacht"
+  },
+  {
+    id: "dom-ww", fqdn: "ww-aanvraag.overheid.nl", app: "app-ww-aanvraag", team: "team-platform",
+    dnssec: true, tls: "cert-5", internetnl: 88, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.60" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::60" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
+  }
+];
+
+// --- Software & SaaS procurement: the counterpart to hardware inkoop. Licenses
+// and services bought under ARBIT/ARVODI, with lock-in risk and an exit
+// strategy, so dependence on a vendor is an explicit, governed choice. ---
+export const softwareInkoop = [
+  {
+    id: "sw-2026-001", supplier: "Forgejo (zelf gehost)", product: "Forgejo Enterprise-support", category: "ontwikkeltooling",
+    amount: 45000, term: "1 jaar", contract: "ARVODI", lockin: "laag", exitStrategie: "Open source, data en repo's volledig portabel",
+    openSource: true, team: "team-platform", status: "actief"
+  },
+  {
+    id: "sw-2026-002", supplier: "Microsoft", product: "Microsoft 365 Rijk", category: "kantoorautomatisering",
+    amount: 1850000, term: "3 jaar", contract: "ARBIT", lockin: "hoog", exitStrategie: "Migratiepad naar open formaten in onderzoek",
+    openSource: false, team: "team-nldd-iam", status: "actief"
+  },
+  {
+    id: "sw-2026-003", supplier: "Elastic", product: "Elasticsearch-licentie", category: "observability",
+    amount: 220000, term: "1 jaar", contract: "ARVODI", lockin: "gemiddeld", exitStrategie: "OpenSearch als open alternatief beschikbaar",
+    openSource: false, team: "team-platform", status: "actief"
+  },
+  {
+    id: "sw-2026-004", supplier: "HashiCorp", product: "Vault Enterprise", category: "security",
+    amount: 310000, term: "2 jaar", contract: "ARBIT", lockin: "hoog", exitStrategie: "OpenBao-fork als exit-pad geborgd",
+    openSource: false, team: "team-nldd-iam", status: "heroverweging"
+  },
+  {
+    id: "sw-2026-005", supplier: "GitLab", product: "GitLab Ultimate", category: "ontwikkeltooling",
+    amount: 0, term: "n.v.t.", contract: "ARVODI", lockin: "hoog", exitStrategie: "Afgewezen: te hoge lock-in, Forgejo gekozen",
+    openSource: false, team: "team-platform", status: "afgewezen"
+  },
+  {
+    id: "sw-2026-006", supplier: "Geonovum", product: "PDOK-aansluiting", category: "geo",
+    amount: 60000, term: "1 jaar", contract: "ARVODI", lockin: "laag", exitStrategie: "Open standaarden (OGC API), geen vendor-binding",
+    openSource: true, team: "team-data", status: "actief"
+  }
+];
+
+// --- Reusable components (Common Ground: build once, use widely). A marketplace
+// of components teams can adopt instead of rebuilding, each with the teams that
+// already use it. ---
+export const componenten = [
+  {
+    id: "comp-brp-bevraging", name: "BRP-bevraging", kind: "bibliotheek", language: "Rust", repo: "repo-datadeling",
+    owner: "team-data", reuses: 14, register: "brp", license: "EUPL-1.2",
+    description: "Geteste client voor de BRP met ingebouwde AVG-logging en herkomstregistratie.",
+    usedBy: ["team-toeslagen", "team-burgerzaken", "team-platform"]
+  },
+  {
+    id: "comp-betalen", name: "Betaalmodule (iDEAL/incasso)", kind: "service", language: "Go", repo: "repo-platformportaal",
+    owner: "team-platform", reuses: 9, register: null, license: "EUPL-1.2",
+    description: "Herbruikbare betaal- en incassomodule met PSD2-koppeling en boekhoudkoppeling.",
+    usedBy: ["team-bd-inning", "team-cjib-inning"]
+  },
+  {
+    id: "comp-nldd-formulier", name: "NLDD-formulierbouwer", kind: "frontend-component", language: "Vue", repo: "repo-platformportaal",
+    owner: "team-platform", reuses: 31, register: null, license: "EUPL-1.2",
+    description: "Toegankelijke formulieren (WCAG 2.2 AA) op basis van het NLDD design system, met validatie.",
+    usedBy: ["team-toeslagen", "team-burgerzaken", "team-data"]
+  },
+  {
+    id: "comp-machtigen", name: "Machtigen-koppeling", kind: "bibliotheek", language: "Go", repo: "repo-datadeling",
+    owner: "team-logius-machtigen", reuses: 6, register: null, license: "EUPL-1.2",
+    description: "Standaardkoppeling voor DigiD Machtigen en ketenmachtiging eHerkenning.",
+    usedBy: ["team-toeslagen", "team-bd-aangifte"]
+  },
+  {
+    id: "comp-notificatie", name: "Notificatierouter", kind: "service", language: "Rust", repo: "repo-datadeling",
+    owner: "team-data", reuses: 12, register: null, license: "EUPL-1.2",
+    description: "Routeert notificaties naar de Berichtenbox, MijnOverheid en e-mail volgens de notificatiestandaard.",
+    usedBy: ["team-toeslagen", "team-burgerzaken", "team-platform", "team-data"]
+  }
+];
+
+// --- Feature flags / toggles: progressive delivery as a platform capability,
+// managed by the feature-flags service. Each flag has a rollout percentage and
+// the app it gates. ---
+export const featureFlags = [
+  {
+    id: "ff-nieuwe-inkomenstoets", name: "nieuwe-inkomenstoets", app: "app-toeslagen", team: "team-toeslagen",
+    rollout: 25, status: "uitrollend", kind: "release", description: "Nieuwe inkomenstoets-engine, geleidelijk uitgerold."
+  },
+  {
+    id: "ff-eidas-login", name: "eidas-login", app: "app-studiefinanciering-portaal", team: "team-platform",
+    rollout: 100, status: "aan", kind: "release", description: "eIDAS-inlog ingeschakeld voor EU-studenten."
+  },
+  {
+    id: "ff-experiment-uitleg", name: "experiment-besluituitleg", app: "app-toeslagen", team: "team-toeslagen",
+    rollout: 10, status: "experiment", kind: "experiment", description: "Tonen van een uitleg bij elk geautomatiseerd besluit."
+  },
+  {
+    id: "ff-donker-thema", name: "donker-thema", app: "app-platformportaal", team: "team-platform",
+    rollout: 50, status: "uitrollend", kind: "release", description: "Donker thema voor het platformportaal."
+  },
+  {
+    id: "ff-killswitch-betalen", name: "killswitch-betalen", app: "app-platformportaal", team: "team-platform",
+    rollout: 0, status: "uit", kind: "kill-switch", description: "Noodschakelaar om de betaalmodule direct uit te zetten."
+  },
+  {
+    id: "ff-nieuwe-zoek", name: "nieuwe-zoekfunctie", app: "app-kentekencheck", team: "team-data",
+    rollout: 75, status: "uitrollend", kind: "release", description: "Snellere zoekfunctie op het kentekenregister."
+  }
+];
+
+// --- Data contracts: the agreement between a data source and its consumers.
+// Per dataset-to-app coupling: the schema, the SLA, the allowed purpose and the
+// retention. Makes data sharing an explicit, governed contract. ---
+export const datacontracten = [
+  {
+    id: "dc-inkomen-toeslagen", dataset: "ds-toetsingsinkomen-2026", consumer: "app-toeslagen", provider: "team-toeslagen",
+    sla: "99.5%", schema: "v2.1", doelbinding: "Vaststellen recht op toeslag", grondslag: "awir",
+    bewaartermijn: "7 jaar", status: "actief", signed: "2025-09-15"
+  },
+  {
+    id: "dc-brp-toeslagen", dataset: "ds-personen-brp", consumer: "app-toeslagen", provider: "team-data",
+    sla: "99.95%", schema: "v3.0", doelbinding: "Verifiëren persoonsgegevens aanvrager", grondslag: "awir",
+    bewaartermijn: "7 jaar", status: "actief", signed: "2025-06-20"
+  },
+  {
+    id: "dc-huishouden-inkomenstoets", dataset: "ds-huishoudsamenstelling", consumer: "app-inkomenstoets", provider: "team-toeslagen",
+    sla: "99.0%", schema: "v1.4", doelbinding: "Bepalen huishoudsamenstelling", grondslag: "kinderbijslagwet",
+    bewaartermijn: "5 jaar", status: "actief", signed: "2025-04-02"
+  },
+  {
+    id: "dc-bag-vergunning", dataset: "ds-adressen-bag", consumer: "app-vergunningchecker", provider: "team-data",
+    sla: "99.9%", schema: "v2.0", doelbinding: "Controleren adres bij vergunningaanvraag", grondslag: null,
+    bewaartermijn: "10 jaar", status: "actief", signed: "2026-01-10"
+  },
+  {
+    id: "dc-kenteken-handhaving", dataset: "ds-kentekens-rdw", consumer: "app-kentekencheck", provider: "team-data",
+    sla: "99.9%", schema: "v1.2", doelbinding: "Controle voertuiggegevens", grondslag: null,
+    bewaartermijn: "90 dagen", status: "heronderhandeling", signed: "2024-11-30"
+  },
+  {
+    id: "dc-inkomen-historie", dataset: "ds-inkomen-historie", consumer: "app-inkomenstoets", provider: "team-toeslagen",
+    sla: "98.0%", schema: "v1.0", doelbinding: "Meerjarige inkomensvergelijking", grondslag: "awir",
+    bewaartermijn: "7 jaar", status: "concept", signed: ""
+  }
+];
+
+// --- Accessibility statements (DigiToegankelijk): the mandatory published
+// statement per service, with its WCAG status and the formal compliance label. ---
+export const toegankelijkheidsverklaringen = [
+  {
+    id: "tv-toeslagen", app: "app-toeslagen", team: "team-toeslagen", fqdn: "toeslagen.nl",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-03-01",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  },
+  {
+    id: "tv-platform", app: "app-platformportaal", team: "team-platform", fqdn: "platform.rijks.app",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-02-15",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  },
+  {
+    id: "tv-kenteken", app: "app-kentekencheck", team: "team-data", fqdn: "kentekencheck.overheid.nl",
+    status: "voldoet gedeeltelijk", wcagLevel: "AA", issues: 3, audited: "2026-01-20",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  },
+  {
+    id: "tv-studie", app: "app-studiefinanciering-portaal", team: "team-platform", fqdn: "studiefinanciering.nl",
+    status: "eerste maatregelen genomen", wcagLevel: "AA", issues: 11, audited: "2025-11-05",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  },
+  {
+    id: "tv-ww", app: "app-ww-aanvraag", team: "team-platform", fqdn: "ww-aanvraag.overheid.nl",
+    status: "voldoet volledig", wcagLevel: "AA", issues: 0, audited: "2026-04-10",
+    verklaringUrl: "https://www.toegankelijkheidsverklaring.nl/register/..."
+  }
+];

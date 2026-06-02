@@ -247,6 +247,70 @@ export const domains = [
     ],
   },
   {
+    key: 'datacontracten',
+    path: '/datacontracten',
+    label: 'Datacontracten',
+    icon: 'pencil-on-square',
+    wave: 'A',
+    routes: [
+      { path: '/datacontracten', name: 'datacontracten', view: () => import('./domains/datacontracten/Datacontracten.vue'), title: 'Datacontracten' },
+      { path: '/datacontracten/:id', name: 'datacontracten-detail', view: () => import('./domains/datacontracten/DatacontractDetail.vue'), title: 'Datacontract' },
+    ],
+  },
+  {
+    key: 'inloggen',
+    path: '/inloggen',
+    label: 'Inloggen',
+    icon: 'person-circle',
+    wave: 'A',
+    routes: [
+      { path: '/inloggen', name: 'inloggen', view: () => import('./domains/inloggen/LoginMethods.vue'), title: 'Inloggen' },
+      { path: '/inloggen/:id', name: 'inloggen-detail', view: () => import('./domains/inloggen/LoginDetail.vue'), title: 'Inlogmethode' },
+    ],
+  },
+  {
+    key: 'dns',
+    path: '/dns',
+    label: 'Domeinen & DNS',
+    icon: 'globe',
+    wave: 'A',
+    routes: [
+      { path: '/dns', name: 'dns', view: () => import('./domains/dns/Domeinen.vue'), title: 'Domeinen & DNS' },
+      { path: '/dns/:id', name: 'dns-detail', view: () => import('./domains/dns/DomeinDetail.vue'), title: 'Domein' },
+    ],
+  },
+  {
+    key: 'componenten',
+    path: '/componenten',
+    label: 'Componenten',
+    icon: 'puzzle-piece',
+    wave: 'A',
+    routes: [
+      { path: '/componenten', name: 'componenten', view: () => import('./domains/componenten/Componenten.vue'), title: 'Componenten' },
+      { path: '/componenten/:id', name: 'componenten-detail', view: () => import('./domains/componenten/ComponentDetail.vue'), title: 'Component' },
+    ],
+  },
+  {
+    key: 'flags',
+    path: '/flags',
+    label: 'Feature flags',
+    icon: 'flag',
+    wave: 'A',
+    routes: [
+      { path: '/flags', name: 'flags', view: () => import('./domains/flags/FeatureFlags.vue'), title: 'Feature flags' },
+    ],
+  },
+  {
+    key: 'software-inkoop',
+    path: '/software-inkoop',
+    label: 'Software-inkoop',
+    icon: 'tag',
+    wave: 'A',
+    routes: [
+      { path: '/software-inkoop', name: 'software-inkoop', view: () => import('./domains/inkoop/SoftwareInkoop.vue'), title: 'Software-inkoop' },
+    ],
+  },
+  {
     key: 'wetten',
     path: '/wetten',
     label: 'Wet uitvoeren',
@@ -311,6 +375,16 @@ export const domains = [
     wave: 'C',
     routes: [
       { path: '/standaarden', name: 'standaarden', view: () => import('./domains/standaarden/ComplianceMarketplace.vue'), title: 'Standaarden' },
+    ],
+  },
+  {
+    key: 'toegankelijkheid',
+    path: '/toegankelijkheid',
+    label: 'Toegankelijkheid',
+    icon: 'eyeglasses',
+    wave: 'C',
+    routes: [
+      { path: '/toegankelijkheid', name: 'toegankelijkheid', view: () => import('./domains/toegankelijkheid/Toegankelijkheid.vue'), title: 'Toegankelijkheidsverklaringen' },
     ],
   },
   {

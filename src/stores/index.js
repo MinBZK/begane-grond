@@ -75,6 +75,13 @@ export const usePlatformStore = defineStore('platform', {
     verwerkingen: clone(seed.verwerkingen),
     wooDocuments: clone(seed.wooDocuments),
     artefacten: clone(seed.artefacten),
+    loginMethods: clone(seed.loginMethods),
+    domeinen: clone(seed.domeinen),
+    softwareInkoop: clone(seed.softwareInkoop),
+    componenten: clone(seed.componenten),
+    featureFlags: clone(seed.featureFlags),
+    datacontracten: clone(seed.datacontracten),
+    toegankelijkheidsverklaringen: clone(seed.toegankelijkheidsverklaringen),
     // The "logged in" demo user.
     currentUser: 'ans',
 
@@ -207,6 +214,35 @@ export const usePlatformStore = defineStore('platform', {
       s.artefacten.length
         ? Math.round((s.artefacten.filter((a) => a.signed).length / s.artefacten.length) * 100)
         : 0,
+
+    // --- Login (DigiD / eHerkenning / eIDAS / machtigen) ---
+    loginMethodById: (s) => (id) => s.loginMethods.find((m) => m.id === id),
+    loginMethodsForApp: (s) => (appId) => s.loginMethods.filter((m) => (m.connectedApps || []).includes(appId)),
+
+    // --- Domains & DNS ---
+    domeinById: (s) => (id) => s.domeinen.find((d) => d.id === id),
+    domeinForApp: (s) => (appId) => s.domeinen.find((d) => d.app === appId),
+    dnssecCount: (s) => s.domeinen.filter((d) => d.dnssec).length,
+
+    // --- Software procurement ---
+    softwareInkoopById: (s) => (id) => s.softwareInkoop.find((o) => o.id === id),
+
+    // --- Reusable components ---
+    componentById: (s) => (id) => s.componenten.find((c) => c.id === id),
+    componentsForTeam: (s) => (teamId) => s.componenten.filter((c) => (c.usedBy || []).includes(teamId)),
+
+    // --- Feature flags ---
+    featureFlagById: (s) => (id) => s.featureFlags.find((f) => f.id === id),
+    flagsForApp: (s) => (appId) => s.featureFlags.filter((f) => f.app === appId),
+
+    // --- Data contracts ---
+    datacontractById: (s) => (id) => s.datacontracten.find((c) => c.id === id),
+    contractsForDataset: (s) => (dsId) => s.datacontracten.filter((c) => c.dataset === dsId),
+    contractsForApp: (s) => (appId) => s.datacontracten.filter((c) => c.consumer === appId),
+
+    // --- Accessibility statements ---
+    toegankelijkheidById: (s) => (id) => s.toegankelijkheidsverklaringen.find((t) => t.id === id),
+    toegankelijkheidForApp: (s) => (appId) => s.toegankelijkheidsverklaringen.find((t) => t.app === appId),
     registersForConsumer: (s) => (consumerId) =>
       s.registerConsumers
         .filter((c) => c.consumer === consumerId)
