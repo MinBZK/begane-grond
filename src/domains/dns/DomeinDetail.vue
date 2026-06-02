@@ -54,6 +54,9 @@ const team = computed(() => (domein.value ? store.teamById(domein.value.team) : 
 const cert = computed(() =>
   domein.value ? store.certificates.find((c) => c.id === domein.value.tls) || null : null,
 );
+const toegankelijkheid = computed(() =>
+  domein.value && domein.value.app ? store.toegankelijkheidForApp(domein.value.app) : null,
+);
 
 // internet.nl score colour: success at 95+, warning at 80+, critical below.
 const scoreColor = computed(() => {
@@ -79,6 +82,7 @@ const relations = computed(() => {
   if (app.value) links.push({ text: app.value.name, to: `/apps/${app.value.id}`, icon: 'rectangle-stack' });
   if (team.value) links.push({ text: team.value.name, to: `/teams/${team.value.id}`, icon: 'person-2' });
   if (cert.value) links.push({ text: cert.value.cn, to: '/secrets/certificaten', icon: 'lock-closed' });
+  if (toegankelijkheid.value) links.push({ text: 'Toegankelijkheidsverklaring', to: '/toegankelijkheid', icon: 'eyeglasses' });
   links.push({ text: 'internet.nl-standaarden', to: '/standaarden', icon: 'check-mark-circle' });
   return links;
 });

@@ -244,6 +244,7 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Accessibility statements ---
     toegankelijkheidById: (s) => (id) => s.toegankelijkheidsverklaringen.find((t) => t.id === id),
+    toegankelijkheidForApp: (s) => (appId) => s.toegankelijkheidsverklaringen.find((t) => t.app === appId) || null,
     toegankelijkheidForApp: (s) => (appId) => s.toegankelijkheidsverklaringen.find((t) => t.app === appId),
     registersForConsumer: (s) => (consumerId) =>
       s.registerConsumers
