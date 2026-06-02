@@ -35604,3 +35604,346 @@ export const artefacten = [
     publishedAt: "2026-05-31"
   }
 ];
+
+
+// --- Refresh history per dataset: the cadence of actual refreshes, so you
+// can see whether a source keeps up or falls behind its frequency. Derived
+// deterministically from each dataset's cadence and actuality score.
+export const datasetRefreshLog = {
+  "ds-toetsingsinkomen-2026": {
+    "expected": "2026-05-29",
+    "behindDays": 4,
+    "runs": [
+      {
+        "date": "2026-05-28",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-27",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-26",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-25",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-24",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-23",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-adressen-bag": {
+    "expected": "2026-05-31",
+    "behindDays": 2,
+    "runs": [
+      {
+        "date": "2026-05-30",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-29",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-28",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-27",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-26",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-25",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-kentekens-rdw": {
+    "expected": "2026-06-02",
+    "behindDays": 0,
+    "runs": [
+      {
+        "date": "2026-06-01",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-31",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-30",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-29",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-28",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-27",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-huishoudsamenstelling": {
+    "expected": "2026-05-27",
+    "behindDays": 6,
+    "runs": [
+      {
+        "date": "2026-05-20",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-13",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-06",
+        "status": "vertraagd"
+      },
+      {
+        "date": "2026-04-29",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-22",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-15",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-woz-waarden": {
+    "expected": "2027-01-15",
+    "behindDays": 0,
+    "runs": [
+      {
+        "date": "2026-01-15",
+        "status": "vertraagd"
+      },
+      {
+        "date": "2025-01-15",
+        "status": "op tijd"
+      },
+      {
+        "date": "2024-01-16",
+        "status": "op tijd"
+      },
+      {
+        "date": "2023-01-16",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-bedrijven-hr": {
+    "expected": "2026-05-30",
+    "behindDays": 3,
+    "runs": [
+      {
+        "date": "2026-05-29",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-28",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-27",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-26",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-25",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-24",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-eigendom-brk": {
+    "expected": "2026-05-19",
+    "behindDays": 14,
+    "runs": [
+      {
+        "date": "2026-05-12",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-05",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-28",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-21",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-14",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-07",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-personen-brp": {
+    "expected": "2026-06-02",
+    "behindDays": 0,
+    "runs": [
+      {
+        "date": "2026-06-01",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-31",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-30",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-29",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-28",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-27",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-vergunningen-historie": {
+    "expected": "2026-04-03",
+    "behindDays": 60,
+    "runs": [
+      {
+        "date": "2026-03-04",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-02-02",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-01-03",
+        "status": "vertraagd"
+      },
+      {
+        "date": "2025-12-04",
+        "status": "op tijd"
+      },
+      {
+        "date": "2025-11-04",
+        "status": "vertraagd"
+      }
+    ]
+  },
+  "ds-inkomen-historie": {
+    "expected": "2026-12-01",
+    "behindDays": 0,
+    "runs": [
+      {
+        "date": "2025-12-01",
+        "status": "op tijd"
+      },
+      {
+        "date": "2024-12-01",
+        "status": "op tijd"
+      },
+      {
+        "date": "2023-12-02",
+        "status": "op tijd"
+      },
+      {
+        "date": "2022-12-02",
+        "status": "mislukt"
+      }
+    ]
+  },
+  "ds-zorgpolissen": {
+    "expected": "2026-05-25",
+    "behindDays": 8,
+    "runs": [
+      {
+        "date": "2026-05-18",
+        "status": "te laat"
+      },
+      {
+        "date": "2026-05-11",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-05-04",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-27",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-20",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-13",
+        "status": "op tijd"
+      }
+    ]
+  },
+  "ds-statline-demografie": {
+    "expected": "2026-05-31",
+    "behindDays": 0,
+    "runs": [
+      {
+        "date": "2026-05-01",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-04-01",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-03-02",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-01-31",
+        "status": "op tijd"
+      },
+      {
+        "date": "2026-01-01",
+        "status": "op tijd"
+      }
+    ]
+  }
+};

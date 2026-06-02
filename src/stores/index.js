@@ -70,6 +70,7 @@ export const usePlatformStore = defineStore('platform', {
     trajecten: clone(seed.trajecten),
     scenarios: clone(seed.scenarios),
     datasets: clone(seed.datasets),
+    datasetRefreshLog: clone(seed.datasetRefreshLog),
     algoritmes: clone(seed.algoritmes),
     verwerkingen: clone(seed.verwerkingen),
     wooDocuments: clone(seed.wooDocuments),
@@ -171,6 +172,9 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Data (datasetcatalogus) ---
     datasetById: (s) => (id) => s.datasets.find((d) => d.id === id),
+    refreshLogForDataset: (s) => (id) => s.datasetRefreshLog[id] || null,
+    staleDatasetCount: (s) =>
+      Object.values(s.datasetRefreshLog).filter((l) => l.behindDays > 0).length,
     datasetsByLabel: (s) => (label) => s.datasets.filter((d) => d.qualityLabel === label),
     datasetsForRegister: (s) => (regId) => s.datasets.filter((d) => d.register === regId),
     datasetsForApp: (s) => (appId) => s.datasets.filter((d) => (d.consumers || []).includes(appId)),

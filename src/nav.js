@@ -87,7 +87,7 @@ export const domains = [
     path: '/teams',
     label: 'Teams & mensen',
     icon: 'person-2',
-    wave: 'A',
+    wave: 'P',
     routes: [
       { path: '/teams', name: 'teams', view: () => import('./domains/teams/Teams.vue'), title: 'Teams' },
       { path: '/teams/mensen', name: 'teams-mensen', view: () => import('./domains/teams/People.vue'), title: 'Mensen' },
@@ -102,7 +102,7 @@ export const domains = [
     path: '/werkplekken',
     label: 'Werkplekken',
     icon: 'rectangle-stack',
-    wave: 'A',
+    wave: 'P',
     routes: [
       { path: '/werkplekken', name: 'werkplekken', view: () => import('./domains/werkplekken/Fleet.vue'), title: 'Werkplek-vloot' },
       { path: '/werkplekken/hardware', name: 'werkplekken-hardware', view: () => import('./domains/werkplekken/Hardware.vue'), title: 'Hardware-catalogus' },
@@ -413,6 +413,7 @@ export const routes = domains.flatMap((d) =>
 // Wave labels for grouping in the side navigation.
 export const waveLabels = {
   A: 'Bouwen & draaien',
+  P: 'Mensen & werkplek',
   B: 'Beheren',
   C: 'Governance & standaarden',
   D: 'Platform & AI',

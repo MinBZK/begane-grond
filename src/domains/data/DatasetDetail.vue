@@ -9,6 +9,7 @@ import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import DataTable from '../../components/shared/DataTable.vue';
+import StatusBadge from '../../components/shared/StatusBadge.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 
@@ -27,6 +28,17 @@ const wetten = computed(() =>
 const verwerkingen = computed(() =>
   dataset.value ? store.verwerkingenForDataset(dataset.value.id) : [],
 );
+
+// Refresh history: shows whether the source keeps up with its cadence or falls
+// behind. behindDays > 0 means the next refresh was due before today.
+const refreshLog = computed(() => (dataset.value ? store.refreshLogForDataset(dataset.value.id) : null));
+const behindDays = computed(() => refreshLog.value?.behindDays || 0);
+const refreshSub = computed(() => {
+  if (!dataset.value) return '';
+  if (behindDays.value > 0) return `loopt ${behindDays.value} dagen achter`;
+  return 'op schema';
+});
+const REFRESH_STATUS = { 'op tijd': 'ok', vertraagd: 'warn', mislukt: 'failing', 'te laat': 'failing' };
 
 // Quality dimensions as bars. avgClassificatie is text, kept out of the bars.
 const dims = computed(() => {
@@ -92,7 +104,7 @@ const cli = computed(() =>
     <nldd-container layout="grid" column-count="4" md-column-count="2" sm-column-count="1" gap="16">
       <MetricCard :value="dataset.qualityLabel" label="Kwaliteitslabel" sub="goud, zilver of brons" icon="starburst-filled" />
       <MetricCard :value="dataset.sla" label="Beschikbaarheid" sub="SLA" icon="check-mark-circle" />
-      <MetricCard :value="dataset.refresh" label="Verversing" sub="frequentie" icon="clock" />
+      <MetricCard :value="dataset.refresh" label="Verversing" :sub="refreshSub" :icon="behindDays > 0 ? 'exclamation-triangle' : 'clock'" />
       <MetricCard :value="dataset.open ? 'Open' : 'Gesloten'" label="Openbaarheid" :sub="dataset.open ? 'open data' : 'met reden gesloten'" :icon="dataset.open ? 'check-mark-circle' : 'lock-closed'" />
     </nldd-container>
 
@@ -177,6 +189,34 @@ const cli = computed(() =>
     </DataTable>
     <p v-if="!consumerRows.length" class="rp-empty">Nog geen afnemers gekoppeld.</p>
 
+    <template v-if="refreshLog">
+      <nldd-spacer size="24" />
+      <div class="rp-rh-head">
+        <nldd-title size="3"><h2>Verversingsgeschiedenis</h2></nldd-title>
+        <nldd-tag :color="behindDays > 0 ? 'critical' : 'success'" size="md">
+          {{ behindDays > 0 ? `loopt ${behindDays} dagen achter` : 'op schema' }}
+        </nldd-tag>
+      </div>
+      <nldd-rich-text>
+        <p>
+          Verwacht elke {{ dataset.refresh }} bijgewerkt te worden. Volgende verversing verwacht op {{ refreshLog.expected }}.
+        </p>
+      </nldd-rich-text>
+      <nldd-spacer size="16" />
+      <nldd-card accessible-label="Verversingsgeschiedenis">
+        <nldd-container padding="20">
+          <ul class="rp-rh-list">
+            <li v-for="(run, i) in refreshLog.runs" :key="i" class="rp-rh-row">
+              <span class="rp-rh-dot" :class="`rp-rh-${REFRESH_STATUS[run.status]}`"></span>
+              <span class="rp-rh-date rp-mono">{{ run.date }}</span>
+              <StatusBadge :status="REFRESH_STATUS[run.status]" size="sm" />
+              <span class="rp-rh-label">{{ run.status }}</span>
+            </li>
+          </ul>
+        </nldd-container>
+      </nldd-card>
+    </template>
+
     <nldd-spacer size="24" />
     <CliHint :command="cli" />
   </div>
@@ -208,6 +248,15 @@ const cli = computed(() =>
 .rp-lin-arrow nldd-icon { width: 1.1rem; height: 1.1rem; opacity: 0.4; }
 .rp-mono { font-variant-numeric: tabular-nums; font-family: ui-monospace, monospace; }
 .rp-empty { opacity: 0.6; margin: 0.5rem 0 0; }
+.rp-rh-head { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.rp-rh-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.rp-rh-row { display: flex; align-items: center; gap: 0.7rem; }
+.rp-rh-dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+.rp-rh-ok { background: #2e8540; }
+.rp-rh-warn { background: #d98a1f; }
+.rp-rh-failing { background: #d52b1e; }
+.rp-rh-date { min-width: 6.5rem; font-size: 0.88rem; }
+.rp-rh-label { font-size: 0.85rem; opacity: 0.7; text-transform: capitalize; }
 .rp-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
 </style>
