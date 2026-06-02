@@ -131,13 +131,28 @@ async function runSlide(i) {
   document.documentElement.classList.toggle('rp-presenting-full', !!s.full)
 
   // Navigate to the slide's demo route, or just update the query in place.
-  if (s.route && _router.currentRoute.value.path !== s.route) {
-    _router.push({ path: s.route, query: presentQuery(i) })
-  } else {
-    _router.replace({ query: presentQuery(i) })
+  // Await the navigation so the route component is resolved before we emit or
+  // drive. Without awaiting, fast slide changes can leave a half-loaded view
+  // (the lazy route chunk not yet mounted), which reads as an empty panel.
+  try {
+    if (s.route && _router.currentRoute.value.path !== s.route) {
+      await _router.push({ path: s.route, query: presentQuery(i) })
+    } else {
+      await _router.replace({ query: presentQuery(i) })
+    }
+  } catch (e) {
+    // Ignore redundant/aborted navigations (e.g. clicking through quickly).
   }
 
   await nextTick()
+
+  // Reset the demo's scroll to the top so a shorter page after a longer one is
+  // not left scrolled past its content (which looks like an empty panel).
+  try {
+    window.scrollTo({ top: 0, left: 0 })
+  } catch (e) {
+    // Ignore: no window (e.g. tests).
+  }
 
   // Optionally emit a store event so the live app reacts.
   if (s.emit) {

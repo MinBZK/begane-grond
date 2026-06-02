@@ -11,6 +11,21 @@ const current = computed(() => p.current.value)
 const index = computed(() => p.index.value)
 const total = computed(() => p.total.value)
 
+// Today's date, formatted in Dutch, for the title slide. Read once when the deck
+// mounts so the date is correct wherever and whenever the talk is given.
+const todayLabel = ref('')
+onMounted(() => {
+  try {
+    todayLabel.value = new Intl.DateTimeFormat('nl-NL', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(new Date())
+  } catch (e) {
+    todayLabel.value = ''
+  }
+})
+
 // Format helpers for the footer counter.
 const counter = computed(
   () =>
@@ -123,21 +138,35 @@ onBeforeUnmount(() => {
           >
             <li v-for="(b, i) in current.bullets" :key="i">{{ b }}</li>
           </ul>
+
+          <!-- Title-slide meta: speaker, affiliation, today's date. -->
+          <div
+            v-if="current && (current.speaker || current.affiliation || current.showDate)"
+            class="title-meta"
+          >
+            <span v-if="current.speaker" class="title-speaker">{{ current.speaker }}</span>
+            <span v-if="current.affiliation" class="title-affiliation">{{ current.affiliation }}</span>
+            <span v-if="current.showDate && todayLabel" class="title-date">{{ todayLabel }}</span>
+          </div>
+
+          <!-- Closing link, e.g. on the wrap-up slide. -->
+          <a
+            v-if="current && current.link"
+            class="slide-link"
+            :href="current.link.href"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ current.link.label }}
+          </a>
         </div>
 
-        <!-- Government callout and speaker note sit at the foot of the slide. -->
+        <!-- Government callout sits at the foot of the slide. -->
         <div
-          v-if="current && ((current.gov && typeof current.gov === 'string') || current.note)"
+          v-if="current && current.gov && typeof current.gov === 'string'"
           class="content-foot"
         >
-          <p
-            v-if="current.gov && typeof current.gov === 'string'"
-            class="gov-explain"
-          >
-            {{ current.gov }}
-          </p>
-
-          <p v-if="current.note" class="note">{{ current.note }}</p>
+          <p class="gov-explain">{{ current.gov }}</p>
         </div>
       </div>
 
@@ -335,22 +364,58 @@ onBeforeUnmount(() => {
   padding-left: 0.25rem;
 }
 
+/* Title-slide meta: speaker and affiliation on one line, date on its own. */
+.title-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.6rem;
+  font-family: 'RijksSans', system-ui, sans-serif;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.title-speaker {
+  font-weight: 600;
+  color: #fff;
+}
+
+.title-affiliation {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.title-date {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Closing link, e.g. the wrap-up slide. */
+.slide-link {
+  align-self: flex-start;
+  margin-top: 0.8rem;
+  font-family: 'RijksSans', system-ui, sans-serif;
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+  font-weight: 600;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.slide-link:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.slide-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
 .gov-explain {
   font-family: 'RijksSans', system-ui, sans-serif;
   font-size: 1.05rem;
   line-height: 1.45;
   margin: 0;
   color: rgba(255, 255, 255, 0.82);
-}
-
-.note {
-  font-family: 'RijksSans', system-ui, sans-serif;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin: 0;
-  font-style: italic;
-  /* 0.7 clears WCAG AA (4.5:1) over the Rijksblauw panel. */
-  color: rgba(255, 255, 255, 0.7);
 }
 
 .footer {

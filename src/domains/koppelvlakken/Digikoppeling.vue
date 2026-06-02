@@ -111,7 +111,7 @@ function fmtOin(oin) {
     </PageHeader>
 
     <nldd-container layout="grid" column-count="3" gap="16">
-      <MetricCard :value="peers.length" label="Peers" sub="aangesloten organisaties" icon="apartment-building" />
+      <MetricCard :value="store.fscPeers.length" label="Peers" sub="aangesloten organisaties" icon="apartment-building" />
       <MetricCard :value="totalServices" label="Aangeboden diensten" sub="in de directory" icon="link" />
       <MetricCard :value="inwayCount" label="Inways" sub="actieve aanbieders" icon="shield-check-mark" />
     </nldd-container>

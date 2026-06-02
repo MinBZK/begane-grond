@@ -1,7 +1,9 @@
-// Slide deck for the "Begane Grond" stage talk about what platform engineering
-// is. The left rail (the deck) tells the story; the right side drives the live
-// demo app to the matching route, optionally emits an event, runs a wizard, or
-// highlights part of the screen.
+// Slide deck for the "Platform engineering" stage talk. The talk positions the
+// government as the largest software shop in the country; "Begane Grond" (the
+// demo app) is the running example used to make that concrete. The left rail
+// (the deck) tells the story; the right side drives the live demo app to the
+// matching route, optionally emits an event, runs a wizard, or highlights part
+// of the screen.
 //
 // Each slide is a plain data object consumed by the presentation overlay:
 //   {
@@ -15,7 +17,10 @@
 //     drive?,              // { wizard: 'order'|'app'|'wet'|'werkplek'|
 //                          //   'promotie'|'campagne'|'llm' } auto-run flow
 //     highlight?,          // CSS selector to pulse on the demo side
-//     note?,               // short speaker note (Dutch), not projected
+//     link?,               // { href, label } shown as a closing link on the slide
+//     speaker?,            // presenter name (title slide)
+//     affiliation?,        // presenter affiliation (title slide)
+//     showDate?,           // render today's date on the slide (title slide)
 //   }
 //
 // All UI text is Dutch; identifiers and comments are English. No clock or
@@ -25,16 +30,13 @@
 export const slides = [
   {
     id: 'titel',
-    title: 'Begane Grond',
-    lead: 'Het ontwikkelplatform van de Rijksoverheid.',
-    bullets: [
-      'Ruig terrein wordt begaanbaar, bergen worden heuvels.',
-      'Een vaste laag waarop iedereen bouwt, in plaats van elke keer opnieuw beginnen.',
-      'Vandaag: wat platform engineering is, en waarom de overheid het nodig heeft.',
-    ],
+    title: 'Platform engineering',
+    lead: 'Waarom de Nederlandse overheid misschien wel het grootste softwarebedrijf van Nederland is. En waarom we ons ook zo moeten organiseren.',
+    speaker: 'Anne Schuth',
+    affiliation: 'Nederlandse Digitale Dienst',
+    showDate: true,
     route: '/',
     full: true,
-    note: 'Rustig openen. De naam is de belofte: de grond onder iedereens voeten effen maken.',
   },
   {
     id: 'overheid-techbedrijf',
@@ -46,7 +48,6 @@ export const slides = [
       'Er is geen kant-en-klaar product voor de Toeslagenberekening. Je kunt het niet kopen.',
     ],
     full: true,
-    note: 'These van het essay, bijna letterlijk. Begin bij iets dat iedereen kent: een toeslag, een paspoort. Daar zit code achter.',
   },
   {
     id: 'uitbesteden-vastloopt',
@@ -59,7 +60,6 @@ export const slides = [
       'Vendor lock-in: eenmaal binnen kom je er niet meer uit.',
     ],
     full: true,
-    note: 'Eerste keer dat ik "platform" definieer. Doe het langzaam: de basislaag, niet de app zelf.',
   },
   {
     id: 'ai-kantelt',
@@ -71,7 +71,17 @@ export const slides = [
       'Maar goedkope code zonder platform is een berg techniek-schuld in wording.',
     ],
     full: true,
-    note: 'De kanteling uit het essay. Zelf bouwen wint, mits er een platform onder ligt dat het veilig houdt.',
+  },
+  {
+    id: 'voorbeeld-begane-grond',
+    title: 'Een voorbeeld: Begane Grond',
+    lead: 'Om concreet te maken wat ik bedoel, lopen we door één platform heen.',
+    bullets: [
+      'Begane Grond: een ontwikkelplatform voor de Rijksoverheid.',
+      'Ruig terrein wordt begaanbaar, bergen worden heuvels.',
+      'Een vaste laag waarop teams bouwen, in plaats van elke keer opnieuw beginnen.',
+    ],
+    route: '/',
   },
   {
     id: 'geplaveide-weg',
@@ -84,7 +94,6 @@ export const slides = [
     ],
     route: '/apps/templates',
     emit: { type: 'repo.created', title: 'Nieuwe dienst opgezet via gebaand pad' },
-    note: 'Wijs op de steigers rechts. Het gebaande pad is letterlijk klikbaar.',
   },
   {
     id: 'self-service',
@@ -97,7 +106,6 @@ export const slides = [
     ],
     route: '/infra',
     emit: { type: 'infra.instance.requested', title: 'PostgreSQL aangevraagd uit de catalogus' },
-    note: 'De multiplier is het zakelijke argument. 2,3x meer output uit dezelfde mensen.',
   },
   {
     id: 'gelaagde-stack',
@@ -109,7 +117,6 @@ export const slides = [
       'Klik op een app en je ziet tot in welk rack hij draait.',
     ],
     route: '/',
-    note: 'Korte ophanger naar het fysieke deel. We dalen nu af naar de onderste laag.',
   },
   {
     id: 'fysiek-ijzer',
@@ -123,7 +130,6 @@ export const slides = [
     gov: 'Data blijft in Nederland. Soevereiniteit begint bij het ijzer dat je zelf bezit.',
     route: '/fysiek',
     emit: { type: 'capacity.warning', title: 'Datacenter Den Haag: 78% rackcapaciteit' },
-    note: 'Het verrast mensen dat een platform ook tastbaar is. Laat de datacenters zien.',
   },
   {
     id: 'tot-in-het-rack',
@@ -136,7 +142,6 @@ export const slides = [
     ],
     route: '/fysiek/racks/r-dh-a1',
     emit: { type: 'cooling.alert', title: 'Rack r-dh-a1: koeling binnen marge' },
-    note: 'Inzoomen op rack r-dh-a1 in Den Haag. Dit is de bodem van de stack.',
   },
   {
     id: 'infra-afnemen',
@@ -150,7 +155,6 @@ export const slides = [
     route: '/infra/order/postgres',
     drive: { wizard: 'order' },
     emit: { type: 'infra.instance.ready', title: 'Demo-instance is gereed' },
-    note: 'Laat de wizard zelf doorlopen en wijs naar de bel op het moment van de emit.',
   },
   {
     id: 'applicaties',
@@ -163,7 +167,6 @@ export const slides = [
     ],
     route: '/apps',
     emit: { type: 'app.created', title: 'Nieuwe applicatie geregistreerd in de catalogus' },
-    note: 'Bruggetje: hoe komt zo’n app er eigenlijk? Dat doen we nu live.',
   },
   {
     id: 'nieuwe-app',
@@ -176,7 +179,6 @@ export const slides = [
     ],
     route: '/apps/nieuw',
     drive: { wizard: 'app' },
-    note: 'Laat de NewAppWizard automatisch doorlopen. Benadruk dat compliance al ingebakken is.',
   },
   {
     id: 'code-forgejo',
@@ -190,7 +192,6 @@ export const slides = [
     gov: 'Open-tenzij, op een eigen forge. Geen broncode in een buitenlandse cloud, soevereiniteit by design.',
     route: '/code',
     emit: { type: 'pr.opened', title: 'Pull request geopend op code.overheid.nl' },
-    note: 'Forgejo is open source en zelf-gehost. Dat is het hele punt: geen afhankelijkheid van een platform van een ander.',
   },
   {
     id: 'ci-runners',
@@ -203,7 +204,6 @@ export const slides = [
     ],
     route: '/environments/runners',
     emit: { type: 'runner.scaled', title: 'Runner-pool opgeschaald naar de wachtrij' },
-    note: 'Kort houden. Dit is de motor, niet de show.',
   },
   {
     id: 'promoten',
@@ -217,7 +217,6 @@ export const slides = [
     gov: 'Kwaliteit en governance als afdwingbare gates, niet als handtekening op een formulier.',
     route: '/environments/promotie/app-toeslagen',
     drive: { wizard: 'promotie' },
-    note: 'De gates worden automatisch bevestigd en de deploy-pijplijn draait. Laat de stages oplichten.',
   },
   {
     id: 'teams-oncall',
@@ -230,7 +229,6 @@ export const slides = [
     ],
     route: '/teams/on-call',
     emit: { type: 'oncall.handover', title: 'On-call overgedragen aan het volgende team' },
-    note: 'Het mensen-argument: betere tools houden betere ontwikkelaars binnen.',
   },
   {
     id: 'werkplek-uitrollen',
@@ -244,7 +242,6 @@ export const slides = [
     gov: 'Encryptie en MDM staan standaard aan. De Rijksbaseline is ingebouwd, niet optioneel.',
     route: '/werkplekken/nieuw',
     drive: { wizard: 'werkplek' },
-    note: 'Laat de werkplek-wizard zelf lopen. Het punt: ook hardware-uitrol hoort bij het platform.',
   },
   {
     id: 'observability',
@@ -257,7 +254,6 @@ export const slides = [
     ],
     route: '/observability',
     emit: { type: 'alert.firing', title: 'SLO-alert: latency boven de drempel' },
-    note: 'Opmaat naar het incident. Eerst laten zien dat we kunnen kijken, dan gaat er iets stuk.',
   },
   {
     id: 'incident',
@@ -274,7 +270,6 @@ export const slides = [
       title: 'Verhoogde latency op productie',
       severity: 'critical',
     },
-    note: 'Wacht even op de rode bel voordat je doorpraat. Dat moment is de demo.',
   },
   {
     id: 'finops',
@@ -287,7 +282,6 @@ export const slides = [
     ],
     route: '/kosten',
     emit: { type: 'cost.anomaly', title: 'Kostenanomalie gedetecteerd bij een team' },
-    note: 'Self-service kan eng klinken voor controllers. Dit is het antwoord: volledige kostentransparantie.',
   },
   {
     id: 'security-compliance',
@@ -301,7 +295,6 @@ export const slides = [
     gov: 'BIO als default. Compliance ingebakken in het gebaande pad, niet als bijlage bij een rapport.',
     route: '/security',
     emit: { type: 'compliance.dropped', title: 'Compliance-score gedaald, actie vereist' },
-    note: 'Kernzin van het essay: compliance als default. Dit is het hart van het overheidsverhaal.',
   },
   {
     id: 'standaarden',
@@ -317,7 +310,6 @@ export const slides = [
     emit: { type: 'standard.updated', title: 'NLDD design system bijgewerkt naar 0.9' },
     highlight: '.rp-page',
     highlight: '.rp-page',
-    note: 'Paradepaardje één. Het punt: standaarden als code verslaan een stapel beleids-PDF’s.',
   },
   {
     id: 'fleet-campagne',
@@ -331,7 +323,6 @@ export const slides = [
     gov: 'Een beleidswijziging wordt een codewijziging die je over de hele Rijksvloot uitrolt.',
     route: '/fleet/nieuw',
     drive: { wizard: 'campagne' },
-    note: 'Laat de campagne-wizard lopen. Dit maakt "standaarden als code" concreet: een PR in elke repo.',
   },
   {
     id: 'basisregistraties',
@@ -346,7 +337,6 @@ export const slides = [
     route: '/registers',
     emit: { type: 'register.connected', title: 'Dienst aangesloten op de BRP' },
     highlight: '.rp-page',
-    note: 'Paradepaardje twee. Wijs op de BRP-velden: bsn, geboortedatum, verblijfadres. Niet "leeftijd", dat staat er niet.',
   },
   {
     id: 'digikoppeling-fsc',
@@ -360,7 +350,6 @@ export const slides = [
     gov: 'Een verbindende platformlaag over bestaande overheidsbouwstenen heen. Daarvoor is mandaat nodig.',
     route: '/koppelvlakken/fsc',
     emit: { type: 'register.connected', title: 'Vertrouwde koppeling via FSC tot stand gebracht' },
-    note: 'De bouwstenen bestaan al. Wat ontbrak is de verbindende laag. Dat is precies wat een platform doet.',
   },
   {
     id: 'wet-naar-systeem',
@@ -374,7 +363,6 @@ export const slides = [
     gov: 'De wettekst als single source of truth. Verandert de wet, dan verandert de dienst, herleidbaar.',
     route: '/wetten',
     emit: { type: 'wet.published', title: 'Wet gepubliceerd in het corpus' },
-    note: 'Het paradepaardje. Pitch het plat: een app die wet of beleid uitvoert. De wet is geen los document meer maar de bron van de code.',
   },
   {
     id: 'wet-draaiende-dienst',
@@ -387,7 +375,6 @@ export const slides = [
     ],
     route: '/wetten/nieuw',
     drive: { wizard: 'wet' },
-    note: 'Laat de NewWetWizard automatisch lopen. Dit is de meest verrassende demo, geef hem ruimte.',
   },
   {
     id: 'cli-rp',
@@ -399,7 +386,6 @@ export const slides = [
       'Eén tool die het gebaande pad in tekstvorm geeft.',
     ],
     route: '/cli',
-    note: 'Voor de developers in de zaal. rp is het bewijs dat alles ook automatiseerbaar is.',
   },
   {
     id: 'llm-afnemen',
@@ -413,7 +399,6 @@ export const slides = [
     gov: 'Een eigen LLM-gateway: geen overheidsdata naar een model van een ander.',
     route: '/ai/llm',
     drive: { wizard: 'llm' },
-    note: 'Laat de LLM-wizard zelf lopen. Het punt: zelfs AI is een afdwingbare, soevereine platformdienst.',
   },
   {
     id: 'ai-skills',
@@ -426,7 +411,6 @@ export const slides = [
     ],
     route: '/ai/skills',
     emit: { type: 'ai.skill.installed', title: 'Skill geïnstalleerd voor het team' },
-    note: 'De AI-wending uit het essay. Het platform is juist nu cruciaal: het maakt goedkope code ook veilig.',
   },
   {
     id: 'platform-als-product',
@@ -439,6 +423,16 @@ export const slides = [
     ],
     route: '/',
     emit: { type: 'deploy.completed', title: 'Platform-release uitgerold' },
-    note: 'Afsluiten waar we begonnen. Terug naar de naam: de begane grond onder de hele Rijksoverheid.',
+  },
+  {
+    id: 'wrap-up',
+    title: 'Dank',
+    lead: 'De overheid is een techbedrijf. Laten we ons ook zo organiseren.',
+    bullets: [
+      'Platform engineering: de gedeelde basislaag waarop teams bouwen.',
+      'Begane Grond liet zien hoe dat er voor de Rijksoverheid uitziet.',
+    ],
+    link: { href: 'https://anneschuth.nl', label: 'anneschuth.nl' },
+    full: true,
   },
 ];
