@@ -28,6 +28,9 @@ const wetten = computed(() =>
 const verwerkingen = computed(() =>
   dataset.value ? store.verwerkingenForDataset(dataset.value.id) : [],
 );
+const datacontracten = computed(() =>
+  dataset.value ? store.datacontractenForDataset(dataset.value.id) : [],
+);
 
 // Refresh history: shows whether the source keeps up with its cadence or falls
 // behind. behindDays > 0 means the next refresh was due before today.
@@ -78,6 +81,7 @@ const relations = computed(() => {
   for (const w of wetten.value) links.push({ text: w.name, to: `/wetten/${w.id}`, icon: 'certificate' });
   if (team.value) links.push({ text: team.value.name, to: `/teams/${team.value.id}`, icon: 'person-2' });
   for (const v of verwerkingen.value) links.push({ text: v.name, to: `/verwerkingen/${v.id}`, icon: 'lock-closed' });
+  for (const c of datacontracten.value) links.push({ text: `Datacontract ${c.id}`, to: `/datacontracten/${c.id}`, icon: 'pencil-on-square' });
   return links;
 });
 

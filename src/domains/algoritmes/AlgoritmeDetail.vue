@@ -25,6 +25,14 @@ const model = computed(() =>
 const sources = computed(() =>
   algoritme.value ? (algoritme.value.dataSources || []).map((id) => store.datasetById(id)).filter(Boolean) : [],
 );
+// Processings (DPIA) that draw on the same datasets as this algorithm: an
+// algorithm deciding about people shares a legal basis with the registered
+// processing of those data, so the two records belong linked.
+const verwerkingen = computed(() => {
+  if (!algoritme.value) return [];
+  const dsIds = new Set(algoritme.value.dataSources || []);
+  return store.verwerkingen.filter((v) => (v.datasets || []).some((d) => dsIds.has(d)));
+});
 
 const sourceColumns = [
   { key: 'naam', label: 'Databron' },
@@ -47,6 +55,7 @@ const relations = computed(() => {
   if (app.value) links.push({ text: app.value.name, to: `/apps/${app.value.id}`, icon: 'rectangle-stack' });
   if (model.value) links.push({ text: model.value.name, to: '/ai/llm', icon: 'sparkles' });
   for (const d of sources.value) links.push({ text: d.name, to: `/data/${d.id}`, icon: 'chart-x-y-axis-line' });
+  for (const v of verwerkingen.value) links.push({ text: v.name, to: `/verwerkingen/${v.id}`, icon: 'clipboard-rectangle' });
   if (team.value) links.push({ text: team.value.name, to: `/teams/${team.value.id}`, icon: 'person-2' });
   return links;
 });

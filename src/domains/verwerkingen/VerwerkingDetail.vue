@@ -26,6 +26,13 @@ const datasets = computed(() =>
 const registers = computed(() =>
   verwerking.value ? (verwerking.value.registers || []).map((id) => store.registerById(id)).filter(Boolean) : [],
 );
+// Algorithms that draw on the same datasets as this processing: a decision
+// algorithm and the registered processing of those data share a legal basis.
+const algoritmes = computed(() => {
+  if (!verwerking.value) return [];
+  const dsIds = new Set(verwerking.value.datasets || []);
+  return store.algoritmes.filter((a) => (a.dataSources || []).some((d) => dsIds.has(d)));
+});
 
 const relations = computed(() => {
   if (!verwerking.value) return [];
@@ -33,6 +40,7 @@ const relations = computed(() => {
   if (wet.value) links.push({ text: wet.value.name, to: `/wetten/${wet.value.id}`, icon: 'certificate' });
   for (const d of datasets.value) links.push({ text: d.name, to: `/data/${d.id}`, icon: 'chart-x-y-axis-line' });
   for (const r of registers.value) links.push({ text: r.name, to: `/registers/${r.id}`, icon: 'cylinder-split' });
+  for (const a of algoritmes.value) links.push({ text: a.name, to: `/algoritmes/${a.id}`, icon: 'brackets-ellipsis' });
   if (team.value) links.push({ text: team.value.name, to: `/teams/${team.value.id}`, icon: 'person-2' });
   return links;
 });

@@ -238,6 +238,7 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Data contracts ---
     datacontractById: (s) => (id) => s.datacontracten.find((c) => c.id === id),
+    datacontractenForDataset: (s) => (dsId) => s.datacontracten.filter((c) => c.dataset === dsId),
     contractsForDataset: (s) => (dsId) => s.datacontracten.filter((c) => c.dataset === dsId),
     contractsForApp: (s) => (appId) => s.datacontracten.filter((c) => c.consumer === appId),
 
