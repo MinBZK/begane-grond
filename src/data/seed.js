@@ -15405,6 +15405,60 @@ export const procurement = [
     "lead": "6 wk",
     "status": "besteld",
     "dc": "dc-groningen"
+  },
+  {
+    "id": "po-2026-007",
+    "supplier": "NVIDIA / SuperMicro",
+    "item": "4× HGX H200 8-GPU systeem",
+    "amount": 1480000,
+    "lead": "16 wk",
+    "status": "geleverd",
+    "dc": "dc-denhaag"
+  },
+  {
+    "id": "po-2026-011",
+    "supplier": "NVIDIA",
+    "item": "2× GB200 NVL72-rack",
+    "amount": 6200000,
+    "lead": "26 wk",
+    "status": "besteld",
+    "dc": "dc-denhaag"
+  },
+  {
+    "id": "po-2026-014",
+    "supplier": "Dell Technologies",
+    "item": "4× HGX B200 8-GPU systeem",
+    "amount": 1720000,
+    "lead": "20 wk",
+    "status": "offerte",
+    "dc": "dc-denhaag"
+  },
+  {
+    "id": "po-2026-018",
+    "supplier": "Schneider Electric",
+    "item": "Direct-liquid-cooling voor AI-rijen (CDU + manifolds)",
+    "amount": 540000,
+    "lead": "12 wk",
+    "status": "besteld",
+    "dc": "dc-denhaag"
+  },
+  {
+    "id": "po-2026-021",
+    "supplier": "Vertiv",
+    "item": "12× hoogvermogen-PDU (63A) voor GPU-racks",
+    "amount": 88000,
+    "lead": "5 wk",
+    "status": "geleverd",
+    "dc": "dc-denhaag"
+  },
+  {
+    "id": "po-2026-024",
+    "supplier": "NVIDIA / SuperMicro",
+    "item": "2× HGX H200 8-GPU systeem",
+    "amount": 740000,
+    "lead": "16 wk",
+    "status": "offerte",
+    "dc": "dc-apeldoorn"
   }
 ];
 

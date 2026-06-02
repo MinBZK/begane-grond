@@ -48,6 +48,7 @@ function barColor(p) {
       :crumbs="[{ text: 'Fundament', href: '/fysiek' }, { text: 'Datacenters', href: '/fysiek' }]"
     >
       <template #actions>
+        <nldd-button variant="secondary" text="Inventory" start-icon="rectangle-stack" href="/fysiek/inventory"></nldd-button>
         <nldd-button variant="secondary" text="Netwerktopologie" start-icon="arrow-up-arrow-down" href="/fysiek/netwerk"></nldd-button>
         <nldd-button variant="primary" text="Inkoop & planning" start-icon="euro-sign" href="/fysiek/inkoop"></nldd-button>
       </template>

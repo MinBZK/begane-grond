@@ -40,6 +40,7 @@ export const domains = [
       { path: '/fysiek/datacenters/:dc', name: 'fysiek-dc', view: () => import('./domains/fysiek/DatacenterDetail.vue'), title: 'Datacenter' },
       { path: '/fysiek/datacenters/:dc/floor', name: 'fysiek-floor', view: () => import('./domains/fysiek/Floorplan.vue'), title: 'Zaalindeling' },
       { path: '/fysiek/racks/:rack', name: 'fysiek-rack', view: () => import('./domains/fysiek/RackElevation.vue'), title: 'Rack' },
+      { path: '/fysiek/inventory', name: 'fysiek-inventory', view: () => import('./domains/fysiek/Inventory.vue'), title: 'Inventory' },
       { path: '/fysiek/netwerk', name: 'fysiek-netwerk', view: () => import('./domains/fysiek/NetworkTopology.vue'), title: 'Netwerk' },
       { path: '/fysiek/inkoop', name: 'fysiek-inkoop', view: () => import('./domains/fysiek/Inkoop.vue'), title: 'Inkoop & planning' },
     ],
