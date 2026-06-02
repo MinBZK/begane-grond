@@ -36181,7 +36181,7 @@ export const wooDocuments = [
 export const artefacten = [
   {
     id: "art-toeslagenmotor-3.4.1", name: "toeslagenmotor", kind: "container-image", version: "3.4.1",
-    digest: "sha256:9f2c4e…a1b7", repo: "repo-toeslagen", app: "app-toeslagen", buildJob: "job-7778",
+    digest: "sha256:9f2c4e…a1b7", repo: "repo-toeslagen", app: "app-toeslagen", buildJob: "job-7781",
     registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:team-toeslagen",
     slsaLevel: 3, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 412, deps: [
@@ -36204,7 +36204,7 @@ export const artefacten = [
   },
   {
     id: "art-kentekencheck-1.9.2", name: "kentekencheck", kind: "container-image", version: "1.9.2",
-    digest: "sha256:cc01fe…2d40", repo: "repo-kentekencheck", app: "app-kentekencheck", buildJob: "job-7779",
+    digest: "sha256:cc01fe…2d40", repo: "repo-kentekencheck", app: "app-kentekencheck", buildJob: "job-g0",
     registry: "registry.overheid.nl/rdw", signed: true, signedBy: "fulcio:team-data",
     slsaLevel: 2, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 256, deps: [
@@ -36215,7 +36215,7 @@ export const artefacten = [
   },
   {
     id: "art-nldd-ui-0.9.0", name: "nldd-ui", kind: "package", version: "0.9.0",
-    digest: "sha256:71aa90…ee15", repo: "repo-datadeling", app: "app-vergunningchecker", buildJob: "job-7780",
+    digest: "sha256:71aa90…ee15", repo: "repo-datadeling", app: "app-vergunningchecker", buildJob: "job-7778",
     registry: "registry.overheid.nl/nldd", signed: true, signedBy: "fulcio:team-platform",
     slsaLevel: 3, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 184, deps: [
@@ -36226,7 +36226,7 @@ export const artefacten = [
   },
   {
     id: "art-toeslagenmotor-3.3.0", name: "toeslagenmotor", kind: "container-image", version: "3.3.0",
-    digest: "sha256:5e8c12…b9a0", repo: "repo-toeslagen", app: "app-toeslagen", buildJob: "job-7777",
+    digest: "sha256:5e8c12…b9a0", repo: "repo-toeslagen", app: "app-toeslagen", buildJob: "job-7781",
     registry: "registry.overheid.nl/minbzk", signed: false, signedBy: "",
     slsaLevel: 1, provenance: "ongetekend",
     sbom: { format: "CycloneDX 1.5", components: 401, deps: [
@@ -36236,7 +36236,7 @@ export const artefacten = [
   },
   {
     id: "art-vergunningchecker-0.6.1", name: "vergunningchecker", kind: "container-image", version: "0.6.1",
-    digest: "sha256:b204aa…1f33", repo: "repo-datadeling", app: "app-vergunningchecker", buildJob: "job-7781",
+    digest: "sha256:b204aa…1f33", repo: "repo-datadeling", app: "app-vergunningchecker", buildJob: "job-7778",
     registry: "registry.overheid.nl/minbzk", signed: false, signedBy: "",
     slsaLevel: 1, provenance: "in afwachting",
     sbom: { format: "CycloneDX 1.5", components: 222, deps: [
@@ -36246,7 +36246,7 @@ export const artefacten = [
   },
   {
     id: "art-paspoort-4.6.5", name: "paspoort", kind: "container-image", version: "4.6.5",
-    digest: "sha256:a0d912…f65b", repo: "repo-paspoort", app: "app-paspoort", buildJob: "job-7778",
+    digest: "sha256:a0d912…f65b", repo: "repo-paspoort", app: "app-paspoort", buildJob: "job-7779",
     registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
     slsaLevel: 3, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 331, deps: [{ name: "express", version: "4.19.2", license: "MIT" }, { name: "zod", version: "3.23.8", license: "MIT" }], vulns: [] },
@@ -36254,7 +36254,7 @@ export const artefacten = [
   },
   {
     id: "art-bijstandsuitkering-2.8.4", name: "bijstandsuitkering", kind: "container-image", version: "2.8.4",
-    digest: "sha256:44d96d…0a12", repo: "repo-bijstandsuitkering", app: "app-bijstandsuitkering", buildJob: "job-7778",
+    digest: "sha256:44d96d…0a12", repo: "repo-bijstandsuitkering", app: "app-bijstandsuitkering", buildJob: "job-g2",
     registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
     slsaLevel: 3, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 469, deps: [{ name: "tokio", version: "1.38.0", license: "MIT" }, { name: "serde", version: "1.0.203", license: "MIT/Apache-2.0" }], vulns: [] },
@@ -36262,7 +36262,7 @@ export const artefacten = [
   },
   {
     id: "art-inkomenstoets-4.2.6", name: "inkomenstoets", kind: "container-image", version: "4.2.6",
-    digest: "sha256:854b38…bd4b", repo: "repo-inkomenstoets", app: "app-inkomenstoets", buildJob: "job-7778",
+    digest: "sha256:854b38…bd4b", repo: "repo-inkomenstoets", app: "app-inkomenstoets", buildJob: "job-g1",
     registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
     slsaLevel: 2, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 468, deps: [{ name: "fastapi", version: "0.111.0", license: "MIT" }, { name: "pydantic", version: "2.7.1", license: "MIT" }], vulns: [] },
@@ -36270,7 +36270,7 @@ export const artefacten = [
   },
   {
     id: "art-brp-bevraging-3.0.5", name: "brp-bevraging", kind: "package", version: "3.0.5",
-    digest: "sha256:82a820…327f", repo: "repo-brp-bevraging", app: "app-brp-bevraging", buildJob: "job-7778",
+    digest: "sha256:82a820…327f", repo: "repo-brp-bevraging", app: "app-brp-bevraging", buildJob: "job-g8",
     registry: "registry.overheid.nl/nldd", signed: true, signedBy: "fulcio:nldd",
     slsaLevel: 3, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 463, deps: [{ name: "axum", version: "0.7.5", license: "MIT" }, { name: "sqlx", version: "0.7.4", license: "MIT/Apache-2.0" }], vulns: [] },
@@ -36278,7 +36278,7 @@ export const artefacten = [
   },
   {
     id: "art-bsn-validatie-4.3.0", name: "bsn-validatie", kind: "package", version: "4.3.0",
-    digest: "sha256:ed770e…b076", repo: "repo-bsn-validatie", app: "app-bsn-validatie", buildJob: "job-7778",
+    digest: "sha256:ed770e…b076", repo: "repo-bsn-validatie", app: "app-bsn-validatie", buildJob: "job-g7",
     registry: "registry.overheid.nl/nldd", signed: true, signedBy: "fulcio:nldd",
     slsaLevel: 3, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 147, deps: [{ name: "tokio", version: "1.38.0", license: "MIT" }, { name: "serde", version: "1.0.203", license: "MIT/Apache-2.0" }], vulns: [] },
@@ -36286,7 +36286,7 @@ export const artefacten = [
   },
   {
     id: "art-iban-validatie-3.2.1", name: "iban-validatie", kind: "package", version: "3.2.1",
-    digest: "sha256:9d7db4…7e21", repo: "repo-iban-validatie", app: "app-iban-validatie", buildJob: "job-7778",
+    digest: "sha256:9d7db4…7e21", repo: "repo-iban-validatie", app: "app-iban-validatie", buildJob: "job-g18",
     registry: "registry.overheid.nl/nldd", signed: true, signedBy: "fulcio:nldd",
     slsaLevel: 2, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 357, deps: [{ name: "axum", version: "0.7.5", license: "MIT" }, { name: "sqlx", version: "0.7.4", license: "MIT/Apache-2.0" }], vulns: [] },
@@ -36294,7 +36294,7 @@ export const artefacten = [
   },
   {
     id: "art-betaalverzoek-4.5.0", name: "betaalverzoek", kind: "container-image", version: "4.5.0",
-    digest: "sha256:b79f01…7551", repo: "repo-betaalverzoek", app: "app-betaalverzoek", buildJob: "job-7778",
+    digest: "sha256:b79f01…7551", repo: "repo-betaalverzoek", app: "app-betaalverzoek", buildJob: "job-g9",
     registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
     slsaLevel: 3, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 260, deps: [{ name: "express", version: "4.19.2", license: "MIT" }, { name: "zod", version: "3.23.8", license: "MIT" }], vulns: [] },
@@ -36310,7 +36310,7 @@ export const artefacten = [
   },
   {
     id: "art-aangifte-omzetbelasting-2.3.7", name: "aangifte-omzetbelasting", kind: "container-image", version: "2.3.7",
-    digest: "sha256:6304d9…70da", repo: "repo-aangifte-omzetbelasting", app: "app-aangifte-omzetbelasting", buildJob: "job-7778",
+    digest: "sha256:6304d9…70da", repo: "repo-aangifte-omzetbelasting", app: "app-aangifte-omzetbelasting", buildJob: "job-g20",
     registry: "registry.overheid.nl/bd", signed: true, signedBy: "fulcio:bd",
     slsaLevel: 3, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 466, deps: [{ name: "axum", version: "0.7.5", license: "MIT" }, { name: "sqlx", version: "0.7.4", license: "MIT/Apache-2.0" }], vulns: ["cve-1"] },
@@ -36318,7 +36318,7 @@ export const artefacten = [
   },
   {
     id: "art-vergunningchecker-3.7.4", name: "vergunningchecker", kind: "container-image", version: "3.7.4",
-    digest: "sha256:74c0ac…3b8a", repo: "repo-vergunningchecker", app: "app-vergunningchecker", buildJob: "job-7778",
+    digest: "sha256:74c0ac…3b8a", repo: "repo-vergunningchecker", app: "app-vergunningchecker", buildJob: "job-g24",
     registry: "registry.overheid.nl/minbzk", signed: false, signedBy: "",
     slsaLevel: 1, provenance: "ongetekend",
     sbom: { format: "CycloneDX 1.5", components: 430, deps: [{ name: "tokio", version: "1.38.0", license: "MIT" }, { name: "serde", version: "1.0.203", license: "MIT/Apache-2.0" }], vulns: [] },
@@ -36326,7 +36326,7 @@ export const artefacten = [
   },
   {
     id: "art-bezwaarafhandeling-3.9.2", name: "bezwaarafhandeling", kind: "container-image", version: "3.9.2",
-    digest: "sha256:56093c…07bb", repo: "repo-bezwaarafhandeling", app: "app-bezwaarafhandeling", buildJob: "job-7778",
+    digest: "sha256:56093c…07bb", repo: "repo-bezwaarafhandeling", app: "app-bezwaarafhandeling", buildJob: "job-g25",
     registry: "registry.overheid.nl/minbzk", signed: true, signedBy: "fulcio:minbzk",
     slsaLevel: 2, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 221, deps: [{ name: "fastapi", version: "0.111.0", license: "MIT" }, { name: "pydantic", version: "2.7.1", license: "MIT" }], vulns: [] },
@@ -36334,7 +36334,7 @@ export const artefacten = [
   },
   {
     id: "art-digid-koppeling-2.0.7", name: "digid-koppeling", kind: "package", version: "2.0.7",
-    digest: "sha256:f593c3…3822", repo: "repo-digid-koppeling", app: "app-digid-koppeling", buildJob: "job-7778",
+    digest: "sha256:f593c3…3822", repo: "repo-digid-koppeling", app: "app-digid-koppeling", buildJob: "job-g9",
     registry: "registry.overheid.nl/logius", signed: true, signedBy: "fulcio:logius",
     slsaLevel: 3, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 458, deps: [{ name: "axum", version: "0.7.5", license: "MIT" }, { name: "sqlx", version: "0.7.4", license: "MIT/Apache-2.0" }], vulns: [] },
@@ -36342,7 +36342,7 @@ export const artefacten = [
   },
   {
     id: "art-eherkenning-broker-2.5.5", name: "eherkenning-broker", kind: "container-image", version: "2.5.5",
-    digest: "sha256:0982ce…57c0", repo: "repo-eherkenning-broker", app: "app-eherkenning-broker", buildJob: "job-7778",
+    digest: "sha256:0982ce…57c0", repo: "repo-eherkenning-broker", app: "app-eherkenning-broker", buildJob: "job-7781",
     registry: "registry.overheid.nl/logius", signed: false, signedBy: "",
     slsaLevel: 1, provenance: "in afwachting",
     sbom: { format: "CycloneDX 1.5", components: 449, deps: [{ name: "express", version: "4.19.2", license: "MIT" }, { name: "zod", version: "3.23.8", license: "MIT" }], vulns: [] },
@@ -36350,7 +36350,7 @@ export const artefacten = [
   },
   {
     id: "art-diplomaregister-3.8.7", name: "diplomaregister", kind: "container-image", version: "3.8.7",
-    digest: "sha256:4042bf…2046", repo: "repo-diplomaregister", app: "app-diplomaregister", buildJob: "job-7778",
+    digest: "sha256:4042bf…2046", repo: "repo-diplomaregister", app: "app-diplomaregister", buildJob: "job-g12",
     registry: "registry.overheid.nl/duo", signed: true, signedBy: "fulcio:duo",
     slsaLevel: 2, provenance: "geverifieerd",
     sbom: { format: "CycloneDX 1.5", components: 258, deps: [{ name: "fastapi", version: "0.111.0", license: "MIT" }, { name: "pydantic", version: "2.7.1", license: "MIT" }], vulns: [] },

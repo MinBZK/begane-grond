@@ -165,6 +165,7 @@ export const usePlatformStore = defineStore('platform', {
     runnerById: (s) => (id) => s.runners.find((r) => r.id === id),
     runnersByRack: (s) => (rack) => s.runners.filter((r) => r.rack === rack),
     jobsByPool: (s) => (pool) => s.ciJobs.filter((j) => j.pool === pool),
+    ciJobById: (s) => (id) => s.ciJobs.find((j) => j.id === id),
     // Total concurrent CI capacity and current utilisation across all pools.
     runnerUtilisation: (s) => {
       const cap = s.runners.reduce((n, r) => n + r.capacity, 0);

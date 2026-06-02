@@ -19,6 +19,7 @@ const store = usePlatformStore();
 const artefact = computed(() => store.artefactById(route.params.id));
 const repo = computed(() => (artefact.value ? store.repoById(artefact.value.repo) : null));
 const app = computed(() => (artefact.value ? store.appById(artefact.value.app) : null));
+const buildJob = computed(() => (artefact.value ? store.ciJobById(artefact.value.buildJob) : null));
 const vulns = computed(() =>
   artefact.value ? (artefact.value.sbom.vulns || []).map((id) => store.vulnerabilities.find((v) => v.id === id)).filter(Boolean) : [],
 );
@@ -35,6 +36,7 @@ const relations = computed(() => {
   if (repo.value) links.push({ text: repo.value.name, to: `/code/${repo.value.id}`, icon: 'chevron-left-forward-slash-chevron-right' });
   if (app.value) links.push({ text: app.value.name, to: `/apps/${app.value.id}`, icon: 'rectangle-stack' });
   links.push({ text: 'CI-pijplijn', to: '/environments/pijplijn', icon: 'gear' });
+  if (buildJob.value) links.push({ text: `Build ${buildJob.value.id}`, to: '/environments/runners', icon: 'timer' });
   if (vulns.value.length) links.push({ text: `${vulns.value.length} kwetsbaarheid(en)`, to: '/security/kwetsbaarheden', icon: 'shield-check-mark' });
   return links;
 });
@@ -80,6 +82,13 @@ const cli = computed(() =>
             <dd class="rp-mono">{{ artefact.signedBy || 'niet ondertekend' }}</dd>
             <dt>Provenance</dt>
             <dd><StatusBadge :status="artefact.provenance === 'geverifieerd' ? 'ok' : artefact.provenance === 'ongetekend' ? 'failing' : 'requested'" size="sm" /> <span class="rp-prov">{{ artefact.provenance }}</span></dd>
+            <template v-if="buildJob">
+              <dt>Gebouwd door</dt>
+              <dd>
+                <router-link :to="`/code/${buildJob.repo}`" class="rp-link rp-mono">{{ buildJob.id }}</router-link>
+                <span class="rp-prov"> via {{ buildJob.workflow }} op {{ buildJob.pool }}</span>
+              </dd>
+            </template>
             <dt>Register</dt>
             <dd class="rp-mono">{{ artefact.registry }}</dd>
             <dt>Gepubliceerd</dt>
@@ -125,4 +134,6 @@ const cli = computed(() =>
 .rp-kv dd { margin: 0; font-weight: 600; word-break: break-all; }
 .rp-prov { font-weight: 400; opacity: 0.75; }
 .rp-mono { font-family: ui-monospace, monospace; font-weight: 400; }
+.rp-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; font-weight: 600; }
+.rp-link:hover { text-decoration: underline; }
 </style>
