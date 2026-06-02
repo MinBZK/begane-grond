@@ -207,6 +207,19 @@ export const slides = [
     emit: { type: 'runner.scaled', title: 'Runner-pool opgeschaald naar de wachtrij' },
   },
   {
+    id: 'pijplijn-by-default',
+    title: 'Eén pijplijn, by default',
+    lead: 'Alles wat een team normaal uit losse systemen haalt, zit hier in één gebaand pad.',
+    bullets: [
+      'Code, CI, kwaliteit, coverage, dependencies, kwetsbaarheden en artefacten in één pad.',
+      'Niet zelf bekabelen per team. Standaard aan op elke repository.',
+      'De gates draaien in elke pijplijn, ook als niemand naar een dashboard kijkt.',
+    ],
+    gov: 'Kwaliteit en compliance als default, niet als losse tool die je hoopt dat iemand bezoekt.',
+    route: '/environments/pijplijn',
+    emit: { type: 'pipeline.passed', title: 'Pijplijn groen, alle gates gehaald' },
+  },
+  {
     id: 'promoten',
     title: 'Promoten met gates, live',
     lead: 'Een release een stap opschuiven, met de controles erbij.',

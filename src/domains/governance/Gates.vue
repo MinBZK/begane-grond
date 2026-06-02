@@ -126,11 +126,14 @@ function barColor(pct) {
   <div class="rp-page">
     <PageHeader
       title="Beleids-gates"
-      lede="Elke applicatie wordt getoetst aan de Rijksbrede beleids-gates: open-source-tenzij, EUPL-licentie, toegankelijkheid en de security-baseline (BIO). De matrix is afgeleid uit de actuele platformdata en verandert mee met repository-, security- en releasewijzigingen."
+      lede="Elke applicatie wordt getoetst aan de Rijksbrede beleids-gates: open-source-tenzij, EUPL-licentie, toegankelijkheid en de security-baseline (BIO). Deze gates staan niet los: ze draaien in elke CI-pijplijn, standaard aan. De matrix is afgeleid uit de actuele platformdata en verandert mee met repository-, security- en releasewijzigingen."
       :crumbs="[{ text: 'Platform', href: '/' }, { text: 'Governance', href: '/governance' }]"
     >
       <template #actions>
         <nldd-button-group orientation="horizontal">
+          <router-link to="/environments/pijplijn">
+            <nldd-button variant="secondary" text="Draait in elke pijplijn" start-icon="gear"></nldd-button>
+          </router-link>
           <router-link to="/governance/rfcs">
             <nldd-button variant="secondary" text="RFC's" start-icon="books-vertical"></nldd-button>
           </router-link>

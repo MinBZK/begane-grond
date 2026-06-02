@@ -123,6 +123,16 @@ export const domains = [
     ],
   },
   {
+    key: 'pijplijn',
+    path: '/environments/pijplijn',
+    label: 'CI-pijplijn',
+    icon: 'gear',
+    wave: 'B',
+    routes: [
+      { path: '/environments/pijplijn', name: 'environments-pijplijn', view: () => import('./domains/environments/Pipeline.vue'), title: 'CI-pijplijn' },
+    ],
+  },
+  {
     key: 'runners',
     path: '/environments/runners',
     label: 'CI-runners',
