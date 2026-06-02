@@ -9,6 +9,7 @@ import { useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
+import StatusBadge from '../../components/shared/StatusBadge.vue';
 
 const store = usePlatformStore();
 const router = useRouter();
@@ -164,6 +165,7 @@ function scoreColor(score) {
 
             <nldd-spacer size="12" />
             <nldd-container layout="wrap" gap="6" horizontal-alignment="left">
+              <StatusBadge :status="d.status" size="md" />
               <nldd-tag v-if="d.dnssec" color="success" size="md">DNSSEC</nldd-tag>
               <nldd-tag v-else color="critical" size="md">geen DNSSEC</nldd-tag>
               <nldd-tag v-if="d.ipv6" color="neutral" size="md">IPv6</nldd-tag>

@@ -22,13 +22,6 @@ const daysLeft = (expires) => {
   const m = /(\d+)/.exec(expires || '');
   return m ? Number(m[1]) : null;
 };
-const STATUS_COLOR = {
-  geldig: 'success',
-  'verloopt binnenkort': 'warning',
-  kritiek: 'critical',
-  verlopen: 'critical',
-  aangevraagd: 'neutral',
-};
 const appForService = (service) => store.apps.find((a) => a.id === service) || null;
 const domainForCert = (id) => store.domeinen.find((d) => d.tls === id) || null;
 
@@ -257,7 +250,7 @@ function toggleAuto(id) {
               <p class="rp-cert-cn rp-mono">{{ c.cn }}</p>
               <p class="rp-cert-sub">{{ c.tsp }} · {{ c.keyType }}</p>
             </div>
-            <nldd-tag :color="STATUS_COLOR[c.status] || 'neutral'" size="md">{{ c.status }}</nldd-tag>
+            <StatusBadge :status="c.status" size="md" />
           </div>
 
           <nldd-spacer size="12" />

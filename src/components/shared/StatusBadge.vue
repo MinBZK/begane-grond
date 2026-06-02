@@ -14,11 +14,17 @@ const COLORS = {
   'in gebruik': 'success', geleverd: 'success', merged: 'success', resolved: 'success',
   opgelost: 'success', goedgekeurd: 'success', geaccepteerd: 'success', voldoet: 'success',
   productie: 'success', afgerond: 'success',
+  // certificate lifecycle (PKIoverheid)
+  geldig: 'success', 'verloopt binnenkort': 'warning', kritiek: 'critical',
+  verlopen: 'critical', aangevraagd: 'neutral',
+  // accessibility statements (DigiToegankelijk)
+  'voldoet volledig': 'success', 'voldoet gedeeltelijk': 'warning',
+  'eerste maatregelen genomen': 'warning', 'voldoet niet': 'critical',
   // in progress / neutral-ish
   provisioning: 'warning', requested: 'neutral', besteld: 'neutral', 'in aanbouw': 'warning',
   'in beoordeling': 'warning', 'in behandeling': 'warning', mitigated: 'warning',
   beta: 'warning', deels: 'warning', warn: 'warning', warning: 'warning', actief: 'accent',
-  gepland: 'neutral', concept: 'neutral', offerte: 'neutral',
+  gepland: 'neutral', concept: 'neutral', offerte: 'neutral', aandacht: 'warning',
   sev3: 'warning', medium: 'warning', laag: 'neutral', low: 'neutral',
   // bad
   red: 'critical', failing: 'critical', open: 'critical', critical: 'critical',

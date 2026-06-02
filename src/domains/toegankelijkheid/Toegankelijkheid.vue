@@ -7,14 +7,9 @@ import { ref, computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
+import StatusBadge from '../../components/shared/StatusBadge.vue';
 
 const store = usePlatformStore();
-
-// Compliance status has no StatusBadge vocabulary, so map it locally to nldd-tag colors.
-const STATUS_COLOR = {
-  'voldoet volledig': 'success',
-  'voldoet gedeeltelijk': 'warning',
-};
 
 const STATUSES = [
   { id: 'all', label: 'Alle' },
@@ -42,9 +37,6 @@ function appName(id) {
 }
 function teamName(id) {
   return store.teamById(id)?.name || id;
-}
-function statusColor(status) {
-  return STATUS_COLOR[status] || 'critical';
 }
 function issuesLabel(issues) {
   return issues > 0 ? `${issues} knelpunten` : 'geen knelpunten';
@@ -103,7 +95,7 @@ function issuesLabel(issues) {
               <nldd-title size="4"><h2>{{ appName(t.app) }}</h2></nldd-title>
               <p class="rp-tv-fqdn">{{ t.fqdn }}</p>
             </div>
-            <nldd-tag :color="statusColor(t.status)" size="md">{{ t.status }}</nldd-tag>
+            <StatusBadge :status="t.status" size="md" />
           </div>
 
           <nldd-spacer size="10" />
