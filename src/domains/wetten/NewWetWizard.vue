@@ -159,7 +159,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('wet'));
   <div class="rp-page">
     <PageHeader
       title="Wet of beleid uitvoeren"
-      lede="De gouden weg om wet- en regelgeving uit te voeren (RegelRecht): van een geharveste wettekst naar een gepubliceerde, machine-leesbare wet die als dienst draait. Jurist en developer werken in hetzelfde traject, met de basisregistraties als bron."
+      lede="Het gebaande pad om wet- en regelgeving uit te voeren (RegelRecht): van een geharveste wettekst naar een gepubliceerde, machine-leesbare wet die als dienst draait. Jurist en developer werken in hetzelfde traject, met de basisregistraties als bron."
       :crumbs="[
         { text: 'Wet uitvoeren', href: '/wetten' },
         { text: 'Wet of beleid uitvoeren', href: '/wetten/nieuw' },

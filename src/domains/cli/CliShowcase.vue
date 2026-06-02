@@ -150,7 +150,7 @@ bg oncall escalate inc-2024-017`,
     to: '/ai/llm',
     toText: 'Bekijk LLM-modellen',
     code: `# Maak een API-key aan voor de overheids-LLM-gateway
-bg ai key create --team ${myTeam.value?.id || 'team-platform'} --name ci-summarizer
+bg ai key create --model overheids-llm-l --team ${myTeam.value?.id || 'team-platform'} --name ci-summarizer
 #  → llm_sk_live_••••••••••••••••5f3a  (kopieer nu, wordt niet opnieuw getoond)
 
 bg ai models                     # overheids-llm-l, overheids-llm-s, overheids-llm-eu
@@ -261,7 +261,7 @@ const subTools = [
 ];
 
 const completionCmd = `# Shell-completion installeren
-bg completion zsh > ~/.zsh/completions/_rp
+bg completion zsh > ~/.zsh/completions/_bg
 bg completion bash | sudo tee /etc/bash_completion.d/bg
 
 # Niet-interactief in CI (service-account token via env)

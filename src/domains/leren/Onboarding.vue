@@ -36,7 +36,7 @@ const newDevMeta = [
   { hint: 'Open een merge request en laat CI groen worden.', to: '/code', linkText: 'Open een PR', icon: 'arrow-up-arrow-down' },
 ];
 const prodMeta = [
-  { hint: 'Genereer een nieuwe service uit een golden-path template.', to: '/apps/nieuw', linkText: 'Nieuwe app', icon: 'plus' },
+  { hint: 'Genereer een nieuwe service uit een gebaand pad.', to: '/apps/nieuw', linkText: 'Nieuwe app', icon: 'plus' },
   { hint: 'Neem Postgres, Kafka of een cluster af uit de catalogus.', to: '/infra', linkText: 'Infra afnemen', icon: 'cloud' },
   { hint: 'Controleer dat de pijplijn slaagt op test en acceptatie.', to: '/observability', linkText: 'Pijplijn bekijken', icon: 'check-mark-circle' },
   { hint: 'Promoot je release stap voor stap naar productie.', to: '/environments', linkText: 'Omgevingen', icon: 'arrow-up-arrow-down' },
@@ -125,7 +125,7 @@ const meLinks = computed(() => {
           v-if="prodPath"
           :path="prodPath"
           icon="ship-wheel"
-          lede="Van golden-path template tot een dienst in productie."
+          lede="Van een gebaand pad tot een dienst in productie."
           :meta="prodMeta"
           :pre-done="0"
         />

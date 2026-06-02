@@ -212,7 +212,7 @@ export const people = [
     "history": [
       {
         "period": "2023–nu",
-        "what": "Platform engineer, RijksICT Gilde"
+        "what": "Platform engineer, Nederlandse Digitale Dienst"
       },
       {
         "period": "2020–2023",
@@ -246,7 +246,7 @@ export const people = [
     "history": [
       {
         "period": "2022–nu",
-        "what": "SRE, RijksICT Gilde"
+        "what": "SRE, Nederlandse Digitale Dienst"
       }
     ]
   },
@@ -25273,7 +25273,7 @@ export const fscPeers = [
   },
   {
     "id": "oin-g7",
-    "org": "RIJKSICT",
+    "org": "NLDD",
     "oin": "00000001000004000",
     "services": [
       "Inkomenstoets API",

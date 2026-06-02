@@ -123,9 +123,9 @@ export const eventSources = {
   teams: { label: 'Teams', icon: 'person-2', path: '/teams' },
   ai: { label: 'AI & LLM', icon: 'sparkles', path: '/ai' },
   governance: { label: 'Governance', icon: 'certificate', path: '/governance' },
-  fysiek: { label: 'Fysieke infra', icon: 'apartment-building', path: '/fysiek' },
+  fysiek: { label: 'Fundament', icon: 'apartment-building', path: '/fysiek' },
   standaarden: { label: 'Standaarden', icon: 'check-mark-circle', path: '/standaarden' },
-  wetten: { label: 'Wetten', icon: 'certificate', path: '/wetten' },
+  wetten: { label: 'Wet uitvoeren', icon: 'certificate', path: '/wetten' },
   registers: { label: 'Basisregistraties', icon: 'cylinder-split', path: '/registers' },
 };
 

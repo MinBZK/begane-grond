@@ -134,7 +134,7 @@ function nodeFill(type) {
           :sub="slo ? `SLO ${slo.current}% / ${slo.target}%` : 'geen SLO'"
           icon="heart"
         />
-        <MetricCard :value="app.maturity" label="Maturity" sub="golden-path-niveau" icon="starburst-filled" />
+        <MetricCard :value="app.maturity" label="Maturity" sub="gebaand-pad-niveau" icon="starburst-filled" />
         <MetricCard :value="instances.length" label="Infra-componenten" sub="instances in gebruik" icon="cloud" />
         <MetricCard
           :value="repo ? repo.openPrs : 0"

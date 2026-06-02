@@ -102,7 +102,7 @@ const crumbs = [
   <div class="rp-page">
     <PageHeader
       title="Productiewaardigheid-scorecards"
-      lede="Per applicatie een scorecard tegen de golden-path-eisen. Brons, zilver of goud, met een checklist die doorlinkt naar waar je een ontbrekend punt oplost."
+      lede="Per applicatie een scorecard tegen de gebaande-pad-eisen. Brons, zilver of goud, met een checklist die doorlinkt naar waar je een ontbrekend punt oplost."
       :crumbs="crumbs"
     />
 

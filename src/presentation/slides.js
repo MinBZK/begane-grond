@@ -309,7 +309,6 @@ export const slides = [
     route: '/standaarden',
     emit: { type: 'standard.updated', title: 'NLDD design system bijgewerkt naar 0.9' },
     highlight: '.rp-page',
-    highlight: '.rp-page',
   },
   {
     id: 'fleet-campagne',
