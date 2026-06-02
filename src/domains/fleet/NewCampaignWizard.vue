@@ -118,7 +118,7 @@ function diffFor(repo) {
       'new file mode 100644',
       `+++ b/${fileGuess}`,
       '@@ -0,0 +1,6 @@',
-      '+// Gegenereerd door fleet-shift (Claude via gateway)',
+      '+// Gegenereerd door fleet-shift (Overheids-LLM EU)',
       '+pub async fn healthz() -> impl Responder {',
       '+    HttpResponse::Ok().body("OK")',
       '+}',
@@ -143,7 +143,7 @@ const cliCommand = computed(() => {
     return `bg fleet campaign run --type regex \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --match '${form.pattern}' --replace '${form.replacement}' --glob '${form.glob}' \\\n  --repos ${repoArgs}`;
   }
   if (t === 'llm') {
-    return `bg fleet campaign run --type llm --model claude-gateway \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --prompt "${form.prompt.slice(0, 60)}…" \\\n  --repos ${repoArgs}`;
+    return `bg fleet campaign run --type llm --model overheids-llm-eu \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --prompt "${form.prompt.slice(0, 60)}…" \\\n  --repos ${repoArgs}`;
   }
   return `bg fleet campaign run --type file-creation \\\n  --title "${form.title || typeMeta(t).label}" \\\n  --add ${form.filePath} \\\n  --repos ${repoArgs}`;
 });
@@ -369,7 +369,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
 
           <!-- llm -->
           <div v-else-if="form.type === 'llm'">
-            <nldd-inline-dialog title="Model: Claude (via gateway)" supporting-text="EU-residency, tot Intern geclassificeerd. De gateway stelt per repo een diff voor; jij bekijkt en mergt."></nldd-inline-dialog>
+            <nldd-inline-dialog title="Model: Overheids-LLM EU" supporting-text="EU-residency, tot Intern geclassificeerd. De gateway stelt per repo een diff voor; jij bekijkt en mergt."></nldd-inline-dialog>
             <nldd-spacer size="14" />
             <nldd-form-field label="Prompt voor de transformatie">
               <textarea
@@ -436,7 +436,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
             <div><dt>Eigenaar</dt><dd>{{ teamName(form.owner) }}</dd></div>
             <div><dt>Repos</dt><dd>{{ targetRepos.length }} ({{ targetRepos.map((r) => r.name).join(', ') }})</dd></div>
             <div v-if="form.type === 'regex'"><dt>Codemod</dt><dd class="rp-mono">s/{{ form.pattern }}/{{ form.replacement }}/ in {{ form.glob }}</dd></div>
-            <div v-else-if="form.type === 'llm'"><dt>Model</dt><dd>Claude (via gateway)</dd></div>
+            <div v-else-if="form.type === 'llm'"><dt>Model</dt><dd>Overheids-LLM EU</dd></div>
             <div v-else><dt>Bestand</dt><dd class="rp-mono">{{ form.filePath }}</dd></div>
           </dl>
           <nldd-spacer size="16" />

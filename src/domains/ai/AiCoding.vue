@@ -41,7 +41,7 @@ const assistants = [
     name: 'AI-PR-review',
     tagline: 'Automatische review-comments op elke pull request',
     desc: 'Draait als CI-stap, plaatst inline opmerkingen, blokkeert niet.',
-    model: 'Claude (via gateway)',
+    model: 'Overheids-LLM L',
     badge: 'beta',
     badgeColor: 'warning',
     icon: 'eye',
@@ -183,8 +183,8 @@ const reviewComments = [
     file: 'src/config.rs',
     line: 28,
     title: 'Secret uit omgeving, niet hardcoden',
-    body: 'De Kafka-API-key lijkt als constante ingebakken. Lees hem uit de Vault via RP_KAFKA_KEY. Zie het secrets-domein.',
-    suggestion: 'let key = std::env::var("RP_KAFKA_KEY")?;',
+    body: 'De Kafka-API-key lijkt als constante ingebakken. Lees hem uit de Vault via BG_KAFKA_KEY. Zie het secrets-domein.',
+    suggestion: 'let key = std::env::var("BG_KAFKA_KEY")?;',
   },
   {
     id: 'rc-3',
@@ -211,7 +211,7 @@ const reviewComments = [
 // --- AI governance: data classification -> allowed models -----------------
 const governance = [
   { classification: 'Openbaar', color: 'success', models: 'alle modellen', residency: 'NL of EU', note: 'Geen beperkingen.' },
-  { classification: 'Intern', color: 'accent', models: 'NL- en EU-modellen', residency: 'NL of EU', note: 'Claude-gateway toegestaan, data blijft in de EU.' },
+  { classification: 'Intern', color: 'accent', models: 'NL- en EU-modellen', residency: 'NL of EU', note: 'EU-model toegestaan, data blijft in de EU.' },
   { classification: 'Departementaal Vertrouwelijk', color: 'warning', models: 'alleen soevereine modellen', residency: 'Nederland', note: 'Uitsluitend Overheids-LLM L/S. Geen data buiten NL.' },
   { classification: 'Staatsgeheim', color: 'critical', models: 'geen LLM-gebruik', residency: 'n.v.t.', note: 'Niet toegestaan via de gateway.' },
 ];

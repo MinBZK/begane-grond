@@ -28177,8 +28177,8 @@ export const llmModels = [
     "classification": "tot Departementaal Vertrouwelijk"
   },
   {
-    "id": "claude-gateway",
-    "name": "Claude (via gateway)",
+    "id": "overheids-llm-eu",
+    "name": "Overheids-LLM EU",
     "host": "EU",
     "context": "200k",
     "pricePer1m": 9,
@@ -28195,12 +28195,12 @@ export const skillPlugins = [
     "skills": 10,
     "desc": "API Design Rules, Digikoppeling, OAuth NL, FSC en andere Logius-standaarden als AI-skills.",
     "install": "bg ai skill install standaarden --team team-platform",
-    "altInstall": "claude plugin install standaarden@overheid-plugins",
+    "altInstall": "opencode plugin install standaarden@overheid-plugins",
     "standards": [
       "std-adr"
     ],
     "platforms": [
-      "Claude Code",
+      "opencode",
       "Cursor"
     ],
     "installs": 34
@@ -28212,13 +28212,13 @@ export const skillPlugins = [
     "skills": 14,
     "desc": "De 14 richtlijnen van de Nederlandse Richtlijn Digitale Systemen, van privacy tot open source.",
     "install": "bg ai skill install nerds --team team-platform",
-    "altInstall": "claude plugin install nerds@overheid-plugins",
+    "altInstall": "opencode plugin install nerds@overheid-plugins",
     "standards": [
       "std-bio",
       "std-wcag"
     ],
     "platforms": [
-      "Claude Code",
+      "opencode",
       "Cursor"
     ],
     "installs": 28
@@ -28230,10 +28230,10 @@ export const skillPlugins = [
     "skills": 6,
     "desc": "Geonovum geo-standaarden: OGC API, metadata, informatiemodellen (NEN 3610, IMGeo).",
     "install": "bg ai skill install geo --team team-data",
-    "altInstall": "claude plugin install geo@overheid-plugins",
+    "altInstall": "opencode plugin install geo@overheid-plugins",
     "standards": [],
     "platforms": [
-      "Claude Code",
+      "opencode",
       "Cursor"
     ],
     "installs": 9
@@ -28245,12 +28245,12 @@ export const skillPlugins = [
     "skills": 5,
     "desc": "internet.nl web- en mailstandaarden: HTTPS, DNSSEC, DMARC, DKIM, SPF, security.txt.",
     "install": "bg ai skill install internet --team team-platform",
-    "altInstall": "claude plugin install internet@overheid-plugins",
+    "altInstall": "opencode plugin install internet@overheid-plugins",
     "standards": [
       "std-internetnl"
     ],
     "platforms": [
-      "Claude Code",
+      "opencode",
       "Cursor"
     ],
     "installs": 21
@@ -28262,12 +28262,12 @@ export const skillPlugins = [
     "skills": 4,
     "desc": "Skills voor het NLDD design system: componenten kiezen, tokens en toegankelijke patronen.",
     "install": "bg ai skill install design --team team-platform",
-    "altInstall": "claude plugin install design@overheid-plugins",
+    "altInstall": "opencode plugin install design@overheid-plugins",
     "standards": [
       "std-nldd"
     ],
     "platforms": [
-      "Claude Code",
+      "opencode",
       "Cursor"
     ],
     "installs": 31
@@ -28279,10 +28279,10 @@ export const skillPlugins = [
     "skills": 2,
     "desc": "Skills om zelf plugins te publiceren en de marketplace.json gesynchroniseerd te houden.",
     "install": "bg ai skill install marketplace --team team-platform",
-    "altInstall": "claude plugin install marketplace@overheid-plugins",
+    "altInstall": "opencode plugin install marketplace@overheid-plugins",
     "standards": [],
     "platforms": [
-      "Claude Code",
+      "opencode",
       "Cursor"
     ],
     "installs": 6

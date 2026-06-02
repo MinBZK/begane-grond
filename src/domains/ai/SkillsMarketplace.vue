@@ -3,7 +3,7 @@
 // AI toward compliance with Dutch government standards. Modelled on
 // github.com/developer-overheid-nl/skills-marketplace, a neutral marketplace
 // of plugins (each bundling "skills", i.e. AI capabilities) installable into
-// bg code or a Claude-Code-style editor such as Cursor. This is the missing
+// bg code (opencode) or an editor such as Cursor. This is the missing
 // link between the platform's AI offering and its standards: the assistant
 // learns the standard you must meet.
 import { ref, computed } from 'vue';

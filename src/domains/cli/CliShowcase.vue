@@ -153,7 +153,7 @@ bg oncall escalate inc-2024-017`,
 bg ai key create --team ${myTeam.value?.id || 'team-platform'} --name ci-summarizer
 #  → llm_sk_live_••••••••••••••••5f3a  (kopieer nu, wordt niet opnieuw getoond)
 
-bg ai models                     # overheids-llm-l, overheids-llm-s, claude-gateway
+bg ai models                     # overheids-llm-l, overheids-llm-s, overheids-llm-eu
 bg ai chat --model overheids-llm-l "Vat dit changelog samen" < CHANGELOG.md
 
 # Skills-marketplace: geef je assistent kennis van de overheidsstandaarden
@@ -265,7 +265,7 @@ bg completion zsh > ~/.zsh/completions/_rp
 bg completion bash | sudo tee /etc/bash_completion.d/bg
 
 # Niet-interactief in CI (service-account token via env)
-export RP_TOKEN=$RIJKSPLATFORM_TOKEN
+export BG_TOKEN=$RIJKSPLATFORM_TOKEN
 bg infra list --output json --no-input | jq '.[] | .name'`;
 
 const tab = ref('domeinen');

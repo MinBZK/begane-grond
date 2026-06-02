@@ -185,7 +185,7 @@ const cliCommand = computed(() => {
 const usageSnippet = computed(() => {
   if (!ordered.value) return '';
   return `curl ${endpoint.value}/chat/completions \\
-  -H "Authorization: Bearer $RP_LLM_KEY" \\
+  -H "Authorization: Bearer $BG_LLM_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{"model":"${selectedModel.value.id}","messages":[{"role":"user","content":"Hallo"}]}'`;
 });
@@ -312,7 +312,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('llm'));
                 <div class="rp-key-value">
                   <code>{{ endpoint }}</code>
                 </div>
-                <p class="rp-key-note">OpenAI-compatible. Stel <code>RP_LLM_KEY</code> in als omgevingsvariabele.</p>
+                <p class="rp-key-note">OpenAI-compatible. Stel <code>BG_LLM_KEY</code> in als omgevingsvariabele.</p>
               </div>
             </div>
 
