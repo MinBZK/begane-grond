@@ -352,6 +352,20 @@ export const slides = [
     skippable: true,
   },
   {
+    id: 'software-inkoop',
+    title: 'Koop of bouw, met een uitweg',
+    lead: 'Wat je toch inkoopt, koop je met het lock-in-risico en de exit-strategie erbij.',
+    bullets: [
+      'Niet alles bouw je zelf. Wat je koopt, leg je vast met voorwaarden en een uitweg.',
+      'Per contract staat het lock-in-risico en hoe je eruit stapt.',
+      'Open source verlaagt de afhankelijkheid, en dat is zichtbaar te sturen.',
+    ],
+    gov: 'Afhankelijkheid van een leverancier wordt een bewuste, herleidbare keuze onder ARBIT en ARVODI, geen sluipend gevolg.',
+    route: '/software-inkoop',
+    highlight: '.rp-page',
+    skippable: true,
+  },
+  {
     id: 'security-compliance',
     title: 'Security en compliance',
     lead: 'Veiligheid is geen bijlage achteraf.',
