@@ -196,7 +196,7 @@ export const domains = [
     path: '/koppelvlakken',
     label: 'Koppelvlakken',
     icon: 'link',
-    wave: 'C',
+    wave: 'A',
     routes: [
       { path: '/koppelvlakken', name: 'koppelvlakken', view: () => import('./domains/koppelvlakken/ApiCatalog.vue'), title: 'API-catalogus' },
       { path: '/koppelvlakken/fsc', name: 'koppelvlakken-fsc', view: () => import('./domains/koppelvlakken/Digikoppeling.vue'), title: 'Digikoppeling / FSC' },
@@ -207,7 +207,7 @@ export const domains = [
     path: '/registers',
     label: 'Basisregistraties',
     icon: 'cylinder-split',
-    wave: 'C',
+    wave: 'A',
     routes: [
       { path: '/registers', name: 'registers', view: () => import('./domains/registers/Registers.vue'), title: 'Basisregistraties' },
       { path: '/registers/:id', name: 'registers-detail', view: () => import('./domains/registers/RegisterDetail.vue'), title: 'Register' },
@@ -218,7 +218,7 @@ export const domains = [
     path: '/wetten',
     label: 'Wet uitvoeren',
     icon: 'certificate',
-    wave: 'C',
+    wave: 'A',
     routes: [
       { path: '/wetten', name: 'wetten', view: () => import('./domains/wetten/Wetten.vue'), title: 'Wet uitvoeren' },
       { path: '/wetten/nieuw', name: 'wetten-nieuw', view: () => import('./domains/wetten/NewWetWizard.vue'), title: 'Wet of beleid uitvoeren' },
