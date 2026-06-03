@@ -113,6 +113,19 @@ const totalSpent = computed(() =>
   store.budgets.reduce((sum, b) => sum + (b.spent || 0), 0),
 );
 const overruns = computed(() => rows.value.filter((r) => r.over));
+// Total euros spent over budget across all overrunning teams, and a short
+// summary that names only the worst few so the banner stays one tight line.
+const totalOverspend = computed(() =>
+  overruns.value.reduce((sum, r) => sum + (r.spent - r.budget), 0),
+);
+const overrunSummary = computed(() => {
+  if (!overruns.value.length) return '';
+  const worst = [...overruns.value].sort((a, b) => b.spent - b.budget - (a.spent - a.budget));
+  const named = worst.slice(0, 3).map((o) => o.name).join(', ');
+  const rest = worst.length - 3;
+  const who = rest > 0 ? `${named} en ${rest} ${rest === 1 ? 'ander team' : 'andere teams'}` : named;
+  return `${who}, samen ${fmtEur(totalOverspend.value)} te veel. Verhoog het budget of schaal diensten terug.`;
+});
 const portfolioPct = computed(() =>
   totalBudget.value ? Math.round((totalSpent.value / totalBudget.value) * 100) : 0,
 );
@@ -161,7 +174,7 @@ function bumpBudget(teamId, delta) {
       <MetricCard
         :value="overruns.length"
         label="Overschrijdingen"
-        :sub="overruns.length ? overruns.map((o) => o.name).join(', ') : 'binnen budget'"
+        :sub="overruns.length ? `${overruns.length === 1 ? 'team' : 'teams'} over budget` : 'binnen budget'"
         icon="exclamation-triangle"
       />
       <MetricCard
@@ -174,12 +187,18 @@ function bumpBudget(teamId, delta) {
 
     <nldd-spacer size="24" />
 
-    <!-- Overrun banner -->
+    <!-- Overrun banner: one tight line, left-aligned with an icon. The per-team
+         detail lives in the list below, so we summarize here. (A plain element
+         rather than nldd-banner, which auto-defines attributes that break Vue's
+         createElement.) -->
     <template v-if="overruns.length">
-      <nldd-inline-dialog
-        title="Budget overschreden"
-        :supporting-text="`${overruns.map((o) => `${o.name} (${fmtEur(o.spent)} van ${fmtEur(o.budget)})`).join('; ')}. Verhoog het budget of schaal diensten terug.`"
-      ></nldd-inline-dialog>
+      <div class="rp-overrun-banner" role="status">
+        <nldd-icon name="exclamation-triangle" aria-hidden="true" class="rp-overrun-icon"></nldd-icon>
+        <div class="rp-overrun-body">
+          <p class="rp-overrun-title">{{ overruns.length }} {{ overruns.length === 1 ? 'team' : 'teams' }} over budget</p>
+          <p class="rp-overrun-text">{{ overrunSummary }}</p>
+        </div>
+      </div>
       <nldd-spacer size="24" />
     </template>
 
@@ -346,6 +365,37 @@ function bumpBudget(teamId, delta) {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+}
+
+/* Overrun warning banner */
+.rp-overrun-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid #d97706;
+  background: rgba(217, 119, 6, 0.08);
+}
+.rp-overrun-icon {
+  width: 1.3rem;
+  height: 1.3rem;
+  color: #b45309;
+  flex: 0 0 auto;
+  margin-top: 0.05rem;
+}
+.rp-overrun-body {
+  min-width: 0;
+}
+.rp-overrun-title {
+  margin: 0;
+  font-weight: 700;
+}
+.rp-overrun-text {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  opacity: 0.85;
 }
 
 /* Filters */
