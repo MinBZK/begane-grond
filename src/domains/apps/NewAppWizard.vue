@@ -151,9 +151,16 @@ const cliCommand = computed(() => {
 });
 
 const created = ref(null); // { app, repoId }
+// How many commits this golden-path creation wrote to platform-config, and the
+// sha of the app-declaration commit to link to. createApp audits the infra
+// orders first and the app last, and audit() unshifts, so commits[0] after the
+// call is the app commit: the right one to land on. This is the seam.
+const createdCommits = ref(0);
+const createdCommitSha = ref('');
 
 function onFinish() {
   if (!form.name.trim()) return;
+  const before = store.commits.length;
   created.value = store.createApp({
     name: form.name.trim(),
     team: form.team,
@@ -161,6 +168,8 @@ function onFinish() {
     withInfra: form.infra,
     visibility: form.visibility,
   });
+  createdCommits.value = store.commits.length - before;
+  createdCommitSha.value = store.commits[0]?.sha || '';
 }
 
 const createdRepo = computed(() =>
@@ -255,6 +264,16 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
           <RelationLinks title="Ga verder met" :links="successLinks" />
 
           <CliHint :command="cliCommand" label="Ditzelfde resultaat via de CLI:" />
+
+          <!-- The seam: this golden-path creation is a set of commits on
+               platform-config. We point at them rather than dumping code. -->
+          <router-link v-if="createdCommits" :to="`/platform/iac/${createdCommitSha}`" class="rp-commit-seam">
+            <nldd-icon name="chevron-left-forward-slash-chevron-right" aria-hidden="true"></nldd-icon>
+            <span class="rp-commit-text">
+              Deze applicatie is <code>{{ createdCommits }}</code> {{ createdCommits === 1 ? 'commit' : 'commits' }} op <code>platform-config</code>
+            </span>
+            <nldd-icon name="arrow-right" aria-hidden="true" class="rp-commit-arrow"></nldd-icon>
+          </router-link>
 
           <nldd-spacer size="20" />
           <nldd-button-group orientation="horizontal">
@@ -578,4 +597,23 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
 .rp-done-fact { display: flex; flex-direction: column; gap: 0.35rem; align-items: flex-start; }
 .rp-done-fact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.6; }
 .rp-done-fact-value { font-weight: 600; }
+.rp-commit-seam {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  text-decoration: none;
+  color: inherit;
+}
+.rp-commit-seam:hover {
+  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+}
+.rp-commit-seam > nldd-icon { width: 1.05rem; height: 1.05rem; opacity: 0.75; flex: 0 0 auto; }
+.rp-commit-text { flex: 1 1 auto; font-size: 0.9rem; }
+.rp-commit-text code { font-family: var(--ro-font-mono, ui-monospace, monospace); font-weight: 600; }
+.rp-commit-arrow { opacity: 0.4; }
 </style>

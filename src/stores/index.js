@@ -15,6 +15,74 @@ const nextId = (prefix) => `${prefix}-${++_seq}`;
 // Severity rank for sorting/escalation.
 const SEV_RANK = { critical: 0, warning: 1, success: 2, info: 3 };
 
+// --- Infra-as-code: every audited action also lands as a commit -------------
+// The platform's whole point is that the UI is just an editor over a git repo
+// of declared config: no wizard, no button changes anything outside a commit.
+// audit() funnels through here so every existing call-site inherits a commit
+// for free. Everything below is deterministic (no clock/random APIs, which the
+// codebase forbids): the sha is a hash of the action, the path/message/diff
+// follow from the action family.
+
+// Tiny deterministic 32-bit string hash (FNV-1a), rendered as a 7-char hex sha.
+function shaFor(seed) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < seed.length; i += 1) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return (h >>> 0).toString(16).padStart(8, '0').slice(0, 7);
+}
+
+// Slugify a free-text resource into a path-safe token.
+function slugify(s) {
+  return String(s || 'resource')
+    .toLowerCase()
+    .replace(/→.*$/, '')
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'resource';
+}
+
+// Map an action family to a file in the platform-config repo + a commit type.
+// The family detection mirrors AuditLog.vue's actionIcon() so path and icon
+// stay consistent across the two screens.
+function commitMetaFor(action, resource) {
+  const a = (action || '').toLowerCase();
+  const slug = slugify(resource);
+  if (a.includes('secret')) return { path: `secrets/${slug}.sops.yaml`, type: 'chore', scope: 'secrets', verb: 'rotate' };
+  if (a.includes('infra') || a.includes('instance')) return { path: `infra/${slug}.tf`, type: 'feat', scope: 'infra', verb: 'provision' };
+  if (a.includes('release') || a.includes('promo')) return { path: `environments/${slug}.yaml`, type: 'feat', scope: 'release', verb: 'promote' };
+  if (a.includes('rfc')) return { path: `governance/rfcs/${slug}.md`, type: 'docs', scope: 'rfc', verb: 'record' };
+  if (a.includes('applicatie') || a.includes('app')) return { path: `apps/${slug}/app.yaml`, type: 'feat', scope: 'app', verb: 'scaffold' };
+  if (a.includes('campagne')) return { path: `fleet/${slug}.yaml`, type: 'feat', scope: 'fleet', verb: 'roll out' };
+  if (a.includes('werkplek') || a.includes('device')) return { path: `workplaces/${slug}.yaml`, type: 'chore', scope: 'workplace', verb: 'apply' };
+  if (a.includes('budget') || a.includes('kosten') || a.includes('showback')) return { path: `finance/${slug}.yaml`, type: 'chore', scope: 'finance', verb: 'update' };
+  if (a.includes('scan') || a.includes('security')) return { path: `security/${slug}.yaml`, type: 'chore', scope: 'security', verb: 'record' };
+  return { path: `platform/${slug}.yaml`, type: 'chore', scope: 'platform', verb: 'update' };
+}
+
+// Build a compact, plausible unified diff for the commit. We do not parse real
+// files; we render an added block whose shape matches the family, enough to make
+// "this is what changed" tangible when the row is expanded on the IaC page.
+function diffFor(meta, resource) {
+  const slug = slugify(resource);
+  const lines = [`--- a/${meta.path}`, `+++ b/${meta.path}`, '@@'];
+  if (meta.scope === 'infra') {
+    lines.push(`+resource "platform_instance" "${slug}" {`, `+  name    = "${resource}"`, '+  managed = true', '+}');
+  } else if (meta.scope === 'release') {
+    lines.push(`+# ${resource}`, '+desired_version: "next"', '+strategy: rolling');
+  } else if (meta.scope === 'secrets') {
+    lines.push(`+# rotated ${resource}`, '+enc: sops:age', '+rotation: quarterly');
+  } else if (meta.scope === 'app') {
+    lines.push(`+name: ${resource}`, '+template: golden-path', '+infra: [postgres, kubernetes]');
+  } else if (meta.scope === 'fleet') {
+    lines.push(`+campaign: ${resource}`, '+target: matched-repos', '+open_pr: true');
+  } else {
+    lines.push(`+# ${resource}`, '+managed: true');
+  }
+  return lines.join('\n');
+}
+
 export const usePlatformStore = defineStore('platform', {
   state: () => ({
     organisations: clone(seed.organisations),
@@ -55,6 +123,7 @@ export const usePlatformStore = defineStore('platform', {
     gates: clone(seed.gates),
     rfcs: clone(seed.rfcs),
     auditLog: clone(seed.auditLog),
+    commits: clone(seed.commits),
     standards: clone(seed.standards),
     channels: clone(seed.channels),
     subscriptions: clone(seed.subscriptions),
@@ -119,6 +188,7 @@ export const usePlatformStore = defineStore('platform', {
     rackById: (s) => (id) => s.racks.find((r) => r.id === id),
     instanceById: (s) => (id) => s.instances.find((i) => i.id === id),
     orgById: (s) => (id) => s.organisations.find((o) => o.id === id),
+    commitBySha: (s) => (sha) => s.commits.find((c) => c.sha === sha),
 
     // --- Physical compute capacity, aggregated from the rack units ---
     // Sums vCPU, memory (GB), GPUs and raw storage (TB) across all installed
@@ -311,6 +381,30 @@ export const usePlatformStore = defineStore('platform', {
   actions: {
     audit(action, resource) {
       this.auditLog.unshift({ id: nextId('a'), actor: this.currentUser, action, resource, at: 'zojuist' });
+      // The same event, seen as a commit: every audited action writes to the
+      // platform-config repo. This is what makes "every click is a commit" true.
+      this.commit({ action, resource });
+    },
+
+    // Append a commit to the platform-config repo for an action. Pure and
+    // deterministic; the sha/path/message/diff all follow from action+resource.
+    commit({ action, resource, actor = null }) {
+      const id = nextId('c');
+      const meta = commitMetaFor(action, resource);
+      const sha = shaFor(`${id}|${action}|${resource}`);
+      const message = `${meta.type}(${meta.scope}): ${meta.verb} ${resource}`;
+      const entry = {
+        id,
+        sha,
+        actor: actor || this.currentUser,
+        message,
+        path: meta.path,
+        diff: diffFor(meta, resource),
+        action,
+        at: 'zojuist',
+      };
+      this.commits.unshift(entry);
+      return entry;
     },
 
     // --- The event bus: the spine that feeds the notification system ---

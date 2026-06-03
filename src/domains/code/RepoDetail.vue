@@ -66,6 +66,14 @@ const README = {
     ],
     run: 'uv run uvicorn datadeling.main:app --reload',
   },
+  'repo-platform-config': {
+    tagline: 'De bron van waarheid van het platform: alle infra, omgevingen en governance als code.',
+    body: [
+      'Deze repository is wat het platform draaiend houdt. Elke wizard en elke knop in het Platformportaal schrijft hierheen: infra afnemen, een release promoten, een secret roteren. Niets verandert buiten een commit om, dus alles is herleidbaar en terug te draaien.',
+      'Gedeclareerd in HCL en YAML, versleuteld waar nodig met sops. De gewenste staat per omgeving staat in environments/, en drift is een afwijking van wat hier staat. Open onder EUPL-1.2, zodat de werking controleerbaar is.',
+    ],
+    run: 'bg config log --path infra/',
+  },
   'repo-stuc': {
     tagline: 'Open-source engine achter rijksbrede fleet-transformaties.',
     body: [
@@ -123,6 +131,16 @@ const BY_LANG = {
     { name: 'tests/', kind: 'dir', icon: 'folder' },
     { name: 'pyproject.toml', kind: 'file', icon: 'cylinder-split' },
     { name: 'uv.lock', kind: 'file', icon: 'cylinder-split' },
+  ],
+  // platform-config: the source of truth, declared as code (see IaC.vue).
+  HCL: [
+    { name: 'apps/', kind: 'dir', icon: 'folder', note: 'elke applicatie als declaratie' },
+    { name: 'environments/', kind: 'dir', icon: 'folder', note: 'gewenste versie per omgeving' },
+    { name: 'fleet/', kind: 'dir', icon: 'folder', note: 'vloot-brede wijzigingen' },
+    { name: 'governance/', kind: 'dir', icon: 'folder', note: "RFC's en besluiten als code" },
+    { name: 'infra/', kind: 'dir', icon: 'folder', note: 'databases, clusters, queues' },
+    { name: 'secrets/', kind: 'dir', icon: 'folder', note: 'versleuteld (sops)' },
+    { name: 'main.tf', kind: 'file', icon: 'cylinder-split' },
   ],
 };
 const fileTree = computed(() => {

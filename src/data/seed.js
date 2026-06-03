@@ -20374,6 +20374,18 @@ export const templates = [
 
 export const repos = [
   {
+    "id": "repo-platform-config",
+    "name": "nldd/platform-config",
+    "visibility": "open",
+    "lang": "HCL",
+    "stars": 47,
+    "openPrs": 3,
+    "openIssues": 1,
+    "ci": "green",
+    "license": "EUPL-1.2",
+    "app": null
+  },
+  {
     "id": "repo-paspoort",
     "name": "minbzk/paspoort",
     "visibility": "intern",
@@ -31219,6 +31231,72 @@ export const auditLog = [
     "resource": "Voeg Dependabot-config toe",
     "at": "do 17:39"
   }
+];
+
+// platform-config commit history. Every audited action also lands here at
+// runtime (see store.commit); these seed entries give the IaC page a populated
+// log on first load. Actors match auditLog. Deterministic, no clock/random.
+export const commits = [
+  {
+    id: 'c-seed-1', sha: 'a3f9c21', actor: 'ans',
+    message: 'feat(infra): provision llm-gilde-prod',
+    path: 'infra/llm-gilde-prod.tf', action: 'infra afgenomen', at: 'di 10:02',
+    diff: '--- a/infra/llm-gilde-prod.tf\n+++ b/infra/llm-gilde-prod.tf\n@@\n+resource "platform_instance" "llm-gilde-prod" {\n+  name    = "llm-gilde-prod"\n+  kind    = "llm"\n+  managed = true\n+}',
+  },
+  {
+    id: 'c-seed-2', sha: 'b71d0e4', actor: 'fatima',
+    message: 'chore(secrets): rotate platform/llm-gateway-key',
+    path: 'secrets/platform-llm-gateway-key.sops.yaml', action: 'secret geroteerd', at: 'di 09:40',
+    diff: '--- a/secrets/platform-llm-gateway-key.sops.yaml\n+++ b/secrets/platform-llm-gateway-key.sops.yaml\n@@\n+# rotated platform/llm-gateway-key\n+enc: sops:age\n+rotation: quarterly',
+  },
+  {
+    id: 'c-seed-3', sha: 'c0a8842', actor: 'joost',
+    message: 'feat(release): promote app-paspoort naar prod',
+    path: 'environments/app-paspoort.yaml', action: 'release gepromoot', at: 'gisteren 14:22',
+    diff: '--- a/environments/app-paspoort.yaml\n+++ b/environments/app-paspoort.yaml\n@@\n prod:\n-  version: "3.4.1"\n+  version: "3.5.0"',
+  },
+  {
+    id: 'c-seed-4', sha: 'd12f5b9', actor: 'ans',
+    message: 'feat(app): scaffold inkomenstoets',
+    path: 'apps/inkomenstoets/app.yaml', action: 'applicatie aangemaakt', at: 'gisteren 11:08',
+    diff: '--- a/apps/inkomenstoets/app.yaml\n+++ b/apps/inkomenstoets/app.yaml\n@@\n+name: inkomenstoets\n+template: golden-path\n+infra: [postgres, kubernetes]',
+  },
+  {
+    id: 'c-seed-5', sha: 'e9c4470', actor: 'sanne',
+    message: 'feat(fleet): roll out Voeg Dependabot-config toe',
+    path: 'fleet/voeg-dependabot-config-toe.yaml', action: 'campagne uitgerold', at: 'do 17:39',
+    diff: '--- a/fleet/voeg-dependabot-config-toe.yaml\n+++ b/fleet/voeg-dependabot-config-toe.yaml\n@@\n+campaign: Voeg Dependabot-config toe\n+target: matched-repos\n+open_pr: true',
+  },
+  {
+    id: 'c-seed-6', sha: 'f5b1a23', actor: 'joost',
+    message: 'feat(infra): provision toeslagen-postgres-prod',
+    path: 'infra/toeslagen-postgres-prod.tf', action: 'infra afgenomen', at: 'do 16:51',
+    diff: '--- a/infra/toeslagen-postgres-prod.tf\n+++ b/infra/toeslagen-postgres-prod.tf\n@@\n+resource "platform_instance" "toeslagen-postgres-prod" {\n+  name    = "toeslagen-postgres-prod"\n+  kind    = "postgres"\n+  size    = "L"\n+  managed = true\n+}',
+  },
+  {
+    id: 'c-seed-7', sha: '1d6e088', actor: 'fatima',
+    message: 'docs(rfc): record rfc-2026-014 Multi-region kafka',
+    path: 'governance/rfcs/rfc-2026-014.md', action: 'RFC opgesteld', at: 'wo 13:20',
+    diff: '--- a/governance/rfcs/rfc-2026-014.md\n+++ b/governance/rfcs/rfc-2026-014.md\n@@\n+# RFC 2026-014: Multi-region kafka\n+status: voorgesteld',
+  },
+  {
+    id: 'c-seed-8', sha: '2a7f9c1', actor: 'ans',
+    message: 'feat(release): promote app-toeslagen naar acc',
+    path: 'environments/app-toeslagen.yaml', action: 'release gepromoot', at: 'wo 10:05',
+    diff: '--- a/environments/app-toeslagen.yaml\n+++ b/environments/app-toeslagen.yaml\n@@\n acc:\n-  version: "8.1.2"\n+  version: "8.2.0"',
+  },
+  {
+    id: 'c-seed-9', sha: '3c8b0d5', actor: 'sanne',
+    message: 'chore(workplace): apply wp-1042',
+    path: 'workplaces/wp-1042.yaml', action: 'werkplek opnieuw geïmaged', at: 'di 15:33',
+    diff: '--- a/workplaces/wp-1042.yaml\n+++ b/workplaces/wp-1042.yaml\n@@\n-image: rijksbeeld-2025.3\n+image: rijksbeeld-2026.1',
+  },
+  {
+    id: 'c-seed-10', sha: '4e2a7f6', actor: 'joost',
+    message: 'chore(secrets): rotate paspoort/db-wachtwoord',
+    path: 'secrets/paspoort-db-wachtwoord.sops.yaml', action: 'secret geroteerd', at: 'di 09:11',
+    diff: '--- a/secrets/paspoort-db-wachtwoord.sops.yaml\n+++ b/secrets/paspoort-db-wachtwoord.sops.yaml\n@@\n+# rotated paspoort/db-wachtwoord\n+enc: sops:age\n+rotation: quarterly',
+  },
 ];
 
 export const standards = [

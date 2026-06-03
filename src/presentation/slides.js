@@ -268,6 +268,20 @@ export const slides = [
     drive: { wizard: 'promotie' },
   },
   {
+    id: 'infra-als-code',
+    title: 'En dat was een commit',
+    lead: 'Die promotie was geen losse klik: het werd een diff in git, een nieuwe gewenste versie.',
+    bullets: [
+      'Elke wizard en elke knop schrijft naar één config-repo, ook deze promotie.',
+      'Je kunt altijd naar de onderliggende code kijken, en elke wijziging terugdraaien.',
+      'Desired state staat in git; drift is zichtbaar als afwijking daarvan.',
+    ],
+    gov: 'Herleidbaar en reproduceerbaar van nature: precies wat een overheid moet kunnen aantonen.',
+    route: '/platform/iac',
+    highlight: '.rp-page',
+    emit: { type: 'config.committed', title: 'Commit op platform-config: nieuwe gewenste versie' },
+  },
+  {
     id: 'artefacten',
     title: 'Artefacten, SBOM en handtekeningen',
     lead: 'Elk gebouwd artefact heeft een paklijst en een handtekening.',

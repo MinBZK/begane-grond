@@ -70,6 +70,7 @@ export const eventCatalog = [
   { type: 'issue.assigned', source: 'code', label: 'Issue toegewezen', severity: 'info', icon: 'person' },
   { type: 'issue.closed', source: 'code', label: 'Issue gesloten', severity: 'success', icon: 'check-mark-circle' },
   { type: 'commit.pushed', source: 'code', label: 'Commit gepusht', severity: 'info', icon: 'chevron-left-forward-slash-chevron-right' },
+  { type: 'config.committed', source: 'code', label: 'Config-commit', severity: 'info', icon: 'chevron-left-forward-slash-chevron-right' },
   { type: 'branch.created', source: 'code', label: 'Branch aangemaakt', severity: 'info', icon: 'folder' },
   { type: 'repo.created', source: 'code', label: 'Repository aangemaakt', severity: 'success', icon: 'folder-stack' },
   { type: 'ai.pr-review.posted', source: 'code', label: 'AI-PR-review geplaatst', severity: 'info', icon: 'sparkles' },

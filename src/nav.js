@@ -406,6 +406,17 @@ export const domains = [
     ],
   },
   {
+    key: 'iac',
+    path: '/platform/iac',
+    label: 'Infra als code',
+    icon: 'chevron-left-forward-slash-chevron-right',
+    wave: 'M',
+    routes: [
+      { path: '/platform/iac', name: 'platform-iac', view: () => import('./domains/platform/IaC.vue'), title: 'Infra als code' },
+      { path: '/platform/iac/:sha', name: 'platform-iac-commit', view: () => import('./domains/platform/CommitDetail.vue'), title: 'Commit' },
+    ],
+  },
+  {
     key: 'kosten',
     path: '/kosten',
     label: 'Kosten',

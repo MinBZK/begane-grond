@@ -109,6 +109,12 @@ function placeBlurb() {
   return `Draait als beheerde dienst in ${dcName(ordered.value.dc)}.`;
 }
 
+// The commit this order produced. orderInstance() funnels through audit(),
+// which writes a commit to platform-config, so the freshest commit is the seam
+// we point at. We capture it at finish() time rather than reading commits[0]
+// live, so it stays stable while the page is open.
+const orderCommit = ref(null);
+
 function finish() {
   ordered.value = store.orderInstance({
     kind: kind.value,
@@ -119,6 +125,7 @@ function finish() {
     size: form.size,
     dc: form.dc,
   });
+  orderCommit.value = store.commits[0] || null;
 }
 
 const wizardSteps = [
@@ -210,6 +217,16 @@ onBeforeUnmount(() => presentation.unregisterWizard('order'));
           </nldd-button-group>
 
           <CliHint :command="cliCommand" />
+
+          <!-- The seam: this order is a commit on platform-config. We point at
+               it rather than dumping the generated code here. -->
+          <router-link v-if="orderCommit" :to="`/platform/iac/${orderCommit.sha}`" class="rp-commit-seam">
+            <nldd-icon name="chevron-left-forward-slash-chevron-right" aria-hidden="true"></nldd-icon>
+            <span class="rp-commit-text">
+              Dit is commit <code>{{ orderCommit.sha }}</code> in <code>platform-config</code> · {{ orderCommit.path }}
+            </span>
+            <nldd-icon name="arrow-right" aria-hidden="true" class="rp-commit-arrow"></nldd-icon>
+          </router-link>
         </nldd-container>
       </nldd-card>
     </div>
@@ -482,4 +499,26 @@ onBeforeUnmount(() => presentation.unregisterWizard('order'));
   0%, 100% { box-shadow: 0 0 0 0 rgba(184, 92, 0, 0.4); }
   50% { box-shadow: 0 0 0 6px rgba(184, 92, 0, 0); }
 }
+.rp-commit-seam {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  text-decoration: none;
+  color: inherit;
+}
+.rp-commit-seam:hover {
+  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+}
+.rp-commit-seam > nldd-icon { width: 1.05rem; height: 1.05rem; opacity: 0.75; flex: 0 0 auto; }
+.rp-commit-text { flex: 1 1 auto; font-size: 0.9rem; }
+.rp-commit-text code {
+  font-family: var(--ro-font-mono, ui-monospace, monospace);
+  font-weight: 600;
+}
+.rp-commit-arrow { opacity: 0.4; }
 </style>

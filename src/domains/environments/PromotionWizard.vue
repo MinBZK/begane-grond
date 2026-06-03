@@ -117,6 +117,8 @@ const PIPELINE = [
 const pipelineStatus = ref({});
 const deploying = ref(false);
 const done = ref(false);
+// The commit this promotion produced on platform-config; the seam we point at.
+const promoteCommit = ref(null);
 
 // Deterministic id suffix for a recorded release (no clock API in this path).
 let _releaseSeq = 0;
@@ -151,6 +153,9 @@ async function runDeploy(maybeControl) {
   }
   // Commit the promotion to the store and record a release line.
   store.promote(appId.value, fromEnv.value, toEnv.value);
+  // The promotion is a commit on platform-config: a version bump in the
+  // environment's desired state. Capture it so the result screen can point at it.
+  promoteCommit.value = store.commits[0] || null;
   store.releases.unshift({
     id: `rel-${releaseSeq()}`,
     app: appId.value,
@@ -365,6 +370,16 @@ onBeforeUnmount(() => presentation.unregisterWizard('promotie'));
                   :supporting-text="`${app.name} ${fromVersion} draait nu in ${ENV_LABEL[toEnv]}.`"
                 ></nldd-inline-dialog>
                 <CliHint :command="cliCommand" />
+
+                <!-- The seam: this promotion is a version bump committed to
+                     platform-config. Point at the commit, not a code dump. -->
+                <router-link v-if="promoteCommit" :to="`/platform/iac/${promoteCommit.sha}`" class="rp-commit-seam">
+                  <nldd-icon name="chevron-left-forward-slash-chevron-right" aria-hidden="true"></nldd-icon>
+                  <span class="rp-commit-text">
+                    Dit is commit <code>{{ promoteCommit.sha }}</code> in <code>platform-config</code> · {{ promoteCommit.path }}
+                  </span>
+                  <nldd-icon name="arrow-right" aria-hidden="true" class="rp-commit-arrow"></nldd-icon>
+                </router-link>
               </div>
             </div>
           </template>
@@ -549,4 +564,23 @@ onBeforeUnmount(() => presentation.unregisterWizard('promotie'));
   font-family: ui-monospace, "SF Mono", Menlo, monospace;
   font-weight: 400;
 }
+.rp-commit-seam {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  text-decoration: none;
+  color: inherit;
+}
+.rp-commit-seam:hover {
+  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+}
+.rp-commit-seam > nldd-icon { width: 1.05rem; height: 1.05rem; opacity: 0.75; flex: 0 0 auto; }
+.rp-commit-text { flex: 1 1 auto; font-size: 0.9rem; }
+.rp-commit-text code { font-family: var(--ro-font-mono, ui-monospace, monospace); font-weight: 600; }
+.rp-commit-arrow { opacity: 0.4; }
 </style>
