@@ -124,6 +124,7 @@ export const usePlatformStore = defineStore('platform', {
     rfcs: clone(seed.rfcs),
     auditLog: clone(seed.auditLog),
     commits: clone(seed.commits),
+    designSystem: clone(seed.designSystem),
     standards: clone(seed.standards),
     channels: clone(seed.channels),
     subscriptions: clone(seed.subscriptions),

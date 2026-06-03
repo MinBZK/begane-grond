@@ -49,6 +49,7 @@ function teamName(id) {
       ]"
     >
       <template #actions>
+        <nldd-button variant="secondary" text="Design system" start-icon="square-on-square" href="/design-system"></nldd-button>
         <nldd-button variant="secondary" text="Teams" start-icon="person-2" href="/teams"></nldd-button>
       </template>
     </PageHeader>

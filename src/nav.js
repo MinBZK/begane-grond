@@ -94,6 +94,16 @@ export const domains = [
     ],
   },
   {
+    key: 'design-system',
+    path: '/design-system',
+    label: 'Design system',
+    icon: 'square-on-square',
+    wave: 'A',
+    routes: [
+      { path: '/design-system', name: 'design-system', view: () => import('./domains/componenten/DesignSystem.vue'), title: 'Design system' },
+    ],
+  },
+  {
     key: 'environments',
     path: '/environments',
     label: 'Omgevingen',
