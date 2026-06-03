@@ -11,6 +11,7 @@ import StatusBadge from '../../components/shared/StatusBadge.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
 import CliHint from '../../components/shared/CliHint.vue';
+import HavenBadge from '../../components/shared/HavenBadge.vue';
 import Sparkline from './Sparkline.vue';
 
 const store = usePlatformStore();
@@ -165,6 +166,9 @@ function relLinks(d) {
         <nldd-button variant="primary" text="Alerts & SLO" start-icon="exclamation-triangle" href="/observability/alerts"></nldd-button>
       </template>
     </PageHeader>
+
+    <HavenBadge service="Monitoring" />
+    <nldd-spacer size="20" />
 
     <nldd-container layout="grid" column-count="4" gap="16">
       <MetricCard :value="totals.services" label="Diensten gemonitord" icon="eye" />

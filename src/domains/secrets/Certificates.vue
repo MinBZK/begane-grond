@@ -13,6 +13,7 @@ import MetricCard from '../../components/shared/MetricCard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import Wizard from '../../components/shared/Wizard.vue';
 import CliHint from '../../components/shared/CliHint.vue';
+import HavenBadge from '../../components/shared/HavenBadge.vue';
 import { usePresentation } from '../../presentation/usePresentation.js';
 import { controlledDelay } from '../../presentation/drive.js';
 
@@ -139,6 +140,9 @@ function toggleAuto(id) {
         <nldd-button variant="primary" text="Certificaat aanvragen" start-icon="plus" @click="requesting = true"></nldd-button>
       </template>
     </PageHeader>
+
+    <HavenBadge service="Certificaten" />
+    <nldd-spacer size="20" />
 
     <nldd-container layout="grid" column-count="4" md-column-count="2" sm-column-count="1" gap="16">
       <MetricCard :value="total" label="Certificaten" sub="onder PKIoverheid" icon="certificate" />

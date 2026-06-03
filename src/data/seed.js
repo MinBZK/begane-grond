@@ -9206,7 +9206,8 @@ export const datacenters = [
     "capacityKw": 1200,
     "usedKw": 740,
     "racks": 48,
-    "uplinks": "2× 100GbE"
+    "uplinks": "2× 100GbE",
+    "haven": true
   },
   {
     "id": "dc-apeldoorn",
@@ -9218,7 +9219,8 @@ export const datacenters = [
     "capacityKw": 900,
     "usedKw": 410,
     "racks": 36,
-    "uplinks": "2× 100GbE"
+    "uplinks": "2× 100GbE",
+    "haven": true
   },
   {
     "id": "dc-zwolle",
@@ -9230,7 +9232,8 @@ export const datacenters = [
     "capacityKw": 1500,
     "usedKw": 0,
     "racks": 0,
-    "uplinks": "gepland"
+    "uplinks": "gepland",
+    "haven": false
   },
   {
     "id": "dc-groningen",
@@ -9242,7 +9245,8 @@ export const datacenters = [
     "capacityKw": 1000,
     "usedKw": 300,
     "racks": 30,
-    "uplinks": "2× 100GbE"
+    "uplinks": "2× 100GbE",
+    "haven": true
   },
   {
     "id": "dc-maastricht",
@@ -9254,7 +9258,8 @@ export const datacenters = [
     "capacityKw": 800,
     "usedKw": 250,
     "racks": 24,
-    "uplinks": "2× 40GbE"
+    "uplinks": "2× 40GbE",
+    "haven": true
   }
 ];
 
@@ -15559,7 +15564,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-a1",
     "dc": "dc-denhaag",
-    "costMonth": 980
+    "costMonth": 980,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-toeslagen-prod",
@@ -15611,7 +15618,8 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 261
+    "costMonth": 261,
+    "havenCompliant": false
   },
   {
     "id": "kubernetes-studiefinanciering-portaal-test",
@@ -15624,7 +15632,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-c2",
     "dc": "dc-denhaag",
-    "costMonth": 245
+    "costMonth": 245,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-studiefinanciering-portaal-acc",
@@ -15715,7 +15725,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-a1",
     "dc": "dc-groningen",
-    "costMonth": 409
+    "costMonth": 409,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-aangifte-omzetbelasting-acc",
@@ -15741,7 +15753,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 393
+    "costMonth": 393,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-bijstandsuitkering-acc",
@@ -15806,7 +15820,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 573
+    "costMonth": 573,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-subsidieportaal-rvo-dev",
@@ -15832,7 +15848,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-ap-b3",
     "dc": "dc-apeldoorn",
-    "costMonth": 541
+    "costMonth": 541,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-ww-aanvraag-acc",
@@ -15923,7 +15941,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 705
+    "costMonth": 705,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kubernetes-woz-bezwaar-test",
@@ -15936,7 +15956,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-mt-a3",
     "dc": "dc-maastricht",
-    "costMonth": 689
+    "costMonth": 689,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-woz-bezwaar-acc",
@@ -16027,7 +16049,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-ap-b3",
     "dc": "dc-apeldoorn",
-    "costMonth": 853
+    "costMonth": 853,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-naturalisatie-aanvraag-acc",
@@ -16053,7 +16077,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-zw-a4",
     "dc": "dc-zwolle",
-    "costMonth": 837
+    "costMonth": 837,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-huurtoeslag-rekenen-acc",
@@ -16118,7 +16144,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 117
+    "costMonth": 117,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-eherkenning-broker-dev",
@@ -16144,7 +16172,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 85
+    "costMonth": 85,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-bsn-validatie-acc",
@@ -16235,7 +16265,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-zw-a4",
     "dc": "dc-zwolle",
-    "costMonth": 249
+    "costMonth": 249,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kubernetes-handelsregister-zoeker-test",
@@ -16248,7 +16280,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-a1",
     "dc": "dc-groningen",
-    "costMonth": 233
+    "costMonth": 233,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-handelsregister-zoeker-acc",
@@ -16339,7 +16373,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 397
+    "costMonth": 397,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-belastingaangifte-ib-acc",
@@ -16365,7 +16401,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-c2",
     "dc": "dc-denhaag",
-    "costMonth": 381
+    "costMonth": 381,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-zorgtoeslag-portaal-acc",
@@ -16430,7 +16468,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-zw-a4",
     "dc": "dc-zwolle",
-    "costMonth": 561
+    "costMonth": 561,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-zorgverzekeraar-koppeling-dev",
@@ -16456,7 +16496,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 529
+    "costMonth": 529,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-vaccinatieregister-acc",
@@ -16547,7 +16589,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-c2",
     "dc": "dc-denhaag",
-    "costMonth": 693
+    "costMonth": 693,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kubernetes-leerplicht-melding-test",
@@ -16560,7 +16604,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-ap-b3",
     "dc": "dc-apeldoorn",
-    "costMonth": 677
+    "costMonth": 677,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-leerplicht-melding-acc",
@@ -16651,7 +16697,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 841
+    "costMonth": 841,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-bouwvergunning-acc",
@@ -16677,7 +16725,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-mt-a3",
     "dc": "dc-maastricht",
-    "costMonth": 825
+    "costMonth": 825,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-waterschapsheffing-acc",
@@ -16742,7 +16792,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-c2",
     "dc": "dc-denhaag",
-    "costMonth": 105
+    "costMonth": 105,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-parkeervergunning-dev",
@@ -16768,7 +16820,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-zw-a4",
     "dc": "dc-zwolle",
-    "costMonth": 73
+    "costMonth": 73,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-rijksbegroting-explorer-acc",
@@ -16859,7 +16913,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-mt-a3",
     "dc": "dc-maastricht",
-    "costMonth": 237
+    "costMonth": 237,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kubernetes-datakwaliteit-monitor-test",
@@ -16872,7 +16928,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 221
+    "costMonth": 221,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-datakwaliteit-monitor-acc",
@@ -16963,7 +17021,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-zw-a4",
     "dc": "dc-zwolle",
-    "costMonth": 385
+    "costMonth": 385,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-nachtelijke-batchrun-acc",
@@ -16989,7 +17049,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-a1",
     "dc": "dc-groningen",
-    "costMonth": 369
+    "costMonth": 369,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-sepa-incasso-job-acc",
@@ -17054,7 +17116,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-mt-a3",
     "dc": "dc-maastricht",
-    "costMonth": 549
+    "costMonth": 549,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-risicoscoring-dev",
@@ -17080,7 +17144,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-c2",
     "dc": "dc-denhaag",
-    "costMonth": 517
+    "costMonth": 517,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-sanctielijst-check-acc",
@@ -17171,7 +17237,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-a1",
     "dc": "dc-groningen",
-    "costMonth": 681
+    "costMonth": 681,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kubernetes-toegangsbeheer-test",
@@ -17184,7 +17252,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 665
+    "costMonth": 665,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-toegangsbeheer-acc",
@@ -17275,7 +17345,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-c2",
     "dc": "dc-denhaag",
-    "costMonth": 829
+    "costMonth": 829,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-servicedesk-portaal-acc",
@@ -17301,7 +17373,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-ap-b3",
     "dc": "dc-apeldoorn",
-    "costMonth": 813
+    "costMonth": 813,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-monitoring-collector-acc",
@@ -17366,7 +17440,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-a1",
     "dc": "dc-groningen",
-    "costMonth": 93
+    "costMonth": 93,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-deploy-orchestrator-dev",
@@ -17392,7 +17468,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-mt-a3",
     "dc": "dc-maastricht",
-    "costMonth": 61
+    "costMonth": 61,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-ci-runnerpool-acc",
@@ -17483,7 +17561,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-ap-b3",
     "dc": "dc-apeldoorn",
-    "costMonth": 225
+    "costMonth": 225,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kubernetes-huisstijl-bibliotheek-test",
@@ -17496,7 +17576,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-zw-a4",
     "dc": "dc-zwolle",
-    "costMonth": 209
+    "costMonth": 209,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-huisstijl-bibliotheek-acc",
@@ -17587,7 +17669,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-mt-a3",
     "dc": "dc-maastricht",
-    "costMonth": 373
+    "costMonth": 373,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-standaarden-checker-acc",
@@ -17613,7 +17697,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 357
+    "costMonth": 357,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-pdf-generator-acc",
@@ -17678,7 +17764,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-ap-b3",
     "dc": "dc-apeldoorn",
-    "costMonth": 537
+    "costMonth": 537,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-berichtenbox-dev",
@@ -17704,7 +17792,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-a1",
     "dc": "dc-groningen",
-    "costMonth": 505
+    "costMonth": 505,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-mijnoverheid-portaal-acc",
@@ -17795,7 +17885,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 669
+    "costMonth": 669,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kubernetes-wachtrij-manager-test",
@@ -17808,7 +17900,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-c2",
     "dc": "dc-denhaag",
-    "costMonth": 653
+    "costMonth": 653,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-wachtrij-manager-acc",
@@ -17899,7 +17993,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-a1",
     "dc": "dc-groningen",
-    "costMonth": 817
+    "costMonth": 817,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-betaalverzoek-acc",
@@ -17925,7 +18021,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 801
+    "costMonth": 801,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-machtigingenregister-acc",
@@ -17990,7 +18088,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 81
+    "costMonth": 81,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-stelselcatalogus-dev",
@@ -18016,7 +18116,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-ap-b3",
     "dc": "dc-apeldoorn",
-    "costMonth": 949
+    "costMonth": 949,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-terugmeldvoorziening-acc",
@@ -18107,7 +18209,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 213
+    "costMonth": 213,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kubernetes-subsidie-aanvraag-test",
@@ -18120,7 +18224,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-mt-a3",
     "dc": "dc-maastricht",
-    "costMonth": 197
+    "costMonth": 197,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-subsidie-aanvraag-acc",
@@ -18211,7 +18317,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-ap-b3",
     "dc": "dc-apeldoorn",
-    "costMonth": 361
+    "costMonth": 361,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-factuurverwerking-acc",
@@ -18237,7 +18345,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-zw-a4",
     "dc": "dc-zwolle",
-    "costMonth": 345
+    "costMonth": 345,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-verlofaanvraag-acc",
@@ -18302,7 +18412,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 525
+    "costMonth": 525,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-rooster-uitvoering-dev",
@@ -18328,7 +18440,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 493
+    "costMonth": 493,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-zaaksysteem-acc",
@@ -18419,7 +18533,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-zw-a4",
     "dc": "dc-zwolle",
-    "costMonth": 657
+    "costMonth": 657,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kubernetes-backup-scheduler-test",
@@ -18432,7 +18548,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-a1",
     "dc": "dc-groningen",
-    "costMonth": 641
+    "costMonth": 641,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-backup-scheduler-acc",
@@ -18523,7 +18641,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-b1",
     "dc": "dc-denhaag",
-    "costMonth": 805
+    "costMonth": 805,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-energieverbruik-monitor-acc",
@@ -18549,7 +18669,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-dh-c2",
     "dc": "dc-denhaag",
-    "costMonth": 789
+    "costMonth": 789,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-handhavingsdossier-acc",
@@ -18614,7 +18736,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-zw-a4",
     "dc": "dc-zwolle",
-    "costMonth": 69
+    "costMonth": 69,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "postgres-wob-verzoek-dev",
@@ -18640,7 +18764,9 @@ export const instances = [
     "status": "ready",
     "rack": "r-gr-b2",
     "dc": "dc-groningen",
-    "costMonth": 937
+    "costMonth": 937,
+    "havenCompliant": true,
+    "havenCertDate": "2026-04-15"
   },
   {
     "id": "kafka-publicatieplatform-acc",
@@ -31329,6 +31455,12 @@ export const standards = [
     "name": "WCAG 2.2 AA",
     "kind": "Toegankelijkheid",
     "status": "voldoet"
+  },
+  {
+    "id": "std-haven",
+    "name": "Haven (cloud-hosting)",
+    "kind": "Cloud",
+    "status": "deels"
   }
 ];
 
@@ -36854,6 +36986,60 @@ export const componenten = [
   },
 
 ];
+
+// The NLDD design system as a first-class platform building block. Not one more
+// component in the catalog, but the shared UI foundation every government
+// frontend is built on: accessibility and the rijkshuisstijl baked into the
+// components, so teams inherit both instead of rebuilding them. This very demo
+// (and its presentation mode) renders with it, which is the honest dogfooding
+// argument. Numbers are derived from the seed: website apps + Vue repositories.
+export const designSystem = {
+  name: "NLDD design system",
+  package: "@nldd/design-system",
+  version: "0.8.52",
+  owner: "team-nldd-docs",
+  license: "EUPL-1.2",
+  componentCount: 96,
+  // Adoption: frontends across the estate that build on it.
+  websiteApps: 33,
+  frontendRepos: 21,
+  wcagLevel: "WCAG 2.2 AA",
+  repoUrl: "https://github.com/MinBZK/storybook",
+  pillars: [
+    {
+      id: "toegankelijk",
+      title: "Toegankelijk by default",
+      icon: "person",
+      body: "Toegankelijkheid zit in de componenten, niet in goede voornemens. Wie de knop, het formulier of de tabel overneemt, krijgt WCAG 2.2 AA cadeau. Geen losse audit achteraf.",
+      to: "/toegankelijkheid",
+      toLabel: "Toegankelijkheid",
+    },
+    {
+      id: "huisstijl",
+      title: "Eén rijkshuisstijl",
+      icon: "square-on-square",
+      body: "Elke dienst ziet er hetzelfde uit, dus de burger herkent de overheid. De huisstijl is geen pdf met richtlijnen, maar werkende componenten met de juiste kleuren, typografie en tokens.",
+      to: "/standaarden",
+      toLabel: "Standaarden",
+    },
+    {
+      id: "snelheid",
+      title: "Niet opnieuw bouwen",
+      icon: "sparkles",
+      body: "Teams bouwen geen eigen knop, datatabel of dialoog. Ze nemen het over en bouwen verder. Eenmaal bouwen, breed gebruiken, net als de rest van de componentcatalogus.",
+      to: "/componenten",
+      toLabel: "Componenten",
+    },
+    {
+      id: "dogfooding",
+      title: "Dit scherm draait erop",
+      icon: "check-mark-circle",
+      body: "Begane Grond en deze presentatie zijn er volledig mee gebouwd. Wat je nu ziet is het bewijs: het platform gebruikt zijn eigen bouwblok, dus problemen komen vanzelf boven.",
+      to: "/componenten",
+      toLabel: "Componenten",
+    },
+  ],
+};
 
 // --- Feature flags / toggles: progressive delivery as a platform capability,
 // managed by the feature-flags service. Each flag has a rollout percentage and

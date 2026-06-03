@@ -8,6 +8,7 @@ import { ref, computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
+import HavenBadge from '../../components/shared/HavenBadge.vue';
 
 const store = usePlatformStore();
 
@@ -47,6 +48,9 @@ const productieCount = computed(() => store.loginMethods.filter((m) => m.status 
         <nldd-button variant="secondary" text="Teams" start-icon="person-2" href="/teams"></nldd-button>
       </template>
     </PageHeader>
+
+    <HavenBadge service="Authenticatie" />
+    <nldd-spacer size="20" />
 
     <nldd-container layout="grid" column-count="4" md-column-count="2" sm-column-count="1" gap="16">
       <MetricCard :value="store.loginMethods.length" label="Inlogmethoden" sub="in de catalogus" icon="person-circle" />

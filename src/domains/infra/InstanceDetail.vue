@@ -10,6 +10,7 @@ import PageHeader from '../../components/shared/PageHeader.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
 import CliHint from '../../components/shared/CliHint.vue';
+import HavenLogo from '../../components/shared/HavenLogo.vue';
 import Sparkline from './Sparkline.vue';
 
 const route = useRoute();
@@ -133,6 +134,11 @@ function doDelete() {
   router.push('/infra/instances');
 }
 
+// Haven attest applies to Kubernetes environments only. Compliant means an app
+// here runs unmodified on any other Haven environment; the cert date is when the
+// environment was last checked against the standard.
+const isK8s = computed(() => instance.value?.kind === 'kubernetes');
+
 const relationLinks = computed(() => {
   const links = [];
   if (team.value) links.push({ text: team.value.name, to: `/teams/${team.value.id}`, icon: 'person-2' });
@@ -174,6 +180,35 @@ const relationLinks = computed(() => {
           </dl>
         </nldd-container>
       </nldd-card>
+
+      <!-- Haven attest: only meaningful for Kubernetes environments. -->
+      <template v-if="isK8s">
+        <nldd-spacer size="20" />
+        <a
+          class="rp-haven"
+          :class="{ 'rp-haven-off': !instance.havenCompliant }"
+          href="https://haven.commonground.nl/"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="rp-haven-icon">
+            <HavenLogo />
+          </span>
+          <span class="rp-haven-text">
+            <strong v-if="instance.havenCompliant">Haven-gecertificeerd · sinds {{ instance.havenCertDate }}</strong>
+            <strong v-else>Nog niet Haven-gecertificeerd</strong>
+            <span class="rp-haven-sub" v-if="instance.havenCompliant">
+              Deze omgeving voldoet aan de Haven-standaard. Een app die hier draait, draait
+              op elke andere Haven-omgeving zonder herschrijven.
+            </span>
+            <span class="rp-haven-sub" v-else>
+              Deze Kubernetes-omgeving voldoet nog niet aan de Haven-configuratie. Tot die tijd
+              is overdraagbaarheid naar andere omgevingen niet gegarandeerd.
+            </span>
+          </span>
+          <nldd-icon name="external-link" aria-hidden="true" class="rp-haven-out"></nldd-icon>
+        </a>
+      </template>
 
       <nldd-spacer size="20" />
 
@@ -329,6 +364,58 @@ const relationLinks = computed(() => {
 }
 .rp-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+/* Haven attest block */
+.rp-haven {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  text-decoration: none;
+  color: inherit;
+}
+.rp-haven:hover {
+  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+}
+.rp-haven-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 10px;
+  /* Haven brand accent (geel op zwart). */
+  background: #ffbc2c;
+  color: #000;
+  flex: 0 0 auto;
+}
+.rp-haven-off .rp-haven-icon {
+  background: var(--semantics-surfaces-default-background-color, #fff);
+  color: inherit;
+  opacity: 0.6;
+}
+.rp-haven-icon :deep(.rp-haven-logo) {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+.rp-haven-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1 1 auto;
+}
+.rp-haven-sub {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+.rp-haven-out {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.5;
+  flex: 0 0 auto;
 }
 
 @media (max-width: 900px) {

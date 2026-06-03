@@ -8,6 +8,7 @@ import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import CliHint from '../../components/shared/CliHint.vue';
+import HavenBadge from '../../components/shared/HavenBadge.vue';
 
 const store = usePlatformStore();
 
@@ -145,6 +146,9 @@ function appForSecret(sec) {
         </router-link>
       </template>
     </PageHeader>
+
+    <HavenBadge service="Secrets" />
+    <nldd-spacer size="20" />
 
     <nldd-container layout="grid" column-count="3" gap="16">
       <MetricCard

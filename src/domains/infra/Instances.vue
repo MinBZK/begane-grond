@@ -36,10 +36,17 @@ const totalCost = computed(() =>
   store.instances.reduce((s, i) => s + (i.costMonth || 0), 0),
 );
 const prodCount = computed(() => store.instances.filter((i) => i.env === 'prod').length);
+// Haven attest only applies to Kubernetes environments. Count the certified ones
+// against the total k8s fleet so the KPI reads "N van M Haven-gecertificeerd".
+const k8sCount = computed(() => store.instances.filter((i) => i.kind === 'kubernetes').length);
+const havenCount = computed(
+  () => store.instances.filter((i) => i.kind === 'kubernetes' && i.havenCompliant).length,
+);
 
 const columns = [
   { key: 'name', label: 'Instance', mono: true },
   { key: 'kind', label: 'Soort' },
+  { key: 'haven', label: 'Haven' },
   { key: 'team', label: 'Team' },
   { key: 'env', label: 'Omgeving' },
   { key: 'costMonth', label: 'Kosten/mnd', align: 'right' },
@@ -75,7 +82,7 @@ function kindLabel(kind) {
     <nldd-container layout="grid" column-count="3" gap="16">
       <MetricCard :value="store.instances.length" label="Instances" :sub="`${prodCount} in productie`" icon="rectangle-stack" />
       <MetricCard :value="`€ ${totalCost.toLocaleString('nl-NL')}`" label="Maandkosten" sub="alle instances samen" icon="euro-sign" />
-      <MetricCard :value="kinds.length" label="Soorten dienst" sub="in gebruik" icon="cloud" />
+      <MetricCard :value="`${havenCount} / ${k8sCount}`" label="Haven-gecertificeerd" sub="van de Kubernetes-omgevingen" icon="ship-wheel" />
     </nldd-container>
 
     <nldd-spacer size="24" />
@@ -103,6 +110,11 @@ function kindLabel(kind) {
         </template>
         <template v-else-if="col.key === 'kind'">
           <nldd-tag color="neutral" size="md">{{ kindLabel(value) }}</nldd-tag>
+        </template>
+        <template v-else-if="col.key === 'haven'">
+          <nldd-tag v-if="row.havenCompliant" color="success" size="md">Haven</nldd-tag>
+          <nldd-tag v-else-if="row.kind === 'kubernetes'" color="neutral" size="md">nog niet</nldd-tag>
+          <span v-else class="rp-dim">—</span>
         </template>
         <template v-else-if="col.key === 'team'">
           <router-link :to="`/teams/${row.team}`" class="rp-link">{{ teamName(value) }}</router-link>
@@ -143,5 +155,8 @@ function kindLabel(kind) {
 }
 .rp-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.rp-dim {
+  opacity: 0.4;
 }
 </style>
