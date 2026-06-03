@@ -82,6 +82,12 @@ function onKey(e) {
       // Autoplay toggle. Not 'p', so the Shift+P start chord cannot trigger it.
       p.toggleAutoplay()
       break
+    case 'o':
+    case 'O':
+      // Skip optional slides during navigation (for a tighter time slot).
+      p.toggleSkipOptional()
+      e.preventDefault()
+      break
     case 'f':
       toggleFullscreen()
       break
@@ -200,7 +206,11 @@ onBeforeUnmount(() => {
         <div class="footer-row">
           <span class="counter-wrap">
             <span class="counter" :aria-label="`Slide ${index + 1} van ${total}`">{{ counter }}</span>
-            <span v-if="current && current.skippable" class="optional-chip">optioneel</span>
+            <span
+              v-if="current && current.skippable"
+              class="optional-chip"
+              :class="{ 'optional-chip-active': p.skipOptional.value }"
+            >{{ p.skipOptional.value ? 'wordt overgeslagen' : 'optioneel' }}</span>
           </span>
           <div class="nav-buttons">
             <button
@@ -243,8 +253,10 @@ onBeforeUnmount(() => {
           <span class="hint">Esc sluit</span>
           <span class="hint">f volledig scherm</span>
           <span class="hint">a autoplay</span>
+          <span class="hint">o sla optionele over</span>
           <span v-if="p.driving.value" class="hint hint-autoplay">spatie pauzeert</span>
           <span v-if="p.autoplay.value" class="hint hint-autoplay">autoplay aan</span>
+          <span v-if="p.skipOptional.value" class="hint hint-autoplay">optionele overgeslagen</span>
         </div>
       </div>
 
@@ -459,6 +471,12 @@ onBeforeUnmount(() => {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   color: rgba(255, 255, 255, 0.8);
+}
+
+/* When skip mode is on, the chip warns this slide will be jumped over. */
+.optional-chip-active {
+  border-color: rgba(240, 196, 25, 0.8);
+  color: #f0c419;
 }
 
 .nav-buttons {

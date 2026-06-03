@@ -9,6 +9,10 @@ import { wizardScripts } from './wizard-scripts.js'
 const active = ref(false)
 const index = ref(0)
 const autoplay = ref(false)
+// When on, next()/prev() jump over slides marked `skippable`, so a tight time
+// slot can run the core spine without manually clicking through the optional
+// slides. The presenter toggles this with the 'o' key.
+const skipOptional = ref(false)
 
 // Drive state for the on-screen "animation running" indicator and its controls.
 const driving = ref(false) // a wizard flow is auto-running on the right
@@ -177,18 +181,36 @@ async function goto(i) {
   await runSlide(clamped)
 }
 
+// Find the next/previous slide index, skipping `skippable` slides when the
+// skip-optional mode is on. Returns the same index if there is no further slide
+// in that direction (so we never wrap or land out of range).
+function nextIndex(from, step) {
+  let i = from + step
+  while (i >= 0 && i < total.value) {
+    if (!skipOptional.value || !slides[i]?.skippable) return i
+    i += step
+  }
+  // Everything ahead is optional: fall back to the last/first non-optional we
+  // can reach, otherwise stay put. For "next" that means the final slide; for
+  // "prev" the first. The wrap-up and title are never skippable, so this is safe.
+  return from
+}
+
 // Advance to the next slide if there is one.
 async function next() {
-  if (index.value < total.value - 1) {
-    await goto(index.value + 1)
-  }
+  const target = nextIndex(index.value, 1)
+  if (target !== index.value) await goto(target)
 }
 
 // Go back to the previous slide if there is one.
 async function prev() {
-  if (index.value > 0) {
-    await goto(index.value - 1)
-  }
+  const target = nextIndex(index.value, -1)
+  if (target !== index.value) await goto(target)
+}
+
+// Toggle skipping of optional slides during navigation.
+function toggleSkipOptional() {
+  skipOptional.value = !skipOptional.value
 }
 
 // Enter presentation mode and show the first (or given) slide.
@@ -254,6 +276,7 @@ export function usePresentation() {
     total,
     isFull,
     autoplay,
+    skipOptional,
     driving,
     drivePaused,
     init,
@@ -263,6 +286,7 @@ export function usePresentation() {
     prev,
     goto,
     toggleAutoplay,
+    toggleSkipOptional,
     pauseDrive,
     resumeDrive,
     toggleDrive,
