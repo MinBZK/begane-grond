@@ -1,4 +1,4 @@
-# Rijksplatform
+# Begane Grond
 
 Een klikbare demo van een **internal developer platform** voor de Nederlandse
 Rijksoverheid. Het laat zien hoe Platform Engineering bij de overheid kan werken: van
@@ -9,6 +9,10 @@ on-call en autonome Linux-werkplekken. Gebouwd met het
 > Dit is een **mock-up**: er is geen echte backend. Alle data leeft in een in-memory store,
 > edits muteren live en resetten bij een refresh. Wizards en provisioning-acties lopen
 > end-to-end door met gefakede status-overgangen.
+
+Het bevat ook een **presentatiemodus** (`Shift+P`): een slide-deck dat de live demo
+aanstuurt. Het deck navigeert mee, draait wizards af en licht delen van het scherm op,
+zodat het verhaal en de werkende app naast elkaar lopen.
 
 ## Draaien
 
@@ -21,27 +25,41 @@ npm run preview  # serveer de productie-build
 
 ## Wat zit erin
 
-Eén SPA met een wave-gegroepeerde navigatie over 25 domeinen. De ruggengraat is één
-cross-laag relatie-model, zodat je door kunt klikken van persoon naar team naar app naar
-instance naar rack naar datacenter.
+Eén SPA met een wave-gegroepeerde navigatie over ruim veertig domeinen, ingedeeld in zeven
+groepen. De ruggengraat is één cross-laag relatie-model, zodat je door kunt klikken van
+persoon naar team naar app naar instance naar rack naar datacenter.
 
-**Bouwen & draaien** — Overzicht, Fysieke infra (datacenter-floorplan met hot/cold-aisle,
-rack-elevatie, bekabeling, netwerk, inkoop), Infra-diensten (k8s/Postgres/Kafka/mail/LLM,
-self-service afname-wizard), Applicaties (software-catalogus, golden-path scaffolding-wizard),
-Code (code.overheid.nl), Teams & mensen (org, on-call, Matrix), Werkplekken (autonome
-Linux-laptops, hardware, provisioning).
+**Bouwen & draaien** — Fysieke infra (datacenter-floorplan met hot/cold-aisle, rack-elevatie,
+bekabeling, netwerk, inkoop), Infra-diensten (k8s/Postgres/Kafka/mail/LLM, self-service
+afname-wizard), Applicaties (software-catalogus, golden-path scaffolding-wizard), Code
+(code.overheid.nl), Componenten.
 
-**Beheren** — Omgevingen & promotie, Observability, Incidenten & changes, Secrets, Security.
+**Uitrollen & draaien** — Omgevingen & promotie, CI-pijplijn, CI-runners, Artefacten (SBOM,
+handtekeningen), Feature flags, Observability, Incidenten & changes.
 
-**Governance & standaarden** — Kosten/FinOps, Koppelvlakken (Digikoppeling/FSC), Governance
-& audit-log, Standaarden-marktplaats, Notificaties, Duurzaamheid.
+**Mensen & werkplek** — Teams & mensen (org, on-call, Matrix), Werkplekken (autonome
+Linux-laptops, hardware, provisioning), Leren.
 
-**Platform & AI** — Mijn spullen, Fleet-shift (vloot-brede code-transformaties, naar het
-model van [stuc](https://github.com/RijksICTGilde/stuc) en Spotify Fleetshift), AI &
-AI-assisted coding + LLM-API's, CLI & API-first, Tech radar, Scorecards, Leren.
+**Toegang & beveiliging** — Inloggen, Domeinen & DNS, Certificaten, Secrets, Security.
+
+**Data & koppelvlakken** — Basisregistraties, Datasets, Datacontracten, Koppelvlakken
+(Digikoppeling/FSC), Notificaties.
+
+**Governance & standaarden** — Governance & audit-log, Wet uitvoeren (wet als code),
+Standaarden, Algoritmeregister, Privacy & DPIA, Woo & archief, Toegankelijkheid, Duurzaamheid.
+
+**Platform, kosten & AI** — Infra als code, Kosten/FinOps, Software-inkoop, Scorecards, Tech
+radar, AI & AI-assisted coding + LLM-API's, CLI & API-first, Fleet-shift (vloot-brede
+code-transformaties, naar het model van [stuc](https://github.com/RijksICTGilde/stuc) en
+Spotify Fleetshift).
+
+**Alles is code.** Elke wizard en elke knop schrijft een commit naar één config-repo
+(`platform-config`): infra afnemen, een release promoten, een secret roteren. De pagina
+**Infra als code** toont die commit-log met diffs en de gewenste staat versus drift; vanaf
+elke commit klik je door naar de repository op `/code`. Niets verandert buiten een commit om.
 
 Een terugkerend patroon: onder elke actie en wizard-eindscherm staat het equivalente
-`rp`-CLI-commando met copy-knop. Het portaal is maar één interface; alles is ook API-first.
+`bg`-CLI-commando met copy-knop. Het portaal is maar één interface; alles is ook API-first.
 
 ## Stack
 
