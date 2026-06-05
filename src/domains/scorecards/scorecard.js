@@ -129,6 +129,16 @@ const CHECKS = [
   },
 ];
 
+// Run a single check by key against an app + context. Exposed so other screens
+// (the NeRDS scorecard) can delegate to the exact same check logic instead of
+// duplicating it. Returns the same shape buildScorecard puts in `checks`.
+export function runCheck(key, app, ctx) {
+  const c = CHECKS.find((x) => x.key === key);
+  if (!c) return null;
+  const res = c.evaluate(app, ctx);
+  return { key: c.key, label: c.label, desc: c.desc, icon: c.icon, to: c.to, fixLabel: c.fixLabel, pass: res.pass, detail: res.detail };
+}
+
 // Build the full scorecard for one app against a store context.
 export function buildScorecard(app, ctx) {
   const checks = CHECKS.map((c) => {

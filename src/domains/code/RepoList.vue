@@ -5,6 +5,7 @@
 import { ref, computed, watch } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
+import NerdsBadge from '../../components/shared/NerdsBadge.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import CliHint from '../../components/shared/CliHint.vue';
@@ -84,6 +85,9 @@ function appName(repo) {
         ></nldd-button>
       </template>
     </PageHeader>
+
+    <NerdsBadge richtlijn="open-source" />
+    <nldd-spacer size="20" />
 
     <nldd-container layout="grid" column-count="4" gap="16">
       <MetricCard :value="totals.total" label="Repositories" icon="folder-stack" />

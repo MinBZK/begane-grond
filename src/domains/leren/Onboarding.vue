@@ -7,6 +7,7 @@
 import { computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
+import NerdsBadge from '../../components/shared/NerdsBadge.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
 import CliHint from '../../components/shared/CliHint.vue';
@@ -75,6 +76,9 @@ const meLinks = computed(() => {
         <nldd-button variant="primary" text="Nieuwe app starten" start-icon="plus" @click="$router.push('/apps/nieuw')" />
       </template>
     </PageHeader>
+
+    <NerdsBadge richtlijn="gebruikersbehoeften" />
+    <nldd-spacer size="20" />
 
     <!-- Welcome banner -->
     <nldd-card accessible-label="Welkom">

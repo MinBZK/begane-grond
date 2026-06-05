@@ -6,6 +6,7 @@
 import { ref, computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
+import NerdsBadge from '../../components/shared/NerdsBadge.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 
 const store = usePlatformStore();
@@ -53,6 +54,9 @@ function teamName(id) {
         <nldd-button variant="secondary" text="Basisregistraties" start-icon="cylinder-split" href="/registers"></nldd-button>
       </template>
     </PageHeader>
+
+    <NerdsBadge richtlijn="datagebruik" />
+    <nldd-spacer size="20" />
 
     <nldd-container layout="grid" column-count="4" md-column-count="2" sm-column-count="1" gap="16">
       <MetricCard :value="store.datasets.length" label="Datasets" sub="in de catalogus" icon="chart-x-y-axis-line" />

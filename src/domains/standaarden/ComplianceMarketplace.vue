@@ -8,6 +8,7 @@
 import { computed, ref } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
+import NerdsBadge from '../../components/shared/NerdsBadge.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import CliHint from '../../components/shared/CliHint.vue';
@@ -183,6 +184,9 @@ function scoreColor(score) {
         ></nldd-button>
       </template>
     </PageHeader>
+
+    <NerdsBadge richtlijn="open-standaarden" />
+    <nldd-spacer size="20" />
 
     <!-- KPI strip -->
     <nldd-collection layout="grid" item-width="240px">

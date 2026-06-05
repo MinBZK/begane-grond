@@ -363,6 +363,17 @@ export const domains = [
     ],
   },
   {
+    key: 'nerds',
+    path: '/nerds',
+    label: 'NeRDS-richtlijnen',
+    icon: 'check-list',
+    wave: 'R',
+    routes: [
+      { path: '/nerds', name: 'nerds', view: () => import('./domains/nerds/NerdsOverview.vue'), title: 'NeRDS-richtlijnen' },
+      { path: '/nerds/scorecard', name: 'nerds-scorecard', view: () => import('./domains/nerds/NerdsScorecards.vue'), title: 'NeRDS-scorecard' },
+    ],
+  },
+  {
     key: 'algoritmes',
     path: '/algoritmes',
     label: 'Algoritmeregister',

@@ -6,6 +6,7 @@
 import { computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
+import NerdsBadge from '../../components/shared/NerdsBadge.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 
 const store = usePlatformStore();
@@ -47,6 +48,9 @@ function tierColor(tier) {
         </router-link>
       </template>
     </PageHeader>
+
+    <NerdsBadge richtlijn="cloudstrategie" />
+    <nldd-spacer size="20" />
 
     <nldd-container layout="grid" column-count="3" gap="16">
       <MetricCard :value="services.length" label="Diensten in catalogus" icon="cloud" />

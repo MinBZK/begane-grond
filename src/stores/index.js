@@ -152,6 +152,7 @@ export const usePlatformStore = defineStore('platform', {
     featureFlags: clone(seed.featureFlags),
     datacontracten: clone(seed.datacontracten),
     toegankelijkheidsverklaringen: clone(seed.toegankelijkheidsverklaringen),
+    richtlijnen: clone(seed.richtlijnen),
     // The "logged in" demo user.
     currentUser: 'ans',
 
@@ -312,6 +313,12 @@ export const usePlatformStore = defineStore('platform', {
     datacontractenForDataset: (s) => (dsId) => s.datacontracten.filter((c) => c.dataset === dsId),
     contractsForDataset: (s) => (dsId) => s.datacontracten.filter((c) => c.dataset === dsId),
     contractsForApp: (s) => (appId) => s.datacontracten.filter((c) => c.consumer === appId),
+
+    // --- NeRDS richtlijnen ---
+    richtlijnById: (s) => (id) => s.richtlijnen.find((r) => r.id === id),
+    // Resolve a richtlijn by the route it lives on, so a page can claim its
+    // own richtlijn without hardcoding the id twice.
+    richtlijnByRoute: (s) => (path) => s.richtlijnen.find((r) => r.to === path),
 
     // --- Accessibility statements ---
     toegankelijkheidById: (s) => (id) => s.toegankelijkheidsverklaringen.find((t) => t.id === id),

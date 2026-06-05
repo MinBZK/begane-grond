@@ -38101,3 +38101,109 @@ export const datasetRefreshLog = {
     ]
   }
 };
+
+
+// --- NeRDS: de dertien richtlijnen van de Nederlandse Richtlijn Digitale
+// Systemen (minbzk.github.io/NeRDS). Geen los bouwblok, maar een charter dat
+// dwars door het platform loopt: elke richtlijn heeft al een thuis in Begane
+// Grond. Deze ene lijst voedt de badge ("hiermee voldoe je aan richtlijn N"),
+// de hub-kaart en de NeRDS-scorecard. `source` zegt waar het oordeel per app
+// vandaan komt, zodat de score niet naast bestaande gates/checks gaat staan
+// maar eruit volgt:
+//   { kind: 'gate', ref }     -> evalGate(app, ref) uit governance/gates.js
+//   { kind: 'check', ref }    -> runCheck(ref, app, ctx) uit scorecards/scorecard.js
+//   { kind: 'standard', ref } -> status van standards[ref]
+//   { kind: 'derived', ref }  -> kleine regel op bestaande seed-relaties (zie nerds-scorecard.js)
+export const richtlijnen = [
+  {
+    id: "gebruikersbehoeften", number: 1, title: "Gebruikersbehoeften",
+    tagline: "Begin bij wat de gebruiker nodig heeft, niet bij de techniek.",
+    icon: "person", to: "/leren", toLabel: "Leren & onboarding",
+    source: { kind: "check", ref: "runbook" },
+    why: "Een dienst die niet aansluit op de gebruiker wordt niet gebruikt.",
+  },
+  {
+    id: "toegankelijkheid", number: 2, title: "Toegankelijkheid & inclusie",
+    tagline: "Iedereen kan meedoen: WCAG 2.2 AA zit in de componenten.",
+    icon: "eye", to: "/toegankelijkheid", toLabel: "Toegankelijkheid",
+    source: { kind: "gate", ref: "gate-wcag" },
+    why: "Toegankelijkheid is een wettelijke plicht, geen extraatje.",
+  },
+  {
+    id: "open-source", number: 3, title: "Open source & transparantie",
+    tagline: "Open-tenzij: code staat open onder EUPL-1.2.",
+    icon: "chevron-left-forward-slash-chevron-right", to: "/code", toLabel: "Code",
+    source: { kind: "gate", ref: "gate-open" },
+    why: "Open code is controleerbaar, herbruikbaar en wint vertrouwen.",
+  },
+  {
+    id: "open-standaarden", number: 4, title: "Open standaarden",
+    tagline: "Systemen praten met elkaar via open standaarden.",
+    icon: "check-mark-circle", to: "/standaarden", toLabel: "Standaarden",
+    source: { kind: "standard", ref: "std-adr" },
+    why: "Open standaarden voorkomen vendor lock-in en houden systemen koppelbaar.",
+  },
+  {
+    id: "cloudstrategie", number: 5, title: "Cloudstrategie",
+    tagline: "Draait op Haven+: soeverein en portabel, niet cloud-specifiek.",
+    icon: "cloud", to: "/infra", toLabel: "Infra-diensten",
+    source: { kind: "derived", ref: "haven-stack" },
+    why: "Een bewuste, soevereine cloudkeuze houdt de overheid in control.",
+  },
+  {
+    id: "veiligheid", number: 6, title: "Veiligheid",
+    tagline: "BIO-baseline ingebouwd: geen open kritieke kwetsbaarheden.",
+    icon: "shield-check-mark", to: "/security", toLabel: "Security",
+    source: { kind: "gate", ref: "gate-bio" },
+    why: "Vertrouwen in de digitale overheid valt of staat met veiligheid.",
+  },
+  {
+    id: "privacy", number: 7, title: "Privacy",
+    tagline: "Privacy by design: DPIA uitgevoerd voor de verwerking.",
+    icon: "lock-closed", to: "/verwerkingen", toLabel: "Privacy & DPIA",
+    source: { kind: "derived", ref: "dpia" },
+    why: "Persoonsgegevens verdienen bescherming vanaf het ontwerp.",
+  },
+  {
+    id: "samenwerking", number: 8, title: "Samenwerking & hergebruik",
+    tagline: "Bouw niet opnieuw: deel componenten en gebaande paden.",
+    icon: "sparkles", to: "/componenten", toLabel: "Componenten",
+    source: { kind: "derived", ref: "hergebruik" },
+    why: "Eenmaal bouwen en breed gebruiken bespaart de hele overheid werk.",
+  },
+  {
+    id: "integratie", number: 9, title: "Integratie",
+    tagline: "Sluit aan op bestaande koppelvlakken via ADR-API's.",
+    icon: "puzzle-piece", to: "/koppelvlakken", toLabel: "Koppelvlakken",
+    source: { kind: "derived", ref: "api" },
+    why: "Een systeem dat niet integreert, staat los van de keten.",
+  },
+  {
+    id: "datagebruik", number: 10, title: "Datagebruik",
+    tagline: "Data bij de bron, met een getekend datacontract.",
+    icon: "cylinder-split", to: "/data", toLabel: "Datasets",
+    source: { kind: "derived", ref: "datacontract" },
+    why: "Goed databeheer maakt diensten betrouwbaar en herleidbaar.",
+  },
+  {
+    id: "algoritmen", number: 11, title: "Algoritmen",
+    tagline: "Algoritmen geregistreerd, met impact- en discriminatietoets.",
+    icon: "brackets-ellipsis", to: "/algoritmes", toLabel: "Algoritmeregister",
+    source: { kind: "derived", ref: "algoritme" },
+    why: "Verantwoorde AI is transparant, getoetst en uitlegbaar.",
+  },
+  {
+    id: "inkoopstrategie", number: 12, title: "Inkoopstrategie",
+    tagline: "Inkoop zonder lock-in: open source of een geborgd exit-pad.",
+    icon: "tag", to: "/software-inkoop", toLabel: "Software-inkoop",
+    source: { kind: "derived", ref: "inkoop" },
+    why: "Slimme inkoop houdt de overheid wendbaar en onafhankelijk.",
+  },
+  {
+    id: "duurzaamheid", number: 13, title: "Duurzaamheid",
+    tagline: "Geconsolideerde productie-infra, geen sprawl over omgevingen.",
+    icon: "heart", to: "/duurzaamheid", toLabel: "Duurzaamheid",
+    source: { kind: "derived", ref: "green" },
+    why: "Digitale diensten dragen bij aan de klimaatdoelen van het Rijk.",
+  },
+];

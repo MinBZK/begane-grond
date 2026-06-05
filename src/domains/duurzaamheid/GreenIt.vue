@@ -12,6 +12,7 @@
 import { computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
+import NerdsBadge from '../../components/shared/NerdsBadge.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import DataTable from '../../components/shared/DataTable.vue';
@@ -292,6 +293,9 @@ function exportFootprint() {
         <nldd-button variant="primary" text="Exporteer CO2-rapport" start-icon="arrow-up-arrow-down" @click="exportFootprint" />
       </template>
     </PageHeader>
+
+    <NerdsBadge richtlijn="duurzaamheid" />
+    <nldd-spacer size="20" />
 
     <!-- KPI row -->
     <nldd-collection layout="grid" item-width="220px">

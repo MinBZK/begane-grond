@@ -6,6 +6,7 @@
 import { ref, computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
+import NerdsBadge from '../../components/shared/NerdsBadge.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 
@@ -57,6 +58,9 @@ function issuesLabel(issues) {
         <nldd-button variant="secondary" text="Standaarden" start-icon="check-mark-circle" href="/standaarden"></nldd-button>
       </template>
     </PageHeader>
+
+    <NerdsBadge richtlijn="toegankelijkheid" />
+    <nldd-spacer size="20" />
 
     <nldd-container layout="grid" column-count="4" md-column-count="2" sm-column-count="1" gap="16">
       <MetricCard :value="store.toegankelijkheidsverklaringen.length" label="Verklaringen" sub="per dienst" icon="eyeglasses" />
