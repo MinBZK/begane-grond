@@ -315,6 +315,8 @@ export const domains = [
     wave: 'O',
     routes: [
       { path: '/koppelvlakken', name: 'koppelvlakken', view: () => import('./domains/koppelvlakken/ApiCatalog.vue'), title: 'API-catalogus' },
+      { path: '/koppelvlakken/nieuw', name: 'koppelvlakken-nieuw', view: () => import('./domains/koppelvlakken/NewApiWizard.vue'), title: 'Nieuw koppelvlak' },
+      { path: '/koppelvlakken/compliance', name: 'koppelvlakken-compliance', view: () => import('./domains/koppelvlakken/ApiCompliance.vue'), title: 'API-compliance' },
       { path: '/koppelvlakken/fsc', name: 'koppelvlakken-fsc', view: () => import('./domains/koppelvlakken/Digikoppeling.vue'), title: 'Digikoppeling / FSC' },
     ],
   },

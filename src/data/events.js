@@ -16,6 +16,8 @@ export const eventCatalog = [
   { type: 'infra.instance.deleted', source: 'infra', label: 'Dienst verwijderd', severity: 'warning', icon: 'dismiss-circle' },
   // Apps / golden path
   { type: 'app.created', source: 'apps', label: 'Applicatie aangemaakt', severity: 'success', icon: 'rectangle-stack' },
+  // Koppelvlakken / API golden path
+  { type: 'api.created', source: 'koppelvlakken', label: 'Koppelvlak aangemaakt', severity: 'success', icon: 'link' },
   // Environments / deploy
   { type: 'deploy.started', source: 'environments', label: 'Deploy gestart', severity: 'info', icon: 'arrow-up-arrow-down' },
   { type: 'deploy.completed', source: 'environments', label: 'Deploy voltooid', severity: 'success', icon: 'check-mark-circle' },

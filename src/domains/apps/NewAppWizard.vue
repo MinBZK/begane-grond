@@ -73,6 +73,15 @@ const GOV_PATHS = [
     cta: 'Kies een register',
   },
   {
+    id: 'gov-api',
+    name: 'Nieuw koppelvlak / API',
+    icon: 'link',
+    desc: 'Een API die compliant-by-default is: ADR, OAuth NL GOV, Logboek en problem+json komen automatisch mee.',
+    tags: ['ADR', 'OAuth NL GOV', 'Logboek', 'problem+json'],
+    to: '/koppelvlakken/nieuw',
+    cta: 'Start het gebaande pad',
+  },
+  {
     id: 'gov-fsc',
     name: 'Digikoppeling / FSC',
     icon: 'link',

@@ -7,13 +7,22 @@
 import { ref, computed, watch } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
+import NerdsBadge from '../../components/shared/NerdsBadge.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import DataTable from '../../components/shared/DataTable.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
+import { evalApiStandaarden } from './api-standaarden.js';
 
 const store = usePlatformStore();
+
+// Verdict → tag styling for the spec panel's standards pills.
+const VERDICT_TAG = {
+  pass: { color: 'success', icon: 'check-mark-circle' },
+  fail: { color: 'critical', icon: 'exclamation-triangle' },
+  nvt: { color: 'neutral', icon: 'minus' },
+};
 
 const query = ref('');
 const statusFilter = ref('');
@@ -90,13 +99,19 @@ const relatedApps = computed(() => {
   if (!selected.value) return [];
   return store.appsByTeam(selected.value.owner);
 });
+
+// The real standards posture of the selected koppelvlak, shared with the
+// compliance scorecard via the same evaluator.
+const selectedStandaarden = computed(() =>
+  selected.value ? evalApiStandaarden(selected.value) : [],
+);
 </script>
 
 <template>
   <div class="rp-page">
     <PageHeader
       title="API-catalogus"
-      lede="Alle koppelvlakken van het Begane Grond op één plek. Versie, eigenaar, ADR-naleving, rate-limit en status. Klik een API open voor de OpenAPI-specificatie."
+      lede="Alle koppelvlakken van het Begane Grond op één plek; een koppelvlak is een API, de termen worden door elkaar gebruikt. Versie, eigenaar, ADR-naleving, rate-limit en status. Klik een API open voor de OpenAPI-specificatie."
       :crumbs="[
         { text: 'Platform', href: '/' },
         { text: 'Koppelvlakken', href: '/koppelvlakken' },
@@ -104,15 +119,24 @@ const relatedApps = computed(() => {
       ]"
     >
       <template #actions>
+        <router-link to="/koppelvlakken/nieuw">
+          <nldd-button variant="primary" text="Nieuw koppelvlak" start-icon="add"></nldd-button>
+        </router-link>
+        <router-link to="/koppelvlakken/compliance">
+          <nldd-button variant="secondary" text="API-compliance" start-icon="shield-check-mark"></nldd-button>
+        </router-link>
         <router-link to="/koppelvlakken/fsc">
           <nldd-button variant="secondary" text="Digikoppeling / FSC" start-icon="link"></nldd-button>
         </router-link>
       </template>
     </PageHeader>
 
+    <NerdsBadge richtlijn="integratie" />
+    <nldd-spacer size="20" />
+
     <nldd-container layout="grid" column-count="3" gap="16">
       <MetricCard :value="store.apis.length" label="Koppelvlakken" :sub="`${inProd} in productie`" icon="link" />
-      <MetricCard :value="`${adrCompliant}/${store.apis.length}`" label="ADR-compliant" sub="API Design Rules" icon="shield-check-mark" />
+      <MetricCard :value="`${adrCompliant}/${store.apis.length}`" label="ADR-compliant" sub="bekijk volledige compliance" icon="shield-check-mark" to="/koppelvlakken/compliance" />
       <MetricCard :value="store.fscPeers.length" label="FSC-peers" sub="via Digikoppeling" icon="ship-wheel" to="/koppelvlakken/fsc" />
     </nldd-container>
 
@@ -212,22 +236,32 @@ const relatedApps = computed(() => {
             </div>
           </div>
 
+          <template v-if="selected.spec">
+            <nldd-spacer size="16" />
+            <p class="rp-spec-label">
+              OpenAPI-specificatie
+              <span class="rp-spec-sub">· ontworpen in de wizard, {{ selected.resources?.length || 0 }} resource(s)</span>
+            </p>
+            <nldd-code-viewer language="yaml" class="rp-spec-yaml">{{ selected.spec }}</nldd-code-viewer>
+          </template>
+
           <nldd-spacer size="16" />
 
+          <p class="rp-spec-label">Overheidsstandaarden</p>
           <div class="rp-spec-meta">
-            <div class="rp-spec-pill">
-              <nldd-icon name="shield-check-mark" aria-hidden="true"></nldd-icon>
-              <span>ADR: {{ selected.adr ? 'voldoet aan API Design Rules' : 'nog niet getoetst' }}</span>
-            </div>
-            <div class="rp-spec-pill">
-              <nldd-icon name="arrow-up-arrow-down" aria-hidden="true"></nldd-icon>
-              <span>Rate-limit {{ selected.rateLimit }}</span>
-            </div>
-            <div class="rp-spec-pill">
-              <nldd-icon name="lock-closed" aria-hidden="true"></nldd-icon>
-              <span>OAuth 2.0 (NL GOV-profiel)</span>
+            <div
+              v-for="s in selectedStandaarden"
+              :key="s.key"
+              class="rp-spec-pill"
+              :class="`rp-pill-${s.verdict}`"
+              :title="s.bron"
+            >
+              <nldd-icon :name="VERDICT_TAG[s.verdict].icon" aria-hidden="true"></nldd-icon>
+              <span>{{ s.label }}<template v-if="s.verdict === 'nvt'"> (n.v.t.)</template></span>
             </div>
           </div>
+          <nldd-spacer size="8" />
+          <router-link to="/koppelvlakken/compliance" class="rp-link">Bekijk in de compliance-scorecard →</router-link>
 
           <nldd-spacer size="16" />
 
@@ -316,6 +350,16 @@ const relatedApps = computed(() => {
   opacity: 0.6;
   margin: 0 0 0.4rem;
 }
+.rp-spec-sub {
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.85;
+}
+.rp-spec-yaml {
+  max-height: 360px;
+  overflow: auto;
+  display: block;
+}
 .rp-spec-meta {
   display: flex;
   gap: 0.6rem;
@@ -334,5 +378,16 @@ const relatedApps = computed(() => {
   width: 1rem;
   height: 1rem;
   opacity: 0.7;
+}
+.rp-pill-pass {
+  border-color: var(--semantics-feedback-success-icon-color, #2e7d32);
+  color: var(--semantics-feedback-success-icon-color, #2e7d32);
+}
+.rp-pill-fail {
+  border-color: var(--semantics-feedback-critical-icon-color, #b00020);
+  color: var(--semantics-feedback-critical-icon-color, #b00020);
+}
+.rp-pill-nvt {
+  opacity: 0.55;
 }
 </style>

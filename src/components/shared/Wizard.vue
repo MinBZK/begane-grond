@@ -17,6 +17,10 @@ const emit = defineEmits(['finish']);
 const current = ref(0);
 const isLast = computed(() => current.value === props.steps.length - 1);
 
+// Always emit finish; never disable the nldd-button. A disabled nldd-button
+// calls stopPropagation() in its own click handler, which swallows the event
+// before Vue's @click ever runs — making the button feel dead. The caller's
+// onFinish is responsible for validating and surfacing why it can't proceed.
 function next() {
   if (isLast.value) emit('finish');
   else current.value++;

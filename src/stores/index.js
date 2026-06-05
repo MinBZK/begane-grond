@@ -5,6 +5,7 @@
 import { defineStore } from 'pinia';
 import * as seed from '../data/seed.js';
 import { eventSeed, extraHistoricalEvents, eventTypeMap, eventSources, SEVERITIES } from '../data/events.js';
+import { generateOpenApiYaml } from '../domains/koppelvlakken/openapi.js';
 
 // Deep clone the seed so the store owns mutable copies (refresh resets it).
 const clone = (v) => JSON.parse(JSON.stringify(v));
@@ -53,6 +54,7 @@ function commitMetaFor(action, resource) {
   if (a.includes('infra') || a.includes('instance')) return { path: `infra/${slug}.tf`, type: 'feat', scope: 'infra', verb: 'provision' };
   if (a.includes('release') || a.includes('promo')) return { path: `environments/${slug}.yaml`, type: 'feat', scope: 'release', verb: 'promote' };
   if (a.includes('rfc')) return { path: `governance/rfcs/${slug}.md`, type: 'docs', scope: 'rfc', verb: 'record' };
+  if (a.includes('koppelvlak') || a.includes('api')) return { path: `apis/${slug}/openapi.yaml`, type: 'feat', scope: 'api', verb: 'add' };
   if (a.includes('applicatie') || a.includes('app')) return { path: `apps/${slug}/app.yaml`, type: 'feat', scope: 'app', verb: 'scaffold' };
   if (a.includes('campagne')) return { path: `fleet/${slug}.yaml`, type: 'feat', scope: 'fleet', verb: 'roll out' };
   if (a.includes('werkplek') || a.includes('device')) return { path: `workplaces/${slug}.yaml`, type: 'chore', scope: 'workplace', verb: 'apply' };
@@ -314,6 +316,10 @@ export const usePlatformStore = defineStore('platform', {
     contractsForDataset: (s) => (dsId) => s.datacontracten.filter((c) => c.dataset === dsId),
     contractsForApp: (s) => (appId) => s.datacontracten.filter((c) => c.consumer === appId),
 
+    // --- Koppelvlakken / API's ---
+    apiById: (s) => (id) => s.apis.find((a) => a.id === id),
+    apisByTeam: (s) => (team) => s.apis.filter((a) => a.owner === team),
+
     // --- NeRDS richtlijnen ---
     richtlijnById: (s) => (id) => s.richtlijnen.find((r) => r.id === id),
     // Resolve a richtlijn by the route it lives on, so a page can claim its
@@ -396,18 +402,21 @@ export const usePlatformStore = defineStore('platform', {
 
     // Append a commit to the platform-config repo for an action. Pure and
     // deterministic; the sha/path/message/diff all follow from action+resource.
-    commit({ action, resource, actor = null }) {
+    // An action that already knows its real artifact (e.g. createApi has the
+    // generated OpenAPI spec) may override `path`, `diff` and `message` so the
+    // commit shows the actual change instead of a generic placeholder.
+    commit({ action, resource, actor = null, path = null, diff = null, message = null }) {
       const id = nextId('c');
       const meta = commitMetaFor(action, resource);
       const sha = shaFor(`${id}|${action}|${resource}`);
-      const message = `${meta.type}(${meta.scope}): ${meta.verb} ${resource}`;
+      const finalPath = path || meta.path;
       const entry = {
         id,
         sha,
         actor: actor || this.currentUser,
-        message,
-        path: meta.path,
-        diff: diffFor(meta, resource),
+        message: message || `${meta.type}(${meta.scope}): ${meta.verb} ${resource}`,
+        path: finalPath,
+        diff: diff || diffFor(meta, resource),
         action,
         at: 'zojuist',
       };
@@ -538,6 +547,59 @@ export const usePlatformStore = defineStore('platform', {
       this.emit('repo.created', { title: `Repository ${ns}/${slug} aangemaakt`, resource: repoId, target: `/code/${repoId}`, team });
       this.emit('app.created', { title: `Applicatie ${name} aangemaakt`, resource: id, target: `/apps/${id}`, team });
       return { app, repoId };
+    },
+
+    // The koppelvlak golden path. Mirrors createApp: it writes an API record and
+    // — via audit() — a commit on platform-config, so a new koppelvlak is just as
+    // traceable as a new app. `standaarden`/`exposure`/`persoonsgegevens`/`events`
+    // carry the compliant-by-default profile the wizard assembled, which the
+    // api-standaarden evaluator reads back verbatim.
+    createApi({ name, version = 'v1', team, exposure = 'intern', persoonsgegevens = false, events = false, standaarden = {}, resources = [] }) {
+      const id = nextId('api');
+      const cleanResources = resources
+        .map((r) => ({ singular: (r.singular || '').trim(), ops: r.ops ? { ...r.ops } : undefined }))
+        .filter((r) => r.singular);
+      const api = {
+        id, name, version, owner: team,
+        adr: standaarden.adr !== false, // ADR is on by default on the golden path
+        rateLimit: '100/s',
+        status: 'beta',
+        exposure, persoonsgegevens, events,
+        standaarden: {
+          problemJson: Boolean(standaarden.problemJson),
+          oauth: Boolean(standaarden.oauth),
+          rateLimit: standaarden.rateLimit !== false,
+          logboek: Boolean(standaarden.logboek),
+          cloudevents: Boolean(standaarden.cloudevents),
+          fsc: Boolean(standaarden.fsc),
+        },
+        resources: cleanResources,
+        // The designed contract: a real OpenAPI 3.0 document, generated from the
+        // resources so the catalogus can show the actual spec, not just a URL.
+        spec: cleanResources.length ? generateOpenApiYaml({ name, version, standaarden }, cleanResources) : null,
+      };
+      this.apis.push(api);
+
+      // Audit + commit. Unlike a generic action, a new koppelvlak has a real
+      // artifact — the OpenAPI spec — so we write that as the commit diff on a
+      // proper apis/<slug>/<version>/openapi.yaml path, instead of the generic
+      // "managed: true" placeholder. The diff IS the contract you just designed.
+      this.auditLog.unshift({ id: nextId('a'), actor: this.currentUser, action: 'koppelvlak aangemaakt', resource: name, at: 'zojuist' });
+      const slug = name.toLowerCase().replace(/api$/, '').trim().replace(/\s+/g, '-') || 'api';
+      const specPath = `apis/${slug}/${version}/openapi.yaml`;
+      const specDiff = api.spec
+        ? [`--- /dev/null`, `+++ b/${specPath}`, '@@', ...api.spec.split('\n').map((l) => '+' + l)].join('\n')
+        : null;
+      this.commit({
+        action: 'koppelvlak aangemaakt',
+        resource: name,
+        path: specPath,
+        message: `feat(api): add ${slug} ${version}`,
+        diff: specDiff,
+      });
+
+      this.emit('api.created', { title: `Koppelvlak ${name} ${version} aangemaakt`, resource: id, target: '/koppelvlakken', team, severity: 'success' });
+      return { api };
     },
 
     // --- Racks (editable) ---
