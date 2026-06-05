@@ -38145,10 +38145,10 @@ export const richtlijnen = [
   },
   {
     id: "cloudstrategie", number: 5, title: "Cloudstrategie",
-    tagline: "Draait op Haven+: soeverein en portabel, niet cloud-specifiek.",
+    tagline: "Draait op Haven+: cloud native, dus portabel en operationeel autonoom.",
     icon: "cloud", to: "/infra", toLabel: "Infra-diensten",
     source: { kind: "derived", ref: "haven-stack" },
-    why: "Een bewuste, soevereine cloudkeuze houdt de overheid in control.",
+    why: "Cloud native draaien borgt portabiliteit en operationele autonomie: de overheid houdt technologische keuzevrijheid en kan migreren.",
   },
   {
     id: "veiligheid", number: 6, title: "Veiligheid",

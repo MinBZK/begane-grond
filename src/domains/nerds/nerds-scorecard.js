@@ -45,13 +45,13 @@ const EVALUATORS = {
   },
 
   // 5 — cloudstrategie: draait op Haven (Kubernetes) of op de platform-native
-  // stack (NLDD), dus soeverein en portabel.
+  // stack (NLDD), dus cloud native en daarmee portabel en operationeel autonoom.
   cloudstrategie: (app, ctx) => {
     const onK8s = ctx.instances.some((i) => i.app === app.id && i.kind === 'kubernetes');
     const native = app.stack?.includes('NLDD') || app.stack?.includes('Vue');
-    if (onK8s) return { pass: true, detail: 'Draait op Haven (Kubernetes)' };
-    if (native) return { pass: true, detail: 'Platform-native stack (NLDD)' };
-    return { pass: false, detail: 'Nog niet op de soevereine cloud (Haven+)' };
+    if (onK8s) return { pass: true, detail: 'Cloud native op Haven (Kubernetes)' };
+    if (native) return { pass: true, detail: 'Cloud native (NLDD-stack)' };
+    return { pass: false, detail: 'Nog niet cloud native / operationeel autonoom (Haven+)' };
   },
 
   // 6 — delegate to the BIO security baseline gate.
