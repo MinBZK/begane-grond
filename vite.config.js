@@ -20,7 +20,13 @@ export default defineConfig({
       configureServer(server) {
         server.middlewares.use((req, _res, next) => {
           const url = req.url.split('?')[0];
-          if (url !== '/' && !url.includes('.') && !url.startsWith('/@') && !url.startsWith('/node_modules') && !url.startsWith('/src')) {
+          if (
+            url !== '/' &&
+            !url.includes('.') &&
+            !url.startsWith('/@') &&
+            !url.startsWith('/node_modules') &&
+            !url.startsWith('/src')
+          ) {
             req.url = '/index.html';
           }
           next();

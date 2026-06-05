@@ -3,8 +3,7 @@
 // cannot tell: every runner pool runs on a real node, in a rack, in a
 // datacenter. This page shows the pools (load + labels + status), the live CI
 // job queue feeding them, and deep links down into the physical layer.
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed } from 'vue';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
@@ -13,7 +12,6 @@ import DataTable from '../../components/shared/DataTable.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 
 const store = usePlatformStore();
-const router = useRouter();
 
 const util = computed(() => store.runnerUtilisation);
 

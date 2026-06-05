@@ -3,7 +3,6 @@
 // seven-point checklist with pass/fail, and a "to do for next tier" footer that
 // links each failing check to where it gets fixed.
 import { computed } from 'vue';
-import StatusBadge from '../../components/shared/StatusBadge.vue';
 import { tierMeta } from './scorecard.js';
 
 const props = defineProps({

@@ -156,10 +156,6 @@ const activeAdvice = computed(() => {
   return ring ? ring.advice : '';
 });
 
-function ringTone(key) {
-  return RINGS.find((r) => r.key === key)?.tone || 'neutral';
-}
-
 // Label angle for the curved ring names, placed along the top vertical axis.
 function ringLabelY(ri) {
   return CENTER - (ringInner(ri) + (RING_R[ri] - ringInner(ri)) / 2);

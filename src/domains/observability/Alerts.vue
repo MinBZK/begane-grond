@@ -62,14 +62,6 @@ function budgetClass(left) {
   return 'rp-high';
 }
 
-function alertLinks(a) {
-  const links = [];
-  if (a.owner.appId) links.push({ text: a.owner.name, to: `/apps/${a.owner.appId}`, icon: 'rectangle-stack' });
-  if (a.owner.instId) links.push({ text: a.owner.instId, to: `/infra/instances/${a.owner.instId}`, icon: 'cylinder-split' });
-  if (a.owner.team) links.push({ text: a.owner.team.name, to: `/teams/${a.owner.team.id}`, icon: 'person-2' });
-  links.push({ text: 'On-call rooster', to: '/teams/on-call', icon: 'clock' });
-  return links;
-}
 </script>
 
 <template>

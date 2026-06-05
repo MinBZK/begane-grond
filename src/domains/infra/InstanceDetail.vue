@@ -128,7 +128,6 @@ function doScale() {
   flash.value = 'Bijschalen aangevraagd. Capaciteit wordt uitgebreid.';
 }
 function doDelete() {
-  // eslint-disable-next-line no-alert
   if (!window.confirm(`Instance ${instance.value.name} definitief verwijderen?`)) return;
   store.deleteInstance(instance.value.id);
   router.push('/infra/instances');

@@ -24,7 +24,16 @@ export const docs = [
     icon: 'rectangle-stack',
     updated: '1 week geleden',
     summary: 'Genereer een service uit een template, koppel infra en krijg CI in één keer groen.',
-    keywords: ['gebaand pad', 'golden path', 'template', 'steiger', 'scaffold', 'service', 'ci', 'app'],
+    keywords: [
+      'gebaand pad',
+      'golden path',
+      'template',
+      'steiger',
+      'scaffold',
+      'service',
+      'ci',
+      'app',
+    ],
   },
   {
     id: 'doc-runbook-incident',
@@ -34,7 +43,8 @@ export const docs = [
     minutes: 7,
     icon: 'exclamation-triangle',
     updated: 'gisteren',
-    summary: 'Stappenplan bij een productieverstoring: erkennen, mitigeren, communiceren, evalueren.',
+    summary:
+      'Stappenplan bij een productieverstoring: erkennen, mitigeren, communiceren, evalueren.',
     keywords: ['incident', 'sev1', 'sev2', 'piket', 'on-call', 'postmortem'],
   },
   {

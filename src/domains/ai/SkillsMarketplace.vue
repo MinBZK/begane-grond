@@ -7,14 +7,12 @@
 // link between the platform's AI offering and its standards: the assistant
 // learns the standard you must meet.
 import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 
 const store = usePlatformStore();
-const router = useRouter();
 
 const myTeam = computed(() => store.teamOfPerson(store.currentUser));
 const installedForMyTeam = computed(() =>

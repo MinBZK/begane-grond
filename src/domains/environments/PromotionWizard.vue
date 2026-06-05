@@ -104,7 +104,6 @@ const gates = computed(() => {
 // continuing. For the demo we let them tick the box even on a red gate, but we
 // surface the risk clearly.
 const acknowledged = ref({});
-const allAcknowledged = computed(() => gates.value.every((g) => acknowledged.value[g.id]));
 const anyFailing = computed(() => gates.value.some((g) => !g.pass));
 
 // --- Deploy pipeline ---------------------------------------------------
@@ -146,7 +145,6 @@ async function runDeploy(maybeControl) {
   for (const stage of PIPELINE) {
     if (control.aborted) { deploying.value = false; return; }
     pipelineStatus.value = { ...pipelineStatus.value, [stage.id]: 'running' };
-    // eslint-disable-next-line no-await-in-loop
     await controlledDelay(850, control);
     if (control.aborted) { deploying.value = false; return; }
     pipelineStatus.value = { ...pipelineStatus.value, [stage.id]: 'ready' };
@@ -181,13 +179,6 @@ const relationLinks = computed(() => {
   out.push({ text: 'Release-historie', to: '/environments/releases', icon: 'clock' });
   return out;
 });
-
-function pipelineLabel(id) {
-  const s = pipelineStatus.value[id];
-  if (s === 'running') return 'bezig';
-  if (s === 'ready') return 'klaar';
-  return 'wacht';
-}
 
 // Presentation mode can auto-drive this wizard on stage. It has no single form,
 // so we expose the helpers a drive script needs: acknowledge every gate and run
@@ -242,7 +233,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('promotie'));
     <div v-else class="rp-promote-grid">
       <div>
         <Wizard ref="wizardRef" :steps="steps" finish-label="Sluiten" @finish="router.push('/environments')">
-          <template #default="{ step, go }">
+          <template #default="{ step }">
             <!-- STEP 1: choose environments -->
             <div v-if="step === 0">
               <nldd-title size="5"><h3>Welke stap promoot je?</h3></nldd-title>

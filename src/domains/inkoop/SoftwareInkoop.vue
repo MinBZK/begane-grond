@@ -103,7 +103,7 @@ function statusBadge(status) {
     <nldd-spacer size="16" />
 
     <DataTable :columns="columns" :rows="filtered" row-key="id">
-      <template #cell="{ row, col, value }">
+      <template #cell="{ col, value }">
         <template v-if="col.key === 'contract'">
           <nldd-tag color="neutral" size="md">{{ value }}</nldd-tag>
         </template>

@@ -568,7 +568,10 @@ export const slides = [
     ],
     gov: 'Gegevensdeling met afspraken die het platform handhaaft, niet met goede bedoelingen.',
     route: '/datacontracten',
-    emit: { type: 'register.connected', title: 'Datacontract geactiveerd tussen aanbieder en afnemer' },
+    emit: {
+      type: 'register.connected',
+      title: 'Datacontract geactiveerd tussen aanbieder en afnemer',
+    },
     highlight: '.rp-page',
     skippable: true,
   },

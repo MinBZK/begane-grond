@@ -17,13 +17,23 @@
 // plus a small list of irregulars. Good enough for a generated example spec;
 // the ADR-check still nudges the user toward clean singular nouns.
 const IRREGULAR_PLURALS = {
-  kind: 'kinderen', ei: 'eieren', koe: 'koeien', stad: 'steden', schip: 'schepen',
-  lid: 'leden', blad: 'bladeren', been: 'beenderen', ambtenaar: 'ambtenaren',
-  museum: 'musea', medium: 'media',
+  kind: 'kinderen',
+  ei: 'eieren',
+  koe: 'koeien',
+  stad: 'steden',
+  schip: 'schepen',
+  lid: 'leden',
+  blad: 'bladeren',
+  been: 'beenderen',
+  ambtenaar: 'ambtenaren',
+  museum: 'musea',
+  medium: 'media',
 };
 
 const VOWELS = 'aeiou';
-function isVowel(c) { return VOWELS.includes(c); }
+function isVowel(c) {
+  return VOWELS.includes(c);
+}
 
 export function pluralize(singular) {
   const s = singular.trim().toLowerCase().replace(/\s+/g, '-');
@@ -64,8 +74,15 @@ export function pluralize(singular) {
 
 // PascalCase schema name from a singular resource. "vergunning" → "Vergunning".
 function schemaName(singular) {
-  const s = singular.trim().toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-  return s.split(' ').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+  const s = singular
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+  return s
+    .split(' ')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join('');
 }
 
 // operationId per ADR: verb + Resource(s). listVergunningen, createVergunning.
@@ -150,13 +167,20 @@ export function buildSpecModel(api, resources) {
         operationId: opId('list', singular, plural),
         summary: `Lijst ${plural}`,
         parameters: [
-          { name: 'page', in: 'query', schema: { type: 'integer', default: 1 }, description: 'Paginanummer (ADR-paginatie).' },
+          {
+            name: 'page',
+            in: 'query',
+            schema: { type: 'integer', default: 1 },
+            description: 'Paginanummer (ADR-paginatie).',
+          },
           { name: 'pageSize', in: 'query', schema: { type: 'integer', default: 20, maximum: 100 } },
         ],
         responses: {
           200: {
             description: `Een pagina ${plural}.`,
-            content: { 'application/json': { schema: { $ref: `#/components/schemas/${Schema}Pagina` } } },
+            content: {
+              'application/json': { schema: { $ref: `#/components/schemas/${Schema}Pagina` } },
+            },
           },
           default: errorResponse(),
         },
@@ -187,7 +211,10 @@ export function buildSpecModel(api, resources) {
         operationId: opId('get', singular, plural),
         summary: `Haal één ${singular} op`,
         responses: {
-          200: { description: `De ${singular}.`, content: { 'application/json': { schema: { $ref: `#/components/schemas/${Schema}` } } } },
+          200: {
+            description: `De ${singular}.`,
+            content: { 'application/json': { schema: { $ref: `#/components/schemas/${Schema}` } } },
+          },
           404: errorResponse('Niet gevonden.'),
           default: errorResponse(),
         },
@@ -202,7 +229,10 @@ export function buildSpecModel(api, resources) {
           content: { 'application/json': { schema: { $ref: `#/components/schemas/${Schema}` } } },
         },
         responses: {
-          200: { description: `De bijgewerkte ${singular}.`, content: { 'application/json': { schema: { $ref: `#/components/schemas/${Schema}` } } } },
+          200: {
+            description: `De bijgewerkte ${singular}.`,
+            content: { 'application/json': { schema: { $ref: `#/components/schemas/${Schema}` } } },
+          },
           default: errorResponse(),
         },
       };
@@ -215,7 +245,9 @@ export function buildSpecModel(api, resources) {
       };
     }
     if (Object.keys(item).length) {
-      item.parameters = [{ name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } }];
+      item.parameters = [
+        { name: 'id', in: 'path', required: true, schema: { type: 'string', format: 'uuid' } },
+      ];
       paths[itemPath] = item;
     }
 
@@ -244,15 +276,18 @@ export function buildSpecModel(api, resources) {
     paths,
     components: {
       schemas,
-      securitySchemes: api.standaarden?.oauth !== false
-        ? {
-            oauth2: {
-              type: 'oauth2',
-              description: 'OAuth 2.0 volgens het NL GOV-profiel.',
-              flows: { clientCredentials: { tokenUrl: `https://auth.overheid.nl/token`, scopes: {} } },
-            },
-          }
-        : {},
+      securitySchemes:
+        api.standaarden?.oauth !== false
+          ? {
+              oauth2: {
+                type: 'oauth2',
+                description: 'OAuth 2.0 volgens het NL GOV-profiel.',
+                flows: {
+                  clientCredentials: { tokenUrl: `https://auth.overheid.nl/token`, scopes: {} },
+                },
+              },
+            }
+          : {},
     },
   };
   if (api.standaarden?.oauth !== false) spec.security = [{ oauth2: [] }];
@@ -263,7 +298,9 @@ export function buildSpecModel(api, resources) {
 function errorResponse(description = 'Foutbericht (problem+json).') {
   return {
     description,
-    content: { 'application/problem+json': { schema: { $ref: '#/components/schemas/Foutbericht' } } },
+    content: {
+      'application/problem+json': { schema: { $ref: '#/components/schemas/Foutbericht' } },
+    },
   };
 }
 
@@ -291,7 +328,7 @@ function toYaml(value, indent = 0) {
     const keys = Object.keys(value);
     if (!keys.length) return ' {}\n';
     let out = indent === 0 ? '' : '\n';
-    keys.forEach((k, i) => {
+    keys.forEach((k, _i) => {
       const v = value[k];
       const key = yamlKey(k);
       if (isMap(v) || Array.isArray(v)) {
@@ -320,7 +357,7 @@ function scalar(v) {
   if (typeof v === 'number') return String(v);
   const s = String(v);
   // Quote strings that could be misread as YAML (refs, urls, leading specials).
-  if (s === '' || /[:#{}\[\],&*!|>'"%@`]/.test(s) || /^[\s-]/.test(s) || /^\d/.test(s)) {
+  if (s === '' || /[:#{}[\],&*!|>'"%@`]/.test(s) || /^[\s-]/.test(s) || /^\d/.test(s)) {
     return `'${s.replace(/'/g, "''")}'`;
   }
   return s;
@@ -345,22 +382,30 @@ export function lintAdr(api, resources) {
   rules.push({
     rule: 'Minstens één resource',
     pass: named.length > 0,
-    detail: named.length ? `${named.length} resource(s) gedefinieerd` : 'Voeg minstens één resource toe',
+    detail: named.length
+      ? `${named.length} resource(s) gedefinieerd`
+      : 'Voeg minstens één resource toe',
   });
 
   // Resource names should be nouns, lowercase, no spaces/uppercase/plurals typed
   // by hand (the generator pluralises). Flag obviously off names.
-  const badNames = named.filter((r) => /[A-Z]/.test(r.singular) || /\d/.test(r.singular) || r.singular.trim().includes(' '));
+  const badNames = named.filter(
+    (r) => /[A-Z]/.test(r.singular) || /\d/.test(r.singular) || r.singular.trim().includes(' ')
+  );
   rules.push({
     rule: 'Resourcenamen: enkelvoud, kleine letters',
     pass: badNames.length === 0,
-    detail: badNames.length ? `Pas aan: ${badNames.map((r) => r.singular).join(', ')}` : 'Alle namen zijn nette zelfstandige naamwoorden',
+    detail: badNames.length
+      ? `Pas aan: ${badNames.map((r) => r.singular).join(', ')}`
+      : 'Alle namen zijn nette zelfstandige naamwoorden',
   });
 
   rules.push({
     rule: 'Versie in de server-URL',
     pass: Boolean(api.version),
-    detail: api.version ? `Major versie ${api.version} in /${api.version}` : 'Geen versie opgegeven',
+    detail: api.version
+      ? `Major versie ${api.version} in /${api.version}`
+      : 'Geen versie opgegeven',
   });
 
   rules.push({

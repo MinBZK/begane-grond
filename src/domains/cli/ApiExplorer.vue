@@ -8,7 +8,6 @@ import { ref, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
-import StatusBadge from '../../components/shared/StatusBadge.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
 

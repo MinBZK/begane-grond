@@ -65,11 +65,6 @@ const overallPct = computed(() =>
   totalChecks.value ? Math.round((totalPass.value / totalChecks.value) * 100) : 100
 );
 
-function cellColor(verdict) {
-  if (verdict === 'pass') return 'success';
-  if (verdict === 'fail') return 'critical';
-  return 'neutral';
-}
 function cellIcon(verdict) {
   if (verdict === 'pass') return 'check-mark-circle';
   if (verdict === 'fail') return 'exclamation-triangle';

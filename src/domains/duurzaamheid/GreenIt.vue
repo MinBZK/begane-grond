@@ -65,7 +65,6 @@ const co2BudgetLeft = computed(() =>
 const fmtKwh = (n) => `${Math.round(n).toLocaleString('nl-NL')} kWh`;
 const fmtCo2 = (n) => `${Math.round(n).toLocaleString('nl-NL')} kg`;
 const fmtW = (n) => `${Math.round(n).toLocaleString('nl-NL')} W`;
-const fmtEur = (n) => `€${Math.round(n).toLocaleString('nl-NL')}`;
 const teamName = (id) => store.teamById(id)?.name || id;
 const appName = (id) => store.appById(id)?.name || '—';
 const dcName = (id) => store.datacenterById(id)?.name || id;

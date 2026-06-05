@@ -34,7 +34,10 @@ const CHECKS = [
     evaluate: (app, ctx) => {
       const team = ctx.teams.find((t) => t.id === app.team);
       const rota = team && ctx.oncall.find((o) => o.team === team.id && o.person);
-      return { pass: Boolean(rota), detail: rota ? `Piket: ${ctx.personName(rota.person)}` : 'Geen piket-rotatie gevonden' };
+      return {
+        pass: Boolean(rota),
+        detail: rota ? `Piket: ${ctx.personName(rota.person)}` : 'Geen piket-rotatie gevonden',
+      };
     },
     to: '/teams/on-call',
     fixLabel: 'Richt on-call in',
@@ -60,7 +63,12 @@ const CHECKS = [
     icon: 'arrow-up-arrow-down',
     evaluate: (app, ctx) => {
       const slo = ctx.slos.find((s) => s.service === app.id);
-      return { pass: Boolean(slo), detail: slo ? `Doel ${slo.target}% · budget ${slo.budgetLeft}% over` : 'Geen SLO vastgelegd' };
+      return {
+        pass: Boolean(slo),
+        detail: slo
+          ? `Doel ${slo.target}% · budget ${slo.budgetLeft}% over`
+          : 'Geen SLO vastgelegd',
+      };
     },
     to: '/incidenten',
     fixLabel: 'Definieer een SLO',
@@ -72,11 +80,18 @@ const CHECKS = [
     icon: 'cylinder-split',
     evaluate: (app, ctx) => {
       const insts = ctx.instances.filter((i) => i.app === app.id);
-      const stateful = insts.filter((i) => ['postgres', 'kafka', 'redis', 'objectstore'].includes(i.kind));
+      const stateful = insts.filter((i) =>
+        ['postgres', 'kafka', 'redis', 'objectstore'].includes(i.kind)
+      );
       if (stateful.length === 0) return { pass: true, detail: 'Geen stateful infra (n.v.t.)' };
       // Plausible rule: prod-stateful counts as backed up, acc/dev not yet.
       const pass = stateful.every((i) => i.env === 'prod');
-      return { pass, detail: pass ? `${stateful.length} datastore(s) in back-upschema` : 'Back-up niet getest in alle omgevingen' };
+      return {
+        pass,
+        detail: pass
+          ? `${stateful.length} datastore(s) in back-upschema`
+          : 'Back-up niet getest in alle omgevingen',
+      };
     },
     to: '/infra/instances',
     fixLabel: 'Stel back-ups in',
@@ -136,7 +151,16 @@ export function runCheck(key, app, ctx) {
   const c = CHECKS.find((x) => x.key === key);
   if (!c) return null;
   const res = c.evaluate(app, ctx);
-  return { key: c.key, label: c.label, desc: c.desc, icon: c.icon, to: c.to, fixLabel: c.fixLabel, pass: res.pass, detail: res.detail };
+  return {
+    key: c.key,
+    label: c.label,
+    desc: c.desc,
+    icon: c.icon,
+    to: c.to,
+    fixLabel: c.fixLabel,
+    pass: res.pass,
+    detail: res.detail,
+  };
 }
 
 // Build the full scorecard for one app against a store context.

@@ -141,11 +141,6 @@ function teamName(app) {
   return t ? t.name : 'geen team';
 }
 
-function isPublic(app) {
-  const repo = store.repoById(app.repo);
-  return repo && repo.visibility === 'open';
-}
-
 const detailLinks = computed(() => {
   if (!selected.value) return [];
   return selected.value.apps.slice(0, 4).map((a) => ({

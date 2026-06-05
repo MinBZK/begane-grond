@@ -29,7 +29,6 @@ const filtered = computed(() =>
 );
 
 const goudCount = computed(() => store.datasetsByLabel('goud').length);
-const zilverCount = computed(() => store.datasetsByLabel('zilver').length);
 const bronsCount = computed(() => store.datasetsByLabel('brons').length);
 
 function registerName(id) {

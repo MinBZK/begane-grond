@@ -62,10 +62,6 @@ function isApplicable(key) {
 }
 // adr/problemJson/oauth/rateLimit are mandatory; the conditional three are
 // "required when applicable" and locked on once their trigger is set.
-function isMandatory(key) {
-  return isApplicable(key);
-}
-
 // Keep the standards object honest as answers change: switch the conditional
 // ones on when they become applicable, off when they stop being.
 function syncStandaarden() {
@@ -121,7 +117,6 @@ function endpointsFor(r) {
 
 // The ADR lint over the current design, green/red in the wizard.
 const adrChecks = computed(() => lintAdr({ version: form.version }, form.resources));
-const adrOk = computed(() => adrChecks.value.every((c) => c.pass));
 
 const standaardenRows = computed(() =>
   STANDAARDEN.map((s) => ({

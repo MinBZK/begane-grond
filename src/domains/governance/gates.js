@@ -10,7 +10,8 @@
 // The reasoning string explains the verdict and powers the tooltip cell.
 export function evalGate(app, gateId, store) {
   const repo = app.repo ? store.repoById(app.repo) : null;
-  const isFrontend = app.type === 'website' || app.stack?.includes('Vue') || app.stack?.includes('NLDD');
+  const isFrontend =
+    app.type === 'website' || app.stack?.includes('Vue') || app.stack?.includes('NLDD');
   const vulns = store.vulnerabilities.filter((v) => v.app === app.id);
   const openCritical = vulns.filter(
     (v) => (v.severity === 'critical' || v.severity === 'high') && v.status !== 'opgelost'
@@ -37,7 +38,8 @@ export function evalGate(app, gateId, store) {
       if (openCritical.length) {
         return { verdict: 'fail', why: `${openCritical.length} open kwetsbaarheid(en) (BIO)` };
       }
-      if (app.health === 'warn') return { verdict: 'fail', why: 'Operationele BIO-controls op warn' };
+      if (app.health === 'warn')
+        return { verdict: 'fail', why: 'Operationele BIO-controls op warn' };
       return { verdict: 'pass', why: 'BIO-baseline groen' };
     }
     default:

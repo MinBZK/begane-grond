@@ -21,7 +21,7 @@ onMounted(() => {
       month: 'long',
       year: 'numeric',
     }).format(new Date())
-  } catch (e) {
+  } catch {
     todayLabel.value = ''
   }
 })

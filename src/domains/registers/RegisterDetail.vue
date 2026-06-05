@@ -8,7 +8,6 @@ import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import DataTable from '../../components/shared/DataTable.vue';
-import StatusBadge from '../../components/shared/StatusBadge.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 

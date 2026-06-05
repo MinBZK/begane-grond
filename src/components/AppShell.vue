@@ -54,7 +54,7 @@ function applyTheme() {
 }
 function setTheme(t) {
   theme.value = t;
-  try { localStorage.setItem('rp-theme', t); } catch (e) {}
+  try { localStorage.setItem('rp-theme', t); } catch { /* best-effort: localStorage may be unavailable */ }
   applyTheme();
 }
 
@@ -98,7 +98,7 @@ onMounted(() => {
   try {
     const v = localStorage.getItem('rp-theme');
     if (v) theme.value = v;
-  } catch (e) {}
+  } catch { /* best-effort: localStorage may be unavailable */ }
   applyTheme();
   if (window.matchMedia) {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {

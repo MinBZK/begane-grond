@@ -4,7 +4,13 @@
 // clickable demo needs. Domain views read these arrays and call these helpers.
 import { defineStore } from 'pinia';
 import * as seed from '../data/seed.js';
-import { eventSeed, extraHistoricalEvents, eventTypeMap, eventSources, SEVERITIES } from '../data/events.js';
+import {
+  eventSeed,
+  extraHistoricalEvents,
+  eventTypeMap,
+  eventSources,
+  SEVERITIES,
+} from '../data/events.js';
 import { generateOpenApiYaml } from '../domains/koppelvlakken/openapi.js';
 
 // Deep clone the seed so the store owns mutable copies (refresh resets it).
@@ -12,9 +18,6 @@ const clone = (v) => JSON.parse(JSON.stringify(v));
 
 let _seq = 1000;
 const nextId = (prefix) => `${prefix}-${++_seq}`;
-
-// Severity rank for sorting/escalation.
-const SEV_RANK = { critical: 0, warning: 1, success: 2, info: 3 };
 
 // --- Infra-as-code: every audited action also lands as a commit -------------
 // The platform's whole point is that the UI is just an editor over a git repo
@@ -36,12 +39,14 @@ function shaFor(seed) {
 
 // Slugify a free-text resource into a path-safe token.
 function slugify(s) {
-  return String(s || 'resource')
-    .toLowerCase()
-    .replace(/→.*$/, '')
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '') || 'resource';
+  return (
+    String(s || 'resource')
+      .toLowerCase()
+      .replace(/→.*$/, '')
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'resource'
+  );
 }
 
 // Map an action family to a file in the platform-config repo + a commit type.
@@ -50,16 +55,26 @@ function slugify(s) {
 function commitMetaFor(action, resource) {
   const a = (action || '').toLowerCase();
   const slug = slugify(resource);
-  if (a.includes('secret')) return { path: `secrets/${slug}.sops.yaml`, type: 'chore', scope: 'secrets', verb: 'rotate' };
-  if (a.includes('infra') || a.includes('instance')) return { path: `infra/${slug}.tf`, type: 'feat', scope: 'infra', verb: 'provision' };
-  if (a.includes('release') || a.includes('promo')) return { path: `environments/${slug}.yaml`, type: 'feat', scope: 'release', verb: 'promote' };
-  if (a.includes('rfc')) return { path: `governance/rfcs/${slug}.md`, type: 'docs', scope: 'rfc', verb: 'record' };
-  if (a.includes('koppelvlak') || a.includes('api')) return { path: `apis/${slug}/openapi.yaml`, type: 'feat', scope: 'api', verb: 'add' };
-  if (a.includes('applicatie') || a.includes('app')) return { path: `apps/${slug}/app.yaml`, type: 'feat', scope: 'app', verb: 'scaffold' };
-  if (a.includes('campagne')) return { path: `fleet/${slug}.yaml`, type: 'feat', scope: 'fleet', verb: 'roll out' };
-  if (a.includes('werkplek') || a.includes('device')) return { path: `workplaces/${slug}.yaml`, type: 'chore', scope: 'workplace', verb: 'apply' };
-  if (a.includes('budget') || a.includes('kosten') || a.includes('showback')) return { path: `finance/${slug}.yaml`, type: 'chore', scope: 'finance', verb: 'update' };
-  if (a.includes('scan') || a.includes('security')) return { path: `security/${slug}.yaml`, type: 'chore', scope: 'security', verb: 'record' };
+  if (a.includes('secret'))
+    return { path: `secrets/${slug}.sops.yaml`, type: 'chore', scope: 'secrets', verb: 'rotate' };
+  if (a.includes('infra') || a.includes('instance'))
+    return { path: `infra/${slug}.tf`, type: 'feat', scope: 'infra', verb: 'provision' };
+  if (a.includes('release') || a.includes('promo'))
+    return { path: `environments/${slug}.yaml`, type: 'feat', scope: 'release', verb: 'promote' };
+  if (a.includes('rfc'))
+    return { path: `governance/rfcs/${slug}.md`, type: 'docs', scope: 'rfc', verb: 'record' };
+  if (a.includes('koppelvlak') || a.includes('api'))
+    return { path: `apis/${slug}/openapi.yaml`, type: 'feat', scope: 'api', verb: 'add' };
+  if (a.includes('applicatie') || a.includes('app'))
+    return { path: `apps/${slug}/app.yaml`, type: 'feat', scope: 'app', verb: 'scaffold' };
+  if (a.includes('campagne'))
+    return { path: `fleet/${slug}.yaml`, type: 'feat', scope: 'fleet', verb: 'roll out' };
+  if (a.includes('werkplek') || a.includes('device'))
+    return { path: `workplaces/${slug}.yaml`, type: 'chore', scope: 'workplace', verb: 'apply' };
+  if (a.includes('budget') || a.includes('kosten') || a.includes('showback'))
+    return { path: `finance/${slug}.yaml`, type: 'chore', scope: 'finance', verb: 'update' };
+  if (a.includes('scan') || a.includes('security'))
+    return { path: `security/${slug}.yaml`, type: 'chore', scope: 'security', verb: 'record' };
   return { path: `platform/${slug}.yaml`, type: 'chore', scope: 'platform', verb: 'update' };
 }
 
@@ -70,7 +85,12 @@ function diffFor(meta, resource) {
   const slug = slugify(resource);
   const lines = [`--- a/${meta.path}`, `+++ b/${meta.path}`, '@@'];
   if (meta.scope === 'infra') {
-    lines.push(`+resource "platform_instance" "${slug}" {`, `+  name    = "${resource}"`, '+  managed = true', '+}');
+    lines.push(
+      `+resource "platform_instance" "${slug}" {`,
+      `+  name    = "${resource}"`,
+      '+  managed = true',
+      '+}'
+    );
   } else if (meta.scope === 'release') {
     lines.push(`+# ${resource}`, '+desired_version: "next"', '+strategy: rolling');
   } else if (meta.scope === 'secrets') {
@@ -199,7 +219,15 @@ export const usePlatformStore = defineStore('platform', {
     // hardware. Optionally scoped to a single datacenter.
     computeCapacity: (s) => (dc) => {
       const racks = dc ? s.racks.filter((r) => r.dc === dc) : s.racks;
-      const acc = { vcpu: 0, memGB: 0, gpus: 0, storageTB: 0, computeNodes: 0, gpuNodes: 0, storageNodes: 0 };
+      const acc = {
+        vcpu: 0,
+        memGB: 0,
+        gpus: 0,
+        storageTB: 0,
+        computeNodes: 0,
+        gpuNodes: 0,
+        storageNodes: 0,
+      };
       for (const r of racks) {
         for (const u of r.units) {
           acc.vcpu += u.vcpu || 0;
@@ -207,7 +235,8 @@ export const usePlatformStore = defineStore('platform', {
           acc.gpus += u.gpuCount || 0;
           acc.storageTB += u.storageTB || 0;
           if (u.type === 'gpu') acc.gpuNodes += 1;
-          else if (u.type === 'server' && (u.label || '').startsWith('storage')) acc.storageNodes += 1;
+          else if (u.type === 'server' && (u.label || '').startsWith('storage'))
+            acc.storageNodes += 1;
           else if (u.type === 'server') acc.computeNodes += 1;
         }
       }
@@ -233,7 +262,8 @@ export const usePlatformStore = defineStore('platform', {
       return rec ? rec.plugins : [];
     },
     // Which marketplace plugin (if any) covers a given standard id.
-    pluginForStandard: (s) => (stdId) => s.skillPlugins.find((p) => (p.standards || []).includes(stdId)),
+    pluginForStandard: (s) => (stdId) =>
+      s.skillPlugins.find((p) => (p.standards || []).includes(stdId)),
 
     // --- CI runners ---
     runnerById: (s) => (id) => s.runners.find((r) => r.id === id),
@@ -250,7 +280,8 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Registers (basisregistraties) ---
     registerById: (s) => (id) => s.registers.find((r) => r.id === id),
-    consumersOfRegister: (s) => (registerId) => s.registerConsumers.filter((c) => c.register === registerId),
+    consumersOfRegister: (s) => (registerId) =>
+      s.registerConsumers.filter((c) => c.register === registerId),
 
     // --- Data (datasetcatalogus) ---
     datasetById: (s) => (id) => s.datasets.find((d) => d.id === id),
@@ -268,13 +299,15 @@ export const usePlatformStore = defineStore('platform', {
     algoritmesByType: (s) => (type) => s.algoritmes.filter((a) => a.type === type),
     algoritmesForApp: (s) => (appId) => s.algoritmes.filter((a) => a.app === appId),
     algoritmesForModel: (s) => (modelId) => s.algoritmes.filter((a) => a.model === modelId),
-    algoritmesForDataset: (s) => (dsId) => s.algoritmes.filter((a) => (a.dataSources || []).includes(dsId)),
+    algoritmesForDataset: (s) => (dsId) =>
+      s.algoritmes.filter((a) => (a.dataSources || []).includes(dsId)),
 
     // --- Verwerkingen (AVG art. 30) ---
     verwerkingById: (s) => (id) => s.verwerkingen.find((v) => v.id === id),
     verwerkingenByDpia: (s) => (status) => s.verwerkingen.filter((v) => v.dpiaStatus === status),
     verwerkingenForWet: (s) => (wetId) => s.verwerkingen.filter((v) => v.wet === wetId),
-    verwerkingenForDataset: (s) => (dsId) => s.verwerkingen.filter((v) => (v.datasets || []).includes(dsId)),
+    verwerkingenForDataset: (s) => (dsId) =>
+      s.verwerkingen.filter((v) => (v.datasets || []).includes(dsId)),
 
     // --- Woo & archivering ---
     wooDocumentById: (s) => (id) => s.wooDocuments.find((w) => w.id === id),
@@ -292,7 +325,8 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Login (DigiD / eHerkenning / eIDAS / machtigen) ---
     loginMethodById: (s) => (id) => s.loginMethods.find((m) => m.id === id),
-    loginMethodsForApp: (s) => (appId) => s.loginMethods.filter((m) => (m.connectedApps || []).includes(appId)),
+    loginMethodsForApp: (s) => (appId) =>
+      s.loginMethods.filter((m) => (m.connectedApps || []).includes(appId)),
 
     // --- Domains & DNS ---
     domeinById: (s) => (id) => s.domeinen.find((d) => d.id === id),
@@ -304,7 +338,8 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Reusable components ---
     componentById: (s) => (id) => s.componenten.find((c) => c.id === id),
-    componentsForTeam: (s) => (teamId) => s.componenten.filter((c) => (c.usedBy || []).includes(teamId)),
+    componentsForTeam: (s) => (teamId) =>
+      s.componenten.filter((c) => (c.usedBy || []).includes(teamId)),
 
     // --- Feature flags ---
     featureFlagById: (s) => (id) => s.featureFlags.find((f) => f.id === id),
@@ -328,8 +363,8 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Accessibility statements ---
     toegankelijkheidById: (s) => (id) => s.toegankelijkheidsverklaringen.find((t) => t.id === id),
-    toegankelijkheidForApp: (s) => (appId) => s.toegankelijkheidsverklaringen.find((t) => t.app === appId) || null,
-    toegankelijkheidForApp: (s) => (appId) => s.toegankelijkheidsverklaringen.find((t) => t.app === appId),
+    toegankelijkheidForApp: (s) => (appId) =>
+      s.toegankelijkheidsverklaringen.find((t) => t.app === appId) || null,
     registersForConsumer: (s) => (consumerId) =>
       s.registerConsumers
         .filter((c) => c.consumer === consumerId)
@@ -341,7 +376,8 @@ export const usePlatformStore = defineStore('platform', {
     scenariosByWet: (s) => (wetId) => s.scenarios.filter((sc) => sc.wet === wetId),
     trajectById: (s) => (id) => s.trajecten.find((t) => t.id === id),
     trajectenByWet: (s) => (wetId) => s.trajecten.filter((t) => t.wet === wetId),
-    trajectenByPerson: (s) => (personId) => s.trajecten.filter((t) => (t.members || []).includes(personId)),
+    trajectenByPerson: (s) => (personId) =>
+      s.trajecten.filter((t) => (t.members || []).includes(personId)),
     appForWet: (s) => (wetId) => {
       const w = s.wetten.find((x) => x.id === wetId);
       return w?.service ? s.apps.find((a) => a.id === w.service) : null;
@@ -359,7 +395,9 @@ export const usePlatformStore = defineStore('platform', {
     },
     avgCoverage: (s) => {
       if (!s.wetten.length) return 0;
-      return Math.round((s.wetten.reduce((n, w) => n + (w.coverage || 0), 0) / s.wetten.length) * 100);
+      return Math.round(
+        (s.wetten.reduce((n, w) => n + (w.coverage || 0), 0) / s.wetten.length) * 100
+      );
     },
 
     // --- Notification inbox ---
@@ -372,7 +410,7 @@ export const usePlatformStore = defineStore('platform', {
         (e) =>
           !e.muted &&
           !s.mutedSources.includes(e.source) &&
-          (e.team === myTeam || e.actor === s.currentUser || e.severity === 'critical'),
+          (e.team === myTeam || e.actor === s.currentUser || e.severity === 'critical')
       );
     },
     unreadCount() {
@@ -394,7 +432,13 @@ export const usePlatformStore = defineStore('platform', {
 
   actions: {
     audit(action, resource) {
-      this.auditLog.unshift({ id: nextId('a'), actor: this.currentUser, action, resource, at: 'zojuist' });
+      this.auditLog.unshift({
+        id: nextId('a'),
+        actor: this.currentUser,
+        action,
+        resource,
+        at: 'zojuist',
+      });
       // The same event, seen as a commit: every audited action writes to the
       // platform-config repo. This is what makes "every click is a commit" true.
       this.commit({ action, resource });
@@ -429,8 +473,16 @@ export const usePlatformStore = defineStore('platform', {
     // into the inbox, matched against subscriptions for delivery, and (for
     // anything actor-driven) also written to the audit log. New events show up
     // live in the bell + inbox + the /notificaties stream.
-    emit(type, { title, resource = null, target = null, team = null, actor = null, severity = null } = {}) {
-      const meta = eventTypeMap[type] || { source: 'platform', label: type, icon: 'circle-filled', severity: 'info' };
+    emit(
+      type,
+      { title, resource = null, target = null, team = null, actor = null, severity = null } = {}
+    ) {
+      const meta = eventTypeMap[type] || {
+        source: 'platform',
+        label: type,
+        icon: 'circle-filled',
+        severity: 'info',
+      };
       const ev = {
         id: nextId('evt'),
         type,
@@ -461,10 +513,10 @@ export const usePlatformStore = defineStore('platform', {
     // Match an event against team subscriptions; mark which channels delivered.
     routeEvent(ev) {
       const matched = this.subscriptions.filter(
-        (sub) => sub.event === ev.type && (!sub.team || sub.team === ev.team),
+        (sub) => sub.event === ev.type && (!sub.team || sub.team === ev.team)
       );
       ev.deliveredTo = matched.flatMap((sub) =>
-        this.channels.filter((c) => c.team === sub.team).map((c) => c.type),
+        this.channels.filter((c) => c.team === sub.team).map((c) => c.type)
       );
     },
 
@@ -487,7 +539,7 @@ export const usePlatformStore = defineStore('platform', {
     async runStatusChain(entity, chain, delayMs = 1200) {
       for (const step of chain) {
         entity.status = step;
-        // eslint-disable-next-line no-await-in-loop
+
         await new Promise((r) => setTimeout(r, delayMs));
       }
       return entity;
@@ -497,16 +549,33 @@ export const usePlatformStore = defineStore('platform', {
     orderInstance({ kind, name, team, app = null, env, size, dc = 'dc-denhaag', rack = null }) {
       const inst = {
         id: nextId(kind),
-        kind, name, team, app, env, size, dc, rack,
+        kind,
+        name,
+        team,
+        app,
+        env,
+        size,
+        dc,
+        rack,
         status: 'requested',
         costMonth: 0,
       };
       this.instances.push(inst);
       this.audit('infra afgenomen', inst.name);
-      this.emit('infra.instance.requested', { title: `${inst.name} aangevraagd`, resource: inst.id, target: `/infra/instances/${inst.id}`, team });
+      this.emit('infra.instance.requested', {
+        title: `${inst.name} aangevraagd`,
+        resource: inst.id,
+        target: `/infra/instances/${inst.id}`,
+        team,
+      });
       // When provisioning completes, fire the ready event too.
       this.runStatusChain(inst, ['provisioning', 'ready']).then(() => {
-        this.emit('infra.instance.ready', { title: `${inst.name} is gereed`, resource: inst.id, target: `/infra/instances/${inst.id}`, team });
+        this.emit('infra.instance.ready', {
+          title: `${inst.name} is gereed`,
+          resource: inst.id,
+          target: `/infra/instances/${inst.id}`,
+          team,
+        });
       });
       return inst;
     },
@@ -514,7 +583,12 @@ export const usePlatformStore = defineStore('platform', {
       const i = this.instanceById(id);
       if (i) {
         this.audit('instance geschaald', i.name);
-        this.emit('infra.instance.scaled', { title: `${i.name} geschaald`, resource: i.id, target: `/infra/instances/${i.id}`, team: i.team });
+        this.emit('infra.instance.scaled', {
+          title: `${i.name} geschaald`,
+          resource: i.id,
+          target: `/infra/instances/${i.id}`,
+          team: i.team,
+        });
       }
     },
     deleteInstance(id) {
@@ -522,7 +596,11 @@ export const usePlatformStore = defineStore('platform', {
       this.instances = this.instances.filter((x) => x.id !== id);
       if (i) {
         this.audit('instance verwijderd', i.name);
-        this.emit('infra.instance.deleted', { title: `${i.name} verwijderd`, resource: i.id, team: i.team });
+        this.emit('infra.instance.deleted', {
+          title: `${i.name} verwijderd`,
+          resource: i.id,
+          team: i.team,
+        });
       }
     },
 
@@ -537,15 +615,52 @@ export const usePlatformStore = defineStore('platform', {
       const ns = orgNs[teamObj?.org] || 'nldd';
       // App type follows the template: frontend/docs templates are websites.
       const type = /vue|nldd|astro|docs/.test(template || '') ? 'website' : 'service';
-      this.repos.push({ id: repoId, name: `${ns}/${slug}`, visibility, lang: template?.includes('rust') ? 'Rust' : template?.includes('python') ? 'Python' : 'Vue', stars: 0, openPrs: 0, openIssues: 0, ci: 'green', license: 'EUPL-1.2', app: id });
-      const app = { id, name, team, type, stack: [], repo: repoId, maturity: 'brons', health: 'ok' };
+      this.repos.push({
+        id: repoId,
+        name: `${ns}/${slug}`,
+        visibility,
+        lang: template?.includes('rust') ? 'Rust' : template?.includes('python') ? 'Python' : 'Vue',
+        stars: 0,
+        openPrs: 0,
+        openIssues: 0,
+        ci: 'green',
+        license: 'EUPL-1.2',
+        app: id,
+      });
+      const app = {
+        id,
+        name,
+        team,
+        type,
+        stack: [],
+        repo: repoId,
+        maturity: 'brons',
+        health: 'ok',
+      };
       this.apps.push(app);
       for (const kind of withInfra) {
-        this.orderInstance({ kind, name: `${name.toLowerCase().replace(/\s+/g, '-')}-${kind}`, team, app: id, env: 'dev', size: 'S' });
+        this.orderInstance({
+          kind,
+          name: `${name.toLowerCase().replace(/\s+/g, '-')}-${kind}`,
+          team,
+          app: id,
+          env: 'dev',
+          size: 'S',
+        });
       }
       this.audit('applicatie aangemaakt', name);
-      this.emit('repo.created', { title: `Repository ${ns}/${slug} aangemaakt`, resource: repoId, target: `/code/${repoId}`, team });
-      this.emit('app.created', { title: `Applicatie ${name} aangemaakt`, resource: id, target: `/apps/${id}`, team });
+      this.emit('repo.created', {
+        title: `Repository ${ns}/${slug} aangemaakt`,
+        resource: repoId,
+        target: `/code/${repoId}`,
+        team,
+      });
+      this.emit('app.created', {
+        title: `Applicatie ${name} aangemaakt`,
+        resource: id,
+        target: `/apps/${id}`,
+        team,
+      });
       return { app, repoId };
     },
 
@@ -554,17 +669,34 @@ export const usePlatformStore = defineStore('platform', {
     // traceable as a new app. `standaarden`/`exposure`/`persoonsgegevens`/`events`
     // carry the compliant-by-default profile the wizard assembled, which the
     // api-standaarden evaluator reads back verbatim.
-    createApi({ name, version = 'v1', team, exposure = 'intern', persoonsgegevens = false, events = false, standaarden = {}, resources = [] }) {
+    createApi({
+      name,
+      version = 'v1',
+      team,
+      exposure = 'intern',
+      persoonsgegevens = false,
+      events = false,
+      standaarden = {},
+      resources = [],
+    }) {
       const id = nextId('api');
       const cleanResources = resources
-        .map((r) => ({ singular: (r.singular || '').trim(), ops: r.ops ? { ...r.ops } : undefined }))
+        .map((r) => ({
+          singular: (r.singular || '').trim(),
+          ops: r.ops ? { ...r.ops } : undefined,
+        }))
         .filter((r) => r.singular);
       const api = {
-        id, name, version, owner: team,
+        id,
+        name,
+        version,
+        owner: team,
         adr: standaarden.adr !== false, // ADR is on by default on the golden path
         rateLimit: '100/s',
         status: 'beta',
-        exposure, persoonsgegevens, events,
+        exposure,
+        persoonsgegevens,
+        events,
         standaarden: {
           problemJson: Boolean(standaarden.problemJson),
           oauth: Boolean(standaarden.oauth),
@@ -576,7 +708,9 @@ export const usePlatformStore = defineStore('platform', {
         resources: cleanResources,
         // The designed contract: a real OpenAPI 3.0 document, generated from the
         // resources so the catalogus can show the actual spec, not just a URL.
-        spec: cleanResources.length ? generateOpenApiYaml({ name, version, standaarden }, cleanResources) : null,
+        spec: cleanResources.length
+          ? generateOpenApiYaml({ name, version, standaarden }, cleanResources)
+          : null,
       };
       this.apis.push(api);
 
@@ -584,11 +718,22 @@ export const usePlatformStore = defineStore('platform', {
       // artifact — the OpenAPI spec — so we write that as the commit diff on a
       // proper apis/<slug>/<version>/openapi.yaml path, instead of the generic
       // "managed: true" placeholder. The diff IS the contract you just designed.
-      this.auditLog.unshift({ id: nextId('a'), actor: this.currentUser, action: 'koppelvlak aangemaakt', resource: name, at: 'zojuist' });
+      this.auditLog.unshift({
+        id: nextId('a'),
+        actor: this.currentUser,
+        action: 'koppelvlak aangemaakt',
+        resource: name,
+        at: 'zojuist',
+      });
       const slug = name.toLowerCase().replace(/api$/, '').trim().replace(/\s+/g, '-') || 'api';
       const specPath = `apis/${slug}/${version}/openapi.yaml`;
       const specDiff = api.spec
-        ? [`--- /dev/null`, `+++ b/${specPath}`, '@@', ...api.spec.split('\n').map((l) => '+' + l)].join('\n')
+        ? [
+            `--- /dev/null`,
+            `+++ b/${specPath}`,
+            '@@',
+            ...api.spec.split('\n').map((l) => '+' + l),
+          ].join('\n')
         : null;
       this.commit({
         action: 'koppelvlak aangemaakt',
@@ -598,7 +743,13 @@ export const usePlatformStore = defineStore('platform', {
         diff: specDiff,
       });
 
-      this.emit('api.created', { title: `Koppelvlak ${name} ${version} aangemaakt`, resource: id, target: '/koppelvlakken', team, severity: 'success' });
+      this.emit('api.created', {
+        title: `Koppelvlak ${name} ${version} aangemaakt`,
+        resource: id,
+        target: '/koppelvlakken',
+        team,
+        severity: 'success',
+      });
       return { api };
     },
 
@@ -618,13 +769,27 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Workplaces ---
     provisionWorkplace({ person, model, image }) {
-      const wp = { id: nextId('wp'), person, model, image, status: 'besteld', lastSeen: '—', encrypted: true, updated: false };
+      const wp = {
+        id: nextId('wp'),
+        person,
+        model,
+        image,
+        status: 'besteld',
+        lastSeen: '—',
+        encrypted: true,
+        updated: false,
+      };
       this.workplaces.push(wp);
       const personName = this.personById(person)?.name || person;
       const team = this.personById(person)?.team;
       this.audit('werkplek uitgerold', `${wp.id} → ${person}`);
       this.runStatusChain(wp, ['provisioning', 'geleverd', 'in gebruik']).then(() => {
-        this.emit('workplace.provisioned', { title: `Werkplek ${wp.id} uitgerold aan ${personName}`, resource: wp.id, target: `/werkplekken/${wp.id}`, team });
+        this.emit('workplace.provisioned', {
+          title: `Werkplek ${wp.id} uitgerold aan ${personName}`,
+          resource: wp.id,
+          target: `/werkplekken/${wp.id}`,
+          team,
+        });
       });
       return wp;
     },
@@ -635,7 +800,12 @@ export const usePlatformStore = defineStore('platform', {
       if (sec) {
         sec.rotated = 'zojuist';
         this.audit('secret geroteerd', sec.name);
-        this.emit('secret.rotated', { title: `${sec.name} geroteerd`, resource: sec.id, target: '/secrets', team: sec.team });
+        this.emit('secret.rotated', {
+          title: `${sec.name} geroteerd`,
+          resource: sec.id,
+          target: '/secrets',
+          team: sec.team,
+        });
       }
     },
 
@@ -660,7 +830,12 @@ export const usePlatformStore = defineStore('platform', {
       };
       this.certificates.unshift(cert);
       this.audit('certificaat aangevraagd', cn);
-      this.emit('cert.issued', { title: `Certificaat ${cn} uitgegeven door ${cert.tsp}`, resource: cert.id, target: '/secrets/certificaten', team: 'team-platform' });
+      this.emit('cert.issued', {
+        title: `Certificaat ${cn} uitgegeven door ${cert.tsp}`,
+        resource: cert.id,
+        target: '/secrets/certificaten',
+        team: 'team-platform',
+      });
       return cert;
     },
     renewCertificate(id) {
@@ -670,7 +845,12 @@ export const usePlatformStore = defineStore('platform', {
       cert.status = 'geldig';
       cert.requested = 'zojuist vernieuwd';
       this.audit('certificaat vernieuwd', cert.cn);
-      this.emit('cert.renewed', { title: `Certificaat ${cert.cn} vernieuwd`, resource: cert.id, target: '/secrets/certificaten', team: 'team-platform' });
+      this.emit('cert.renewed', {
+        title: `Certificaat ${cert.cn} vernieuwd`,
+        resource: cert.id,
+        target: '/secrets/certificaten',
+        team: 'team-platform',
+      });
     },
     toggleCertAutoRenew(id) {
       const cert = this.certificates.find((c) => c.id === id);
@@ -699,7 +879,12 @@ export const usePlatformStore = defineStore('platform', {
       };
       this.domeinen.unshift(dom);
       this.audit('domein geregistreerd', fqdn);
-      this.emit('dns.domain.added', { title: `Domein ${fqdn} geregistreerd`, resource: dom.id, target: `/dns/${dom.id}`, team: dom.team });
+      this.emit('dns.domain.added', {
+        title: `Domein ${fqdn} geregistreerd`,
+        resource: dom.id,
+        target: `/dns/${dom.id}`,
+        team: dom.team,
+      });
       return dom;
     },
     toggleDnssec(id) {
@@ -718,7 +903,12 @@ export const usePlatformStore = defineStore('platform', {
         dom.status = 'aandacht';
       }
       this.audit(dom.dnssec ? 'DNSSEC ingeschakeld' : 'DNSSEC uitgeschakeld', dom.fqdn);
-      this.emit('dns.dnssec.changed', { title: `DNSSEC ${dom.dnssec ? 'aan' : 'uit'} voor ${dom.fqdn}`, resource: dom.id, target: `/dns/${dom.id}`, team: dom.team });
+      this.emit('dns.dnssec.changed', {
+        title: `DNSSEC ${dom.dnssec ? 'aan' : 'uit'} voor ${dom.fqdn}`,
+        resource: dom.id,
+        target: `/dns/${dom.id}`,
+        team: dom.team,
+      });
     },
     addDnsRecord(id, record) {
       const dom = this.domeinById(id);
@@ -741,7 +931,12 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Fleet-shift ---
     createCampaign(c) {
-      const camp = { id: nextId('camp'), status: 'concept', progress: { open: 0, merged: 0, failing: 0 }, ...c };
+      const camp = {
+        id: nextId('camp'),
+        status: 'concept',
+        progress: { open: 0, merged: 0, failing: 0 },
+        ...c,
+      };
       this.campaigns.push(camp);
       this.audit('campagne aangemaakt', camp.title);
       return camp;
@@ -752,10 +947,20 @@ export const usePlatformStore = defineStore('platform', {
       c.status = 'actief';
       c.progress = { open: c.repos.length, merged: 0, failing: 0 };
       this.audit('campagne uitgerold', c.title);
-      this.emit('fleet.campaign.started', { title: `Campagne "${c.title}" uitgerold over ${c.repos.length} repos`, resource: c.id, target: `/fleet/${c.id}`, team: c.owner });
+      this.emit('fleet.campaign.started', {
+        title: `Campagne "${c.title}" uitgerold over ${c.repos.length} repos`,
+        resource: c.id,
+        target: `/fleet/${c.id}`,
+        team: c.owner,
+      });
       // Each targeted repo gets a fleet PR opened.
       for (const repoId of c.repos) {
-        this.emit('fleet.pr.opened', { title: `Fleet-PR geopend in ${this.repoById(repoId)?.name || repoId}`, resource: repoId, target: `/fleet/${c.id}`, team: c.owner });
+        this.emit('fleet.pr.opened', {
+          title: `Fleet-PR geopend in ${this.repoById(repoId)?.name || repoId}`,
+          resource: repoId,
+          target: `/fleet/${c.id}`,
+          team: c.owner,
+        });
       }
     },
 
@@ -765,7 +970,12 @@ export const usePlatformStore = defineStore('platform', {
       if (i) {
         i.status = 'mitigated';
         this.audit('incident bevestigd', i.id);
-        this.emit('incident.acknowledged', { title: `Incident ${i.id} bevestigd: ${i.title}`, resource: i.id, target: `/incidenten/${i.id}`, team: i.team });
+        this.emit('incident.acknowledged', {
+          title: `Incident ${i.id} bevestigd: ${i.title}`,
+          resource: i.id,
+          target: `/incidenten/${i.id}`,
+          team: i.team,
+        });
       }
     },
 
@@ -781,7 +991,12 @@ export const usePlatformStore = defineStore('platform', {
         const p = this.skillPluginById(pluginId);
         if (p) p.installs += 1;
         this.audit('skill-plugin geïnstalleerd', `${pluginId} → ${team}`);
-        this.emit('ai.skill.installed', { title: `${p?.name || pluginId} geïnstalleerd`, resource: pluginId, target: '/ai/skills', team });
+        this.emit('ai.skill.installed', {
+          title: `${p?.name || pluginId} geïnstalleerd`,
+          resource: pluginId,
+          target: '/ai/skills',
+          team,
+        });
       }
     },
     uninstallSkill(team, pluginId) {
@@ -796,9 +1011,20 @@ export const usePlatformStore = defineStore('platform', {
         d[toEnv] = d[fromEnv];
         const appObj = this.appById(app);
         this.audit('release gepromoot', `${app} → ${toEnv}`);
-        this.emit('release.promoted', { title: `${appObj?.name || app} ${d[toEnv]} gepromoot naar ${toEnv}`, resource: app, target: `/apps/${app}`, team: appObj?.team, severity: toEnv === 'prod' ? 'success' : 'info' });
+        this.emit('release.promoted', {
+          title: `${appObj?.name || app} ${d[toEnv]} gepromoot naar ${toEnv}`,
+          resource: app,
+          target: `/apps/${app}`,
+          team: appObj?.team,
+          severity: toEnv === 'prod' ? 'success' : 'info',
+        });
         if (toEnv === 'prod') {
-          this.emit('deploy.completed', { title: `${appObj?.name || app} ${d.prod} live op productie`, resource: app, target: `/apps/${app}`, team: appObj?.team });
+          this.emit('deploy.completed', {
+            title: `${appObj?.name || app} ${d.prod} live op productie`,
+            resource: app,
+            target: `/apps/${app}`,
+            team: appObj?.team,
+          });
         }
       }
     },
@@ -814,32 +1040,79 @@ export const usePlatformStore = defineStore('platform', {
       this.registerConsumers.push({ id, register, consumer, via: field, type: consumerType });
       const reg = this.registerById(register);
       this.audit('databron aangesloten', `${reg?.name || register} → ${consumer}`);
-      this.emit('register.connected', { title: `${reg?.name || register} aangesloten op ${consumer}`, resource: register, target: `/registers/${register}` });
+      this.emit('register.connected', {
+        title: `${reg?.name || register} aangesloten op ${consumer}`,
+        resource: register,
+        target: `/registers/${register}`,
+      });
       return id;
     },
 
     // --- Wetten (RegelRecht: law -> system) ---
     harvestWet({ name, bwbId, layer = 'WET' }) {
-      const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const id = name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
       const w = {
-        id, name, layer, bwbId, url: `https://wetten.overheid.nl/${bwbId}`,
-        validFrom: '2026-01-01', version: '2026-01-01', status: 'harvested', coverage: 0,
-        owner: this.teamOfPerson(this.currentUser)?.id || 'team-toeslagen', service: null, traject: null,
-        articles: [{ number: '1', title: 'Begripsbepalingen', legalCharacter: null, decisionType: null, definitions: [], parameters: [], inputs: [], outputs: [], openTerms: [] }],
+        id,
+        name,
+        layer,
+        bwbId,
+        url: `https://wetten.overheid.nl/${bwbId}`,
+        validFrom: '2026-01-01',
+        version: '2026-01-01',
+        status: 'harvested',
+        coverage: 0,
+        owner: this.teamOfPerson(this.currentUser)?.id || 'team-toeslagen',
+        service: null,
+        traject: null,
+        articles: [
+          {
+            number: '1',
+            title: 'Begripsbepalingen',
+            legalCharacter: null,
+            decisionType: null,
+            definitions: [],
+            parameters: [],
+            inputs: [],
+            outputs: [],
+            openTerms: [],
+          },
+        ],
       };
       this.wetten.push(w);
       this.audit('wet geharvest', name);
-      this.emit('wet.harvested', { title: `${name} geharvest uit BWB`, resource: id, target: `/wetten/${id}`, team: w.owner });
+      this.emit('wet.harvested', {
+        title: `${name} geharvest uit BWB`,
+        resource: id,
+        target: `/wetten/${id}`,
+        team: w.owner,
+      });
       return w;
     },
     createTraject({ name, wet, members = [], team }) {
       const id = `${(wet || 'traject').slice(0, 12)}-${(++_seq).toString(16).padStart(8, '0')}`;
-      const t = { id, name, wet, status: 'concept', branch: id, members, team: team || this.teamOfPerson(this.currentUser)?.id, opened: 'zojuist' };
+      const t = {
+        id,
+        name,
+        wet,
+        status: 'concept',
+        branch: id,
+        members,
+        team: team || this.teamOfPerson(this.currentUser)?.id,
+        opened: 'zojuist',
+      };
       this.trajecten.push(t);
       const w = this.wetById(wet);
       if (w) w.traject = id;
       this.audit('traject geopend', name);
-      this.emit('traject.created', { title: `Traject geopend: ${name}`, resource: id, target: wet ? `/wetten/${wet}` : '/wetten', team: t.team });
+      this.emit('traject.created', {
+        title: `Traject geopend: ${name}`,
+        resource: id,
+        target: wet ? `/wetten/${wet}` : '/wetten',
+        team: t.team,
+      });
       return t;
     },
     enrichWet(wetId, { inputs = [], outputs = [], coverage } = {}) {
@@ -855,11 +1128,22 @@ export const usePlatformStore = defineStore('platform', {
       else w.coverage = Math.min(1, (w.coverage || 0) + 0.3);
       w.status = 'enriched';
       this.audit('wet machine-leesbaar gemaakt', w.name);
-      this.emit('wet.enriched', { title: `${w.name} machine-leesbaar gemaakt`, resource: wetId, target: `/wetten/${wetId}`, team: w.owner });
+      this.emit('wet.enriched', {
+        title: `${w.name} machine-leesbaar gemaakt`,
+        resource: wetId,
+        target: `/wetten/${wetId}`,
+        team: w.owner,
+      });
       // Connecting a register input also registers a data-source consumer.
       for (const inp of inputs) {
         if (inp.source?.kind === 'register') {
-          this.registerConsumers.push({ id: nextId('rc'), register: inp.source.id, consumer: wetId, via: inp.name, type: 'wet' });
+          this.registerConsumers.push({
+            id: nextId('rc'),
+            register: inp.source.id,
+            consumer: wetId,
+            via: inp.name,
+            type: 'wet',
+          });
         }
       }
     },
@@ -872,10 +1156,21 @@ export const usePlatformStore = defineStore('platform', {
       });
       const w = this.wetById(wetId);
       if (failed) {
-        this.emit('scenario.failed', { title: `${failed} scenario('s) gezakt voor ${w?.name || wetId}`, resource: wetId, target: `/wetten/${wetId}`, team: w?.owner, severity: 'warning' });
+        this.emit('scenario.failed', {
+          title: `${failed} scenario('s) gezakt voor ${w?.name || wetId}`,
+          resource: wetId,
+          target: `/wetten/${wetId}`,
+          team: w?.owner,
+          severity: 'warning',
+        });
       } else {
         this.audit('wet gevalideerd', w?.name || wetId);
-        this.emit('wet.validated', { title: `Alle scenario's groen voor ${w?.name || wetId}`, resource: wetId, target: `/wetten/${wetId}`, team: w?.owner });
+        this.emit('wet.validated', {
+          title: `Alle scenario's groen voor ${w?.name || wetId}`,
+          resource: wetId,
+          target: `/wetten/${wetId}`,
+          team: w?.owner,
+        });
       }
       return { total: list.length, failed };
     },
@@ -889,16 +1184,32 @@ export const usePlatformStore = defineStore('platform', {
         w.traject = null;
       }
       this.audit('wet gepubliceerd', w.name);
-      this.emit('wet.published', { title: `${w.name} ${w.version} gepubliceerd naar corpus`, resource: wetId, target: `/wetten/${wetId}`, team: w.owner });
+      this.emit('wet.published', {
+        title: `${w.name} ${w.version} gepubliceerd naar corpus`,
+        resource: wetId,
+        target: `/wetten/${wetId}`,
+        team: w.owner,
+      });
     },
     // Publish + generate the executing service via the app golden path.
     deployWetAsService(wetId, { template = 'tpl-rust-api' } = {}) {
       const w = this.wetById(wetId);
       if (!w) return null;
       if (w.status !== 'gepubliceerd') this.publishWet(wetId);
-      const { app, repoId } = this.createApp({ name: `${w.name} uitvoering`, team: w.owner, template, withInfra: ['postgres'], visibility: 'open' });
+      const { app, repoId } = this.createApp({
+        name: `${w.name} uitvoering`,
+        team: w.owner,
+        template,
+        withInfra: ['postgres'],
+        visibility: 'open',
+      });
       w.service = app.id;
-      this.emit('wet.deployed', { title: `${w.name} uitgerold als dienst (${app.name})`, resource: wetId, target: `/apps/${app.id}`, team: w.owner });
+      this.emit('wet.deployed', {
+        title: `${w.name} uitgerold als dienst (${app.name})`,
+        resource: wetId,
+        target: `/apps/${app.id}`,
+        team: w.owner,
+      });
       return { app, repoId };
     },
 
@@ -908,13 +1219,23 @@ export const usePlatformStore = defineStore('platform', {
       if (!r) return;
       r.capacity = Math.max(1, r.capacity + delta);
       this.audit('runner-pool geschaald', `${r.name} → ${r.capacity} jobs`);
-      this.emit('runner.scaled', { title: `Runner-pool ${r.name} geschaald naar ${r.capacity} parallelle jobs`, resource: r.id, target: '/environments/runners', team: r.team });
+      this.emit('runner.scaled', {
+        title: `Runner-pool ${r.name} geschaald naar ${r.capacity} parallelle jobs`,
+        resource: r.id,
+        target: '/environments/runners',
+        team: r.team,
+      });
     },
     toggleRunnerStandby(id) {
       const r = this.runnerById(id);
       if (!r) return;
       r.status = r.status === 'stand-by' ? 'operationeel' : 'stand-by';
-      this.emit(r.status === 'operationeel' ? 'runner.online' : 'runner.offline', { title: `Runner-pool ${r.name} is nu ${r.status}`, resource: r.id, target: '/environments/runners', team: r.team });
+      this.emit(r.status === 'operationeel' ? 'runner.online' : 'runner.offline', {
+        title: `Runner-pool ${r.name} is nu ${r.status}`,
+        resource: r.id,
+        target: '/environments/runners',
+        team: r.team,
+      });
     },
   },
 });

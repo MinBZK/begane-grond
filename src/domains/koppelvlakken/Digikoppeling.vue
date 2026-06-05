@@ -207,7 +207,7 @@ function fmtOin(oin) {
     <nldd-spacer size="16" />
 
     <DataTable :columns="registerColumns" :rows="registerRows" row-key="id">
-      <template #cell="{ row, col, value }">
+      <template #cell="{ col, value }">
         <template v-if="col.key === 'org'">
           <span class="rp-org-cell">
             <nldd-icon name="apartment-building" aria-hidden="true"></nldd-icon>

@@ -41,7 +41,10 @@ const EVALUATORS = {
     const adrStd = ctx.standards.find((s) => s.id === 'std-adr');
     if (!api) return { pass: true, detail: 'Geen eigen API; erft platformstandaarden', nvt: true };
     if (api.adr) return { pass: true, detail: `${api.name} volgt API Design Rules` };
-    return { pass: false, detail: `${api.name} voldoet nog niet aan ADR (${adrStd?.status || 'deels'})` };
+    return {
+      pass: false,
+      detail: `${api.name} voldoet nog niet aan ADR (${adrStd?.status || 'deels'})`,
+    };
   },
 
   // 5 — cloudstrategie: draait op Haven (Kubernetes) of op de platform-native
@@ -61,9 +64,11 @@ const EVALUATORS = {
   // verwerking met persoonsgegevens => n.v.t.
   privacy: (app, ctx) => {
     const vwks = ctx.verwerkingen.filter((v) => v.team === app.team);
-    if (!vwks.length) return { pass: true, detail: 'Geen persoonsgegevensverwerking (n.v.t.)', nvt: true };
+    if (!vwks.length)
+      return { pass: true, detail: 'Geen persoonsgegevensverwerking (n.v.t.)', nvt: true };
     const open = vwks.filter((v) => v.dpiaStatus !== 'uitgevoerd');
-    if (!open.length) return { pass: true, detail: `${vwks.length} verwerking(en), DPIA uitgevoerd` };
+    if (!open.length)
+      return { pass: true, detail: `${vwks.length} verwerking(en), DPIA uitgevoerd` };
     return { pass: false, detail: `DPIA open voor ${open.length} verwerking(en)` };
   },
 
@@ -72,8 +77,10 @@ const EVALUATORS = {
   samenwerking: (app, ctx) => {
     const owns = ctx.componenten.filter((c) => c.owner === app.team);
     const uses = ctx.componenten.filter((c) => (c.usedBy || []).includes(app.team));
-    if (owns.length) return { pass: true, detail: `Levert ${owns.length} herbruikbare component(en)` };
-    if (uses.length) return { pass: true, detail: `Hergebruikt ${uses.length} platformcomponent(en)` };
+    if (owns.length)
+      return { pass: true, detail: `Levert ${owns.length} herbruikbare component(en)` };
+    if (uses.length)
+      return { pass: true, detail: `Hergebruikt ${uses.length} platformcomponent(en)` };
     return { pass: false, detail: 'Geen gedeelde componenten geleverd of hergebruikt' };
   },
 
@@ -81,7 +88,8 @@ const EVALUATORS = {
   integratie: (app, ctx) => {
     const api = ctx.apis.find((a) => a.owner === app.team);
     if (!api) return { pass: true, detail: 'Geen koppelvlak aangeboden (n.v.t.)', nvt: true };
-    if (api.adr && api.status === 'productie') return { pass: true, detail: `${api.name} in productie, ADR-conform` };
+    if (api.adr && api.status === 'productie')
+      return { pass: true, detail: `${api.name} in productie, ADR-conform` };
     return { pass: false, detail: `${api.name}: ${api.adr ? api.status : 'niet ADR-conform'}` };
   },
 
@@ -89,19 +97,28 @@ const EVALUATORS = {
   // Geen dataconsumptie => n.v.t.
   datagebruik: (app, ctx) => {
     const contracts = ctx.datacontracten.filter((c) => c.consumer === app.id);
-    if (!contracts.length) return { pass: true, detail: 'Geen externe dataconsumptie (n.v.t.)', nvt: true };
+    if (!contracts.length)
+      return { pass: true, detail: 'Geen externe dataconsumptie (n.v.t.)', nvt: true };
     const active = contracts.filter((c) => c.status === 'actief');
-    if (active.length === contracts.length) return { pass: true, detail: `${active.length} actief datacontract` };
-    return { pass: false, detail: `${contracts.length - active.length} datacontract(en) niet actief` };
+    if (active.length === contracts.length)
+      return { pass: true, detail: `${active.length} actief datacontract` };
+    return {
+      pass: false,
+      detail: `${contracts.length - active.length} datacontract(en) niet actief`,
+    };
   },
 
   // 11 — algoritmen: geregistreerd met impact- en discriminatietoets. Geen
   // algoritmische besluitvorming => n.v.t.
   algoritmen: (app, ctx) => {
     const algs = ctx.algoritmes.filter((a) => a.app === app.id);
-    if (!algs.length) return { pass: true, detail: 'Geen algoritmische besluitvorming (n.v.t.)', nvt: true };
-    const untested = algs.filter((a) => a.impacttoets !== 'uitgevoerd' || a.discriminatietoets !== 'uitgevoerd');
-    if (!untested.length) return { pass: true, detail: `${algs.length} algoritme(n) getoetst en geregistreerd` };
+    if (!algs.length)
+      return { pass: true, detail: 'Geen algoritmische besluitvorming (n.v.t.)', nvt: true };
+    const untested = algs.filter(
+      (a) => a.impacttoets !== 'uitgevoerd' || a.discriminatietoets !== 'uitgevoerd'
+    );
+    if (!untested.length)
+      return { pass: true, detail: `${algs.length} algoritme(n) getoetst en geregistreerd` };
     return { pass: false, detail: `${untested.length} algoritme(n) zonder volledige toets` };
   },
 
@@ -109,9 +126,11 @@ const EVALUATORS = {
   // exit-pad. Geen inkoop op naam van dit team => n.v.t.
   inkoopstrategie: (app, ctx) => {
     const buys = ctx.softwareInkoop.filter((o) => o.team === app.team && o.status === 'actief');
-    if (!buys.length) return { pass: true, detail: 'Geen actieve software-inkoop (n.v.t.)', nvt: true };
+    if (!buys.length)
+      return { pass: true, detail: 'Geen actieve software-inkoop (n.v.t.)', nvt: true };
     const locked = buys.filter((o) => o.lockin === 'hoog' && !o.openSource);
-    if (!locked.length) return { pass: true, detail: `${buys.length} contract(en) zonder hoge lock-in` };
+    if (!locked.length)
+      return { pass: true, detail: `${buys.length} contract(en) zonder hoge lock-in` };
     return { pass: false, detail: `${locked.length} contract(en) met hoge lock-in` };
   },
 
@@ -121,7 +140,8 @@ const EVALUATORS = {
     const insts = ctx.instances.filter((i) => i.app === app.id);
     if (!insts.length) return { pass: true, detail: 'Geen toegewezen infra (n.v.t.)', nvt: true };
     const nonProd = insts.filter((i) => i.env !== 'prod');
-    if (nonProd.length <= 1) return { pass: true, detail: `${insts.length} instantie(s), geconsolideerd` };
+    if (nonProd.length <= 1)
+      return { pass: true, detail: `${insts.length} instantie(s), geconsolideerd` };
     return { pass: false, detail: `${nonProd.length} niet-productie-instanties (sprawl)` };
   },
 };
@@ -130,7 +150,9 @@ const EVALUATORS = {
 // canonical richtlijn order from the store.
 export function buildNerdsScorecard(app, ctx) {
   const checks = ctx.richtlijnen.map((r) => {
-    const res = EVALUATORS[r.id] ? EVALUATORS[r.id](app, ctx) : { pass: false, detail: 'Geen evaluatie' };
+    const res = EVALUATORS[r.id]
+      ? EVALUATORS[r.id](app, ctx)
+      : { pass: false, detail: 'Geen evaluatie' };
     return {
       key: r.id,
       number: r.number,

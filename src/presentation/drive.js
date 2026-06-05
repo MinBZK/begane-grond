@@ -49,12 +49,6 @@ export async function controlledDelay(ms, control) {
   return !control.aborted;
 }
 
-// Read a nested value by dot/array path, returning undefined if missing.
-function getPath(target, path) {
-  if (!target || typeof path !== 'string') return undefined;
-  return path.split('.').reduce((cursor, key) => (cursor == null ? cursor : cursor[key]), target);
-}
-
 // Type a string into a path character by character so it reads as live typing.
 // Honors the control token so typing pauses/aborts with the presenter.
 async function typeInto(target, path, value, control) {
@@ -98,9 +92,10 @@ export async function runScript(exposed, script, control = NO_CONTROL) {
   if (!Array.isArray(script)) return;
 
   // Some wizards keep their form in a ref; mutate the inner object in that case.
-  const form = exposed.form && exposed.form.value !== undefined && typeof exposed.form.value === 'object'
-    ? exposed.form.value
-    : exposed.form;
+  const form =
+    exposed.form && exposed.form.value !== undefined && typeof exposed.form.value === 'object'
+      ? exposed.form.value
+      : exposed.form;
 
   for (const step of script) {
     if (control.aborted) return;

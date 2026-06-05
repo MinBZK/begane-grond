@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.vite/
+
+# Generated seed data: 38k lines of JSON-like objects. Formatting it would
+# produce a massive, unreviewable diff and the file is machine-shaped anyway.
+src/data/seed.js
+
+package-lock.json
+
+# Vue single-file components are formatted by eslint-plugin-vue, not Prettier.
+# Prettier's template reformatting (the `>`-on-its-own-line whitespace dance)
+# produces an AST that the Vue 3 + rolldown compiler in this toolchain rejects
+# with "Cannot read properties of undefined (reading 'type')" at build time.
+# So Prettier owns .js/.json/.css/.md/.yaml; eslint-plugin-vue owns .vue.
+*.vue

@@ -21,13 +21,48 @@
 // The seven building blocks, in display order. `key` matches the api.standaarden
 // object; `bron` points at the governing standard for a "lees meer" link.
 export const STANDAARDEN = [
-  { key: 'adr', label: 'API Design Rules', skill: 'ls-api', bron: 'REST API Design Rules / NL GOV API-profiel (Spectral)' },
-  { key: 'problemJson', label: 'problem+json', skill: 'ls-api', bron: 'RFC 7807 application/problem+json foutformat' },
-  { key: 'oauth', label: 'OAuth / OIDC NL GOV', skill: 'ls-iam', bron: 'OAuth 2.0 / OIDC NL GOV-profiel, private_key_jwt, scopes' },
-  { key: 'rateLimit', label: 'Rate-limiting', skill: 'ls-api', bron: 'Rate-limit headers + 429 Too Many Requests + Retry-After' },
-  { key: 'logboek', label: 'Logboek Dataverwerkingen', skill: 'ls-logboek', bron: 'Logboek Dataverwerkingen, NEN 7513, OTLP' },
-  { key: 'cloudevents', label: 'CloudEvents', skill: 'ls-notif', bron: 'CloudEvents 1.0 voor notificaties / abonnementen' },
-  { key: 'fsc', label: 'Digikoppeling / FSC', skill: 'ls-dk', bron: 'Digikoppeling / FSC, PKIoverheid (overheid-overheid)' },
+  {
+    key: 'adr',
+    label: 'API Design Rules',
+    skill: 'ls-api',
+    bron: 'REST API Design Rules / NL GOV API-profiel (Spectral)',
+  },
+  {
+    key: 'problemJson',
+    label: 'problem+json',
+    skill: 'ls-api',
+    bron: 'RFC 7807 application/problem+json foutformat',
+  },
+  {
+    key: 'oauth',
+    label: 'OAuth / OIDC NL GOV',
+    skill: 'ls-iam',
+    bron: 'OAuth 2.0 / OIDC NL GOV-profiel, private_key_jwt, scopes',
+  },
+  {
+    key: 'rateLimit',
+    label: 'Rate-limiting',
+    skill: 'ls-api',
+    bron: 'Rate-limit headers + 429 Too Many Requests + Retry-After',
+  },
+  {
+    key: 'logboek',
+    label: 'Logboek Dataverwerkingen',
+    skill: 'ls-logboek',
+    bron: 'Logboek Dataverwerkingen, NEN 7513, OTLP',
+  },
+  {
+    key: 'cloudevents',
+    label: 'CloudEvents',
+    skill: 'ls-notif',
+    bron: 'CloudEvents 1.0 voor notificaties / abonnementen',
+  },
+  {
+    key: 'fsc',
+    label: 'Digikoppeling / FSC',
+    skill: 'ls-dk',
+    bron: 'Digikoppeling / FSC, PKIoverheid (overheid-overheid)',
+  },
 ];
 
 // Stable string hash (djb2). Same id => same number, every reload.
@@ -49,7 +84,7 @@ function deriveProfile(api) {
   // Per-standard "in place?": ADR follows the seed flag; the rest pass more
   // often for production koppelvlakken. A planned/beta API legitimately has
   // gaps, which is exactly what the scorecard should surface.
-  const ok = (salt) => (prod ? ((h >> salt) % 4 !== 0) : ((h >> salt) % 2 === 0));
+  const ok = (salt) => (prod ? (h >> salt) % 4 !== 0 : (h >> salt) % 2 === 0);
   return {
     exposure,
     persoonsgegevens,
@@ -97,7 +132,7 @@ function present(key, api, prof) {
   return Boolean(prof.standaarden[key]);
 }
 
-function why(key, verdict, api) {
+function why(key, verdict, _api) {
   if (verdict === 'nvt') {
     if (key === 'logboek') return 'Geen persoonsgegevens (n.v.t.)';
     if (key === 'cloudevents') return 'Publiceert geen gebeurtenissen (n.v.t.)';

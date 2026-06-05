@@ -16,7 +16,12 @@ export const domains = [
     icon: 'house',
     wave: 'H',
     routes: [
-      { path: '/', name: 'home', view: () => import('./domains/home/Dashboard.vue'), title: 'Overzicht' },
+      {
+        path: '/',
+        name: 'home',
+        view: () => import('./domains/home/Dashboard.vue'),
+        title: 'Overzicht',
+      },
     ],
   },
   {
@@ -26,7 +31,12 @@ export const domains = [
     icon: 'person',
     wave: 'H',
     routes: [
-      { path: '/zelf', name: 'zelf', view: () => import('./domains/zelf/MyDashboard.vue'), title: 'Mijn overzicht' },
+      {
+        path: '/zelf',
+        name: 'zelf',
+        view: () => import('./domains/zelf/MyDashboard.vue'),
+        title: 'Mijn overzicht',
+      },
     ],
   },
   {
@@ -36,13 +46,48 @@ export const domains = [
     icon: 'apartment-building',
     wave: 'A',
     routes: [
-      { path: '/fysiek', name: 'fysiek', view: () => import('./domains/fysiek/Datacenters.vue'), title: 'Datacenters' },
-      { path: '/fysiek/datacenters/:dc', name: 'fysiek-dc', view: () => import('./domains/fysiek/DatacenterDetail.vue'), title: 'Datacenter' },
-      { path: '/fysiek/datacenters/:dc/floor', name: 'fysiek-floor', view: () => import('./domains/fysiek/Floorplan.vue'), title: 'Zaalindeling' },
-      { path: '/fysiek/racks/:rack', name: 'fysiek-rack', view: () => import('./domains/fysiek/RackElevation.vue'), title: 'Rack' },
-      { path: '/fysiek/inventory', name: 'fysiek-inventory', view: () => import('./domains/fysiek/Inventory.vue'), title: 'Inventory' },
-      { path: '/fysiek/netwerk', name: 'fysiek-netwerk', view: () => import('./domains/fysiek/NetworkTopology.vue'), title: 'Netwerk' },
-      { path: '/fysiek/inkoop', name: 'fysiek-inkoop', view: () => import('./domains/fysiek/Inkoop.vue'), title: 'Inkoop & planning' },
+      {
+        path: '/fysiek',
+        name: 'fysiek',
+        view: () => import('./domains/fysiek/Datacenters.vue'),
+        title: 'Datacenters',
+      },
+      {
+        path: '/fysiek/datacenters/:dc',
+        name: 'fysiek-dc',
+        view: () => import('./domains/fysiek/DatacenterDetail.vue'),
+        title: 'Datacenter',
+      },
+      {
+        path: '/fysiek/datacenters/:dc/floor',
+        name: 'fysiek-floor',
+        view: () => import('./domains/fysiek/Floorplan.vue'),
+        title: 'Zaalindeling',
+      },
+      {
+        path: '/fysiek/racks/:rack',
+        name: 'fysiek-rack',
+        view: () => import('./domains/fysiek/RackElevation.vue'),
+        title: 'Rack',
+      },
+      {
+        path: '/fysiek/inventory',
+        name: 'fysiek-inventory',
+        view: () => import('./domains/fysiek/Inventory.vue'),
+        title: 'Inventory',
+      },
+      {
+        path: '/fysiek/netwerk',
+        name: 'fysiek-netwerk',
+        view: () => import('./domains/fysiek/NetworkTopology.vue'),
+        title: 'Netwerk',
+      },
+      {
+        path: '/fysiek/inkoop',
+        name: 'fysiek-inkoop',
+        view: () => import('./domains/fysiek/Inkoop.vue'),
+        title: 'Inkoop & planning',
+      },
     ],
   },
   {
@@ -52,10 +97,30 @@ export const domains = [
     icon: 'cylinder-split',
     wave: 'A',
     routes: [
-      { path: '/infra', name: 'infra', view: () => import('./domains/infra/Catalog.vue'), title: 'Service-catalogus' },
-      { path: '/infra/order/:kind', name: 'infra-order', view: () => import('./domains/infra/OrderWizard.vue'), title: 'Dienst afnemen' },
-      { path: '/infra/instances', name: 'infra-instances', view: () => import('./domains/infra/Instances.vue'), title: 'Instances' },
-      { path: '/infra/instances/:id', name: 'infra-instance', view: () => import('./domains/infra/InstanceDetail.vue'), title: 'Instance' },
+      {
+        path: '/infra',
+        name: 'infra',
+        view: () => import('./domains/infra/Catalog.vue'),
+        title: 'Service-catalogus',
+      },
+      {
+        path: '/infra/order/:kind',
+        name: 'infra-order',
+        view: () => import('./domains/infra/OrderWizard.vue'),
+        title: 'Dienst afnemen',
+      },
+      {
+        path: '/infra/instances',
+        name: 'infra-instances',
+        view: () => import('./domains/infra/Instances.vue'),
+        title: 'Instances',
+      },
+      {
+        path: '/infra/instances/:id',
+        name: 'infra-instance',
+        view: () => import('./domains/infra/InstanceDetail.vue'),
+        title: 'Instance',
+      },
     ],
   },
   {
@@ -65,10 +130,30 @@ export const domains = [
     icon: 'rectangle-stack',
     wave: 'A',
     routes: [
-      { path: '/apps', name: 'apps', view: () => import('./domains/apps/Catalog.vue'), title: 'Software-catalogus' },
-      { path: '/apps/nieuw', name: 'apps-nieuw', view: () => import('./domains/apps/NewAppWizard.vue'), title: 'Nieuwe applicatie' },
-      { path: '/apps/templates', name: 'apps-templates', view: () => import('./domains/apps/Templates.vue'), title: 'Gebaande paden' },
-      { path: '/apps/:id', name: 'apps-detail', view: () => import('./domains/apps/AppDetail.vue'), title: 'Applicatie' },
+      {
+        path: '/apps',
+        name: 'apps',
+        view: () => import('./domains/apps/Catalog.vue'),
+        title: 'Software-catalogus',
+      },
+      {
+        path: '/apps/nieuw',
+        name: 'apps-nieuw',
+        view: () => import('./domains/apps/NewAppWizard.vue'),
+        title: 'Nieuwe applicatie',
+      },
+      {
+        path: '/apps/templates',
+        name: 'apps-templates',
+        view: () => import('./domains/apps/Templates.vue'),
+        title: 'Gebaande paden',
+      },
+      {
+        path: '/apps/:id',
+        name: 'apps-detail',
+        view: () => import('./domains/apps/AppDetail.vue'),
+        title: 'Applicatie',
+      },
     ],
   },
   {
@@ -78,8 +163,18 @@ export const domains = [
     icon: 'chevron-left-forward-slash-chevron-right',
     wave: 'A',
     routes: [
-      { path: '/code', name: 'code', view: () => import('./domains/code/RepoList.vue'), title: 'code.overheid.nl' },
-      { path: '/code/:repo', name: 'code-repo', view: () => import('./domains/code/RepoDetail.vue'), title: 'Repository' },
+      {
+        path: '/code',
+        name: 'code',
+        view: () => import('./domains/code/RepoList.vue'),
+        title: 'code.overheid.nl',
+      },
+      {
+        path: '/code/:repo',
+        name: 'code-repo',
+        view: () => import('./domains/code/RepoDetail.vue'),
+        title: 'Repository',
+      },
     ],
   },
   {
@@ -89,8 +184,18 @@ export const domains = [
     icon: 'puzzle-piece',
     wave: 'A',
     routes: [
-      { path: '/componenten', name: 'componenten', view: () => import('./domains/componenten/Componenten.vue'), title: 'Componenten' },
-      { path: '/componenten/:id', name: 'componenten-detail', view: () => import('./domains/componenten/ComponentDetail.vue'), title: 'Component' },
+      {
+        path: '/componenten',
+        name: 'componenten',
+        view: () => import('./domains/componenten/Componenten.vue'),
+        title: 'Componenten',
+      },
+      {
+        path: '/componenten/:id',
+        name: 'componenten-detail',
+        view: () => import('./domains/componenten/ComponentDetail.vue'),
+        title: 'Component',
+      },
     ],
   },
   {
@@ -100,7 +205,12 @@ export const domains = [
     icon: 'square-on-square',
     wave: 'A',
     routes: [
-      { path: '/design-system', name: 'design-system', view: () => import('./domains/componenten/DesignSystem.vue'), title: 'Design system' },
+      {
+        path: '/design-system',
+        name: 'design-system',
+        view: () => import('./domains/componenten/DesignSystem.vue'),
+        title: 'Design system',
+      },
     ],
   },
   {
@@ -110,9 +220,24 @@ export const domains = [
     icon: 'arrow-up-arrow-down',
     wave: 'D',
     routes: [
-      { path: '/environments', name: 'environments', view: () => import('./domains/environments/EnvMatrix.vue'), title: 'Omgevingen' },
-      { path: '/environments/promotie/:app', name: 'environments-promotie', view: () => import('./domains/environments/PromotionWizard.vue'), title: 'Promoten' },
-      { path: '/environments/releases', name: 'environments-releases', view: () => import('./domains/environments/Releases.vue'), title: 'Releases' },
+      {
+        path: '/environments',
+        name: 'environments',
+        view: () => import('./domains/environments/EnvMatrix.vue'),
+        title: 'Omgevingen',
+      },
+      {
+        path: '/environments/promotie/:app',
+        name: 'environments-promotie',
+        view: () => import('./domains/environments/PromotionWizard.vue'),
+        title: 'Promoten',
+      },
+      {
+        path: '/environments/releases',
+        name: 'environments-releases',
+        view: () => import('./domains/environments/Releases.vue'),
+        title: 'Releases',
+      },
     ],
   },
   {
@@ -122,7 +247,12 @@ export const domains = [
     icon: 'gear',
     wave: 'D',
     routes: [
-      { path: '/environments/pijplijn', name: 'environments-pijplijn', view: () => import('./domains/environments/Pipeline.vue'), title: 'CI-pijplijn' },
+      {
+        path: '/environments/pijplijn',
+        name: 'environments-pijplijn',
+        view: () => import('./domains/environments/Pipeline.vue'),
+        title: 'CI-pijplijn',
+      },
     ],
   },
   {
@@ -132,7 +262,12 @@ export const domains = [
     icon: 'timer',
     wave: 'D',
     routes: [
-      { path: '/environments/runners', name: 'environments-runners', view: () => import('./domains/environments/Runners.vue'), title: 'CI-runners' },
+      {
+        path: '/environments/runners',
+        name: 'environments-runners',
+        view: () => import('./domains/environments/Runners.vue'),
+        title: 'CI-runners',
+      },
     ],
   },
   {
@@ -142,8 +277,18 @@ export const domains = [
     icon: 'folder-stack',
     wave: 'D',
     routes: [
-      { path: '/artefacten', name: 'artefacten', view: () => import('./domains/artefacten/ArtefactRegistry.vue'), title: 'Artefactregister' },
-      { path: '/artefacten/:id', name: 'artefacten-detail', view: () => import('./domains/artefacten/ArtefactDetail.vue'), title: 'Artefact' },
+      {
+        path: '/artefacten',
+        name: 'artefacten',
+        view: () => import('./domains/artefacten/ArtefactRegistry.vue'),
+        title: 'Artefactregister',
+      },
+      {
+        path: '/artefacten/:id',
+        name: 'artefacten-detail',
+        view: () => import('./domains/artefacten/ArtefactDetail.vue'),
+        title: 'Artefact',
+      },
     ],
   },
   {
@@ -153,7 +298,12 @@ export const domains = [
     icon: 'flag',
     wave: 'D',
     routes: [
-      { path: '/flags', name: 'flags', view: () => import('./domains/flags/FeatureFlags.vue'), title: 'Feature flags' },
+      {
+        path: '/flags',
+        name: 'flags',
+        view: () => import('./domains/flags/FeatureFlags.vue'),
+        title: 'Feature flags',
+      },
     ],
   },
   {
@@ -163,10 +313,30 @@ export const domains = [
     icon: 'eye',
     wave: 'D',
     routes: [
-      { path: '/observability', name: 'observability', view: () => import('./domains/observability/Dashboards.vue'), title: 'Dashboards' },
-      { path: '/observability/logs', name: 'observability-logs', view: () => import('./domains/observability/Logs.vue'), title: 'Logs' },
-      { path: '/observability/traces', name: 'observability-traces', view: () => import('./domains/observability/Traces.vue'), title: 'Traces' },
-      { path: '/observability/alerts', name: 'observability-alerts', view: () => import('./domains/observability/Alerts.vue'), title: 'Alerts & SLO' },
+      {
+        path: '/observability',
+        name: 'observability',
+        view: () => import('./domains/observability/Dashboards.vue'),
+        title: 'Dashboards',
+      },
+      {
+        path: '/observability/logs',
+        name: 'observability-logs',
+        view: () => import('./domains/observability/Logs.vue'),
+        title: 'Logs',
+      },
+      {
+        path: '/observability/traces',
+        name: 'observability-traces',
+        view: () => import('./domains/observability/Traces.vue'),
+        title: 'Traces',
+      },
+      {
+        path: '/observability/alerts',
+        name: 'observability-alerts',
+        view: () => import('./domains/observability/Alerts.vue'),
+        title: 'Alerts & SLO',
+      },
     ],
   },
   {
@@ -176,10 +346,30 @@ export const domains = [
     icon: 'exclamation-triangle',
     wave: 'D',
     routes: [
-      { path: '/incidenten', name: 'incidenten', view: () => import('./domains/incidenten/Incidents.vue'), title: 'Incidenten' },
-      { path: '/incidenten/status', name: 'incidenten-status', view: () => import('./domains/incidenten/StatusPage.vue'), title: 'Status' },
-      { path: '/incidenten/changes', name: 'incidenten-changes', view: () => import('./domains/incidenten/Changes.vue'), title: 'Changes' },
-      { path: '/incidenten/:id', name: 'incidenten-detail', view: () => import('./domains/incidenten/IncidentDetail.vue'), title: 'Incident' },
+      {
+        path: '/incidenten',
+        name: 'incidenten',
+        view: () => import('./domains/incidenten/Incidents.vue'),
+        title: 'Incidenten',
+      },
+      {
+        path: '/incidenten/status',
+        name: 'incidenten-status',
+        view: () => import('./domains/incidenten/StatusPage.vue'),
+        title: 'Status',
+      },
+      {
+        path: '/incidenten/changes',
+        name: 'incidenten-changes',
+        view: () => import('./domains/incidenten/Changes.vue'),
+        title: 'Changes',
+      },
+      {
+        path: '/incidenten/:id',
+        name: 'incidenten-detail',
+        view: () => import('./domains/incidenten/IncidentDetail.vue'),
+        title: 'Incident',
+      },
     ],
   },
   {
@@ -189,12 +379,42 @@ export const domains = [
     icon: 'person-2',
     wave: 'G',
     routes: [
-      { path: '/teams', name: 'teams', view: () => import('./domains/teams/Teams.vue'), title: 'Teams' },
-      { path: '/teams/mensen', name: 'teams-mensen', view: () => import('./domains/teams/People.vue'), title: 'Mensen' },
-      { path: '/teams/mensen/:id', name: 'teams-persoon', view: () => import('./domains/teams/PersonDetail.vue'), title: 'Persoon' },
-      { path: '/teams/organisatie', name: 'teams-org', view: () => import('./domains/teams/OrgGraph.vue'), title: 'Organisatie' },
-      { path: '/teams/on-call', name: 'teams-oncall', view: () => import('./domains/teams/OnCall.vue'), title: 'On-call' },
-      { path: '/teams/:id', name: 'teams-detail', view: () => import('./domains/teams/TeamDetail.vue'), title: 'Team' },
+      {
+        path: '/teams',
+        name: 'teams',
+        view: () => import('./domains/teams/Teams.vue'),
+        title: 'Teams',
+      },
+      {
+        path: '/teams/mensen',
+        name: 'teams-mensen',
+        view: () => import('./domains/teams/People.vue'),
+        title: 'Mensen',
+      },
+      {
+        path: '/teams/mensen/:id',
+        name: 'teams-persoon',
+        view: () => import('./domains/teams/PersonDetail.vue'),
+        title: 'Persoon',
+      },
+      {
+        path: '/teams/organisatie',
+        name: 'teams-org',
+        view: () => import('./domains/teams/OrgGraph.vue'),
+        title: 'Organisatie',
+      },
+      {
+        path: '/teams/on-call',
+        name: 'teams-oncall',
+        view: () => import('./domains/teams/OnCall.vue'),
+        title: 'On-call',
+      },
+      {
+        path: '/teams/:id',
+        name: 'teams-detail',
+        view: () => import('./domains/teams/TeamDetail.vue'),
+        title: 'Team',
+      },
     ],
   },
   {
@@ -204,10 +424,30 @@ export const domains = [
     icon: 'business-suitcase',
     wave: 'G',
     routes: [
-      { path: '/werkplekken', name: 'werkplekken', view: () => import('./domains/werkplekken/Fleet.vue'), title: 'Werkplek-vloot' },
-      { path: '/werkplekken/hardware', name: 'werkplekken-hardware', view: () => import('./domains/werkplekken/Hardware.vue'), title: 'Hardware-catalogus' },
-      { path: '/werkplekken/nieuw', name: 'werkplekken-nieuw', view: () => import('./domains/werkplekken/NewWorkplaceWizard.vue'), title: 'Werkplek uitrollen' },
-      { path: '/werkplekken/:id', name: 'werkplekken-detail', view: () => import('./domains/werkplekken/WorkplaceDetail.vue'), title: 'Werkplek' },
+      {
+        path: '/werkplekken',
+        name: 'werkplekken',
+        view: () => import('./domains/werkplekken/Fleet.vue'),
+        title: 'Werkplek-vloot',
+      },
+      {
+        path: '/werkplekken/hardware',
+        name: 'werkplekken-hardware',
+        view: () => import('./domains/werkplekken/Hardware.vue'),
+        title: 'Hardware-catalogus',
+      },
+      {
+        path: '/werkplekken/nieuw',
+        name: 'werkplekken-nieuw',
+        view: () => import('./domains/werkplekken/NewWorkplaceWizard.vue'),
+        title: 'Werkplek uitrollen',
+      },
+      {
+        path: '/werkplekken/:id',
+        name: 'werkplekken-detail',
+        view: () => import('./domains/werkplekken/WorkplaceDetail.vue'),
+        title: 'Werkplek',
+      },
     ],
   },
   {
@@ -217,7 +457,12 @@ export const domains = [
     icon: 'face-smiling-badge-plus',
     wave: 'G',
     routes: [
-      { path: '/leren', name: 'leren', view: () => import('./domains/leren/Onboarding.vue'), title: 'Leren & onboarding' },
+      {
+        path: '/leren',
+        name: 'leren',
+        view: () => import('./domains/leren/Onboarding.vue'),
+        title: 'Leren & onboarding',
+      },
     ],
   },
   {
@@ -227,8 +472,18 @@ export const domains = [
     icon: 'person-circle',
     wave: 'I',
     routes: [
-      { path: '/inloggen', name: 'inloggen', view: () => import('./domains/inloggen/LoginMethods.vue'), title: 'Inloggen' },
-      { path: '/inloggen/:id', name: 'inloggen-detail', view: () => import('./domains/inloggen/LoginDetail.vue'), title: 'Inlogmethode' },
+      {
+        path: '/inloggen',
+        name: 'inloggen',
+        view: () => import('./domains/inloggen/LoginMethods.vue'),
+        title: 'Inloggen',
+      },
+      {
+        path: '/inloggen/:id',
+        name: 'inloggen-detail',
+        view: () => import('./domains/inloggen/LoginDetail.vue'),
+        title: 'Inlogmethode',
+      },
     ],
   },
   {
@@ -238,8 +493,18 @@ export const domains = [
     icon: 'globe',
     wave: 'I',
     routes: [
-      { path: '/dns', name: 'dns', view: () => import('./domains/dns/Domeinen.vue'), title: 'Domeinen & DNS' },
-      { path: '/dns/:id', name: 'dns-detail', view: () => import('./domains/dns/DomeinDetail.vue'), title: 'Domein' },
+      {
+        path: '/dns',
+        name: 'dns',
+        view: () => import('./domains/dns/Domeinen.vue'),
+        title: 'Domeinen & DNS',
+      },
+      {
+        path: '/dns/:id',
+        name: 'dns-detail',
+        view: () => import('./domains/dns/DomeinDetail.vue'),
+        title: 'Domein',
+      },
     ],
   },
   {
@@ -249,7 +514,12 @@ export const domains = [
     icon: 'certificate',
     wave: 'I',
     routes: [
-      { path: '/secrets/certificaten', name: 'secrets-certs', view: () => import('./domains/secrets/Certificates.vue'), title: 'Certificaten' },
+      {
+        path: '/secrets/certificaten',
+        name: 'secrets-certs',
+        view: () => import('./domains/secrets/Certificates.vue'),
+        title: 'Certificaten',
+      },
     ],
   },
   {
@@ -259,7 +529,12 @@ export const domains = [
     icon: 'lock-closed',
     wave: 'I',
     routes: [
-      { path: '/secrets', name: 'secrets', view: () => import('./domains/secrets/Vault.vue'), title: 'Secrets-kluis' },
+      {
+        path: '/secrets',
+        name: 'secrets',
+        view: () => import('./domains/secrets/Vault.vue'),
+        title: 'Secrets-kluis',
+      },
     ],
   },
   {
@@ -269,9 +544,24 @@ export const domains = [
     icon: 'shield-check-mark',
     wave: 'I',
     routes: [
-      { path: '/security', name: 'security', view: () => import('./domains/security/ComplianceScorecards.vue'), title: 'Compliance' },
-      { path: '/security/kwetsbaarheden', name: 'security-vulns', view: () => import('./domains/security/Vulnerabilities.vue'), title: 'Kwetsbaarheden' },
-      { path: '/security/scans', name: 'security-scans', view: () => import('./domains/security/Scans.vue'), title: 'Scans & audits' },
+      {
+        path: '/security',
+        name: 'security',
+        view: () => import('./domains/security/ComplianceScorecards.vue'),
+        title: 'Compliance',
+      },
+      {
+        path: '/security/kwetsbaarheden',
+        name: 'security-vulns',
+        view: () => import('./domains/security/Vulnerabilities.vue'),
+        title: 'Kwetsbaarheden',
+      },
+      {
+        path: '/security/scans',
+        name: 'security-scans',
+        view: () => import('./domains/security/Scans.vue'),
+        title: 'Scans & audits',
+      },
     ],
   },
   {
@@ -281,8 +571,18 @@ export const domains = [
     icon: 'books-vertical',
     wave: 'O',
     routes: [
-      { path: '/registers', name: 'registers', view: () => import('./domains/registers/Registers.vue'), title: 'Basisregistraties' },
-      { path: '/registers/:id', name: 'registers-detail', view: () => import('./domains/registers/RegisterDetail.vue'), title: 'Register' },
+      {
+        path: '/registers',
+        name: 'registers',
+        view: () => import('./domains/registers/Registers.vue'),
+        title: 'Basisregistraties',
+      },
+      {
+        path: '/registers/:id',
+        name: 'registers-detail',
+        view: () => import('./domains/registers/RegisterDetail.vue'),
+        title: 'Register',
+      },
     ],
   },
   {
@@ -292,8 +592,18 @@ export const domains = [
     icon: 'chart-x-y-axis-line',
     wave: 'O',
     routes: [
-      { path: '/data', name: 'data', view: () => import('./domains/data/DatasetCatalog.vue'), title: 'Datasetcatalogus' },
-      { path: '/data/:id', name: 'data-detail', view: () => import('./domains/data/DatasetDetail.vue'), title: 'Dataset' },
+      {
+        path: '/data',
+        name: 'data',
+        view: () => import('./domains/data/DatasetCatalog.vue'),
+        title: 'Datasetcatalogus',
+      },
+      {
+        path: '/data/:id',
+        name: 'data-detail',
+        view: () => import('./domains/data/DatasetDetail.vue'),
+        title: 'Dataset',
+      },
     ],
   },
   {
@@ -303,8 +613,18 @@ export const domains = [
     icon: 'pencil-on-square',
     wave: 'O',
     routes: [
-      { path: '/datacontracten', name: 'datacontracten', view: () => import('./domains/datacontracten/Datacontracten.vue'), title: 'Datacontracten' },
-      { path: '/datacontracten/:id', name: 'datacontracten-detail', view: () => import('./domains/datacontracten/DatacontractDetail.vue'), title: 'Datacontract' },
+      {
+        path: '/datacontracten',
+        name: 'datacontracten',
+        view: () => import('./domains/datacontracten/Datacontracten.vue'),
+        title: 'Datacontracten',
+      },
+      {
+        path: '/datacontracten/:id',
+        name: 'datacontracten-detail',
+        view: () => import('./domains/datacontracten/DatacontractDetail.vue'),
+        title: 'Datacontract',
+      },
     ],
   },
   {
@@ -314,10 +634,30 @@ export const domains = [
     icon: 'link',
     wave: 'O',
     routes: [
-      { path: '/koppelvlakken', name: 'koppelvlakken', view: () => import('./domains/koppelvlakken/ApiCatalog.vue'), title: 'API-catalogus' },
-      { path: '/koppelvlakken/nieuw', name: 'koppelvlakken-nieuw', view: () => import('./domains/koppelvlakken/NewApiWizard.vue'), title: 'Nieuw koppelvlak' },
-      { path: '/koppelvlakken/compliance', name: 'koppelvlakken-compliance', view: () => import('./domains/koppelvlakken/ApiCompliance.vue'), title: 'API-compliance' },
-      { path: '/koppelvlakken/fsc', name: 'koppelvlakken-fsc', view: () => import('./domains/koppelvlakken/Digikoppeling.vue'), title: 'Digikoppeling / FSC' },
+      {
+        path: '/koppelvlakken',
+        name: 'koppelvlakken',
+        view: () => import('./domains/koppelvlakken/ApiCatalog.vue'),
+        title: 'API-catalogus',
+      },
+      {
+        path: '/koppelvlakken/nieuw',
+        name: 'koppelvlakken-nieuw',
+        view: () => import('./domains/koppelvlakken/NewApiWizard.vue'),
+        title: 'Nieuw koppelvlak',
+      },
+      {
+        path: '/koppelvlakken/compliance',
+        name: 'koppelvlakken-compliance',
+        view: () => import('./domains/koppelvlakken/ApiCompliance.vue'),
+        title: 'API-compliance',
+      },
+      {
+        path: '/koppelvlakken/fsc',
+        name: 'koppelvlakken-fsc',
+        view: () => import('./domains/koppelvlakken/Digikoppeling.vue'),
+        title: 'Digikoppeling / FSC',
+      },
     ],
   },
   {
@@ -327,7 +667,12 @@ export const domains = [
     icon: 'envelope',
     wave: 'O',
     routes: [
-      { path: '/notificaties', name: 'notificaties', view: () => import('./domains/notificaties/Channels.vue'), title: 'Notificaties' },
+      {
+        path: '/notificaties',
+        name: 'notificaties',
+        view: () => import('./domains/notificaties/Channels.vue'),
+        title: 'Notificaties',
+      },
     ],
   },
   {
@@ -337,9 +682,24 @@ export const domains = [
     icon: 'check-list',
     wave: 'R',
     routes: [
-      { path: '/governance', name: 'governance', view: () => import('./domains/governance/Gates.vue'), title: 'Beleids-gates' },
-      { path: '/governance/rfcs', name: 'governance-rfcs', view: () => import('./domains/governance/Rfcs.vue'), title: "RFC's" },
-      { path: '/governance/audit', name: 'governance-audit', view: () => import('./domains/governance/AuditLog.vue'), title: 'Audit-log' },
+      {
+        path: '/governance',
+        name: 'governance',
+        view: () => import('./domains/governance/Gates.vue'),
+        title: 'Beleids-gates',
+      },
+      {
+        path: '/governance/rfcs',
+        name: 'governance-rfcs',
+        view: () => import('./domains/governance/Rfcs.vue'),
+        title: "RFC's",
+      },
+      {
+        path: '/governance/audit',
+        name: 'governance-audit',
+        view: () => import('./domains/governance/AuditLog.vue'),
+        title: 'Audit-log',
+      },
     ],
   },
   {
@@ -349,9 +709,24 @@ export const domains = [
     icon: 'clipboard',
     wave: 'R',
     routes: [
-      { path: '/wetten', name: 'wetten', view: () => import('./domains/wetten/Wetten.vue'), title: 'Wet uitvoeren' },
-      { path: '/wetten/nieuw', name: 'wetten-nieuw', view: () => import('./domains/wetten/NewWetWizard.vue'), title: 'Wet of beleid uitvoeren' },
-      { path: '/wetten/:id', name: 'wetten-detail', view: () => import('./domains/wetten/WetDetail.vue'), title: 'Wet' },
+      {
+        path: '/wetten',
+        name: 'wetten',
+        view: () => import('./domains/wetten/Wetten.vue'),
+        title: 'Wet uitvoeren',
+      },
+      {
+        path: '/wetten/nieuw',
+        name: 'wetten-nieuw',
+        view: () => import('./domains/wetten/NewWetWizard.vue'),
+        title: 'Wet of beleid uitvoeren',
+      },
+      {
+        path: '/wetten/:id',
+        name: 'wetten-detail',
+        view: () => import('./domains/wetten/WetDetail.vue'),
+        title: 'Wet',
+      },
     ],
   },
   {
@@ -361,7 +736,12 @@ export const domains = [
     icon: 'check-mark-circle',
     wave: 'R',
     routes: [
-      { path: '/standaarden', name: 'standaarden', view: () => import('./domains/standaarden/ComplianceMarketplace.vue'), title: 'Standaarden' },
+      {
+        path: '/standaarden',
+        name: 'standaarden',
+        view: () => import('./domains/standaarden/ComplianceMarketplace.vue'),
+        title: 'Standaarden',
+      },
     ],
   },
   {
@@ -371,8 +751,18 @@ export const domains = [
     icon: 'check-list',
     wave: 'R',
     routes: [
-      { path: '/nerds', name: 'nerds', view: () => import('./domains/nerds/NerdsOverview.vue'), title: 'NeRDS-richtlijnen' },
-      { path: '/nerds/scorecard', name: 'nerds-scorecard', view: () => import('./domains/nerds/NerdsScorecards.vue'), title: 'NeRDS-scorecard' },
+      {
+        path: '/nerds',
+        name: 'nerds',
+        view: () => import('./domains/nerds/NerdsOverview.vue'),
+        title: 'NeRDS-richtlijnen',
+      },
+      {
+        path: '/nerds/scorecard',
+        name: 'nerds-scorecard',
+        view: () => import('./domains/nerds/NerdsScorecards.vue'),
+        title: 'NeRDS-scorecard',
+      },
     ],
   },
   {
@@ -382,8 +772,18 @@ export const domains = [
     icon: 'brackets-ellipsis',
     wave: 'R',
     routes: [
-      { path: '/algoritmes', name: 'algoritmes', view: () => import('./domains/algoritmes/AlgoritmeRegister.vue'), title: 'Algoritmeregister' },
-      { path: '/algoritmes/:id', name: 'algoritmes-detail', view: () => import('./domains/algoritmes/AlgoritmeDetail.vue'), title: 'Algoritme' },
+      {
+        path: '/algoritmes',
+        name: 'algoritmes',
+        view: () => import('./domains/algoritmes/AlgoritmeRegister.vue'),
+        title: 'Algoritmeregister',
+      },
+      {
+        path: '/algoritmes/:id',
+        name: 'algoritmes-detail',
+        view: () => import('./domains/algoritmes/AlgoritmeDetail.vue'),
+        title: 'Algoritme',
+      },
     ],
   },
   {
@@ -393,8 +793,18 @@ export const domains = [
     icon: 'clipboard-rectangle',
     wave: 'R',
     routes: [
-      { path: '/verwerkingen', name: 'verwerkingen', view: () => import('./domains/verwerkingen/Verwerkingenregister.vue'), title: 'Verwerkingenregister' },
-      { path: '/verwerkingen/:id', name: 'verwerkingen-detail', view: () => import('./domains/verwerkingen/VerwerkingDetail.vue'), title: 'Verwerking' },
+      {
+        path: '/verwerkingen',
+        name: 'verwerkingen',
+        view: () => import('./domains/verwerkingen/Verwerkingenregister.vue'),
+        title: 'Verwerkingenregister',
+      },
+      {
+        path: '/verwerkingen/:id',
+        name: 'verwerkingen-detail',
+        view: () => import('./domains/verwerkingen/VerwerkingDetail.vue'),
+        title: 'Verwerking',
+      },
     ],
   },
   {
@@ -404,8 +814,18 @@ export const domains = [
     icon: 'file-text',
     wave: 'R',
     routes: [
-      { path: '/openbaarheid', name: 'openbaarheid', view: () => import('./domains/openbaarheid/Openbaarheid.vue'), title: 'Woo & archivering' },
-      { path: '/openbaarheid/:id', name: 'openbaarheid-detail', view: () => import('./domains/openbaarheid/WooDetail.vue'), title: 'Openbaarmaking' },
+      {
+        path: '/openbaarheid',
+        name: 'openbaarheid',
+        view: () => import('./domains/openbaarheid/Openbaarheid.vue'),
+        title: 'Woo & archivering',
+      },
+      {
+        path: '/openbaarheid/:id',
+        name: 'openbaarheid-detail',
+        view: () => import('./domains/openbaarheid/WooDetail.vue'),
+        title: 'Openbaarmaking',
+      },
     ],
   },
   {
@@ -415,7 +835,12 @@ export const domains = [
     icon: 'eyeglasses',
     wave: 'R',
     routes: [
-      { path: '/toegankelijkheid', name: 'toegankelijkheid', view: () => import('./domains/toegankelijkheid/Toegankelijkheid.vue'), title: 'Toegankelijkheidsverklaringen' },
+      {
+        path: '/toegankelijkheid',
+        name: 'toegankelijkheid',
+        view: () => import('./domains/toegankelijkheid/Toegankelijkheid.vue'),
+        title: 'Toegankelijkheidsverklaringen',
+      },
     ],
   },
   {
@@ -425,7 +850,12 @@ export const domains = [
     icon: 'heart',
     wave: 'R',
     routes: [
-      { path: '/duurzaamheid', name: 'duurzaamheid', view: () => import('./domains/duurzaamheid/GreenIt.vue'), title: 'Green IT' },
+      {
+        path: '/duurzaamheid',
+        name: 'duurzaamheid',
+        view: () => import('./domains/duurzaamheid/GreenIt.vue'),
+        title: 'Green IT',
+      },
     ],
   },
   {
@@ -435,8 +865,18 @@ export const domains = [
     icon: 'chevron-left-forward-slash-chevron-right',
     wave: 'M',
     routes: [
-      { path: '/platform/iac', name: 'platform-iac', view: () => import('./domains/platform/IaC.vue'), title: 'Infra als code' },
-      { path: '/platform/iac/:sha', name: 'platform-iac-commit', view: () => import('./domains/platform/CommitDetail.vue'), title: 'Commit' },
+      {
+        path: '/platform/iac',
+        name: 'platform-iac',
+        view: () => import('./domains/platform/IaC.vue'),
+        title: 'Infra als code',
+      },
+      {
+        path: '/platform/iac/:sha',
+        name: 'platform-iac-commit',
+        view: () => import('./domains/platform/CommitDetail.vue'),
+        title: 'Commit',
+      },
     ],
   },
   {
@@ -446,8 +886,18 @@ export const domains = [
     icon: 'euro-sign',
     wave: 'M',
     routes: [
-      { path: '/kosten', name: 'kosten', view: () => import('./domains/kosten/CostOverview.vue'), title: 'Kosten' },
-      { path: '/kosten/budgetten', name: 'kosten-budgetten', view: () => import('./domains/kosten/Budgets.vue'), title: 'Budgetten' },
+      {
+        path: '/kosten',
+        name: 'kosten',
+        view: () => import('./domains/kosten/CostOverview.vue'),
+        title: 'Kosten',
+      },
+      {
+        path: '/kosten/budgetten',
+        name: 'kosten-budgetten',
+        view: () => import('./domains/kosten/Budgets.vue'),
+        title: 'Budgetten',
+      },
     ],
   },
   {
@@ -457,7 +907,12 @@ export const domains = [
     icon: 'tag',
     wave: 'M',
     routes: [
-      { path: '/software-inkoop', name: 'software-inkoop', view: () => import('./domains/inkoop/SoftwareInkoop.vue'), title: 'Software-inkoop' },
+      {
+        path: '/software-inkoop',
+        name: 'software-inkoop',
+        view: () => import('./domains/inkoop/SoftwareInkoop.vue'),
+        title: 'Software-inkoop',
+      },
     ],
   },
   {
@@ -467,7 +922,12 @@ export const domains = [
     icon: 'starburst-filled',
     wave: 'M',
     routes: [
-      { path: '/scorecards', name: 'scorecards', view: () => import('./domains/scorecards/MaturityScorecards.vue'), title: 'Scorecards' },
+      {
+        path: '/scorecards',
+        name: 'scorecards',
+        view: () => import('./domains/scorecards/MaturityScorecards.vue'),
+        title: 'Scorecards',
+      },
     ],
   },
   {
@@ -477,7 +937,12 @@ export const domains = [
     icon: 'ship-wheel',
     wave: 'M',
     routes: [
-      { path: '/tech-radar', name: 'tech-radar', view: () => import('./domains/tech-radar/Radar.vue'), title: 'Tech radar' },
+      {
+        path: '/tech-radar',
+        name: 'tech-radar',
+        view: () => import('./domains/tech-radar/Radar.vue'),
+        title: 'Tech radar',
+      },
     ],
   },
   {
@@ -487,9 +952,24 @@ export const domains = [
     icon: 'sparkles',
     wave: 'M',
     routes: [
-      { path: '/ai', name: 'ai', view: () => import('./domains/ai/AiCoding.vue'), title: 'AI-assisted coding' },
-      { path: '/ai/llm', name: 'ai-llm', view: () => import('./domains/ai/LlmCatalog.vue'), title: 'LLM-API’s' },
-      { path: '/ai/skills', name: 'ai-skills', view: () => import('./domains/ai/SkillsMarketplace.vue'), title: 'Skills-marketplace' },
+      {
+        path: '/ai',
+        name: 'ai',
+        view: () => import('./domains/ai/AiCoding.vue'),
+        title: 'AI-assisted coding',
+      },
+      {
+        path: '/ai/llm',
+        name: 'ai-llm',
+        view: () => import('./domains/ai/LlmCatalog.vue'),
+        title: 'LLM-API’s',
+      },
+      {
+        path: '/ai/skills',
+        name: 'ai-skills',
+        view: () => import('./domains/ai/SkillsMarketplace.vue'),
+        title: 'Skills-marketplace',
+      },
     ],
   },
   {
@@ -499,8 +979,18 @@ export const domains = [
     icon: 'terminal',
     wave: 'M',
     routes: [
-      { path: '/cli', name: 'cli', view: () => import('./domains/cli/CliShowcase.vue'), title: 'CLI' },
-      { path: '/cli/api', name: 'cli-api', view: () => import('./domains/cli/ApiExplorer.vue'), title: 'API-explorer' },
+      {
+        path: '/cli',
+        name: 'cli',
+        view: () => import('./domains/cli/CliShowcase.vue'),
+        title: 'CLI',
+      },
+      {
+        path: '/cli/api',
+        name: 'cli-api',
+        view: () => import('./domains/cli/ApiExplorer.vue'),
+        title: 'API-explorer',
+      },
     ],
   },
   {
@@ -510,9 +1000,24 @@ export const domains = [
     icon: 'square-on-square',
     wave: 'M',
     routes: [
-      { path: '/fleet', name: 'fleet', view: () => import('./domains/fleet/Campaigns.vue'), title: 'Campagnes' },
-      { path: '/fleet/nieuw', name: 'fleet-nieuw', view: () => import('./domains/fleet/NewCampaignWizard.vue'), title: 'Nieuwe campagne' },
-      { path: '/fleet/:id', name: 'fleet-detail', view: () => import('./domains/fleet/CampaignDetail.vue'), title: 'Campagne' },
+      {
+        path: '/fleet',
+        name: 'fleet',
+        view: () => import('./domains/fleet/Campaigns.vue'),
+        title: 'Campagnes',
+      },
+      {
+        path: '/fleet/nieuw',
+        name: 'fleet-nieuw',
+        view: () => import('./domains/fleet/NewCampaignWizard.vue'),
+        title: 'Nieuwe campagne',
+      },
+      {
+        path: '/fleet/:id',
+        name: 'fleet-detail',
+        view: () => import('./domains/fleet/CampaignDetail.vue'),
+        title: 'Campagne',
+      },
     ],
   },
 ];
@@ -524,7 +1029,7 @@ export const routes = domains.flatMap((d) =>
     name: r.name,
     component: r.view,
     meta: { title: r.title, domain: d.key },
-  })),
+  }))
 );
 
 // Wave labels for grouping in the side navigation.

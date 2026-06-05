@@ -14,7 +14,33 @@ env:
   IMAGE_NAME: ${{ github.repository }} # ghcr.io/anneschuth/begane-grond
 
 jobs:
+  quality:
+    # Lint, format-check and a real production build gate every deploy. Runs on
+    # PRs and on merge to main; the build job below cannot start until this is
+    # green, so a broken or unformatted change never reaches GHCR or ZAD.
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: ESLint
+        run: npm run lint -- --max-warnings=0
+      - name: Prettier
+        run: npm run format:check
+      - name: Build
+        # The Vite build is itself a check: it fails on template/compile errors
+        # that ESLint does not catch. The Docker build below repeats this, but
+        # running it here surfaces failures without waiting on the image layers.
+        run: npm run build
+
   build:
+    needs: quality # no image is built or pushed unless quality passed
     # Skip the build when a PR is merely closed (nothing to build then).
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest

@@ -19,10 +19,6 @@ import { controlledDelay } from '../../presentation/drive.js';
 
 const store = usePlatformStore();
 
-const daysLeft = (expires) => {
-  const m = /(\d+)/.exec(expires || '');
-  return m ? Number(m[1]) : null;
-};
 const appForService = (service) => store.apps.find((a) => a.id === service) || null;
 const domainForCert = (id) => store.domeinen.find((d) => d.tls === id) || null;
 
@@ -69,7 +65,6 @@ async function runIssue(maybeControl) {
   for (const stage of PIPELINE) {
     if (control.aborted) { issuing.value = false; return; }
     pipelineStatus.value = { ...pipelineStatus.value, [stage.id]: 'running' };
-    // eslint-disable-next-line no-await-in-loop
     await controlledDelay(800, control);
     if (control.aborted) { issuing.value = false; return; }
     pipelineStatus.value = { ...pipelineStatus.value, [stage.id]: 'ready' };

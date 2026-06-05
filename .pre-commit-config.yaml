@@ -1,0 +1,41 @@
+# Pre-commit hooks for begane-grond. Install once with: pre-commit install
+# Run against everything with: pre-commit run --all-files
+#
+# Formatting (Prettier) and file hygiene run here so problems are caught before
+# they reach CI. ESLint also runs locally on changed files; the authoritative
+# lint + build gate lives in .github/workflows/ci.yml.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^src/data/seed\.js$
+      - id: end-of-file-fixer
+        exclude: ^src/data/seed\.js$
+      - id: check-yaml
+      - id: check-json
+        exclude: ^package-lock\.json$
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  - repo: local
+    hooks:
+      # Run the project's own Prettier (not the deprecated mirror) so the hook
+      # uses the exact same version and .prettierrc/.prettierignore as CI. The
+      # .prettierignore excludes seed.js, dist, the lockfile and all .vue files.
+      - id: prettier
+        name: prettier
+        entry: npx prettier --write --ignore-unknown
+        language: system
+        files: \.(js|json|css|html|ya?ml|md)$
+        pass_filenames: true
+
+      - id: eslint
+        name: eslint
+        entry: npx eslint --fix --max-warnings=0
+        language: system
+        # Only lint source files; eslint.config.js handles ignores (incl. seed.js).
+        files: \.(js|vue)$
+        exclude: ^src/data/seed\.js$
+        pass_filenames: true

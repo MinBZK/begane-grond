@@ -18,12 +18,6 @@ function serviceLabel(id) {
   if (inst) return inst.name;
   return id;
 }
-function serviceRoute(id) {
-  if (store.appById(id)) return `/apps/${id}`;
-  if (store.instanceById(id)) return `/infra/instances/${id}`;
-  return null;
-}
-
 // Order: open/active incidents first, then by severity weight.
 const SEV_WEIGHT = { sev1: 3, sev2: 2, sev3: 1, sev4: 0 };
 const STATUS_WEIGHT = { open: 3, mitigated: 1, resolved: 0 };
