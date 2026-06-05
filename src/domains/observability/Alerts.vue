@@ -231,7 +231,7 @@ function alertLinks(a) {
   gap: 0.35rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--semantics-focus-color, #1a73e8);
+  color: var(--semantics-focus-color);
 }
 .rp-alert-svc nldd-icon {
   width: 1rem;
@@ -273,7 +273,7 @@ function alertLinks(a) {
   width: 1.7rem;
   height: 1.7rem;
   border-radius: 50%;
-  background: var(--semantics-surfaces-tinted-background-color, #e8eef7);
+  background: var(--semantics-surfaces-tinted-background-color);
   font-size: 0.72rem;
   font-weight: 700;
 }
@@ -293,7 +293,7 @@ function alertLinks(a) {
 .rp-slo-name {
   font-weight: 600;
   text-decoration: none;
-  color: var(--semantics-focus-color, #1a73e8);
+  color: var(--semantics-focus-color);
 }
 .rp-slo-name:hover {
   text-decoration: underline;
@@ -313,7 +313,7 @@ function alertLinks(a) {
   flex: 1;
   height: 14px;
   border-radius: 7px;
-  background: var(--semantics-surfaces-tinted-background-color, #eee);
+  background: var(--semantics-surfaces-tinted-background-color);
   border: 1px solid var(--semantics-dividers-color);
   overflow: hidden;
 }

@@ -108,7 +108,7 @@ const currentIndex = computed(() => done.value.findIndex((d) => !d));
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 12px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-path-icon nldd-icon {
   width: 1.4rem;
@@ -126,17 +126,17 @@ const currentIndex = computed(() => done.value.findIndex((d) => !d));
 .rp-progress {
   height: 0.6rem;
   border-radius: 999px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .rp-progress-bar {
   height: 100%;
   border-radius: 999px;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
   transition: width 0.35s ease;
 }
 .rp-progress-bar.is-done {
-  background: var(--semantics-feedback-success-color, #1a7f37);
+  background: var(--semantics-feedback-success-color);
 }
 .rp-progress-label {
   display: flex;
@@ -157,7 +157,7 @@ const currentIndex = computed(() => done.value.findIndex((d) => !d));
   display: flex;
   gap: 0.75rem;
   padding: 0.7rem 0;
-  border-top: 1px solid var(--semantics-dividers-color, #e3e6ea);
+  border-top: 1px solid var(--semantics-dividers-color);
 }
 .rp-step:first-child {
   border-top: none;
@@ -170,7 +170,7 @@ const currentIndex = computed(() => done.value.findIndex((d) => !d));
   padding: 0;
   margin-top: 0.05rem;
   cursor: pointer;
-  color: var(--semantics-text-default-color, #1a1a1a);
+  color: var(--semantics-text-default-color);
   opacity: 0.45;
   transition: opacity 0.15s ease, color 0.15s ease;
 }
@@ -180,7 +180,7 @@ const currentIndex = computed(() => done.value.findIndex((d) => !d));
 }
 .rp-step.is-done .rp-step-check {
   opacity: 1;
-  color: var(--semantics-feedback-success-color, #1a7f37);
+  color: var(--semantics-feedback-success-color);
 }
 .rp-step.is-current .rp-step-check {
   opacity: 0.85;
@@ -221,7 +221,7 @@ const currentIndex = computed(() => done.value.findIndex((d) => !d));
   font-size: 0.82rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   width: fit-content;
 }
 .rp-step-link:hover {

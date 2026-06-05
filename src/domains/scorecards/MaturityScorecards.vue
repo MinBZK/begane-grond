@@ -247,7 +247,7 @@ const crumbs = [
   height: 16px;
   border-radius: 999px;
   overflow: hidden;
-  background: var(--semantics-surfaces-tinted-background-color, #eceef2);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .sc-dist-seg {
   height: 100%;

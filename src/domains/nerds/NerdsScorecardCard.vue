@@ -92,7 +92,7 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
   padding: 0.3rem 0.6rem;
   border-radius: 999px;
   font-size: 0.95rem;
-  border: 1.5px solid var(--semantics-dividers-color, #d6dbe1);
+  border: 1.5px solid var(--semantics-dividers-color);
   white-space: nowrap;
 }
 .nc-score strong { font-size: 1.1rem; }
@@ -105,7 +105,7 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
 .nc-bar {
   height: 8px;
   border-radius: 999px;
-  background: var(--semantics-surfaces-tinted-background-color, #eceef2);
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .nc-bar-fill {
@@ -121,14 +121,14 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
   align-items: center;
   gap: 0.6rem;
   padding: 0.5rem 0;
-  border-bottom: 1px solid var(--semantics-dividers-color, #e5e7eb);
+  border-bottom: 1px solid var(--semantics-dividers-color);
 }
 .nc-check:last-child { border-bottom: none; }
 .nc-mark { flex: 0 0 auto; display: inline-flex; }
 .nc-mark nldd-icon { width: 1.1rem; height: 1.1rem; }
 .nc-ok { color: #1a8a4a; }
 .nc-no { color: #c0392b; }
-.nc-na { color: var(--semantics-text-default-color, #888); opacity: 0.5; }
+.nc-na { color: var(--semantics-text-default-color); opacity: 0.5; }
 .nc-body { display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto; }
 .nc-label { display: flex; align-items: center; gap: 0.45rem; font-weight: 600; font-size: 0.9rem; }
 .nc-num {
@@ -138,7 +138,7 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
   width: 1.3rem;
   height: 1.3rem;
   border-radius: 5px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   font-size: 0.72rem;
   font-weight: 700;
   opacity: 0.75;
@@ -155,12 +155,12 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
   font-size: 0.78rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   white-space: nowrap;
 }
 .nc-fix:hover { text-decoration: underline; }
 .nc-fix nldd-icon { width: 0.8rem; height: 0.8rem; }
-.nc-next { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--semantics-dividers-color, #e5e7eb); }
+.nc-next { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--semantics-dividers-color); }
 .nc-next-head { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 600; opacity: 0.8; }
 .nc-next-head nldd-icon { width: 1rem; height: 1rem; }
 .nc-next-tags { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -170,14 +170,14 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
   border-radius: 999px;
   text-decoration: none;
   color: inherit;
-  border: 1px solid var(--semantics-dividers-color, #e5e7eb);
-  background: var(--semantics-surfaces-tinted-background-color, #f4f5f7);
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
-.nc-next-tag:hover { border-color: var(--semantics-actions-primary-default-background-color, #154273); }
+.nc-next-tag:hover { border-color: var(--semantics-actions-primary-default-background-color); }
 .nc-done {
   margin-top: 0.6rem;
   padding-top: 0.5rem;
-  border-top: 1px dashed var(--semantics-dividers-color, #e5e7eb);
+  border-top: 1px dashed var(--semantics-dividers-color);
   display: flex;
   align-items: center;
   gap: 0.4rem;

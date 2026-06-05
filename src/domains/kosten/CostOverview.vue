@@ -541,7 +541,7 @@ function showMoreShowback() {
 }
 .rp-donut-track {
   fill: none;
-  stroke: var(--semantics-dividers-color, rgba(0, 0, 0, 0.08));
+  stroke: var(--semantics-dividers-color);
   stroke-width: 22;
 }
 .rp-donut-seg {
@@ -609,7 +609,7 @@ function showMoreShowback() {
 .rp-legend-bar-wrap {
   height: 0.55rem;
   border-radius: 99px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.05));
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .rp-legend-bar {
@@ -698,7 +698,7 @@ function showMoreShowback() {
 .rp-pue-meter {
   height: 0.5rem;
   border-radius: 99px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.05));
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .rp-pue-fill {
@@ -719,7 +719,7 @@ function showMoreShowback() {
 .rp-energy-fig {
   padding: 0.75rem;
   border-radius: 10px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.05));
+  background: var(--semantics-surfaces-tinted-background-color);
   text-align: center;
 }
 .rp-energy-num {
@@ -768,7 +768,7 @@ function showMoreShowback() {
 /* Table cells */
 .rp-cell-link {
   text-decoration: none;
-  color: var(--rp-link, #2563eb);
+  color: var(--rp-link);
 }
 .rp-cell-link:hover {
   text-decoration: underline;

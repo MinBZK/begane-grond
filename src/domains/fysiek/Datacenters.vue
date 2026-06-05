@@ -34,9 +34,9 @@ function pct(dc) {
   return Math.round((dc.usedKw / dc.capacityKw) * 100);
 }
 function barColor(p) {
-  if (p >= 80) return 'var(--rp-crit, #d52b1e)';
-  if (p >= 60) return 'var(--rp-warn, #e08c00)';
-  return 'var(--rp-ok, #218838)';
+  if (p >= 80) return 'var(--rp-crit)';
+  if (p >= 60) return 'var(--rp-warn)';
+  return 'var(--rp-ok)';
 }
 </script>
 
@@ -163,9 +163,9 @@ function barColor(p) {
 .rp-dc-bar {
   height: 12px;
   border-radius: 999px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  border: 1px solid var(--semantics-dividers-color);
 }
 .rp-dc-bar-fill {
   height: 100%;
@@ -205,7 +205,7 @@ function barColor(p) {
   gap: 0.35rem;
   font-weight: 600;
   font-size: 0.88rem;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-dc-foot nldd-icon {
   width: 1rem;

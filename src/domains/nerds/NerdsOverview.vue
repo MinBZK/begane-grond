@@ -39,9 +39,9 @@ const crumbs = [
 ];
 
 function pctColor(pct) {
-  if (pct >= 80) return 'var(--rp-ok, #3a7d44)';
-  if (pct >= 50) return 'var(--rp-warn, #b8860b)';
-  return 'var(--rp-bad, #b3261e)';
+  if (pct >= 80) return 'var(--rp-ok)';
+  if (pct >= 50) return 'var(--rp-warn)';
+  return 'var(--rp-bad)';
 }
 </script>
 
@@ -141,11 +141,11 @@ function pctColor(pct) {
   gap: 0.85rem;
   padding: 1rem 1.1rem;
   border-radius: 12px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  border: 1px solid var(--semantics-dividers-color);
   scroll-margin-top: 1.5rem;
 }
 .rp-pillar:target {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   box-shadow: 0 0 0 2px color-mix(in srgb, #154273 25%, transparent);
 }
 .rp-pillar-ic {
@@ -155,7 +155,7 @@ function pctColor(pct) {
   width: 2.3rem;
   height: 2.3rem;
   border-radius: 9px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   flex: 0 0 auto;
 }
 .rp-pillar-ic nldd-icon { width: 1.2rem; height: 1.2rem; opacity: 0.85; }
@@ -172,7 +172,7 @@ function pctColor(pct) {
   flex: 1;
   height: 0.5rem;
   border-radius: 999px;
-  background: var(--semantics-surfaces-tinted-background-color, #eceef2);
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .rp-pillar-bar-fill { display: block; height: 100%; border-radius: 999px; }
@@ -185,7 +185,7 @@ function pctColor(pct) {
   font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-pillar-link:hover { text-decoration: underline; }
 .rp-pillar-link nldd-icon { width: 0.85rem; height: 0.85rem; }

@@ -505,8 +505,8 @@ function runScenarios() {
 }
 .rp-source-chip nldd-icon { width: 0.95rem; height: 0.95rem; }
 .rp-source-chip:hover { background: var(--semantics-surfaces-tinted-background-color); }
-.rp-source-register { border-color: var(--semantics-actions-primary-default-background-color, #154273); }
-.rp-source-wet { border-color: var(--semantics-feedback-success-icon-color, #2e7d32); }
+.rp-source-register { border-color: var(--semantics-actions-primary-default-background-color); }
+.rp-source-wet { border-color: var(--semantics-feedback-success-icon-color); }
 .rp-source-output { opacity: 0.7; }
 
 .rp-scn-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
@@ -538,7 +538,7 @@ function runScenarios() {
 .rp-cov-row { display: flex; align-items: center; gap: 0.6rem; }
 .rp-cov-label { font-size: 0.78rem; opacity: 0.65; width: 3.5rem; flex: 0 0 auto; }
 .rp-cov-track { flex: 1 1 auto; height: 0.5rem; border-radius: 999px; background: var(--semantics-surfaces-tinted-background-color); overflow: hidden; }
-.rp-cov-fill { height: 100%; border-radius: 999px; background: var(--semantics-actions-primary-default-background-color, #154273); }
+.rp-cov-fill { height: 100%; border-radius: 999px; background: var(--semantics-actions-primary-default-background-color); }
 .rp-cov-pct { font-size: 0.82rem; width: 2.6rem; text-align: right; flex: 0 0 auto; }
 
 .rp-traj-chip {

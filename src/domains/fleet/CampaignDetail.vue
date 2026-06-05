@@ -246,16 +246,16 @@ const cliCommand = computed(() => {
   height: 0.85rem;
   border-radius: 999px;
   overflow: hidden;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f4);
+  background: var(--semantics-surfaces-tinted-background-color);
   border: 1px solid var(--semantics-dividers-color);
 }
 .rp-seg {
   height: 100%;
   transition: width 0.4s ease;
 }
-.rp-seg-merged { background: var(--nldd-color-success, #39870c); }
-.rp-seg-open { background: var(--nldd-color-warning, #b85c00); }
-.rp-seg-failing { background: var(--nldd-color-critical, #d52b1e); }
+.rp-seg-merged { background: var(--semantics-feedback-success-icon-color); }
+.rp-seg-open { background: var(--semantics-feedback-warning-color); }
+.rp-seg-failing { background: var(--semantics-feedback-critical-icon-color); }
 .rp-seg-pending { background: transparent; }
 .rp-bar-legend {
   display: flex;
@@ -276,14 +276,14 @@ const cliCommand = computed(() => {
   border-radius: 2px;
   border: 1px solid var(--semantics-dividers-color);
 }
-.rp-leg-merged::before { background: var(--nldd-color-success, #39870c); }
-.rp-leg-open::before { background: var(--nldd-color-warning, #b85c00); }
-.rp-leg-failing::before { background: var(--nldd-color-critical, #d52b1e); }
+.rp-leg-merged::before { background: var(--semantics-feedback-success-icon-color); }
+.rp-leg-open::before { background: var(--semantics-feedback-warning-color); }
+.rp-leg-failing::before { background: var(--semantics-feedback-critical-icon-color); }
 .rp-leg-pending::before { background: transparent; }
 /* DataTable lives in a 2-of-3 column span; widen the main column. */
 .rp-col-main { grid-column: span 2; }
 .rp-cell-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }

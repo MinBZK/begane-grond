@@ -219,7 +219,7 @@ function openRack(rid) {
   width: 100%;
 }
 .rp-vueflow {
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-node {
   display: flex;
@@ -227,7 +227,7 @@ function openRack(rid) {
   gap: 0.5rem;
   padding: 0.55rem 0.7rem;
   border-radius: 10px;
-  border: 1.5px solid var(--semantics-dividers-color, #cdd3da);
+  border: 1.5px solid var(--semantics-dividers-color);
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   min-width: 150px;
@@ -257,7 +257,7 @@ function openRack(rid) {
   white-space: nowrap;
 }
 .rp-node-spine {
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
   border-color: #0e2f54;
   color: #fff;
 }
@@ -295,7 +295,7 @@ function openRack(rid) {
 }
 .rp-topo-legend {
   background: rgba(255, 255, 255, 0.92);
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  border: 1px solid var(--semantics-dividers-color);
   border-radius: 8px;
   padding: 0.5rem 0.65rem;
   font-size: 0.74rem;

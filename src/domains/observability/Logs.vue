@@ -251,7 +251,7 @@ const cliCommand = computed(() => {
 }
 .rp-level-btn.rp-active {
   opacity: 1;
-  border-color: var(--semantics-focus-color, #1a73e8);
+  border-color: var(--semantics-focus-color);
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-level-count {
@@ -292,7 +292,7 @@ const cliCommand = computed(() => {
   flex-shrink: 0;
   text-decoration: none;
   font-weight: 600;
-  color: var(--semantics-focus-color, #1a73e8);
+  color: var(--semantics-focus-color);
 }
 .rp-log-svc:hover {
   text-decoration: underline;

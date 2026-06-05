@@ -639,7 +639,7 @@ function exportFootprint() {
   margin: 0;
   padding: 0.75rem 1rem;
   border-radius: 10px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(13, 148, 136, 0.06));
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-equiv nldd-icon {
   width: 1.1rem;
@@ -726,7 +726,7 @@ function exportFootprint() {
   display: block;
 }
 .rp-bar-bg {
-  fill: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.05));
+  fill: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-bar-fill {
   transition: width 0.4s ease;
@@ -836,7 +836,7 @@ function exportFootprint() {
   width: 3px;
   height: calc(0.5rem + 6px);
   border-radius: 2px;
-  background: var(--semantics-text-default-color, #1f2933);
+  background: var(--semantics-text-default-color);
   transform: translateX(-50%);
 }
 .rp-pue-foot {
@@ -922,7 +922,7 @@ function exportFootprint() {
 /* Table cells */
 .rp-cell-link {
   text-decoration: none;
-  color: var(--rp-link, #2563eb);
+  color: var(--rp-link);
 }
 .rp-cell-link:hover {
   text-decoration: underline;
@@ -975,7 +975,7 @@ function exportFootprint() {
   width: 80px;
   height: 0.5rem;
   border-radius: 99px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.05));
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .rp-score-fill {

@@ -383,9 +383,9 @@ onBeforeUnmount(() => presentation.unregisterWizard('order'));
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-choice.rp-sel {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
-  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color, #154273);
+  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color);
 }
 .rp-choice.rp-disabled {
   opacity: 0.45;
@@ -474,7 +474,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('order'));
   opacity: 0.55;
 }
 .rp-prov-step.rp-active .rp-prov-dot {
-  border-color: var(--nldd-color-warning, #b85c00);
+  border-color: var(--semantics-feedback-warning-color);
   animation: rp-pulse 1.1s ease-in-out infinite;
 }
 .rp-prov-step.rp-active .rp-prov-dot nldd-icon,
@@ -482,8 +482,8 @@ onBeforeUnmount(() => presentation.unregisterWizard('order'));
   opacity: 1;
 }
 .rp-prov-step.rp-done .rp-prov-dot {
-  border-color: var(--nldd-color-success, #39870c);
-  background: var(--nldd-color-success, #39870c);
+  border-color: var(--semantics-feedback-success-icon-color);
+  background: var(--semantics-feedback-success-icon-color);
 }
 .rp-prov-step.rp-done .rp-prov-dot nldd-icon {
   opacity: 1;
@@ -506,13 +506,13 @@ onBeforeUnmount(() => presentation.unregisterWizard('order'));
   margin-top: 1rem;
   padding: 0.7rem 0.85rem;
   border-radius: 10px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
   text-decoration: none;
   color: inherit;
 }
 .rp-commit-seam:hover {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-commit-seam > nldd-icon { width: 1.05rem; height: 1.05rem; opacity: 0.75; flex: 0 0 auto; }
 .rp-commit-text { flex: 1 1 auto; font-size: 0.9rem; }

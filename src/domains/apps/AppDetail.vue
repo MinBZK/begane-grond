@@ -359,7 +359,7 @@ function nodeFill(type) {
 .rp-page { display: block; }
 .rp-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 .rp-muted { opacity: 0.7; }
-.rp-inline-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; }
+.rp-inline-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; }
 .rp-inline-link:hover { text-decoration: underline; }
 
 .rp-detail-grid { display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(260px, 1fr); gap: 1.25rem; align-items: start; }
@@ -371,7 +371,7 @@ function nodeFill(type) {
 .rp-stack-row { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
 
 .rp-graph { width: 100%; height: auto; max-height: 340px; }
-.rp-graph-edge { stroke: var(--semantics-dividers-color, #c5c9d0); stroke-width: 2; }
+.rp-graph-edge { stroke: var(--semantics-dividers-color); stroke-width: 2; }
 .rp-graph-type { fill: #fff; opacity: 0.8; font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; text-anchor: middle; }
 .rp-graph-label { fill: #fff; font-size: 11px; font-weight: 600; text-anchor: middle; }
 .rp-graph-clickable { cursor: pointer; }
@@ -385,7 +385,7 @@ function nodeFill(type) {
 .rp-slo-row { display: flex; justify-content: space-between; padding: 0.2rem 0; }
 .rp-ok { color: #2e7d32; }
 .rp-bad { color: #b00020; }
-.rp-budget-bar { height: 8px; border-radius: 999px; background: var(--semantics-surfaces-tinted-background-color, #eef0f3); overflow: hidden; margin: 0.35rem 0 0.25rem; }
+.rp-budget-bar { height: 8px; border-radius: 999px; background: var(--semantics-surfaces-tinted-background-color); overflow: hidden; margin: 0.35rem 0 0.25rem; }
 .rp-budget-fill { height: 100%; background: #2e7d32; border-radius: 999px; }
 .rp-budget-low { background: #c8a200; }
 .rp-budget-num { font-size: 0.8rem; opacity: 0.7; }

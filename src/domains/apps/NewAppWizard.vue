@@ -548,19 +548,19 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
 }
 .rp-tpl-choice:hover { background: var(--semantics-surfaces-tinted-background-color); }
 .rp-tpl-choice.rp-selected {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
-  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color, #154273) inset;
+  border-color: var(--semantics-actions-primary-default-background-color);
+  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color) inset;
 }
 .rp-tpl-choice-head { display: flex; align-items: center; gap: 0.5rem; }
 .rp-tpl-choice-head nldd-icon { width: 1.2rem; height: 1.2rem; }
-.rp-tick { margin-left: auto; color: var(--semantics-feedback-success-icon-color, #2e7d32); }
+.rp-tick { margin-left: auto; color: var(--semantics-feedback-success-icon-color); }
 .rp-tpl-choice-desc { font-size: 0.85rem; opacity: 0.75; }
 .rp-tpl-choice-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
 
 .rp-gov-choice { text-decoration: none; color: inherit; }
-.rp-gov-choice:hover { border-color: var(--semantics-actions-primary-default-background-color, #154273); }
+.rp-gov-choice:hover { border-color: var(--semantics-actions-primary-default-background-color); }
 .rp-gov-arrow { margin-left: auto; width: 1rem; height: 1rem; opacity: 0.5; }
-.rp-gov-cta { font-size: 0.82rem; font-weight: 600; color: var(--semantics-actions-primary-default-background-color, #154273); margin-top: 0.15rem; }
+.rp-gov-cta { font-size: 0.82rem; font-weight: 600; color: var(--semantics-actions-primary-default-background-color); margin-top: 0.15rem; }
 
 .rp-preview { border: 1px solid var(--semantics-dividers-color); border-radius: 10px; overflow: hidden; }
 .rp-preview-label {
@@ -585,8 +585,8 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
 }
 .rp-infra-choice:hover { background: var(--semantics-surfaces-tinted-background-color); }
 .rp-infra-choice.rp-selected {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
-  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color, #154273) inset;
+  border-color: var(--semantics-actions-primary-default-background-color);
+  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color) inset;
 }
 .rp-infra-choice > nldd-icon { width: 1.3rem; height: 1.3rem; }
 .rp-infra-text { display: flex; flex-direction: column; gap: 0.1rem; flex: 1 1 auto; }
@@ -600,9 +600,9 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
 .rp-done-icon {
   display: inline-flex; align-items: center; justify-content: center;
   width: 3rem; height: 3rem; border-radius: 50%; flex: none;
-  background: var(--semantics-feedback-success-background-color, #e6f4ea);
+  background: var(--semantics-feedback-success-background-color);
 }
-.rp-done-icon nldd-icon { width: 1.7rem; height: 1.7rem; color: var(--semantics-feedback-success-icon-color, #2e7d32); }
+.rp-done-icon nldd-icon { width: 1.7rem; height: 1.7rem; color: var(--semantics-feedback-success-icon-color); }
 .rp-done-fact { display: flex; flex-direction: column; gap: 0.35rem; align-items: flex-start; }
 .rp-done-fact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.6; }
 .rp-done-fact-value { font-weight: 600; }
@@ -613,13 +613,13 @@ onBeforeUnmount(() => presentation.unregisterWizard('app'));
   margin-top: 1rem;
   padding: 0.7rem 0.85rem;
   border-radius: 10px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
   text-decoration: none;
   color: inherit;
 }
 .rp-commit-seam:hover {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-commit-seam > nldd-icon { width: 1.05rem; height: 1.05rem; opacity: 0.75; flex: 0 0 auto; }
 .rp-commit-text { flex: 1 1 auto; font-size: 0.9rem; }

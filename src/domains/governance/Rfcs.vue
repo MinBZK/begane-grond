@@ -225,7 +225,7 @@ const crumbs = [
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
   color: white;
 }
 .rp-flow-disc nldd-icon {
@@ -291,7 +291,7 @@ const crumbs = [
   background: var(--semantics-dividers-color);
 }
 .rp-rfc-pip-on {
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
 }
 @media (max-width: 720px) {
   .rp-rfc-row {

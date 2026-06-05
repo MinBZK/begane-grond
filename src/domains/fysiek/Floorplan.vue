@@ -127,7 +127,7 @@ function open(rid) {
               :x="PAD / 2" :y="PAD / 2"
               :width="layout.width - PAD" :height="layout.height - PAD"
               rx="14" fill="none"
-              stroke="var(--semantics-dividers-color, #d6dbe1)" stroke-width="2" stroke-dasharray="6 6"
+              stroke="var(--semantics-dividers-color)" stroke-width="2" stroke-dasharray="6 6"
             />
 
             <!-- Aisle bands: the coloured gangen between the rack rows -->
@@ -181,7 +181,7 @@ function open(rid) {
                 />
                 <rect
                   :x="r.x + 6" :y="r.y + RACK_H - 12" :width="(RACK_W - 12) * (r.fill / 100)" height="5" rx="2.5"
-                  fill="var(--semantics-actions-primary-default-background-color, #154273)"
+                  fill="var(--semantics-actions-primary-default-background-color)"
                 />
                 <text :x="r.x + RACK_W / 2" :y="r.y + 23" text-anchor="middle" class="rp-floor-racklabel">{{ r.rack?.label }}</text>
                 <text :x="r.x + RACK_W / 2" :y="r.y + 36" text-anchor="middle" class="rp-floor-rackmeta">{{ r.fill }}% · {{ r.watts }}W</text>
@@ -253,7 +253,7 @@ function open(rid) {
 .rp-floor-rowlabel {
   font-size: 14px;
   font-weight: 700;
-  fill: var(--semantics-text-default-color, #1a1a1a);
+  fill: var(--semantics-text-default-color);
 }
 .rp-floor-aislelabel {
   font-size: 9px;
@@ -279,12 +279,12 @@ function open(rid) {
   font-size: 13px;
   font-weight: 700;
   font-family: ui-monospace, monospace;
-  fill: var(--semantics-text-default-color, #1a1a1a);
+  fill: var(--semantics-text-default-color);
   pointer-events: none;
 }
 .rp-floor-rackmeta {
   font-size: 10px;
-  fill: var(--semantics-text-default-color, #1a1a1a);
+  fill: var(--semantics-text-default-color);
   opacity: 0.7;
   pointer-events: none;
 }

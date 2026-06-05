@@ -49,6 +49,21 @@ html {
 html.dark {
   color-scheme: dark;
 }
+
+/* App-local semantic colour aliases, defined as NLDD tokens so they theme with
+   light/dark instead of falling back to hardcoded hex. Components reference
+   these (var(--rp-ok), var(--rp-crit), ...) for status accents; the single
+   source of truth is the NLDD design system, never a literal colour. */
+:root {
+  --rp-ok: var(--semantics-feedback-success-icon-color);
+  --rp-warn: var(--semantics-feedback-warning-color);
+  --rp-err: var(--semantics-feedback-critical-icon-color);
+  --rp-crit: var(--semantics-feedback-critical-icon-color);
+  --rp-bad: var(--semantics-feedback-critical-icon-color);
+  --rp-link: var(--semantics-actions-primary-default-background-color);
+  --rp-edge: var(--semantics-dividers-color);
+  --rp-dot-color: var(--semantics-dividers-color);
+}
 html,
 body {
   margin: 0;
@@ -94,7 +109,7 @@ nldd-top-navigation-bar {
   width: 0.625rem;
   height: 0.625rem;
   border-radius: 50%;
-  background: var(--rp-dot-color, var(--semantics-dividers-color));
+  background: var(--rp-dot-color);
 }
 
 /* Monospace for ids / connection strings / CLI peeks. */

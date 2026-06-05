@@ -110,7 +110,7 @@ function pick(std, app) {
   padding: 0.7rem 0.8rem;
   text-align: left;
   vertical-align: middle;
-  border-bottom: 1px solid var(--semantics-dividers-color, #e2e5ea);
+  border-bottom: 1px solid var(--semantics-dividers-color);
 }
 .rp-corner {
   font-size: 0.78rem;
@@ -167,7 +167,7 @@ function pick(std, app) {
   height: 0.85rem;
 }
 .rp-pill-active {
-  outline: 2px solid var(--semantics-actions-primary-background-color, #154273);
+  outline: 2px solid var(--semantics-actions-primary-background-color);
   outline-offset: 1px;
 }
 .rp-cell-voldoet { background: #e6f6ec; color: #1f7a45; border-color: #bfe6cd; }
@@ -199,8 +199,8 @@ function pick(std, app) {
   margin: 0 1.1rem 1.1rem;
   padding: 0.9rem 1rem;
   border-radius: 10px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f6);
-  border: 1px solid var(--semantics-dividers-color, #e2e5ea);
+  background: var(--semantics-surfaces-tinted-background-color);
+  border: 1px solid var(--semantics-dividers-color);
 }
 .rp-explain-head {
   display: flex;

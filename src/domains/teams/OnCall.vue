@@ -272,13 +272,13 @@ function hueFor(id) {
   align-items: center;
   padding: 0.3rem 0.6rem;
   border-radius: 999px;
-  border: 1px solid var(--semantics-dividers-color, #dfe3e8);
+  border: 1px solid var(--semantics-dividers-color);
   font-size: 0.8rem;
   text-decoration: none;
   color: inherit;
 }
 .rp-oc-chain-primary {
-  background: var(--semantics-surfaces-tinted-background-color, #f3f5f8);
+  background: var(--semantics-surfaces-tinted-background-color);
   font-weight: 600;
 }
 .rp-oc-arrow {
@@ -301,12 +301,12 @@ function hueFor(id) {
   gap: 0.5rem;
   padding: 0.4rem 0.5rem;
   border-radius: 8px;
-  border: 1px solid var(--semantics-dividers-color, #dfe3e8);
+  border: 1px solid var(--semantics-dividers-color);
   text-decoration: none;
   color: inherit;
 }
 .rp-oc-inc:hover {
-  background: var(--semantics-surfaces-tinted-background-color, #f3f5f8);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-oc-inc nldd-icon {
   width: 1rem;

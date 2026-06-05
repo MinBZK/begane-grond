@@ -188,7 +188,7 @@ function wetName(id) {
 }
 .rp-cat:hover { background: var(--semantics-surfaces-tinted-background-color); }
 .rp-cat-on {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
   font-weight: 700;
 }
@@ -210,7 +210,7 @@ function wetName(id) {
 .rp-cov-fill {
   height: 100%;
   border-radius: 999px;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
 }
 .rp-cov-pct { font-size: 0.82rem; width: 2.6rem; text-align: right; flex: 0 0 auto; }
 
@@ -227,7 +227,7 @@ function wetName(id) {
   margin-left: -0.4rem;
   border-radius: 50%;
   background: var(--semantics-surfaces-tinted-background-color);
-  border: 2px solid var(--semantics-surfaces-default-background-color, #fff);
+  border: 2px solid var(--semantics-surfaces-background-color);
   font-size: 0.7rem;
   font-weight: 700;
 }

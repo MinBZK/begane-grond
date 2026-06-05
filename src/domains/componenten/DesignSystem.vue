@@ -169,7 +169,7 @@ const relationLinks = [
   gap: 0.85rem;
   padding: 1rem 1.1rem;
   border-radius: 12px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  border: 1px solid var(--semantics-dividers-color);
 }
 .rp-pillar-ic {
   display: inline-flex;
@@ -178,7 +178,7 @@ const relationLinks = [
   width: 2.3rem;
   height: 2.3rem;
   border-radius: 9px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   flex: 0 0 auto;
 }
 .rp-pillar-ic nldd-icon { width: 1.2rem; height: 1.2rem; opacity: 0.85; }
@@ -192,7 +192,7 @@ const relationLinks = [
   font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-pillar-link:hover { text-decoration: underline; }
 .rp-pillar-link nldd-icon { width: 0.85rem; height: 0.85rem; }
@@ -235,7 +235,7 @@ const relationLinks = [
   font-weight: 600;
 }
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }

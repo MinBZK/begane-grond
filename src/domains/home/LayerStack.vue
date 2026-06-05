@@ -93,7 +93,7 @@ const layers = computed(() => [
   text-decoration: none;
   color: inherit;
   border: 1px solid var(--semantics-dividers-color);
-  background: var(--semantics-surfaces-default-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
   transition: background 0.12s ease, border-color 0.12s ease;
 }
 .rp-layer:hover {
@@ -146,7 +146,7 @@ const layers = computed(() => [
   font-family: var(--rp-mono, ui-monospace, monospace);
   padding: 0.12rem 0.45rem;
   border-radius: 6px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.05));
+  background: var(--semantics-surfaces-tinted-background-color);
   white-space: nowrap;
 }
 .rp-layer-go {

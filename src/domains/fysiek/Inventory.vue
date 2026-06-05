@@ -204,7 +204,7 @@ const columns = [
   opacity: 0.6;
 }
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
 }
 .rp-link:hover { text-decoration: underline; }

@@ -134,6 +134,6 @@ const cli = computed(() =>
 .rp-kv dd { margin: 0; font-weight: 600; word-break: break-all; }
 .rp-prov { font-weight: 400; opacity: 0.75; }
 .rp-mono { font-family: ui-monospace, monospace; font-weight: 400; }
-.rp-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; font-weight: 600; }
+.rp-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
 </style>

@@ -64,7 +64,7 @@ const graph = computed(() => {
         source: `org-${org.id}`,
         target: `team-${team.id}`,
         markerEnd: MarkerType.ArrowClosed,
-        style: { stroke: 'var(--rp-edge, #9aa6b2)' },
+        style: { stroke: 'var(--rp-edge)' },
       });
 
       if (isFocus) {
@@ -87,7 +87,7 @@ const graph = computed(() => {
             source: `team-${team.id}`,
             target: `person-${person.id}`,
             markerEnd: MarkerType.ArrowClosed,
-            style: { stroke: 'var(--rp-edge, #9aa6b2)' },
+            style: { stroke: 'var(--rp-edge)' },
           });
         });
         teamRow += Math.max(1, team.members.length);
@@ -224,7 +224,7 @@ function setFocus(id) {
   min-width: 22rem;
 }
 .rp-vnode-focus {
-  outline: 2px solid var(--semantics-actions-primary-default-background-color, #154273);
+  outline: 2px solid var(--semantics-actions-primary-default-background-color);
   outline-offset: 1px;
 }
 .rp-legend {
@@ -273,8 +273,8 @@ function setFocus(id) {
   gap: 0.55rem;
   padding: 0.55rem 0.8rem;
   border-radius: 12px;
-  background: var(--semantics-surfaces-default-background-color, #fff);
-  border: 1px solid var(--semantics-dividers-color, #dfe3e8);
+  background: var(--semantics-surfaces-background-color);
+  border: 1px solid var(--semantics-dividers-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   min-width: 220px;
   cursor: default;
@@ -319,7 +319,7 @@ function setFocus(id) {
   width: 1.8rem;
   height: 1.8rem;
   border-radius: 50%;
-  background: var(--semantics-surfaces-tinted-background-color, #f3f5f8);
+  background: var(--semantics-surfaces-tinted-background-color);
   font-size: 0.72rem;
   font-weight: 700;
   flex-shrink: 0;

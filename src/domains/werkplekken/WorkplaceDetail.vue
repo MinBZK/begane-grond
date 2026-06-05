@@ -332,7 +332,7 @@ const handoverTarget = computed(() =>
   justify-content: center;
   font-weight: 700;
   color: white;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
 }
 .rp-detail-sub {
   font-size: 0.85rem;
@@ -406,10 +406,10 @@ const handoverTarget = computed(() =>
   opacity: 0.7;
 }
 .rp-action-danger:hover {
-  border-color: var(--nldd-color-critical, #b3261e);
+  border-color: var(--semantics-feedback-critical-icon-color);
 }
 .rp-action-danger nldd-icon {
-  color: var(--nldd-color-critical, #b3261e);
+  color: var(--semantics-feedback-critical-icon-color);
   opacity: 1;
 }
 /* Handover picker: search-driven results list, not a wall of options. */
@@ -437,7 +437,7 @@ const handoverTarget = computed(() =>
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-pick-on {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-pick-selected {
@@ -456,7 +456,7 @@ const handoverTarget = computed(() =>
   justify-content: center;
   font-weight: 700;
   color: white;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
 }
 .rp-pick-main {
   display: flex;

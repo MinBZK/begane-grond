@@ -284,7 +284,7 @@ const visiblePipelines = computed(() => (pipeAll.value ? pipelines.value : pendi
   height: 12px;
   border-radius: 50%;
   background: #aaa;
-  box-shadow: 0 0 0 3px var(--semantics-surfaces-default-background-color, #fff);
+  box-shadow: 0 0 0 3px var(--semantics-surfaces-background-color);
 }
 .rp-tl-head {
   display: flex;

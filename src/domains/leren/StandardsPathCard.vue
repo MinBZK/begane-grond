@@ -101,7 +101,7 @@ const dash = computed(() => (pct.value / 100) * CIRC);
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 12px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-sp-icon nldd-icon {
   width: 1.5rem;
@@ -124,7 +124,7 @@ const dash = computed(() => (pct.value / 100) * CIRC);
 }
 .rp-sp-ring-bg {
   fill: none;
-  stroke: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  stroke: var(--semantics-surfaces-tinted-background-color);
   stroke-width: 6;
 }
 .rp-sp-ring-fg {
@@ -139,7 +139,7 @@ const dash = computed(() => (pct.value / 100) * CIRC);
 .rp-sp-ring-text {
   font-size: 0.85rem;
   font-weight: 700;
-  fill: var(--semantics-text-default-color, #1a1a1a);
+  fill: var(--semantics-text-default-color);
 }
 .rp-sp-lede {
   margin: 0;
@@ -174,7 +174,7 @@ const dash = computed(() => (pct.value / 100) * CIRC);
   align-items: center;
   gap: 0.6rem;
   padding: 0.5rem 0;
-  border-top: 1px solid var(--semantics-dividers-color, #e3e6ea);
+  border-top: 1px solid var(--semantics-dividers-color);
 }
 .rp-sp-module:first-child {
   border-top: none;
@@ -186,7 +186,7 @@ const dash = computed(() => (pct.value / 100) * CIRC);
   background: none;
   padding: 0;
   cursor: pointer;
-  color: var(--semantics-text-default-color, #1a1a1a);
+  color: var(--semantics-text-default-color);
   opacity: 0.4;
   transition: opacity 0.15s ease, color 0.15s ease;
 }
@@ -196,7 +196,7 @@ const dash = computed(() => (pct.value / 100) * CIRC);
 }
 .rp-sp-module.is-done .rp-sp-check {
   opacity: 1;
-  color: var(--semantics-feedback-success-color, #1a7f37);
+  color: var(--semantics-feedback-success-color);
 }
 .rp-sp-module-title {
   flex: 1;
@@ -218,7 +218,7 @@ const dash = computed(() => (pct.value / 100) * CIRC);
   font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-sp-cta:hover {
   text-decoration: underline;

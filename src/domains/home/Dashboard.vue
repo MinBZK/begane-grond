@@ -309,7 +309,7 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
   gap: 0.3rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-shortcut-cta nldd-icon {
   width: 0.95rem;
@@ -337,7 +337,7 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.05));
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-activity-dot nldd-icon {
   width: 1rem;
@@ -374,7 +374,7 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
   font-size: 0.76rem;
   padding: 0.05rem 0.35rem;
   border-radius: 5px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.05));
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-activity-at {
   font-size: 0.74rem;
@@ -412,7 +412,7 @@ const redCi = computed(() => store.repos.filter((r) => r.ci === 'red'));
   gap: 0.5rem;
   padding: 0.6rem 0.75rem;
   border-radius: 10px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.05));
+  background: var(--semantics-surfaces-tinted-background-color);
   text-decoration: none;
   color: inherit;
   font-size: 0.9rem;

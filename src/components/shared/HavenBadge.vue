@@ -35,13 +35,13 @@ defineProps({
   gap: 0.75rem;
   padding: 0.7rem 0.95rem;
   border-radius: 12px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
   text-decoration: none;
   color: inherit;
 }
 .rp-haven-badge:hover {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-haven-icon {
   display: inline-flex;

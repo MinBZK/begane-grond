@@ -420,7 +420,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('werkplek'));
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-pick-on {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-pick-avatar {
@@ -433,7 +433,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('werkplek'));
   justify-content: center;
   font-weight: 700;
   color: white;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
 }
 .rp-pick-icon {
   width: 1.5rem;
@@ -483,7 +483,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('werkplek'));
   opacity: 0.7;
 }
 .rp-policy-on {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-review {
@@ -520,7 +520,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('werkplek'));
   width: 2.6rem;
   height: 2.6rem;
   flex: 0 0 auto;
-  color: var(--nldd-color-success, #39870c);
+  color: var(--semantics-feedback-success-icon-color);
 }
 .rp-lifecycle {
   list-style: none;
@@ -558,7 +558,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('werkplek'));
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--semantics-surfaces-default-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
 }
 .rp-stage-dot nldd-icon {
   width: 1rem;
@@ -575,11 +575,11 @@ onBeforeUnmount(() => presentation.unregisterWizard('werkplek'));
   opacity: 1;
 }
 .rp-stage-done .rp-stage-dot {
-  background: var(--nldd-color-success, #39870c);
-  border-color: var(--nldd-color-success, #39870c);
+  background: var(--semantics-feedback-success-icon-color);
+  border-color: var(--semantics-feedback-success-icon-color);
 }
 .rp-stage-active .rp-stage-dot {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   animation: rp-pulse 1.1s ease-in-out infinite;
 }
 @keyframes rp-pulse {

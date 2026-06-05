@@ -129,6 +129,6 @@ const cli = computed(() =>
 .rp-usedby-chip:hover { background: var(--semantics-surfaces-tinted-background-color); }
 .rp-usedby-chip nldd-icon { width: 1rem; height: 1rem; flex: 0 0 auto; }
 .rp-empty { opacity: 0.6; margin: 0.5rem 0 0; }
-.rp-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; font-weight: 600; }
+.rp-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
 </style>

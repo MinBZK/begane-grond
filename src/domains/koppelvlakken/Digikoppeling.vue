@@ -250,7 +250,7 @@ function fmtOin(oin) {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }
@@ -269,7 +269,7 @@ function fmtOin(oin) {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 10px;
-  background: var(--semantics-surfaces-tinted-background-color, #f0f4f8);
+  background: var(--semantics-surfaces-tinted-background-color);
   flex: 0 0 auto;
 }
 .rp-peer-avatar nldd-icon {

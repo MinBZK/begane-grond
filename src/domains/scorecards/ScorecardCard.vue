@@ -138,7 +138,7 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
   margin-top: 0.4rem;
   height: 8px;
   border-radius: 999px;
-  background: var(--semantics-surfaces-tinted-background-color, #eceef2);
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .sc-bar-fill {
@@ -161,7 +161,7 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
   align-items: center;
   gap: 0.6rem;
   padding: 0.55rem 0;
-  border-bottom: 1px solid var(--semantics-dividers-color, #e5e7eb);
+  border-bottom: 1px solid var(--semantics-dividers-color);
 }
 .sc-check:last-child {
   border-bottom: none;
@@ -210,7 +210,7 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--semantics-actions-primary-background-color, #154273);
+  color: var(--semantics-actions-primary-background-color);
   white-space: nowrap;
 }
 .sc-fix:hover {
@@ -223,7 +223,7 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
 .sc-next {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
-  border-top: 1px dashed var(--semantics-dividers-color, #e5e7eb);
+  border-top: 1px dashed var(--semantics-dividers-color);
 }
 .sc-next-head {
   display: flex;
@@ -249,16 +249,16 @@ const pct = computed(() => Math.round(props.card.ratio * 100));
   border-radius: 999px;
   text-decoration: none;
   color: inherit;
-  border: 1px solid var(--semantics-dividers-color, #e5e7eb);
-  background: var(--semantics-surfaces-tinted-background-color, #f4f5f7);
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .sc-next-tag:hover {
-  border-color: var(--semantics-actions-primary-background-color, #154273);
+  border-color: var(--semantics-actions-primary-background-color);
 }
 .sc-done {
   margin-top: 0.6rem;
   padding-top: 0.5rem;
-  border-top: 1px dashed var(--semantics-dividers-color, #e5e7eb);
+  border-top: 1px dashed var(--semantics-dividers-color);
   display: flex;
   align-items: center;
   gap: 0.4rem;

@@ -244,12 +244,12 @@ const relationLinks = [
   text-decoration: none;
   font-family: var(--ro-font-mono, ui-monospace, monospace);
   font-weight: 600;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-sha:hover { text-decoration: underline; }
 .rp-sha nldd-icon { width: 0.85rem; height: 0.85rem; opacity: 0.6; }
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }

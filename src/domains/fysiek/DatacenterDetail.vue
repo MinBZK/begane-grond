@@ -286,8 +286,8 @@ const moreInstances = computed(() => Math.max(0, filteredInstances.value.length 
   font-size: 0.8rem;
   padding: 0.3rem 0.55rem;
   border-radius: 6px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.03));
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-alley-rack:hover {
   filter: brightness(0.96);
@@ -302,19 +302,19 @@ const moreInstances = computed(() => Math.max(0, filteredInstances.value.length 
   width: 70px;
   height: 8px;
   border-radius: 999px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .rp-fill-bar-in {
   height: 100%;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
 }
 .rp-rack-go {
   display: inline-flex;
   align-items: center;
   gap: 0.2rem;
   text-decoration: none;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   font-weight: 600;
 }
 .rp-rack-go nldd-icon {
@@ -346,12 +346,12 @@ const moreInstances = computed(() => Math.max(0, filteredInstances.value.length 
   gap: 0.5rem;
   padding: 0.5rem 0.6rem;
   border-radius: 8px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  border: 1px solid var(--semantics-dividers-color);
   text-decoration: none;
   color: inherit;
 }
 .rp-inst-row:hover {
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-inst-main {
   display: flex;
@@ -375,7 +375,7 @@ const moreInstances = computed(() => Math.max(0, filteredInstances.value.length 
   align-items: center;
   gap: 1rem;
   padding: 0.7rem 0;
-  border-bottom: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  border-bottom: 1px solid var(--semantics-dividers-color);
 }
 .rp-proc-main {
   display: flex;

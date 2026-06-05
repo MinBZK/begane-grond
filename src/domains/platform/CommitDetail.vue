@@ -147,7 +147,7 @@ const relationLinks = computed(() => {
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 8px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   flex: 0 0 auto;
 }
 .rp-commit-ic nldd-icon { width: 1.25rem; height: 1.25rem; opacity: 0.8; }
@@ -175,7 +175,7 @@ const relationLinks = computed(() => {
 }
 .rp-commit-when nldd-icon { width: 0.85rem; height: 0.85rem; opacity: 0.6; }
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }

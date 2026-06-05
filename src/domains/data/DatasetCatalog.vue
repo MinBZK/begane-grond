@@ -124,7 +124,7 @@ function teamName(id) {
 .rp-cat-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .rp-cat { padding: 0.45rem 0.85rem; border-radius: 999px; border: 1.5px solid var(--semantics-dividers-color); background: transparent; cursor: pointer; font-size: 0.9rem; }
 .rp-cat:hover { background: var(--semantics-surfaces-tinted-background-color); }
-.rp-cat-on { border-color: var(--semantics-actions-primary-default-background-color, #154273); background: var(--semantics-surfaces-tinted-background-color); font-weight: 700; }
+.rp-cat-on { border-color: var(--semantics-actions-primary-default-background-color); background: var(--semantics-surfaces-tinted-background-color); font-weight: 700; }
 .rp-ds-link { text-decoration: none; color: inherit; display: block; }
 .rp-ds-head { display: flex; align-items: flex-start; gap: 0.75rem; }
 .rp-ds-icon { width: 1.6rem; height: 1.6rem; flex: 0 0 auto; opacity: 0.8; }

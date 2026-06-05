@@ -90,7 +90,7 @@ const gradId = `sg-${Math.random().toString(36).slice(2, 8)}`;
   overflow: visible;
 }
 .rp-spark-axis {
-  stroke: var(--semantics-dividers-color, #ddd);
+  stroke: var(--semantics-dividers-color);
   stroke-width: 1;
   stroke-dasharray: 2 2;
 }

@@ -446,7 +446,7 @@ const auditMoreCount = computed(() => Math.max(0, auditMatches.value.length - au
 .rp-cell-text {
   flex: 1;
   font-size: 0.82rem;
-  color: var(--semantics-text-default-color, #1b1b1b);
+  color: var(--semantics-text-default-color);
   opacity: 0.85;
 }
 .rp-cell-count {

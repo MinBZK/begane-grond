@@ -214,7 +214,7 @@ const crumbs = [
   height: 16px;
   border-radius: 999px;
   overflow: hidden;
-  background: var(--semantics-surfaces-tinted-background-color, #eceef2);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .nf-dist-seg { height: 100%; transition: width 0.4s ease; }
 .nf-band-volledig { background: #1a8a4a; }

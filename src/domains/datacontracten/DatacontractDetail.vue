@@ -120,6 +120,6 @@ const cli = computed(() => (contract.value ? `bg datacontract show ${contract.va
 .rp-kv-row dt { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.6; }
 .rp-kv-row dd { margin: 0; font-weight: 600; }
 @media (max-width: 600px) { .rp-kv-row { grid-template-columns: 1fr; gap: 0.15rem; } }
-.rp-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; font-weight: 600; }
+.rp-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
 </style>

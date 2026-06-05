@@ -145,6 +145,6 @@ const cli = computed(() => (method.value ? `bg login show ${method.value.id}` : 
 .rp-cap { display: flex; align-items: center; gap: 0.4rem; margin: 0.4rem 0 0; font-size: 0.85rem; opacity: 0.78; }
 .rp-cap nldd-icon { width: 0.95rem; height: 0.95rem; flex: 0 0 auto; }
 .rp-empty { opacity: 0.6; margin: 0.5rem 0 0; }
-.rp-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; font-weight: 600; }
+.rp-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
 </style>

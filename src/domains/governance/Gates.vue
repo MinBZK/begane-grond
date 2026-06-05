@@ -81,9 +81,9 @@ function cellLabel(verdict) {
   return 'N.v.t.';
 }
 function barColor(pct) {
-  if (pct >= 90) return 'var(--rp-ok, #3a7d44)';
-  if (pct >= 60) return 'var(--rp-warn, #b8860b)';
-  return 'var(--rp-bad, #b3261e)';
+  if (pct >= 90) return 'var(--rp-ok)';
+  if (pct >= 60) return 'var(--rp-warn)';
+  return 'var(--rp-bad)';
 }
 </script>
 
@@ -297,7 +297,7 @@ function barColor(pct) {
   border-color: rgba(179, 38, 30, 0.28);
 }
 .rp-exempt {
-  color: var(--semantics-text-default-color, #444);
+  color: var(--semantics-text-default-color);
   background: var(--semantics-surfaces-tinted-background-color);
   border-color: var(--semantics-dividers-color);
   opacity: 0.7;

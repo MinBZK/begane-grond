@@ -407,16 +407,16 @@ const cableColumns = [
 }
 /* --- Elevation --- */
 .rp-elev-frame {
-  border: 3px solid var(--semantics-text-default-color, #2a2a2a);
+  border: 3px solid var(--semantics-text-default-color);
   border-radius: 10px;
   padding: 0;
-  background: var(--semantics-surfaces-default-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 .rp-elev-toplbl,
 .rp-elev-botlbl {
-  background: var(--semantics-text-default-color, #2a2a2a);
+  background: var(--semantics-text-default-color);
   color: #fff;
   font-size: 0.7rem;
   text-align: center;
@@ -430,7 +430,7 @@ const cableColumns = [
   gap: 2px;
   padding: 6px;
   background: repeating-linear-gradient(
-    var(--semantics-surfaces-tinted-background-color, #eef1f5) 0 22px,
+    var(--semantics-surfaces-tinted-background-color) 0 22px,
     transparent 22px 24px
   );
 }
@@ -456,10 +456,10 @@ const cableColumns = [
 }
 .rp-elev-empty {
   flex: 1;
-  border: 1px dashed var(--semantics-dividers-color, #cdd3da);
+  border: 1px dashed var(--semantics-dividers-color);
   border-radius: 4px;
   font-size: 0.6rem;
-  color: var(--semantics-text-default-color, #1a1a1a);
+  color: var(--semantics-text-default-color);
   opacity: 0.3;
   display: flex;
   align-items: center;
@@ -471,7 +471,7 @@ const cableColumns = [
   align-items: center;
   gap: 0.5rem;
   border-radius: 5px;
-  border: 1px solid var(--semantics-dividers-color, #cdd3da);
+  border: 1px solid var(--semantics-dividers-color);
   padding: 0 0.5rem;
 }
 .rp-elev-led {
@@ -548,12 +548,12 @@ const cableColumns = [
 .rp-power-bar {
   height: 8px;
   border-radius: 999px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .rp-power-bar-in {
   height: 100%;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
 }
 .rp-power-w {
   text-align: right;
@@ -566,7 +566,7 @@ const cableColumns = [
   gap: 0.6rem;
 }
 .rp-cool-tile {
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  border: 1px solid var(--semantics-dividers-color);
   border-radius: 8px;
   padding: 0.75rem;
   display: flex;

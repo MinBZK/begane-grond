@@ -409,7 +409,7 @@ function rotate(secretId) {
   font-weight: 700;
   font-size: 1.2rem;
   color: #fff;
-  background: var(--semantics-action-primary-background-color, #154273);
+  background: var(--semantics-action-primary-background-color);
   flex: 0 0 auto;
 }
 .rp-identity-meta {
@@ -484,7 +484,7 @@ function rotate(secretId) {
   gap: 0.25rem;
   font-size: 0.85rem;
   text-decoration: none;
-  color: var(--semantics-action-primary-background-color, #154273);
+  color: var(--semantics-action-primary-background-color);
   font-weight: 600;
 }
 .rp-cell-link {
@@ -511,10 +511,10 @@ function rotate(secretId) {
   border-left-width: 4px;
 }
 .rp-action.rp-tone-critical {
-  border-left-color: var(--semantics-feedback-error-color, #d52b1e);
+  border-left-color: var(--semantics-feedback-error-color);
 }
 .rp-action.rp-tone-warning {
-  border-left-color: var(--semantics-feedback-warning-color, #e17000);
+  border-left-color: var(--semantics-feedback-warning-color);
 }
 .rp-action-icon {
   width: 1.3rem;

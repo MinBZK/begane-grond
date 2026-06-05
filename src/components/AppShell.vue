@@ -252,7 +252,7 @@ onBeforeUnmount(() => {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--semantics-feedback-critical-color, #d52b1e);
+  background: var(--semantics-feedback-critical-color);
 }
 .rp-inbox-backdrop {
   position: fixed;
@@ -267,7 +267,7 @@ onBeforeUnmount(() => {
   width: min(30rem, 94vw);
   max-height: 78vh;
   overflow-y: auto;
-  background: var(--semantics-surfaces-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
   border: 1px solid var(--semantics-dividers-color);
   border-radius: 12px;
   box-shadow: 0 8px 28px rgb(0 0 0 / 0.18);
@@ -296,12 +296,12 @@ onBeforeUnmount(() => {
   cursor: pointer;
   font: inherit;
   font-size: 0.85rem;
-  color: var(--semantics-text-subtle-color, #5a6573);
+  color: var(--semantics-text-subtle-color);
   padding: 0.3rem 0.5rem;
   border-radius: 6px;
 }
 .rp-present-link:hover {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-present-link nldd-icon {

@@ -237,7 +237,7 @@ nldd-segmented-control button {
   cursor: pointer;
   padding: 0.4rem 0.85rem;
   border: 1px solid var(--semantics-dividers-color);
-  background: var(--semantics-surfaces-default-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
   color: inherit;
 }
 nldd-segmented-control button:first-child {

@@ -242,7 +242,7 @@ function toggleStandby(r) {
   opacity: 0.4;
 }
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }

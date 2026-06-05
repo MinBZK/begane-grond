@@ -476,7 +476,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-repo-row.rp-sel {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-repo-check {
@@ -491,8 +491,8 @@ onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
 }
 .rp-repo-row.rp-sel .rp-repo-check,
 .rp-repo-row.rp-static .rp-repo-check {
-  background: var(--nldd-color-success, #39870c);
-  border-color: var(--nldd-color-success, #39870c);
+  background: var(--semantics-feedback-success-icon-color);
+  border-color: var(--semantics-feedback-success-icon-color);
   color: white;
 }
 .rp-repo-check nldd-icon { width: 0.9rem; height: 0.9rem; }
@@ -507,8 +507,8 @@ onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
   font-weight: 600;
   text-transform: uppercase;
 }
-.rp-ci-green { color: var(--nldd-color-success, #39870c); }
-.rp-ci-red { color: var(--nldd-color-critical, #d52b1e); }
+.rp-ci-green { color: var(--semantics-feedback-success-icon-color); }
+.rp-ci-red { color: var(--semantics-feedback-critical-icon-color); }
 .rp-search-count {
   font-size: 0.88rem;
   opacity: 0.85;
@@ -532,7 +532,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
   border: 1.5px solid var(--semantics-dividers-color);
   font: inherit;
   resize: vertical;
-  background: var(--semantics-surfaces-default-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
   color: inherit;
 }
 .rp-textarea.rp-mono {

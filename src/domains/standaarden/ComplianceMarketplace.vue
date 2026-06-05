@@ -453,7 +453,7 @@ function scoreColor(score) {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f6);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-std-icon nldd-icon {
   width: 1.3rem;
@@ -491,7 +491,7 @@ function scoreColor(score) {
 .rp-score-bar {
   height: 8px;
   border-radius: 999px;
-  background: var(--semantics-dividers-color, #e2e5ea);
+  background: var(--semantics-dividers-color);
   overflow: hidden;
 }
 .rp-score-fill {

@@ -104,7 +104,7 @@ defineExpose({ next, prev, goTo, current, isLast });
   font-weight: 700;
 }
 .rp-current .rp-wizard-num {
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
   color: white;
 }
 </style>

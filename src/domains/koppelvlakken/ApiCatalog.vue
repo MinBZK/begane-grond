@@ -309,7 +309,7 @@ const selectedStandaarden = computed(() =>
   margin-top: 1rem;
 }
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }
@@ -380,12 +380,12 @@ const selectedStandaarden = computed(() =>
   opacity: 0.7;
 }
 .rp-pill-pass {
-  border-color: var(--semantics-feedback-success-icon-color, #2e7d32);
-  color: var(--semantics-feedback-success-icon-color, #2e7d32);
+  border-color: var(--semantics-feedback-success-icon-color);
+  color: var(--semantics-feedback-success-icon-color);
 }
 .rp-pill-fail {
-  border-color: var(--semantics-feedback-critical-icon-color, #b00020);
-  color: var(--semantics-feedback-critical-icon-color, #b00020);
+  border-color: var(--semantics-feedback-critical-icon-color);
+  color: var(--semantics-feedback-critical-icon-color);
 }
 .rp-pill-nvt {
   opacity: 0.55;

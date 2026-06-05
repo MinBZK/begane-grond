@@ -80,39 +80,39 @@ defineProps({
 /* NLDD-token line art: body in the brand blue, screen tinted, accents lint. */
 .rp-d-body {
   fill: none;
-  stroke: var(--primitives-color-donkerblauw-600, #154273);
+  stroke: var(--primitives-color-donkerblauw-600);
   stroke-width: 3;
   stroke-linejoin: round;
 }
 .rp-d-screen {
-  fill: var(--primitives-color-lintblauw-100, #cfe3f5);
-  stroke: var(--primitives-color-donkerblauw-600, #154273);
+  fill: var(--primitives-color-lintblauw-100);
+  stroke: var(--primitives-color-donkerblauw-600);
   stroke-width: 1.5;
 }
 .rp-d-notch {
-  fill: var(--primitives-color-donkerblauw-600, #154273);
+  fill: var(--primitives-color-donkerblauw-600);
 }
 .rp-d-line {
-  stroke: var(--primitives-color-donkerblauw-400, #4a7ba6);
+  stroke: var(--primitives-color-donkerblauw-400);
   stroke-width: 2;
   stroke-linecap: round;
 }
 .rp-d-accent {
   fill: none;
-  stroke: var(--primitives-color-lintblauw-500, #4f9bd9);
+  stroke: var(--primitives-color-lintblauw-500);
   stroke-width: 2;
 }
 .rp-d-accent-fill {
-  fill: var(--primitives-color-lintblauw-400, #7bb5e3);
+  fill: var(--primitives-color-lintblauw-400);
 }
 :global(.dark) .rp-d-body,
 :global(.dark) .rp-d-screen {
-  stroke: var(--primitives-color-lintblauw-300, #9ecbed);
+  stroke: var(--primitives-color-lintblauw-300);
 }
 :global(.dark) .rp-d-screen {
-  fill: var(--primitives-color-donkerblauw-700, #0f3050);
+  fill: var(--primitives-color-donkerblauw-700);
 }
 :global(.dark) .rp-d-notch {
-  fill: var(--primitives-color-lintblauw-300, #9ecbed);
+  fill: var(--primitives-color-lintblauw-300);
 }
 </style>

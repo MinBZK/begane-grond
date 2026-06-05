@@ -629,7 +629,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('llm'));
 .rp-model-icon {
   width: 2rem;
   height: 2rem;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   flex-shrink: 0;
 }
 .rp-model-spec {
@@ -739,7 +739,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('llm'));
 .rp-cost-fill {
   height: 100%;
   border-radius: 999px;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
 }
 /* Wizard reuse */
 .rp-wiz-head {
@@ -784,7 +784,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('llm'));
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-pick-on {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-pick-selected {
@@ -827,9 +827,9 @@ onBeforeUnmount(() => presentation.unregisterWizard('llm'));
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-choice.rp-sel {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
-  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color, #154273);
+  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color);
 }
 .rp-choice-title {
   font-weight: 700;

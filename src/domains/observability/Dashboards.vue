@@ -481,7 +481,7 @@ function relLinks(d) {
   flex: 1;
   height: 7px;
   border-radius: 4px;
-  background: var(--semantics-surfaces-tinted-background-color, #eee);
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
   border: 1px solid var(--semantics-dividers-color);
 }

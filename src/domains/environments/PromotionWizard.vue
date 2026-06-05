@@ -441,7 +441,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('promotie'));
 }
 .rp-hop-target {
   background: var(--semantics-surfaces-tinted-background-color);
-  box-shadow: inset 0 0 0 2px var(--semantics-actions-primary-default-background-color, #154273);
+  box-shadow: inset 0 0 0 2px var(--semantics-actions-primary-default-background-color);
 }
 .rp-hop-env {
   font-weight: 700;
@@ -476,7 +476,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('promotie'));
   border: 1px solid var(--semantics-dividers-color);
 }
 .rp-gate-fail {
-  border-color: var(--semantics-feedback-warning-border-color, #d98a00);
+  border-color: var(--semantics-feedback-warning-border-color);
   background: rgba(217, 138, 0, 0.06);
 }
 .rp-gate-icon {
@@ -571,13 +571,13 @@ onBeforeUnmount(() => presentation.unregisterWizard('promotie'));
   margin-top: 1rem;
   padding: 0.7rem 0.85rem;
   border-radius: 10px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
   text-decoration: none;
   color: inherit;
 }
 .rp-commit-seam:hover {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-commit-seam > nldd-icon { width: 1.05rem; height: 1.05rem; opacity: 0.75; flex: 0 0 auto; }
 .rp-commit-text { flex: 1 1 auto; font-size: 0.9rem; }

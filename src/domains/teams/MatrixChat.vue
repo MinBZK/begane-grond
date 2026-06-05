@@ -153,7 +153,7 @@ function send() {
   overflow-y: auto;
   padding: 0.75rem;
   border-radius: 10px;
-  background: var(--semantics-surfaces-tinted-background-color, #f3f5f8);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-chat-msg {
   display: flex;
@@ -173,13 +173,13 @@ function send() {
 .rp-chat-bubble {
   padding: 0.5rem 0.75rem;
   border-radius: 14px;
-  background: var(--semantics-surfaces-default-background-color, #fff);
-  border: 1px solid var(--semantics-dividers-color, #dfe3e8);
+  background: var(--semantics-surfaces-background-color);
+  border: 1px solid var(--semantics-dividers-color);
   font-size: 0.9rem;
   line-height: 1.35;
 }
 .rp-chat-mine .rp-chat-bubble {
-  background: var(--semantics-action-primary-background-color, #154273);
+  background: var(--semantics-action-primary-background-color);
   color: #fff;
   border-color: transparent;
 }

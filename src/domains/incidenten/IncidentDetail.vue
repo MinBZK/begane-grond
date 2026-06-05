@@ -278,7 +278,7 @@ function childPos(idx, len) {
   font-weight: 700;
   font-size: 0.85rem;
   color: #fff;
-  background: var(--semantics-surfaces-brand-background-color, #154273);
+  background: var(--semantics-surfaces-brand-background-color);
   flex-shrink: 0;
 }
 .rp-oncall-name {

@@ -723,10 +723,10 @@ const relationLinks = computed(() => {
   margin-top: 0.1rem;
 }
 .rp-check-icon.is-ok {
-  color: var(--semantics-status-success-color, #2e7d32);
+  color: var(--semantics-status-success-color);
 }
 .rp-check-icon.is-warn {
-  color: var(--semantics-status-warning-color, #b26a00);
+  color: var(--semantics-status-warning-color);
 }
 .rp-check-label {
   font-weight: 600;
@@ -744,7 +744,7 @@ const relationLinks = computed(() => {
   padding: 0.35rem 0;
 }
 .rp-kv .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
   font-family: 'JetBrains Mono', ui-monospace, monospace;

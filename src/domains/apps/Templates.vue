@@ -241,7 +241,7 @@ const usageByTemplate = computed(() => {
 .rp-tpl-tags { display: flex; gap: 0.35rem; flex-wrap: wrap; }
 .rp-tpl-batteries { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.3rem; }
 .rp-tpl-batteries li { display: flex; align-items: center; gap: 0.45rem; font-size: 0.9rem; }
-.rp-tpl-batteries nldd-icon { width: 1rem; height: 1rem; color: var(--semantics-feedback-success-icon-color, #2e7d32); }
+.rp-tpl-batteries nldd-icon { width: 1rem; height: 1rem; color: var(--semantics-feedback-success-icon-color); }
 .rp-tpl-foot { display: flex; gap: 1rem; flex-wrap: wrap; }
 .rp-tpl-meta { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; opacity: 0.75; }
 .rp-tpl-meta nldd-icon { width: 1rem; height: 1rem; }
@@ -249,10 +249,10 @@ const usageByTemplate = computed(() => {
 .rp-gov-link { text-decoration: none; color: inherit; display: block; }
 .rp-gov-link nldd-card { transition: box-shadow 0.15s ease; }
 .rp-gov-link:hover nldd-card {
-  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color, #154273) inset;
+  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color) inset;
   border-radius: 12px;
 }
-.rp-gov-icon { background: var(--semantics-actions-primary-default-background-color, #154273); }
+.rp-gov-icon { background: var(--semantics-actions-primary-default-background-color); }
 .rp-gov-icon nldd-icon { color: #fff; }
-.rp-gov-cta { font-weight: 600; color: var(--semantics-actions-primary-default-background-color, #154273); }
+.rp-gov-cta { font-weight: 600; color: var(--semantics-actions-primary-default-background-color); }
 </style>

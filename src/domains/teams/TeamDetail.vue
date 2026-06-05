@@ -272,7 +272,7 @@ const chatOpen = ref(false);
 }
 .rp-member-row:hover,
 .rp-inc-row:hover {
-  background: var(--semantics-surfaces-tinted-background-color, #f3f5f8);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-member-avatar {
   display: inline-flex;
@@ -338,7 +338,7 @@ const chatOpen = ref(false);
   gap: 0.3rem;
   padding: 0.3rem 0.6rem;
   border-radius: 999px;
-  border: 1px solid var(--semantics-dividers-color, #dfe3e8);
+  border: 1px solid var(--semantics-dividers-color);
   text-decoration: none;
   color: inherit;
   font-size: 0.82rem;

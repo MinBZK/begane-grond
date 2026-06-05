@@ -466,7 +466,7 @@ function bumpBudget(teamId, delta) {
   position: relative;
   height: 1.1rem;
   border-radius: 99px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.06));
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: visible;
 }
 .rp-budget-track--empty {
@@ -506,7 +506,7 @@ function bumpBudget(teamId, delta) {
   top: -3px;
   height: calc(100% + 6px);
   width: 2px;
-  background: var(--semantics-text-color, #1e293b);
+  background: var(--semantics-text-color);
   opacity: 0.55;
 }
 
@@ -563,7 +563,7 @@ function bumpBudget(teamId, delta) {
 .rp-portfolio-track {
   height: 0.9rem;
   border-radius: 99px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.06));
+  background: var(--semantics-surfaces-tinted-background-color);
   overflow: hidden;
 }
 .rp-portfolio-fill {
@@ -595,6 +595,6 @@ function bumpBudget(teamId, delta) {
   font-size: 0.78rem;
   padding: 0.05rem 0.3rem;
   border-radius: 5px;
-  background: var(--semantics-surfaces-tinted-background-color, rgba(0, 0, 0, 0.06));
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 </style>

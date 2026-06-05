@@ -192,7 +192,7 @@ const lastOrdered = ref('');
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-cat-on {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
   background: var(--semantics-surfaces-tinted-background-color);
   font-weight: 700;
 }

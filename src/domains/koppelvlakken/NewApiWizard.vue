@@ -556,12 +556,12 @@ onBeforeUnmount(() => presentation.unregisterWizard('api'));
 }
 .rp-tpl-choice:hover { background: var(--semantics-surfaces-tinted-background-color); }
 .rp-tpl-choice.rp-selected {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
-  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color, #154273) inset;
+  border-color: var(--semantics-actions-primary-default-background-color);
+  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color) inset;
 }
 .rp-tpl-choice-head { display: flex; align-items: center; gap: 0.5rem; }
 .rp-tpl-choice-head nldd-icon { width: 1.2rem; height: 1.2rem; }
-.rp-tick { margin-left: auto; color: var(--semantics-feedback-success-icon-color, #2e7d32); }
+.rp-tick { margin-left: auto; color: var(--semantics-feedback-success-icon-color); }
 .rp-tpl-choice-desc { font-size: 0.85rem; opacity: 0.75; }
 
 /* Design step: resources left, live spec right. */
@@ -591,15 +591,15 @@ onBeforeUnmount(() => presentation.unregisterWizard('api'));
 .rp-ep-toggle:hover { opacity: 0.85; }
 .rp-ep-toggle.rp-ep-on {
   opacity: 1;
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
-  color: var(--semantics-actions-primary-default-background-color, #154273);
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  border-color: var(--semantics-actions-primary-default-background-color);
+  color: var(--semantics-actions-primary-default-background-color);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-adr-list { display: flex; flex-direction: column; gap: 0.5rem; }
 .rp-adr-row { display: flex; align-items: flex-start; gap: 0.5rem; }
 .rp-adr-row nldd-icon { width: 1.1rem; height: 1.1rem; flex: 0 0 auto; margin-top: 0.1rem; }
-.rp-adr-ok { color: var(--semantics-feedback-success-icon-color, #2e7d32); }
-.rp-adr-bad { color: var(--semantics-feedback-critical-icon-color, #b00020); }
+.rp-adr-ok { color: var(--semantics-feedback-success-icon-color); }
+.rp-adr-bad { color: var(--semantics-feedback-critical-icon-color); }
 .rp-adr-text { display: flex; flex-direction: column; gap: 0.05rem; }
 .rp-adr-detail { font-size: 0.82rem; opacity: 0.7; }
 .rp-spec-yaml { display: block; max-height: 460px; overflow: auto; }
@@ -624,8 +624,8 @@ onBeforeUnmount(() => presentation.unregisterWizard('api'));
 }
 .rp-infra-choice:hover { background: var(--semantics-surfaces-tinted-background-color); }
 .rp-infra-choice.rp-selected {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
-  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color, #154273) inset;
+  border-color: var(--semantics-actions-primary-default-background-color);
+  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color) inset;
 }
 .rp-infra-choice > nldd-icon { width: 1.3rem; height: 1.3rem; }
 .rp-infra-text { display: flex; flex-direction: column; gap: 0.1rem; flex: 1 1 auto; }
@@ -649,9 +649,9 @@ onBeforeUnmount(() => presentation.unregisterWizard('api'));
 .rp-done-icon {
   display: inline-flex; align-items: center; justify-content: center;
   width: 3rem; height: 3rem; border-radius: 50%; flex: none;
-  background: var(--semantics-feedback-success-background-color, #e6f4ea);
+  background: var(--semantics-feedback-success-background-color);
 }
-.rp-done-icon nldd-icon { width: 1.7rem; height: 1.7rem; color: var(--semantics-feedback-success-icon-color, #2e7d32); }
+.rp-done-icon nldd-icon { width: 1.7rem; height: 1.7rem; color: var(--semantics-feedback-success-icon-color); }
 .rp-commit-seam {
   display: flex;
   align-items: center;
@@ -659,12 +659,12 @@ onBeforeUnmount(() => presentation.unregisterWizard('api'));
   margin-top: 1rem;
   padding: 0.7rem 0.85rem;
   border-radius: 10px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
   text-decoration: none;
   color: inherit;
 }
-.rp-commit-seam:hover { border-color: var(--semantics-actions-primary-default-background-color, #154273); }
+.rp-commit-seam:hover { border-color: var(--semantics-actions-primary-default-background-color); }
 .rp-commit-seam > nldd-icon { width: 1.05rem; height: 1.05rem; opacity: 0.75; flex: 0 0 auto; }
 .rp-commit-text { flex: 1 1 auto; font-size: 0.9rem; }
 .rp-commit-text code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 600; }

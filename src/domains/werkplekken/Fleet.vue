@@ -294,7 +294,7 @@ function goDetail(id) {
   font-weight: 700;
   font-size: 0.9rem;
   color: white;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
 }
 .rp-wp-id {
   flex: 1 1 auto;

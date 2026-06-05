@@ -151,6 +151,6 @@ const relations = computed(() => {
 .rp-toets-val { font-size: 0.84rem; opacity: 0.7; }
 .rp-pub { display: flex; align-items: center; gap: 0.4rem; margin: 0; font-size: 0.85rem; opacity: 0.75; }
 .rp-pub nldd-icon { width: 0.95rem; height: 0.95rem; }
-.rp-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; font-weight: 600; }
+.rp-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
 </style>

@@ -492,8 +492,8 @@ onBeforeUnmount(() => presentation.unregisterWizard('wet'));
 .rp-mode span { font-size: 0.85rem; opacity: 0.75; }
 .rp-mode.rp-selected,
 .rp-member.rp-selected {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
-  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color, #154273) inset;
+  border-color: var(--semantics-actions-primary-default-background-color);
+  box-shadow: 0 0 0 1px var(--semantics-actions-primary-default-background-color) inset;
 }
 
 .rp-member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.6rem; }
@@ -507,7 +507,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('wet'));
 .rp-member:hover { background: var(--semantics-surfaces-tinted-background-color); }
 .rp-member-text { display: flex; flex-direction: column; flex: 1 1 auto; }
 .rp-member-text span { font-size: 0.8rem; opacity: 0.7; }
-.rp-tick { width: 1.1rem; height: 1.1rem; color: var(--semantics-feedback-success-icon-color, #2e7d32); }
+.rp-tick { width: 1.1rem; height: 1.1rem; color: var(--semantics-feedback-success-icon-color); }
 .rp-avatar {
   display: inline-flex; align-items: center; justify-content: center;
   width: 2rem; height: 2rem; border-radius: 50%; flex: 0 0 auto;
@@ -517,7 +517,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('wet'));
 
 .rp-ai-hint {
   display: inline-flex; align-items: center; gap: 0.45rem;
-  text-decoration: none; color: var(--semantics-actions-primary-default-background-color, #154273);
+  text-decoration: none; color: var(--semantics-actions-primary-default-background-color);
   font-size: 0.88rem; font-weight: 600;
 }
 .rp-ai-hint:hover { text-decoration: underline; }
@@ -538,7 +538,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('wet'));
 
 .rp-validate { padding: 1rem; border: 1px solid var(--semantics-dividers-color); border-radius: 12px; }
 .rp-validate-head { display: flex; align-items: center; gap: 0.6rem; }
-.rp-validate-head > nldd-icon { width: 1.5rem; height: 1.5rem; color: var(--semantics-feedback-success-icon-color, #2e7d32); }
+.rp-validate-head > nldd-icon { width: 1.5rem; height: 1.5rem; color: var(--semantics-feedback-success-icon-color); }
 .rp-validate-head div { display: flex; align-items: center; gap: 0.5rem; }
 .rp-trace { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; }
 
@@ -546,9 +546,9 @@ onBeforeUnmount(() => presentation.unregisterWizard('wet'));
 .rp-done-icon {
   display: inline-flex; align-items: center; justify-content: center;
   width: 3rem; height: 3rem; border-radius: 50%; flex: none;
-  background: var(--semantics-feedback-success-background-color, #e6f4ea);
+  background: var(--semantics-feedback-success-background-color);
 }
-.rp-done-icon nldd-icon { width: 1.7rem; height: 1.7rem; color: var(--semantics-feedback-success-icon-color, #2e7d32); }
+.rp-done-icon nldd-icon { width: 1.7rem; height: 1.7rem; color: var(--semantics-feedback-success-icon-color); }
 .rp-done-fact { display: flex; flex-direction: column; gap: 0.35rem; align-items: flex-start; }
 .rp-done-fact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.6; }
 .rp-done-fact-value { font-weight: 600; }

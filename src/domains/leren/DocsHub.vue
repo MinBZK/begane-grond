@@ -120,7 +120,7 @@ const filtered = computed(() => {
   align-items: flex-start;
   gap: 0.85rem;
   padding: 0.85rem 0.5rem;
-  border-top: 1px solid var(--semantics-dividers-color, #e3e6ea);
+  border-top: 1px solid var(--semantics-dividers-color);
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.12s ease;
@@ -129,7 +129,7 @@ const filtered = computed(() => {
   border-top: none;
 }
 .rp-doc:hover {
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f8);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-doc-icon {
   flex-shrink: 0;
@@ -139,7 +139,7 @@ const filtered = computed(() => {
   width: 2.3rem;
   height: 2.3rem;
   border-radius: 10px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-doc-icon nldd-icon {
   width: 1.2rem;

@@ -230,13 +230,13 @@ function jobBadge(status) {
   gap: 0.75rem;
   padding: 0.7rem 0.85rem;
   border-radius: 10px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  border: 1px solid var(--semantics-dividers-color);
   text-decoration: none;
   color: inherit;
   box-sizing: border-box;
 }
 .rp-cap-link:hover {
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-cap-ic {
   display: inline-flex;
@@ -245,7 +245,7 @@ function jobBadge(status) {
   width: 2.1rem;
   height: 2.1rem;
   border-radius: 8px;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   flex: 0 0 auto;
 }
 .rp-cap-ic nldd-icon {
@@ -284,7 +284,7 @@ function jobBadge(status) {
   gap: 0.4rem;
   padding: 0.8rem 0.9rem;
   border-radius: 10px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
+  border: 1px solid var(--semantics-dividers-color);
   min-width: 150px;
   flex: 1 1 150px;
 }
@@ -311,11 +311,11 @@ function jobBadge(status) {
   align-self: center;
   width: 18px;
   height: 2px;
-  background: var(--semantics-dividers-color, #d6dbe1);
+  background: var(--semantics-dividers-color);
   flex: 0 0 auto;
 }
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }

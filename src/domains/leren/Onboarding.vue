@@ -197,7 +197,7 @@ const meLinks = computed(() => {
   width: 3.25rem;
   height: 3.25rem;
   border-radius: 50%;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
   color: #fff;
   font-weight: 700;
   font-size: 1.1rem;
@@ -229,7 +229,7 @@ const meLinks = computed(() => {
   }
 }
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   font-weight: 600;
 }
 </style>

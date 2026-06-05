@@ -55,9 +55,9 @@ const dims = computed(() => {
   ];
 });
 function dimColor(v) {
-  if (v >= 90) return 'var(--rp-ok, #2e8540)';
-  if (v >= 70) return 'var(--rp-warn, #d98a1f)';
-  return 'var(--rp-crit, #d52b1e)';
+  if (v >= 90) return 'var(--rp-ok)';
+  if (v >= 70) return 'var(--rp-warn)';
+  return 'var(--rp-crit)';
 }
 
 // Consumers table.
@@ -245,7 +245,7 @@ const cli = computed(() =>
 .rp-lineage { display: flex; align-items: stretch; flex-wrap: wrap; gap: 0; }
 .rp-lin-node { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.7rem 0.9rem; border-radius: 10px; border: 1px solid var(--semantics-dividers-color); min-width: 140px; text-decoration: none; color: inherit; }
 .rp-lin-node:hover { background: var(--semantics-surfaces-tinted-background-color); }
-.rp-lin-self { background: var(--semantics-surfaces-tinted-background-color); box-shadow: inset 0 0 0 2px var(--semantics-actions-primary-default-background-color, #154273); }
+.rp-lin-self { background: var(--semantics-surfaces-tinted-background-color); box-shadow: inset 0 0 0 2px var(--semantics-actions-primary-default-background-color); }
 .rp-lin-kind { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.55; }
 .rp-lin-name { font-weight: 700; font-size: 0.9rem; }
 .rp-lin-arrow { align-self: center; display: flex; align-items: center; padding: 0 0.2rem; }
@@ -261,6 +261,6 @@ const cli = computed(() =>
 .rp-rh-failing { background: #d52b1e; }
 .rp-rh-date { min-width: 6.5rem; font-size: 0.88rem; }
 .rp-rh-label { font-size: 0.85rem; opacity: 0.7; text-transform: capitalize; }
-.rp-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; font-weight: 600; }
+.rp-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
 </style>

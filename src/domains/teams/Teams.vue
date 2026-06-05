@@ -300,7 +300,7 @@ function resetLimit() {
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 50%;
-  background: var(--semantics-feedback-success-color, #1a7f37);
+  background: var(--semantics-feedback-success-color);
   box-shadow: 0 0 0 3px rgba(26, 127, 55, 0.18);
 }
 .rp-team-mini-avatar {
@@ -310,7 +310,7 @@ function resetLimit() {
   width: 1.7rem;
   height: 1.7rem;
   border-radius: 50%;
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   font-size: 0.7rem;
   font-weight: 700;
 }

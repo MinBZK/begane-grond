@@ -115,7 +115,7 @@ const metrics = computed(() => {
   const i = instance.value;
   const s = (i?.name?.length || 5) % 9;
   return [
-    { label: 'CPU', unit: '%', color: 'var(--nldd-color-brand, #154273)', data: series(s, 24, 42, 28), last: (d) => `${d[d.length - 1]}%` },
+    { label: 'CPU', unit: '%', color: 'var(--semantics-actions-primary-default-background-color)', data: series(s, 24, 42, 28), last: (d) => `${d[d.length - 1]}%` },
     { label: 'Geheugen', unit: '%', color: '#39870c', data: series(s + 2, 24, 55, 18), last: (d) => `${d[d.length - 1]}%` },
     { label: 'Latency p99', unit: 'ms', color: '#b85c00', data: series(s + 5, 24, 30, 40), last: (d) => `${d[d.length - 1]} ms` },
   ];
@@ -372,13 +372,13 @@ const relationLinks = computed(() => {
   gap: 0.75rem;
   padding: 0.8rem 1rem;
   border-radius: 12px;
-  border: 1px solid var(--semantics-dividers-color, #d6dbe1);
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  border: 1px solid var(--semantics-dividers-color);
+  background: var(--semantics-surfaces-tinted-background-color);
   text-decoration: none;
   color: inherit;
 }
 .rp-haven:hover {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-haven-icon {
   display: inline-flex;
@@ -393,7 +393,7 @@ const relationLinks = computed(() => {
   flex: 0 0 auto;
 }
 .rp-haven-off .rp-haven-icon {
-  background: var(--semantics-surfaces-default-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
   color: inherit;
   opacity: 0.6;
 }

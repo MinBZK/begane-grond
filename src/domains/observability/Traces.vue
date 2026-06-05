@@ -256,7 +256,7 @@ const critical = computed(() => trace.value.spans.reduce((m, s) => Math.max(m, s
 .rp-trace-tab {
   flex: 1 1 240px;
   text-align: left;
-  background: var(--semantics-surfaces-default-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
   border: 1px solid var(--semantics-dividers-color);
   border-radius: 10px;
   padding: 0.7rem 0.9rem;
@@ -266,8 +266,8 @@ const critical = computed(() => trace.value.spans.reduce((m, s) => Math.max(m, s
   gap: 0.4rem;
 }
 .rp-trace-tab.rp-active {
-  border-color: var(--semantics-focus-color, #1a73e8);
-  box-shadow: 0 0 0 1px var(--semantics-focus-color, #1a73e8);
+  border-color: var(--semantics-focus-color);
+  box-shadow: 0 0 0 1px var(--semantics-focus-color);
 }
 .rp-trace-tab-title {
   font-weight: 600;
@@ -349,7 +349,7 @@ const critical = computed(() => trace.value.spans.reduce((m, s) => Math.max(m, s
 }
 .rp-span-row.rp-selected {
   background: var(--semantics-surfaces-tinted-background-color);
-  box-shadow: inset 3px 0 0 var(--semantics-focus-color, #1a73e8);
+  box-shadow: inset 3px 0 0 var(--semantics-focus-color);
 }
 .rp-span-label {
   width: 38%;

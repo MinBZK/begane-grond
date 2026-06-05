@@ -595,7 +595,7 @@ const openapiUrl = `${BASE}/openapi.json`;
   align-items: center;
   gap: 0.35rem;
   text-decoration: none;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   font-size: 0.85rem;
   font-weight: 600;
 }

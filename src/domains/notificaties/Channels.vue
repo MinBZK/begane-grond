@@ -668,7 +668,7 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
   background: var(--semantics-surfaces-tinted-background-color);
 }
 .rp-source-tag:hover {
-  border-color: var(--semantics-actions-primary-default-background-color, #154273);
+  border-color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-source-tag nldd-icon {
   width: 0.85rem;
@@ -699,7 +699,7 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
   display: block;
   font-weight: 600;
   margin-top: 0.1rem;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
 }
 .rp-source-name:hover {
@@ -748,7 +748,7 @@ const sourceCount = computed(() => Object.keys(store.eventSourceMeta).length);
 
 /* --- Shared bits --- */
 .rp-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }

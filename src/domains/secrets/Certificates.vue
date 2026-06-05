@@ -318,7 +318,7 @@ function toggleAuto(id) {
 .rp-cert-actions { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
 .rp-toggle { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; cursor: pointer; }
 .rp-form-hint { margin: 0; font-size: 0.85rem; opacity: 0.65; }
-.rp-link { color: var(--semantics-actions-primary-default-background-color, #154273); text-decoration: none; font-weight: 600; }
+.rp-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
 .rp-mono { font-family: ui-monospace, monospace; }
 .rp-pipeline { display: flex; align-items: center; flex-wrap: wrap; }

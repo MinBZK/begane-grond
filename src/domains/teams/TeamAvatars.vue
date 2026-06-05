@@ -47,14 +47,14 @@ const overflow = computed(() => Math.max(0, props.people.length - props.max));
   border-radius: 50%;
   font-size: calc(var(--rp-av-size) * 0.36);
   font-weight: 700;
-  border: 2px solid var(--semantics-surfaces-default-background-color, #fff);
+  border: 2px solid var(--semantics-surfaces-background-color);
   margin-left: calc(var(--rp-av-size) * -0.28);
 }
 .rp-avatar:first-child {
   margin-left: 0;
 }
 .rp-avatar-more {
-  background: var(--semantics-surfaces-tinted-background-color, #eef1f5);
+  background: var(--semantics-surfaces-tinted-background-color);
   color: inherit;
   opacity: 0.85;
 }

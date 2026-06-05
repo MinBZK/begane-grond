@@ -466,7 +466,7 @@ code {
 .rp-asst-icon {
   width: 1.8rem;
   height: 1.8rem;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
 }
 .rp-asst-tagline {
   font-weight: 600;
@@ -534,11 +534,11 @@ code {
   opacity: 0.75;
 }
 .rp-add {
-  color: var(--nldd-color-success, #39870c);
+  color: var(--semantics-feedback-success-icon-color);
   font-weight: 700;
 }
 .rp-del {
-  color: var(--nldd-color-critical, #d52b1e);
+  color: var(--semantics-feedback-critical-icon-color);
   font-weight: 700;
 }
 .rp-review {
@@ -603,7 +603,7 @@ code {
 .rp-run-icon {
   width: 1.2rem;
   height: 1.2rem;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   flex-shrink: 0;
 }
 .rp-run-task {
@@ -623,14 +623,14 @@ code {
 .rp-run-fill {
   height: 100%;
   border-radius: 999px;
-  background: var(--semantics-actions-primary-default-background-color, #154273);
+  background: var(--semantics-actions-primary-default-background-color);
   transition: width 0.4s ease;
 }
 .rp-run-fill.rp-run-done {
-  background: var(--nldd-color-success, #39870c);
+  background: var(--semantics-feedback-success-icon-color);
 }
 .rp-run-fill.rp-run-stopped {
-  background: var(--nldd-color-critical, #d52b1e);
+  background: var(--semantics-feedback-critical-icon-color);
 }
 .rp-run-actions {
   flex-shrink: 0;

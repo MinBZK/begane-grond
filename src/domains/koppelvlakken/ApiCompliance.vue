@@ -184,16 +184,16 @@ const VERDICT_TAG = {
 }
 .rp-matrix thead th {
   position: sticky; top: 0;
-  background: var(--semantics-surfaces-tinted-background-color, #f4f6f9);
+  background: var(--semantics-surfaces-tinted-background-color);
   font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.03em; opacity: 0.75;
 }
 .rp-sticky-col {
   position: sticky; left: 0;
-  background: var(--semantics-surfaces-default-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
   text-align: left !important;
   z-index: 1;
 }
-.rp-matrix thead .rp-sticky-col { background: var(--semantics-surfaces-tinted-background-color, #f4f6f9); z-index: 2; }
+.rp-matrix thead .rp-sticky-col { background: var(--semantics-surfaces-tinted-background-color); z-index: 2; }
 .rp-api-cell { display: flex; flex-direction: column; gap: 0.1rem; }
 .rp-api-meta { font-size: 0.78rem; opacity: 0.65; }
 .rp-cell { vertical-align: middle; }

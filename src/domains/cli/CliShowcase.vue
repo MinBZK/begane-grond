@@ -632,7 +632,7 @@ function copy(text) {
   align-items: center;
   gap: 0.4rem;
   text-decoration: none;
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   font-size: 0.9rem;
   font-weight: 600;
 }

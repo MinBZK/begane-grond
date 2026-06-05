@@ -136,7 +136,7 @@ const chart = computed(() => {
           <svg :viewBox="`0 0 ${chart.W} ${chart.H}`" class="rp-chart-svg" role="img" aria-label="Capaciteitsprojectie over 24 maanden">
             <!-- horizontal gridlines + y labels -->
             <g v-for="t in chart.yTicks" :key="'y' + t.v">
-              <line x1="56" :x2="chart.W - 20" :y1="t.y" :y2="t.y" stroke="var(--semantics-dividers-color, #e2e6ea)" stroke-width="1" />
+              <line x1="56" :x2="chart.W - 20" :y1="t.y" :y2="t.y" stroke="var(--semantics-dividers-color)" stroke-width="1" />
               <text x="48" :y="t.y + 4" text-anchor="end" class="rp-chart-axis">{{ t.v }}</text>
             </g>
             <!-- x labels -->
@@ -224,18 +224,18 @@ const chart = computed(() => {
 }
 .rp-chart-axis {
   font-size: 11px;
-  fill: var(--semantics-text-default-color, #1a1a1a);
+  fill: var(--semantics-text-default-color);
   opacity: 0.55;
   font-variant-numeric: tabular-nums;
 }
 .rp-chart-marker {
   font-size: 11px;
   font-weight: 600;
-  fill: var(--semantics-text-default-color, #1a1a1a);
+  fill: var(--semantics-text-default-color);
   opacity: 0.75;
 }
 .rp-dc-cell-link {
-  color: var(--semantics-actions-primary-default-background-color, #154273);
+  color: var(--semantics-actions-primary-default-background-color);
   text-decoration: none;
   font-weight: 600;
 }

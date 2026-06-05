@@ -456,7 +456,7 @@ function appForSecret(sec) {
   height: 0.9rem;
 }
 .rp-fresh {
-  color: var(--semantics-feedback-success-color, #1a7f37);
+  color: var(--semantics-feedback-success-color);
   font-weight: 600;
   opacity: 1;
 }
@@ -476,7 +476,7 @@ function appForSecret(sec) {
   border-radius: 999px;
   text-decoration: none;
   color: inherit;
-  background: var(--semantics-surfaces-default-background-color, #fff);
+  background: var(--semantics-surfaces-background-color);
 }
 .rp-app-chip nldd-icon {
   width: 0.85rem;
