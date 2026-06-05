@@ -1,0 +1,121 @@
+name: Deploy
+
+on:
+  pull_request:
+    # opened/synchronize/reopened -> build + preview deploy
+    # closed -> tear down the preview environment and its image
+    types: [opened, synchronize, reopened, closed]
+  push:
+    # merge to main -> build :latest + deploy the production deployment
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }} # ghcr.io/anneschuth/begane-grond
+
+jobs:
+  build:
+    # Skip the build when a PR is merely closed (nothing to build then).
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # push the image to GHCR with the built-in GITHUB_TOKEN
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }} # shared by the deploy jobs
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Determine image tag
+        id: tag
+        # PRs get a per-PR tag so previews never overwrite each other;
+        # a push to main publishes :latest for the production deployment.
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "tag=pr-${{ github.event.number }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=latest" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }}
+
+  deploy-preview:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write # post the preview URL as a PR comment
+    environment:
+      name: pr-${{ github.event.pull_request.number }}
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - name: Deploy to ZAD
+        id: deploy
+        uses: RijksICTGilde/zad-actions/deploy@v4
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: bg-4s2
+          deployment-name: pr-${{ github.event.pull_request.number }}
+          component: frontend
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.tag }}
+          comment-on-pr: 'true' # drops a clickable preview link in the PR
+          wait-for-ready: 'true' # block until the deployment answers on /
+          health-endpoint: '/'
+
+  deploy-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - name: Deploy to ZAD
+        id: deploy
+        uses: RijksICTGilde/zad-actions/deploy@v4
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: bg-4s2
+          deployment-name: production
+          component: frontend
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.tag }}
+          wait-for-ready: 'true'
+          health-endpoint: '/'
+
+  cleanup-preview:
+    # When the PR closes (merged or not), remove the ZAD deployment, the
+    # GitHub deployment records, and the per-PR image tag. The (empty)
+    # GitHub environment is left in place so no admin PAT is needed.
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: write # delete the GitHub deployment records
+      packages: write # delete the per-PR container tag from GHCR
+      pull-requests: write # remove the preview comment
+    steps:
+      - name: Cleanup
+        uses: RijksICTGilde/zad-actions/cleanup@v4
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: bg-4s2
+          deployment-name: pr-${{ github.event.pull_request.number }}
+          delete-github-deployments: 'true'
+          delete-container: 'true'
+          container-org: ${{ github.repository_owner }}
+          container-name: ${{ github.event.repository.name }}
+          container-tag: pr-${{ github.event.number }}
