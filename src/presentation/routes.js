@@ -1,25 +1,24 @@
 // Routes: "wie ben je vandaag". A route is a role on one example team
 // (team-toeslagen). Choosing a route makes you that person (store.setPersona)
-// and plays a slide-path tailored to that role — different screens, order,
+// and plays a slide-path tailored to that role: different screens, order,
 // driven wizard and examples, but transparently the same platform.
 //
 // A route reuses the exact slide shape from slides.js/tours.js, so the
 // presentation engine (usePresentation.js) stays unchanged: it only reads
 // `.slides`. A route adds two fields the launcher uses: `role` and `persona`.
 //
-// Slide shape (see slides.js header): { id, title, lead?, bullets?, route?,
-// drive?:{wizard}, emit?:{type,title,severity?}, highlight?, full?, skippable? }
+// Slide shape: { id, title, lead?, bullets?, route?, drive?:{wizard},
+// emit?:{type,title,severity?}, highlight?, full?, skippable? }. All route paths
+// and drive.wizard names exist in nav.js / wizard-scripts.js. The per-role
+// language lives in the slide text. These decks are written to be deep and
+// self-contained: each tells one flowing story, with the pitch argument woven in,
+// so a single persona deck stands on its own as a complete presentation.
 //
-// All route paths and drive.wizard names below already exist (nav.js /
-// wizard-scripts.js) and are reused verbatim. The per-role language lives in the
-// slide lead/bullets. Identifiers/comments English; UI text Dutch.
+// Identifiers/comments English; UI text Dutch.
 
 export const EXAMPLE_TEAM = 'team-toeslagen';
 
 export const routes = [
-  // --- Engineer (Sanne Visser, Backend developer) -------------------------
-  // From an empty screen to a running toeslagen-service: scaffold, take infra,
-  // pipeline green, observe. Drives the app wizard.
   {
     id: 'engineer',
     role: 'Backend developer',
@@ -30,53 +29,171 @@ export const routes = [
       {
         id: 'eng-intro',
         title: 'Een dag als engineer bij Toeslagen',
-        lead: 'Je bent Sanne, backend developer. Van een leeg scherm naar een draaiende dienst — zonder tickets, zonder wachten.',
+        lead: 'Je bent Sanne, backend developer. Vandaag ga je van een leeg scherm naar een draaiende dienst, zonder ticket en zonder wachten op een ander team.',
         bullets: [
-          'Het platform geeft je een gebaand pad: een werkende service met CI, observability en standaarden ingebakken.',
-          'Alles wat je nodig hebt neem je zelf af.',
+          'De toeslagenberekening kun je niet kopen. Belasting en toeslagen zijn software op schaal, dus die bouw je zelf.',
+          'Het verschil zit in waar je begint: niet bij nul, maar op een gebaand pad waar CI, observability en standaarden al in zitten.',
+          'Alles wat je nodig hebt neem je zelf af, en elke klik is een commit.',
         ],
         route: '/zelf',
         full: true,
       },
       {
-        id: 'eng-nieuwe-app',
-        title: 'Genereer een dienst uit een gebaand pad',
-        lead: 'Geen lege repo, maar een service die meteen voldoet aan de standaarden.',
+        id: 'eng-paved-path',
+        title: 'Het gebaande pad',
+        lead: 'Dat pad begint niet bij een leeg vel, maar bij een werkende dienst die meteen voldoet.',
         bullets: [
-          'Kies een template, benoem de dienst, en het platform scaffolt repo, CI en infra.',
-          'De standaarden volgen uit het pad — je hoeft ze niet zelf op te zoeken.',
+          'Je kiest het pad dat bij je dienst past: een API, een batchverwerker, een worker.',
+          'Compliance, logging en SBOM zitten erin gebakken, niet als huiswerk voor later.',
+          'Het pad is gebaand, maar je mag eraf als je weet wat je doet.',
+        ],
+        route: '/apps/templates',
+        skippable: true,
+      },
+      {
+        id: 'eng-nieuwe-app',
+        title: 'Je genereert je dienst',
+        lead: 'En dus begin je niet met scaffolden, maar met kiezen. Een template, een naam, en het platform zet de rest.',
+        bullets: [
+          'Je benoemt de dienst, en repo, CI en infra worden voor je gescaffold.',
+          'De standaarden volgen uit het pad. Je hoeft ze niet op te zoeken, ze staan er al.',
+          'Binnen een paar minuten staat er iets dat bouwt, test en deployt.',
         ],
         route: '/apps/nieuw',
         drive: { wizard: 'app' },
+        emit: { type: 'app.created', title: 'Dienst app-toeslagen aangemaakt' },
+      },
+      {
+        id: 'eng-code',
+        title: 'En daar staat je repo',
+        lead: 'Wat de wizard maakte, staat klaar in de codeforge, met de gebaande structuur al gezet.',
+        bullets: [
+          'Branch, pull request, review: het normale werk, maar met de gates al geconfigureerd.',
+          'Elke wijziging is een commit, en elke commit is herleidbaar tot wie en waarom.',
+        ],
+        route: '/code',
+      },
+      {
+        id: 'eng-cli',
+        title: 'Liever vanuit je terminal',
+        lead: 'En precies hetzelfde doe je vanaf de command line.',
+        bullets: [
+          'Scaffolden, infra afnemen, deployen: alles via de CLI, scriptbaar en herhaalbaar.',
+          'Geen klikwerk dat je later niet kunt reproduceren.',
+        ],
+        route: '/cli',
+        skippable: true,
       },
       {
         id: 'eng-infra',
-        title: 'Neem infra af, self-service',
-        lead: 'Postgres, Kafka, een Kubernetes-cluster — uit de catalogus, in minuten.',
+        title: 'Nu wil je infra erbij',
+        lead: 'Je dienst staat, maar zonder database doet hij niets. Dus neem je die zelf af, uit de catalogus.',
         bullets: [
-          'Je team-context staat al ingevuld; je kiest de omgeving en de maat.',
-          'Geen aanvraagformulier, geen weken wachten.',
+          'Je team-context staat al ingevuld, jij kiest alleen de omgeving en de maat.',
+          'Geen aanvraagformulier, geen weken wachten op een ander team.',
         ],
         route: '/infra',
       },
       {
+        id: 'eng-postgres',
+        title: 'Een Postgres in een paar keuzes',
+        lead: 'Een database bestellen is geen project, het zijn een paar klikken.',
+        bullets: [
+          'Back-ups, encryptie en monitoring komen standaard mee.',
+          'De infra wordt vastgelegd als code: de aanvraag en de levering zijn hetzelfde commit.',
+        ],
+        route: '/infra/order/postgres',
+      },
+      {
         id: 'eng-pijplijn',
         title: 'De pijplijn draait groen',
-        lead: 'Bouwen, testen, scannen — op gedeelde runners, met de gates die compliance bewaken.',
+        lead: 'Je code en je infra komen samen in de pijplijn, die bouwt, test en scant.',
+        bullets: [
+          'De gates zijn beleid als code: een release komt er pas door als alles klopt.',
+          'Je hoeft de regels niet te kennen, het pad dwingt ze voor je af.',
+        ],
         route: '/environments/pijplijn',
+        emit: { type: 'pipeline.passed', title: 'Pijplijn app-toeslagen geslaagd' },
+      },
+      {
+        id: 'eng-runners',
+        title: 'Op gedeelde runners',
+        lead: 'Die pijplijn draait niet op jouw machine, maar op gedeelde runners van het platform.',
+        bullets: [
+          'Geen eigen buildmachines om te onderhouden, je deelt de capaciteit.',
+          'Het schaalt mee met het team, je betaalt voor wat je gebruikt.',
+        ],
+        route: '/environments/runners',
         skippable: true,
       },
       {
+        id: 'eng-artefacten',
+        title: 'Wat eruit komt, kun je vertrouwen',
+        lead: 'Elke groene build levert een artefact, en dat artefact draagt een SBOM en een handtekening.',
+        bullets: [
+          'De SBOM zegt precies welke libraries erin zitten, herleidbaar tot de bron.',
+          'De handtekening bewijst dat het uit jouw pijplijn komt, en niet ergens anders vandaan.',
+        ],
+        route: '/artefacten',
+      },
+      {
+        id: 'eng-promotie',
+        title: 'Van test naar productie',
+        lead: 'Datzelfde artefact schuif je door de omgevingen, met goedkeuring waar dat moet.',
+        bullets: [
+          'Niets wordt opnieuw gebouwd: wat je testte is exact wat naar productie gaat.',
+          'Wie wat goedkeurde staat vast, dus de release is van begin tot eind herleidbaar.',
+        ],
+        route: '/environments/promotie/app-toeslagen',
+      },
+      {
         id: 'eng-observability',
-        title: 'Zie wat er draait',
-        lead: 'Metrics, logs, traces en SLO-alerts. En als het misgaat is er een incident met een piket eronder.',
+        title: 'En dan draait hij echt',
+        lead: 'Vanaf de eerste deploy zie je wat je dienst doet: metrics, logs, traces en SLO-alerts.',
+        bullets: [
+          'De dienst is meteen waarneembaar, want ook observability komt uit het pad.',
+          'Dreigt een SLO te breken, dan weet jij het voordat je gebruikers het merken.',
+        ],
         route: '/observability',
         emit: { type: 'alert.firing', title: 'SLO-alert: latency app-toeslagen', severity: 'warning' },
       },
+      {
+        id: 'eng-traces',
+        title: 'Een alert, en de oorzaak eronder',
+        lead: 'En precies zo gaat het: een alert komt binnen, en je volgt hem naar de trace die laat zien waar de tijd weglekt.',
+        bullets: [
+          'Je springt van metric naar log naar trace zonder van tool te wisselen.',
+          'Loopt het echt uit de hand, dan hangt er een incident met een piket onder.',
+        ],
+        route: '/observability/traces',
+        skippable: true,
+      },
+      {
+        id: 'eng-llm',
+        title: 'AI als gereedschap, soeverein afgenomen',
+        lead: 'Hetzelfde patroon geldt voor AI: een LLM neem je af uit de eigen catalogus, binnen de muren van de overheid.',
+        bullets: [
+          'AI maakt een klein team productief: code wordt goedkoop, en een wizard schrijft een dienst.',
+          'Maar goedkope code zonder platform is techniek-schuld, en juist dat vangt het platform op.',
+          'De data blijft binnen en het model draait op soevereine infra.',
+        ],
+        route: '/ai/llm',
+        emit: { type: 'ai.key.created', title: 'LLM-sleutel team-toeslagen aangemaakt' },
+      },
+      {
+        id: 'eng-waarom',
+        title: 'Daarom bouwt de overheid zelf',
+        lead: 'Je hebt vandaag een dienst gebouwd en gedraaid zonder één ticket. Dat is geen toeval, dat is de inzet.',
+        bullets: [
+          'De overheid is het grootste softwarebedrijf van Nederland, en inkopen loopt vast: twee op de drie grote IT-projecten lopen vertraging op, en een bestek dicht de wereld nooit op tijd af.',
+          'Een platform is daarom geen project dat af is, maar een product dat blijft, met mandaat en structurele financiering.',
+          'En als het werk goed voelt, blijven de goede mensen. We zijn een techbedrijf, dus laten we ons ook zo organiseren.',
+        ],
+        route: '/zelf',
+        full: true,
+      },
     ],
   },
-
-  // --- Tech lead (Noor Bakker) --------------------------------------------
   {
     id: 'tech-lead',
     role: 'Tech lead',
@@ -86,23 +203,155 @@ export const routes = [
     slides: [
       {
         id: 'tl-intro',
-        title: 'Een dag als tech lead bij Toeslagen',
-        lead: 'Je bent Noor. Je bewaakt de kwaliteit van de dienst en beslist wat naar productie gaat.',
-        route: '/zelf',
+        title: 'Noor, tech lead op Toeslagen',
+        lead: 'Jij bent de laatste hand voordat iets de productie raakt.',
+        bullets: [
+          'Je bewaakt de kwaliteit over het hele team',
+          'Jij drukt op de knop die test naar productie promoot',
+          'Maar niet jouw handtekening houdt fouten tegen, dat doen de gates',
+        ],
         full: true,
       },
-      { id: 'tl-compliance', title: 'Voldoet de dienst?', lead: 'De compliance-scorecard toont per standaard de status.', route: '/koppelvlakken/compliance' },
+      {
+        id: 'tl-zelf',
+        title: 'En dus begin je hier: je werkdag op één scherm',
+        lead: 'Wat speelt er, wat wacht op jou, waar staat het team.',
+        bullets: [
+          'Open changes, gefaalde pijplijnen, releases die klaarstaan',
+          'Geen jacht door tien tools, alles bij elkaar',
+          'En elke handeling herleidbaar tot een commit',
+        ],
+        route: '/zelf',
+        skippable: true,
+      },
+      {
+        id: 'tl-compliance',
+        title: 'De eerste vraag: voldoet de dienst eigenlijk?',
+        lead: 'De scorecard meet het per standaard, het is geen belofte maar een stand van zaken.',
+        bullets: [
+          'Per standaard één kleur: groen, geel of rood',
+          'Je ziet meteen welke koppelvlakken de norm halen en welke niet',
+          'Voldoen is hier iets dat je meet, geen vinkje op een formulier',
+        ],
+        route: '/koppelvlakken/compliance',
+      },
+      {
+        id: 'tl-koppelvlakken',
+        title: 'Het scheelt dat het pad al gebaand is',
+        lead: 'Wie hier een koppelvlak bouwt, doet het compliant-by-default.',
+        bullets: [
+          'API Design Rules en beveiliging zitten al in het gereedschap',
+          'Niet achteraf toetsen, maar vooraf het goede pad bieden',
+          'Daarom staat die scorecard vaker op groen dan je zou verwachten',
+        ],
+        route: '/koppelvlakken',
+      },
+      {
+        id: 'tl-gates',
+        title: 'En waar het pad niet volstaat, staat een poort',
+        lead: 'Open-source-tenzij, EUPL, WCAG, BIO: geen mening, maar een gate in de pijplijn.',
+        bullets: [
+          'Een release komt er pas door als elke gate klopt',
+          'Geen mail naar een afdeling die het moet beoordelen, de gate beslist',
+          'Zo verschuift compliance van papier naar code',
+        ],
+        route: '/governance/gates',
+      },
+      {
+        id: 'tl-governance',
+        title: 'Geen black box: je ziet waar elke regel vandaan komt',
+        lead: 'De gates zijn herleidbaar, elke poort wijst terug naar zijn bron.',
+        bullets: [
+          'Elke gate verwijst naar de standaard of de wet erachter',
+          'Transparant wat er getoetst wordt en waarom',
+          'Dus geen verrassing die je pas vlak voor een release ziet',
+        ],
+        route: '/governance',
+      },
+      {
+        id: 'tl-rfcs',
+        title: 'En verandert er een regel, dan draagt het team dat',
+        lead: 'Grote keuzes lopen via een RFC, niet via de gang.',
+        bullets: [
+          'Voorstel, discussie en besluit, allemaal vastgelegd',
+          'Het team beslist mee en het besluit blijft herleidbaar',
+          'Geen kennis die alleen in één hoofd zit',
+        ],
+        route: '/governance/rfcs',
+        skippable: true,
+      },
+      {
+        id: 'tl-pijplijn',
+        title: 'Alles komt samen in de pijplijn',
+        lead: 'Test, build en al die gates draaien automatisch bij elke commit.',
+        bullets: [
+          'Rood betekent staan, groen betekent door',
+          'Geen handmatige checklist, de pijplijn bewaakt het voor je',
+          'Wat hier groen wordt, is klaar voor jouw beslissing',
+        ],
+        route: '/environments/pijplijn',
+      },
       {
         id: 'tl-promotie',
-        title: 'Zet de release door naar productie',
-        lead: 'Stap voor stap van test naar acceptatie naar productie, met goedkeuring waar dat moet.',
+        title: 'Dit is het moment: test naar productie',
+        lead: 'Jouw kern-handeling. Je promoot app-toeslagen, en de gates beslissen mee.',
+        bullets: [
+          'De wizard loopt langs elke gate: compliance, WCAG, BIO',
+          'Eén rode gate en de promotie stopt, zonder uitzondering',
+          'Jij zet door, het platform staat ervoor in dat het klopt',
+        ],
         route: '/environments/promotie/app-toeslagen',
         drive: { wizard: 'promotie' },
+        emit: { type: 'deploy.completed', title: 'app-toeslagen gepromoot naar productie', severity: 'info' },
+      },
+      {
+        id: 'tl-scorecards',
+        title: 'En dan? Brons, zilver, goud',
+        lead: 'Voldoen is een ondergrens. De maturity-scorecards laten zien hoever je daarboven komt.',
+        bullets: [
+          'In één blik waar een dienst staat en wat er nog mist',
+          'Geen vinkjes, maar een zichtbaar groeipad',
+          'Kwaliteit wordt zo een richting, niet een momentopname',
+        ],
+        route: '/scorecards',
+      },
+      {
+        id: 'tl-artefacten',
+        title: 'En als het toch misgaat: alles terug naar de bron',
+        lead: 'Elk artefact, van image tot config, is te herleiden tot een commit.',
+        bullets: [
+          'Je ziet wat er draait in productie en waar het vandaan kwam',
+          'Geen handmatige stap zonder spoor',
+          'Bij een incident weet je binnen minuten wat er veranderde',
+        ],
+        route: '/artefacten',
+        skippable: true,
+      },
+      {
+        id: 'tl-teams',
+        title: 'Daarom kan een klein team dit aan',
+        lead: 'Mensen, rollen en het piket, bij elkaar op één plek.',
+        bullets: [
+          'Het platform doet het zware werk, dus het team blijft klein',
+          'AI maakt code goedkoop, het platform houdt die code verantwoord',
+          'Want goedkope code zonder platform is gewoon techniek-schuld',
+        ],
+        route: '/teams',
+        skippable: true,
+      },
+      {
+        id: 'tl-waarom',
+        title: 'En daarom is de overheid een techbedrijf',
+        lead: 'De Toeslagenberekening kun je niet kopen, die bouw je, en dan moet kwaliteit afdwingbaar zijn.',
+        bullets: [
+          'Twee op de drie grote IT-projecten loopt vertraging op, inkopen timmert de complexiteit niet dicht',
+          'Het platform is geen project dat af is, maar een product dat blijft',
+          'Dat vraagt mandaat en structurele financiering, laten we ons als techbedrijf organiseren',
+        ],
+        full: true,
       },
     ],
   },
-
-  // --- Jurist (Lieke Jansen) ----------------------------------------------
   {
     id: 'jurist',
     role: 'Jurist',
@@ -113,44 +362,270 @@ export const routes = [
       {
         id: 'jur-intro',
         title: 'Een dag als jurist bij Toeslagen',
-        lead: 'Je bent Lieke, wetgevingsjurist. De overheid mag een handeling alleen verrichten als een wet die toestaat — jij legt die grondslag vast.',
+        lead: 'Je bent Lieke, wetgevingsjurist. De overheid mag een burger niets toekennen of opleggen zonder dat een wet het toestaat. Jij bewaakt die grondslag, en vandaag zie je waar hij terechtkomt: in software die elke dag duizenden besluiten neemt.',
+        bullets: ['Legaliteitsbeginsel: geen handeling zonder wettelijke basis', 'De Toeslagenberekening is wet, geworden tot draaiende dienst', 'Jij staat tussen de wetstekst en wat de machine doet'],
         route: '/wetten',
         full: true,
       },
       {
+        id: 'jur-catalogus',
+        title: 'Waar al die wetten samenkomen',
+        lead: 'Voordat je iets bouwt, kijk je waar je staat. Elke wet die een dienst aanstuurt staat hier, herleidbaar naar haar bron, met haar status. Niet een PDF in jouw mailbox, maar een catalogus die iedereen deelt.',
+        bullets: ['Eén gedeelde catalogus in plaats van losse documenten', 'Elke wet herleidbaar naar BWB, het officiele bronregister', 'Wie deze wetten kent, kent de grondslag van het hele systeem'],
+        route: '/wetten',
+      },
+      {
+        id: 'jur-niet-kopen',
+        title: 'En dit kun je niet inkopen',
+        lead: 'Je zou denken: laat een leverancier dit bouwen. Maar de Toeslagenberekening komt niet in een doos. Het is jouw wet, vertaald naar logica, en die complexiteit krijg je niet vooraf in een bestek dichtgetimmerd.',
+        bullets: ['2 op de 3 grote IT-projecten lopen vertraging op', 'Geen bestek vangt vooraf de volle complexiteit van de wet', 'Verandert de wet bij de leverancier, dan zit je vast (lock-in)'],
+        route: '/wetten',
+        skippable: true,
+      },
+      {
+        id: 'jur-wet-intro',
+        title: 'Dus doe je het zelf, in zes stappen',
+        lead: 'Dan maar zelf, hier, live. Je neemt een echte wet en maakt er een geteste, machine-leesbare dienst van. Dit is de kern van de dag.',
+        bullets: ['Oogst de bron uit BWB', 'Maak de uitkomsten machine-leesbaar', 'Toets met een scenario en publiceer als dienst'],
+        route: '/wetten/nieuw',
+        full: true,
+      },
+      {
         id: 'jur-wet',
-        title: 'Maak een wet machine-leesbaar',
-        lead: 'Van wetstekst naar uitvoerbare logica, met scenario’s die hem toetsen.',
+        title: 'De Wet op de huurtoeslag wordt machine-leesbaar',
+        lead: 'Daar gaat hij. Je oogst de wettekst uit het Basiswettenbestand, bindt haar aan de registers waar de gegevens vandaan komen, en maakt van de wettekst de bron waar alles op terugslaat.',
+        bullets: ['BWBR0008659 wordt live geoogst en benoemd', 'Uitkomsten gekoppeld aan inkomensregister en BRP', 'De wettekst zelf wordt de single source of truth'],
         route: '/wetten/nieuw',
         drive: { wizard: 'wet' },
       },
-      { id: 'jur-verwerking', title: 'De verwerking en haar grondslag', lead: 'Elke verwerking van persoonsgegevens rust op een wettelijke grondslag.', route: '/verwerkingen' },
-      { id: 'jur-keten', title: 'De bevoegdheidsketen', lead: 'Van wetsartikel naar bevoegd gezag naar de artefacten die zich erop beroepen.', route: '/governance/bevoegdheid' },
+      {
+        id: 'jur-scenario',
+        title: 'Klopt hij? Toets voordat hij leeft',
+        lead: 'Voor je publiceert, toets je. Alleenstaande met een toetsingsinkomen van 22.000 euro: recht op huurtoeslag, hoogte berekend. Het scenario is de wet in een concreet geval, en jij schrijft het.',
+        bullets: ['Given, when, then: de wet als toetsbaar gedrag', 'Een rode toets is een bug in de grondslag, geen verrassing in productie', 'De jurist schrijft de toets, niet alleen de ontwikkelaar'],
+        route: '/wetten/nieuw',
+        skippable: true,
+      },
+      {
+        id: 'jur-publiceren',
+        title: 'Groen, en met één klik live',
+        lead: 'De toets staat groen, dus je publiceert. Met die ene handeling wordt de machine-leesbare wet een draaiende dienst. Geen overdracht, geen vertaalslag die onderweg betekenis verliest.',
+        bullets: ['De wet die je goedkeurt is precies de wet die draait', 'Elke klik is een commit: de hele harvest is herleidbaar', 'Verandert de wet, dan verandert de dienst, met hetzelfde spoor'],
+        route: '/wetten',
+        emit: { type: 'wet.published', title: 'Wet op de huurtoeslag gepubliceerd als dienst', severity: 'info' },
+      },
+      {
+        id: 'jur-verwerking',
+        title: 'En nu raakt de dienst persoonsgegevens',
+        lead: 'Zodra hij draait, leest de dienst inkomen en huishouden van burgers. Elke keer dat dat gebeurt, moet er een wettelijke grondslag onder liggen, en die staat hier vast.',
+        bullets: ['Het verwerkingenregister volgens AVG artikel 30', 'Per verwerking: doel, gegevens en de wet die het toestaat', 'Geen grondslag, geen verwerking'],
+        route: '/verwerkingen',
+      },
+      {
+        id: 'jur-art30',
+        title: 'Artikel 30 zonder los Excel-bestand',
+        lead: 'Het register dat de AVG eist is hier geen jaarlijkse papieren exercitie meer. Het leeft naast de diensten en beweegt met ze mee.',
+        bullets: ['De verwerking staat naast de dienst die hem uitvoert', 'Wijzigt de dienst, dan wijzigt het register mee', 'Klaar voor de Autoriteit Persoonsgegevens, by default'],
+        route: '/verwerkingen',
+        skippable: true,
+      },
+      {
+        id: 'jur-keten',
+        title: 'Wie mag dit eigenlijk, en waarom?',
+        lead: 'Een grondslag is pas hard als je hem kunt nalopen. Van wetsartikel naar bevoegd gezag naar de artefacten en handelingen die zich erop beroepen: de legitimiteit van elke handeling, in één keten zichtbaar gemaakt.',
+        bullets: ['Wetsartikel, bevoegd gezag, artefacten en handelingen in één keten', 'Elke schakel verwijst terug naar de wet die hem draagt', 'Wie iets mag, en waarom, staat op één plek'],
+        route: '/governance/bevoegdheid',
+      },
+      {
+        id: 'jur-juriconnect',
+        title: 'Tot aan het exacte artikel',
+        lead: 'Die keten wijst niet vaag naar "de wet", maar met een juriconnect-referentie naar precies dit artikel, en klikt door naar RegelRecht voor de officiele machine-leesbare regels.',
+        bullets: ['Juriconnect: een stabiele verwijzing naar exact dit artikel', 'Doorklik naar RegelRecht, de rijksbron voor regelgeving', 'Geen losse interpretatie, maar een harde link naar de bron'],
+        route: '/governance/bevoegdheid',
+        skippable: true,
+      },
+      {
+        id: 'jur-algoritmes',
+        title: 'En waar de wet een model loslaat',
+        lead: 'Soms laat de wet ruimte voor een model dat meebeslist. Dan wil je weten dat het bestaat. Hier staat het, met doel, uitlegbaarheid en menselijke controle.',
+        bullets: ['Algoritmen die meebeslissen, transparant geregistreerd', 'Je ziet waar logica de plek van een mens inneemt', 'Toezicht hoort bij de grondslag, niet erbuiten'],
+        route: '/algoritmes',
+      },
+      {
+        id: 'jur-source-of-truth',
+        title: 'Alles hangt aan diezelfde wettekst',
+        lead: 'Zie wat er gebeurd is: de catalogus, de dienst, het verwerkingenregister en de bevoegdheidsketen hangen allemaal aan die ene bron. Verandert de wet, dan beweegt de hele werkelijkheid mee, herleidbaar.',
+        bullets: ['Geen drift tussen wat de wet zegt en wat de dienst doet', 'Een wetswijziging is een commit met een spoor', 'Compliance is geen project achteraf maar de default'],
+        route: '/wetten',
+      },
+      {
+        id: 'jur-platform',
+        title: 'Daarom is dit een product, geen project',
+        lead: 'Code wordt goedkoop, maar goedkope code zonder grondslag is techniek-schuld met juridische gevolgen. Dit platform legt de wet onder elke dienst, by default, en verkleint zo het gat tussen wetgever en uitvoerder. Dat is geen project dat een keer af is; het vergt mandaat en structurele financiering. De overheid is een techbedrijf. Laten we ons ook zo organiseren.',
+        bullets: ['Wetgever en uitvoerder werken op dezelfde bron', 'Gebaande paden maken compliance de makkelijkste weg', 'Een platform is een product, geen eenmalig project'],
+        route: '/governance/bevoegdheid',
+        full: true,
+      },
     ],
   },
-
-  // --- Beleidsmaker (Bram de Wit) -----------------------------------------
   {
     id: 'beleidsmaker',
     role: 'Beleidsmaker',
     persona: 'bram-de-wit',
     icon: 'clipboard',
-    lead: 'Je vertaalt beleid naar een uitvoerbare wet.',
+    lead: 'Je vertaalt beleid naar een uitvoerbare wet, en beslist over het platform zelf.',
     slides: [
       {
         id: 'bel-intro',
-        title: 'Een dag als beleidsmaker bij Toeslagen',
-        lead: 'Je bent Bram. Beleid is pas echt als het uitvoerbaar is — jij ziet de lijn van wet naar dienst naar besluit.',
+        title: 'Twee petten, één dag',
+        lead: 'Je bent Bram, beleidsmaker bij Toeslagen. Vandaag draag je twee petten: je maakt beleid uitvoerbaar, en je beslist of de overheid dit platform zelf bouwt of inkoopt.',
+        bullets: [
+          'Eerst de uitvoering: van wetsartikel naar een draaiende dienst die je kunt navertellen.',
+          'Dan de strategie: bouwen of kopen, wie de regie houdt, wie het betaalt.',
+        ],
         route: '/wetten',
         full: true,
       },
-      { id: 'bel-wet', title: 'Beleid wordt uitvoerbare wet', lead: 'De wet als machine-leesbare logica, niet als losse PDF.', route: '/wetten/nieuw', drive: { wizard: 'wet' } },
-      { id: 'bel-algoritme', title: 'Welke algoritmen beslissen mee?', lead: 'Met doel, uitlegbaarheid en menselijke controle.', route: '/algoritmes' },
-      { id: 'bel-keten', title: 'De bevoegdheidsketen', lead: 'De legitimiteit van elke handeling, traceerbaar tot het wetsartikel.', route: '/governance/bevoegdheid' },
+      {
+        id: 'bel-wet',
+        title: 'De wet als draaiende logica',
+        lead: 'Begin bij de bron. Een wet die machine-leesbaar is en met scenario\'s getoetst wordt, niet een PDF die elke uitvoerder zelf maar interpreteert.',
+        bullets: [
+          'Wetstekst en uitvoering blijven aan elkaar geknoopt: de bron stuurt de regels.',
+          'Verander het beleid en de scenario\'s tonen meteen wat het voor mensen betekent.',
+        ],
+        route: '/wetten/nieuw',
+        drive: { wizard: 'wet' },
+      },
+      {
+        id: 'bel-algoritme',
+        title: 'En wie beslist er mee?',
+        lead: 'Zodra een model meebeslist over een burger, hoort het in het register. Met doel, uitlegbaarheid en een mens die kan ingrijpen.',
+        bullets: [
+          'Geen black box: uitlegbaarheid en menselijke controle zijn voorwaarde, geen bijzaak.',
+          'De toeslagenaffaire begon precies waar dit ontbrak. Hier zit het ingebakken.',
+        ],
+        route: '/algoritmes',
+        skippable: true,
+      },
+      {
+        id: 'bel-keten',
+        title: 'Alles terug te leiden naar een wetsartikel',
+        lead: 'En achter elke handeling moet legitimiteit zitten. Van het wetsartikel naar het bevoegd gezag naar de dienst die zich erop beroept, in één traceerbare lijn.',
+        bullets: [
+          'De overheid mag iets alleen doen als een wet het toestaat. Hier zie je die grond.',
+          'Elke klik is een commit, dus de keten is herleidbaar, vooraf en achteraf.',
+        ],
+        route: '/governance/bevoegdheid',
+      },
+      {
+        id: 'bel-software-is-overheid',
+        title: 'Dit is geen formulier, dit is software op schaal',
+        lead: 'Wat je net deed, beleid in code gieten, is het hart van de uitvoering. En dat hart kun je niet inkopen en daarna vergeten.',
+        bullets: [
+          'Belasting, toeslagen en uitkeringen zíjn software. De overheid is het grootste softwarebedrijf van Nederland.',
+          'De toeslagenberekening ligt niet in een winkelschap. Die bouw en beheer je zelf.',
+        ],
+        route: '/standaarden',
+        full: true,
+      },
+      {
+        id: 'bel-inkoop-faalt',
+        title: 'Waarom puur inkopen vastloopt',
+        lead: 'Dat botst met hoe we het meestal doen. Twee op de drie grote IT-projecten lopen vertraging op, want je probeert een bewegende wereld vast te leggen in een bestek.',
+        bullets: [
+          'Een bestek bevriest je aannames, terwijl de uitvoering elke maand verandert.',
+          'En bij elke wijziging zit je vast aan dezelfde leverancier, steeds duurder.',
+        ],
+        route: '/software-inkoop',
+      },
+      {
+        id: 'bel-lock-in-exit',
+        title: 'Inkopen mag, met de ogen open',
+        lead: 'Dat betekent niet dat je nooit inkoopt. Het betekent dat je per keer weet wat het je vastlegt, en hoe je er weer uit komt.',
+        bullets: [
+          'Maak de lock-in expliciet: hoe groot is hij, en is er een exit?',
+          'Soevereiniteit is dan geen ideologie maar een risicobeslissing die jij neemt.',
+        ],
+        route: '/software-inkoop',
+        skippable: true,
+      },
+      {
+        id: 'bel-ai-kantelt',
+        title: 'AI verandert de rekensom',
+        lead: 'En precies nu kantelt de keuze. Code wordt goedkoop en een klein team wordt productief, dus zelf bouwen is niet langer het dure alternatief.',
+        bullets: [
+          'Wat tien jaar terug een reden was om in te kopen, doe je nu betaalbaar zelf.',
+          'Maar goedkope code zonder platform is schuld die zich opstapelt tot alles stilstaat.',
+        ],
+        route: '/nerds',
+      },
+      {
+        id: 'bel-nerds',
+        title: 'Zelf bouwen, maar binnen de lijntjes',
+        lead: 'Daarom hoort er een norm bij. NeRDS zegt in dertien richtlijnen wat verantwoord bouwen bij de overheid betekent, van open source tot privacy tot toegankelijkheid.',
+        bullets: [
+          'Goedkope code mag, maar binnen de grenzen die de samenleving van de overheid eist.',
+          'De richtlijnen maken \'verantwoord\' toetsbaar in plaats van vrijblijvend.',
+        ],
+        route: '/nerds',
+        skippable: true,
+      },
+      {
+        id: 'bel-scorecard',
+        title: 'Voldoet de hele vloot, niet één schip',
+        lead: 'En een norm die je niet meet, is een belofte op papier. De scorecard toont fleet-breed hoe alle diensten op die richtlijnen scoren.',
+        bullets: [
+          'Niet één dienst, maar elk team in één beeld: waar zit de schuld?',
+          'Zo stuur je op de cijfers in plaats van op het incident van vandaag.',
+        ],
+        route: '/nerds/scorecard',
+      },
+      {
+        id: 'bel-standaarden',
+        title: 'Open standaarden houden de deur open',
+        lead: 'Eén richtlijn weegt strategisch het zwaarst. Open standaarden zijn je structurele verzekering tegen lock-in: systemen die praten op afspraken, niet op één leverancier.',
+        bullets: [
+          'Pas-toe-of-leg-uit als echt beleid, niet als formaliteit onderaan een formulier.',
+          'Interoperabiliteit houdt de deur naar elke volgende leverancier open.',
+        ],
+        route: '/standaarden',
+        skippable: true,
+      },
+      {
+        id: 'bel-kosten',
+        title: 'Wat kost het, per team?',
+        lead: 'Met de regie terug komt ook de vraag wat dit alles kost. FinOps maakt de uitgaven zichtbaar per team en per dienst.',
+        bullets: [
+          'Spend per team, in plaats van één grote ondoorzichtige IT-post.',
+          'Wat zichtbaar is, wordt bespreekbaar: kosten naast de waarde.',
+        ],
+        route: '/kosten',
+      },
+      {
+        id: 'bel-budgetten',
+        title: 'Een platform leeft, dus financier het zo',
+        lead: 'En zichtbare kosten vragen om een ander soort budget. Niet een eenmalig potje, maar doorlopende financiering per team.',
+        bullets: [
+          'Bouwbudget zonder beheerbudget is een gegarandeerde achterstand.',
+          'Hier kies jij: structurele financiering en mandaat, of langzaam verval.',
+        ],
+        route: '/kosten/budgetten',
+      },
+      {
+        id: 'bel-platform-als-product',
+        title: 'Platform als product, geen project',
+        lead: 'Dat is de kern van je dag. Een platform is niet af na oplevering, het is een product dat blijft leven. En of het blijft leven, beslis jij.',
+        bullets: [
+          'Gebaande paden, self-service en compliance-by-default verdienen zich terug, maar alleen als ze blijven draaien.',
+          'Jouw keuze maakt het verschil tussen een platform dat draagt en code die schuld wordt.',
+          'De overheid is een techbedrijf. Laten we ons ook zo organiseren.',
+        ],
+        route: '/',
+        full: true,
+      },
     ],
   },
-
-  // --- Information security officer (Samira Haddad) ------------------------
   {
     id: 'security-officer',
     role: 'Information security officer',
@@ -161,17 +636,134 @@ export const routes = [
       {
         id: 'sec-intro',
         title: 'Een dag als security officer bij Toeslagen',
-        lead: 'Je bent Samira. Jij bewaakt dat niets onveiligs naar productie glipt.',
+        lead: 'Je bent Samira. Jouw werk is dat niets onveiligs naar productie glipt. En dat doe je niet met hoop, maar met gates.',
+        bullets: [
+          'Toeslagen is software op schaal, en die schaal kun je niet handmatig dichthouden.',
+          'Dus is beveiliging geen bijlage achteraf, maar ingebakken in het gebaande pad.',
+          'Een team dat het pad volgt, voldoet al voordat jij ernaar kijkt.',
+        ],
         route: '/security',
         full: true,
       },
-      { id: 'sec-gates', title: 'De gates die een release tegenhouden', lead: 'Beleid als code: een release komt er pas door als het klopt.', route: '/governance' },
-      { id: 'sec-algoritme', title: 'Algoritmen onder toezicht', lead: 'Risicomodellen met impacttoets en menselijke controle.', route: '/algoritmes', skippable: true },
-      { id: 'sec-cert', title: 'Certificaten, self-service', lead: 'PKIoverheid-certificaten aanvragen en uitrollen zonder ticket.', route: '/secrets/certificaten', drive: { wizard: 'cert' } },
+      {
+        id: 'sec-scorecard',
+        title: 'Eerst kijken waar je staat',
+        lead: 'Voordat je iets afdwingt, wil je weten waar elke dienst staat tegen de Baseline. Dat zie je hier in één oogopslag.',
+        bullets: [
+          'De BIO-maatregelen worden gemeten waar ze leven: in de code, de infra, de pijplijn.',
+          'Geen jaarlijkse audit-foto, maar een live beeld dat meebeweegt met elke wijziging.',
+        ],
+        route: '/security',
+      },
+      {
+        id: 'sec-gates',
+        title: 'En waar het rood staat, gaat de deur dicht',
+        lead: 'Dat live beeld is geen dashboard om naar te kijken. Het houdt releases tegen.',
+        bullets: [
+          'Geen handtekening op een formulier, maar een controle die automatisch afdwingt.',
+          'Wat niet voldoet, komt er niet langs. Punt.',
+        ],
+        route: '/governance/gates',
+      },
+      {
+        id: 'sec-beleid-als-code',
+        title: 'Want jouw regels zijn code geworden',
+        lead: 'Die gate kan alleen afdwingen omdat het beleid erachter in versiebeheer staat, niet in een PDF op een gedeelde schijf.',
+        bullets: [
+          'Scherp je een eis aan, dan rol je dat uit als wijziging, met review en historie.',
+          'Iedereen draait dezelfde regel, op hetzelfde moment.',
+        ],
+        route: '/governance',
+        skippable: true,
+      },
+      {
+        id: 'sec-algoritme',
+        title: 'Datzelfde regime geldt voor de algoritmen',
+        lead: 'Een risicomodel passeert pas als de impacttoets en de discriminatietoets zijn gedaan, met een mens die erop beslist.',
+        bullets: [
+          'Het algoritmeregister maakt zichtbaar wat er meebeslist en waarom.',
+          'Een model zonder toets komt het register niet in, en dus productie niet in.',
+        ],
+        route: '/algoritmes',
+        skippable: true,
+      },
+      {
+        id: 'sec-cert',
+        title: 'Het scherpst zie je het bij een certificaat',
+        lead: 'Hier gebeurt de kern. Een PKIoverheid-certificaat dat vroeger weken papierwerk kostte, vraag je nu zelf aan en heb je in seconden.',
+        bullets: [
+          'Kijk mee: aanvraag, validatie, uitgifte, installatie, de hele pijplijn loopt voor je ogen.',
+          'Geen mailtjes naar een afdeling, geen wachtrij, geen handwerk.',
+        ],
+        route: '/secrets/certificaten',
+        drive: { wizard: 'cert' },
+      },
+      {
+        id: 'sec-rotatie',
+        title: 'En het verloopt nooit ongemerkt',
+        lead: 'Wat je net uitgaf, vergeet het platform niet. Het bewaakt de looptijd en vernieuwt voordat het misgaat.',
+        bullets: [
+          'Rotatie gebeurt automatisch, niet afhankelijk van wie eraan denkt.',
+          'Een naderende vervaldatum is een vroeg signaal, geen storing op zaterdagnacht.',
+        ],
+        route: '/secrets',
+        emit: { type: 'cert.expiring', title: 'Certificaat app-toeslagen verloopt over 14 dagen', severity: 'warning' },
+      },
+      {
+        id: 'sec-dns',
+        title: 'Dezelfde aanpak, nu bij DNS',
+        lead: 'DNSSEC, SPF en DMARC staan aan omdat het pad ze aanzet, niet omdat iemand eraan dacht.',
+        bullets: [
+          'Geen handmatige records die iemand vergeet of fout overtypt.',
+          'Spoofing van een Rijksdomein wordt aan de bron afgevangen.',
+        ],
+        route: '/dns',
+        skippable: true,
+      },
+      {
+        id: 'sec-inloggen',
+        title: 'En bij de voordeur voor burger en bedrijf',
+        lead: 'Authenticatie loopt via DigiD en eHerkenning, de erkende middelen, ingebakken in het pad.',
+        bullets: [
+          'Geen zelfgebouwde inlog, maar de standaard die je mag vertrouwen.',
+          'De koppeling komt met de juiste certificaten en afspraken al ingeregeld.',
+        ],
+        route: '/inloggen',
+      },
+      {
+        id: 'sec-artefacten',
+        title: 'En tot in wat er werkelijk draait',
+        lead: 'Elke build draagt een SBOM en een handtekening, zodat je weet wat er in productie staat.',
+        bullets: [
+          'Je ziet welke componenten erin zitten en of er een kwetsbaarheid in zit.',
+          'Een ongetekend of onbekend artefact komt de keten niet in.',
+        ],
+        route: '/artefacten',
+      },
+      {
+        id: 'sec-compliance',
+        title: 'Het bewijs schrijf je niet meer, het is er al',
+        lead: 'Omdat dit allemaal in het pad zit, tonen de koppelvlakken per standaard de status automatisch.',
+        bullets: [
+          'Compliance-by-default: het gebaande pad levert het bewijs zelf.',
+          'Geen rapport dat achteraf wordt samengesteld, maar een actuele waarheid.',
+        ],
+        route: '/koppelvlakken/compliance',
+      },
+      {
+        id: 'sec-waarom',
+        title: 'Daarom: security die je afdwingt, niet hoopt',
+        lead: 'De overheid is het grootste softwarebedrijf van Nederland. Op die schaal is hoop geen strategie, en alles wat je net zag is het alternatief.',
+        bullets: [
+          'AI maakt code goedkoop, maar goedkope code zonder platform is techniek-schuld met een open deur.',
+          'Gebaande paden, gates en herleidbaarheid maken beveiliging afdwingbaar in plaats van hoopvol.',
+          'Een platform is geen project dat af is maar een product dat blijft, en dat vraagt mandaat en structurele financiering.',
+        ],
+        route: '/security',
+        full: true,
+      },
     ],
   },
-
-  // --- Scrum master (Wouter Stam) -----------------------------------------
   {
     id: 'scrum-master',
     role: 'Scrum master',
@@ -180,19 +772,136 @@ export const routes = [
     lead: 'Je houdt het team en de levering op koers.',
     slides: [
       {
-        id: 'scr-intro',
+        id: 'sm-intro',
         title: 'Een dag als scrum master bij Toeslagen',
-        lead: 'Je bent Wouter. Jij houdt het team, het werk en de levering op koers.',
+        lead: 'Je bent Wouter. Je bouwt niets zelf. Jouw werk is bewaken: dat het team levert, dat niemand vastloopt, en dat je ziet wat er misgaat voordat de burger het merkt.',
+        bullets: [
+          'Jouw vak is overzicht en ritme: openstaande acties, on-call, incidenten, levering.',
+          'De vraag van vandaag: kun je dat overzicht krijgen zonder het zelf bij elkaar te sprokkelen uit losse tools?',
+        ],
         route: '/zelf',
         full: true,
       },
-      { id: 'scr-team', title: 'Het team en wie wat doet', lead: 'Mensen, rollen en het piketrooster op één plek.', route: '/teams' },
-      { id: 'scr-incidenten', title: 'Wat staat er open?', lead: 'Incidenten, changes en de status van de dienst.', route: '/incidenten' },
-      { id: 'scr-alerts', title: 'Alerts & SLO', lead: 'Loopt het nog binnen de afspraken?', route: '/observability/alerts', skippable: true },
+      {
+        id: 'sm-dashboard',
+        title: 'Je begint met overzicht, niet met zoeken',
+        lead: 'Het antwoord begint hier. Mijn team, mijn openstaande acties, mijn on-call: alles wat jou raakt staat op één scherm, klaar als je inlogt.',
+        bullets: [
+          'Het platform weet wie je bent en wat er voor jou ligt. Geen mailtjes natrekken, geen spreadsheets bijwerken.',
+          'En alles wat je hier ziet, hangt aan iets concreters: jouw team.',
+        ],
+        route: '/zelf',
+      },
+      {
+        id: 'sm-team',
+        title: 'Het team als fundament',
+        lead: 'Want het team is geen lijst in iemands hoofd, maar een eerstegraads object op het platform: wie erin zit, welke diensten onder hun naam draaien, wie welke rol heeft.',
+        bullets: [
+          'Alles wat volgt, on-call, incidenten, levering, hangt aan dit team.',
+          'Nieuwe mensen zien meteen waar ze bij horen en wat het team bezit.',
+        ],
+        route: '/teams',
+        skippable: true,
+      },
+      {
+        id: 'sm-oncall',
+        title: 'Wie staat er nu paraat?',
+        lead: 'De eerste vraag die het team draaiende houdt. Het piketrooster staat in het platform zelf, geen aparte telefoonlijst die niemand bijhoudt.',
+        bullets: [
+          'Wie nu piket heeft volgt uit het rooster, niet uit een appje in een groep.',
+          'Elke overdracht is vastgelegd, dus je weet altijd wie de bal heeft als er straks iets gebeurt.',
+        ],
+        route: '/teams/on-call',
+        emit: { type: 'oncall.handover', title: 'On-call overdracht: Wouter neemt over van Sanne', severity: 'info' },
+      },
+      {
+        id: 'sm-incidenten',
+        title: 'En dan: er gaat iets mis',
+        lead: 'Een melding komt binnen. Open incidenten, hun severity en wie er piket op zit, staan meteen voor je, zonder dat je het hoeft te vragen.',
+        bullets: [
+          'Je ziet de stand live, niet pas in de stand-up van morgen.',
+          'Severity stuurt de aandacht: het ergste eerst.',
+        ],
+        route: '/incidenten',
+        emit: { type: 'incident.opened', title: 'Incident geopend: verhoogde foutmarge app-toeslagen', severity: 'warning' },
+      },
+      {
+        id: 'sm-status',
+        title: 'Wat merkt de buitenwereld?',
+        lead: 'Terwijl het team eraan werkt, vertelt de statuspagina de rest in mensentaal: wat draait, wat hapert, wat ligt plat.',
+        bullets: [
+          'Eén bron van waarheid voor binnen en buiten het team.',
+          'Niet de techniek, maar de impact op de burger staat voorop.',
+        ],
+        route: '/incidenten/status',
+        skippable: true,
+      },
+      {
+        id: 'sm-changes',
+        title: 'Wat is er net veranderd?',
+        lead: 'Bij een incident is dit bijna altijd de eerste echte vraag. En hier staat het antwoord, naast het incident zelf.',
+        bullets: [
+          'Changes zijn gekoppeld aan incidenten, dus oorzaak en gevolg liggen naast elkaar.',
+          'Elke wijziging is een commit, dus je herleidt het tot wie en wanneer.',
+        ],
+        route: '/incidenten/changes',
+      },
+      {
+        id: 'sm-alerts',
+        title: 'Volgende keer wil je het eerder weten',
+        lead: 'Dit incident is in beeld. Maar de winst zit in het signaal vóór de melding: alerts en de SLO-burndown laten zien hoe snel je foutbudget opraakt.',
+        bullets: [
+          'De burndown is een vroege waarschuwing, geen autopsie achteraf.',
+          'Het team stuurt op het budget, niet op brandjes.',
+        ],
+        route: '/observability/alerts',
+      },
+      {
+        id: 'sm-observability',
+        title: 'De hartslag van de dienst',
+        lead: 'Onder die alerts ligt de volle gezondheid van de dienst: metrics, logs en traces bij elkaar op één plek.',
+        bullets: [
+          'Het platform levert observability standaard mee, het team hoeft het niet zelf in te richten.',
+          'Zo praat je onderbouwd over levering, niet op onderbuik.',
+        ],
+        route: '/observability',
+        skippable: true,
+      },
+      {
+        id: 'sm-rfcs',
+        title: 'Beslissingen in de open lucht',
+        lead: 'Als de storm gaat liggen, zakt het werk naar het rustigere niveau: RFC\'s leggen vast wat het team van plan is en waarom.',
+        bullets: [
+          'Een besluit is een document met een spoor, geen mondelinge afspraak die vervaagt.',
+          'Nieuwe teamleden lezen terug waarom iets zo gekozen is.',
+        ],
+        route: '/governance/rfcs',
+        skippable: true,
+      },
+      {
+        id: 'sm-scorecards',
+        title: 'Hoe volwassen is het team?',
+        lead: 'En al die sporen tellen op: de maturity-scorecards laten zien waar het team sterk staat en waar nog werk ligt.',
+        bullets: [
+          'Niet om af te rekenen, maar om gericht te verbeteren.',
+          'Veel scores haal je zonder extra moeite, omdat compliance-by-default al in het platform zit.',
+        ],
+        route: '/scorecards',
+      },
+      {
+        id: 'sm-waarom',
+        title: 'Waarom dit platform: rust en ritme',
+        lead: 'Tel de dag op en dit is de kern. De overheid is het grootste softwarebedrijf van Nederland. Toeslagen draaien op software op schaal, en die software moet bewaakt worden.',
+        bullets: [
+          'On-call, incidenten en levering zijn ingebakken, niet zelf in elkaar geknutseld. Dat geeft het team rust.',
+          'Elke klik is een commit, dus alles is herleidbaar en jij hoeft geen overzicht meer te sprokkelen.',
+          'Een platform is geen project dat af is maar een product dat blijft, en dat geeft het team een ritme dat houdbaar is.',
+        ],
+        route: '/zelf',
+        full: true,
+      },
     ],
   },
-
-  // --- Business analist (Daan Koster) -------------------------------------
   {
     id: 'analist',
     role: 'Business analist',
@@ -203,13 +912,148 @@ export const routes = [
       {
         id: 'ana-intro',
         title: 'Een dag als analist bij Toeslagen',
-        lead: 'Je bent Daan. Jij werkt met de gegevens waar de dienst op draait.',
+        lead: 'Je bent Daan. Jij werkt met de gegevens waar de hele dienst op draait, en jij bewaakt waar die gegevens vandaan komen.',
+        bullets: [
+          'Een toeslag berekenen is gegevens combineren: inkomen, vermogen, huishouden, woonsituatie.',
+          'Foute data is geen schoonheidsfoutje, het is een onterechte beslissing over een mens.',
+          'Jouw vak is niet alleen weten welke data er is, maar of je haar mag en moet vertrouwen.',
+        ],
         route: '/registers',
         full: true,
       },
-      { id: 'ana-datasets', title: 'De datasetcatalogus', lead: 'Welke data is er, met welke kwaliteit en grondslag.', route: '/data' },
-      { id: 'ana-contracten', title: 'Datacontracten', lead: 'Wie mag welke data gebruiken, voor welk doel.', route: '/datacontracten' },
-      { id: 'ana-verwerking', title: 'Verwerkingen', lead: 'Hoe de data verwerkt wordt, en op welke grondslag.', route: '/verwerkingen', skippable: true },
+      {
+        id: 'ana-overheid-is-data',
+        title: 'En dus draait de overheid op data, niet op formulieren',
+        lead: 'Belasting, toeslagen en uitkeringen zijn software op schaal, en die software is nooit beter dan de gegevens eronder.',
+        bullets: [
+          'De Toeslagenberekening kun je niet kopen, en de gegevensbasis eronder al helemaal niet.',
+          'Dit is geen administratie, dit is een gegevensstelsel dat over miljoenen mensen beslist.',
+          'Betrouwbare data is daarom niet het sluitstuk van het platform, maar het fundament.',
+        ],
+        route: '/registers',
+        skippable: true,
+      },
+      {
+        id: 'ana-registers',
+        title: 'Dus begin je bij de gezaghebbende bron',
+        lead: 'Basisregistraties zijn de officiele bronnen: de BRP voor personen, het Handelsregister, de BAG voor adressen.',
+        bullets: [
+          'Elke bron heeft een houder met een OIN, herleidbaar tot wie verantwoordelijk is.',
+          'Je bevraagt de bron, je kopieert haar niet: werken met een verouderde kopie is werken met een gok.',
+          'Bron-bij-de-bron betekent dat een correctie aan de bron meteen overal doorwerkt.',
+        ],
+        route: '/registers',
+      },
+      {
+        id: 'ana-register-koppelen',
+        title: 'En die bron sluit je live aan',
+        lead: 'Je koppelt de basisregistratie aan de dienst, en op het moment dat je dat doet ligt de koppeling vast en is ze herleidbaar.',
+        bullets: [
+          'Geen ad-hoc integratie in een hoekje, maar een geregistreerde verbinding met een verantwoordelijke bron.',
+          'De koppeling staat als gebeurtenis in de tijdlijn: elke klik is een commit.',
+        ],
+        route: '/registers',
+        emit: { type: 'register.connected', title: 'BRP gekoppeld aan app-toeslagen', severity: 'info' },
+      },
+      {
+        id: 'ana-datasets',
+        title: 'Maar welke dataset mag je eigenlijk gebruiken?',
+        lead: 'De catalogus laat zien welke datasets er zijn, en bij elke dataset zie je meteen hoe betrouwbaar ze is.',
+        bullets: [
+          'Een kwaliteitslabel per dataset: goud, zilver of brons.',
+          'Goud is de gezaghebbende bron, brons is afgeleid of onvolledig en mag je niet blind vertrouwen.',
+          'Dat label is geen sticker maar een afspraak: het zegt waarvoor je de dataset wel en niet mag inzetten.',
+        ],
+        route: '/data',
+      },
+      {
+        id: 'ana-kwaliteit',
+        title: 'En voor een mensbeslissing pak je goud',
+        lead: 'Een toeslagbeslissing verdient een gezaghebbende bron, geen ongelabelde dataset van onbekende herkomst.',
+        bullets: [
+          'Goud betekent: bekende bron, bekende actualiteit, bekende dekking.',
+          'Zo neemt geen enkele dienst stilletjes een gouden beslissing op brons-data.',
+        ],
+        route: '/data',
+        skippable: true,
+      },
+      {
+        id: 'ana-contracten',
+        title: 'Datadeling leg je vast in een contract',
+        lead: 'Wie data deelt, legt in een datacontract vast wat hij deelt en onder welke voorwaarden: schema, SLA, doelbinding en bewaartermijn.',
+        bullets: [
+          'Geen ongedocumenteerde integratie die over een jaar niemand meer begrijpt, maar een afspraak die je kunt lezen en handhaven.',
+          'Het schema garandeert de vorm, de SLA de beschikbaarheid, de doelbinding het waarvoor.',
+          'De bewaartermijn dwingt af dat data niet langer blijft hangen dan mag.',
+        ],
+        route: '/datacontracten',
+      },
+      {
+        id: 'ana-doelbinding',
+        title: 'Zo zit doelbinding ingebakken',
+        lead: 'Het contract koppelt elk gebruik aan een doel, zodat data niet ongemerkt voor iets anders wordt ingezet.',
+        bullets: [
+          'Wil iemand de data voor een nieuw doel, dan sluit hij een nieuw contract: zichtbaar en toetsbaar.',
+          'De vraag "waarvoor gebruiken jullie dit gegeven" heeft daarmee altijd een antwoord.',
+        ],
+        route: '/datacontracten',
+        skippable: true,
+      },
+      {
+        id: 'ana-verwerkingen',
+        title: 'En de AVG volgt vanzelf',
+        lead: 'Omdat doel en grondslag al in de contracten zitten, registreert elke verwerking van persoonsgegevens zich met haar grondslag en de gegevens die ze raakt.',
+        bullets: [
+          'Het verwerkingenregister is geen Word-document naast de bouw, maar leidt af uit wat er echt draait.',
+          'Grondslag, doel en betrokken gegevens staan op een plek, herleidbaar tot de dataset eronder.',
+        ],
+        route: '/verwerkingen',
+      },
+      {
+        id: 'ana-fsc',
+        title: 'Over de grens van je organisatie heen',
+        lead: 'Gaat een gegeven naar een andere organisatie, dan gaat het over een gestandaardiseerd koppelvlak, nooit via een handmatige export.',
+        bullets: [
+          'FSC en Digikoppeling regelen authenticatie, autorisatie en herleidbaarheid van elke uitwisseling.',
+          'Je bevraagt de bron over het koppelvlak in plaats van een dump te mailen.',
+          'Elke uitwisseling is een geregistreerd contract tussen twee bekende partijen.',
+        ],
+        route: '/koppelvlakken/fsc',
+      },
+      {
+        id: 'ana-lineage',
+        title: 'En nu zie je de hele keten: van wet tot app',
+        lead: 'Alles wat je net hebt aangelegd komt hier samen: van wetsartikel naar register naar dataset naar datacontract naar de app die haar gebruikt.',
+        bullets: [
+          'De bevoegdheidsketen laat zien op welke grondslag een gegeven in de dienst belandt.',
+          'Geen los gegeven zonder herkomst: alles is terug te volgen tot de bron en de wet.',
+        ],
+        route: '/governance/bevoegdheid',
+      },
+      {
+        id: 'ana-platform-antwoord',
+        title: 'Dit koop je niet in een bestek',
+        lead: 'Zo een keten kun je niet vooraf in een aanbesteding dichttimmeren; de wereld is daarvoor te complex en verandert te snel.',
+        bullets: [
+          'Twee op de drie grote IT-projecten lopen vertraging op, en vendor lock-in maakt je eigen data onbereikbaar.',
+          'AI maakt code goedkoop, maar goedkope code op ongedocumenteerde data is gewoon techniek-schuld.',
+          'Het platform geeft het antwoord: gebaande paden, self-service en compliance-by-default op de data zelf.',
+        ],
+        route: '/data',
+        skippable: true,
+      },
+      {
+        id: 'ana-slot',
+        title: 'Betrouwbare data is het fundament onder elke beslissing',
+        lead: 'Een toeslag is een beslissing over een mens, en die beslissing is alleen zo goed als de gegevens eronder.',
+        bullets: [
+          'Bevraag de bron, kopieer geen data; deel via contracten, niet via integraties die niemand kent.',
+          'Kwaliteitslabels, doelbinding en herleidbaarheid maken van data governance in plaats van risico.',
+          'De overheid is een techbedrijf. Laten we ons ook zo organiseren, te beginnen bij de data.',
+        ],
+        route: '/registers',
+        full: true,
+      },
     ],
   },
 ];
