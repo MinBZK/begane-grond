@@ -9,6 +9,7 @@ import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
+import GrondslagBlock from '../../components/shared/GrondslagBlock.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 
 const route = useRoute();
@@ -100,7 +101,10 @@ const relations = computed(() => {
         </nldd-container>
       </nldd-card>
 
-      <RelationLinks title="Grondslag en gegevens" :links="relations" />
+      <div class="rp-v-side">
+        <GrondslagBlock :grondslag="verwerking" title="Grondslag (waar mag dit)" />
+        <RelationLinks title="Gegevens en bronnen" :links="relations" />
+      </div>
     </nldd-container>
 
     <nldd-spacer size="24" />
@@ -117,6 +121,7 @@ const relations = computed(() => {
 .rp-page { display: block; }
 .rp-span2 { grid-column: span 2; }
 @media (max-width: 1007px) { .rp-span2 { grid-column: auto; } }
+.rp-v-side { display: flex; flex-direction: column; gap: 20px; }
 .rp-d-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
 .rp-kv { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1rem; margin: 0; }
 .rp-kv dt { opacity: 0.6; font-size: 0.85rem; }

@@ -14,6 +14,8 @@ import Wizard from '../../components/shared/Wizard.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
 import NerdsBadge from '../../components/shared/NerdsBadge.vue';
+import GrondslagFields from '../../components/shared/GrondslagFields.vue';
+import { grondslagComplete } from '../../lib/grondslag.js';
 import { STANDAARDEN } from './api-standaarden.js';
 import { generateOpenApiYaml, lintAdr, pluralize, OPERATIONS, defaultOps } from './openapi.js';
 import { usePresentation } from '../../presentation/usePresentation.js';
@@ -33,6 +35,9 @@ const form = reactive({
   exposure: 'intern',
   persoonsgegevens: false,
   events: false,
+  // The legal basis: a thin RegelRecht reference (GrondslagFields output).
+  // Required when the koppelvlak processes persoonsgegevens.
+  grondslag: {},
   // The resources the API exposes. Each carries an op-set (which CRUD operations
   // are enabled); the golden-path default is full CRUD, toggleable per endpoint.
   resources: [{ singular: '', ops: defaultOps() }],
@@ -127,10 +132,14 @@ const standaardenRows = computed(() =>
   })),
 );
 
+// A grondslag is complete enough to cite when it names a wet and an article.
+const grondslagOk = computed(() => grondslagComplete({ bwb_id: store.wetById(form.grondslag?.wetId)?.bwbId, article: form.grondslag?.article }));
+
 const cliCommand = computed(() => {
   const on = STANDAARDEN.filter((s) => isApplicable(s.key)).map((s) => s.key);
   const parts = [`bg api new "${form.name || 'mijn-api'}"`, `--versie ${form.version}`, `--team ${form.team}`, `--exposure ${form.exposure}`];
   if (form.persoonsgegevens) parts.push('--persoonsgegevens');
+  if (form.persoonsgegevens && form.grondslag?.wetId) parts.push(`--grondslag ${form.grondslag.wetId}${form.grondslag.article ? ':art' + form.grondslag.article : ''}`);
   if (form.events) parts.push('--events');
   if (namedResources.value.length) {
     // A resource with the full CRUD set is just its name; a subset appends the
@@ -162,6 +171,10 @@ function onFinish() {
     finishError.value = 'Benoem minstens één resource met een endpoint (stap 3: Ontwerp).';
     return;
   }
+  if (form.persoonsgegevens && !grondslagOk.value) {
+    finishError.value = 'Wijs een wet én artikel aan als grondslag (stap 2: Gegevens) — die hoort bij het verwerken van persoonsgegevens.';
+    return;
+  }
   finishError.value = '';
   syncStandaarden();
   const before = store.commits.length;
@@ -172,6 +185,7 @@ function onFinish() {
     exposure: form.exposure,
     persoonsgegevens: form.persoonsgegevens,
     events: form.events,
+    grondslag: form.grondslag,
     standaarden: { ...form.standaarden },
     resources: namedResources.value.map((r) => ({ singular: r.singular.trim(), ops: { ...r.ops } })),
   });
@@ -179,7 +193,13 @@ function onFinish() {
   createdCommitSha.value = store.commits[0]?.sha || '';
 }
 
-const canFinish = computed(() => form.name.trim() && form.team && namedResources.value.length > 0);
+const canFinish = computed(
+  () =>
+    form.name.trim() &&
+    form.team &&
+    namedResources.value.length > 0 &&
+    (!form.persoonsgegevens || grondslagOk.value),
+);
 
 const successLinks = computed(() => {
   if (!created.value) return [];
@@ -375,6 +395,22 @@ onBeforeUnmount(() => presentation.unregisterWizard('api'));
               </span>
             </button>
           </div>
+
+          <!-- Grondslag: only relevant — and required — once persoonsgegevens is on. -->
+          <template v-if="form.persoonsgegevens">
+            <nldd-spacer size="20" />
+            <nldd-title size="4"><h3>Grondslag: waar mag je dit?</h3></nldd-title>
+            <nldd-spacer size="6" />
+            <nldd-rich-text><p>De overheid mag een handeling alleen verrichten als een wet die toestaat. Wijs het wetsartikel aan waarop dit koppelvlak rust, wie het bevoegd gezag is, en welke handeling het artikel toestaat. De verwijzing gaat naar RegelRecht; dezelfde grondslag verschijnt in het verwerkingenregister en op datacontracten.</p></nldd-rich-text>
+            <nldd-spacer size="12" />
+            <GrondslagFields v-model="form.grondslag" />
+            <nldd-spacer size="12" />
+            <nldd-inline-dialog
+              v-if="!grondslagOk"
+              title="Grondslag verplicht"
+              supporting-text="Wijs minstens een wet én artikel aan voordat je verder gaat — een handeling met persoonsgegevens zonder grondslag mag niet."
+            ></nldd-inline-dialog>
+          </template>
         </div>
 
         <!-- Step 2: ontwerp (resources → OpenAPI) -->
@@ -509,6 +545,13 @@ onBeforeUnmount(() => presentation.unregisterWizard('api'));
             <nldd-list-item @click="go(3)">
               <nldd-icon-cell slot="start" name="shield-check-mark"></nldd-icon-cell>
               <nldd-title-cell overline="Standaarden" :text="standaardenRows.filter((s) => s.applicable).map((s) => s.label).join(', ')"></nldd-title-cell>
+            </nldd-list-item>
+            <nldd-list-item v-if="form.persoonsgegevens" @click="go(1)">
+              <nldd-icon-cell slot="start" name="clipboard"></nldd-icon-cell>
+              <nldd-title-cell
+                overline="Grondslag"
+                :text="form.grondslag?.wetId ? `${store.wetById(form.grondslag.wetId)?.name || form.grondslag.wetId}${form.grondslag.article ? ', art. ' + form.grondslag.article : ''}` : 'nog niet gekozen'"
+              ></nldd-title-cell>
             </nldd-list-item>
           </nldd-list>
 

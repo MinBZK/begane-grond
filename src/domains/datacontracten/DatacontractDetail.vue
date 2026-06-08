@@ -10,6 +10,7 @@ import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
+import GrondslagBlock from '../../components/shared/GrondslagBlock.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 
 const route = useRoute();
@@ -97,7 +98,10 @@ const cli = computed(() => (contract.value ? `bg datacontract show ${contract.va
         </nldd-container>
       </nldd-card>
 
-      <RelationLinks title="Bron en afnemer" :links="relations" />
+      <div class="rp-dc-side">
+        <GrondslagBlock v-if="contract.grondslag" :grondslag="contract.grondslag" title="Grondslag (waar mag dit)" />
+        <RelationLinks title="Bron en afnemer" :links="relations" />
+      </div>
     </nldd-container>
 
     <nldd-spacer size="24" />
@@ -113,6 +117,7 @@ const cli = computed(() => (contract.value ? `bg datacontract show ${contract.va
 <style scoped>
 .rp-page { display: block; }
 .rp-span2 { grid-column: span 2; }
+.rp-dc-side { display: flex; flex-direction: column; gap: 20px; }
 @media (max-width: 1007px) { .rp-span2 { grid-column: auto; } }
 .rp-dc-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
 .rp-kv { margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }

@@ -12,6 +12,7 @@ import {
   SEVERITIES,
 } from '../data/events.js';
 import { generateOpenApiYaml } from '../domains/koppelvlakken/openapi.js';
+import { readGrondslag } from '../lib/grondslag.js';
 
 // Deep clone the seed so the store owns mutable copies (refresh resets it).
 const clone = (v) => JSON.parse(JSON.stringify(v));
@@ -52,30 +53,32 @@ function slugify(s) {
 // Map an action family to a file in the platform-config repo + a commit type.
 // The family detection mirrors AuditLog.vue's actionIcon() so path and icon
 // stay consistent across the two screens.
+// `impact` classifies the handeling for the legality principle: 'besluit' means
+// it touches a citizen or a right (an API exposing data, a law run as a service,
+// a register query, an algorithm decision) and so REQUIRES a grondslag; 'intern'
+// is technical/operational (infra, secrets, CI, DNS) and needs none. This is the
+// single declarative place where the "does this need a legal basis" line is drawn.
 function commitMetaFor(action, resource) {
   const a = (action || '').toLowerCase();
   const slug = slugify(resource);
-  if (a.includes('secret'))
-    return { path: `secrets/${slug}.sops.yaml`, type: 'chore', scope: 'secrets', verb: 'rotate' };
-  if (a.includes('infra') || a.includes('instance'))
-    return { path: `infra/${slug}.tf`, type: 'feat', scope: 'infra', verb: 'provision' };
-  if (a.includes('release') || a.includes('promo'))
-    return { path: `environments/${slug}.yaml`, type: 'feat', scope: 'release', verb: 'promote' };
-  if (a.includes('rfc'))
-    return { path: `governance/rfcs/${slug}.md`, type: 'docs', scope: 'rfc', verb: 'record' };
-  if (a.includes('koppelvlak') || a.includes('api'))
-    return { path: `apis/${slug}/openapi.yaml`, type: 'feat', scope: 'api', verb: 'add' };
-  if (a.includes('applicatie') || a.includes('app'))
-    return { path: `apps/${slug}/app.yaml`, type: 'feat', scope: 'app', verb: 'scaffold' };
-  if (a.includes('campagne'))
-    return { path: `fleet/${slug}.yaml`, type: 'feat', scope: 'fleet', verb: 'roll out' };
-  if (a.includes('werkplek') || a.includes('device'))
-    return { path: `workplaces/${slug}.yaml`, type: 'chore', scope: 'workplace', verb: 'apply' };
-  if (a.includes('budget') || a.includes('kosten') || a.includes('showback'))
-    return { path: `finance/${slug}.yaml`, type: 'chore', scope: 'finance', verb: 'update' };
-  if (a.includes('scan') || a.includes('security'))
-    return { path: `security/${slug}.yaml`, type: 'chore', scope: 'security', verb: 'record' };
-  return { path: `platform/${slug}.yaml`, type: 'chore', scope: 'platform', verb: 'update' };
+  if (a.includes('secret')) return { path: `secrets/${slug}.sops.yaml`, type: 'chore', scope: 'secrets', verb: 'rotate', impact: 'intern' };
+  if (a.includes('infra') || a.includes('instance')) return { path: `infra/${slug}.tf`, type: 'feat', scope: 'infra', verb: 'provision', impact: 'intern' };
+  if (a.includes('release') || a.includes('promo')) return { path: `environments/${slug}.yaml`, type: 'feat', scope: 'release', verb: 'promote', impact: 'intern' };
+  if (a.includes('rfc')) return { path: `governance/rfcs/${slug}.md`, type: 'docs', scope: 'rfc', verb: 'record', impact: 'intern' };
+  if (a.includes('koppelvlak') || a.includes('api')) return { path: `apis/${slug}/openapi.yaml`, type: 'feat', scope: 'api', verb: 'add', impact: 'besluit' };
+  if (a.includes('applicatie') || a.includes('app')) return { path: `apps/${slug}/app.yaml`, type: 'feat', scope: 'app', verb: 'scaffold', impact: 'besluit' };
+  if (a.includes('wet') || a.includes('register') || a.includes('algoritme') || a.includes('databron')) return { path: `regelrecht/${slug}.yaml`, type: 'feat', scope: 'regelrecht', verb: 'apply', impact: 'besluit' };
+  if (a.includes('campagne')) return { path: `fleet/${slug}.yaml`, type: 'feat', scope: 'fleet', verb: 'roll out', impact: 'intern' };
+  if (a.includes('werkplek') || a.includes('device')) return { path: `workplaces/${slug}.yaml`, type: 'chore', scope: 'workplace', verb: 'apply', impact: 'intern' };
+  if (a.includes('budget') || a.includes('kosten') || a.includes('showback')) return { path: `finance/${slug}.yaml`, type: 'chore', scope: 'finance', verb: 'update', impact: 'intern' };
+  if (a.includes('scan') || a.includes('security')) return { path: `security/${slug}.yaml`, type: 'chore', scope: 'security', verb: 'record', impact: 'intern' };
+  return { path: `platform/${slug}.yaml`, type: 'chore', scope: 'platform', verb: 'update', impact: 'intern' };
+}
+
+// Does a handeling of this family require a legal basis? Drawn from commitMetaFor
+// so the line lives in exactly one place.
+export function grondslagVereist(action) {
+  return commitMetaFor(action, '').impact === 'besluit';
 }
 
 // Build a compact, plausible unified diff for the commit. We do not parse real
@@ -175,8 +178,13 @@ export const usePlatformStore = defineStore('platform', {
     datacontracten: clone(seed.datacontracten),
     toegankelijkheidsverklaringen: clone(seed.toegankelijkheidsverklaringen),
     richtlijnen: clone(seed.richtlijnen),
-    // The "logged in" demo user.
+    // The "logged in" demo user. `currentUser` stays the primary persona (the
+    // one whose name shows in the bar, who actions are attributed to); it always
+    // equals activePersonas[0]. `activePersonas` lets you "be" more than one
+    // person at once — e.g. a Logius data engineer plus a BZK tech lead — so the
+    // personal dashboard and inbox aggregate across all of them.
     currentUser: 'ans',
+    activePersonas: ['ans'],
 
     // --- Notification event bus ---
     // Every platform event lives here, newest first. Seeded with a believable
@@ -256,6 +264,37 @@ export const usePlatformStore = defineStore('platform', {
     },
     incidentsByTeam: (s) => (team) => s.incidents.filter((i) => i.team === team),
     currentPerson: (s) => s.people.find((p) => p.id === s.currentUser),
+
+    // --- Active personas (the "who am I right now" set) ---
+    // The full person records for everyone currently being impersonated.
+    activePeople: (s) => s.activePersonas.map((id) => s.people.find((p) => p.id === id)).filter(Boolean),
+    // The distinct teams the active personas belong to.
+    myTeams() {
+      const ids = new Set(this.activePeople.map((p) => p.team).filter(Boolean));
+      return [...ids].map((id) => this.teamById(id)).filter(Boolean);
+    },
+    // Apps, APIs, workplaces and trajectories aggregated across the active
+    // personas — the substance of the "ingelogd op developer.overheid.nl" view.
+    // Built on the existing per-team / per-person filter getters.
+    myApps() {
+      const teams = new Set(this.myTeams.map((t) => t.id));
+      return this.apps.filter((a) => teams.has(a.team));
+    },
+    myApis() {
+      const teams = new Set(this.myTeams.map((t) => t.id));
+      return this.apis.filter((a) => teams.has(a.owner));
+    },
+    myWorkplaces() {
+      return this.activePersonas.flatMap((id) => this.workplacesByPerson(id));
+    },
+    myTrajecten() {
+      const seen = new Set();
+      const out = [];
+      for (const id of this.activePersonas)
+        for (const t of this.trajectenByPerson(id))
+          if (!seen.has(t.id)) { seen.add(t.id); out.push(t); }
+      return out;
+    },
     skillPluginById: (s) => (id) => s.skillPlugins.find((p) => p.id === id),
     pluginsInstalledByTeam: (s) => (team) => {
       const rec = s.skillInstalls.find((x) => x.team === team);
@@ -400,17 +439,43 @@ export const usePlatformStore = defineStore('platform', {
       );
     },
 
+    // --- Bevoegdheidsketen (legality chain) ---
+    // Every artefact that carries a grondslag, normalised to a reference plus the
+    // artefact it belongs to. The chain screen and the per-wet view read this.
+    artefactenMetGrondslag() {
+      const out = [];
+      const push = (kind, route, name, raw) => {
+        const g = readGrondslag(this, raw);
+        if (g && (g.wetId || g.bwb_id)) out.push({ kind, route, name, grondslag: g });
+      };
+      for (const a of this.apis) if (a.grondslag) push('Koppelvlak', '/koppelvlakken', `${a.name} ${a.version}`, a.grondslag);
+      for (const v of this.verwerkingen) if (v.grondslag || v.wet) push('Verwerking', `/verwerkingen/${v.id}`, v.name, v);
+      for (const c of this.datacontracten) if (c.grondslag) push('Datacontract', `/datacontracten/${c.id}`, this.datasetById(c.dataset)?.name || c.id, c.grondslag);
+      for (const w of this.wetten) if (w.service) push('Wet-als-dienst', `/wetten/${w.id}`, w.name, w.id);
+      return out;
+    },
+    // Artefacten that cite a given wet (by demo wet id).
+    artefactenForWet() {
+      return (wetId) => this.artefactenMetGrondslag.filter((x) => x.grondslag.wetId === wetId);
+    },
+    // Commits that carry a legal basis — the handelingen with a citation.
+    commitsMetGrondslag: (s) => s.commits.filter((c) => c.legalBasis && (c.legalBasis.wetId || c.legalBasis.bwb_id)),
+
     // --- Notification inbox ---
     // The current user's relevant events: everything for their team, plus
     // anything that names them as actor. Muted sources are excluded.
     inboxEvents: (s) => {
-      const me = s.people.find((p) => p.id === s.currentUser);
-      const myTeam = me?.team;
+      // Relevant to any of the active personas: their teams, or events naming
+      // one of them as actor, plus anything critical.
+      const myTeams = new Set(
+        s.activePersonas.map((id) => s.people.find((p) => p.id === id)?.team).filter(Boolean),
+      );
+      const myIds = new Set(s.activePersonas);
       return s.events.filter(
         (e) =>
           !e.muted &&
           !s.mutedSources.includes(e.source) &&
-          (e.team === myTeam || e.actor === s.currentUser || e.severity === 'critical')
+          (myTeams.has(e.team) || myIds.has(e.actor) || e.severity === 'critical'),
       );
     },
     unreadCount() {
@@ -431,25 +496,50 @@ export const usePlatformStore = defineStore('platform', {
   },
 
   actions: {
-    audit(action, resource) {
-      this.auditLog.unshift({
-        id: nextId('a'),
-        actor: this.currentUser,
-        action,
-        resource,
-        at: 'zojuist',
-      });
+    // --- Persona switching ---
+    // Become a single persona: replaces the whole active set and makes them
+    // the primary user (the one actions are attributed to).
+    setPersona(id) {
+      if (!this.people.some((p) => p.id === id)) return;
+      this.currentUser = id;
+      this.activePersonas = [id];
+    },
+    // Add or remove a persona from the active set, keeping at least one. The
+    // primary user (currentUser) follows the first entry in the set.
+    togglePersona(id) {
+      if (!this.people.some((p) => p.id === id)) return;
+      const i = this.activePersonas.indexOf(id);
+      if (i === -1) {
+        this.activePersonas = [...this.activePersonas, id];
+      } else if (this.activePersonas.length > 1) {
+        this.activePersonas = this.activePersonas.filter((x) => x !== id);
+      }
+      if (!this.activePersonas.includes(this.currentUser)) {
+        this.currentUser = this.activePersonas[0];
+      }
+    },
+    // Back to the default demo identity.
+    resetPersona() {
+      this.currentUser = 'ans';
+      this.activePersonas = ['ans'];
+    },
+
+    // A handeling with external impact carries its legal basis (a thin RegelRecht
+    // reference) so the audit trail and the commit answer "on what authority".
+    audit(action, resource, { legalBasis = null } = {}) {
+      this.auditLog.unshift({ id: nextId('a'), actor: this.currentUser, action, resource, at: 'zojuist', legalBasis: legalBasis || null });
       // The same event, seen as a commit: every audited action writes to the
       // platform-config repo. This is what makes "every click is a commit" true.
-      this.commit({ action, resource });
+      this.commit({ action, resource, legalBasis });
     },
 
     // Append a commit to the platform-config repo for an action. Pure and
     // deterministic; the sha/path/message/diff all follow from action+resource.
     // An action that already knows its real artifact (e.g. createApi has the
     // generated OpenAPI spec) may override `path`, `diff` and `message` so the
-    // commit shows the actual change instead of a generic placeholder.
-    commit({ action, resource, actor = null, path = null, diff = null, message = null }) {
+    // commit shows the actual change instead of a generic placeholder. A handeling
+    // with external impact also carries its `legalBasis` (juriconnect reference).
+    commit({ action, resource, actor = null, path = null, diff = null, message = null, legalBasis = null }) {
       const id = nextId('c');
       const meta = commitMetaFor(action, resource);
       const sha = shaFor(`${id}|${action}|${resource}`);
@@ -462,6 +552,8 @@ export const usePlatformStore = defineStore('platform', {
         path: finalPath,
         diff: diff || diffFor(meta, resource),
         action,
+        impact: meta.impact,
+        legalBasis: legalBasis || null,
         at: 'zojuist',
       };
       this.commits.unshift(entry);
@@ -669,16 +761,7 @@ export const usePlatformStore = defineStore('platform', {
     // traceable as a new app. `standaarden`/`exposure`/`persoonsgegevens`/`events`
     // carry the compliant-by-default profile the wizard assembled, which the
     // api-standaarden evaluator reads back verbatim.
-    createApi({
-      name,
-      version = 'v1',
-      team,
-      exposure = 'intern',
-      persoonsgegevens = false,
-      events = false,
-      standaarden = {},
-      resources = [],
-    }) {
+    createApi({ name, version = 'v1', team, exposure = 'intern', persoonsgegevens = false, events = false, grondslag = '', standaarden = {}, resources = [] }) {
       const id = nextId('api');
       const cleanResources = resources
         .map((r) => ({
@@ -694,9 +777,12 @@ export const usePlatformStore = defineStore('platform', {
         adr: standaarden.adr !== false, // ADR is on by default on the golden path
         rateLimit: '100/s',
         status: 'beta',
-        exposure,
-        persoonsgegevens,
-        events,
+        exposure, persoonsgegevens, events,
+        // The legal basis: a thin RegelRecht reference (wetId + article + …) when
+        // the koppelvlak has external impact. Accepts either the structured
+        // reference from GrondslagFields, or a bare wet-id (legacy) which is
+        // normalised on read. Stored verbatim; the keten resolves it via the store.
+        grondslag: grondslag || null,
         standaarden: {
           problemJson: Boolean(standaarden.problemJson),
           oauth: Boolean(standaarden.oauth),
@@ -714,17 +800,16 @@ export const usePlatformStore = defineStore('platform', {
       };
       this.apis.push(api);
 
+      // The handeling inherits the artefact's legal basis: a normalised juriconnect
+      // reference rides along on both the audit entry and the commit, so the trail
+      // answers "on what authority was this koppelvlak created".
+      const legalBasis = api.grondslag ? readGrondslag(this, api.grondslag) : null;
+
       // Audit + commit. Unlike a generic action, a new koppelvlak has a real
       // artifact — the OpenAPI spec — so we write that as the commit diff on a
       // proper apis/<slug>/<version>/openapi.yaml path, instead of the generic
       // "managed: true" placeholder. The diff IS the contract you just designed.
-      this.auditLog.unshift({
-        id: nextId('a'),
-        actor: this.currentUser,
-        action: 'koppelvlak aangemaakt',
-        resource: name,
-        at: 'zojuist',
-      });
+      this.auditLog.unshift({ id: nextId('a'), actor: this.currentUser, action: 'koppelvlak aangemaakt', resource: name, at: 'zojuist', legalBasis });
       const slug = name.toLowerCase().replace(/api$/, '').trim().replace(/\s+/g, '-') || 'api';
       const specPath = `apis/${slug}/${version}/openapi.yaml`;
       const specDiff = api.spec
@@ -741,6 +826,7 @@ export const usePlatformStore = defineStore('platform', {
         path: specPath,
         message: `feat(api): add ${slug} ${version}`,
         diff: specDiff,
+        legalBasis,
       });
 
       this.emit('api.created', {

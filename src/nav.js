@@ -682,24 +682,10 @@ export const domains = [
     icon: 'check-list',
     wave: 'R',
     routes: [
-      {
-        path: '/governance',
-        name: 'governance',
-        view: () => import('./domains/governance/Gates.vue'),
-        title: 'Beleids-gates',
-      },
-      {
-        path: '/governance/rfcs',
-        name: 'governance-rfcs',
-        view: () => import('./domains/governance/Rfcs.vue'),
-        title: "RFC's",
-      },
-      {
-        path: '/governance/audit',
-        name: 'governance-audit',
-        view: () => import('./domains/governance/AuditLog.vue'),
-        title: 'Audit-log',
-      },
+      { path: '/governance', name: 'governance', view: () => import('./domains/governance/Gates.vue'), title: 'Beleids-gates' },
+      { path: '/governance/bevoegdheid', name: 'governance-bevoegdheid', view: () => import('./domains/governance/Bevoegdheidsketen.vue'), title: 'Bevoegdheidsketen' },
+      { path: '/governance/rfcs', name: 'governance-rfcs', view: () => import('./domains/governance/Rfcs.vue'), title: "RFC's" },
+      { path: '/governance/audit', name: 'governance-audit', view: () => import('./domains/governance/AuditLog.vue'), title: 'Audit-log' },
     ],
   },
   {

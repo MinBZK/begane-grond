@@ -13,6 +13,7 @@ import DataTable from '../../components/shared/DataTable.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import CliHint from '../../components/shared/CliHint.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
+import GrondslagBlock from '../../components/shared/GrondslagBlock.vue';
 import { evalApiStandaarden } from './api-standaarden.js';
 
 const store = usePlatformStore();
@@ -243,6 +244,11 @@ const selectedStandaarden = computed(() =>
               <span class="rp-spec-sub">· ontworpen in de wizard, {{ selected.resources?.length || 0 }} resource(s)</span>
             </p>
             <nldd-code-viewer language="yaml" class="rp-spec-yaml">{{ selected.spec }}</nldd-code-viewer>
+          </template>
+
+          <template v-if="selected.grondslag">
+            <nldd-spacer size="16" />
+            <GrondslagBlock :grondslag="selected.grondslag" title="Grondslag (waar mag dit)" />
           </template>
 
           <nldd-spacer size="16" />
