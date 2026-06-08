@@ -8,6 +8,7 @@ import { useRouter } from 'vue-router';
 import AppShell from './components/AppShell.vue';
 import PresentationDeck from './presentation/PresentationDeck.vue';
 import { usePresentation } from './presentation/usePresentation.js';
+import { routeById } from './presentation/routes.js';
 import { usePlatformStore } from './stores/index.js';
 
 const router = useRouter();
@@ -15,15 +16,22 @@ const store = usePlatformStore();
 const p = usePresentation();
 p.init(router, store);
 
-// Deep-link restore: ?present=1&slide=12 opens the deck on that slide, and an
-// optional &tour=<id> picks the tour (default: the pitch deck). Wait for the
-// router to be ready so the initial navigation does not swallow start().
+// Deep-link restore: ?present=1&slide=12 opens the deck on that slide. An
+// optional &tour=<id> picks a tour, or &route=<id> picks a role-route — which
+// also restores the persona, so a shared link lands you as the right person.
+// Wait for the router to be ready so the initial navigation does not swallow start().
 router.isReady().then(() => {
   const q = router.currentRoute.value.query;
   if (q.present) {
     const n = Math.max(1, parseInt(q.slide || '1', 10)) - 1;
-    if (q.tour) p.startTour(String(q.tour), n);
-    else p.start(n);
+    if (q.route) {
+      store.setPersona(routeById(String(q.route)).persona);
+      p.startRoute(String(q.route), n);
+    } else if (q.tour) {
+      p.startTour(String(q.tour), n);
+    } else {
+      p.start(n);
+    }
   }
 });
 
@@ -44,7 +52,7 @@ function onGlobalKey(e) {
   if (typing) return;
   if (e.shiftKey && (e.key === 'P' || e.key === 'p') && !p.active.value) {
     e.preventDefault();
-    p.start(0);
+    p.start();
   }
 }
 onMounted(() => document.addEventListener('keydown', onGlobalKey));

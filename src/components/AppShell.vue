@@ -9,7 +9,7 @@ import { domains, waveLabels } from '../nav.js';
 import { commandItems } from '../lib/commands.js';
 import { usePlatformStore } from '../stores/index.js';
 import { usePresentation } from '../presentation/usePresentation.js';
-import { tours as allTours, toursForPersonas } from '../presentation/tours.js';
+import { routes } from '../presentation/routes.js';
 import NotificationInbox from './shared/NotificationInbox.vue';
 
 const route = useRoute();
@@ -66,7 +66,7 @@ const query = ref('');
 // The order groups appear in: navigation first, then the entity types. Anything
 // not listed falls to the end in first-seen order.
 const GROUP_ORDER = [
-  'Domein', 'Tour', 'Actie', 'Pagina',
+  'Domein', 'Rol', 'Actie', 'Pagina',
   'Applicatie', 'Koppelvlak', 'Team', 'Persoon', 'Dataset', 'Datacontract',
   'Basisregistratie', 'Wet', 'Verwerking', 'Algoritme', 'Component', 'Repository',
   'Instance', 'Domein', 'Datacenter', 'Incident', 'Campagne',
@@ -143,84 +143,40 @@ function closePalette() {
 }
 function go(item) {
   closePalette();
-  if (item.tour) {
-    // Route through startTour so a persona-specific tour switches persona first,
-    // same as launching it from the tour launcher.
-    const tour = allTours.find((t) => t.id === item.tour);
-    if (tour) startTour(tour);
+  if (item.route) {
+    // A route launches the role's deck and switches persona, same as the launcher.
+    const route = routes.find((r) => r.id === item.route);
+    if (route) startRoute(route);
   } else if (item.to) {
     router.push(item.to);
   }
 }
 
-// --- Persona switcher ---
-// Begane Grond is the logged-in side of developer.overheid.nl; the persona
-// switcher is the "login". You can be one person, or several at once (e.g. a
-// Logius data engineer plus a BZK tech lead), and the personal dashboard and
-// inbox aggregate across the set. Persisted so a reload keeps who you are.
+// --- Persona / route ---
+// Begane Grond is the logged-in side of developer.overheid.nl, and the "login"
+// is a route: you pick a role on the example team and become that person, which
+// reframes the whole app (mijn overzicht, inbox, "mine" views) and plays that
+// role's deck. Persisted so a reload keeps who you are.
 const PERSONA_KEY = 'rp-personas';
-const activeIds = computed(() => store.activePersonas);
-const activePeople = computed(() => store.activePeople);
-// People grouped by organisation, for the switcher menu. NLDD first (the home
-// org), then the rest alphabetically by short name.
-const peopleByOrg = computed(() => {
-  const map = new Map();
-  for (const p of store.people) {
-    const org = p.org || 'overig';
-    if (!map.has(org)) map.set(org, []);
-    map.get(org).push(p);
-  }
-  const orgs = [...map.keys()].sort((a, b) => {
-    if (a === 'nldd') return -1;
-    if (b === 'nldd') return 1;
-    return (store.orgById(a)?.short || a).localeCompare(store.orgById(b)?.short || b);
-  });
-  return orgs.map((org) => ({
-    org,
-    label: store.orgById(org)?.name || org,
-    people: map.get(org),
-  }));
-});
-function isActivePersona(id) {
-  return store.activePersonas.includes(id);
-}
-function persistPersonas() {
+function persistPersona() {
   try { localStorage.setItem(PERSONA_KEY, JSON.stringify(store.activePersonas)); } catch (e) {}
 }
 function pickPersona(id) {
   store.setPersona(id);
-  persistPersonas();
+  persistPersona();
 }
-function togglePersona(id) {
-  store.togglePersona(id);
-  persistPersonas();
+function backToAnne() {
+  store.resetPersona();
+  persistPersona();
 }
 
-// --- Tour launcher ---
-// Tours are choosable walks through the platform (the pitch, the engineer's
-// path, the compliance walk, the "build a koppelvlak" quest). The launcher
-// splits them into "voor jou" (audience matches an active persona) and thematic.
-const tourLauncherOpen = ref(false);
-function openTourLauncher() {
-  tourLauncherOpen.value = true;
-}
-function closeTourLauncher() {
-  tourLauncherOpen.value = false;
-}
-const personaTours = computed(() => toursForPersonas(store.activePersonas));
-const thematicTours = computed(() => {
-  const personaIds = new Set(personaTours.value.map((t) => t.id));
-  return allTours.filter((t) => !personaIds.has(t.id));
-});
-// Start a tour. If it is written for a specific persona you are not currently,
-// become that persona first, so the quest is genuinely "what if you worked at
-// Logius" — the dashboard, inbox and "mine" views all reframe to that person.
-function startTour(tour) {
-  closeTourLauncher();
-  if (Array.isArray(tour.audience) && !tour.audience.some((id) => store.activePersonas.includes(id))) {
-    pickPersona(tour.audience[0]);
-  }
-  presentation.startTour(tour.id, 0);
+// --- Routes ---
+// The choice of "who are you today" lives in the presentation (the chooser slide
+// on Shift+P), not in the app UI. This helper is only used by the command
+// palette ("Word de jurist…"): switch persona and start that route's deck.
+function startRoute(route) {
+  pickPersona(route.persona);
+  presentation.startRoute(route.id, 0);
 }
 
 function onKeydown(e) {
@@ -238,15 +194,12 @@ onMounted(() => {
     if (v) theme.value = v;
   } catch { /* best-effort: localStorage may be unavailable */ }
   applyTheme();
-  // Restore the active persona set from a previous session.
+  // Restore the persona from a previous session (the route you last chose).
   try {
     const raw = localStorage.getItem(PERSONA_KEY);
     if (raw) {
       const ids = JSON.parse(raw).filter((id) => store.people.some((p) => p.id === id));
-      if (ids.length) {
-        store.currentUser = ids[0];
-        store.activePersonas = ids;
-      }
+      if (ids[0]) store.setPersona(ids[0]);
     }
   } catch (e) {}
   if (window.matchMedia) {
@@ -299,27 +252,10 @@ onBeforeUnmount(() => {
             </nldd-menu>
           </nldd-menu-bar-item>
           <nldd-menu-bar-item
-            :text="activePeople.length > 1 ? `${store.currentPerson?.name?.split(' ')[0]} +${activePeople.length - 1}` : (store.currentPerson?.name || 'Anne Schuth')"
+            :text="store.currentPerson ? `${store.currentPerson.name} · ${store.currentPerson.role}` : 'Anne Schuth'"
             icon="person-circle"
-            expandable
-          >
-            <nldd-menu>
-              <nldd-menu-item text="Mijn overzicht" @click="router.push('/zelf')"></nldd-menu-item>
-              <nldd-menu-item text="Doe een tour…" @click="openTourLauncher"></nldd-menu-item>
-              <nldd-menu-item v-if="activeIds.length > 1 || activeIds[0] !== 'ans'" text="Terug naar Anne (NLDD)" @click="pickPersona('ans')"></nldd-menu-item>
-              <template v-for="grp in peopleByOrg" :key="grp.org">
-                <nldd-menu-item :text="grp.label" disabled></nldd-menu-item>
-                <nldd-menu-item
-                  v-for="p in grp.people"
-                  :key="p.id"
-                  type="checkbox"
-                  :text="`${p.name} · ${p.role}`"
-                  :selected="isActivePersona(p.id) || undefined"
-                  @click="togglePersona(p.id)"
-                ></nldd-menu-item>
-              </template>
-            </nldd-menu>
-          </nldd-menu-bar-item>
+            @click="router.push('/zelf')"
+          ></nldd-menu-bar-item>
         </nldd-menu-bar>
       </nldd-top-navigation-bar>
     </nldd-skip-link>
@@ -355,15 +291,10 @@ onBeforeUnmount(() => {
           <nldd-page-footer-legal-bar-item slot="end" text="Toegankelijkheid" href="/standaarden" />
         </nldd-page-footer-legal-bar>
         <div class="rp-footer-present">
-          <button type="button" class="rp-present-link" @click="openTourLauncher">
-            <nldd-icon name="caret-right" aria-hidden="true"></nldd-icon>
-            Tour starten
-            <span class="rp-present-hint">kies een rondleiding</span>
-          </button>
-          <button type="button" class="rp-present-link" @click="presentation.start(0)">
+          <button type="button" class="rp-present-link" @click="presentation.start()">
             <nldd-icon name="presentation" aria-hidden="true"></nldd-icon>
             Presentatie
-            <span class="rp-present-hint">Shift + P</span>
+            <span class="rp-present-hint">Shift + P · kies een rol</span>
           </button>
         </div>
       </nldd-page-footer>
@@ -412,40 +343,6 @@ onBeforeUnmount(() => {
       <p v-if="query && !hasResults" class="rp-palette-empty">Niets gevonden voor "{{ query }}".</p>
     </nldd-container>
   </nldd-window>
-
-  <!-- Tour launcher -->
-  <div v-if="tourLauncherOpen" class="rp-tour-backdrop" @click="closeTourLauncher"></div>
-  <div v-if="tourLauncherOpen" class="rp-tour-modal" role="dialog" aria-label="Kies een tour">
-    <div class="rp-tour-head">
-      <nldd-title size="4"><h2>Kies een rondleiding</h2></nldd-title>
-      <button type="button" class="rp-tour-close" aria-label="Sluiten" @click="closeTourLauncher">
-        <nldd-icon name="dismiss" aria-hidden="true"></nldd-icon>
-      </button>
-    </div>
-    <nldd-rich-text>
-      <p>Loop het platform door langs een verhaal: vanuit een persona, of langs een thema.</p>
-    </nldd-rich-text>
-
-    <template v-if="personaTours.length">
-      <p class="rp-tour-group">Voor jou — {{ store.currentPerson?.name }}</p>
-      <div class="rp-tour-grid">
-        <button v-for="t in personaTours" :key="t.id" type="button" class="rp-tour-card" @click="startTour(t)">
-          <nldd-icon :name="t.icon" aria-hidden="true"></nldd-icon>
-          <strong>{{ t.title }}</strong>
-          <span>{{ t.lead }}</span>
-        </button>
-      </div>
-    </template>
-
-    <p class="rp-tour-group">Thematische tours</p>
-    <div class="rp-tour-grid">
-      <button v-for="t in thematicTours" :key="t.id" type="button" class="rp-tour-card" @click="startTour(t)">
-        <nldd-icon :name="t.icon" aria-hidden="true"></nldd-icon>
-        <strong>{{ t.title }}</strong>
-        <span>{{ t.lead }}</span>
-      </button>
-    </div>
-  </div>
 
   <!-- Notification bell popover -->
   <div v-if="inboxOpen" class="rp-inbox-backdrop" @click="closeInbox"></div>
@@ -563,6 +460,15 @@ onBeforeUnmount(() => {
 .rp-tour-card span {
   font-size: 0.85rem;
   opacity: 0.7;
+}
+.rp-route-grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.rp-route-role {
+  font-weight: 600;
+  opacity: 0.95 !important;
+  color: var(--semantics-actions-primary-default-background-color);
+  font-size: 0.82rem !important;
 }
 .rp-bell-alert::after {
   content: '';

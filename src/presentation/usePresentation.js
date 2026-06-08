@@ -2,8 +2,18 @@
 // State is shared via module-level refs (no Pinia involved).
 import { ref, computed, nextTick } from 'vue'
 import { tours, tourById } from './tours.js'
+import { routes, routeById } from './routes.js'
 import { runScript } from './drive.js'
 import { wizardScripts } from './wizard-scripts.js'
+
+// The chooser deck: a single full-screen "wie ben je vandaag?" slide that opens
+// when the presentation starts (Shift+P). Its `kind: 'choice'` tells the deck to
+// render the role cards instead of the usual title/lead/bullets. Picking a card
+// calls chooseRoute(), which becomes that persona and swaps to the route's deck.
+const CHOOSER_TOUR = {
+  id: 'chooser',
+  slides: [{ id: 'chooser', kind: 'choice', full: true }],
+}
 
 // Module-level singleton state shared across every usePresentation() call.
 const active = ref(false)
@@ -14,6 +24,9 @@ const autoplay = ref(false)
 // reads from this tour, so the whole engine is tour-agnostic.
 const activeTour = ref(tourById('pitch'))
 const slides = computed(() => activeTour.value.slides)
+// When a route (role) is playing instead of a tour, its id is held here so the
+// deeplink encodes ?route= and a reload can restore both the deck and persona.
+const activeRouteId = ref(null)
 // When on, next()/prev() jump over slides marked `skippable`, so a tight time
 // slot can run the core spine without manually clicking through the optional
 // slides. The presenter toggles this with the 'o' key.
@@ -55,8 +68,18 @@ function init(router, store) {
 function presentQuery(i) {
   const currentQuery = _router ? _router.currentRoute.value.query : {}
   const q = { ...currentQuery, present: '1', slide: String(i + 1) }
-  if (activeTour.value.id !== 'pitch') q.tour = activeTour.value.id
-  else delete q.tour
+  // A role-route encodes ?route=; a tour encodes ?tour= (except the default
+  // pitch deck, whose URLs stay clean). They are mutually exclusive.
+  if (activeRouteId.value) {
+    q.route = activeRouteId.value
+    delete q.tour
+  } else if (activeTour.value.id !== 'pitch') {
+    q.tour = activeTour.value.id
+    delete q.route
+  } else {
+    delete q.tour
+    delete q.route
+  }
   return q
 }
 
@@ -223,18 +246,66 @@ function toggleSkipOptional() {
   skipOptional.value = !skipOptional.value;
 }
 
-// Enter presentation mode and show the first (or given) slide. Defaults to the
-// pitch tour, so existing entry points (Shift+P, the footer link) are unchanged.
-async function start(fromIndex = 0) {
+// Enter presentation mode. Shift+P opens the chooser slide ("wie ben je
+// vandaag?"); picking a role there starts that route's deck. The chooser IS the
+// first slide — the choice lives in the presentation, not the app UI.
+async function start() {
+  activeTour.value = CHOOSER_TOUR
+  activeRouteId.value = null
+  active.value = true
+  document.documentElement.classList.add('rp-presenting')
+  await goto(0)
+}
+
+// Start the pitch deck directly (the 56-slide stage talk), bypassing the chooser.
+async function startPitch(fromIndex = 0) {
   activeTour.value = tourById('pitch')
+  activeRouteId.value = null
   active.value = true
   document.documentElement.classList.add('rp-presenting')
   await goto(fromIndex)
 }
 
+// Whether the chooser slide is currently showing (so the deck can hide the
+// "naar de keuze" button on the chooser itself).
+const onChooser = computed(() => activeTour.value.id === 'chooser')
+
+// Go back to the chooser slide from within a route/the pitch.
+async function backToChooser() {
+  await start()
+}
+
+// Pick a role from the chooser slide: become that persona (via the injected
+// store, so the store stays the single owner of identity) and play its route
+// from slide 0. The 'pitch' id is a special choice → the stage talk.
+async function chooseRoute(id) {
+  if (id === 'pitch') {
+    await startPitch(0)
+    return
+  }
+  const route = routeById(id)
+  if (_store) _store.setPersona(route.persona)
+  await startRoute(route.id, 0)
+}
+
 // Start a specific tour by id. The tour launcher and ?tour= deep links use this.
 async function startTour(tourId, fromIndex = 0) {
   activeTour.value = tourById(tourId)
+  activeRouteId.value = null
+  index.value = 0
+  active.value = true
+  document.documentElement.classList.add('rp-presenting')
+  await goto(fromIndex)
+}
+
+// Start a role-route by id. The route launcher and ?route= deep links use this.
+// A route object is a drop-in for activeTour (the engine only reads `.slides`);
+// the persona switch is the caller's job, so the store stays the owner of
+// identity. activeRouteId drives the ?route= deeplink.
+async function startRoute(routeId, fromIndex = 0) {
+  const route = routeById(routeId)
+  activeTour.value = route
+  activeRouteId.value = route.id
   index.value = 0
   active.value = true
   document.documentElement.classList.add('rp-presenting')
@@ -250,13 +321,15 @@ function stop() {
     clearInterval(_autoTimer);
     _autoTimer = null;
   }
-  document.documentElement.classList.remove('rp-presenting');
-  document.documentElement.classList.remove('rp-presenting-full');
+  document.documentElement.classList.remove('rp-presenting')
+  document.documentElement.classList.remove('rp-presenting-full')
+  activeRouteId.value = null
   if (_router) {
     const query = { ...(_router.currentRoute.value.query || {}) }
     delete query.present
     delete query.slide
     delete query.tour
+    delete query.route
     _router.replace({ query })
   }
 }
@@ -303,9 +376,15 @@ export function usePresentation() {
     drivePaused,
     activeTour,
     tours,
+    routes,
+    onChooser,
     init,
     start,
+    startPitch,
     startTour,
+    startRoute,
+    chooseRoute,
+    backToChooser,
     stop,
     next,
     prev,

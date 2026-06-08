@@ -5,7 +5,7 @@
 // `keywords` string (its searchable text) so matching works on more than the
 // label, and a `subtitle` for context (team, status) in the results list.
 import { domains } from '../nav.js';
-import { tours } from '../presentation/tours.js';
+import { routes } from '../presentation/routes.js';
 import { usePlatformStore } from '../stores/index.js';
 
 export function commandItems() {
@@ -14,10 +14,10 @@ export function commandItems() {
   for (const d of domains) {
     items.push({ label: d.label, to: d.path, icon: d.icon, hint: 'Domein', keywords: d.label });
   }
-  // Tours, as a searchable action ("Start tour: …"). The `tour` field is handled
-  // by the palette's go() — it starts the tour instead of navigating.
-  for (const t of tours) {
-    items.push({ label: `Tour: ${t.title}`, tour: t.id, icon: t.icon, hint: 'Tour', keywords: `tour rondleiding ${t.title} ${t.theme}` });
+  // Routes, as a searchable action ("Word de jurist…"). The `route` field is
+  // handled by the palette's go() — it switches persona and starts the deck.
+  for (const r of routes) {
+    items.push({ label: `Word ${r.role}`, route: r.id, icon: r.icon, hint: 'Rol', keywords: `rol route ${r.role} ${r.id} presentatie verhaal` });
   }
   // Common actions.
   items.push(

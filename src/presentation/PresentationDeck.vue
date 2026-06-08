@@ -1,8 +1,26 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { usePresentation } from './usePresentation.js'
+import { usePlatformStore } from '../stores/index.js'
 
 const p = usePresentation()
+const store = usePlatformStore()
+
+// The cards on the chooser slide: the 7 roles plus the pitch. Each resolves the
+// person's name so the card reads "Sanne Visser · Backend developer".
+const chooserCards = computed(() => {
+  const roleCards = p.routes.map((r) => ({
+    id: r.id,
+    name: store.personById(r.persona)?.name || r.role,
+    role: r.role,
+    icon: r.icon,
+    lead: r.lead,
+  }))
+  return [
+    ...roleCards,
+    { id: 'pitch', name: 'Het podiumverhaal', role: 'De pitch', icon: 'presentation', lead: 'Waarom de overheid het grootste softwarebedrijf van Nederland is.' },
+  ]
+})
 
 // Whether the viewport is large enough to run the deck.
 const wideEnough = ref(true)
@@ -125,6 +143,33 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
+    <!-- Chooser slide: "wie ben je vandaag?" — its own layout, the first time a
+         slide is interactive. Picking a card becomes that persona + plays the route. -->
+    <template v-else-if="current && current.kind === 'choice'">
+      <div class="chooser">
+        <div class="chooser-head">
+          <h1 class="chooser-title">Wie ben je vandaag?</h1>
+          <p class="chooser-sub">Kies een rol bij het team Toeslagen. Je wordt die persoon, en het platform laat het verhaal vanuit hún werk zien.</p>
+        </div>
+        <div class="chooser-grid">
+          <button
+            v-for="c in chooserCards"
+            :key="c.id"
+            type="button"
+            class="chooser-card"
+            :class="{ 'chooser-card-pitch': c.id === 'pitch' }"
+            @click="p.chooseRoute(c.id)"
+          >
+            <nldd-icon :name="c.icon" aria-hidden="true"></nldd-icon>
+            <span class="chooser-card-name">{{ c.name }}</span>
+            <span class="chooser-card-role">{{ c.role }}</span>
+            <span class="chooser-card-lead">{{ c.lead }}</span>
+          </button>
+        </div>
+        <button type="button" class="chooser-close" @click="p.stop()">Sluiten · Esc</button>
+      </div>
+    </template>
+
     <!-- The actual slide panel. -->
     <template v-else>
       <div class="content">
@@ -206,6 +251,12 @@ onBeforeUnmount(() => {
         <div class="footer-row">
           <span class="counter-wrap">
             <span class="counter" :aria-label="`Slide ${index + 1} van ${total}`">{{ counter }}</span>
+            <button
+              v-if="!p.onChooser.value"
+              type="button"
+              class="chooser-back"
+              @click="p.backToChooser()"
+            >← Naar de keuze</button>
             <span
               v-if="current && current.skippable"
               class="optional-chip"
@@ -269,6 +320,69 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+/* Chooser slide ("wie ben je vandaag?") — full-screen, its own look. */
+.chooser {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 4vh 5vw;
+  color: #fff;
+  overflow-y: auto;
+}
+.chooser-head { text-align: center; max-width: 46rem; }
+.chooser-title {
+  font-family: 'RijksoverheidSerif', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  margin: 0 0 0.6rem;
+  font-weight: 700;
+}
+.chooser-sub { font-size: clamp(0.95rem, 1.4vw, 1.2rem); opacity: 0.8; margin: 0; line-height: 1.5; }
+.chooser-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 64rem;
+}
+.chooser-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+  padding: 1.25rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.chooser-card:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+.chooser-card nldd-icon { width: 1.6rem; height: 1.6rem; opacity: 0.9; margin-bottom: 0.2rem; }
+.chooser-card-name { font-weight: 700; font-size: 1.05rem; }
+.chooser-card-role { font-size: 0.85rem; font-weight: 600; color: #8fb8e8; }
+.chooser-card-lead { font-size: 0.85rem; opacity: 0.75; line-height: 1.4; }
+.chooser-card-pitch { border-style: dashed; }
+.chooser-close {
+  background: none;
+  border: none;
+  color: #fff;
+  opacity: 0.6;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+}
+.chooser-close:hover { opacity: 1; }
+
 .deck {
   position: fixed;
   left: 0;
@@ -459,6 +573,17 @@ onBeforeUnmount(() => {
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.85);
 }
+
+.chooser-back {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0;
+}
+.chooser-back:hover { color: #fff; }
 
 /* Presenter cue: this slide can be cut when the talk runs short. */
 .optional-chip {

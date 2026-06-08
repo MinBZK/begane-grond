@@ -281,6 +281,96 @@ export const people = [
     ]
   },
   {
+    "id": "noor-bakker",
+    "name": "Noor Bakker",
+    "role": "Tech lead",
+    "org": "bzk",
+    "team": "team-toeslagen",
+    "matrix": "@noor-bakker:rijk.chat",
+    "avatar": "NB",
+    "history": [
+      {
+        "period": "2021–nu",
+        "what": "Tech lead Toeslagen, BZK"
+      }
+    ]
+  },
+  {
+    "id": "wouter-stam",
+    "name": "Wouter Stam",
+    "role": "Scrum master",
+    "org": "bzk",
+    "team": "team-toeslagen",
+    "matrix": "@wouter-stam:rijk.chat",
+    "avatar": "WS",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Scrum master Toeslagen, BZK"
+      }
+    ]
+  },
+  {
+    "id": "samira-haddad",
+    "name": "Samira Haddad",
+    "role": "Information security officer",
+    "org": "bzk",
+    "team": "team-toeslagen",
+    "matrix": "@samira-haddad:rijk.chat",
+    "avatar": "SH",
+    "history": [
+      {
+        "period": "2020–nu",
+        "what": "Information security officer Toeslagen, BZK"
+      }
+    ]
+  },
+  {
+    "id": "daan-koster",
+    "name": "Daan Koster",
+    "role": "Business analist",
+    "org": "bzk",
+    "team": "team-toeslagen",
+    "matrix": "@daan-koster:rijk.chat",
+    "avatar": "DK",
+    "history": [
+      {
+        "period": "2022–nu",
+        "what": "Business analist Toeslagen, BZK"
+      }
+    ]
+  },
+  {
+    "id": "lieke-jansen",
+    "name": "Lieke Jansen",
+    "role": "Jurist",
+    "org": "bzk",
+    "team": "team-toeslagen",
+    "matrix": "@lieke-jansen:rijk.chat",
+    "avatar": "LJ",
+    "history": [
+      {
+        "period": "2021–nu",
+        "what": "Wetgevingsjurist Toeslagen, BZK"
+      }
+    ]
+  },
+  {
+    "id": "bram-de-wit",
+    "name": "Bram de Wit",
+    "role": "Beleidsmaker",
+    "org": "bzk",
+    "team": "team-toeslagen",
+    "matrix": "@bram-de-wit:rijk.chat",
+    "avatar": "BW",
+    "history": [
+      {
+        "period": "2020–nu",
+        "what": "Beleidsmedewerker Toeslagen, BZK"
+      }
+    ]
+  },
+  {
     "id": "sanne-de-vries",
     "name": "Sanne De Vries",
     "role": "Frontend developer",
@@ -6065,7 +6155,13 @@ export const teams = [
     "org": "bzk",
     "matrix": "#toeslagen:rijk.chat",
     "members": [
-      "sanne"
+      "sanne",
+      "noor-bakker",
+      "wouter-stam",
+      "samira-haddad",
+      "daan-koster",
+      "lieke-jansen",
+      "bram-de-wit"
     ],
     "owns": {
       "apps": [
@@ -35444,7 +35540,9 @@ export const trajecten = [
     "branch": "awir-3f2a9c01",
     "members": [
       "sanne",
-      "joost"
+      "joost",
+      "lieke-jansen",
+      "bram-de-wit"
     ],
     "team": "team-toeslagen",
     "opened": "di 11:00"
