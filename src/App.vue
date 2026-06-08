@@ -15,21 +15,32 @@ const store = usePlatformStore();
 const p = usePresentation();
 p.init(router, store);
 
-// Deep-link restore: ?present=1&slide=12 opens the deck on that slide. Wait for
-// the router to be ready so the initial navigation does not swallow start().
+// Deep-link restore: ?present=1&slide=12 opens the deck on that slide, and an
+// optional &tour=<id> picks the tour (default: the pitch deck). Wait for the
+// router to be ready so the initial navigation does not swallow start().
 router.isReady().then(() => {
   const q = router.currentRoute.value.query;
   if (q.present) {
     const n = Math.max(1, parseInt(q.slide || '1', 10)) - 1;
-    p.start(n);
+    if (q.tour) p.startTour(String(q.tour), n);
+    else p.start(n);
   }
 });
 
 // Global stage shortcut: Shift+P starts the presentation from the top.
 function onGlobalKey(e) {
   const t = e.target;
+  // NLDD form fields are web components, so e.target is the custom element
+  // (e.g. <nldd-text-field>), not the inner <input>. Treat those as typing too,
+  // otherwise a capital P in any field name (e.g. "Postgres API") fires Shift+P.
+  const tag = t?.tagName?.toLowerCase() || '';
   const typing =
-    t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+    t &&
+    (tag === 'input' ||
+      tag === 'textarea' ||
+      tag === 'select' ||
+      t.isContentEditable ||
+      tag.startsWith('nldd-'));
   if (typing) return;
   if (e.shiftKey && (e.key === 'P' || e.key === 'p') && !p.active.value) {
     e.preventDefault();

@@ -16,26 +16,33 @@ import NotificationInbox from '../../components/shared/NotificationInbox.vue';
 
 const store = usePlatformStore();
 
+// The primary persona drives the welcome header; the full active set drives the
+// aggregated data. With one persona active this behaves exactly as before.
 const me = computed(() => store.currentPerson);
+const activePeople = computed(() => store.activePeople);
+const multiPersona = computed(() => activePeople.value.length > 1);
 const myTeam = computed(() => store.teamOfPerson(me.value.id));
 const myOrg = computed(() => (myTeam.value ? store.orgById(myTeam.value.org) : null));
 
-// Apps and instances that belong to my team(s). The seed gives a person one
-// team, but we treat it as a list so the layout survives multi-team members.
-const myTeams = computed(() => (myTeam.value ? [myTeam.value] : []));
-const myApps = computed(() => myTeams.value.flatMap((t) => store.appsByTeam(t.id)));
+// Apps, instances and workplaces aggregated across every active persona's
+// team(s), via the store's persona-aware getters.
+const myTeams = computed(() => store.myTeams);
+const myApps = computed(() => store.myApps);
 const myInstances = computed(() => myTeams.value.flatMap((t) => store.instancesByTeam(t.id)));
-const myWorkplaces = computed(() => store.workplacesByPerson(me.value.id));
+const myWorkplaces = computed(() => store.myWorkplaces);
 
 // Monthly infra spend across my team's instances.
 const monthlySpend = computed(() => myInstances.value.reduce((sum, i) => sum + (i.costMonth || 0), 0));
 
-// On-call: am I currently the pager, or in the escalation chain?
+// On-call: is any active persona currently the pager, or in the escalation chain?
+const personaIds = computed(() => store.activePersonas);
 const myOncall = computed(() =>
-  store.oncall.find((o) => o.person === me.value.id || (o.escalation || []).includes(me.value.id)),
+  store.oncall.find(
+    (o) => personaIds.value.includes(o.person) || (o.escalation || []).some((id) => personaIds.value.includes(id)),
+  ),
 );
-const onCallNow = computed(() => myOncall.value?.person === me.value.id);
-const isEscalation = computed(() => myOncall.value && (myOncall.value.escalation || []).includes(me.value.id));
+const onCallNow = computed(() => myOncall.value && personaIds.value.includes(myOncall.value.person));
+const isEscalation = computed(() => myOncall.value && (myOncall.value.escalation || []).some((id) => personaIds.value.includes(id)));
 
 // --- Open actions: things assigned to me / my team that need attention. ---
 // Parse "over N dagen" / "N dagen geleden" so we can flag soon-to-expire secrets.
@@ -111,8 +118,8 @@ const actions = computed(() => {
 
 const openActionCount = computed(() => actions.value.length);
 
-// Recent activity by me, pulled from the shared audit log.
-const myActivity = computed(() => store.auditLog.filter((a) => a.actor === me.value.id).slice(0, 6));
+// Recent activity by any active persona, pulled from the shared audit log.
+const myActivity = computed(() => store.auditLog.filter((a) => personaIds.value.includes(a.actor)).slice(0, 6));
 
 // Relation chips: the full person -> team -> app -> instance -> rack -> dc chain.
 const relationLinks = computed(() => {
@@ -148,7 +155,9 @@ function rotate(secretId) {
   <div class="rp-page">
     <PageHeader
       :title="`Welkom, ${me.name.split(' ')[0]}`"
-      :lede="`${me.role}${myOrg ? ' bij ' + myOrg.name : ''}. Alles wat van jou en je team is, op één plek.`"
+      :lede="multiPersona
+        ? `Ingelogd op developer.overheid.nl als ${activePeople.length} personen. Alles van al je teams, op één plek.`
+        : `Ingelogd op developer.overheid.nl als ${me.role}${myOrg ? ' bij ' + myOrg.name : ''}. Alles wat van jou en je team is, op één plek.`"
       :crumbs="[{ text: 'Home', href: '/' }, { text: 'Mijn overzicht', href: '/zelf' }]"
     >
       <template #actions>
@@ -161,13 +170,20 @@ function rotate(secretId) {
     <nldd-card accessible-label="Mijn profiel">
       <nldd-container padding="20">
         <div class="rp-identity">
-          <div class="rp-avatar" aria-hidden="true">{{ me.avatar }}</div>
+          <div class="rp-avatar-stack" aria-hidden="true">
+            <div v-for="p in activePeople" :key="p.id" class="rp-avatar">{{ p.avatar }}</div>
+          </div>
           <div class="rp-identity-meta">
-            <nldd-title size="4"><h2>{{ me.name }}</h2></nldd-title>
+            <nldd-title size="4"><h2>{{ multiPersona ? activePeople.map((p) => p.name).join(', ') : me.name }}</h2></nldd-title>
             <div class="rp-identity-sub">
-              <nldd-tag color="accent" size="md">{{ me.role }}</nldd-tag>
-              <nldd-tag v-if="myTeam" color="accent" size="md">{{ myTeam.name }}</nldd-tag>
-              <span class="rp-matrix"><nldd-icon name="link" aria-hidden="true"></nldd-icon> {{ me.matrix }}</span>
+              <template v-if="multiPersona">
+                <nldd-tag v-for="t in myTeams" :key="t.id" color="accent" size="md">{{ t.name }}</nldd-tag>
+              </template>
+              <template v-else>
+                <nldd-tag color="accent" size="md">{{ me.role }}</nldd-tag>
+                <nldd-tag v-if="myTeam" color="accent" size="md">{{ myTeam.name }}</nldd-tag>
+                <span class="rp-matrix"><nldd-icon name="link" aria-hidden="true"></nldd-icon> {{ me.matrix }}</span>
+              </template>
             </div>
           </div>
           <div class="rp-identity-oncall">
@@ -399,6 +415,14 @@ function rotate(secretId) {
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+.rp-avatar-stack {
+  display: flex;
+  flex: 0 0 auto;
+}
+.rp-avatar-stack .rp-avatar + .rp-avatar {
+  margin-left: -16px;
+  box-shadow: 0 0 0 2px var(--semantics-surfaces-default-background-color, #fff);
 }
 .rp-avatar {
   width: 56px;

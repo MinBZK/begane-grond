@@ -1,14 +1,19 @@
 // Singleton composable that drives the presentation overlay.
 // State is shared via module-level refs (no Pinia involved).
-import { ref, computed, nextTick } from 'vue';
-import { slides } from './slides.js';
-import { runScript } from './drive.js';
-import { wizardScripts } from './wizard-scripts.js';
+import { ref, computed, nextTick } from 'vue'
+import { tours, tourById } from './tours.js'
+import { runScript } from './drive.js'
+import { wizardScripts } from './wizard-scripts.js'
 
 // Module-level singleton state shared across every usePresentation() call.
-const active = ref(false);
-const index = ref(0);
-const autoplay = ref(false);
+const active = ref(false)
+const index = ref(0)
+const autoplay = ref(false)
+// The tour currently playing. Defaults to the pitch deck so existing entry
+// points (Shift+P, ?present=1) behave exactly as before. `slides` below always
+// reads from this tour, so the whole engine is tour-agnostic.
+const activeTour = ref(tourById('pitch'))
+const slides = computed(() => activeTour.value.slides)
 // When on, next()/prev() jump over slides marked `skippable`, so a tight time
 // slot can run the core spine without manually clicking through the optional
 // slides. The presenter toggles this with the 'o' key.
@@ -27,11 +32,11 @@ let _autoTimer = null;
 // previous run (e.g. when the presenter moves to another slide mid-animation).
 let _driveControl = { id: 0, aborted: false, isPaused: () => drivePaused.value };
 
-const current = computed(() => slides[index.value]);
-const total = computed(() => slides.length);
+const current = computed(() => slides.value[index.value])
+const total = computed(() => slides.value.length)
 // Intro slides render the deck full-width; once a demo is relevant the deck
 // animates to the left rail and the app slides in on the right.
-const isFull = computed(() => active.value && !!slides[index.value]?.full);
+const isFull = computed(() => active.value && !!slides.value[index.value]?.full)
 
 // Small promise-based delay helper. setTimeout is allowed; no clock/random API.
 function delay(ms) {
@@ -44,10 +49,15 @@ function init(router, store) {
   if (store) _store = store;
 }
 
-// Build the query for slide i, preserving any existing query keys.
+// Build the query for slide i, preserving any existing query keys. The active
+// tour is encoded too (except for the default pitch deck, to keep its URLs
+// unchanged) so a tour is shareable and deep-linkable.
 function presentQuery(i) {
-  const currentQuery = _router ? _router.currentRoute.value.query : {};
-  return { ...currentQuery, present: '1', slide: String(i + 1) };
+  const currentQuery = _router ? _router.currentRoute.value.query : {}
+  const q = { ...currentQuery, present: '1', slide: String(i + 1) }
+  if (activeTour.value.id !== 'pitch') q.tour = activeTour.value.id
+  else delete q.tour
+  return q
 }
 
 // Apply a CSS pulse highlight to all elements matching the selector.
@@ -124,8 +134,8 @@ function skipDrive() {
 
 // Run everything attached to slide i: navigate, emit, highlight and drive.
 async function runSlide(i) {
-  const s = slides[i];
-  if (!s) return;
+  const s = slides.value[i]
+  if (!s) return
 
   // Moving to a new slide aborts any animation still running on the old one.
   cancelDrive();
@@ -176,9 +186,9 @@ async function runSlide(i) {
 
 // Go to slide i, clamped to the valid range.
 async function goto(i) {
-  const clamped = Math.max(0, Math.min(slides.length - 1, i));
-  index.value = clamped;
-  await runSlide(clamped);
+  const clamped = Math.max(0, Math.min(slides.value.length - 1, i))
+  index.value = clamped
+  await runSlide(clamped)
 }
 
 // Find the next/previous slide index, skipping `skippable` slides when the
@@ -187,8 +197,8 @@ async function goto(i) {
 function nextIndex(from, step) {
   let i = from + step;
   while (i >= 0 && i < total.value) {
-    if (!skipOptional.value || !slides[i]?.skippable) return i;
-    i += step;
+    if (!skipOptional.value || !slides.value[i]?.skippable) return i
+    i += step
   }
   // Everything ahead is optional: fall back to the last/first non-optional we
   // can reach, otherwise stay put. For "next" that means the final slide; for
@@ -213,11 +223,22 @@ function toggleSkipOptional() {
   skipOptional.value = !skipOptional.value;
 }
 
-// Enter presentation mode and show the first (or given) slide.
+// Enter presentation mode and show the first (or given) slide. Defaults to the
+// pitch tour, so existing entry points (Shift+P, the footer link) are unchanged.
 async function start(fromIndex = 0) {
-  active.value = true;
-  document.documentElement.classList.add('rp-presenting');
-  await goto(fromIndex);
+  activeTour.value = tourById('pitch')
+  active.value = true
+  document.documentElement.classList.add('rp-presenting')
+  await goto(fromIndex)
+}
+
+// Start a specific tour by id. The tour launcher and ?tour= deep links use this.
+async function startTour(tourId, fromIndex = 0) {
+  activeTour.value = tourById(tourId)
+  index.value = 0
+  active.value = true
+  document.documentElement.classList.add('rp-presenting')
+  await goto(fromIndex)
 }
 
 // Leave presentation mode and strip the present/slide query keys.
@@ -232,10 +253,11 @@ function stop() {
   document.documentElement.classList.remove('rp-presenting');
   document.documentElement.classList.remove('rp-presenting-full');
   if (_router) {
-    const query = { ...(_router.currentRoute.value.query || {}) };
-    delete query.present;
-    delete query.slide;
-    _router.replace({ query });
+    const query = { ...(_router.currentRoute.value.query || {}) }
+    delete query.present
+    delete query.slide
+    delete query.tour
+    _router.replace({ query })
   }
 }
 
@@ -279,8 +301,11 @@ export function usePresentation() {
     skipOptional,
     driving,
     drivePaused,
+    activeTour,
+    tours,
     init,
     start,
+    startTour,
     stop,
     next,
     prev,
