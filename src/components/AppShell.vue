@@ -81,7 +81,9 @@ function personaScore(item) {
     const myApiTeams = new Set(store.myTeams.map((t) => t.id));
     if (item.to && myAppIds.has(item.to)) return 0;
     if (item.subtitle && [...myApiTeams].some((id) => (item.subtitle || '').includes(store.teamById(id)?.name || '###'))) return 1;
-  } catch (e) {}
+  } catch {
+    // Store not ready yet; fall through to the default rank.
+  }
   return 2;
 }
 
@@ -159,14 +161,14 @@ function go(item) {
 // role's deck. Persisted so a reload keeps who you are.
 const PERSONA_KEY = 'rp-personas';
 function persistPersona() {
-  try { localStorage.setItem(PERSONA_KEY, JSON.stringify(store.activePersonas)); } catch (e) {}
+  try {
+    localStorage.setItem(PERSONA_KEY, JSON.stringify(store.activePersonas));
+  } catch {
+    // localStorage unavailable (private mode); persona just won't persist.
+  }
 }
 function pickPersona(id) {
   store.setPersona(id);
-  persistPersona();
-}
-function backToAnne() {
-  store.resetPersona();
   persistPersona();
 }
 
@@ -201,7 +203,9 @@ onMounted(() => {
       const ids = JSON.parse(raw).filter((id) => store.people.some((p) => p.id === id));
       if (ids[0]) store.setPersona(ids[0]);
     }
-  } catch (e) {}
+  } catch {
+    // No stored persona or unreadable; stay with the default identity.
+  }
   if (window.matchMedia) {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
       if (theme.value === 'system') applyTheme();

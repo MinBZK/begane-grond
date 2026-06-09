@@ -1,10 +1,10 @@
 // Singleton composable that drives the presentation overlay.
 // State is shared via module-level refs (no Pinia involved).
-import { ref, computed, nextTick } from 'vue'
-import { tours, tourById } from './tours.js'
-import { routes, routeById } from './routes.js'
-import { runScript } from './drive.js'
-import { wizardScripts } from './wizard-scripts.js'
+import { ref, computed, nextTick } from 'vue';
+import { tours, tourById } from './tours.js';
+import { routes, routeById } from './routes.js';
+import { runScript } from './drive.js';
+import { wizardScripts } from './wizard-scripts.js';
 
 // The chooser deck: a single full-screen "wie ben je vandaag?" slide that opens
 // when the presentation starts (Shift+P). Its `kind: 'choice'` tells the deck to
@@ -13,20 +13,20 @@ import { wizardScripts } from './wizard-scripts.js'
 const CHOOSER_TOUR = {
   id: 'chooser',
   slides: [{ id: 'chooser', kind: 'choice', full: true }],
-}
+};
 
 // Module-level singleton state shared across every usePresentation() call.
-const active = ref(false)
-const index = ref(0)
-const autoplay = ref(false)
+const active = ref(false);
+const index = ref(0);
+const autoplay = ref(false);
 // The tour currently playing. Defaults to the pitch deck so existing entry
 // points (Shift+P, ?present=1) behave exactly as before. `slides` below always
 // reads from this tour, so the whole engine is tour-agnostic.
-const activeTour = ref(tourById('pitch'))
-const slides = computed(() => activeTour.value.slides)
+const activeTour = ref(tourById('pitch'));
+const slides = computed(() => activeTour.value.slides);
 // When a route (role) is playing instead of a tour, its id is held here so the
 // deeplink encodes ?route= and a reload can restore both the deck and persona.
-const activeRouteId = ref(null)
+const activeRouteId = ref(null);
 // When on, next()/prev() jump over slides marked `skippable`, so a tight time
 // slot can run the core spine without manually clicking through the optional
 // slides. The presenter toggles this with the 'o' key.
@@ -45,11 +45,11 @@ let _autoTimer = null;
 // previous run (e.g. when the presenter moves to another slide mid-animation).
 let _driveControl = { id: 0, aborted: false, isPaused: () => drivePaused.value };
 
-const current = computed(() => slides.value[index.value])
-const total = computed(() => slides.value.length)
+const current = computed(() => slides.value[index.value]);
+const total = computed(() => slides.value.length);
 // Intro slides render the deck full-width; once a demo is relevant the deck
 // animates to the left rail and the app slides in on the right.
-const isFull = computed(() => active.value && !!slides.value[index.value]?.full)
+const isFull = computed(() => active.value && !!slides.value[index.value]?.full);
 
 // Small promise-based delay helper. setTimeout is allowed; no clock/random API.
 function delay(ms) {
@@ -66,21 +66,21 @@ function init(router, store) {
 // tour is encoded too (except for the default pitch deck, to keep its URLs
 // unchanged) so a tour is shareable and deep-linkable.
 function presentQuery(i) {
-  const currentQuery = _router ? _router.currentRoute.value.query : {}
-  const q = { ...currentQuery, present: '1', slide: String(i + 1) }
+  const currentQuery = _router ? _router.currentRoute.value.query : {};
+  const q = { ...currentQuery, present: '1', slide: String(i + 1) };
   // A role-route encodes ?route=; a tour encodes ?tour= (except the default
   // pitch deck, whose URLs stay clean). They are mutually exclusive.
   if (activeRouteId.value) {
-    q.route = activeRouteId.value
-    delete q.tour
+    q.route = activeRouteId.value;
+    delete q.tour;
   } else if (activeTour.value.id !== 'pitch') {
-    q.tour = activeTour.value.id
-    delete q.route
+    q.tour = activeTour.value.id;
+    delete q.route;
   } else {
-    delete q.tour
-    delete q.route
+    delete q.tour;
+    delete q.route;
   }
-  return q
+  return q;
 }
 
 // Apply a CSS pulse highlight to all elements matching the selector.
@@ -157,8 +157,8 @@ function skipDrive() {
 
 // Run everything attached to slide i: navigate, emit, highlight and drive.
 async function runSlide(i) {
-  const s = slides.value[i]
-  if (!s) return
+  const s = slides.value[i];
+  if (!s) return;
 
   // Moving to a new slide aborts any animation still running on the old one.
   cancelDrive();
@@ -209,9 +209,9 @@ async function runSlide(i) {
 
 // Go to slide i, clamped to the valid range.
 async function goto(i) {
-  const clamped = Math.max(0, Math.min(slides.value.length - 1, i))
-  index.value = clamped
-  await runSlide(clamped)
+  const clamped = Math.max(0, Math.min(slides.value.length - 1, i));
+  index.value = clamped;
+  await runSlide(clamped);
 }
 
 // Find the next/previous slide index, skipping `skippable` slides when the
@@ -220,8 +220,8 @@ async function goto(i) {
 function nextIndex(from, step) {
   let i = from + step;
   while (i >= 0 && i < total.value) {
-    if (!skipOptional.value || !slides.value[i]?.skippable) return i
-    i += step
+    if (!skipOptional.value || !slides.value[i]?.skippable) return i;
+    i += step;
   }
   // Everything ahead is optional: fall back to the last/first non-optional we
   // can reach, otherwise stay put. For "next" that means the final slide; for
@@ -233,11 +233,11 @@ function nextIndex(from, step) {
 // back to the chooser ("terug naar het begin"), so a deck never dead-ends and
 // you can hand the next person a fresh choice.
 async function next() {
-  const target = nextIndex(index.value, 1)
+  const target = nextIndex(index.value, 1);
   if (target !== index.value) {
-    await goto(target)
+    await goto(target);
   } else if (activeTour.value.id !== 'chooser') {
-    await start()
+    await start();
   }
 }
 
@@ -256,29 +256,29 @@ function toggleSkipOptional() {
 // vandaag?"); picking a role there starts that route's deck. The chooser IS the
 // first slide — the choice lives in the presentation, not the app UI.
 async function start() {
-  activeTour.value = CHOOSER_TOUR
-  activeRouteId.value = null
-  active.value = true
-  document.documentElement.classList.add('rp-presenting')
-  await goto(0)
+  activeTour.value = CHOOSER_TOUR;
+  activeRouteId.value = null;
+  active.value = true;
+  document.documentElement.classList.add('rp-presenting');
+  await goto(0);
 }
 
 // Start the pitch deck directly (the 56-slide stage talk), bypassing the chooser.
 async function startPitch(fromIndex = 0) {
-  activeTour.value = tourById('pitch')
-  activeRouteId.value = null
-  active.value = true
-  document.documentElement.classList.add('rp-presenting')
-  await goto(fromIndex)
+  activeTour.value = tourById('pitch');
+  activeRouteId.value = null;
+  active.value = true;
+  document.documentElement.classList.add('rp-presenting');
+  await goto(fromIndex);
 }
 
 // Whether the chooser slide is currently showing (so the deck can hide the
 // "naar de keuze" button on the chooser itself).
-const onChooser = computed(() => activeTour.value.id === 'chooser')
+const onChooser = computed(() => activeTour.value.id === 'chooser');
 
 // Go back to the chooser slide from within a route/the pitch.
 async function backToChooser() {
-  await start()
+  await start();
 }
 
 // Pick a role from the chooser slide: become that persona (via the injected
@@ -286,22 +286,22 @@ async function backToChooser() {
 // from slide 0. The 'pitch' id is a special choice → the stage talk.
 async function chooseRoute(id) {
   if (id === 'pitch') {
-    await startPitch(0)
-    return
+    await startPitch(0);
+    return;
   }
-  const route = routeById(id)
-  if (_store) _store.setPersona(route.persona)
-  await startRoute(route.id, 0)
+  const route = routeById(id);
+  if (_store) _store.setPersona(route.persona);
+  await startRoute(route.id, 0);
 }
 
 // Start a specific tour by id. The tour launcher and ?tour= deep links use this.
 async function startTour(tourId, fromIndex = 0) {
-  activeTour.value = tourById(tourId)
-  activeRouteId.value = null
-  index.value = 0
-  active.value = true
-  document.documentElement.classList.add('rp-presenting')
-  await goto(fromIndex)
+  activeTour.value = tourById(tourId);
+  activeRouteId.value = null;
+  index.value = 0;
+  active.value = true;
+  document.documentElement.classList.add('rp-presenting');
+  await goto(fromIndex);
 }
 
 // Start a role-route by id. The route launcher and ?route= deep links use this.
@@ -309,13 +309,13 @@ async function startTour(tourId, fromIndex = 0) {
 // the persona switch is the caller's job, so the store stays the owner of
 // identity. activeRouteId drives the ?route= deeplink.
 async function startRoute(routeId, fromIndex = 0) {
-  const route = routeById(routeId)
-  activeTour.value = route
-  activeRouteId.value = route.id
-  index.value = 0
-  active.value = true
-  document.documentElement.classList.add('rp-presenting')
-  await goto(fromIndex)
+  const route = routeById(routeId);
+  activeTour.value = route;
+  activeRouteId.value = route.id;
+  index.value = 0;
+  active.value = true;
+  document.documentElement.classList.add('rp-presenting');
+  await goto(fromIndex);
 }
 
 // Leave presentation mode and strip the present/slide query keys.
@@ -327,16 +327,16 @@ function stop() {
     clearInterval(_autoTimer);
     _autoTimer = null;
   }
-  document.documentElement.classList.remove('rp-presenting')
-  document.documentElement.classList.remove('rp-presenting-full')
-  activeRouteId.value = null
+  document.documentElement.classList.remove('rp-presenting');
+  document.documentElement.classList.remove('rp-presenting-full');
+  activeRouteId.value = null;
   if (_router) {
-    const query = { ...(_router.currentRoute.value.query || {}) }
-    delete query.present
-    delete query.slide
-    delete query.tour
-    delete query.route
-    _router.replace({ query })
+    const query = { ...(_router.currentRoute.value.query || {}) };
+    delete query.present;
+    delete query.slide;
+    delete query.tour;
+    delete query.route;
+    _router.replace({ query });
   }
 }
 

@@ -73,7 +73,9 @@ export function juriconnectFor({ bwb_id, article, paragraph, sentence } = {}) {
 // in the corpus (then there is no RR page to link to — degrade gracefully).
 export function regelrechtUrl({ lawId, article } = {}) {
   if (!lawId) return '';
-  return article ? `${REGELRECHT_BASE}/library/${lawId}/${article}` : `${REGELRECHT_BASE}/library/${lawId}`;
+  return article
+    ? `${REGELRECHT_BASE}/library/${lawId}/${article}`
+    : `${REGELRECHT_BASE}/library/${lawId}`;
 }
 
 // Normalise the various legacy shapes into one grondslag reference object.
@@ -168,7 +170,8 @@ export function produceFor(store, g) {
   if (!g?.wetId || !store.wetById) return null;
   const wet = store.wetById(g.wetId);
   if (!wet) return null;
-  const art = (wet.articles || []).find((a) => String(a.number) === String(g.article)) || wet.articles?.[0];
+  const art =
+    (wet.articles || []).find((a) => String(a.number) === String(g.article)) || wet.articles?.[0];
   if (!art) return null;
   return {
     legal_character: art.legalCharacter || null,
@@ -178,7 +181,11 @@ export function produceFor(store, g) {
 
 export function describeProduces(produces) {
   if (!produces) return '';
-  const lc = produces.legal_character ? LEGAL_CHARACTERS[produces.legal_character] || produces.legal_character : '';
-  const dt = produces.decision_type ? DECISION_TYPES[produces.decision_type] || produces.decision_type : '';
+  const lc = produces.legal_character
+    ? LEGAL_CHARACTERS[produces.legal_character] || produces.legal_character
+    : '';
+  const dt = produces.decision_type
+    ? DECISION_TYPES[produces.decision_type] || produces.decision_type
+    : '';
   return [lc, dt].filter(Boolean).join(' · ');
 }

@@ -61,18 +61,106 @@ function slugify(s) {
 function commitMetaFor(action, resource) {
   const a = (action || '').toLowerCase();
   const slug = slugify(resource);
-  if (a.includes('secret')) return { path: `secrets/${slug}.sops.yaml`, type: 'chore', scope: 'secrets', verb: 'rotate', impact: 'intern' };
-  if (a.includes('infra') || a.includes('instance')) return { path: `infra/${slug}.tf`, type: 'feat', scope: 'infra', verb: 'provision', impact: 'intern' };
-  if (a.includes('release') || a.includes('promo')) return { path: `environments/${slug}.yaml`, type: 'feat', scope: 'release', verb: 'promote', impact: 'intern' };
-  if (a.includes('rfc')) return { path: `governance/rfcs/${slug}.md`, type: 'docs', scope: 'rfc', verb: 'record', impact: 'intern' };
-  if (a.includes('koppelvlak') || a.includes('api')) return { path: `apis/${slug}/openapi.yaml`, type: 'feat', scope: 'api', verb: 'add', impact: 'besluit' };
-  if (a.includes('applicatie') || a.includes('app')) return { path: `apps/${slug}/app.yaml`, type: 'feat', scope: 'app', verb: 'scaffold', impact: 'besluit' };
-  if (a.includes('wet') || a.includes('register') || a.includes('algoritme') || a.includes('databron')) return { path: `regelrecht/${slug}.yaml`, type: 'feat', scope: 'regelrecht', verb: 'apply', impact: 'besluit' };
-  if (a.includes('campagne')) return { path: `fleet/${slug}.yaml`, type: 'feat', scope: 'fleet', verb: 'roll out', impact: 'intern' };
-  if (a.includes('werkplek') || a.includes('device')) return { path: `workplaces/${slug}.yaml`, type: 'chore', scope: 'workplace', verb: 'apply', impact: 'intern' };
-  if (a.includes('budget') || a.includes('kosten') || a.includes('showback')) return { path: `finance/${slug}.yaml`, type: 'chore', scope: 'finance', verb: 'update', impact: 'intern' };
-  if (a.includes('scan') || a.includes('security')) return { path: `security/${slug}.yaml`, type: 'chore', scope: 'security', verb: 'record', impact: 'intern' };
-  return { path: `platform/${slug}.yaml`, type: 'chore', scope: 'platform', verb: 'update', impact: 'intern' };
+  if (a.includes('secret'))
+    return {
+      path: `secrets/${slug}.sops.yaml`,
+      type: 'chore',
+      scope: 'secrets',
+      verb: 'rotate',
+      impact: 'intern',
+    };
+  if (a.includes('infra') || a.includes('instance'))
+    return {
+      path: `infra/${slug}.tf`,
+      type: 'feat',
+      scope: 'infra',
+      verb: 'provision',
+      impact: 'intern',
+    };
+  if (a.includes('release') || a.includes('promo'))
+    return {
+      path: `environments/${slug}.yaml`,
+      type: 'feat',
+      scope: 'release',
+      verb: 'promote',
+      impact: 'intern',
+    };
+  if (a.includes('rfc'))
+    return {
+      path: `governance/rfcs/${slug}.md`,
+      type: 'docs',
+      scope: 'rfc',
+      verb: 'record',
+      impact: 'intern',
+    };
+  if (a.includes('koppelvlak') || a.includes('api'))
+    return {
+      path: `apis/${slug}/openapi.yaml`,
+      type: 'feat',
+      scope: 'api',
+      verb: 'add',
+      impact: 'besluit',
+    };
+  if (a.includes('applicatie') || a.includes('app'))
+    return {
+      path: `apps/${slug}/app.yaml`,
+      type: 'feat',
+      scope: 'app',
+      verb: 'scaffold',
+      impact: 'besluit',
+    };
+  if (
+    a.includes('wet') ||
+    a.includes('register') ||
+    a.includes('algoritme') ||
+    a.includes('databron')
+  )
+    return {
+      path: `regelrecht/${slug}.yaml`,
+      type: 'feat',
+      scope: 'regelrecht',
+      verb: 'apply',
+      impact: 'besluit',
+    };
+  if (a.includes('campagne'))
+    return {
+      path: `fleet/${slug}.yaml`,
+      type: 'feat',
+      scope: 'fleet',
+      verb: 'roll out',
+      impact: 'intern',
+    };
+  if (a.includes('werkplek') || a.includes('device'))
+    return {
+      path: `workplaces/${slug}.yaml`,
+      type: 'chore',
+      scope: 'workplace',
+      verb: 'apply',
+      impact: 'intern',
+    };
+  if (a.includes('budget') || a.includes('kosten') || a.includes('showback'))
+    return {
+      path: `finance/${slug}.yaml`,
+      type: 'chore',
+      scope: 'finance',
+      verb: 'update',
+      impact: 'intern',
+    };
+  if (a.includes('scan') || a.includes('security'))
+    return {
+      path: `security/${slug}.yaml`,
+      type: 'chore',
+      scope: 'security',
+      verb: 'record',
+      impact: 'intern',
+    };
+  return {
+    path: `platform/${slug}.yaml`,
+    type: 'chore',
+    scope: 'platform',
+    verb: 'update',
+    impact: 'intern',
+  };
 }
 
 // Does a handeling of this family require a legal basis? Drawn from commitMetaFor
@@ -267,7 +355,8 @@ export const usePlatformStore = defineStore('platform', {
 
     // --- Active personas (the "who am I right now" set) ---
     // The full person records for everyone currently being impersonated.
-    activePeople: (s) => s.activePersonas.map((id) => s.people.find((p) => p.id === id)).filter(Boolean),
+    activePeople: (s) =>
+      s.activePersonas.map((id) => s.people.find((p) => p.id === id)).filter(Boolean),
     // The distinct teams the active personas belong to.
     myTeams() {
       const ids = new Set(this.activePeople.map((p) => p.team).filter(Boolean));
@@ -292,7 +381,10 @@ export const usePlatformStore = defineStore('platform', {
       const out = [];
       for (const id of this.activePersonas)
         for (const t of this.trajectenByPerson(id))
-          if (!seen.has(t.id)) { seen.add(t.id); out.push(t); }
+          if (!seen.has(t.id)) {
+            seen.add(t.id);
+            out.push(t);
+          }
       return out;
     },
     skillPluginById: (s) => (id) => s.skillPlugins.find((p) => p.id === id),
@@ -448,10 +540,21 @@ export const usePlatformStore = defineStore('platform', {
         const g = readGrondslag(this, raw);
         if (g && (g.wetId || g.bwb_id)) out.push({ kind, route, name, grondslag: g });
       };
-      for (const a of this.apis) if (a.grondslag) push('Koppelvlak', '/koppelvlakken', `${a.name} ${a.version}`, a.grondslag);
-      for (const v of this.verwerkingen) if (v.grondslag || v.wet) push('Verwerking', `/verwerkingen/${v.id}`, v.name, v);
-      for (const c of this.datacontracten) if (c.grondslag) push('Datacontract', `/datacontracten/${c.id}`, this.datasetById(c.dataset)?.name || c.id, c.grondslag);
-      for (const w of this.wetten) if (w.service) push('Wet-als-dienst', `/wetten/${w.id}`, w.name, w.id);
+      for (const a of this.apis)
+        if (a.grondslag)
+          push('Koppelvlak', '/koppelvlakken', `${a.name} ${a.version}`, a.grondslag);
+      for (const v of this.verwerkingen)
+        if (v.grondslag || v.wet) push('Verwerking', `/verwerkingen/${v.id}`, v.name, v);
+      for (const c of this.datacontracten)
+        if (c.grondslag)
+          push(
+            'Datacontract',
+            `/datacontracten/${c.id}`,
+            this.datasetById(c.dataset)?.name || c.id,
+            c.grondslag
+          );
+      for (const w of this.wetten)
+        if (w.service) push('Wet-als-dienst', `/wetten/${w.id}`, w.name, w.id);
       return out;
     },
     // Artefacten that cite a given wet (by demo wet id).
@@ -459,7 +562,8 @@ export const usePlatformStore = defineStore('platform', {
       return (wetId) => this.artefactenMetGrondslag.filter((x) => x.grondslag.wetId === wetId);
     },
     // Commits that carry a legal basis — the handelingen with a citation.
-    commitsMetGrondslag: (s) => s.commits.filter((c) => c.legalBasis && (c.legalBasis.wetId || c.legalBasis.bwb_id)),
+    commitsMetGrondslag: (s) =>
+      s.commits.filter((c) => c.legalBasis && (c.legalBasis.wetId || c.legalBasis.bwb_id)),
 
     // --- Notification inbox ---
     // The current user's relevant events: everything for their team, plus
@@ -468,14 +572,14 @@ export const usePlatformStore = defineStore('platform', {
       // Relevant to any of the active personas: their teams, or events naming
       // one of them as actor, plus anything critical.
       const myTeams = new Set(
-        s.activePersonas.map((id) => s.people.find((p) => p.id === id)?.team).filter(Boolean),
+        s.activePersonas.map((id) => s.people.find((p) => p.id === id)?.team).filter(Boolean)
       );
       const myIds = new Set(s.activePersonas);
       return s.events.filter(
         (e) =>
           !e.muted &&
           !s.mutedSources.includes(e.source) &&
-          (myTeams.has(e.team) || myIds.has(e.actor) || e.severity === 'critical'),
+          (myTeams.has(e.team) || myIds.has(e.actor) || e.severity === 'critical')
       );
     },
     unreadCount() {
@@ -527,7 +631,14 @@ export const usePlatformStore = defineStore('platform', {
     // A handeling with external impact carries its legal basis (a thin RegelRecht
     // reference) so the audit trail and the commit answer "on what authority".
     audit(action, resource, { legalBasis = null } = {}) {
-      this.auditLog.unshift({ id: nextId('a'), actor: this.currentUser, action, resource, at: 'zojuist', legalBasis: legalBasis || null });
+      this.auditLog.unshift({
+        id: nextId('a'),
+        actor: this.currentUser,
+        action,
+        resource,
+        at: 'zojuist',
+        legalBasis: legalBasis || null,
+      });
       // The same event, seen as a commit: every audited action writes to the
       // platform-config repo. This is what makes "every click is a commit" true.
       this.commit({ action, resource, legalBasis });
@@ -539,7 +650,15 @@ export const usePlatformStore = defineStore('platform', {
     // generated OpenAPI spec) may override `path`, `diff` and `message` so the
     // commit shows the actual change instead of a generic placeholder. A handeling
     // with external impact also carries its `legalBasis` (juriconnect reference).
-    commit({ action, resource, actor = null, path = null, diff = null, message = null, legalBasis = null }) {
+    commit({
+      action,
+      resource,
+      actor = null,
+      path = null,
+      diff = null,
+      message = null,
+      legalBasis = null,
+    }) {
       const id = nextId('c');
       const meta = commitMetaFor(action, resource);
       const sha = shaFor(`${id}|${action}|${resource}`);
@@ -761,7 +880,17 @@ export const usePlatformStore = defineStore('platform', {
     // traceable as a new app. `standaarden`/`exposure`/`persoonsgegevens`/`events`
     // carry the compliant-by-default profile the wizard assembled, which the
     // api-standaarden evaluator reads back verbatim.
-    createApi({ name, version = 'v1', team, exposure = 'intern', persoonsgegevens = false, events = false, grondslag = '', standaarden = {}, resources = [] }) {
+    createApi({
+      name,
+      version = 'v1',
+      team,
+      exposure = 'intern',
+      persoonsgegevens = false,
+      events = false,
+      grondslag = '',
+      standaarden = {},
+      resources = [],
+    }) {
       const id = nextId('api');
       const cleanResources = resources
         .map((r) => ({
@@ -777,7 +906,9 @@ export const usePlatformStore = defineStore('platform', {
         adr: standaarden.adr !== false, // ADR is on by default on the golden path
         rateLimit: '100/s',
         status: 'beta',
-        exposure, persoonsgegevens, events,
+        exposure,
+        persoonsgegevens,
+        events,
         // The legal basis: a thin RegelRecht reference (wetId + article + …) when
         // the koppelvlak has external impact. Accepts either the structured
         // reference from GrondslagFields, or a bare wet-id (legacy) which is
@@ -809,7 +940,14 @@ export const usePlatformStore = defineStore('platform', {
       // artifact — the OpenAPI spec — so we write that as the commit diff on a
       // proper apis/<slug>/<version>/openapi.yaml path, instead of the generic
       // "managed: true" placeholder. The diff IS the contract you just designed.
-      this.auditLog.unshift({ id: nextId('a'), actor: this.currentUser, action: 'koppelvlak aangemaakt', resource: name, at: 'zojuist', legalBasis });
+      this.auditLog.unshift({
+        id: nextId('a'),
+        actor: this.currentUser,
+        action: 'koppelvlak aangemaakt',
+        resource: name,
+        at: 'zojuist',
+        legalBasis,
+      });
       const slug = name.toLowerCase().replace(/api$/, '').trim().replace(/\s+/g, '-') || 'api';
       const specPath = `apis/${slug}/${version}/openapi.yaml`;
       const specDiff = api.spec

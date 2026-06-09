@@ -19,7 +19,7 @@ import {
 
 const props = defineProps({
   // The raw grondslag to render (string wet-id, reference object, or record).
-  grondslag: { default: null },
+  grondslag: { type: [String, Object], default: null },
   title: { type: String, default: 'Grondslag' },
   // When true, render the "n.v.t." empty state instead of hiding the block.
   showEmpty: { type: Boolean, default: false },

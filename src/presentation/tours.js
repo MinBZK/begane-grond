@@ -71,7 +71,11 @@ const apiBouwenSlides = [
     title: 'Compliant-by-default, aantoonbaar',
     lead: 'De compliance-scorecard toont per standaard de status. Geen losse checklist achteraf, maar ingebouwd.',
     route: '/koppelvlakken/compliance',
-    emit: { type: 'api.created', title: 'Nieuw koppelvlak compliant opgeleverd', severity: 'success' },
+    emit: {
+      type: 'api.created',
+      title: 'Nieuw koppelvlak compliant opgeleverd',
+      severity: 'success',
+    },
   },
 ];
 
@@ -81,7 +85,10 @@ const complianceSlides = [
     id: 'comp-intro',
     title: 'Een rondleiding langs compliance',
     lead: 'Niet vanuit één rol, maar langs de governance-kant: privacy, security, algoritmen, toegankelijkheid, standaarden.',
-    bullets: ['Alles wat de overheid uniek maakt zit in deze laag.', 'En het is allemaal aan elkaar geknoopt in het platform.'],
+    bullets: [
+      'Alles wat de overheid uniek maakt zit in deze laag.',
+      'En het is allemaal aan elkaar geknoopt in het platform.',
+    ],
     route: '/nerds',
     full: true,
   },
@@ -133,7 +140,10 @@ const engineeringSlides = [
     id: 'eng-intro',
     title: 'Langs de as van de engineer',
     lead: 'Hoe voelt het platform vanaf de werkvloer? Van een leeg scherm naar een draaiende dienst in productie.',
-    bullets: ['Gebaande paden, self-service infra, CI/CD, observability — de hele keten.', 'Geen tickets, geen wachten: je doet het zelf.'],
+    bullets: [
+      'Gebaande paden, self-service infra, CI/CD, observability — de hele keten.',
+      'Geen tickets, geen wachten: je doet het zelf.',
+    ],
     route: '/',
     full: true,
   },

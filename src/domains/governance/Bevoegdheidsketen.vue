@@ -12,7 +12,7 @@ import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import NerdsBadge from '../../components/shared/NerdsBadge.vue';
-import { readGrondslag, produceFor, describeProduces, competentAuthorityName, regelrechtUrl, RR_LAW_SLUGS } from '../../lib/grondslag.js';
+import { produceFor, describeProduces, competentAuthorityName } from '../../lib/grondslag.js';
 
 const store = usePlatformStore();
 
