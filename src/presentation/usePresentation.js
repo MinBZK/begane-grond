@@ -163,6 +163,21 @@ async function runSlide(i) {
   // Moving to a new slide aborts any animation still running on the old one.
   cancelDrive();
 
+  // Estafette hand-over: a slide can carry `becomePersona`, switching the active
+  // persona so one route passes the same subject from role to role while the
+  // topbar identity and every "van mij"-getter re-colour. Scan backwards to the
+  // most recent becomePersona at or before this slide, so the persona is a pure
+  // function of the slide index: correct on next, prev, goto and deep links.
+  if (_store) {
+    for (let j = i; j >= 0; j--) {
+      const persona = slides.value[j]?.becomePersona;
+      if (persona) {
+        _store.setPersona(persona);
+        break;
+      }
+    }
+  }
+
   // Full-width intro vs. left-rail demo mode. Toggling the class drives a CSS
   // width transition on the deck and the app's left padding.
   document.documentElement.classList.toggle('rp-presenting-full', !!s.full);

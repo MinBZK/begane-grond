@@ -6,20 +6,40 @@ import { usePlatformStore } from '../stores/index.js'
 const p = usePresentation()
 const store = usePlatformStore()
 
-// The cards on the chooser slide: the 7 roles plus the pitch. Each resolves the
-// person's name so the card reads "Sanne Visser · Backend developer".
+// The cards on the chooser slide: the 7 roles, the estafette, and the pitch.
+// Each role card resolves the person's name so it reads "Sanne Visser ·
+// Backend developer". A chain-route (the estafette) gets its own accented card.
 const chooserCards = computed(() => {
-  const roleCards = p.routes.map((r) => ({
-    id: r.id,
-    name: store.personById(r.persona)?.name || r.role,
-    role: r.role,
-    icon: r.icon,
-    lead: r.lead,
-  }))
+  const roleCards = p.routes
+    .filter((r) => !r.chain)
+    .map((r) => ({
+      id: r.id,
+      name: store.personById(r.persona)?.name || r.role,
+      role: r.role,
+      icon: r.icon,
+      lead: r.lead,
+    }))
+  const chainCards = p.routes
+    .filter((r) => r.chain)
+    .map((r) => ({ id: r.id, name: r.role, role: 'Eén wet, vijf brillen', icon: r.icon, lead: r.lead, chain: true }))
   return [
     ...roleCards,
+    ...chainCards,
     { id: 'pitch', name: 'Het podiumverhaal', role: 'De pitch', icon: 'presentation', lead: 'Waarom de overheid het grootste softwarebedrijf van Nederland is.' },
   ]
+})
+
+// On a hand-over slide ("kind: handover"), resolve the two people so the deck
+// can show "van <naam> · <rol>  →  naar <naam> · <rol>".
+const handover = computed(() => {
+  const s = current.value
+  if (!s || s.kind !== 'handover' || !s.handover) return null
+  const from = store.personById(s.handover.from)
+  const to = store.personById(s.handover.to)
+  return {
+    from: { name: from?.name || s.handover.from, role: from?.role || '' },
+    to: { name: to?.name || s.handover.to, role: to?.role || '' },
+  }
 })
 
 // Whether the viewport is large enough to run the deck.
@@ -162,7 +182,7 @@ onBeforeUnmount(() => {
             :key="c.id"
             type="button"
             class="chooser-card"
-            :class="{ 'chooser-card-pitch': c.id === 'pitch' }"
+            :class="{ 'chooser-card-pitch': c.id === 'pitch', 'chooser-card-chain': c.chain }"
             @click="p.chooseRoute(c.id)"
           >
             <nldd-icon :name="c.icon" aria-hidden="true"></nldd-icon>
@@ -172,6 +192,37 @@ onBeforeUnmount(() => {
           </button>
         </div>
         <button type="button" class="chooser-close" @click="p.stop()">Sluiten · Esc</button>
+      </div>
+    </template>
+
+    <!-- Hand-over slide: the estafette passes the subject to the next role. -->
+    <template v-else-if="current && current.kind === 'handover'">
+      <div class="handover">
+        <h1 class="handover-title">{{ current.title }}</h1>
+        <p v-if="current.lead" class="handover-lead">{{ current.lead }}</p>
+        <div v-if="handover" class="handover-people">
+          <span class="handover-person">
+            <span class="handover-person-name">{{ handover.from.name }}</span>
+            <span class="handover-person-role">{{ handover.from.role }}</span>
+          </span>
+          <svg class="handover-arrow" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path
+              d="M5 12h14m-6-6 6 6-6 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span class="handover-person handover-person-next">
+            <span class="handover-person-name">{{ handover.to.name }}</span>
+            <span class="handover-person-role">{{ handover.to.role }}</span>
+          </span>
+        </div>
+        <button v-if="handover" type="button" class="handover-btn" @click="p.next()">
+          Verder als {{ handover.to.name }} →
+        </button>
       </div>
     </template>
 
@@ -379,6 +430,15 @@ onBeforeUnmount(() => {
 .chooser-card-role { font-size: 0.85rem; font-weight: 600; color: #8fb8e8; }
 .chooser-card-lead { font-size: 0.85rem; opacity: 0.75; line-height: 1.4; }
 .chooser-card-pitch { border-style: dashed; }
+.chooser-card-chain {
+  border-color: #ffb612;
+  background: rgba(255, 182, 18, 0.08);
+}
+.chooser-card-chain:hover {
+  background: rgba(255, 182, 18, 0.16);
+  border-color: #ffb612;
+}
+.chooser-card-chain .chooser-card-role { color: #ffb612; }
 .chooser-close {
   background: none;
   border: none;
@@ -389,6 +449,77 @@ onBeforeUnmount(() => {
   font-size: 0.85rem;
 }
 .chooser-close:hover { opacity: 1; }
+
+/* Hand-over slide: the estafette moment where the subject changes hands. */
+.handover {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  text-align: center;
+  font-family: 'RijksSans', system-ui, sans-serif;
+}
+.handover-title {
+  font-family: 'RijksSerif', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+  max-width: 24ch;
+}
+.handover-lead {
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.5;
+  opacity: 0.9;
+  margin: 0;
+  max-width: 52ch;
+}
+.handover-people {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+.handover-person {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  min-width: 13rem;
+}
+.handover-person-next {
+  border-color: #ffb612;
+  background: rgba(255, 182, 18, 0.1);
+}
+.handover-person-name { font-weight: 700; font-size: 1.1rem; }
+.handover-person-role { font-size: 0.85rem; color: #8fb8e8; }
+.handover-person-next .handover-person-role { color: #ffb612; }
+.handover-arrow { opacity: 0.8; flex: 0 0 auto; }
+.handover-btn {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  height: 2.9rem;
+  padding: 0 1.6rem;
+  border-radius: 999px;
+  border: 1.5px solid #ffb612;
+  background: #ffb612;
+  color: #154273;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.handover-btn:hover {
+  background: #ffc845;
+  transform: translateY(-1px);
+}
 
 .deck {
   position: fixed;
