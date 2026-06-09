@@ -1140,6 +1140,205 @@ export const routes = [
       },
     ],
   },
+
+  // The estafette: one subject (AWIR art. 3, the toeslagpartner) passed through
+  // five roles. Hand-over slides (kind: 'handover') mark each baton change; the
+  // first slide of each part carries `becomePersona` so the identity switches on
+  // the click "Verder als <naam>", and stays a pure function of the slide index
+  // (correct on prev/next/deep links). Texts are written as one flowing story.
+  {
+    id: 'awir-estafette',
+    role: 'De estafette',
+    persona: 'bram-de-wit',
+    icon: 'arrow-up-arrow-down',
+    chain: true,
+    lead: 'Volg AWIR artikel 3, de toeslagpartner, door vijf rollen heen: jij loopt elke etappe zelf, van wetstekst tot draaiende dienst.',
+    slides: [
+      {
+        id: 'est-intro',
+        title: 'Het stokje heet artikel 3',
+        lead: 'Wie je toeslagpartner is, bepaalt mede je toetsingsinkomen en dus je recht op toeslag. Vandaag volg je dat ene begrip uit AWIR artikel 3 door vijf paar handen, en je bent ze allemaal.',
+        bullets: [
+          'Je wordt ze één voor één: de app kleurt mee met wie je op dat moment bent.',
+          'Iedereen kijkt naar hetzelfde artikel, ieder met een eigen bril.',
+          'De slide duidt, het scherm bewijst: je kijkt mee in het platform zelf.',
+        ],
+        full: true,
+      },
+      {
+        id: 'est-bram-wet',
+        becomePersona: 'bram-de-wit',
+        title: 'Is dit begrip uitvoerbaar?',
+        lead: 'Je trapt af als Bram de Wit, beleidsmaker bij Toeslagen. Dit is jouw wet, de AWIR, en jouw vraag bij artikel 3: kan de uitvoering uit de voeten met het begrip toeslagpartner, of is het alleen mooie wetstekst?',
+        bullets: [
+          'Artikel 3 staat hier als toets: bsn erin, heeft_toeslagpartner eruit, met de partner gelezen uit de BRP.',
+          'Huurtoeslag en zorgtoeslag hergebruiken die uitkomst: dit ene begrip draagt meerdere regelingen.',
+          'Van de AWIR-logica is 64% al machine-leesbaar: je ziet welk deel van de wet hard is en welk deel nog tekst.',
+        ],
+        route: '/wetten/awir',
+      },
+      {
+        id: 'est-bram-bevoegdheid',
+        title: 'En wie mag dit doen?',
+        lead: 'Uitvoerbaar is de helft, bevoegd is de andere helft. Voordat je het artikel doorgeeft, loop je de keten na: welk wetsartikel autoriseert wie.',
+        bullets: [
+          'Elke schakel wijst terug naar een artikel: geen bevoegdheid zonder grondslag.',
+          'Straks leest artikel 3 partnergegevens uit de BRP; hier zie je waarom dat mag.',
+          'Daarmee is jouw etappe af: een begrip dat uitvoerbaar is, op een grondslag die staat.',
+        ],
+        route: '/governance/bevoegdheid',
+      },
+      {
+        id: 'est-handover-lieke',
+        kind: 'handover',
+        title: 'Het begrip kan, de bevoegdheid klopt',
+        lead: 'Bram laat een artikel achter dat uitvoerbaar is en op een harde grondslag rust. Lieke Jansen, jurist, maakt er nu een machine-leesbare regel van en bewaakt dat die juridisch blijft kloppen.',
+        handover: { from: 'bram-de-wit', to: 'lieke-jansen' },
+        full: true,
+      },
+      {
+        id: 'est-lieke-regel',
+        becomePersona: 'lieke-jansen',
+        title: 'Dezelfde wet, een andere bril',
+        lead: 'Je bent nu Lieke Jansen, jurist. Je opent dezelfde pagina die Bram achterliet, maar jij kijkt naar het traject: de werkruimte waar artikel 3 een machine-leesbare regel wordt.',
+        bullets: [
+          "Het traject 'AWIR toeslagpartner-logica' heeft een eigen branch waar jurist en developer samen aan de wet werken; Sanne, Joost en Bram zitten er al in.",
+          'Status: in review. Dat betekent dat jij aan zet bent: zegt de regel precies wat artikel 3 zegt, of net niet?',
+          'Wat jij hier goedkeurt, nemen huurtoeslag en zorgtoeslag straks ongezien over. Dit moet in één keer kloppen.',
+        ],
+        route: '/wetten/awir',
+      },
+      {
+        id: 'est-lieke-grondslag',
+        title: 'Geen regel zonder grondslag',
+        lead: 'Een regel die partners uit de BRP leest, verwerkt persoonsgegevens. Dus loop je de verwerking eronder na voordat je het stokje doorgeeft.',
+        bullets: [
+          "'Vaststellen recht op toeslag' staat in het register op grondslag van een wettelijke verplichting: de AWIR zelf, geen gekunstelde constructie.",
+          'Betrokkenen zijn aanvragers én hun toeslagpartners; de DPIA is uitgevoerd en het risico staat expliciet op hoog.',
+          'Bewaartermijn zeven jaar, registers BRP en inkomen: ook het einde van de gegevens is geregeld voordat de regel draait.',
+        ],
+        route: '/verwerkingen/vwk-toeslagen-vaststelling',
+        skippable: true,
+      },
+      {
+        id: 'est-handover-sanne',
+        kind: 'handover',
+        title: 'De regel is juridisch rond',
+        lead: 'Machine-leesbaar, grondslag vast, DPIA gedaan. Sanne Visser, backend developer, laat de regel nu landen in code en brengt hem door de pijplijn naar productie.',
+        handover: { from: 'lieke-jansen', to: 'sanne' },
+        full: true,
+      },
+      {
+        id: 'est-sanne-repo',
+        becomePersona: 'sanne',
+        title: 'Het stokje wordt code',
+        lead: 'Je bent Sanne Visser, backend developer. De regel die Lieke dichttimmerde landt hier: minbzk/toeslagenmotor, de repo van je team.',
+        bullets: [
+          'Rust, open onder EUPL-1.2: iedereen kan nalezen hoe de overheid bepaalt wie een toeslagpartner is.',
+          'De overdracht is geen document maar een diff: in het traject werkten Lieke en jij al op dezelfde branch.',
+        ],
+        route: '/code/repo-toeslagen',
+      },
+      {
+        id: 'est-sanne-app',
+        title: 'De motor die het artikel draait',
+        lead: 'Code wordt pas een dienst als hij draait. Dit is de Toeslagenmotor als applicatie: de plek waar repo, pijplijn en omgevingen samenkomen.',
+        bullets: [
+          'Artikel 3 is hier geen tekst meer maar gedrag: per aanvraag beantwoordt de dienst straks de vraag heeft_toeslagpartner.',
+          'Je ziet wat in test staat en wat in productie draait, dus je weet precies wat je zo gaat promoten.',
+        ],
+        route: '/apps/app-toeslagen',
+        skippable: true,
+      },
+      {
+        id: 'est-sanne-deploy',
+        title: 'Kijk mee: van test naar productie',
+        lead: 'Dan het moment zelf: je promoot de Toeslagenmotor van test naar productie, en de wizard loopt live langs elke gate.',
+        bullets: [
+          'Elke gate wordt groen voor je ogen, of het houdt op: één rode gate en de promotie stopt, zonder uitzondering.',
+          'Geen ticket, geen wachtrij: jij zet de stap, het platform bewaakt de regels.',
+          'Vanaf nu beantwoordt de regel van Lieke echte aanvragen.',
+        ],
+        route: '/environments/promotie/app-toeslagen',
+        drive: { wizard: 'promotie' },
+      },
+      {
+        id: 'est-handover-samira',
+        kind: 'handover',
+        title: 'Artikel 3 draait in productie',
+        lead: 'En juist nu begint het werk van Samira Haddad, information security officer. Zij toetst of het algoritme erachter mag beslissen, en of de gates dat blijvend afdwingen.',
+        handover: { from: 'sanne', to: 'samira-haddad' },
+        full: true,
+      },
+      {
+        id: 'est-samira-algoritme',
+        becomePersona: 'samira-haddad',
+        title: 'Mag dit algoritme beslissen?',
+        lead: 'Je kijkt nu als Samira Haddad, information security officer. In de dienst van Sanne toetst de Geautomatiseerde inkomenstoets het inkomen waarin de toeslagpartner meetelt: bepalend voor het besluit, zonder mens in de loop.',
+        bullets: [
+          'Rule-based en hoog uitlegbaar: elke uitkomst voert terug op een regel, en die regel op de wet.',
+          'Juist omdat er geen mens tussen zit, zijn de impacttoets en de discriminatietoets uitgevoerd en hier vastgelegd.',
+          'En het staat gepubliceerd in het algoritmeregister: wat meebeslist over burgers, is openbaar na te lopen.',
+        ],
+        route: '/algoritmes/alg-inkomenstoets',
+      },
+      {
+        id: 'est-samira-gates',
+        title: 'Jouw toets wordt code',
+        lead: 'Eén keer goedkeuren is niet genoeg, want de dienst verandert door. Daarom staan jouw eisen als gates in de pijplijn: de gates die Sanne net groen zag worden, dat waren jouw regels aan het werk.',
+        bullets: [
+          'Beleid als code: scherp je een eis aan, dan rolt die uit als wijziging, met review en historie.',
+          'Geen audit één keer per jaar, maar een toets bij elke release.',
+          'Een algoritme zonder toets komt er niet door, ook volgend jaar niet.',
+        ],
+        route: '/governance',
+        skippable: true,
+      },
+      {
+        id: 'est-handover-daan',
+        kind: 'handover',
+        title: 'Getoetst én afgedwongen',
+        lead: 'De toetsen zijn gedaan en de gates dwingen ze blijvend af. Daan Koster, business analist, loopt de laatste etappe: hoe goed is de data waar deze hele keten op rekent?',
+        handover: { from: 'samira-haddad', to: 'daan-koster' },
+        full: true,
+      },
+      {
+        id: 'est-daan-data',
+        becomePersona: 'daan-koster',
+        title: 'De data onder het partnerbegrip',
+        lead: 'Je sluit de rij als Daan Koster, business analist. Een toets is zo goed als zijn input, en alles in deze keten hangt op één gegeven: wie iemands partner is.',
+        bullets: [
+          'Persoonsgegevens (BRP): kwaliteit goud, volledigheid 99%, realtime. Geen verouderde kopie maar de actuele stand.',
+          'Het zijn bijzondere persoonsgegevens: precies de data waarvoor Lieke vanmorgen de grondslag naliep.',
+          'Afnemers app-toeslagen en app-inkomenstoets: je ziet precies wie er nog meer op dit gegeven draait.',
+        ],
+        route: '/data/ds-personen-brp',
+      },
+      {
+        id: 'est-daan-register',
+        title: 'Tot aan de bron zelf',
+        lead: 'Achter de dataset ligt het register: de Basisregistratie Personen, beheerd door RvIG. Hier eindigt het stokje, bij de plek waar artikel 3 zijn input leest.',
+        bullets: [
+          'Het partnergegeven dat hier wordt bijgehouden is letterlijk de input van artikel 3: verder terug gaat de keten niet.',
+          'Beschikbaarheid 99,95%: hapert de BRP, dan hapert de toets. Ook de betrouwbaarheid van de bron is een gegeven, geen aanname.',
+          'Eén houder, RvIG: er is altijd iemand verantwoordelijk voor de bron.',
+        ],
+        route: '/registers/brp',
+        skippable: true,
+      },
+      {
+        id: 'est-slot',
+        title: 'Vijf paar handen, één spoor',
+        lead: 'Vijf mensen hielden hetzelfde begrip vast, en op elk scherm was het iets anders geworden: artikel, regel, code, besluit, gegeven. Het stokje is nergens gevallen, en elke overdracht liet een spoor na.',
+        bullets: [
+          'Dit kun je niet inkopen. Een keten die van wetsartikel tot draaiende dienst herleidbaar is, bouw je.',
+          'Vijf rollen, één platform, en niemand die wachtte op een ander team: iedereen werkte op dezelfde bron.',
+          'Verandert artikel 3, dan loopt de estafette opnieuw, langs hetzelfde pad, met hetzelfde spoor.',
+        ],
+        full: true,
+      },
+    ],
+  },
 ];
 
 export function routeById(id) {
