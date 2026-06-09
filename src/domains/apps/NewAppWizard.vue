@@ -131,13 +131,18 @@ onMounted(() => {
 const selectedTemplate = computed(() => store.templates.find((t) => t.id === form.template));
 const selectedTeam = computed(() => store.teamById(form.team));
 
-function pickTemplate(id) {
+// When auto-driven from a slide, drive.js calls helpers as helper(control, ...args),
+// so the real argument may arrive as the second parameter. These two helpers take
+// a string; if the first arg is not a string it is the control token, so shift.
+function pickTemplate(id, maybeId) {
+  if (typeof id !== 'string') id = maybeId;
   form.template = id;
   // Pre-tick the infra the template pairs well with, but only if untouched.
   if (!form.infra.length) form.infra = [...tplMeta(id).suggests];
 }
 
-function toggleInfra(kind) {
+function toggleInfra(kind, maybeKind) {
+  if (typeof kind !== 'string') kind = maybeKind;
   const i = form.infra.indexOf(kind);
   if (i === -1) form.infra.push(kind);
   else form.infra.splice(i, 1);
