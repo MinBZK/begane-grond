@@ -66,12 +66,12 @@ export const routes = [
       {
         id: 'eng-code',
         title: 'En daar staat je repo',
-        lead: 'Wat de wizard maakte, staat klaar in de codeforge, met de gebaande structuur al gezet.',
+        lead: 'Dit is de toeslagenmotor: de repo van je team, met de gebaande structuur al gezet.',
         bullets: [
           'Branch, pull request, review: het normale werk, maar met de gates al geconfigureerd.',
           'Elke wijziging is een commit, en elke commit is herleidbaar tot wie en waarom.',
         ],
-        route: '/code',
+        route: '/code/repo-toeslagen',
       },
       {
         id: 'eng-cli',
