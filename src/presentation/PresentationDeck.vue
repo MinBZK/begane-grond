@@ -226,32 +226,6 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <!-- Live animation indicator + controls, shown while a wizard auto-runs. -->
-      <div v-if="p.driving.value" class="drive" :class="{ 'drive-paused': p.drivePaused.value }">
-        <span class="drive-dot" aria-hidden="true"></span>
-        <span class="drive-label">{{ p.drivePaused.value ? 'Animatie gepauzeerd' : 'Animatie loopt' }}</span>
-        <div class="drive-controls">
-          <button
-            type="button"
-            class="drive-btn"
-            :aria-label="p.drivePaused.value ? 'Hervat animatie' : 'Pauzeer animatie'"
-            @click="p.toggleDrive()"
-          >
-            <svg v-if="p.drivePaused.value" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-              <path d="M8 5v14l11-7z" fill="currentColor" />
-            </svg>
-            <svg v-else viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-              <path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor" />
-            </svg>
-          </button>
-          <button type="button" class="drive-btn" aria-label="Sla animatie over" @click="p.skipDrive()">
-            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-              <path d="M5 5l9 7-9 7zM16 5h3v14h-3z" fill="currentColor" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
       <div class="footer">
         <div class="footer-row">
           <span class="counter-wrap">
@@ -317,7 +291,28 @@ onBeforeUnmount(() => {
           <span class="hint">f volledig scherm</span>
           <span class="hint">a autoplay</span>
           <span class="hint">o sla optionele over</span>
-          <span v-if="p.driving.value" class="hint hint-autoplay">spatie pauzeert</span>
+          <!-- Compact animation controls, inline in the hint row while a wizard auto-runs. -->
+          <span v-if="p.driving.value" class="drive-inline" :class="{ 'drive-inline-paused': p.drivePaused.value }">
+            <span class="drive-dot" aria-hidden="true"></span>
+            <button
+              type="button"
+              class="drive-mini"
+              :aria-label="p.drivePaused.value ? 'Hervat animatie' : 'Pauzeer animatie'"
+              @click="p.toggleDrive()"
+            >
+              <svg v-if="p.drivePaused.value" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+                <path d="M8 5v14l11-7z" fill="currentColor" />
+              </svg>
+              <svg v-else viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+                <path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor" />
+              </svg>
+            </button>
+            <button type="button" class="drive-mini" aria-label="Sla animatie over" @click="p.skipDrive()">
+              <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+                <path d="M5 5l9 7-9 7zM16 5h3v14h-3z" fill="currentColor" />
+              </svg>
+            </button>
+          </span>
           <span v-if="p.autoplay.value" class="hint hint-autoplay">autoplay aan</span>
           <span v-if="p.skipOptional.value" class="hint hint-autoplay">optionele overgeslagen</span>
         </div>
@@ -679,28 +674,23 @@ onBeforeUnmount(() => {
 }
 
 /* Live animation indicator + its pause/skip controls. */
-.drive {
-  display: flex;
+/* Compact animation controls, inline in the hint row (dot + pause + skip). */
+.drive-inline {
+  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  margin: 0 0 0.9rem;
-  padding: 0.55rem 0.8rem;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  font-family: 'RijksSans', system-ui, sans-serif;
+  gap: 0.3rem;
 }
 
 .drive-dot {
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 50%;
   background: #8fd19e;
   flex: 0 0 auto;
   animation: drive-blink 1s ease-in-out infinite;
 }
 
-.drive-paused .drive-dot {
+.drive-inline-paused .drive-dot {
   background: #f0c419;
   animation: none;
 }
@@ -717,37 +707,25 @@ onBeforeUnmount(() => {
   }
 }
 
-.drive-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #fff;
-  flex: 1 1 auto;
-}
-
-.drive-controls {
-  display: flex;
-  gap: 0.35rem;
-}
-
-.drive-btn {
+.drive-mini {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.9rem;
-  height: 1.9rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   background: transparent;
   color: #fff;
   cursor: pointer;
   transition: background 0.15s ease;
 }
 
-.drive-btn:hover {
+.drive-mini:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.drive-btn:focus-visible {
+.drive-mini:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
 }
