@@ -229,10 +229,16 @@ function nextIndex(from, step) {
   return from;
 }
 
-// Advance to the next slide if there is one.
+// Advance to the next slide. On the last slide of a route or the pitch, loop
+// back to the chooser ("terug naar het begin"), so a deck never dead-ends and
+// you can hand the next person a fresh choice.
 async function next() {
-  const target = nextIndex(index.value, 1);
-  if (target !== index.value) await goto(target);
+  const target = nextIndex(index.value, 1)
+  if (target !== index.value) {
+    await goto(target)
+  } else if (activeTour.value.id !== 'chooser') {
+    await start()
+  }
 }
 
 // Go back to the previous slide if there is one.

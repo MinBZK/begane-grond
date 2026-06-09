@@ -44,6 +44,11 @@ onMounted(() => {
   }
 })
 
+// On the last slide of a route/pitch, "next" loops back to the chooser. Show a
+// labelled button there instead of a bare arrow ("terug naar het begin").
+const isLastSlide = computed(() => index.value === total.value - 1)
+const loopsToStart = computed(() => isLastSlide.value && !p.onChooser.value)
+
 // Format helpers for the footer counter.
 const counter = computed(
   () =>
@@ -282,6 +287,13 @@ onBeforeUnmount(() => {
               </svg>
             </button>
             <button
+              v-if="loopsToStart"
+              type="button"
+              class="restart-btn"
+              @click="p.next()"
+            >Terug naar het begin</button>
+            <button
+              v-else
               type="button"
               class="round-btn"
               aria-label="Volgende slide"
@@ -624,6 +636,25 @@ onBeforeUnmount(() => {
 }
 
 .round-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #fff;
+}
+
+.restart-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 2.5rem;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.restart-btn:hover {
   background: rgba(255, 255, 255, 0.18);
   border-color: #fff;
 }
