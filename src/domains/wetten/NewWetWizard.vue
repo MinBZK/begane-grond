@@ -49,7 +49,10 @@ function syncTrajectName() {
   }
 }
 
-function toggleMember(id) {
+function toggleMember(id, maybeId) {
+  // Auto-drive calls helpers as helper(control, ...args); the real id then
+  // arrives second. Shift when the first arg is not a string.
+  if (typeof id !== 'string') id = maybeId;
   const i = form.members.indexOf(id);
   if (i === -1) form.members.push(id);
   else if (id !== store.currentUser) form.members.splice(i, 1);
