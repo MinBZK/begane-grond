@@ -1157,7 +1157,7 @@ export const routes = [
       {
         id: 'est-intro',
         title: 'Het stokje heet artikel 3',
-        lead: 'Wie je toeslagpartner is, bepaalt mede je toetsingsinkomen en dus je recht op toeslag. Vandaag volg je dat ene begrip uit AWIR artikel 3 door vijf paar handen, en je bent ze allemaal.',
+        lead: 'Wie je toeslagpartner is, telt mee voor het inkomen waarop je toeslag wordt berekend, en bepaalt zo mede je recht. Vandaag volg je dat ene begrip uit AWIR artikel 3 door vijf paar handen, en je bent ze allemaal.',
         bullets: [
           'Je wordt ze één voor één: de app kleurt mee met wie je op dat moment bent.',
           'Iedereen kijkt naar hetzelfde artikel, ieder met een eigen bril.',
@@ -1187,6 +1187,7 @@ export const routes = [
           'Daarmee is jouw etappe af: een begrip dat uitvoerbaar is, op een grondslag die staat.',
         ],
         route: '/governance/bevoegdheid',
+        skippable: true,
       },
       {
         id: 'est-handover-lieke',
@@ -1255,8 +1256,8 @@ export const routes = [
         title: 'Kijk mee: van test naar productie',
         lead: 'Dan het moment zelf: je promoot de Toeslagenmotor van test naar productie, en de wizard loopt live langs elke gate.',
         bullets: [
-          'Elke gate wordt groen voor je ogen, of het houdt op: één rode gate en de promotie stopt, zonder uitzondering.',
-          'Geen ticket, geen wachtrij: jij zet de stap, het platform bewaakt de regels.',
+          'Elke gate toetst voor je ogen: faalt er een, dan kun je overrulen, maar met motivatie en vastgelegd in het auditlog.',
+          'Geen ticket, geen wachtrij: jij zet de stap, het platform bewaakt de regels en houdt het spoor bij.',
           'Vanaf nu beantwoordt de regel van Lieke echte aanvragen.',
         ],
         route: '/environments/promotie/app-toeslagen',
@@ -1309,7 +1310,7 @@ export const routes = [
         lead: 'Je sluit de rij als Daan Koster, business analist. Een toets is zo goed als zijn input, en alles in deze keten hangt op één gegeven: wie iemands partner is.',
         bullets: [
           'Persoonsgegevens (BRP): kwaliteit goud, volledigheid 99%, realtime. Geen verouderde kopie maar de actuele stand.',
-          'Het zijn bijzondere persoonsgegevens: precies de data waarvoor Lieke vanmorgen de grondslag naliep.',
+          'Het zijn persoonsgegevens: precies de data waarvoor Lieke vanmorgen de grondslag naliep.',
           'Afnemers app-toeslagen en app-inkomenstoets: je ziet precies wie er nog meer op dit gegeven draait.',
         ],
         route: '/data/ds-personen-brp',

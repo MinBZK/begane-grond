@@ -62,7 +62,7 @@ export const slides = [
   {
     id: 'uitbesteden-vastloopt',
     title: 'Inkopen werkt niet',
-    lead: 'Een platform is de gedeelde basislaag waarop teams hun software bouwen.',
+    lead: 'De klassieke route is een groot traject uitbesteden. Bij software op deze schaal loopt dat keer op keer vast.',
     bullets: [
       'Twee op de drie grote IT-projecten van de overheid lopen vertraging op.',
       'Miljarden aan budgetoverschrijding, en dan werkt het vaak nog niet.',

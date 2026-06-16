@@ -6,14 +6,9 @@ import { routes, routeById } from './routes.js';
 import { runScript } from './drive.js';
 import { wizardScripts } from './wizard-scripts.js';
 
-// The chooser deck: a single full-screen "wie ben je vandaag?" slide that opens
-// when the presentation starts (Shift+P). Its `kind: 'choice'` tells the deck to
-// render the role cards instead of the usual title/lead/bullets. Picking a card
-// calls chooseRoute(), which becomes that persona and swaps to the route's deck.
-const CHOOSER_TOUR = {
-  id: 'chooser',
-  slides: [{ id: 'chooser', kind: 'choice', full: true }],
-};
+// The chooser ("kies een rol") is no longer its own one-slide tour: it lives as
+// the final slide of the intro/runway tour (kind: 'choice'), so the talk plays
+// runway -> chooser -> chosen route as one continuous flow. See start() below.
 
 // Module-level singleton state shared across every usePresentation() call.
 const active = ref(false);
@@ -251,8 +246,9 @@ async function next() {
   const target = nextIndex(index.value, 1);
   if (target !== index.value) {
     await goto(target);
-  } else if (activeTour.value.id !== 'chooser') {
-    await start();
+  } else if (current.value?.kind !== 'choice') {
+    // End of a route/the pitch: loop back to the chooser (not the full runway).
+    await start(CHOOSER_INDEX);
   }
 }
 
@@ -267,15 +263,21 @@ function toggleSkipOptional() {
   skipOptional.value = !skipOptional.value;
 }
 
-// Enter presentation mode. Shift+P opens the chooser slide ("wie ben je
-// vandaag?"); picking a role there starts that route's deck. The chooser IS the
-// first slide — the choice lives in the presentation, not the app UI.
-async function start() {
-  activeTour.value = CHOOSER_TOUR;
+// The runway tour (id 'intro') opens the talk: the pitch-opening slides whose
+// last slide IS the chooser. Resolve it once so start() can target either the
+// top of the runway (Shift+P) or just the chooser (loop-back, "naar de keuze").
+const INTRO_TOUR = tourById('intro');
+const CHOOSER_INDEX = INTRO_TOUR.slides.length - 1;
+
+// Enter presentation mode. Shift+P (fromIndex 0) plays the runway and lands on
+// the chooser; picking a role there starts that route's deck. Loop-back and the
+// "naar de keuze" button pass CHOOSER_INDEX to skip straight to the chooser.
+async function start(fromIndex = 0) {
+  activeTour.value = INTRO_TOUR;
   activeRouteId.value = null;
   active.value = true;
   document.documentElement.classList.add('rp-presenting');
-  await goto(0);
+  await goto(fromIndex);
 }
 
 // Start the pitch deck directly (the 56-slide stage talk), bypassing the chooser.
@@ -288,12 +290,14 @@ async function startPitch(fromIndex = 0) {
 }
 
 // Whether the chooser slide is currently showing (so the deck can hide the
-// "naar de keuze" button on the chooser itself).
-const onChooser = computed(() => activeTour.value.id === 'chooser');
+// "naar de keuze" button on the chooser itself). The chooser now lives as the
+// last slide of the intro tour, so check the slide kind, not the tour id.
+const onChooser = computed(() => current.value?.kind === 'choice');
 
-// Go back to the chooser slide from within a route/the pitch.
+// Go back to the chooser from within a route/the pitch. Skip the runway: land
+// straight on the chooser slide, not the top of the intro.
 async function backToChooser() {
-  await start();
+  await start(CHOOSER_INDEX);
 }
 
 // Pick a role from the chooser slide: become that persona (via the injected

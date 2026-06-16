@@ -196,7 +196,27 @@ const engineeringSlides = [
   },
 ];
 
+// --- Aanloop: the runway before the chooser ----------------------------------
+// The pitch's own opening sets up the whole talk: the title slide and "de
+// overheid is een techbedrijf" (software at scale, Toeslagen you can't buy).
+// We reuse those two verbatim from the pitch deck (single source of truth: edit
+// the pitch and the runway follows), then end on the chooser (kind: 'choice'),
+// so Shift+P plays runway -> chooser -> pick a route as one continuous flow.
+const introSlides = [
+  ...pitchSlides.slice(0, 2),
+  { id: 'intro-chooser', kind: 'choice', full: true },
+];
+
 export const tours = [
+  {
+    id: 'intro',
+    title: 'Aanloop',
+    lead: 'De aanloop naar de keuze: de pitch-opening, dan kies je een rol.',
+    theme: 'intro',
+    audience: 'any',
+    icon: 'presentation',
+    slides: introSlides,
+  },
   {
     id: 'pitch',
     title: 'De pitch',

@@ -173,8 +173,8 @@ onBeforeUnmount(() => {
     <template v-else-if="current && current.kind === 'choice'">
       <div class="chooser">
         <div class="chooser-head">
-          <h1 class="chooser-title">Wie ben je vandaag?</h1>
-          <p class="chooser-sub">Kies een rol bij het team Toeslagen. Je wordt die persoon, en het platform laat het verhaal vanuit hún werk zien.</p>
+          <h1 class="chooser-title">Kies een rol</h1>
+          <p class="chooser-sub">Je wordt die persoon, en het platform kleurt mee.</p>
         </div>
         <div class="chooser-grid">
           <button
