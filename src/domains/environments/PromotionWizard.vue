@@ -494,17 +494,19 @@ onBeforeUnmount(() => presentation.unregisterWizard('promotie'));
 .rp-pipeline {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 .rp-pipe-stage {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.8rem 0.6rem;
+  padding: 0.8rem 0.55rem;
   border-radius: 10px;
   border: 1px solid var(--semantics-dividers-color);
-  min-width: 110px;
+  min-width: 92px;
+  flex-shrink: 0;
 }
 .rp-pipe-stage nldd-icon {
   width: 1.5rem;
@@ -528,10 +530,11 @@ onBeforeUnmount(() => presentation.unregisterWizard('promotie'));
   opacity: 1;
 }
 .rp-pipe-conn {
-  width: 28px;
+  width: 20px;
   height: 2px;
   background: var(--semantics-dividers-color);
   align-self: center;
+  flex-shrink: 0;
 }
 .rp-pipe-conn-done {
   background: #1a7a3e;
