@@ -52,7 +52,10 @@ function onGlobalKey(e) {
   if (typing) return;
   if (e.shiftKey && (e.key === 'P' || e.key === 'p') && !p.active.value) {
     e.preventDefault();
-    p.start();
+    // The talk: open straight into "de keten die je niet kunt kopen" (korte
+    // pitch -> estafette). The chooser/aanloop stays reachable via ?tour= /
+    // ?route= deep links and the in-deck "naar de keuze" button.
+    p.startTour('keten');
   }
 }
 onMounted(() => document.addEventListener('keydown', onGlobalKey));

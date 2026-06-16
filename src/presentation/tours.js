@@ -15,6 +15,7 @@
 //
 // All UI text is Dutch; identifiers and comments are English. No clock/random.
 import { slides as pitchSlides } from './slides.js';
+import { routeById } from './routes.js';
 
 // --- Persona-driven: "je werkt bij Logius en wilt een koppelvlak maken" -------
 // The quest that started this: where do I have to go to ship a compliant API?
@@ -207,6 +208,49 @@ const introSlides = [
   { id: 'intro-chooser', kind: 'choice', full: true },
 ];
 
+// --- "De keten die je niet kunt kopen" ---------------------------------------
+// The talk for an audience that already believes build-over-buy (developers).
+// A short, curated run-up proves the platform base is real (frame -> sovereign
+// -> paved path with two live wizards), then hands off into the estafette: AWIR
+// art. 3 through five roles (wet -> code -> data -> audit). The estafette IS the
+// chain you can't buy, tighter and more novel than the full feature tour.
+//
+// The run-up reuses real pitch slides by id (single source of truth: edit the
+// pitch and these follow). The estafette slides are pulled verbatim from the
+// route, so their `becomePersona` hand-overs still work: the engine resolves the
+// persona as a pure function of slide index, regardless of tour vs route.
+const pitchById = Object.fromEntries(pitchSlides.map((s) => [s.id, s]));
+const ketenRunup = [
+  'titel', // titelslide: naam + datum
+  'overheid-techbedrijf', // frame: software op schaal, kun je niet kopen
+  'ai-kantelt', // de these: bouwen wint, maar niet zonder platform
+  'voorbeeld-begane-grond', // hier is dat platform, een PoC
+  'fysiek-ijzer', // van wie: soeverein tot op het ijzer
+  'code-forgejo', // open-tenzij, broncode op eigen grond
+  'geplaveide-weg', // hoe makkelijk: het gebaande pad
+  'self-service', // zelf afnemen, geen ticket
+  'nieuwe-app', // live: een dienst uit het niets (drive=app)
+  'pijplijn-by-default', // gates en compliance by default
+  'promoten', // live: gates groen voor je ogen (drive=promotie)
+].map((id) => pitchById[id]);
+
+// Hand-off from the run-up into the estafette: this is the base, but any modern
+// software shop could build it. Now the part that is unique to the state, and
+// that you cannot buy.
+const ketenHandoff = {
+  id: 'keten-overgang',
+  title: 'En nu het deel dat je niet kunt kopen',
+  lead: 'Dit was de basis: een platform dat elk modern softwarebedrijf zou herkennen. Maar de overheid voert wetten uit, en dat koop je niet kant-en-klaar. Ik volg één wetsartikel door vijf paar handen.',
+  bullets: [
+    'AWIR artikel 3, de toeslagpartner: van wetstekst tot code tot data tot audit.',
+    'Vijf rollen, één platform, één spoor. Op elk scherm word jij die persoon.',
+    'Verandert de wet, dan loopt de keten opnieuw, langs hetzelfde spoor.',
+  ],
+  full: true,
+};
+
+const ketenSlides = [...ketenRunup, ketenHandoff, ...routeById('awir-estafette').slides];
+
 export const tours = [
   {
     id: 'intro',
@@ -216,6 +260,15 @@ export const tours = [
     audience: 'any',
     icon: 'presentation',
     slides: introSlides,
+  },
+  {
+    id: 'keten',
+    title: 'De keten die je niet kunt kopen',
+    lead: 'Korte basis, dan de estafette: één wetsartikel van wet tot audit, door vijf rollen.',
+    theme: 'keten',
+    audience: 'any',
+    icon: 'arrow-up-arrow-down',
+    slides: ketenSlides,
   },
   {
     id: 'pitch',

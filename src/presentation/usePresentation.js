@@ -314,7 +314,11 @@ async function chooseRoute(id) {
 }
 
 // Start a specific tour by id. The tour launcher and ?tour= deep links use this.
+// A tour is a "you are yourself" deck (only routes adopt a persona), so reset to
+// the default identity first; a tour that switches persona mid-deck (the keten's
+// estafette tail) still overrides per-slide via becomePersona.
 async function startTour(tourId, fromIndex = 0) {
+  if (_store) _store.resetPersona();
   activeTour.value = tourById(tourId);
   activeRouteId.value = null;
   index.value = 0;
