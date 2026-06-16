@@ -90,12 +90,12 @@ export const slides = [
   },
   {
     id: 'voorbeeld-begane-grond',
-    title: 'Een voorbeeld: Begane Grond',
-    lead: 'Om concreet te maken wat ik bedoel, lopen we door één platform heen.',
+    title: 'Het platform: Begane Grond',
+    lead: 'Om concreet te maken wat ik bedoel, lopen we door dit platform heen.',
     bullets: [
       'Begane Grond: een ontwikkelplatform voor de Rijksoverheid.',
-      'Je bouwt de begane grond op het fundament.',
-      'Dat fundament is een soevereine cloud voor het Rijk, waar we nu aan werken.',
+      'Je bouwt de begane grond op het Fundament.',
+      'Dat Fundament is een soevereine cloud voor het Rijk, waar we nu aan werken.',
       'Let op: dit is een demo, een proof of concept, om het gesprek te kunnen voeren.',
     ],
     route: '/',
