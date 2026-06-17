@@ -3,9 +3,10 @@
 // breakdown per dimension, the lineage chain (wet -> register -> dataset -> app),
 // the consumers, and the open-data status. Everything cross-links: register to
 // /registers, laws to /wetten, consumers to /apps, processings to /verwerkingen.
-import { computed } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
+import { usePresentation } from '../../presentation/usePresentation.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import DataTable from '../../components/shared/DataTable.vue';
@@ -42,6 +43,31 @@ const refreshSub = computed(() => {
   return 'op schema';
 });
 const REFRESH_STATUS = { 'op tijd': 'ok', vertraagd: 'warn', mislukt: 'failing', 'te laat': 'failing' };
+
+// --- Daan's action: pull a fresh refresh of the source, to confirm the data is
+// current. The new run is prepended to the history; the page is otherwise a
+// read-only view of how well the source keeps up.
+const extraRuns = ref([]);
+const refreshing = ref(false);
+const allRuns = computed(() => [...extraRuns.value, ...(refreshLog.value?.runs || [])]);
+const justRefreshed = computed(() => extraRuns.value.length > 0);
+function refreshSource() {
+  refreshing.value = true;
+  setTimeout(() => {
+    refreshing.value = false;
+    extraRuns.value = [{ date: 'zojuist', status: 'op tijd' }, ...extraRuns.value];
+  }, 1300);
+}
+
+// Presentation drive (the estafette's fifth leg, Daan): pull a fresh refresh.
+const presentation = usePresentation();
+onMounted(() => {
+  presentation.registerWizard('data-refresh', {
+    form: {},
+    refreshSource: () => refreshSource(),
+  });
+});
+onBeforeUnmount(() => presentation.unregisterWizard('data-refresh'));
 
 // Quality dimensions as bars. avgClassificatie is text, kept out of the bars.
 const dims = computed(() => {
@@ -206,15 +232,30 @@ const cli = computed(() =>
           Verwacht elke {{ dataset.refresh }} bijgewerkt te worden. Volgende verversing verwacht op {{ refreshLog.expected }}.
         </p>
       </nldd-rich-text>
+      <nldd-spacer size="12" />
+      <!-- Daan's action: pull a fresh refresh; the new run appears on top. -->
+      <nldd-button
+        variant="secondary"
+        :text="refreshing ? 'Bron verversen…' : 'Bron nu verversen'"
+        start-icon="arrow-2-counter-clockwise"
+        :disabled="refreshing"
+        @click="refreshSource"
+      ></nldd-button>
       <nldd-spacer size="16" />
       <nldd-card accessible-label="Verversingsgeschiedenis">
         <nldd-container padding="20">
           <ul class="rp-rh-list">
-            <li v-for="(run, i) in refreshLog.runs" :key="i" class="rp-rh-row">
+            <li
+              v-for="(run, i) in allRuns"
+              :key="i"
+              class="rp-rh-row"
+              :class="{ 'rp-rh-fresh': justRefreshed && i === 0 }"
+            >
               <span class="rp-rh-dot" :class="`rp-rh-${REFRESH_STATUS[run.status]}`"></span>
               <span class="rp-rh-date rp-mono">{{ run.date }}</span>
               <StatusBadge :status="REFRESH_STATUS[run.status]" size="sm" />
               <span class="rp-rh-label">{{ run.status }}</span>
+              <nldd-tag v-if="justRefreshed && i === 0" color="success" size="sm">nieuw</nldd-tag>
             </li>
           </ul>
         </nldd-container>
@@ -261,6 +302,18 @@ const cli = computed(() =>
 .rp-rh-failing { background: #d52b1e; }
 .rp-rh-date { min-width: 6.5rem; font-size: 0.88rem; }
 .rp-rh-label { font-size: 0.85rem; opacity: 0.7; text-transform: capitalize; }
+/* The freshly pulled run is highlighted so it visibly appears on top. */
+.rp-rh-fresh {
+  margin: -0.2rem -0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  background: rgba(46, 133, 64, 0.1);
+  animation: rp-rh-in 0.4s ease;
+}
+@keyframes rp-rh-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .rp-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
 </style>

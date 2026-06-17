@@ -1277,13 +1277,14 @@ export const routes = [
         id: 'est-samira-algoritme',
         becomePersona: 'samira-haddad',
         title: 'Mag dit algoritme beslissen?',
-        lead: 'We kijken nu als Samira Haddad, information security officer. In de dienst van Sanne toetst de Geautomatiseerde inkomenstoets het inkomen waarin de toeslagpartner meetelt: bepalend voor het besluit, zonder mens in de loop.',
+        lead: 'We kijken nu als Samira Haddad, information security officer. In de Toeslagenmotor van Sanne toetst de Geautomatiseerde inkomenstoets het inkomen waarin de toeslagpartner meetelt: precies het begrip uit artikel 3 dat Bram en Lieke vanmorgen behandelden, nu bepalend voor een besluit zonder mens in de loop.',
         bullets: [
-          'Rule-based en hoog uitlegbaar: elke uitkomst voert terug op een regel, en die regel op de wet.',
-          'Juist omdat er geen mens tussen zit, zijn de impacttoets en de discriminatietoets uitgevoerd en hier vastgelegd.',
+          'Hetzelfde partnergegeven uit de BRP, dezelfde keten: van artikel 3 tot dit besluit, herleidbaar.',
+          'Er zit geen mens tussen het besluit en de burger, dus is de discriminatietoets de waarborg. Samira draait hem live opnieuw en het resultaat verschijnt.',
           'En het staat gepubliceerd in het algoritmeregister: wat meebeslist over burgers, is openbaar na te lopen.',
         ],
         route: '/algoritmes/alg-inkomenstoets',
+        drive: { wizard: 'alg-toets' },
       },
       {
         id: 'est-samira-gates',
@@ -1312,10 +1313,11 @@ export const routes = [
         lead: 'We sluiten de rij als Daan Koster, business analist. Een toets is zo goed als zijn input, en alles in deze keten hangt op één gegeven: wie iemands partner is.',
         bullets: [
           'Persoonsgegevens (BRP): kwaliteit goud, volledigheid 99%, realtime. Geen verouderde kopie maar de actuele stand.',
-          'Het zijn persoonsgegevens: precies de data waarvoor Lieke vanmorgen de grondslag naliep.',
-          'Afnemers app-toeslagen en app-inkomenstoets: we zien precies wie er nog meer op dit gegeven draait.',
+          'Daan haalt live een verse verversing op: de nieuwe run komt bovenaan, zo weet hij dat de bron actueel is.',
+          'Het is precies de data waarvoor Lieke vanmorgen de grondslag naliep, en die artikel 3 als input leest.',
         ],
         route: '/data/ds-personen-brp',
+        drive: { wizard: 'data-refresh' },
       },
       {
         id: 'est-daan-register',

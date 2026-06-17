@@ -2,9 +2,10 @@
 // Algorithm detail: purpose, the impact and discrimination assessments, and
 // cross-links to the app it runs in, the LLM model (for type 'llm'), and the
 // datasets it consumes. The data sources link straight into the data domain.
-import { computed } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
+import { usePresentation } from '../../presentation/usePresentation.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import DataTable from '../../components/shared/DataTable.vue';
@@ -59,6 +60,37 @@ const relations = computed(() => {
   if (team.value) links.push({ text: team.value.name, to: `/teams/${team.value.id}`, icon: 'person-2' });
   return links;
 });
+
+// --- Samira's action: re-run the discrimination assessment before it ships ---
+// The page otherwise only shows the assessments as done; running it live makes
+// "een algoritme zonder toets komt er niet door" a verb, not a status.
+const rerunning = ref(false);
+const rerunResult = ref(null);
+function rerunToets() {
+  rerunning.value = true;
+  rerunResult.value = null;
+  setTimeout(() => {
+    rerunning.value = false;
+    rerunResult.value = {
+      status: 'geslaagd',
+      lines: [
+        'inkomensverdeling per herkomstgroep vergeleken',
+        'geen indirecte discriminatie aangetoond (drempel 0,8 doorstaan)',
+        'uitkomst vastgelegd in het algoritmeregister',
+      ],
+    };
+  }, 1400);
+}
+
+// Presentation drive (the estafette's fourth leg, Samira): run the toets live.
+const presentation = usePresentation();
+onMounted(() => {
+  presentation.registerWizard('alg-toets', {
+    form: {},
+    rerunToets: () => rerunToets(),
+  });
+});
+onBeforeUnmount(() => presentation.unregisterWizard('alg-toets'));
 </script>
 
 <template>
@@ -104,6 +136,29 @@ const relations = computed(() => {
               <div><span class="rp-toets-label">Menselijke tussenkomst</span><span class="rp-toets-val">{{ algoritme.humanInTheLoop ? 'mens beslist mee' : 'volautomatisch besluit' }}</span></div>
             </li>
           </ul>
+          <nldd-spacer size="16" />
+
+          <!-- Samira's action: re-run the discrimination assessment, with the
+               result appearing inline. The page is otherwise display-only. -->
+          <nldd-button
+            variant="secondary"
+            :text="rerunning ? 'Discriminatietoets draait…' : 'Discriminatietoets opnieuw draaien'"
+            start-icon="shield-check-mark"
+            :disabled="rerunning"
+            @click="rerunToets"
+          ></nldd-button>
+          <Transition name="rp-toets-appear">
+            <div v-if="rerunResult" class="rp-toets-result">
+              <div class="rp-toets-result-head">
+                <StatusBadge :status="rerunResult.status" size="sm" />
+                <span>Discriminatietoets {{ rerunResult.status }}</span>
+              </div>
+              <ol class="rp-toets-trace rp-mono">
+                <li v-for="(l, i) in rerunResult.lines" :key="i">{{ l }}</li>
+              </ol>
+            </div>
+          </Transition>
+
           <nldd-spacer size="16" />
           <p class="rp-pub"><nldd-icon name="file-text" aria-hidden="true"></nldd-icon> Openbaar via algoritmes.overheid.nl</p>
         </nldd-container>
@@ -153,4 +208,17 @@ const relations = computed(() => {
 .rp-pub nldd-icon { width: 0.95rem; height: 0.95rem; }
 .rp-link { color: var(--semantics-actions-primary-default-background-color); text-decoration: none; font-weight: 600; }
 .rp-link:hover { text-decoration: underline; }
+.rp-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+/* The re-run result appears under the button when the assessment completes. */
+.rp-toets-result {
+  margin-top: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #1a7a3e;
+  background: rgba(26, 122, 62, 0.08);
+}
+.rp-toets-result-head { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; }
+.rp-toets-trace { margin: 0.6rem 0 0; padding-left: 1.2rem; font-size: 0.82rem; opacity: 0.85; line-height: 1.5; }
+.rp-toets-appear-enter-active { transition: opacity 0.4s ease, transform 0.4s ease; }
+.rp-toets-appear-enter-from { opacity: 0; transform: translateY(-6px); }
 </style>

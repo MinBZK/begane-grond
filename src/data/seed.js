@@ -36096,7 +36096,7 @@ export const algoritmes = [
     doel: "Recht op toeslag berekenen uit het toetsingsinkomen.", type: "rule-based", model: null,
     uitlegbaarheid: "hoog", impacttoets: "uitgevoerd", discriminatietoets: "uitgevoerd",
     humanInTheLoop: false, besluitvorming: "bepalend", dataSources: ["ds-toetsingsinkomen-2026", "ds-personen-brp"],
-    app: "app-inkomenstoets", status: "productie", published: "2023-06-15",
+    app: "app-toeslagen", status: "productie", published: "2023-06-15",
     publicUrl: "https://algoritmes.overheid.nl/nl/algoritme/inkomenstoets"
   },
   {
