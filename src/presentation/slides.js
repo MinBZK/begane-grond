@@ -735,7 +735,7 @@ export const slides = [
     ],
     gov: 'EN 301 549 en WCAG zijn wettelijk verplicht. Het platform toetst ze automatisch in plaats van achteraf.',
     route: '/toegankelijkheid',
-    emit: { type: 'compliance.dropped', title: 'Toegankelijkheidscheck gezakt, gate dicht' },
+    emit: { type: 'compliance.dropped', title: 'Toegankelijkheidscheck mislukt, gate dicht' },
     highlight: '.rp-page',
     skippable: true,
   },

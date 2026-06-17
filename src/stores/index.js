@@ -1402,7 +1402,7 @@ export const usePlatformStore = defineStore('platform', {
       const w = this.wetById(wetId);
       if (failed) {
         this.emit('scenario.failed', {
-          title: `${failed} scenario('s) gezakt voor ${w?.name || wetId}`,
+          title: `${failed} scenario('s) mislukt voor ${w?.name || wetId}`,
           resource: wetId,
           target: `/wetten/${wetId}`,
           team: w?.owner,

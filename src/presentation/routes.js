@@ -1205,7 +1205,7 @@ export const routes = [
         lead: 'We zijn nu Lieke Jansen, jurist. Dezelfde wet, een andere bril: we openen de machine-leesbare regel achter artikel 3, het stuk dat precies moet zeggen wat de wet zegt.',
         bullets: [
           'De regel als code: bsn in, heeft_toeslagpartner uit, met de partner uit de BRP. Dit is wat Lieke bewaakt.',
-          'Lieke stelt een wijziging voor en de scenario’s draaien opnieuw: één zakt. Precies het geval dat ze moet vangen voordat het live gaat.',
+          'Lieke stelt een wijziging voor en de scenario’s draaien opnieuw: één mislukt. Precies het geval dat ze moet vangen voordat het live gaat.',
           'Wat hier wordt goedgekeurd, nemen huurtoeslag en zorgtoeslag straks ongezien over. Dit moet in één keer kloppen.',
         ],
         route: '/wetten/awir',

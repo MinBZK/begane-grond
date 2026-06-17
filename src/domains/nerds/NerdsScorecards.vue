@@ -196,7 +196,7 @@ const crumbs = [
             toegankelijkheid, open source), erft de scorecard exact dat oordeel. De overige
             richtlijnen volgen uit de platformdata zelf: een getekend datacontract, een
             geregistreerd algoritme met toetsen, inkoop zonder lock-in. Niet van toepassing telt
-            niet als gezakt. Een rood punt linkt door naar het scherm waar je het oplost.
+            niet als rood punt. Een rood punt linkt door naar het scherm waar je het oplost.
           </p>
         </nldd-rich-text>
         <nldd-spacer size="12" />

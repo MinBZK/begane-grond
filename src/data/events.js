@@ -216,7 +216,7 @@ export const eventCatalog = [
   {
     type: 'compliance.dropped',
     source: 'security',
-    label: 'Compliance gezakt',
+    label: 'Compliance mislukt',
     severity: 'warning',
     icon: 'exclamation-triangle',
   },
@@ -522,7 +522,7 @@ export const eventCatalog = [
   {
     type: 'scenario.failed',
     source: 'wetten',
-    label: 'Scenario gezakt',
+    label: 'Scenario mislukt',
     severity: 'warning',
     icon: 'exclamation-triangle',
   },

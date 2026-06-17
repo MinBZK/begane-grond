@@ -121,7 +121,7 @@ onMounted(() => {
     openMachine: () => {
       tab.value = 'machine';
     },
-    proposeChange: () => confirmChange(),
+    confirmChange: () => confirmChange(),
   });
 });
 onBeforeUnmount(() => {
@@ -226,7 +226,7 @@ function runScenarios() {
     <template v-if="changeDone">
       <nldd-inline-dialog
         title="Wijzigingstraject geopend"
-        supporting-text="Er is een traject aangemaakt en de scenario's zijn opnieuw gedraaid. Eén scenario zakt: zie het tabblad Scenario's voor de impact van deze wijziging."
+        supporting-text="Er is een traject aangemaakt en de scenario's zijn opnieuw gedraaid. Eén scenario mislukt: zie het tabblad Scenario's voor de impact van deze wijziging."
       ></nldd-inline-dialog>
       <nldd-spacer size="16" />
     </template>
@@ -351,7 +351,7 @@ function runScenarios() {
             <div v-for="sc in scenarios" :key="sc.id" class="rp-scn">
               <div class="rp-scn-top">
                 <strong>{{ sc.name }}</strong>
-                <StatusBadge :status="sc.status === 'pass' ? 'geslaagd' : sc.status === 'fail' ? 'gezakt' : sc.status" />
+                <StatusBadge :status="sc.status === 'pass' ? 'geslaagd' : sc.status === 'fail' ? 'mislukt' : sc.status" />
               </div>
               <nldd-spacer size="8" />
               <div class="rp-scn-given">
@@ -481,7 +481,7 @@ function runScenarios() {
           <p>
             Stel: de standaardpremie wordt aangepast bij de jaarovergang. Door een wijziging te starten opent het platform een
             <strong>traject</strong> (een branch met een eigen werkruimte) en draait het de scenario's opnieuw, zodat de impact van de
-            wijziging direct zichtbaar is. Eén bestaand scenario zal zakken: dat is precies het signaal dat je wilt zien.
+            wijziging direct zichtbaar is. Eén bestaand scenario zal mislukken: dat is precies het signaal dat je wilt zien.
           </p>
         </nldd-rich-text>
         <nldd-spacer size="20" />

@@ -13,7 +13,7 @@ const COLORS = {
   ready: 'success', ok: 'success', operationeel: 'success', green: 'success',
   'in gebruik': 'success', geleverd: 'success', merged: 'success', resolved: 'success',
   opgelost: 'success', goedgekeurd: 'success', geaccepteerd: 'success', voldoet: 'success',
-  productie: 'success', afgerond: 'success',
+  productie: 'success', afgerond: 'success', geslaagd: 'success',
   // certificate lifecycle (PKIoverheid)
   geldig: 'success', 'verloopt binnenkort': 'warning', kritiek: 'critical',
   verlopen: 'critical', aangevraagd: 'neutral',
@@ -27,7 +27,7 @@ const COLORS = {
   gepland: 'neutral', concept: 'neutral', offerte: 'neutral', aandacht: 'warning',
   sev3: 'warning', medium: 'warning', laag: 'neutral', low: 'neutral',
   // bad
-  red: 'critical', failing: 'critical', open: 'critical', critical: 'critical',
+  red: 'critical', failing: 'critical', open: 'critical', critical: 'critical', mislukt: 'critical',
   sev1: 'critical', sev2: 'critical', high: 'critical', hoog: 'critical', verstoord: 'critical',
 };
 
