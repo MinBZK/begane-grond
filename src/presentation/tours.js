@@ -210,33 +210,139 @@ const introSlides = [
 
 // --- "De keten die je niet kunt kopen" ---------------------------------------
 // The talk for an audience that already believes build-over-buy (developers).
-// A short, curated run-up proves the platform base is real (frame -> sovereign
-// -> paved path with two live wizards), then hands off into the estafette: AWIR
-// art. 3 through five roles (wet -> code -> data -> audit). The estafette IS the
-// chain you can't buy, tighter and more novel than the full feature tour.
+// Structure: titelslide -> the 8 arguments (the case that the government is a
+// tech company, from anneschuth.nl/.../techbedrijf) -> a bridge -> a short
+// Begane Grond demo (proof the base is real, with two live wizards) -> the
+// estafette: AWIR art. 3 through five roles (wet -> code -> data -> audit). The
+// estafette IS the chain you can't buy.
 //
-// The run-up reuses real pitch slides by id (single source of truth: edit the
-// pitch and these follow). The estafette slides are pulled verbatim from the
+// The demo slides reuse real pitch slides by id (single source of truth: edit
+// the pitch and they follow). The estafette slides are pulled verbatim from the
 // route, so their `becomePersona` hand-overs still work: the engine resolves the
 // persona as a pure function of slide index, regardless of tour vs route.
 const pitchById = Object.fromEntries(pitchSlides.map((s) => [s.id, s]));
-const ketenRunup = [
-  'titel', // titelslide: naam + datum
-  'overheid-techbedrijf', // frame: software op schaal, kun je niet kopen
-  'ai-kantelt', // de these: bouwen wint, maar niet zonder platform
-  'voorbeeld-begane-grond', // hier is dat platform, een PoC
-  'fysiek-ijzer', // van wie: soeverein tot op het ijzer
-  'code-forgejo', // open-tenzij, broncode op eigen grond
-  'geplaveide-weg', // hoe makkelijk: het gebaande pad
+
+// The 8 arguments, one tight full-screen slide each. Title = the argument, lead
+// = the claim, bullets = the sharpest fact. Numbers are from the blog post, not
+// rounded. The demo afterwards shows several of these working, so the bridge
+// names that as deliberate setup rather than repetition.
+const argumentSlides = [
+  {
+    id: 'arg-softwarebedrijf',
+    title: '1. De overheid is een softwarebedrijf',
+    lead: 'Het grootste en meest complexe van Nederland. Alleen noemt niemand het zo.',
+    bullets: [
+      'Belastingdienst, UWV, SVB, DUO, RvIG: kerntaken zijn software op enorme schaal.',
+      'Meer dan 10 miljoen aangiftes per jaar, honderden wijzigingen in tientallen regelingen.',
+      'Voor de Toeslagenberekening of een WIA-beoordeling bestaat geen SaaS. Je kunt het niet kopen.',
+    ],
+    full: true,
+  },
+  {
+    id: 'arg-inkopen',
+    title: '2. Inkopen werkt niet',
+    lead: 'De klassieke route is uitbesteden. Bij software op deze schaal loopt dat keer op keer vast.',
+    bullets: [
+      'Twee op de drie grote IT-projecten lopen vertraging op (Rapportage Grote ICT 2024).',
+      '1,6 miljard euro aan budgetoverschrijding over 184 projecten.',
+      'De wereld is te ingewikkeld om vooraf dicht te timmeren in een bestek.',
+    ],
+    full: true,
+  },
+  {
+    id: 'arg-ai-kantelt',
+    title: '3. AI kantelt koop versus bouw',
+    lead: 'Code wordt goedkoper om te schrijven. Dat verandert de rekensom.',
+    bullets: [
+      'Empirisch: 26% meer afgeronde taken, 27-39% winst bij junior developers (Microsoft/Accenture).',
+      'Kleinere teams kunnen significant meer dan een paar jaar geleden.',
+      'De 4x-claim is niet onderbouwd, maar de richting is duidelijk: bouwen wordt aantrekkelijker.',
+    ],
+    full: true,
+  },
+  {
+    id: 'arg-multiplier',
+    title: '4. De multiplier',
+    lead: 'Een platform onder een team vermenigvuldigt wat datzelfde team aankan.',
+    bullets: [
+      'Teams met een platform eronder: 2,3x actiever op code, 2x zo vaak deployen (Spotify/Backstage).',
+      '2x zoveel wijzigingen in 17% minder cycle time.',
+      'Correlatie, geen bewijs, maar het patroon is consistent: de basislaag doet het zware werk.',
+    ],
+    full: true,
+  },
+  {
+    id: 'arg-bijzonder',
+    title: '5. Bijzonder genoeg',
+    lead: 'De overheid heeft eisen die geen enkel commercieel product standaard invult.',
+    bullets: [
+      'BIO, AVG, data-soevereiniteit, DigiD, archivering, toegankelijkheid.',
+      'Elke organisatie lost dit nu apart op, keer op keer opnieuw.',
+      'Een platform regelt het één keer goed, voor iedereen.',
+    ],
+    full: true,
+  },
+  {
+    id: 'arg-standaarden',
+    title: '6. Standaarden in code',
+    lead: 'Een standaard is pas echt als hij is afgedwongen, niet als hij is opgeschreven.',
+    bullets: [
+      "In plaats van een PDF die zegt 'gebruik TLS 1.3', een platform waar TLS 1.3 de default is.",
+      'In plaats van een memo over een nieuwe versie, een automatische pull request naar alle repos.',
+      'API Design Rules, WCAG, BIO: als check in de pijplijn, niet als wens.',
+    ],
+    full: true,
+  },
+  {
+    id: 'arg-talent',
+    title: '7. Talent',
+    lead: 'Het tekort aan IT-specialisten bij de overheid is nijpend. Goed gereedschap is het antwoord.',
+    bullets: [
+      'Engineers kiezen werkgevers waar de tooling goed is en de bureaucratie klein.',
+      'Goed gereedschap trekt goed vakmanschap aan, en houdt het binnen.',
+      'Een platform is niet alleen techniek, het is wervingskracht.',
+    ],
+    full: true,
+  },
+  {
+    id: 'arg-bouwblokken',
+    title: '8. Versnipperde bouwblokken',
+    lead: 'De stukken bestaan al. Ze passen alleen nog niet op elkaar.',
+    bullets: [
+      'Haven, FSC, Common Ground, OpenZaak, Open Formulieren, NL Design System.',
+      'Onafhankelijk gebouwd, met eigen aannames over authenticatie, datamodellen en deployment.',
+      'Geen developer portal, geen service catalog, geen golden paths. Die verbindende laag ontbreekt.',
+    ],
+    full: true,
+  },
+];
+
+// Bridge: that was the argument; now what it looks like. Several of the 8 return
+// here as things the platform does, so name it as setup, not repetition.
+const ketenBridge = {
+  id: 'keten-brug',
+  title: 'Genoeg betoog. Hoe ziet dat eruit?',
+  lead: 'Acht argumenten voor één conclusie: de overheid moet bouwen, op een platform. Ik heb dat platform gebouwd om het gesprek concreet te maken. De komende minuten kijk je mee in dat platform zelf.',
+  bullets: [
+    'Begane Grond: een werkend ontwikkelplatform voor de Rijksoverheid. Een proof of concept.',
+    'Je ziet de argumenten terug als werkende dingen: gebaande paden, gates, standaarden in code.',
+    'Geen plaatjes, het draait echt.',
+  ],
+  full: true,
+};
+
+// Short demo: proof the base is real, with two live wizards. Kept lean because
+// the 8 arguments already made the case; this only needs to show it works.
+const ketenDemo = [
+  'geplaveide-weg', // het gebaande pad: 93 dagen -> minuten
   'self-service', // zelf afnemen, geen ticket
   'nieuwe-app', // live: een dienst uit het niets (drive=app)
   'pijplijn-by-default', // gates en compliance by default
   'promoten', // live: gates groen voor je ogen (drive=promotie)
 ].map((id) => pitchById[id]);
 
-// Hand-off from the run-up into the estafette: this is the base, but any modern
-// software shop could build it. Now the part that is unique to the state, and
-// that you cannot buy.
+// Hand-off into the estafette: this base any modern software shop could build.
+// Now the part unique to the state, that you cannot buy.
 const ketenHandoff = {
   id: 'keten-overgang',
   title: 'En nu het deel dat je niet kunt kopen',
@@ -249,7 +355,14 @@ const ketenHandoff = {
   full: true,
 };
 
-const ketenSlides = [...ketenRunup, ketenHandoff, ...routeById('awir-estafette').slides];
+const ketenSlides = [
+  pitchById['titel'], // titelslide: naam + datum
+  ...argumentSlides, // de 8 argumenten (het betoog)
+  ketenBridge, // brug: van betoog naar demo
+  ...ketenDemo, // korte demo: de basis staat, twee live wizards
+  ketenHandoff, // brug: van demo naar de estafette
+  ...routeById('awir-estafette').slides, // de keten die je niet kunt kopen
+];
 
 export const tours = [
   {
