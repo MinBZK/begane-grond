@@ -229,15 +229,15 @@ const pitchById = Object.fromEntries(pitchSlides.map((s) => [s.id, s]));
 const argumentSlides = [
   {
     id: 'arg-softwarebedrijf',
-    title: '1. De overheid is een softwarebedrijf',
+    title: '1. De overheid is een softwarebedrijf*',
     lead: 'Het grootste en meest complexe van Nederland. Alleen noemt niemand het zo.',
     bullets: [
-      'Spotify maakt een muziek-app.* De Belastingdienst draait software die complexer is dan de gemiddelde scale-up.',
+      'De Belastingdienst draait software die complexer is dan wat de gemiddelde scale-up bouwt.',
       'UWV, SVB, DUO, RvIG: meer dan 10 miljoen aangiftes per jaar, honderden wijzigingen in tientallen regelingen.',
       'Voor de Toeslagenberekening of een WIA-beoordeling bestaat geen SaaS. Je kunt het niet kopen.',
     ],
     aside:
-      "Eerder zei ik dat de vergelijking tussen Spotify en de overheid 'totaal mank gaat.' Dat vind ik nog steeds, qua missie. Maar qua software-complexiteit helpt de vergelijking wel.",
+      'Op heel veel vlakken gaat de vergelijking met een techbedrijf mank, zeker qua missie. Maar qua software-complexiteit helpt de vergelijking wel.',
     full: true,
   },
   {
@@ -319,23 +319,26 @@ const argumentSlides = [
   },
 ];
 
-// Bridge: that was the argument; now what it looks like. Several of the 8 return
-// here as things the platform does, so name it as setup, not repetition.
+// Bridge: that was the argument; now what it looks like. A pure turn from the
+// case to the tool; the next slide (the Begane Grond landing) introduces the
+// platform itself, so this one does not pre-empt it.
 const ketenBridge = {
   id: 'keten-brug',
   title: 'Genoeg betoog. Hoe ziet dat eruit?',
-  lead: 'Acht argumenten voor één conclusie: de overheid moet bouwen, op een platform. Ik heb dat platform gebouwd om het gesprek concreet te maken. De komende minuten kijk je mee in dat platform zelf.',
+  lead: 'Acht argumenten voor één conclusie: de overheid moet bouwen, op een platform. Om dat gesprek concreet te maken, heb ik dat platform gebouwd.',
   bullets: [
-    'Begane Grond: een werkend ontwikkelplatform voor de Rijksoverheid. Een proof of concept.',
+    'De komende minuten kijk je mee in dat platform zelf.',
     'Je ziet de argumenten terug als werkende dingen: gebaande paden, gates, standaarden in code.',
     'Geen plaatjes, het draait echt.',
   ],
   full: true,
 };
 
-// Short demo: proof the base is real, with two live wizards. Kept lean because
-// the 8 arguments already made the case; this only needs to show it works.
+// Short demo: land on the tool as a whole first (Begane Grond's front page),
+// then zoom into the paved path and two live wizards. Kept lean because the 8
+// arguments already made the case; this only needs to show it works.
 const ketenDemo = [
+  'voorbeeld-begane-grond', // landing: de voorkant van de tool (route /)
   'geplaveide-weg', // het gebaande pad: 93 dagen -> minuten
   'self-service', // zelf afnemen, geen ticket
   'nieuwe-app', // live: een dienst uit het niets (drive=app)
