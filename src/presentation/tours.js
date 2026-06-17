@@ -342,7 +342,7 @@ const ketenBridge = {
   title: 'Genoeg betoog. Hoe ziet dat eruit?',
   lead: 'Acht argumenten voor één conclusie: de overheid moet bouwen, op een platform. Om dat concreet te maken, heb ik een prototype in elkaar gezet.',
   bullets: [
-    'De komende minuten kijken we mee in die proof of concept.',
+    'De komende minuten lopen we er samen doorheen.',
     'We zien de argumenten terug als werkende dingen: gebaande paden, gates, standaarden in code.',
     'Geen plaatjes om naar te wijzen, maar iets dat klikt en draait.',
   ],
