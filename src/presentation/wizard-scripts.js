@@ -142,10 +142,16 @@ export const wizardScripts = {
   // inline. One keer goedkeuren is niet genoeg — the toets runs at each release.
   'alg-toets': [{ wait: 1200 }, { call: 'rerunToets' }, { wait: 1800 }],
 
-  // DatasetDetail (the estafette's fifth leg, Daan): pull a fresh refresh of the
-  // source; the new run appears on top of the history, confirming the data the
-  // whole chain rests on is current.
-  'data-refresh': [{ wait: 1200 }, { call: 'refreshSource' }, { wait: 1800 }],
+  // DatasetDetail (the estafette's fifth leg, Daan): scroll the refresh section
+  // into view (it sits low on the page), then pull a fresh refresh; the new run
+  // appears on top, confirming the data the whole chain rests on is current.
+  'data-refresh': [
+    { wait: 900 },
+    { call: 'scrollToRefresh' },
+    { wait: 1300 },
+    { call: 'refreshSource' },
+    { wait: 1800 },
+  ],
 
   // NewWorkplaceWizard: 6 steps (Medewerker, Hardware, Image, Profiel, Policy, Bevestigen).
   // The form is a ref; the driver mutates the inner object.

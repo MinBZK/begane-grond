@@ -49,6 +49,7 @@ const REFRESH_STATUS = { 'op tijd': 'ok', vertraagd: 'warn', mislukt: 'failing',
 // read-only view of how well the source keeps up.
 const extraRuns = ref([]);
 const refreshing = ref(false);
+const refreshSection = ref(null);
 const allRuns = computed(() => [...extraRuns.value, ...(refreshLog.value?.runs || [])]);
 const justRefreshed = computed(() => extraRuns.value.length > 0);
 function refreshSource() {
@@ -59,11 +60,17 @@ function refreshSource() {
   }, 1300);
 }
 
-// Presentation drive (the estafette's fifth leg, Daan): pull a fresh refresh.
+// Presentation drive (the estafette's fifth leg, Daan): scroll the refresh
+// section into view first (it lives low on the page, off-screen on entry), then
+// pull a fresh refresh so the new run is visible as it appears.
 const presentation = usePresentation();
+function scrollToRefresh() {
+  refreshSection.value?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
 onMounted(() => {
   presentation.registerWizard('data-refresh', {
     form: {},
+    scrollToRefresh: () => scrollToRefresh(),
     refreshSource: () => refreshSource(),
   });
 });
@@ -221,7 +228,7 @@ const cli = computed(() =>
 
     <template v-if="refreshLog">
       <nldd-spacer size="24" />
-      <div class="rp-rh-head">
+      <div ref="refreshSection" class="rp-rh-head">
         <nldd-title size="3"><h2>Verversingsgeschiedenis</h2></nldd-title>
         <nldd-tag :color="behindDays > 0 ? 'critical' : 'success'" size="md">
           {{ behindDays > 0 ? `loopt ${behindDays} dagen achter` : 'op schema' }}
