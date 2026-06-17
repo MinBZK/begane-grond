@@ -35697,9 +35697,21 @@ export const scenarios = [
   {
     "id": "sc-4",
     "wet": "awir",
-    "name": "Gehuwd: heeft toeslagpartner",
+    "name": "Gehuwd, samenwonend",
     "given": [
-      "partner geregistreerd in BRP"
+      "partner geregistreerd in BRP",
+      "zelfde adres als aanvrager"
+    ],
+    "then": "heeft_toeslagpartner = waar",
+    "status": "pass"
+  },
+  {
+    "id": "sc-4b",
+    "wet": "awir",
+    "name": "Gehuwd, apart wonend (LAT)",
+    "given": [
+      "partner geregistreerd in BRP",
+      "ander adres dan aanvrager"
     ],
     "then": "heeft_toeslagpartner = waar",
     "status": "pass"

@@ -121,15 +121,16 @@ export const wizardScripts = {
   ],
 
   // WetDetail (the estafette's second leg, Lieke): open the Machine-leesbaar tab
-  // (the rule as code, her other bril), then propose a change. The scenarios
-  // re-run with one failing and the view lands on Scenario's with a "traject
-  // aangemaakt" notice — the jurist catching a case that breaks. The change
-  // modal is skipped: it renders 0x0 inside the scaled presentation layout, so
-  // confirmChange is called directly (the failing scenario is the visible result).
+  // (the rule as code, her other bril), then propose a change. The change panel
+  // appears inline on the page (not a modal, which renders 0x0 in the scaled
+  // presentation layout), so the jurist's action is visible; confirming it opens
+  // a traject and re-runs the scenarios with one failing — the case she catches.
   'wet-review': [
     { wait: 900 },
     { call: 'openMachine' },
     { wait: 2400 },
+    { call: 'proposeChange' },
+    { wait: 2000 },
     { call: 'confirmChange' },
     { wait: 1400 },
   ],

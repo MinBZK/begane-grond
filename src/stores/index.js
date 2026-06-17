@@ -1392,11 +1392,16 @@ export const usePlatformStore = defineStore('platform', {
         }
       }
     },
-    runScenarios(wetId, { failOne = false } = {}) {
+    // Run the BDD scenarios. With { requireSameAddress } the rule has gained the
+    // extra condition that partners only count on a shared address, so any
+    // scenario whose facts mention a different address now fails: a concrete
+    // change breaking a concrete case, not a blind flip.
+    runScenarios(wetId, { requireSameAddress = false } = {}) {
       const list = this.scenariosByWet(wetId);
       let failed = 0;
-      list.forEach((sc, i) => {
-        sc.status = failOne && i === 0 ? 'fail' : 'pass';
+      list.forEach((sc) => {
+        const differentAddress = (sc.given || []).some((g) => /ander adres/i.test(g));
+        sc.status = requireSameAddress && differentAddress ? 'fail' : 'pass';
         if (sc.status === 'fail') failed++;
       });
       const w = this.wetById(wetId);

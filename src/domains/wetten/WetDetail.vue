@@ -121,6 +121,10 @@ onMounted(() => {
     openMachine: () => {
       tab.value = 'machine';
     },
+    proposeChange: () => {
+      tab.value = 'tekst';
+      showChange.value = true;
+    },
     confirmChange: () => confirmChange(),
   });
 });
@@ -178,19 +182,25 @@ const yaml = computed(() => {
 });
 
 // --- Wijziging starten ---
+// The concrete change Lieke proposes: partners only count as toeslagpartner on a
+// shared address. changeApplied surfaces that extra condition in the
+// Machine-leesbaar tab; it makes the LAT scenario (different address) fail.
 const showChange = ref(false);
 const changeDone = ref(false);
+const changeApplied = ref(false);
 
 function confirmChange() {
   if (!wet.value) return;
   store.createTraject({
-    name: `Wijziging ${wet.value.name}`,
+    name: `Wijziging ${wet.value.name}: partner telt alleen op gezamenlijk adres`,
     wet: wet.value.id,
     members: [store.currentUser],
     team: wet.value.owner,
   });
-  // Re-run scenarios with one deliberately failing so the impact is visible.
-  store.runScenarios(wet.value.id, { failOne: true });
+  changeApplied.value = true;
+  // The rule now requires a shared address, so the LAT scenario (ander adres)
+  // fails: a concrete change breaking a concrete case.
+  store.runScenarios(wet.value.id, { requireSameAddress: true });
   changeDone.value = true;
   showChange.value = false;
   tab.value = 'scenarios';
@@ -222,11 +232,37 @@ function runScenarios() {
       </template>
     </PageHeader>
 
+    <!-- Wijziging voorstellen: an inline panel (not a modal, which renders 0x0
+         in the scaled presentation layout). Shown when "Wijziging starten" is
+         clicked or driven, so the jurist's action is visible on the page. -->
+    <template v-if="showChange">
+      <nldd-card accessible-label="Wijziging voorstellen">
+        <nldd-container padding="24">
+          <nldd-title size="4"><h2>Wijziging voorstellen</h2></nldd-title>
+          <nldd-spacer size="12" />
+          <nldd-rich-text>
+            <p>
+              De voorgestelde wijziging: een partner telt alleen als toeslagpartner bij een
+              <strong>gezamenlijk adres</strong>. Door de wijziging te starten opent het platform een
+              <strong>traject</strong> (een branch met een eigen werkruimte) en draait het de scenario's opnieuw, zodat de impact direct
+              zichtbaar is. Het scenario met een partner op een ander adres (LAT) zal nu mislukken: precies het geval dat je wilt zien.
+            </p>
+          </nldd-rich-text>
+          <nldd-spacer size="20" />
+          <nldd-button-group orientation="horizontal">
+            <nldd-button variant="primary" text="Traject openen" start-icon="pencil" @click="confirmChange"></nldd-button>
+            <nldd-button variant="secondary" text="Annuleren" @click="showChange = false"></nldd-button>
+          </nldd-button-group>
+        </nldd-container>
+      </nldd-card>
+      <nldd-spacer size="16" />
+    </template>
+
     <!-- Change notice -->
     <template v-if="changeDone">
       <nldd-inline-dialog
         title="Wijzigingstraject geopend"
-        supporting-text="Er is een traject aangemaakt en de scenario's zijn opnieuw gedraaid. Eén scenario mislukt: zie het tabblad Scenario's voor de impact van deze wijziging."
+        supporting-text="Traject aangemaakt: de regel eist nu een gezamenlijk adres. De scenario's zijn opnieuw gedraaid en het LAT-scenario (partner op een ander adres) mislukt. Zie het tabblad Scenario's."
       ></nldd-inline-dialog>
       <nldd-spacer size="16" />
     </template>
@@ -321,6 +357,19 @@ function runScenarios() {
               </nldd-tag>
               <span v-if="!firstArticle.outputs.length" class="rp-muted">Nog geen uitvoer gedefinieerd.</span>
             </nldd-container>
+
+            <!-- Voorwaarden: shows the rule's conditions, with Lieke's added
+                 condition highlighted as new once the change is applied. -->
+            <nldd-spacer size="20" />
+            <nldd-title size="5"><h3>Voorwaarden</h3></nldd-title>
+            <nldd-spacer size="8" />
+            <div class="rp-cond-list">
+              <div class="rp-cond rp-mono">partner geregistreerd in BRP</div>
+              <div v-if="changeApplied" class="rp-cond rp-cond-new rp-mono">
+                <span class="rp-cond-plus">+</span> partner op gezamenlijk adres
+                <nldd-tag color="accent" size="sm">nieuw</nldd-tag>
+              </div>
+            </div>
 
             <template v-if="firstArticle.openTerms.length">
               <nldd-spacer size="20" />
@@ -472,25 +521,6 @@ function runScenarios() {
       </aside>
     </nldd-container>
 
-    <!-- Wijziging-modal -->
-    <nldd-modal-dialog v-if="showChange" open accessible-label="Wijziging starten">
-      <nldd-container padding="24">
-        <nldd-title size="3"><h2>Wijziging starten</h2></nldd-title>
-        <nldd-spacer size="12" />
-        <nldd-rich-text>
-          <p>
-            Stel: de standaardpremie wordt aangepast bij de jaarovergang. Door een wijziging te starten opent het platform een
-            <strong>traject</strong> (een branch met een eigen werkruimte) en draait het de scenario's opnieuw, zodat de impact van de
-            wijziging direct zichtbaar is. Eén bestaand scenario zal mislukken: dat is precies het signaal dat je wilt zien.
-          </p>
-        </nldd-rich-text>
-        <nldd-spacer size="20" />
-        <nldd-button-group orientation="horizontal">
-          <nldd-button variant="primary" text="Traject openen" start-icon="pencil" @click="confirmChange"></nldd-button>
-          <nldd-button variant="secondary" text="Annuleren" @click="showChange = false"></nldd-button>
-        </nldd-button-group>
-      </nldd-container>
-    </nldd-modal-dialog>
   </div>
 
   <div v-else class="rp-page">
@@ -503,6 +533,20 @@ function runScenarios() {
 .rp-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .rp-muted { opacity: 0.65; }
 .rp-span2 { grid-column: span 2; }
+
+/* Conditions on the rule; the added one is highlighted green ("nieuw"). */
+.rp-cond-list { display: flex; flex-direction: column; gap: 0.4rem; }
+.rp-cond {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 0.75rem; border-radius: 8px;
+  border: 1px solid var(--semantics-dividers-color);
+  font-size: 0.9rem;
+}
+.rp-cond-new {
+  border-color: #1a7a3e;
+  background: rgba(26, 122, 62, 0.08);
+}
+.rp-cond-plus { color: #1a7a3e; font-weight: 700; }
 @media (max-width: 1007px) {
   .rp-span2 { grid-column: auto; }
 }
