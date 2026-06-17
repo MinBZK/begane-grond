@@ -340,11 +340,11 @@ const argumentSlides = [
 const ketenBridge = {
   id: 'keten-brug',
   title: 'Genoeg betoog. Hoe ziet dat eruit?',
-  lead: 'Acht argumenten voor één conclusie: de overheid moet bouwen, op een platform. Om dat gesprek concreet te maken, heb ik dat platform gebouwd.',
+  lead: 'Acht argumenten voor één conclusie: de overheid moet bouwen, op een platform. Om dat concreet te maken, heb ik een prototype in elkaar gezet.',
   bullets: [
-    'De komende minuten kijken we mee in dat platform zelf.',
+    'De komende minuten kijken we mee in die proof of concept.',
     'We zien de argumenten terug als werkende dingen: gebaande paden, gates, standaarden in code.',
-    'Geen plaatjes, het draait echt.',
+    'Geen plaatjes om naar te wijzen, maar iets dat klikt en draait.',
   ],
   full: true,
 };
