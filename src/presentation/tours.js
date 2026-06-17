@@ -361,16 +361,17 @@ const ketenDemo = [
   'promoten', // live: gates groen voor je ogen (drive=promotie)
 ].map((id) => pitchById[id]);
 
-// Hand-off into the estafette: this base any modern software shop could build.
-// Now the part unique to the state, that you cannot buy.
+// Hand-off into the estafette: the pure turn. The base any modern software shop
+// could build; now the part unique to the state. The estafette-intro that
+// follows does the actual set-up (article 3, the five roles), so this slide
+// stays lean and does not pre-empt it.
 const ketenHandoff = {
   id: 'keten-overgang',
   title: 'En nu het deel dat je niet kunt kopen',
-  lead: 'Dit was de basis: een platform dat elk modern softwarebedrijf zou herkennen. Maar de overheid voert wetten uit, en dat koop je niet kant-en-klaar. We volgen één wetsartikel door vijf paar handen.',
+  lead: 'Dit was de basis: een platform dat elk modern softwarebedrijf zou herkennen. Knap, maar te koop.',
   bullets: [
-    'AWIR artikel 3, de toeslagpartner: van wetstekst tot code tot data tot audit.',
-    'Vijf rollen, één platform, één spoor. We worden ze één voor één, en de app kleurt mee met wie we op dat moment zijn.',
-    'Verandert de wet, dan loopt de keten opnieuw, langs hetzelfde spoor.',
+    'Wat je niet koopt, is de overheid zelf: een wet uitvoeren, herleidbaar, van tekst tot besluit.',
+    'Dat bouw je. En dat is precies wat we nu gaan volgen.',
   ],
   full: true,
 };
