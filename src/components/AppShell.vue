@@ -296,7 +296,7 @@ onBeforeUnmount(() => {
         </nldd-page-footer-legal-bar>
         <div class="rp-footer-present">
           <button type="button" class="rp-present-link" @click="presentation.start()">
-            <nldd-icon name="presentation" aria-hidden="true"></nldd-icon>
+            <nldd-icon name="rectangle-stack" aria-hidden="true"></nldd-icon>
             Presentatie
             <span class="rp-present-hint">Shift + P · kies een rol</span>
           </button>

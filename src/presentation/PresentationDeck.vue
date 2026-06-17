@@ -31,15 +31,15 @@ const storyCards = computed(() => {
       id: 'keten',
       name: 'De keten die je niet kunt kopen',
       role: 'Het hele verhaal',
-      icon: 'arrow-up-arrow-down',
+      icon: 'link',
       lead: 'Acht argumenten, een korte demo, en dan de estafette: van wet tot audit.',
     },
     ...chain,
     {
       id: 'pitch',
       name: 'Het podiumverhaal',
-      role: 'De volledige pitch',
-      icon: 'presentation',
+      role: 'Het lange verhaal',
+      icon: 'books-vertical',
       lead: 'Het volledige platform, van gebaande paden tot wet-als-code.',
     },
   ]
@@ -511,8 +511,8 @@ onBeforeUnmount(() => {
 .chooser-card-role { font-size: 0.85rem; font-weight: 600; color: #8fb8e8; }
 .chooser-card-lead { font-size: 0.85rem; opacity: 0.75; line-height: 1.4; }
 
-/* The stories are the headline choices: gold accent, a touch more presence. The
-   first one (the keten, the main talk) spans wider so it reads as the lead. */
+/* The stories are the headline choices: gold accent, a touch more presence.
+   All three are equal-sized cards in the same grid. */
 .chooser-card-story {
   border-color: rgba(255, 182, 18, 0.55);
   background: rgba(255, 182, 18, 0.08);
@@ -525,9 +525,6 @@ onBeforeUnmount(() => {
 .chooser-card-story .chooser-card-name { font-size: 1.15rem; }
 .chooser-card-story .chooser-card-role { color: #ffb612; }
 .chooser-card-story nldd-icon { opacity: 1; color: #ffb612; }
-.chooser-card-story:first-child {
-  grid-column: 1 / -1;
-}
 .chooser-close {
   background: none;
   border: none;

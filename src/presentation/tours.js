@@ -410,7 +410,7 @@ export const tours = [
     lead: 'De aanloop naar de keuze: de pitch-opening, dan kies je een rol.',
     theme: 'intro',
     audience: 'any',
-    icon: 'presentation',
+    icon: 'sparkles',
     slides: introSlides,
   },
   {
@@ -419,7 +419,7 @@ export const tours = [
     lead: 'Korte basis, dan de estafette: één wetsartikel van wet tot audit, door vijf rollen.',
     theme: 'keten',
     audience: 'any',
-    icon: 'arrow-up-arrow-down',
+    icon: 'link',
     slides: ketenSlides,
   },
   {
@@ -428,7 +428,7 @@ export const tours = [
     lead: 'Waarom de overheid het grootste softwarebedrijf van Nederland is — het volledige podiumverhaal.',
     theme: 'pitch',
     audience: 'any',
-    icon: 'presentation',
+    icon: 'books-vertical',
     slides: pitchSlides,
   },
   {
