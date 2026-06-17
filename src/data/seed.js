@@ -37603,31 +37603,31 @@ export const datasetRefreshLog = {
     ]
   },
   "ds-personen-brp": {
-    "expected": "2026-06-02",
+    "expected": "2026-06-17",
     "behindDays": 0,
     "runs": [
       {
-        "date": "2026-06-01",
+        "date": "2026-06-16",
         "status": "op tijd"
       },
       {
-        "date": "2026-05-31",
+        "date": "2026-06-15",
         "status": "op tijd"
       },
       {
-        "date": "2026-05-30",
+        "date": "2026-06-14",
         "status": "op tijd"
       },
       {
-        "date": "2026-05-29",
+        "date": "2026-06-13",
         "status": "op tijd"
       },
       {
-        "date": "2026-05-28",
+        "date": "2026-06-12",
         "status": "op tijd"
       },
       {
-        "date": "2026-05-27",
+        "date": "2026-06-11",
         "status": "op tijd"
       }
     ]

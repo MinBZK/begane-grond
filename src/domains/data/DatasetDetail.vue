@@ -52,11 +52,21 @@ const refreshing = ref(false);
 const refreshSection = ref(null);
 const allRuns = computed(() => [...extraRuns.value, ...(refreshLog.value?.runs || [])]);
 const justRefreshed = computed(() => extraRuns.value.length > 0);
+// Today's date as YYYY-MM-DD for a fresh refresh run. Like the title slide, a
+// component may read the real clock (the seed stays deterministic; this does
+// not), so the run is dated today whenever the talk is given.
+function todayIso() {
+  try {
+    return new Date().toISOString().slice(0, 10);
+  } catch {
+    return 'vandaag';
+  }
+}
 function refreshSource() {
   refreshing.value = true;
   setTimeout(() => {
     refreshing.value = false;
-    extraRuns.value = [{ date: 'zojuist', status: 'op tijd' }, ...extraRuns.value];
+    extraRuns.value = [{ date: todayIso(), status: 'op tijd' }, ...extraRuns.value];
   }, 1300);
 }
 
