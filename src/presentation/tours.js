@@ -222,6 +222,21 @@ const introSlides = [
 // persona as a pure function of slide index, regardless of tour vs route.
 const pitchById = Object.fromEntries(pitchSlides.map((s) => [s.id, s]));
 
+// The thesis slide: the blog's opening framing. The question Anne gets, the
+// thesis as the answer, and the promise of eight arguments. Sets up the eight
+// argument slides that follow.
+const ketenThese = {
+  id: 'keten-these',
+  title: 'Waarom platform engineering?',
+  lead: 'Ik krijg vaak de vraag: wat is platform engineering, en waarom zou de overheid zich daar druk om maken? Mijn antwoord begint bij een these.',
+  bullets: [
+    'De overheid is de facto het grootste en meest complexe softwarebedrijf van Nederland.',
+    'En ze moet zich ook zo organiseren. Platform engineering is de manier om dat te doen.',
+    'Hier acht argumenten.',
+  ],
+  full: true,
+};
+
 // The 8 arguments, one tight full-screen slide each. Title = the argument, lead
 // = the claim, bullets = the sharpest fact. Numbers are from the blog post, not
 // rounded. The demo afterwards shows several of these working, so the bridge
@@ -379,6 +394,7 @@ const ketenDank = {
 
 const ketenSlides = [
   pitchById['titel'], // titelslide: naam + datum
+  ketenThese, // these + aankondiging van de acht argumenten
   ...argumentSlides, // de 8 argumenten (het betoog)
   ketenBridge, // brug: van betoog naar demo
   ...ketenDemo, // korte demo: de basis staat, twee live wizards
