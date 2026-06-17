@@ -276,7 +276,10 @@ function jobBadge(status) {
   display: flex;
   align-items: stretch;
   flex-wrap: wrap;
-  gap: 0;
+  /* Vertical gap between wrapped rows; horizontal stays 0 so the connectors
+     between stages on one row keep touching. */
+  column-gap: 0;
+  row-gap: 0.75rem;
 }
 .rp-pipe-stage {
   display: flex;

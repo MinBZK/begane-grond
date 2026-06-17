@@ -104,7 +104,12 @@ defineExpose({ next, prev, goTo, current, isLast });
   font-weight: 700;
 }
 .rp-current .rp-wizard-num {
-  background: var(--semantics-actions-primary-default-background-color);
-  color: white;
+  /* The semantic primary token is not exposed at document level (it lives in
+     the NLDD shadow DOM), so it resolved to empty -> transparent bg with white
+     text -> an invisible number. Use the design system's primary blue literal
+     (the value an nldd primary button computes) so the badge is readable in
+     both light and dark mode. */
+  background: oklch(0.387 0.097 253.4);
+  color: #fff;
 }
 </style>
