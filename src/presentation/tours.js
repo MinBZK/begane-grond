@@ -368,9 +368,9 @@ const ketenDemo = [
 const ketenHandoff = {
   id: 'keten-overgang',
   title: 'En nu het deel dat je niet kunt kopen',
-  lead: 'Dit was de basis: een platform dat elk modern softwarebedrijf zou herkennen. Knap, maar te koop.',
+  lead: 'Dit was de basis: een platform dat elk modern softwarebedrijf zou herkennen. Dit deel kun je kopen.',
   bullets: [
-    'Wat je niet koopt, is de overheid zelf: een wet uitvoeren, herleidbaar, van tekst tot besluit.',
+    'Een wet uitvoeren, herleidbaar van tekst tot besluit: daar bestaat geen kant-en-klaar product voor.',
     'Dat bouw je. En dat is precies wat we nu gaan volgen.',
   ],
   full: true,
