@@ -300,10 +300,14 @@ async function backToChooser() {
   await start(CHOOSER_INDEX);
 }
 
-// Pick a role from the chooser slide: become that persona (via the injected
-// store, so the store stays the single owner of identity) and play its route
-// from slide 0. The 'pitch' id is a special choice → the stage talk.
+// Pick a card from the chooser slide. The stories ('keten' tour, 'pitch' deck)
+// are special choices; any other id is a role-route, which becomes that persona
+// (via the injected store, the single owner of identity) and plays from slide 0.
 async function chooseRoute(id) {
+  if (id === 'keten') {
+    await startTour('keten', 0);
+    return;
+  }
   if (id === 'pitch') {
     await startPitch(0);
     return;

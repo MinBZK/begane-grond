@@ -6,11 +6,11 @@ import { usePlatformStore } from '../stores/index.js'
 const p = usePresentation()
 const store = usePlatformStore()
 
-// The cards on the chooser slide: the 7 roles, the estafette, and the pitch.
-// Each role card resolves the person's name so it reads "Sanne Visser ·
-// Backend developer". A chain-route (the estafette) gets its own accented card.
-const chooserCards = computed(() => {
-  const roleCards = p.routes
+// The chooser is split in two groups: the 7 roles (become a persona, play their
+// route) and the 3 stories (the full talk, the estafette, the pitch). Role cards
+// resolve the person's name so it reads "Sanne Visser · Backend developer".
+const roleCards = computed(() =>
+  p.routes
     .filter((r) => !r.chain)
     .map((r) => ({
       id: r.id,
@@ -18,14 +18,30 @@ const chooserCards = computed(() => {
       role: r.role,
       icon: r.icon,
       lead: r.lead,
-    }))
-  const chainCards = p.routes
+    })),
+)
+// The stories, accented apart from the roles. The keten is the main talk and
+// leads; the estafette and the pitch follow.
+const storyCards = computed(() => {
+  const chain = p.routes
     .filter((r) => r.chain)
-    .map((r) => ({ id: r.id, name: r.role, role: 'Eén wet, vijf brillen', icon: r.icon, lead: r.lead, chain: true }))
+    .map((r) => ({ id: r.id, name: r.role, role: 'Eén wet, vijf brillen', icon: r.icon, lead: r.lead }))
   return [
-    ...roleCards,
-    ...chainCards,
-    { id: 'pitch', name: 'Het podiumverhaal', role: 'De pitch', icon: 'presentation', lead: 'Waarom de overheid het grootste softwarebedrijf van Nederland is.' },
+    {
+      id: 'keten',
+      name: 'De keten die je niet kunt kopen',
+      role: 'Het hele verhaal',
+      icon: 'arrow-up-arrow-down',
+      lead: 'Acht argumenten, een korte demo, en dan de estafette: van wet tot audit.',
+    },
+    ...chain,
+    {
+      id: 'pitch',
+      name: 'Het podiumverhaal',
+      role: 'De volledige pitch',
+      icon: 'presentation',
+      lead: 'Het volledige platform, van gebaande paden tot wet-als-code.',
+    },
   ]
 })
 
@@ -173,16 +189,32 @@ onBeforeUnmount(() => {
     <template v-else-if="current && current.kind === 'choice'">
       <div class="chooser">
         <div class="chooser-head">
-          <h1 class="chooser-title">Kies een rol</h1>
-          <p class="chooser-sub">Je wordt die persoon, en het platform kleurt mee.</p>
+          <h1 class="chooser-title">Waar wil je beginnen?</h1>
+          <p class="chooser-sub">Kies een verhaal, of word zelf een rol op het platform.</p>
         </div>
+        <div class="chooser-group-label">Verhalen</div>
         <div class="chooser-grid">
           <button
-            v-for="c in chooserCards"
+            v-for="c in storyCards"
+            :key="c.id"
+            type="button"
+            class="chooser-card chooser-card-story"
+            @click="p.chooseRoute(c.id)"
+          >
+            <nldd-icon :name="c.icon" aria-hidden="true"></nldd-icon>
+            <span class="chooser-card-name">{{ c.name }}</span>
+            <span class="chooser-card-role">{{ c.role }}</span>
+            <span class="chooser-card-lead">{{ c.lead }}</span>
+          </button>
+        </div>
+
+        <div class="chooser-group-label">Of word een rol</div>
+        <div class="chooser-grid">
+          <button
+            v-for="c in roleCards"
             :key="c.id"
             type="button"
             class="chooser-card"
-            :class="{ 'chooser-card-pitch': c.id === 'pitch', 'chooser-card-chain': c.chain }"
             @click="p.chooseRoute(c.id)"
           >
             <nldd-icon :name="c.icon" aria-hidden="true"></nldd-icon>
@@ -418,7 +450,7 @@ onBeforeUnmount(() => {
   color: #fff;
   overflow-y: auto;
 }
-.chooser-head { text-align: center; max-width: 46rem; }
+.chooser-head { text-align: center; max-width: 46rem; margin-bottom: 0.5rem; }
 .chooser-title {
   font-family: 'RijksoverheidSerif', Georgia, serif;
   font-size: clamp(2rem, 4vw, 3.4rem);
@@ -426,6 +458,19 @@ onBeforeUnmount(() => {
   font-weight: 700;
 }
 .chooser-sub { font-size: clamp(0.95rem, 1.4vw, 1.2rem); opacity: 0.8; margin: 0; line-height: 1.5; }
+
+/* Small section label above each group of cards. */
+.chooser-group-label {
+  width: 100%;
+  max-width: 64rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: -0.6rem;
+  padding-left: 0.15rem;
+}
 .chooser-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
@@ -445,27 +490,44 @@ onBeforeUnmount(() => {
   color: #fff;
   cursor: pointer;
   font: inherit;
-  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    transform 0.1s,
+    box-shadow 0.15s;
 }
 .chooser-card:hover {
   border-color: #fff;
   background: rgba(255, 255, 255, 0.12);
   transform: translateY(-2px);
 }
-.chooser-card nldd-icon { width: 1.6rem; height: 1.6rem; opacity: 0.9; margin-bottom: 0.2rem; }
+.chooser-card nldd-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  opacity: 0.9;
+  margin-bottom: 0.2rem;
+}
 .chooser-card-name { font-weight: 700; font-size: 1.05rem; }
 .chooser-card-role { font-size: 0.85rem; font-weight: 600; color: #8fb8e8; }
 .chooser-card-lead { font-size: 0.85rem; opacity: 0.75; line-height: 1.4; }
-.chooser-card-pitch { border-style: dashed; }
-.chooser-card-chain {
-  border-color: #ffb612;
+
+/* The stories are the headline choices: gold accent, a touch more presence. The
+   first one (the keten, the main talk) spans wider so it reads as the lead. */
+.chooser-card-story {
+  border-color: rgba(255, 182, 18, 0.55);
   background: rgba(255, 182, 18, 0.08);
 }
-.chooser-card-chain:hover {
-  background: rgba(255, 182, 18, 0.16);
+.chooser-card-story:hover {
   border-color: #ffb612;
+  background: rgba(255, 182, 18, 0.16);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
 }
-.chooser-card-chain .chooser-card-role { color: #ffb612; }
+.chooser-card-story .chooser-card-name { font-size: 1.15rem; }
+.chooser-card-story .chooser-card-role { color: #ffb612; }
+.chooser-card-story nldd-icon { opacity: 1; color: #ffb612; }
+.chooser-card-story:first-child {
+  grid-column: 1 / -1;
+}
 .chooser-close {
   background: none;
   border: none;
@@ -474,6 +536,7 @@ onBeforeUnmount(() => {
   cursor: pointer;
   font: inherit;
   font-size: 0.85rem;
+  margin-top: 0.5rem;
 }
 .chooser-close:hover { opacity: 1; }
 
