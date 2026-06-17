@@ -226,6 +226,21 @@ onBeforeUnmount(() => {
       </div>
     </template>
 
+    <!-- Closing slide: a centered thank-you with a large QR to the platform. -->
+    <template v-else-if="current && current.kind === 'closing'">
+      <div class="closing">
+        <h1 class="closing-title">{{ current.title }}</h1>
+        <p v-if="current.lead" class="closing-lead">{{ current.lead }}</p>
+        <div v-if="current.qr" class="closing-qr">
+          <div class="closing-qr-card">
+            <img :src="current.qr.src" :alt="`QR-code naar ${current.qr.url}`" />
+          </div>
+          <span class="closing-qr-url">{{ current.qr.url }}</span>
+          <span v-if="current.qr.caption" class="closing-qr-caption">{{ current.qr.caption }}</span>
+        </div>
+      </div>
+    </template>
+
     <!-- The actual slide panel. -->
     <template v-else>
       <div class="content">
@@ -531,6 +546,59 @@ onBeforeUnmount(() => {
 .handover-btn:hover {
   background: #ffc845;
   transform: translateY(-1px);
+}
+
+/* Closing slide: centered thank-you with a large QR as the hero element. */
+.closing {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  text-align: center;
+  font-family: 'RijksSans', system-ui, sans-serif;
+}
+.closing-title {
+  font-family: 'RijksSerif', Georgia, serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+}
+.closing-lead {
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  line-height: 1.45;
+  opacity: 0.92;
+  margin: 0;
+  max-width: 34ch;
+}
+.closing-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+.closing-qr-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.25rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+.closing-qr-card img {
+  display: block;
+  width: clamp(200px, 24vw, 300px);
+  height: clamp(200px, 24vw, 300px);
+  image-rendering: pixelated;
+}
+.closing-qr-url {
+  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+  font-weight: 700;
+}
+.closing-qr-caption {
+  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+  opacity: 0.8;
 }
 
 .deck {
