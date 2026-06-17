@@ -118,14 +118,22 @@ onMounted(() => {
   });
   presentation.registerWizard('wet-review', {
     form: exec,
+    // Show the rule as code (its single condition).
     openMachine: () => {
       tab.value = 'machine';
     },
+    // Show the change panel, staying on the machine tab so the rule (and the
+    // condition that will appear) stays in view.
     proposeChange: () => {
-      tab.value = 'tekst';
+      tab.value = 'machine';
       showChange.value = true;
     },
+    // Apply the change: the extra condition appears in the rule, on this tab.
     confirmChange: () => confirmChange(),
+    // Only then move to Scenario's to see the LAT case fail.
+    showScenarios: () => {
+      tab.value = 'scenarios';
+    },
   });
 });
 onBeforeUnmount(() => {
@@ -203,7 +211,9 @@ function confirmChange() {
   store.runScenarios(wet.value.id, { requireSameAddress: true });
   changeDone.value = true;
   showChange.value = false;
-  tab.value = 'scenarios';
+  // Stay on Machine-leesbaar so the added condition visibly appears in the rule;
+  // the drive (or the user) moves to Scenario's afterwards.
+  tab.value = 'machine';
 }
 
 function runScenarios() {
@@ -365,10 +375,12 @@ function runScenarios() {
             <nldd-spacer size="8" />
             <div class="rp-cond-list">
               <div class="rp-cond rp-mono">partner geregistreerd in BRP</div>
-              <div v-if="changeApplied" class="rp-cond rp-cond-new rp-mono">
-                <span class="rp-cond-plus">+</span> partner op gezamenlijk adres
-                <nldd-tag color="accent" size="sm">nieuw</nldd-tag>
-              </div>
+              <Transition name="rp-cond-appear">
+                <div v-if="changeApplied" class="rp-cond rp-cond-new rp-mono">
+                  <span class="rp-cond-plus">+</span> partner op gezamenlijk adres
+                  <nldd-tag color="accent" size="sm">nieuw</nldd-tag>
+                </div>
+              </Transition>
             </div>
 
             <template v-if="firstArticle.openTerms.length">
@@ -547,6 +559,16 @@ function runScenarios() {
   background: rgba(26, 122, 62, 0.08);
 }
 .rp-cond-plus { color: #1a7a3e; font-weight: 700; }
+/* The added condition slides and fades in, so it visibly appears in the rule. */
+.rp-cond-appear-enter-active {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.rp-cond-appear-enter-from {
+  opacity: 0;
+  transform: translateY(-6px);
+}
 @media (max-width: 1007px) {
   .rp-span2 { grid-column: auto; }
 }

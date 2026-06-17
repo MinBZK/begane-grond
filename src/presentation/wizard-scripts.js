@@ -120,18 +120,20 @@ export const wizardScripts = {
     { wait: 1200 },
   ],
 
-  // WetDetail (the estafette's second leg, Lieke): open the Machine-leesbaar tab
-  // (the rule as code, her other bril), then propose a change. The change panel
-  // appears inline on the page (not a modal, which renders 0x0 in the scaled
-  // presentation layout), so the jurist's action is visible; confirming it opens
-  // a traject and re-runs the scenarios with one failing — the case she catches.
+  // WetDetail (the estafette's second leg, Lieke), choreographed so each beat is
+  // visible: show the rule (one condition) -> propose a change (inline panel, not
+  // a modal which renders 0x0 in the scaled layout) -> confirm, and the extra
+  // condition slides into the rule on Machine-leesbaar -> only then move to
+  // Scenario's, where the LAT case now fails. The jurist catching a case.
   'wet-review': [
     { wait: 900 },
     { call: 'openMachine' },
     { wait: 2400 },
     { call: 'proposeChange' },
-    { wait: 2000 },
+    { wait: 2400 },
     { call: 'confirmChange' },
+    { wait: 2600 },
+    { call: 'showScenarios' },
     { wait: 1400 },
   ],
 
