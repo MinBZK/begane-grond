@@ -360,6 +360,18 @@ const ketenHandoff = {
   full: true,
 };
 
+// Closing slide: thank you + a QR to the live platform. The QR SVG is a static
+// asset (generated offline, decodes to https://bg.rijks.app/), so it shows
+// without a network call on stage.
+const ketenDank = {
+  id: 'keten-dank',
+  title: 'Dank',
+  lead: 'De overheid is een techbedrijf. Laten we ons ook zo organiseren.',
+  bullets: ['Begane Grond staat live. Scan en loop er zelf doorheen.'],
+  qr: { src: '/qr-bg-rijks-app.svg', url: 'bg.rijks.app' },
+  full: true,
+};
+
 const ketenSlides = [
   pitchById['titel'], // titelslide: naam + datum
   ...argumentSlides, // de 8 argumenten (het betoog)
@@ -367,6 +379,7 @@ const ketenSlides = [
   ...ketenDemo, // korte demo: de basis staat, twee live wizards
   ketenHandoff, // brug: van demo naar de estafette
   ...routeById('awir-estafette').slides, // de keten die je niet kunt kopen
+  ketenDank, // bedankt + QR naar het live platform
 ];
 
 export const tours = [

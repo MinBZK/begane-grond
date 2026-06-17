@@ -266,6 +266,15 @@ onBeforeUnmount(() => {
           >
             {{ current.link.label }}
           </a>
+
+          <!-- QR code, e.g. on the closing slide: a scannable card on white so
+               it reads against the dark slide, with the URL underneath. -->
+          <div v-if="current && current.qr" class="slide-qr">
+            <div class="slide-qr-card">
+              <img :src="current.qr.src" :alt="`QR-code naar ${current.qr.url}`" />
+            </div>
+            <span class="slide-qr-url">{{ current.qr.url }}</span>
+          </div>
         </div>
 
         <!-- Government callout, and/or a footnote aside, sit at the foot. -->
@@ -678,6 +687,34 @@ onBeforeUnmount(() => {
 .slide-link:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
+}
+
+/* Closing QR code: a white card so the code scans against the dark slide, the
+   URL spelled out beneath it for anyone who'd rather type. */
+.slide-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-top: 1.6rem;
+}
+.slide-qr-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.1rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+.slide-qr-card img {
+  display: block;
+  width: clamp(150px, 18vw, 220px);
+  height: clamp(150px, 18vw, 220px);
+  image-rendering: pixelated;
+}
+.slide-qr-url {
+  font-family: 'RijksSans', system-ui, sans-serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  font-weight: 600;
+  color: #fff;
 }
 
 .gov-explain {
