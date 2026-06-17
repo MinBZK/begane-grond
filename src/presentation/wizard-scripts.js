@@ -120,6 +120,17 @@ export const wizardScripts = {
     { wait: 1200 },
   ],
 
+  // WetDetail (the estafette's second leg, Lieke): open the Machine-leesbaar tab
+  // (the rule as code, her other bril), then propose a change so the scenarios
+  // re-run with one failing — the jurist catching a case that breaks.
+  'wet-review': [
+    { wait: 900 },
+    { call: 'openMachine' },
+    { wait: 2000 },
+    { call: 'proposeChange' },
+    { wait: 1400 },
+  ],
+
   // NewWorkplaceWizard: 6 steps (Medewerker, Hardware, Image, Profiel, Policy, Bevestigen).
   // The form is a ref; the driver mutates the inner object.
   werkplek: [

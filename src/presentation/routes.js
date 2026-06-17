@@ -1202,13 +1202,14 @@ export const routes = [
         id: 'est-lieke-regel',
         becomePersona: 'lieke-jansen',
         title: 'Dezelfde wet, een andere bril',
-        lead: 'We zijn nu Lieke Jansen, jurist. We openen dezelfde pagina die Bram achterliet, maar nu kijken we naar het traject: de werkruimte waar artikel 3 een machine-leesbare regel wordt.',
+        lead: 'We zijn nu Lieke Jansen, jurist. Dezelfde wet, een andere bril: we openen de machine-leesbare regel achter artikel 3, het stuk dat precies moet zeggen wat de wet zegt.',
         bullets: [
-          "Het traject 'AWIR toeslagpartner-logica' heeft een eigen branch waar jurist en developer samen aan de wet werken; Sanne, Joost en Bram zitten er al in.",
-          'Status: in review. Dat betekent dat Lieke aan zet is: zegt de regel precies wat artikel 3 zegt, of net niet?',
+          'De regel als code: bsn in, heeft_toeslagpartner uit, met de partner uit de BRP. Dit is wat Lieke bewaakt.',
+          'Lieke stelt een wijziging voor en de scenario’s draaien opnieuw: één zakt. Precies het geval dat ze moet vangen voordat het live gaat.',
           'Wat hier wordt goedgekeurd, nemen huurtoeslag en zorgtoeslag straks ongezien over. Dit moet in één keer kloppen.',
         ],
         route: '/wetten/awir',
+        drive: { wizard: 'wet-review' },
       },
       {
         id: 'est-lieke-grondslag',

@@ -101,10 +101,12 @@ function runEngine() {
   execResult.value = { outputs, trace, bsn: exec.bsn };
 }
 
-// --- Presentation drive (the estafette's first leg: Bram runs the law) ---
-// Registered as 'wet-uitvoeren' so a slide can drive it: open the Uitvoeren tab
-// and run the engine on a casus, so the answer to "is dit uitvoerbaar?" is shown
-// live (uitkomst + trace) instead of asserted. Reuses the on-screen controls.
+// --- Presentation drives (the estafette's first two legs, on this same page) ---
+// Bram ('wet-uitvoeren'): open the Uitvoeren tab and run the engine, so "is dit
+// uitvoerbaar?" is shown live (uitkomst + trace). Lieke ('wet-review'): open the
+// Machine-leesbaar tab (the rule as code, her other bril), then propose a change
+// so the scenarios re-run with one failing — the jurist catching a case that
+// breaks. Both reuse the on-screen controls; no extra UI.
 const presentation = usePresentation();
 onMounted(() => {
   presentation.registerWizard('wet-uitvoeren', {
@@ -114,8 +116,18 @@ onMounted(() => {
     },
     runEngine: () => runEngine(),
   });
+  presentation.registerWizard('wet-review', {
+    form: exec,
+    openMachine: () => {
+      tab.value = 'machine';
+    },
+    proposeChange: () => confirmChange(),
+  });
 });
-onBeforeUnmount(() => presentation.unregisterWizard('wet-uitvoeren'));
+onBeforeUnmount(() => {
+  presentation.unregisterWizard('wet-uitvoeren');
+  presentation.unregisterWizard('wet-review');
+});
 
 // --- YAML rendering of the machine-readable model ---
 const yaml = computed(() => {
