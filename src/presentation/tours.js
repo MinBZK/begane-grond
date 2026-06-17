@@ -228,7 +228,6 @@ const pitchById = Object.fromEntries(pitchSlides.map((s) => [s.id, s]));
 const ketenThese = {
   id: 'keten-these',
   title: 'Waarom platform engineering?',
-  lead: 'Ik krijg vaak de vraag: wat is platform engineering, en waarom zou de overheid zich daar druk om maken? Mijn antwoord begint bij een these.',
   bullets: [
     'De overheid is de facto het grootste en meest complexe softwarebedrijf van Nederland.',
     'En ze moet zich ook zo organiseren. Platform engineering is de manier om dat te doen.',
