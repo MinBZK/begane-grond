@@ -453,11 +453,11 @@ onBeforeUnmount(() => {
 .chooser-head { text-align: center; max-width: 46rem; margin-bottom: 0.5rem; }
 .chooser-title {
   font-family: 'RijksoverheidSerif', Georgia, serif;
-  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-size: clamp(2rem, 4.4vw, 4.4rem);
   margin: 0 0 0.6rem;
   font-weight: 700;
 }
-.chooser-sub { font-size: clamp(0.95rem, 1.4vw, 1.2rem); opacity: 0.8; margin: 0; line-height: 1.5; }
+.chooser-sub { font-size: clamp(0.95rem, 1.6vw, 1.6rem); opacity: 0.8; margin: 0; line-height: 1.5; }
 
 /* Small section label above each group of cards. */
 .chooser-group-label {
@@ -550,14 +550,14 @@ onBeforeUnmount(() => {
 }
 .handover-title {
   font-family: 'RijksSerif', Georgia, serif;
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4.6vw, 5rem);
   font-weight: 700;
   line-height: 1.15;
   margin: 0;
   max-width: 24ch;
 }
 .handover-lead {
-  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-size: clamp(1.05rem, 2vw, 2.1rem);
   line-height: 1.5;
   opacity: 0.9;
   margin: 0;
@@ -621,13 +621,13 @@ onBeforeUnmount(() => {
 }
 .closing-title {
   font-family: 'RijksSerif', Georgia, serif;
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-size: clamp(2.4rem, 5.5vw, 5.5rem);
   font-weight: 700;
   line-height: 1.1;
   margin: 0;
 }
 .closing-lead {
-  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  font-size: clamp(1.1rem, 2vw, 2.2rem);
   line-height: 1.45;
   opacity: 0.92;
   margin: 0;
@@ -648,16 +648,16 @@ onBeforeUnmount(() => {
 }
 .closing-qr-card img {
   display: block;
-  width: clamp(200px, 24vw, 300px);
-  height: clamp(200px, 24vw, 300px);
+  width: clamp(200px, 26vw, 440px);
+  height: clamp(200px, 26vw, 440px);
   image-rendering: pixelated;
 }
 .closing-qr-url {
-  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+  font-size: clamp(1.2rem, 2vw, 2.2rem);
   font-weight: 700;
 }
 .closing-qr-caption {
-  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.6rem);
   opacity: 0.8;
 }
 
@@ -736,7 +736,7 @@ onBeforeUnmount(() => {
 .title {
   font-family: 'RijksoverheidSerif', Georgia, serif;
   font-weight: 700;
-  font-size: clamp(2.6rem, 4.2vw, 4.2rem);
+  font-size: clamp(2.6rem, 4.6vw, 6rem);
   line-height: 1.08;
   margin: 0;
   color: #fff;
@@ -744,7 +744,7 @@ onBeforeUnmount(() => {
 
 .lead {
   font-family: 'RijksSans', system-ui, sans-serif;
-  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+  font-size: clamp(1.3rem, 2.1vw, 2.4rem);
   line-height: 1.4;
   margin: 0;
   color: #fff;
@@ -753,13 +753,13 @@ onBeforeUnmount(() => {
 
 .bullets {
   font-family: 'RijksSans', system-ui, sans-serif;
-  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+  font-size: clamp(1.2rem, 1.85vw, 2.1rem);
   line-height: 1.45;
   margin: 0;
   padding-left: 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 1rem;
   color: rgba(255, 255, 255, 0.96);
 }
 
@@ -778,7 +778,7 @@ onBeforeUnmount(() => {
   gap: 0.3rem;
   margin-top: 0.6rem;
   font-family: 'RijksSans', system-ui, sans-serif;
-  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-size: clamp(1rem, 1.5vw, 1.7rem);
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.9);
 }
