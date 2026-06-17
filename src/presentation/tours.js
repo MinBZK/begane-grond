@@ -232,10 +232,12 @@ const argumentSlides = [
     title: '1. De overheid is een softwarebedrijf',
     lead: 'Het grootste en meest complexe van Nederland. Alleen noemt niemand het zo.',
     bullets: [
-      'Belastingdienst, UWV, SVB, DUO, RvIG: kerntaken zijn software op enorme schaal.',
-      'Meer dan 10 miljoen aangiftes per jaar, honderden wijzigingen in tientallen regelingen.',
+      'Spotify maakt een muziek-app.* De Belastingdienst draait software die complexer is dan de gemiddelde scale-up.',
+      'UWV, SVB, DUO, RvIG: meer dan 10 miljoen aangiftes per jaar, honderden wijzigingen in tientallen regelingen.',
       'Voor de Toeslagenberekening of een WIA-beoordeling bestaat geen SaaS. Je kunt het niet kopen.',
     ],
+    aside:
+      "Eerder zei ik dat de vergelijking tussen Spotify en de overheid 'totaal mank gaat.' Dat vind ik nog steeds, qua missie. Maar qua software-complexiteit helpt de vergelijking wel.",
     full: true,
   },
   {

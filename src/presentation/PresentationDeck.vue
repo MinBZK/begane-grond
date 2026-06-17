@@ -268,12 +268,15 @@ onBeforeUnmount(() => {
           </a>
         </div>
 
-        <!-- Government callout sits at the foot of the slide. -->
+        <!-- Government callout, and/or a footnote aside, sit at the foot. -->
         <div
-          v-if="current && current.gov && typeof current.gov === 'string'"
+          v-if="current && ((current.gov && typeof current.gov === 'string') || current.aside)"
           class="content-foot"
         >
-          <p class="gov-explain">{{ current.gov }}</p>
+          <p v-if="current.gov && typeof current.gov === 'string'" class="gov-explain">
+            {{ current.gov }}
+          </p>
+          <p v-if="current.aside" class="aside-note"><span class="aside-mark">*</span> {{ current.aside }}</p>
         </div>
       </div>
 
@@ -683,6 +686,21 @@ onBeforeUnmount(() => {
   line-height: 1.45;
   margin: 0;
   color: rgba(255, 255, 255, 0.82);
+}
+
+/* Footnote-style aside (the asterisk from the blog): smaller and dimmer than
+   the gov callout, a quiet self-correction at the foot of the slide. */
+.aside-note {
+  font-family: 'RijksSans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0.6rem 0 0;
+  max-width: 60ch;
+  color: rgba(255, 255, 255, 0.55);
+}
+.aside-mark {
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
 }
 
 .footer {
