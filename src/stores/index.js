@@ -629,8 +629,11 @@ export const usePlatformStore = defineStore('platform', {
     },
 
     // A handeling with external impact carries its legal basis (a thin RegelRecht
-    // reference) so the audit trail and the commit answer "on what authority".
-    audit(action, resource, { legalBasis = null } = {}) {
+    // reference) so the audit trail and the commit answer "on what authority". An
+    // action that knows its real change (e.g. a promotion bumps a version in one
+    // environment) may pass `diff`/`message`/`path` so the commit shows that
+    // change instead of a generic placeholder.
+    audit(action, resource, { legalBasis = null, diff = null, message = null, path = null } = {}) {
       this.auditLog.unshift({
         id: nextId('a'),
         actor: this.currentUser,
@@ -641,7 +644,7 @@ export const usePlatformStore = defineStore('platform', {
       });
       // The same event, seen as a commit: every audited action writes to the
       // platform-config repo. This is what makes "every click is a commit" true.
-      this.commit({ action, resource, legalBasis });
+      this.commit({ action, resource, legalBasis, diff, message, path });
     },
 
     // Append a commit to the platform-config repo for an action. Pure and
@@ -1232,9 +1235,27 @@ export const usePlatformStore = defineStore('platform', {
     promote(app, fromEnv, toEnv) {
       const d = this.deployments.find((x) => x.app === app);
       if (d) {
-        d[toEnv] = d[fromEnv];
+        // The change this promotion makes: the target environment's desired
+        // version moves from what ran there to the promoted version. Capture the
+        // old value before overwriting so the commit shows a real version bump.
+        const oldVersion = d[toEnv];
+        const newVersion = d[fromEnv];
+        d[toEnv] = newVersion;
         const appObj = this.appById(app);
-        this.audit('release gepromoot', `${app} → ${toEnv}`);
+        const slug = slugify(app);
+        const diff = [
+          `--- a/environments/${slug}.yaml`,
+          `+++ b/environments/${slug}.yaml`,
+          '@@',
+          ` ${toEnv}:`,
+          `-  version: "${oldVersion}"`,
+          `+  version: "${newVersion}"`,
+        ].join('\n');
+        this.audit('release gepromoot', `${app} → ${toEnv}`, {
+          diff,
+          message: `feat(release): promote ${app} → ${toEnv} (${newVersion})`,
+          path: `environments/${slug}.yaml`,
+        });
         this.emit('release.promoted', {
           title: `${appObj?.name || app} ${d[toEnv]} gepromoot naar ${toEnv}`,
           resource: app,
