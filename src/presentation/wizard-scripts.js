@@ -109,6 +109,17 @@ export const wizardScripts = {
     { finish: true },
   ],
 
+  // WetDetail (the estafette's first leg, Bram): open the Uitvoeren tab and run
+  // the law on a casus. The BSN is prefilled, so we only switch tab and run, so
+  // "is dit uitvoerbaar?" is answered live with an uitkomst and a trace.
+  'wet-uitvoeren': [
+    { wait: 900 },
+    { call: 'openUitvoeren' },
+    { wait: 1400 },
+    { call: 'runEngine' },
+    { wait: 1200 },
+  ],
+
   // NewWorkplaceWizard: 6 steps (Medewerker, Hardware, Image, Profiel, Policy, Bevestigen).
   // The form is a ref; the driver mutates the inner object.
   werkplek: [

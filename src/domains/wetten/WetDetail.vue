@@ -4,9 +4,10 @@
 // clickable), through the BDD scenarios and an engine preview, to the raw YAML.
 // "Wijziging starten" opens a traject and re-runs the scenarios with one
 // failing case so the impact of a change is immediately visible.
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { usePlatformStore } from '../../stores/index.js';
+import { usePresentation } from '../../presentation/usePresentation.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
 import RelationLinks from '../../components/shared/RelationLinks.vue';
@@ -99,6 +100,22 @@ function runEngine() {
   trace.push(`artikel ${art?.number || '1'} toegepast op rekendatum ${exec.rekendatum}`);
   execResult.value = { outputs, trace, bsn: exec.bsn };
 }
+
+// --- Presentation drive (the estafette's first leg: Bram runs the law) ---
+// Registered as 'wet-uitvoeren' so a slide can drive it: open the Uitvoeren tab
+// and run the engine on a casus, so the answer to "is dit uitvoerbaar?" is shown
+// live (uitkomst + trace) instead of asserted. Reuses the on-screen controls.
+const presentation = usePresentation();
+onMounted(() => {
+  presentation.registerWizard('wet-uitvoeren', {
+    form: exec,
+    openUitvoeren: () => {
+      tab.value = 'uitvoeren';
+    },
+    runEngine: () => runEngine(),
+  });
+});
+onBeforeUnmount(() => presentation.unregisterWizard('wet-uitvoeren'));
 
 // --- YAML rendering of the machine-readable model ---
 const yaml = computed(() => {

@@ -1172,10 +1172,11 @@ export const routes = [
         lead: 'We trappen af als Bram de Wit, beleidsmaker bij Toeslagen. Dit is zijn wet, de AWIR, en zijn vraag bij artikel 3: kan de uitvoering uit de voeten met het begrip toeslagpartner, of is het alleen mooie wetstekst?',
         bullets: [
           'Artikel 3 staat hier als toets: bsn erin, heeft_toeslagpartner eruit, met de partner gelezen uit de BRP.',
-          'Huurtoeslag en zorgtoeslag hergebruiken die uitkomst: dit ene begrip draagt meerdere regelingen.',
-          'Van de AWIR-logica is 64% al machine-leesbaar: we zien welk deel van de wet hard is en welk deel nog tekst.',
+          'Bram beantwoordt zijn eigen vraag: hij voert de wet live uit op een casus en ziet de uitkomst met de trace verschijnen.',
+          'Van de AWIR-logica is 64% al machine-leesbaar: geen wetstekst in een PDF, maar uitvoerbare logica.',
         ],
         route: '/wetten/awir',
+        drive: { wizard: 'wet-uitvoeren' },
       },
       {
         id: 'est-bram-bevoegdheid',

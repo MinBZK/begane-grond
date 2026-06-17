@@ -87,8 +87,11 @@ function setPath(target, path, value) {
 // logged and swallowed so the presentation cannot crash. The optional control
 // token lets the presenter pause, resume or abort the run mid-flight.
 export async function runScript(exposed, script, control = NO_CONTROL) {
-  // Silently bail if the wizard is not (yet) wired up.
-  if (!exposed?.wizardRef || !exposed?.form) return;
+  // Silently bail if the wizard is not (yet) wired up. A stepped wizard exposes
+  // a wizardRef; a page-style drive (only call/set steps, e.g. open a tab and
+  // run an engine) has just a form, so require only that. next/go/finish steps
+  // already null-check wizardRef before use.
+  if (!exposed?.form) return;
   if (!Array.isArray(script)) return;
 
   // Some wizards keep their form in a ref; mutate the inner object in that case.
