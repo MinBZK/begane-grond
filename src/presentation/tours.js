@@ -342,8 +342,8 @@ const ketenBridge = {
   title: 'Genoeg betoog. Hoe ziet dat eruit?',
   lead: 'Acht argumenten voor één conclusie: de overheid moet bouwen, op een platform. Om dat gesprek concreet te maken, heb ik dat platform gebouwd.',
   bullets: [
-    'De komende minuten kijk je mee in dat platform zelf.',
-    'Je ziet de argumenten terug als werkende dingen: gebaande paden, gates, standaarden in code.',
+    'De komende minuten kijken we mee in dat platform zelf.',
+    'We zien de argumenten terug als werkende dingen: gebaande paden, gates, standaarden in code.',
     'Geen plaatjes, het draait echt.',
   ],
   full: true,
@@ -366,10 +366,10 @@ const ketenDemo = [
 const ketenHandoff = {
   id: 'keten-overgang',
   title: 'En nu het deel dat je niet kunt kopen',
-  lead: 'Dit was de basis: een platform dat elk modern softwarebedrijf zou herkennen. Maar de overheid voert wetten uit, en dat koop je niet kant-en-klaar. Ik volg één wetsartikel door vijf paar handen.',
+  lead: 'Dit was de basis: een platform dat elk modern softwarebedrijf zou herkennen. Maar de overheid voert wetten uit, en dat koop je niet kant-en-klaar. We volgen één wetsartikel door vijf paar handen.',
   bullets: [
     'AWIR artikel 3, de toeslagpartner: van wetstekst tot code tot data tot audit.',
-    'Vijf rollen, één platform, één spoor. Op elk scherm word jij die persoon.',
+    'Vijf rollen, één platform, één spoor. We worden ze één voor één, en de app kleurt mee met wie we op dat moment zijn.',
     'Verandert de wet, dan loopt de keten opnieuw, langs hetzelfde spoor.',
   ],
   full: true,
