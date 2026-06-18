@@ -569,6 +569,64 @@ export const eventCatalog = [
     severity: 'warning',
     icon: 'exclamation-circle',
   },
+
+  // Domeinen & DNS
+  {
+    type: 'dns.domain.added',
+    source: 'dns',
+    label: 'Domein geregistreerd',
+    severity: 'info',
+    icon: 'globe',
+  },
+  {
+    type: 'dns.dnssec.changed',
+    source: 'dns',
+    label: 'DNSSEC gewijzigd',
+    severity: 'info',
+    icon: 'shield-check-mark',
+  },
+  {
+    type: 'dns.aanvraag.requested',
+    source: 'dns',
+    label: 'Subdomein aangevraagd',
+    severity: 'info',
+    icon: 'globe',
+  },
+  {
+    type: 'dns.aanvraag.approved',
+    source: 'dns',
+    label: 'Subdomein goedgekeurd',
+    severity: 'success',
+    icon: 'check-mark-circle',
+  },
+  {
+    type: 'dns.aanvraag.rejected',
+    source: 'dns',
+    label: 'Subdomein afgewezen',
+    severity: 'warning',
+    icon: 'dismiss-circle',
+  },
+  {
+    type: 'dns.migration.requested',
+    source: 'dns',
+    label: 'Migratie aangevraagd',
+    severity: 'info',
+    icon: 'arrow-right',
+  },
+  {
+    type: 'dns.migration.approved',
+    source: 'dns',
+    label: 'Migratie actief',
+    severity: 'success',
+    icon: 'check-mark-circle',
+  },
+  {
+    type: 'dns.migration.rejected',
+    source: 'dns',
+    label: 'Migratie afgewezen',
+    severity: 'warning',
+    icon: 'dismiss-circle',
+  },
 ];
 
 // Quick lookup by type.
@@ -594,6 +652,7 @@ export const eventSources = {
   standaarden: { label: 'Standaarden', icon: 'check-mark-circle', path: '/standaarden' },
   wetten: { label: 'Wet uitvoeren', icon: 'certificate', path: '/wetten' },
   registers: { label: 'Basisregistraties', icon: 'cylinder-split', path: '/registers' },
+  dns: { label: 'Domeinen & DNS', icon: 'globe', path: '/dns' },
 };
 
 // Historical event seed: a believable backlog spanning every domain so the

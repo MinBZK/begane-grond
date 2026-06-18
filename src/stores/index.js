@@ -20,6 +20,24 @@ const clone = (v) => JSON.parse(JSON.stringify(v));
 let _seq = 1000;
 const nextId = (prefix) => `${prefix}-${++_seq}`;
 
+// The DNS label an organisation gets under gov.nl. A few orgs read better with
+// their full name (belastingdienst.gov.nl) than their abbreviation; the rest
+// fall back to the lowercased org id. Kept here so composeFqdn stays pure.
+const GOV_ORG_LABELS = { bd: 'belastingdienst' };
+const govOrgLabel = (org) => GOV_ORG_LABELS[org] || (org || '').toLowerCase();
+
+// Compose the fqdn for a request from the namespace tier's pattern. One
+// function for every namespace: substituting {org}/{service} into the tier
+// pattern means a future medeoverheid namespace needs zero new code.
+function composeFqdn(namespace, { org, service, tier }) {
+  if (!namespace) return '';
+  const tierDef = namespace.tiers.find((t) => t.tier === tier) || namespace.tiers[0];
+  if (!tierDef) return '';
+  return tierDef.pattern
+    .replace('{org}', govOrgLabel(org))
+    .replace('{service}', (service || '').toLowerCase());
+}
+
 // --- Infra-as-code: every audited action also lands as a commit -------------
 // The platform's whole point is that the UI is just an editor over a git repo
 // of declared config: no wizard, no button changes anything outside a commit.
@@ -260,6 +278,10 @@ export const usePlatformStore = defineStore('platform', {
     artefacten: clone(seed.artefacten),
     loginMethods: clone(seed.loginMethods),
     domeinen: clone(seed.domeinen),
+    namespaces: clone(seed.namespaces),
+    domeinaanvragen: clone(seed.domeinaanvragen),
+    migraties: clone(seed.migraties),
+    domainRegistry: clone(seed.domainRegistry),
     softwareInkoop: clone(seed.softwareInkoop),
     componenten: clone(seed.componenten),
     featureFlags: clone(seed.featureFlags),
@@ -463,6 +485,107 @@ export const usePlatformStore = defineStore('platform', {
     domeinById: (s) => (id) => s.domeinen.find((d) => d.id === id),
     domeinForApp: (s) => (appId) => s.domeinen.find((d) => d.app === appId),
     dnssecCount: (s) => s.domeinen.filter((d) => d.dnssec).length,
+
+    // --- Naamruimtes & subdomein-aanvragen ---
+    namespaceById: (s) => (id) => s.namespaces.find((n) => n.id === id),
+    namespaceBySuffix: (s) => (suffix) => s.namespaces.find((n) => n.suffix === suffix),
+    // The namespaces a team may actually register under (gov.nl + alpha/beta).
+    openNamespaces: (s) => s.namespaces.filter((n) => n.openForRegistration),
+    // The legacy namespace a fqdn belongs to, matched by suffix. Used to decide
+    // whether a domain may be migrated to gov.nl.
+    namespaceForFqdn: (s) => (fqdn) => {
+      if (!fqdn) return null;
+      // Longest suffix wins so 'rijksoverheid.nl' beats 'overheid.nl'.
+      return [...s.namespaces]
+        .sort((a, b) => b.suffix.length - a.suffix.length)
+        .find((n) => fqdn === n.suffix || fqdn.endsWith(`.${n.suffix}`));
+    },
+    aanvraagById: (s) => (id) => s.domeinaanvragen.find((a) => a.id === id),
+
+    // The current persona's highest domain role, derived from domainRegistry.
+    // registry-beheerder > org-domeinbeheerder > aanvrager. This is the single
+    // place "who am I, domain-wise" is decided.
+    currentDomainRole(s) {
+      const reg = s.domainRegistry;
+      if (reg.registryBeheerders.includes(s.currentUser)) return 'registry-beheerder';
+      const isBeheerder = Object.values(reg.domeinbeheerders).some((ids) =>
+        ids.includes(s.currentUser)
+      );
+      return isBeheerder ? 'org-domeinbeheerder' : 'aanvrager';
+    },
+    // The org ids the current persona is a domeinbeheerder for (empty for a pure
+    // aanvrager or a registry-beheerder).
+    domeinbeheerderOrgs(s) {
+      return Object.entries(s.domainRegistry.domeinbeheerders)
+        .filter(([, ids]) => ids.includes(s.currentUser))
+        .map(([org]) => org);
+    },
+    // The heart of delegation: may the current persona approve THIS request?
+    // self-service has no approver; central → registry-beheerder; delegated →
+    // the org's domeinbeheerder. Always reads approvalLevel off the request
+    // (which was read off the namespace tier), never a hardcoded suffix.
+    canApproveFor(s) {
+      return (aanvraag) => {
+        if (!aanvraag) return false;
+        if (aanvraag.approvalLevel === 'self-service') return false;
+        if (aanvraag.approvalLevel === 'central') {
+          return s.domainRegistry.registryBeheerders.includes(s.currentUser);
+        }
+        if (aanvraag.approvalLevel === 'delegated') {
+          return (s.domainRegistry.domeinbeheerders[aanvraag.org] || []).includes(s.currentUser);
+        }
+        return false;
+      };
+    },
+    // Open requests the current persona is allowed to act on — the inbox feed.
+    pendingAanvragen(s) {
+      const open = new Set(['aangevraagd', 'in beoordeling']);
+      return s.domeinaanvragen.filter((a) => open.has(a.status) && this.canApproveFor(a));
+    },
+    // Requests submitted by the active personas — the "mijn aanvragen" feed.
+    myAanvragen(s) {
+      const ids = new Set(s.activePersonas);
+      return s.domeinaanvragen.filter((a) => ids.has(a.aanvrager));
+    },
+    // Expose the pure composeFqdn helper to components for the live preview.
+    composeFqdn: () => composeFqdn,
+
+    // --- Migraties (redirect-flow) ---
+    migratieById: (s) => (id) => s.migraties.find((m) => m.id === id),
+    // The migration record (if any) for a domain, by legacy id.
+    migratieForDomein: (s) => (domeinId) => s.migraties.find((m) => m.legacyDomeinId === domeinId),
+    // May the current persona migrate this domain? Verified via team ownership:
+    // the domain's owning team must be one of the active personas' teams. This
+    // is the "mag jij dit domein verhuizen" check (no token needed).
+    canMigrateDomein() {
+      return (domein) => {
+        if (!domein) return false;
+        const myTeamIds = new Set(this.myTeams.map((t) => t.id));
+        return myTeamIds.has(domein.team);
+      };
+    },
+    // May the current persona approve THIS migration? Delegated → the org's
+    // domeinbeheerder; central → the registry-beheerder (fallback for orgs
+    // without a beheerder). Mirrors canApproveFor for subdomain requests.
+    canApproveMigratie(s) {
+      return (migratie) => {
+        if (!migratie) return false;
+        if (migratie.approvalLevel === 'central') {
+          return s.domainRegistry.registryBeheerders.includes(s.currentUser);
+        }
+        return (s.domainRegistry.domeinbeheerders[migratie.org] || []).includes(s.currentUser);
+      };
+    },
+    // Open migration requests the current persona may approve — the inbox feed.
+    pendingMigraties(s) {
+      const open = new Set(['aangevraagd', 'in beoordeling']);
+      return s.migraties.filter((m) => open.has(m.status) && this.canApproveMigratie(m));
+    },
+    // Migration requests submitted by the active personas.
+    myMigraties(s) {
+      const ids = new Set(s.activePersonas);
+      return s.migraties.filter((m) => ids.has(m.aanvrager));
+    },
 
     // --- Software procurement ---
     softwareInkoopById: (s) => (id) => s.softwareInkoop.find((o) => o.id === id),
@@ -1087,9 +1210,12 @@ export const usePlatformStore = defineStore('platform', {
     },
 
     // --- Domains & DNS management ---
-    // Register a new government domain. A fresh domain starts without DNSSEC and
-    // without an internet.nl score, so the work to get it compliant is visible.
-    addDomein({ fqdn, app, team }) {
+    // Build, register, audit and announce a new domain. Shared by the inline
+    // "domein toevoegen" form (addDomein) and the subdomein-approval flow
+    // (approveAanvraag). `relaxed` skips the DNSSEC/internet.nl gate for
+    // experiment namespaces; strict domains start non-compliant so the work to
+    // get them compliant stays visible.
+    _createDomein({ fqdn, app, team, namespace = null, relaxed = false, extra = {} }) {
       const slug = fqdn.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
       const dom = {
         id: `dom-${slug}`,
@@ -1102,7 +1228,10 @@ export const usePlatformStore = defineStore('platform', {
         ipv6: false,
         registrar: 'SIDN',
         records: [{ type: 'A', name: '@', value: '145.21.0.0' }],
-        status: 'aandacht',
+        status: relaxed ? 'actief' : 'aandacht',
+        ...(namespace ? { namespace } : {}),
+        ...(relaxed ? { experiment: true } : {}),
+        ...extra,
       };
       this.domeinen.unshift(dom);
       this.audit('domein geregistreerd', fqdn);
@@ -1113,6 +1242,11 @@ export const usePlatformStore = defineStore('platform', {
         team: dom.team,
       });
       return dom;
+    },
+    // Register a new government domain. A fresh domain starts without DNSSEC and
+    // without an internet.nl score, so the work to get it compliant is visible.
+    addDomein({ fqdn, app, team }) {
+      return this._createDomein({ fqdn, app, team });
     },
     toggleDnssec(id) {
       const dom = this.domeinById(id);
@@ -1154,6 +1288,248 @@ export const usePlatformStore = defineStore('platform', {
       if (!dom || !dom.records[index]) return;
       const [removed] = dom.records.splice(index, 1);
       this.audit('DNS-record verwijderd', `${removed.type} ${removed.name} op ${dom.fqdn}`);
+    },
+
+    // --- Subdomein-aanvragen (gelaagde gov.nl-delegatie) ---
+    // Request a subdomain. The namespace tier decides the approval level and the
+    // approver; the fqdn is composed from the tier pattern. Self-service tiers
+    // (alpha/beta) short-circuit to an instantly-created experiment domain.
+    // Returns { aanvraag } or { error } so the UI can show why a request was
+    // refused (e.g. a closed legacy namespace without justification).
+    requestSubdomein({ namespaceId, tier, org, service, team, app, motivatie }) {
+      const ns = this.namespaceById(namespaceId);
+      if (!ns) return { error: 'Onbekende naamruimte.' };
+      const tierDef = ns.tiers.find((t) => t.tier === tier) || ns.tiers[0];
+      if (!tierDef) return { error: 'Onbekende tier.' };
+
+      // Closed legacy namespaces only accept a request with an explicit
+      // justification; otherwise steer the requester to gov.nl.
+      if (!ns.openForRegistration && !(ns.requiresJustification && motivatie)) {
+        return {
+          error: `${ns.suffix} is gesloten voor nieuwe registraties. Vraag dit aan onder gov.nl.`,
+        };
+      }
+
+      const fqdn = composeFqdn(ns, { org, service, tier: tierDef.tier });
+      const level = tierDef.approval;
+      // Derive the approver from the level: central → first registry-beheerder,
+      // delegated → the org's domeinbeheerder, self-service → none.
+      let approver = null;
+      if (level === 'central') approver = this.domainRegistry.registryBeheerders[0] || null;
+      else if (level === 'delegated')
+        approver = (this.domainRegistry.domeinbeheerders[org] || [])[0] || null;
+
+      const aanvraag = {
+        id: nextId('aanvr'),
+        namespace: ns.id,
+        tier: tierDef.tier,
+        org: org || null,
+        service: service || null,
+        fqdn,
+        team: team || this.teamOfPerson(this.currentUser)?.id || null,
+        app: app || null,
+        aanvrager: this.currentUser,
+        approver,
+        approvalLevel: level,
+        motivatie: motivatie || null,
+        status: 'in beoordeling',
+        createdAt: 'zojuist',
+        resolvedAt: null,
+        createdDomein: null,
+      };
+      this.domeinaanvragen.unshift(aanvraag);
+
+      // Self-service: no approver, create the (relaxed) domain immediately.
+      if (level === 'self-service') {
+        aanvraag.status = 'goedgekeurd';
+        aanvraag.resolvedAt = 'zojuist';
+        const dom = this._createDomein({
+          fqdn,
+          app: aanvraag.app,
+          team: aanvraag.team,
+          namespace: ns.id,
+          relaxed: true,
+        });
+        aanvraag.createdDomein = dom.id;
+        this.audit('subdomein aangemaakt (self-service)', fqdn);
+        this.emit('dns.aanvraag.approved', {
+          title: `${fqdn} direct aangemaakt (self-service)`,
+          resource: aanvraag.id,
+          target: `/dns/${dom.id}`,
+          team: aanvraag.team,
+        });
+        return { aanvraag, domein: dom };
+      }
+
+      this.audit('subdomein aangevraagd', fqdn);
+      this.emit('dns.aanvraag.requested', {
+        title: `Subdomein ${fqdn} aangevraagd`,
+        resource: aanvraag.id,
+        target: '/dns/aanvragen',
+        team: aanvraag.team,
+      });
+      return { aanvraag };
+    },
+    // Approve a pending request (guarded by canApproveFor). Creates the real
+    // domain honoring the namespace rules, links it back to the request.
+    approveAanvraag(id) {
+      const aanvraag = this.aanvraagById(id);
+      if (!aanvraag || !this.canApproveFor(aanvraag)) return;
+      const ns = this.namespaceById(aanvraag.namespace);
+      const relaxed = !(ns?.requiresDnssec || ns?.requiresInternetnl);
+      const dom = this._createDomein({
+        fqdn: aanvraag.fqdn,
+        app: aanvraag.app,
+        team: aanvraag.team,
+        namespace: aanvraag.namespace,
+        relaxed,
+      });
+      aanvraag.status = 'goedgekeurd';
+      aanvraag.resolvedAt = 'zojuist';
+      aanvraag.createdDomein = dom.id;
+      this.audit('subdomein goedgekeurd', aanvraag.fqdn, {
+        message: `Goedgekeurd door ${this.personById(this.currentUser)?.name || this.currentUser}`,
+      });
+      this.emit('dns.aanvraag.approved', {
+        title: `Subdomein ${aanvraag.fqdn} goedgekeurd`,
+        resource: aanvraag.id,
+        target: `/dns/${dom.id}`,
+        team: aanvraag.team,
+      });
+      return dom;
+    },
+    // Reject a pending request (guarded). No domain is created.
+    rejectAanvraag(id, reason) {
+      const aanvraag = this.aanvraagById(id);
+      if (!aanvraag || !this.canApproveFor(aanvraag)) return;
+      aanvraag.status = 'afgewezen';
+      aanvraag.resolvedAt = 'zojuist';
+      aanvraag.rejectionReason = reason || 'Afgewezen door de beheerder.';
+      this.audit('subdomein afgewezen', aanvraag.fqdn);
+      this.emit('dns.aanvraag.rejected', {
+        title: `Subdomein ${aanvraag.fqdn} afgewezen`,
+        resource: aanvraag.id,
+        target: '/dns/aanvragen',
+        team: aanvraag.team,
+        severity: 'warning',
+      });
+    },
+    // Start a migration of a legacy domain to gov.nl: the old name stays live as
+    // a 301 redirect ('in migratie') while the new gov.nl name becomes canonical
+    // and owns the redirect list.
+    // Request a migration of a legacy domain to a gov.nl name. Governed like a
+    // subdomain request: you may only migrate a domain your team owns (verified
+    // via team ownership), and the organisation's domeinbeheerder approves it.
+    // The redirect does NOT go live here — only once approved. Returns
+    // { migratie } or { error }.
+    requestMigration({ legacyDomeinId, targetFqdn, motivatie }) {
+      const legacy = this.domeinById(legacyDomeinId);
+      if (!legacy) return { error: 'Onbekend domein.' };
+      if (!targetFqdn || !targetFqdn.trim()) return { error: 'Geef een doel-naam op gov.nl op.' };
+      // Team-ownership verification: you may only migrate a domain your team owns.
+      if (!this.canMigrateDomein(legacy)) {
+        return {
+          error: `Je kunt alleen domeinen verhuizen die je team beheert (${this.teamById(legacy.team)?.name || legacy.team}).`,
+        };
+      }
+      // The org that approves is the org owning the domain's team. If that org
+      // has no domeinbeheerder yet, the central registry-beheerder handles it.
+      const org = this.teamById(legacy.team)?.org || null;
+      const orgBeheerder = (this.domainRegistry.domeinbeheerders[org] || [])[0] || null;
+      const approvalLevel = orgBeheerder ? 'delegated' : 'central';
+      const approver = orgBeheerder || this.domainRegistry.registryBeheerders[0] || null;
+
+      const migratie = {
+        id: nextId('mig'),
+        legacyDomeinId: legacy.id,
+        legacyFqdn: legacy.fqdn,
+        targetFqdn: targetFqdn.trim(),
+        targetDomeinId: this.domeinen.find((d) => d.fqdn === targetFqdn.trim())?.id || null,
+        org,
+        team: legacy.team,
+        aanvrager: this.currentUser,
+        approver,
+        approvalLevel,
+        verifiedVia: 'team-eigenaarschap',
+        redirectType: '301',
+        motivatie: motivatie || null,
+        status: 'in beoordeling',
+        createdAt: 'zojuist',
+        resolvedAt: null,
+      };
+      this.migraties.unshift(migratie);
+      this.audit('migratie aangevraagd', `${legacy.fqdn} -> ${migratie.targetFqdn}`);
+      this.emit('dns.migration.requested', {
+        title: `Migratie aangevraagd: ${legacy.fqdn} → ${migratie.targetFqdn}`,
+        resource: migratie.id,
+        target: `/dns/${legacy.id}`,
+        team: legacy.team,
+      });
+      return { migratie };
+    },
+    // Approve a migration (guarded: only the org's domeinbeheerder). This is
+    // when the redirect actually goes live, as a platform-level HTTP 301 — not a
+    // DNS record. The legacy domain flips to 'in migratie' with a redirectsTo,
+    // the canonical gov.nl target gains a redirectsFrom entry.
+    approveMigration(id) {
+      const migratie = this.migratieById(id);
+      if (!migratie || !this.canApproveMigratie(migratie)) return;
+      const legacy = this.domeinById(migratie.legacyDomeinId);
+      if (!legacy) return;
+      migratie.status = 'actief';
+      migratie.resolvedAt = 'zojuist';
+
+      // Activate the redirect at the platform level (HTTP 301), not via DNS.
+      legacy.status = 'in migratie';
+      legacy.redirectsTo = migratie.targetFqdn;
+
+      // Create or update the canonical target domain with the redirect source.
+      let target = this.domeinen.find((d) => d.fqdn === migratie.targetFqdn);
+      if (!target) {
+        target = this._createDomein({
+          fqdn: migratie.targetFqdn,
+          app: legacy.app,
+          team: legacy.team,
+          namespace: 'ns-gov',
+          extra: { migratedFrom: legacy.fqdn },
+        });
+      } else {
+        target.migratedFrom = legacy.fqdn;
+      }
+      migratie.targetDomeinId = target.id;
+      target.redirectsFrom = target.redirectsFrom || [];
+      if (!target.redirectsFrom.some((r) => r.fqdn === legacy.fqdn)) {
+        target.redirectsFrom.push({
+          fqdn: legacy.fqdn,
+          type: '301',
+          since: 'zojuist',
+          status: 'actief',
+        });
+      }
+      this.audit('migratie goedgekeurd', `${legacy.fqdn} -> ${migratie.targetFqdn}`);
+      this.emit('dns.migration.approved', {
+        title: `Migratie actief: ${legacy.fqdn} → ${migratie.targetFqdn}`,
+        resource: migratie.id,
+        target: `/dns/${legacy.id}`,
+        team: legacy.team,
+      });
+      return target;
+    },
+    // Reject a migration request (guarded). No redirect is activated.
+    rejectMigration(id, reason) {
+      const migratie = this.migratieById(id);
+      if (!migratie || !this.canApproveMigratie(migratie)) return;
+      migratie.status = 'afgewezen';
+      migratie.resolvedAt = 'zojuist';
+      migratie.rejectionReason = reason || 'Afgewezen door de beheerder.';
+      this.audit('migratie afgewezen', `${migratie.legacyFqdn} -> ${migratie.targetFqdn}`);
+      this.emit('dns.migration.rejected', {
+        title: `Migratie afgewezen: ${migratie.legacyFqdn}`,
+        resource: migratie.id,
+        target: `/dns/${migratie.legacyDomeinId}`,
+        team: migratie.team,
+        severity: 'warning',
+      });
     },
 
     // --- Fleet-shift ---

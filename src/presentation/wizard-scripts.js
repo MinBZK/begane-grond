@@ -217,6 +217,48 @@ export const wizardScripts = {
     { call: 'runIssue' },
   ],
 
+  // SubdomeinWizard (the domeinen-estafette's first leg, Sanne): the gov.nl
+  // path has 5 steps (Naamruimte, Organisatie, Tier, Label, Controleer). We
+  // pick gov.nl, request for Belastingdienst on the service-tier, type the
+  // label so the fqdn composes live, and submit. The request lands "in
+  // beoordeling" with the BD domeinbeheerder as approver — the baton Maud picks
+  // up in the next leg.
+  subdomein: [
+    { wait: 800 },
+    // Step 0: namespace. gov.nl is the default; set it explicitly so a replay
+    // from any state lands right.
+    { set: 'namespaceId', value: 'ns-gov' },
+    { wait: 700 },
+    { next: true },
+    // Step 1: organisation = Belastingdienst.
+    { set: 'org', value: 'bd' },
+    { wait: 700 },
+    { next: true },
+    // Step 2: tier = dienst-tier (delegated approval).
+    { set: 'tier', value: 'service' },
+    { wait: 700 },
+    { next: true },
+    // Step 3: label, typed out so the composed fqdn grows live.
+    { set: 'service', value: 'kindgebonden-budget', type: true },
+    { wait: 900 },
+    { next: true },
+    // Step 4: controleer — the summary names the approver, then submit.
+    { wait: 1200 },
+    { finish: true },
+  ],
+
+  // Aanvragen (the domeinen-estafette's approver leg, Maud): approve every
+  // pending request live so "Wacht op jou" empties row by row, the metrics tick
+  // over and the new domains appear. Each approval pulses the Goedkeuren button
+  // first. A page-style drive: one call helper, no form.
+  'dns-goedkeuren': [{ wait: 900 }, { call: 'approveAll' }, { wait: 1200 }],
+
+  // DomeinDetail (the domeinen-estafette's migration leg, Julia): play the whole
+  // redirect flow live — open the migration panel, request it (verified via team
+  // ownership), then approve it as DUO's domeinbeheerder so the HTTP 301 goes
+  // live. Page-style drive: named helpers, no form.
+  'dns-migratie': [{ wait: 900 }, { call: 'runMigration' }, { wait: 1400 }],
+
   // LlmCatalog: gated behind wizardOpen, then 4 steps (Model, Eigenaar,
   // Doel & classificatie, Samenvatting). Open it first, then walk through.
   llm: [

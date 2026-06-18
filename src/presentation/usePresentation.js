@@ -111,9 +111,11 @@ async function driveWizard(name) {
   _driveControl = control;
   drivePaused.value = false;
   try {
-    // Poll until the wizard registers itself (max ~40 attempts).
+    // Poll until the wizard registers itself. The window is generous (~6s) so a
+    // cold deep-link, where the lazy route chunk still has to download and mount
+    // before the wizard registers onMounted, does not lose the drive.
     let attempts = 0;
-    while (!_wizards.has(name) && attempts < 40 && !control.aborted) {
+    while (!_wizards.has(name) && attempts < 120 && !control.aborted) {
       attempts += 1;
       await delay(50);
       await nextTick();

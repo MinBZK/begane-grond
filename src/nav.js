@@ -500,6 +500,24 @@ export const domains = [
         title: 'Domeinen & DNS',
       },
       {
+        path: '/dns/naamruimtes',
+        name: 'dns-namespaces',
+        view: () => import('./domains/dns/Naamruimtes.vue'),
+        title: 'Naamruimtes',
+      },
+      {
+        path: '/dns/aanvragen',
+        name: 'dns-aanvragen',
+        view: () => import('./domains/dns/Aanvragen.vue'),
+        title: 'Subdomein-aanvragen',
+      },
+      {
+        path: '/dns/aanvragen/nieuw',
+        name: 'dns-aanvraag-nieuw',
+        view: () => import('./domains/dns/SubdomeinWizard.vue'),
+        title: 'Subdomein aanvragen',
+      },
+      {
         path: '/dns/:id',
         name: 'dns-detail',
         view: () => import('./domains/dns/DomeinDetail.vue'),

@@ -1344,6 +1344,148 @@ export const routes = [
       },
     ],
   },
+
+  // The domeinen-estafette: one subdomain on gov.nl passed through three roles.
+  // A team requests a name, the organisation's domeinbeheerder grants it, and the
+  // central registry-beheerder shows where the authority above it comes from.
+  // Each leg carries `becomePersona` so the topbar identity and every role-gated
+  // screen re-colour as the baton changes; `handover` slides mark each pass. The
+  // subject is gov.nl-naamgeving: gedelegeerd gezag, niet iedereen bij de root.
+  {
+    id: 'domeinen-estafette',
+    role: 'De domein-estafette',
+    persona: 'sanne',
+    icon: 'globe',
+    chain: true,
+    lead: 'Eén subdomein op gov.nl, door drie rollen: van aanvraag tot gedelegeerde toewijzing.',
+    slides: [
+      {
+        id: 'dom-est-intro',
+        title: 'Het stokje is een naam op gov.nl',
+        lead: 'Eén subdomein, door drie paar handen.',
+        bullets: [
+          'gov.nl is gelaagd: het Rijk wijst tiers toe, organisaties geven diensten uit.',
+          'Registry-beheerder, aanvrager, domeinbeheerder.',
+        ],
+        route: '/dns/naamruimtes',
+        full: true,
+      },
+      {
+        id: 'dom-est-pieter-register',
+        becomePersona: 'pieter',
+        title: 'Het begint bij het register',
+        lead: 'We zijn Pieter, registry-beheerder bij Logius. Hij beheert de root en wijst organisatie-tiers toe.',
+        bullets: [
+          'Eén register, data-gedreven: namespaces, regels, standaarden.',
+          'Zonder een toegewezen tier kan een organisatie niks uitgeven.',
+        ],
+        route: '/dns/naamruimtes',
+      },
+      {
+        id: 'dom-est-pieter-tier',
+        title: 'De Belastingdienst krijgt zijn tier',
+        lead: 'In Pieters inbox staan org-tier aanvragen. belastingdienst.gov.nl wordt aan de organisatie toegewezen.',
+        bullets: [
+          'Centraal wat centraal moet: de organisatie-tiers.',
+          'Hierna mag de Belastingdienst er zelf diensten onder uitgeven.',
+        ],
+        route: '/dns/aanvragen',
+        skippable: true,
+      },
+      {
+        id: 'dom-est-handover-sanne',
+        kind: 'handover',
+        title: 'De tier staat, nu de dienst',
+        lead: 'belastingdienst.gov.nl is toegewezen. Sanne Visser, developer bij Toeslagen, vraagt er een dienst onder aan.',
+        handover: { from: 'pieter', to: 'sanne' },
+        full: true,
+      },
+      {
+        id: 'dom-est-sanne-vraag',
+        becomePersona: 'sanne',
+        title: 'Een dienst heeft een naam nodig',
+        lead: 'We zijn Sanne. Ze vraagt een subdomein aan onder de tier van de Belastingdienst.',
+        bullets: [
+          'gov.nl, Belastingdienst, dienst-tier, label.',
+          'De naam stelt zich live samen, met de goedkeurder erbij.',
+        ],
+        route: '/dns/aanvragen/nieuw',
+        drive: { wizard: 'subdomein' },
+      },
+      {
+        id: 'dom-est-sanne-status',
+        title: 'En nu wachten op een ander',
+        lead: 'Sanne ziet haar aanvraag, maar keurt niet zelf goed.',
+        bullets: [
+          'Status "in beoordeling": het ligt bij de organisatie.',
+          'Geen ticket, geen centrale wachtrij.',
+        ],
+        route: '/dns/aanvragen',
+        skippable: true,
+      },
+      {
+        id: 'dom-est-handover-maud',
+        kind: 'handover',
+        title: 'De aanvraag staat klaar',
+        lead: 'Maud Vermeulen, domeinbeheerder van de Belastingdienst, beoordeelt hem nu.',
+        handover: { from: 'sanne', to: 'maud-vermeulen' },
+        full: true,
+      },
+      {
+        id: 'dom-est-maud-keuren',
+        becomePersona: 'maud-vermeulen',
+        title: 'Dezelfde pagina, een andere bril',
+        lead: 'Zelfde scherm als Sanne, nu met knoppen: het verzoek wacht op Maud.',
+        bullets: [
+          'Sannes aanvraag onder "Wacht op jou", met Goedkeuren.',
+          'Goedkeuren, en het domein ontstaat.',
+        ],
+        route: '/dns/aanvragen',
+        drive: { wizard: 'dns-goedkeuren' },
+      },
+      {
+        id: 'dom-est-maud-domein',
+        title: 'Het stokje is een domein',
+        lead: 'De aanvraag is een domein, nog zonder DNSSEC: het werk is zichtbaar.',
+        bullets: [
+          'Vers domein, status "aandacht".',
+          'Maud besliste zelf, binnen de tier die Pieter toewees.',
+        ],
+        route: '/dns',
+        skippable: true,
+      },
+      {
+        id: 'dom-est-handover-migratie',
+        kind: 'handover',
+        title: 'En de oude namen?',
+        lead: 'De nieuwe naam staat. De oude namen, op overheid.nl en dienst.nl, migreren mee naar gov.nl. Julia El Amrani, domeinbeheerder bij DUO, verhuist het examenregister.',
+        handover: { from: 'maud-vermeulen', to: 'julia-el-amrani' },
+        full: true,
+      },
+      {
+        id: 'dom-est-migratie',
+        becomePersona: 'julia-el-amrani',
+        title: 'Een oude naam verhuist, met goedkeuring',
+        lead: 'examenregister.overheid.nl verhuist naar gov.nl. Geen losse knop, maar een aanvraag die geverifieerd en goedgekeurd wordt.',
+        bullets: [
+          'Alleen het beherende team mag verhuizen; daarna keurt de domeinbeheerder goed.',
+          'De redirect gaat als HTTP 301 live; oude links blijven werken.',
+        ],
+        route: '/dns/dom-duo-examens',
+        drive: { wizard: 'dns-migratie' },
+      },
+      {
+        id: 'dom-est-slot',
+        title: 'Drie paar handen, één naam',
+        lead: 'Toewijzing, aanvraag, goedkeuring. Niemand stond bij de root, en het stokje viel nergens.',
+        bullets: [
+          'Gedelegeerd gezag: grip zonder centrale flessenhals.',
+          'Oude namen migreren mee, met een 301-redirect.',
+        ],
+        full: true,
+      },
+    ],
+  },
 ];
 
 export function routeById(id) {

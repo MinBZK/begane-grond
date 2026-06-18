@@ -10,6 +10,8 @@ import { usePlatformStore } from '../../stores/index.js';
 import PageHeader from '../../components/shared/PageHeader.vue';
 import MetricCard from '../../components/shared/MetricCard.vue';
 import StatusBadge from '../../components/shared/StatusBadge.vue';
+import DnsSubnav from './DnsSubnav.vue';
+import { fqdnParts } from '../../components/shared/fqdn.js';
 
 const store = usePlatformStore();
 const router = useRouter();
@@ -77,9 +79,13 @@ function scoreColor(score) {
     >
       <template #actions>
         <nldd-button variant="secondary" text="Certificaten" start-icon="lock-closed" href="/secrets/certificaten"></nldd-button>
+        <nldd-button variant="secondary" text="Subdomein aanvragen" start-icon="globe" href="/dns/aanvragen/nieuw"></nldd-button>
         <nldd-button variant="primary" text="Domein toevoegen" start-icon="plus" @click="adding = !adding"></nldd-button>
       </template>
     </PageHeader>
+
+    <DnsSubnav />
+    <nldd-spacer size="16" />
 
     <template v-if="adding">
       <nldd-card accessible-label="Domein toevoegen">
@@ -157,7 +163,7 @@ function scoreColor(score) {
             <div class="rp-dom-head">
               <nldd-icon name="globe" aria-hidden="true" class="rp-dom-icon"></nldd-icon>
               <div class="rp-min-width-0">
-                <nldd-title size="4"><h2 class="rp-mono">{{ d.fqdn }}</h2></nldd-title>
+                <nldd-title size="4"><h2 class="rp-mono"><template v-for="(part, i) in fqdnParts(d.fqdn)" :key="i">{{ part }}<wbr /></template></h2></nldd-title>
                 <p class="rp-dom-sub">{{ appName(d.app) }} · {{ teamName(d.team) }}</p>
               </div>
               <nldd-tag :color="scoreColor(d.internetnl)" size="md">{{ d.internetnl }}</nldd-tag>
@@ -189,8 +195,20 @@ function scoreColor(score) {
 .rp-dom-head { display: flex; align-items: flex-start; gap: 0.75rem; }
 .rp-dom-icon { width: 1.6rem; height: 1.6rem; flex: 0 0 auto; opacity: 0.8; }
 .rp-dom-sub { margin: 0.1rem 0 0; font-size: 0.85rem; opacity: 0.65; }
-.rp-mono { font-variant-numeric: tabular-nums; font-family: ui-monospace, monospace; }
+.rp-mono {
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, monospace;
+  /* Wrap an fqdn only on its dot/hyphen boundaries (the <wbr> in the template),
+     never inside a label. A touch smaller so most names stay on one line. */
+  font-size: 1.15rem;
+  line-height: 1.25;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+}
 .rp-form-row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-end; }
-.rp-grow { flex: 1 1 18rem; }
+/* Dropdowns must not shrink below their label width, or the labels overlap. */
+.rp-form-row > nldd-form-field { flex: 1 1 12rem; min-width: 12rem; }
+.rp-grow { flex: 2 1 18rem; }
 .rp-form-hint { margin: 0; font-size: 0.85rem; opacity: 0.65; }
 </style>

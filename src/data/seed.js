@@ -36761,13 +36761,14 @@ export const domeinen = [
     status: "actief"
   },
   {
-    id: "dom-studie", fqdn: "studiefinanciering.nl", app: "app-studiefinanciering-portaal", team: "team-platform",
+    id: "dom-studie", fqdn: "studiefinanciering.nl", app: "app-studiefinanciering-portaal", team: "team-duo-studiefinanciering",
     dnssec: false, tls: "cert-studie", internetnl: 71, ipv6: true, registrar: "SIDN",
     records: [
       { type: "A", name: "@", value: "145.21.0.50" },
       { type: "AAAA", name: "@", value: "2a00:d00:ff::50" }
     ],
-    status: "aandacht"
+    redirectsTo: "studiefinanciering.duo.gov.nl",
+    status: "in migratie"
   },
   {
     id: "dom-ww", fqdn: "ww-aanvraag.overheid.nl", app: "app-ww-aanvraag", team: "team-platform",
@@ -36914,6 +36915,47 @@ export const domeinen = [
       { type: "A", name: "@", value: "145.21.0.141" }
     ],
     status: "aandacht"
+  },
+  {
+    // DUO's new gov.nl home for studiefinanciering. The canonical domain owns
+    // the redirect list; the legacy studiefinanciering.nl only points forward.
+    id: "dom-duo", fqdn: "studiefinanciering.duo.gov.nl", app: "app-studiefinanciering-portaal", team: "team-duo-studiefinanciering",
+    dnssec: true, tls: "cert-studie", internetnl: 96, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.142" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::8e" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    migratedFrom: "studiefinanciering.nl",
+    redirectsFrom: [
+      { fqdn: "studiefinanciering.nl", type: "301", since: "2026-06", status: "actief" }
+    ],
+    status: "actief"
+  },
+  {
+    // Experiment domain on alpha.gov.nl: self-service, relaxed standards, not
+    // for production. Created via the self-service short-circuit (aanvr-003).
+    id: "dom-foo-alpha-gov-nl", fqdn: "foo.alpha.gov.nl", app: null, team: "team-platform",
+    dnssec: false, tls: null, internetnl: 0, ipv6: false, registrar: "SIDN",
+    namespace: "ns-alpha", experiment: true,
+    records: [
+      { type: "A", name: "@", value: "145.21.9.1" }
+    ],
+    status: "actief"
+  },
+  {
+    // A fresh DUO legacy domain, still on overheid.nl and NOT yet migrating, so
+    // the estafette can play a live migration to gov.nl on it. Owned by Julia's
+    // team (team-duo-studiefinanciering) so she may both request and, as DUO
+    // domeinbeheerder, approve it.
+    id: "dom-duo-examens", fqdn: "examenregister.overheid.nl", app: null, team: "team-duo-studiefinanciering",
+    dnssec: true, tls: "cert-wild-overheid", internetnl: 92, ipv6: true, registrar: "SIDN",
+    records: [
+      { type: "A", name: "@", value: "145.21.0.150" },
+      { type: "AAAA", name: "@", value: "2a00:d00:ff::96" },
+      { type: "CAA", name: "@", value: "0 issue pkioverheid.nl" }
+    ],
+    status: "actief"
   },
 
 ];
@@ -38315,5 +38357,317 @@ export const richtlijnen = [
     icon: "heart", to: "/duurzaamheid", toLabel: "Duurzaamheid",
     source: { kind: "derived", ref: "green" },
     why: "Digitale diensten dragen bij aan de klimaatdoelen van het Rijk.",
+  },
+];
+
+// --- Domeinnaamruimtes (namespace registry) ---------------------------------
+// The whole subdomain-request feature is driven by this array: every rule (who
+// may register, which approval level, whether DNSSEC/internet.nl is required,
+// open or closed) is a FIELD, never hardcoded in a component. `tiers[].pattern`
+// encodes the fqdn shape so one composeFqdn() handles every namespace and a
+// future medeoverheid namespace can be added without code changes.
+//
+// kind: 'rijk' | 'experiment' | 'legacy' | 'medeoverheid'  (medeoverheid is
+// documented but unused by the four required namespaces — proof the registry is
+// genuinely open).
+// approval per tier: 'central' (registry-beheerder) | 'delegated' (org
+// domeinbeheerder) | 'self-service' (instant, no approver).
+export const namespaces = [
+  {
+    id: "ns-gov",
+    suffix: "gov.nl",
+    label: "gov.nl",
+    kind: "rijk",
+    openForRegistration: true,
+    layered: true,
+    requiresDnssec: true,
+    requiresInternetnl: true,
+    minInternetnl: 95,
+    tiers: [
+      {
+        tier: "org",
+        approval: "central",
+        pattern: "{org}.gov.nl",
+        description:
+          "Organisatie-tier, toegewezen door de centrale registry-beheerder (Logius).",
+      },
+      {
+        tier: "service",
+        approval: "delegated",
+        pattern: "{service}.{org}.gov.nl",
+        description:
+          "Dienst-tier, aangevraagd door een team en goedgekeurd door de domeinbeheerder van de organisatie (gedelegeerd gezag).",
+      },
+    ],
+    description:
+      "De nieuwe gedeelde Rijks-root. Volledige DNSSEC en internet.nl vereist.",
+  },
+  {
+    id: "ns-alpha",
+    suffix: "alpha.gov.nl",
+    label: "alpha.gov.nl",
+    kind: "experiment",
+    openForRegistration: true,
+    layered: false,
+    requiresDnssec: false,
+    requiresInternetnl: false,
+    minInternetnl: 0,
+    notForProduction: true,
+    tiers: [
+      {
+        tier: "service",
+        approval: "self-service",
+        pattern: "{service}.alpha.gov.nl",
+        description:
+          "Experiment/dev-tier. Self-service, niet voor productie, soepele standaarden.",
+      },
+    ],
+    description:
+      "Experimenteer- en ontwikkeltier. Lage drempel, geen volledige internet.nl/DNSSEC-eis.",
+  },
+  {
+    id: "ns-beta",
+    suffix: "beta.gov.nl",
+    label: "beta.gov.nl",
+    kind: "experiment",
+    openForRegistration: true,
+    layered: false,
+    requiresDnssec: false,
+    requiresInternetnl: false,
+    minInternetnl: 0,
+    notForProduction: true,
+    tiers: [
+      {
+        tier: "service",
+        approval: "self-service",
+        pattern: "{service}.beta.gov.nl",
+        description:
+          "Beta-tier voor publieke proeven. Self-service, soepele standaarden.",
+      },
+    ],
+    description:
+      "Beta-tier voor publieke probeersels, één stap voor productie op gov.nl.",
+  },
+  {
+    id: "ns-overheid",
+    suffix: "overheid.nl",
+    label: "overheid.nl",
+    kind: "legacy",
+    openForRegistration: false,
+    layered: false,
+    requiresDnssec: true,
+    requiresInternetnl: true,
+    minInternetnl: 90,
+    requiresJustification: true,
+    tiers: [
+      {
+        tier: "service",
+        approval: "central",
+        pattern: "{service}.overheid.nl",
+        description:
+          "Bestaand. Alleen nog met expliciete onderbouwing; voorkeur is migratie naar gov.nl.",
+      },
+    ],
+    description:
+      "Bestaande naamruimte. Blijft werken naast gov.nl, geen nieuwe registraties.",
+  },
+  {
+    id: "ns-rijksoverheid",
+    suffix: "rijksoverheid.nl",
+    label: "rijksoverheid.nl",
+    kind: "legacy",
+    openForRegistration: false,
+    layered: false,
+    requiresDnssec: true,
+    requiresInternetnl: true,
+    minInternetnl: 90,
+    requiresJustification: true,
+    tiers: [
+      {
+        tier: "service",
+        approval: "central",
+        pattern: "{service}.rijksoverheid.nl",
+        description:
+          "Bestaand voorlichtingsdomein. Geen nieuwe registraties, migratie naar gov.nl.",
+      },
+    ],
+    description:
+      "Bestaande Rijks-voorlichtingsnaamruimte. Blijft werken, geen nieuwe registraties.",
+  },
+  {
+    id: "ns-dienst",
+    suffix: "dienst.nl",
+    label: "dienst.nl",
+    kind: "legacy",
+    openForRegistration: false,
+    layered: false,
+    requiresDnssec: false,
+    requiresInternetnl: false,
+    minInternetnl: 0,
+    tiers: [
+      {
+        tier: "service",
+        approval: "central",
+        pattern: "{service}.dienst.nl",
+        description:
+          "Extra legacy-naamruimte die voorlopig nog ondersteund moet blijven.",
+      },
+    ],
+    description: 'Legacy-naamruimte, "voorlopig" nog ondersteund.',
+  },
+];
+
+// --- Domeinregister: rol-toewijzing als data --------------------------------
+// Makes the three derived roles believable without a permission matrix. Roles
+// are derived at read-time from currentPerson + this table (see
+// currentDomainRole / canApproveFor in the store).
+//   registry-beheerder  → central authority, assigns org-tier gov.nl (Logius).
+//   org-domeinbeheerder → delegated authority over their org's service-tier.
+//   aanvrager           → any team member; may request, not approve.
+export const domainRegistry = {
+  // Logius is the real-world steward of .overheid.nl / Digikoppeling, so its
+  // engineer is the natural central registry-beheerder.
+  registryBeheerders: ["pieter"],
+  // Per-organisation domeinbeheerder(s). ans (NLDD) is included so the default
+  // demo persona already has a working approval inbox, while she is NOT a
+  // registry-beheerder and not a BD/BZK/DUO approver — switching persona to
+  // pieter/maud/julia visibly changes the gate.
+  domeinbeheerders: {
+    bd: ["maud-vermeulen"], // Belastingdienst, leidt team-bd-aangifte
+    bzk: ["noor-bakker"], // BZK / Toeslagen tech lead (team-toeslagen)
+    duo: ["julia-el-amrani"], // DUO / Studiefinanciering — keurt de migratie goed
+    nldd: ["ans"], // NLDD platform
+  },
+};
+
+// --- Domeinaanvragen (request ledger) ---------------------------------------
+// Status vocabulary mirrors the CAB plus request entry/exit states:
+// 'aangevraagd' → 'in beoordeling' → 'goedgekeurd' | 'afgewezen'.
+// At least one pending request is addressed to each demo approver so switching
+// persona reveals a different inbox.
+export const domeinaanvragen = [
+  {
+    id: "aanvr-001",
+    namespace: "ns-gov",
+    tier: "service",
+    org: "bd",
+    service: "toeslagen",
+    fqdn: "toeslagen.belastingdienst.gov.nl",
+    team: "team-toeslagen",
+    app: "app-toeslagen",
+    aanvrager: "sanne",
+    approver: "maud-vermeulen",
+    approvalLevel: "delegated",
+    motivatie:
+      "Toeslagen verhuist van toeslagen.nl naar de gedeelde gov.nl-root.",
+    status: "in beoordeling",
+    createdAt: "gisteren",
+    resolvedAt: null,
+    createdDomein: null,
+  },
+  {
+    id: "aanvr-002",
+    namespace: "ns-gov",
+    tier: "org",
+    org: "duo",
+    service: null,
+    fqdn: "duo.gov.nl",
+    team: "team-duo-studiefinanciering",
+    app: null,
+    aanvrager: "julia-el-amrani",
+    approver: "pieter",
+    approvalLevel: "central",
+    motivatie:
+      "DUO wil zijn organisatie-tier op gov.nl om diensten te kunnen migreren.",
+    status: "aangevraagd",
+    createdAt: "2 dagen geleden",
+    resolvedAt: null,
+    createdDomein: null,
+  },
+  {
+    id: "aanvr-003",
+    namespace: "ns-alpha",
+    tier: "service",
+    org: "nldd",
+    service: "foo",
+    fqdn: "foo.alpha.gov.nl",
+    team: "team-platform",
+    app: null,
+    aanvrager: "ans",
+    approver: null,
+    approvalLevel: "self-service",
+    motivatie: "Snel een prototype online voor een spike.",
+    status: "goedgekeurd",
+    createdAt: "vorige week",
+    resolvedAt: "vorige week",
+    createdDomein: "dom-foo-alpha-gov-nl",
+  },
+  {
+    id: "aanvr-004",
+    namespace: "ns-overheid",
+    tier: "service",
+    org: "bd",
+    service: "nieuwe-aangifte",
+    fqdn: "nieuwe-aangifte.overheid.nl",
+    team: "team-bd-aangifte",
+    app: null,
+    aanvrager: "mohammed-van-vliet",
+    approver: "pieter",
+    approvalLevel: "central",
+    motivatie: "(geen onderbouwing aangeleverd)",
+    status: "afgewezen",
+    rejectionReason:
+      "overheid.nl is gesloten voor nieuwe registraties; vraag dit aan onder gov.nl.",
+    createdAt: "vorige week",
+    resolvedAt: "vorige week",
+    createdDomein: null,
+  },
+  {
+    id: "aanvr-005",
+    namespace: "ns-gov",
+    tier: "service",
+    org: "bzk",
+    service: "mijn",
+    fqdn: "mijn.bzk.gov.nl",
+    team: "team-burgerzaken",
+    app: null,
+    aanvrager: "joost",
+    approver: "noor-bakker",
+    approvalLevel: "delegated",
+    motivatie: "Burgerportaal van BZK onder de eigen organisatie-tier.",
+    status: "in beoordeling",
+    createdAt: "vandaag",
+    resolvedAt: null,
+    createdDomein: null,
+  },
+];
+
+// --- Migraties (redirect-flow van legacy naar gov.nl) -----------------------
+// A migration is a first-class object with its own lifecycle, governed like a
+// subdomain request: you may only migrate a domain your team owns (verified via
+// team ownership, not a token), and the organisation's domeinbeheerder approves
+// it. Only once approved does the redirect go live — modelled as a platform-
+// level HTTP 301, not a DNS record. Status:
+// 'aangevraagd' -> 'in beoordeling' -> 'goedgekeurd'/'afgewezen', and once the
+// redirect is serving: 'actief'.
+export const migraties = [
+  {
+    // Already live: studiefinanciering.nl -> studiefinanciering.duo.gov.nl.
+    id: "mig-studie",
+    legacyDomeinId: "dom-studie",
+    legacyFqdn: "studiefinanciering.nl",
+    targetFqdn: "studiefinanciering.duo.gov.nl",
+    targetDomeinId: "dom-duo",
+    org: "duo",
+    team: "team-duo-studiefinanciering",
+    aanvrager: "julia-el-amrani",
+    approver: "julia-el-amrani",
+    approvalLevel: "delegated",
+    verifiedVia: "team-eigenaarschap",
+    redirectType: "301",
+    motivatie: "Studiefinanciering verhuist naar de gov.nl-tier van DUO.",
+    status: "actief",
+    createdAt: "2026-06",
+    resolvedAt: "2026-06",
   },
 ];

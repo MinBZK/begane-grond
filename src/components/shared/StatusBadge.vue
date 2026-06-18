@@ -23,6 +23,7 @@ const COLORS = {
   // in progress / neutral-ish
   provisioning: 'warning', requested: 'neutral', besteld: 'neutral', 'in aanbouw': 'warning',
   'in beoordeling': 'warning', 'in behandeling': 'warning', mitigated: 'warning',
+  'in migratie': 'warning', afgewezen: 'critical',
   beta: 'warning', deels: 'warning', warn: 'warning', warning: 'warning', actief: 'accent',
   gepland: 'neutral', concept: 'neutral', offerte: 'neutral', aandacht: 'warning',
   sev3: 'warning', medium: 'warning', laag: 'neutral', low: 'neutral',

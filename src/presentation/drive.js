@@ -13,10 +13,12 @@
 //   }
 
 // Pacing is deliberately calm so an audience can follow every change on stage.
-const DEFAULT_STEP_DELAY_MS = 1100; // pause after a value is set / a field changes
-const STEP_ADVANCE_DELAY_MS = 1500; // longer pause after moving to the next step
-const TYPE_CHAR_DELAY_MS = 55; // per-character delay so text fields look typed
-const TYPE_SETTLE_MS = 500; // brief pause once a field is fully typed
+// These are tuned for a live presentation: each beat should be readable from the
+// back of a room, so err on the slow side.
+const DEFAULT_STEP_DELAY_MS = 1900; // pause after a value is set / a field changes
+const STEP_ADVANCE_DELAY_MS = 2600; // longer pause after moving to the next step
+const TYPE_CHAR_DELAY_MS = 80; // per-character delay so text fields look typed
+const TYPE_SETTLE_MS = 800; // brief pause once a field is fully typed
 
 // Promise-based sleep. setTimeout is allowed; Date/now/random are not.
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
