@@ -1353,19 +1353,19 @@ export const routes = [
   // subject is gov.nl-naamgeving: gedelegeerd gezag, niet iedereen bij de root.
   {
     id: 'domeinen-estafette',
-    role: 'De domein-estafette',
+    role: 'Een naam op gov.nl',
     persona: 'sanne',
     icon: 'globe',
     chain: true,
-    lead: 'Eén subdomein op gov.nl, door drie rollen: van aanvraag tot gedelegeerde toewijzing.',
+    lead: 'Hoe een overheidsdienst een adres op gov.nl krijgt: toewijzen, aanvragen, goedkeuren.',
     slides: [
       {
         id: 'dom-est-intro',
-        title: 'Het stokje is een naam op gov.nl',
-        lead: 'Eén subdomein, door drie paar handen.',
+        title: 'Een adres op gov.nl',
+        lead: 'De Rijksoverheid brengt overheidssites samen onder één naam: gov.nl. Hoe krijgt een dienst daar een adres?',
         bullets: [
-          'gov.nl is gelaagd: het Rijk wijst tiers toe, organisaties geven diensten uit.',
-          'Registry-beheerder, aanvrager, domeinbeheerder.',
+          'gov.nl is gelaagd: het Rijk wijst een organisatie een tier toe, die geeft er zelf diensten onder uit.',
+          'Niet iedereen mag bij de root. We volgen één adres langs de drie rollen die het mogelijk maken.',
         ],
         route: '/dns/naamruimtes',
         full: true,
@@ -1445,8 +1445,8 @@ export const routes = [
       },
       {
         id: 'dom-est-maud-domein',
-        title: 'Het stokje is een domein',
-        lead: 'De aanvraag is een domein, nog zonder DNSSEC: het werk is zichtbaar.',
+        title: 'En het adres bestaat',
+        lead: 'De aanvraag is een domein geworden, nog zonder DNSSEC: het werk is zichtbaar.',
         bullets: [
           'Vers domein, status "aandacht".',
           'Maud besliste zelf, binnen de tier die Pieter toewees.',
@@ -1476,8 +1476,8 @@ export const routes = [
       },
       {
         id: 'dom-est-slot',
-        title: 'Drie paar handen, één naam',
-        lead: 'Toewijzing, aanvraag, goedkeuring. Niemand stond bij de root, en het stokje viel nergens.',
+        title: 'Eén naam, drie rollen',
+        lead: 'Toewijzen, aanvragen, goedkeuren. Niemand hoefde bij de root, en toch klopt elke stap.',
         bullets: [
           'Gedelegeerd gezag: grip zonder centrale flessenhals.',
           'Oude namen migreren mee, met een 301-redirect.',
