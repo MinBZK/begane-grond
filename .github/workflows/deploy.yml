@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }} # ghcr.io/anneschuth/begane-grond
+  IMAGE_NAME: ${{ github.repository }} # bijv. ghcr.io/minbzk/begane-grond
 
 jobs:
   quality:
