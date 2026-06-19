@@ -49,6 +49,7 @@ jobs:
       packages: write # push the image to GHCR with the built-in GITHUB_TOKEN
     outputs:
       tag: ${{ steps.tag.outputs.tag }} # immutable sha- tag, shared by deploy jobs
+      image: ${{ steps.image.outputs.image }} # lowercase registry/owner/name
     steps:
       - uses: actions/checkout@v6
 
@@ -63,6 +64,16 @@ jobs:
           short="$(echo "${{ github.sha }}" | cut -c1-7)"
           echo "tag=sha-${short}" >> "$GITHUB_OUTPUT"
 
+      - name: Determine image name
+        id: image
+        # ${{ github.repository }} keeps the owner's original casing (e.g.
+        # MinBZK/...). GHCR accepts that, but ZAD rejects it ("moet volledig in
+        # kleine letters zijn"). Lowercase the full registry path once here so
+        # both GHCR and the deploy jobs use an identical, valid reference.
+        run: |
+          image="$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')"
+          echo "image=${image}" >> "$GITHUB_OUTPUT"
+
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
@@ -74,7 +85,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ steps.image.outputs.image }}
           # PRs: a pr-<n> tag. Every commit: sha-<short> (what we deploy). Main
           # additionally moves :latest as a convenience pointer, never deployed.
           tags: |
@@ -109,7 +120,7 @@ jobs:
           project-id: bg-4s2
           deployment-name: pr-${{ github.event.pull_request.number }}
           component: frontend
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.tag }}
+          image: ${{ needs.build.outputs.image }}:${{ needs.build.outputs.tag }}
           comment-on-pr: 'true' # drops a clickable preview link in the PR
           wait-for-ready: 'true' # block until the deployment answers on /
           health-endpoint: '/'
@@ -135,7 +146,7 @@ jobs:
           # to the domain, so deploying there left the live site stale.
           deployment-name: productie
           component: frontend
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.tag }}
+          image: ${{ needs.build.outputs.image }}:${{ needs.build.outputs.tag }}
           wait-for-ready: 'true'
           health-endpoint: '/'
 
