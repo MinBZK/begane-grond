@@ -9,7 +9,7 @@
 
 Een klikbare demo van een **internal developer platform** voor de Nederlandse
 Rijksoverheid. Het laat zien hoe Platform Engineering bij de overheid eruit
-*zou kunnen* zien: van fysieke racks en kabels, via self-service
+_zou kunnen_ zien: van fysieke racks en kabels, via self-service
 infrastructuurdiensten, tot applicaties, teams, on-call en autonome
 Linux-werkplekken. Gebouwd met het
 [NLDD design system](https://www.npmjs.com/package/@nldd/design-system).
