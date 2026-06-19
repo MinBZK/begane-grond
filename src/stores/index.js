@@ -1213,22 +1213,30 @@ export const usePlatformStore = defineStore('platform', {
     // Build, register, audit and announce a new domain. Shared by the inline
     // "domein toevoegen" form (addDomein) and the subdomein-approval flow
     // (approveAanvraag). `relaxed` skips the DNSSEC/internet.nl gate for
-    // experiment namespaces; strict domains start non-compliant so the work to
-    // get them compliant stays visible.
-    _createDomein({ fqdn, app, team, namespace = null, relaxed = false, extra = {} }) {
+    // experiment namespaces. `compliant` lets the paved path deliver a domain
+    // that already meets the standards (DNSSEC, certificate, internet.nl, IPv6);
+    // without either flag a domain starts non-compliant so the work to get it
+    // compliant stays visible.
+    _createDomein({ fqdn, app, team, namespace = null, relaxed = false, compliant = false, extra = {} }) {
       const slug = fqdn.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
       const dom = {
         id: `dom-${slug}`,
         fqdn,
         app: app || null,
         team: team || 'team-platform',
-        dnssec: false,
-        tls: null,
-        internetnl: 0,
-        ipv6: false,
+        dnssec: compliant,
+        tls: compliant ? `cert-${slug}` : null,
+        internetnl: compliant ? 96 : 0,
+        ipv6: compliant,
         registrar: 'SIDN',
-        records: [{ type: 'A', name: '@', value: '145.21.0.0' }],
-        status: relaxed ? 'actief' : 'aandacht',
+        records: compliant
+          ? [
+              { type: 'A', name: '@', value: '145.21.0.0' },
+              { type: 'AAAA', name: '@', value: '2a00:d00:ff::0' },
+              { type: 'CAA', name: '@', value: '0 issue pkioverheid.nl' },
+            ]
+          : [{ type: 'A', name: '@', value: '145.21.0.0' }],
+        status: relaxed || compliant ? 'actief' : 'aandacht',
         ...(namespace ? { namespace } : {}),
         ...(relaxed ? { experiment: true } : {}),
         ...extra,
@@ -1371,7 +1379,9 @@ export const usePlatformStore = defineStore('platform', {
       return { aanvraag };
     },
     // Approve a pending request (guarded by canApproveFor). Creates the real
-    // domain honoring the namespace rules, links it back to the request.
+    // domain honoring the namespace rules, links it back to the request. A strict
+    // namespace delivers a compliant domain straight from the paved path (DNSSEC,
+    // certificate, internet.nl, IPv6); experiment namespaces stay relaxed.
     approveAanvraag(id) {
       const aanvraag = this.aanvraagById(id);
       if (!aanvraag || !this.canApproveFor(aanvraag)) return;
@@ -1383,6 +1393,7 @@ export const usePlatformStore = defineStore('platform', {
         team: aanvraag.team,
         namespace: aanvraag.namespace,
         relaxed,
+        compliant: !relaxed,
       });
       aanvraag.status = 'goedgekeurd';
       aanvraag.resolvedAt = 'zojuist';
