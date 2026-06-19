@@ -1358,12 +1358,12 @@ export const routes = [
     persona: 'sanne',
     icon: 'globe',
     chain: true,
-    lead: 'Self-service voor domeinen: nu een mailtje en wachten, straks zelf, in minuten.',
+    lead: 'Self-service voor domeinen: een naam aanvragen op gov.nl, zonder mailtje en zonder wachten.',
     slides: [
       {
         id: 'dom-est-intro',
         title: 'Een naam regel je zelf',
-        lead: 'Een overheidsdienst een adres geven op gov.nl gaat nu via een e-mail naar een centrale balie, en dan wachten. Op dit platform doe je het zelf.',
+        lead: 'Een dienst online zetten op gov.nl begint met een adres. Nu vraag je dat per e-mail aan en wacht je. Hier doe je het zelf.',
         bullets: [
           'Net als een database, een server of een certificaat: je vraagt het aan, en waar het kan staat het er binnen minuten.',
           'We volgen één naam, van aanvraag tot live adres.',
@@ -1374,12 +1374,12 @@ export const routes = [
       {
         id: 'dom-est-waarom',
         title: 'Zelf doen kán meer dan een mailtje',
-        lead: 'Omdat de aanvraag door het platform loopt en het weet wie je bent, kan er van alles automatisch goed gaan dat een e-mail nooit kan.',
+        lead: 'De aanvraag loopt door het platform, en het weet wie je bent. Daardoor gaat er van alles vanzelf goed dat een mailtje aan een balie nooit afdwingt.',
         bullets: [
-          'Alleen ingelogd via SSO Rijk: geen anonieme mailbox, we weten wie aanvraagt.',
-          'Autorisatie per rol: niet iedereen bij BZK mag namen scheppen onder BZK. Alleen de juiste mensen kunnen aanvragen, en het akkoord gaat naar je eigen organisatie.',
-          'Compliant by default: DNSSEC, een PKIoverheid-certificaat, IPv6, internet.nl en WCAG zitten in het gebaande pad, geen losse checklist achteraf.',
-          'Alles herleidbaar: wie, wanneer, waarom. Elke stap staat vast, zonder dat iemand een rapport schrijft.',
+          'Je vraagt alleen aan als je bent ingelogd met SSO Rijk. Geen anonieme mailbox: het platform weet wie er aan de knoppen zit.',
+          'Niet iedereen bij BZK mag zomaar namen aanmaken onder BZK. Autorisatie zit per rol vast, en het akkoord gaat naar je eigen organisatie.',
+          'De standaarden komen mee uit het gebaande pad: DNSSEC, een PKIoverheid-certificaat, IPv6, een internet.nl-score en WCAG. Geen losse checklist achteraf.',
+          'Wie vroeg aan, wie keurde goed, wanneer? Elke stap ligt vast, zonder dat iemand er een rapport voor schrijft.',
         ],
         route: '/dns/naamruimtes',
         full: true,
@@ -1419,7 +1419,7 @@ export const routes = [
         id: 'dom-est-sanne-vraag',
         becomePersona: 'sanne',
         title: 'Je wilt een naam, je vraagt hem zelf aan',
-        lead: 'We zijn Sanne. Ze logt in met SSO Rijk en vraagt een subdomein aan onder de tier van de Belastingdienst. Geen mailtje, een formulier.',
+        lead: 'We zijn Sanne. Ingelogd met SSO Rijk vult ze een formulier in voor een subdomein onder de tier van de Belastingdienst. Geen mailtje aan een balie.',
         bullets: [
           'Ze kan dit alleen omdat ze geautoriseerd is; iemand zonder rechten ziet deze knop niet.',
           'De naam stelt zich live samen, met de goedkeurder er al bij.',
@@ -1461,9 +1461,9 @@ export const routes = [
       {
         id: 'dom-est-maud-domein',
         title: 'En meteen volgens de regels',
-        lead: 'De aanvraag is een domein geworden. Het gebaande pad zet DNSSEC, het certificaat en de internet.nl-toets meteen klaar: compliance is de standaard, geen nawerk.',
+        lead: 'De aanvraag is een domein geworden. DNSSEC staat aan, het certificaat klopt en de internet.nl-score is groen: het gebaande pad regelde het, niet Sanne of Maud achteraf.',
         bullets: [
-          'Vers domein, en de standaarden staan er meteen bij.',
+          'Een vers domein dat meteen aan de standaarden voldoet, zonder nawerk.',
           'Maud besliste zelf, binnen de ruimte die Pieter toewees.',
         ],
         route: '/dns',
@@ -1492,11 +1492,11 @@ export const routes = [
       {
         id: 'dom-est-slot',
         title: 'Zo neem je alles hier af',
-        lead: 'Zelf, in minuten, geen e-mail en geen wachtrij. En juist omdat het via het platform loopt, klopt elke stap.',
+        lead: 'Zelf aangevraagd, binnen minuten klaar. En juist omdat het via het platform loopt in plaats van via een inbox, klopt elke stap.',
         bullets: [
-          'Domeinen was het voorbeeld. Infra, certificaten, secrets, omgevingen: dezelfde knop.',
-          'SSO Rijk, autorisatie, DNSSEC, internet.nl, WCAG: ingebouwd, niet achteraf.',
-          'Een akkoord alleen waar het moet, en dan dichtbij, niet bij een centrale balie.',
+          'Domeinen was het voorbeeld. Infra, certificaten, secrets en omgevingen lopen via dezelfde knop.',
+          'SSO Rijk en autorisatie zitten ervoor, DNSSEC, internet.nl en WCAG komen eruit. Niemand vinkt het achteraf af.',
+          'Een akkoord vraag je alleen waar het moet, en dan bij je eigen organisatie.',
         ],
         full: true,
       },
