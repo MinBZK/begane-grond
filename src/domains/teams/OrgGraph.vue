@@ -273,7 +273,7 @@ function setFocus(id) {
   gap: 0.55rem;
   padding: 0.55rem 0.8rem;
   border-radius: 12px;
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   border: 1px solid var(--semantics-dividers-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   min-width: 220px;

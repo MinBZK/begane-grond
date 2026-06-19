@@ -532,7 +532,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('campagne'));
   border: 1.5px solid var(--semantics-dividers-color);
   font: inherit;
   resize: vertical;
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   color: inherit;
 }
 .rp-textarea.rp-mono {

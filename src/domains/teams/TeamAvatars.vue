@@ -47,7 +47,7 @@ const overflow = computed(() => Math.max(0, props.people.length - props.max));
   border-radius: 50%;
   font-size: calc(var(--rp-av-size) * 0.36);
   font-weight: 700;
-  border: 2px solid var(--semantics-surfaces-background-color);
+  border: 2px solid var(--semantics-surfaces-base-background-color);
   margin-left: calc(var(--rp-av-size) * -0.28);
 }
 .rp-avatar:first-child {

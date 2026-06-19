@@ -93,7 +93,7 @@ const layers = computed(() => [
   text-decoration: none;
   color: inherit;
   border: 1px solid var(--semantics-dividers-color);
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   transition: background 0.12s ease, border-color 0.12s ease;
 }
 .rp-layer:hover {

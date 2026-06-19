@@ -227,7 +227,7 @@ function wetName(id) {
   margin-left: -0.4rem;
   border-radius: 50%;
   background: var(--semantics-surfaces-tinted-background-color);
-  border: 2px solid var(--semantics-surfaces-background-color);
+  border: 2px solid var(--semantics-surfaces-base-background-color);
   font-size: 0.7rem;
   font-weight: 700;
 }

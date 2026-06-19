@@ -173,7 +173,7 @@ function send() {
 .rp-chat-bubble {
   padding: 0.5rem 0.75rem;
   border-radius: 14px;
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   border: 1px solid var(--semantics-dividers-color);
   font-size: 0.9rem;
   line-height: 1.35;

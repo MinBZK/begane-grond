@@ -476,7 +476,7 @@ function appForSecret(sec) {
   border-radius: 999px;
   text-decoration: none;
   color: inherit;
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
 }
 .rp-app-chip nldd-icon {
   width: 0.85rem;

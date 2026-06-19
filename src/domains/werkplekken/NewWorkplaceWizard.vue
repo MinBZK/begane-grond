@@ -558,7 +558,7 @@ onBeforeUnmount(() => presentation.unregisterWizard('werkplek'));
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
 }
 .rp-stage-dot nldd-icon {
   width: 1rem;

@@ -189,7 +189,7 @@ const VERDICT_TAG = {
 }
 .rp-sticky-col {
   position: sticky; left: 0;
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   text-align: left !important;
   z-index: 1;
 }

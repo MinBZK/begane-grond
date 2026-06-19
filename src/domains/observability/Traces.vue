@@ -256,7 +256,7 @@ const critical = computed(() => trace.value.spans.reduce((m, s) => Math.max(m, s
 .rp-trace-tab {
   flex: 1 1 240px;
   text-align: left;
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   border: 1px solid var(--semantics-dividers-color);
   border-radius: 10px;
   padding: 0.7rem 0.9rem;

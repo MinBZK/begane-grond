@@ -17,6 +17,14 @@ const router = useRouter();
 const store = usePlatformStore();
 const presentation = usePresentation();
 
+// --- Page-wide status strip ---
+// Injected via innerHTML rather than as a template element: see the markup
+// comment. The HTML parser is the one element-creation path that tolerates the
+// component setting role/aria-live in its constructor.
+const statusHost = ref(null);
+const STATUS_BAR_HTML =
+  '<nldd-status-bar variant="neutral" text="Begane Grond is een demo / mock-up. Geen productiedata."></nldd-status-bar>';
+
 // --- Notification bell ---
 const inboxOpen = ref(false);
 function toggleInbox() {
@@ -191,6 +199,7 @@ function onKeydown(e) {
 }
 
 onMounted(() => {
+  if (statusHost.value) statusHost.value.innerHTML = STATUS_BAR_HTML;
   try {
     const v = localStorage.getItem('rp-theme');
     if (v) theme.value = v;
@@ -220,6 +229,17 @@ onBeforeUnmount(() => {
 
 <template>
   <nldd-page>
+    <!--
+      Page-wide status strip, stacked above the nav. nldd-status-bar (0.8.62)
+      sets role/aria-live in its constructor, which the custom-elements spec
+      forbids on the document.createElement path that Vue's renderer uses. Vue
+      mounts it and the browser throws NotSupportedError, leaving a 0-height
+      broken element. The HTML-parser path is the only one the spec allows, so
+      the strip is injected via innerHTML in onMounted instead of as a template
+      element. Drop this workaround once the component stops mutating attributes
+      in its constructor.
+    -->
+    <div slot="header" ref="statusHost"></div>
     <nldd-skip-link slot="header" href="#hoofdinhoud" text="Direct naar de inhoud">
       <nldd-top-navigation-bar
         logo-title="Begane Grond"
@@ -497,7 +517,7 @@ onBeforeUnmount(() => {
   width: min(30rem, 94vw);
   max-height: 78vh;
   overflow-y: auto;
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   border: 1px solid var(--semantics-dividers-color);
   border-radius: 12px;
   box-shadow: 0 8px 28px rgb(0 0 0 / 0.18);

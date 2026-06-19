@@ -42,7 +42,7 @@
 }
 
 html {
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   color-scheme: light;
   scroll-padding-top: 5rem;
 }

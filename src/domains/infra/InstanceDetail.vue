@@ -392,7 +392,7 @@ const relationLinks = computed(() => {
   flex: 0 0 auto;
 }
 .rp-haven-off .rp-haven-icon {
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   color: inherit;
   opacity: 0.6;
 }

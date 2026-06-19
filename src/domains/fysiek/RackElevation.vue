@@ -410,7 +410,7 @@ const cableColumns = [
   border: 3px solid var(--semantics-text-default-color);
   border-radius: 10px;
   padding: 0;
-  background: var(--semantics-surfaces-background-color);
+  background: var(--semantics-surfaces-base-background-color);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
