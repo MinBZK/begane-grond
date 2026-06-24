@@ -45,13 +45,10 @@ const imgStyle = computed(() => {
 });
 
 // Clickable hotspots: invisible bands over each layer so the viewer can jump
-// straight to a layer by clicking it (only meaningful on the hero).
+// straight to a layer by clicking it (only meaningful on the hero). Positioned
+// at each layer's focusY.
 const bands = computed(() =>
-  lagen.map((l) => {
-    const idx = lagen.findIndex((x) => x.key === l.key);
-    // band spans roughly half the gap to neighbours; simple even split is fine.
-    return { key: l.key, topPct: l.focusY * 100 };
-  }),
+  lagen.map((l) => ({ key: l.key, topPct: l.focusY * 100 })),
 );
 </script>
 

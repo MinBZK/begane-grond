@@ -1217,7 +1217,15 @@ export const usePlatformStore = defineStore('platform', {
     // that already meets the standards (DNSSEC, certificate, internet.nl, IPv6);
     // without either flag a domain starts non-compliant so the work to get it
     // compliant stays visible.
-    _createDomein({ fqdn, app, team, namespace = null, relaxed = false, compliant = false, extra = {} }) {
+    _createDomein({
+      fqdn,
+      app,
+      team,
+      namespace = null,
+      relaxed = false,
+      compliant = false,
+      extra = {},
+    }) {
       const slug = fqdn.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
       const dom = {
         id: `dom-${slug}`,
