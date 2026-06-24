@@ -1,17 +1,23 @@
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, defineAsyncComponent } from 'vue'
 import { usePresentation } from './usePresentation.js'
 import { usePlatformStore } from '../stores/index.js'
 
 const p = usePresentation()
 const store = usePlatformStore()
 
+// The exploded-view viewer (one big hand-drawn illustration we zoom into) is
+// only used by the 'lagen' route, so it is lazy-loaded: its chunk and the large
+// stack image are fetched only when a 'lagen' slide first renders.
+const StackZoom = defineAsyncComponent(() => import('./exploded/StackZoom.vue'))
+
 // The chooser is split in two groups: the 7 roles (become a persona, play their
 // route) and the 3 stories (the full talk, the estafette, the pitch). Role cards
 // resolve the person's name so it reads "Sanne Visser · Backend developer".
 const roleCards = computed(() =>
   p.routes
-    .filter((r) => !r.chain)
+    // The exploded-view route is a story (shown among storyCards), not a role.
+    .filter((r) => !r.chain && r.id !== 'lagen')
     .map((r) => ({
       id: r.id,
       name: store.personById(r.persona)?.name || r.role,
@@ -35,6 +41,13 @@ const storyCards = computed(() => {
       lead: 'Acht argumenten, een korte demo, en dan de estafette: van wet tot audit.',
     },
     ...chain,
+    {
+      id: 'lagen',
+      name: 'De lagen van het platform',
+      role: 'Exploded view',
+      icon: 'square-on-square',
+      lead: 'Daal in 3D af door de stapel, van wet tot ijzer, met de live demo ernaast.',
+    },
     {
       id: 'pitch',
       name: 'Het podiumverhaal',
@@ -93,6 +106,15 @@ const counter = computed(
 const progressWidth = computed(() =>
   total.value > 0 ? `${((index.value + 1) / total.value) * 100}%` : '0%',
 )
+
+// Clicking a slab in the exploded view jumps straight to that layer's slide.
+// The slide ids follow the pattern `lagen-<key>`, so we find it in the active
+// tour and goto its index.
+function onPickLayer(key) {
+  const slides = p.activeTour.value?.slides || []
+  const idx = slides.findIndex((s) => s.id === `lagen-${key}`)
+  if (idx >= 0) p.goto(idx)
+}
 
 function isEditableTarget(target) {
   if (!target) return false
@@ -270,6 +292,58 @@ onBeforeUnmount(() => {
           <span class="closing-qr-url">{{ current.qr.url }}</span>
           <span v-if="current.qr.caption" class="closing-qr-caption">{{ current.qr.caption }}</span>
         </div>
+      </div>
+    </template>
+
+    <!-- Exploded-view slide: the 3D layer stack fills the panel, slide text
+         overlaid. On the hero (full) it is the whole screen; descending, it
+         compacts to the rail with the live app on the right. -->
+    <template v-else-if="current && current.kind === 'lagen'">
+      <div class="lagen">
+        <StackZoom
+          :active-layer="current.layer || null"
+          :mode="current.full ? 'hero' : 'zoom'"
+          @pick="onPickLayer"
+        />
+        <div class="lagen-overlay" :class="{ 'lagen-overlay-hero': current.full }">
+          <span v-if="current.gov" class="gov-pill">Specifiek voor de overheid</span>
+          <h1 class="lagen-title">{{ current.title }}</h1>
+          <p v-if="current.lead" class="lagen-lead">{{ current.lead }}</p>
+          <ul v-if="current.bullets && current.bullets.length" class="lagen-bullets">
+            <li v-for="(b, i) in current.bullets" :key="i">{{ b }}</li>
+          </ul>
+          <p v-if="current.gov && typeof current.gov === 'string'" class="lagen-gov">{{ current.gov }}</p>
+        </div>
+      </div>
+
+      <div class="footer footer-lagen">
+        <div class="footer-row">
+          <span class="counter-wrap">
+            <span class="counter">{{ counter }}</span>
+            <button
+              v-if="!p.onChooser.value"
+              type="button"
+              class="chooser-back"
+              @click="p.backToChooser()"
+            >← Naar de keuze</button>
+          </span>
+          <div class="nav-buttons">
+            <button type="button" class="round-btn" aria-label="Vorige slide" @click="p.prev()">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button v-if="loopsToStart" type="button" class="restart-btn" @click="p.next()">Terug naar het begin</button>
+            <button v-else type="button" class="round-btn" aria-label="Volgende slide" @click="p.next()">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="progress" aria-hidden="true">
+        <div class="progress-fill" :style="{ width: progressWidth }"></div>
       </div>
     </template>
 
@@ -1057,6 +1131,103 @@ onBeforeUnmount(() => {
   height: 100%;
   background: rgba(255, 255, 255, 0.85);
   transition: width 0.3s ease;
+}
+
+/* Exploded-view slide: the 3D scene fills the panel; text overlays at the foot
+   over a dark gradient so it stays legible against the moving scene. */
+.lagen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.lagen-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Reach high enough that the title sits over a softly darkened drawing — but
+     between the original (bottom-only) and the full veil: the band fills the
+     lower ~55% and fades out more gently above the text. */
+  min-height: 55%;
+  padding: 2.5rem 2.75rem 5.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  background: linear-gradient(
+    to top,
+    rgba(21, 66, 115, 0.96) 0%,
+    rgba(21, 66, 115, 0.88) 45%,
+    rgba(21, 66, 115, 0.55) 75%,
+    rgba(21, 66, 115, 0) 100%
+  );
+  pointer-events: none;
+}
+/* On the hero (fullscreen) the WHOLE drawing should stay visible and crisp, so
+   the tall veil is dropped: a short, soft gradient only behind the centered
+   intro text at the very bottom. */
+.lagen-overlay-hero {
+  min-height: 0;
+  /* Less bottom padding so the title + short subtitle sit lower on the slide. */
+  padding: 4rem clamp(3rem, 10vw, 12rem) 2.5rem;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(
+    to top,
+    rgba(21, 66, 115, 0.95) 0%,
+    rgba(21, 66, 115, 0.9) 22%,
+    rgba(21, 66, 115, 0.62) 45%,
+    rgba(21, 66, 115, 0.2) 70%,
+    rgba(21, 66, 115, 0) 88%
+  );
+}
+.lagen-title {
+  font-family: 'RijksoverheidSerif', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.4vw, 4rem);
+  line-height: 1.08;
+  margin: 0;
+  color: #fff;
+}
+.lagen-lead {
+  font-family: 'RijksSans', system-ui, sans-serif;
+  font-size: clamp(1.05rem, 1.7vw, 1.9rem);
+  line-height: 1.4;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 44ch;
+}
+.lagen-overlay-hero .lagen-lead {
+  max-width: 52ch;
+}
+.lagen-bullets {
+  font-family: 'RijksSans', system-ui, sans-serif;
+  font-size: clamp(0.95rem, 1.3vw, 1.4rem);
+  line-height: 1.4;
+  margin: 0.2rem 0 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 46ch;
+}
+.lagen-gov {
+  font-family: 'RijksSans', system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0.4rem 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 50ch;
+}
+/* The footer sits above the overlay gradient so nav stays clickable. */
+.footer-lagen {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 2.75rem 1.5rem;
+  z-index: 2;
 }
 
 .too-small {

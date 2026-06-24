@@ -16,7 +16,125 @@
 //
 // Identifiers/comments English; UI text Dutch.
 
+import { lagen } from './exploded/lagen.js';
+
 export const EXAMPLE_TEAM = 'team-toeslagen';
+
+// The exploded-view route: its entry IS one big hand-drawn illustration of the
+// whole stack, and we CLIMB it from the bottom (iron) up to the top (law),
+// zooming into each layer in turn, with the live Begane Grond page for that
+// layer sliding in on the right. Each layer slide carries `kind: 'lagen'` (so
+// PresentationDeck renders the StackZoom viewer), `layer` (which layer to zoom
+// to) and `route` (the live page). Narration is in the blog's language:
+// self-service, paved path, compliance-by-default.
+const LAYER_COPY = {
+  wet: {
+    lead: 'En bovenaan de bron: de wet. Regels die heel de stapel eronder uitvoert, machine-leesbaar gemaakt.',
+    bullets: [
+      'Wet-als-code stuurt alles aan wat we net beklommen: van een uitkering tot een vergunning.',
+      'De keten die we volgden loopt van hier helemaal naar beneden, tot het ijzer.',
+    ],
+    gov: 'De overheid voert wetten uit. De hele stapel staat in dienst van deze laag.',
+  },
+  mens: {
+    lead: 'Boven de techniek staan de mensen: de teams die het bouwen en draaien, op autonome werkplekken.',
+    bullets: [
+      'Geen tien teams met tien manieren, maar één gebaand pad dat ze kiezen omdat het makkelijker is.',
+      'Autonome werkplekken: zelf uitgerold, zonder ticket.',
+    ],
+  },
+  apps: {
+    lead: 'Dan de applicaties: wat de burger en de ambtenaar daadwerkelijk gebruiken.',
+    bullets: [
+      'Software schrijven is het kleine werk. De onderbouw eronder is gigantisch.',
+      'Daarom legt het platform die onderbouw als zelf-af-te-nemen lagen neer.',
+    ],
+  },
+  paden: {
+    lead: 'Het gebaande pad: de geplaveide weg met goede borden, waarvan je weet dat hij je op je bestemming brengt.',
+    bullets: [
+      'Compliance-by-default: TLS 1.3 staat gewoon aan, je hoeft het niet te regelen.',
+      'Vangrails waar het moet (BIO, WCAG), vrije keuze waar het kan.',
+    ],
+    gov: 'Aanbevolen, niet verplicht. Teams kiezen het pad omdat het makkelijker is, niet omdat het moet.',
+  },
+  koppelvlakken: {
+    lead: "Koppelvlakken en data: API's, datacontracten en de basisregistraties als bron.",
+    bullets: [
+      'Koppelen zonder alles op één hoop te gooien: federatie, geen centrale flessenhals.',
+      'Data bij de bron, ontsloten via standaard-koppelvlakken.',
+    ],
+  },
+  diensten: {
+    lead: 'Managed diensten: databases, brokers, storage en LLM. Zelf afnemen, geen ticket.',
+    bullets: [
+      'Je neemt het af met een knop. Geen wachtrij, geen mailtje, geen ander team.',
+      'Elke afname is een commit op platform-config: alles is code.',
+    ],
+  },
+  kubernetes: {
+    lead: 'Kubernetes en virtualisatie: de container- en orchestratielaag op het fundament.',
+    bullets: [
+      'Containers drijven op de servers; orchestratie verplaatst ze over de nodes.',
+      'Eén manier van draaien, voor elk team hetzelfde.',
+    ],
+  },
+  fundament: {
+    lead: 'Het fundament: de metal-stack op eigen ijzer. Racks, machines, bekabeling.',
+    bullets: [
+      'Een soevereine Rijks-cloud: de begane grond bouw je op dit fundament.',
+      'De Belastingdienst houdt haar eigen productie; kleinere organisaties delen de standaard.',
+    ],
+    gov: 'Soevereiniteit: eigen ijzer, eigen cloud, onder eigen regie.',
+  },
+  ijzer: {
+    lead: 'We beginnen onderaan, bij het ijzer: stroom, koeling, netwerk. De fysieke wereld waar alles op rust.',
+    bullets: [
+      'Het ijzer, maar eigenlijk daaronder nog het datacenter: stroomaansluitingen, koeling, glasvezel.',
+      'Onzichtbaar als het goed werkt, maar de hele stapel die we gaan beklimmen rust erop.',
+    ],
+  },
+};
+
+// Build the route's slides: a fullscreen hero, then one slide per layer from
+// top (wet) to bottom (ijzer), reading geometry/route from lagen.js.
+// We WALK the stack from the bottom up: start on the iron and climb to the law.
+// `lagen` is already ordered iron-first, so no reverse — we play it as-is. One
+// hand-drawn illustration (stack.png) zooms to each layer in turn.
+const lagenSlides = [
+  {
+    id: 'lagen-hero',
+    kind: 'lagen',
+    layer: null,
+    full: true,
+    title: 'De lagen van het platform',
+    lead: 'Van het ijzer tot de wet. We klimmen van onderaf omhoog.',
+  },
+  ...lagen.map((l) => ({
+    id: `lagen-${l.key}`,
+    kind: 'lagen',
+    layer: l.key,
+    route: l.route,
+    title: l.title,
+    lead: LAYER_COPY[l.key]?.lead || l.sub,
+    bullets: LAYER_COPY[l.key]?.bullets,
+    gov: LAYER_COPY[l.key]?.gov,
+  })),
+  {
+    id: 'lagen-slot',
+    kind: 'closing',
+    title: 'Eén platform, alle lagen',
+    lead: 'Van het ijzer tot de wet: één samenhangende stapel, zelf af te nemen, met compliance ingebouwd. Dat is het platform.',
+  },
+];
+
+export const lagenRoute = {
+  id: 'lagen',
+  role: 'Exploded view',
+  icon: 'square-on-square',
+  lead: 'Klim door de lagen van het platform, van het ijzer tot de wet.',
+  slides: lagenSlides,
+};
 
 export const routes = [
   {
@@ -1502,6 +1620,7 @@ export const routes = [
       },
     ],
   },
+  lagenRoute,
 ];
 
 export function routeById(id) {

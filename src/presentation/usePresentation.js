@@ -314,6 +314,12 @@ async function chooseRoute(id) {
     await startPitch(0);
     return;
   }
+  // The exploded-view route is a story, not a role: it adopts no persona, so
+  // start it directly without a setPersona (it has none).
+  if (id === 'lagen') {
+    await startRoute('lagen', 0);
+    return;
+  }
   const route = routeById(id);
   if (_store) _store.setPersona(route.persona);
   await startRoute(route.id, 0);
