@@ -115,6 +115,9 @@ const lagenSlides = [
     kind: 'lagen',
     layer: l.key,
     route: l.route,
+    // Some layers auto-run a wizard on the live (right) side so the demo moves:
+    // ordering a service, scaffolding an app, turning a law into code.
+    ...(l.drive ? { drive: { wizard: l.drive } } : {}),
     title: l.title,
     lead: LAYER_COPY[l.key]?.lead || l.sub,
     bullets: LAYER_COPY[l.key]?.bullets,

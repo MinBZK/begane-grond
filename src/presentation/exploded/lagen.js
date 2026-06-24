@@ -48,6 +48,8 @@ export const lagen = [
     key: 'kubernetes',
     title: 'Kubernetes & virtualisatie',
     sub: 'Containers en orchestratie op het fundament',
+    // The service catalogus: the "menu" of self-service building blocks, with
+    // tier badges and Afnemen-cards. Diensten then shows one being ordered.
     route: '/infra',
     hue: '#1f6f8b',
     focusY: 0.726,
@@ -59,7 +61,10 @@ export const lagen = [
     key: 'diensten',
     title: 'Managed diensten',
     sub: 'Zelf af te nemen: databases, brokers, storage, LLM',
-    route: '/infra/instances',
+    // The order wizard auto-runs here: a PostgreSQL database is taken in a few
+    // clicks, live, while we talk — "zelf afnemen, geen ticket" made visible.
+    route: '/infra/order/postgres',
+    drive: 'order',
     hue: '#0d9488',
     focusY: 0.633,
     count: (s) => s.instances.length,
@@ -92,7 +97,10 @@ export const lagen = [
     key: 'apps',
     title: 'Applicaties & UI',
     sub: 'Wat de burger en ambtenaar gebruikt',
-    route: '/apps',
+    // The new-app wizard auto-runs: a service is scaffolded from a golden-path
+    // template, with repo, CI and infra in one go.
+    route: '/apps/nieuw',
+    drive: 'app',
     hue: '#2563eb',
     focusY: 0.349,
     count: (s) => s.apps.length,
@@ -103,7 +111,10 @@ export const lagen = [
     key: 'mens',
     title: 'Mens, team & werkplek',
     sub: 'Wie het bouwt en draait, op autonome werkplekken',
-    route: '/teams',
+    // The workplace wizard auto-runs: an autonomous Linux laptop is rolled out
+    // for a colleague, from order to ready.
+    route: '/werkplekken/nieuw',
+    drive: 'werkplek',
     hue: '#7c3aed',
     focusY: 0.238,
     count: (s) => s.teams.length,
@@ -114,7 +125,10 @@ export const lagen = [
     key: 'wet',
     title: 'Wet & beleid',
     sub: 'De bron: regels die het systeem uitvoert, als code',
-    route: '/wetten',
+    // The showcase: the law wizard turns a statute into a running service in a
+    // few steps — wet-als-code, the summit of the climb.
+    route: '/wetten/nieuw',
+    drive: 'wet',
     hue: '#9d174d',
     focusY: 0.112,
     count: (s) => s.wetten.length,
