@@ -299,13 +299,23 @@ onBeforeUnmount(() => {
          overlaid. On the hero (full) it is the whole screen; descending, it
          compacts to the rail with the live app on the right. -->
     <template v-else-if="current && current.kind === 'lagen'">
-      <div class="lagen">
-        <StackZoom
-          :active-layer="current.layer || null"
-          :mode="current.full ? 'hero' : 'zoom'"
-          @pick="onPickLayer"
-        />
-        <div class="lagen-overlay" :class="{ 'lagen-overlay-hero': current.full }">
+      <!-- Hero (fullscreen): the drawing gets its own space at the top and the
+           intro text sits BELOW it, clear of the tekening (Roos' wens). When
+           descending into a layer, we keep the gradient overlay the other way:
+           the drawing fills the rail and the text floats over it on a soft
+           Rijksblauw veil, which reads well against a single zoomed-in layer. -->
+      <div v-if="current.full" class="lagen lagen-hero">
+        <div class="lagen-stage">
+          <StackZoom :active-layer="null" mode="hero" @pick="onPickLayer" />
+        </div>
+        <div class="lagen-text lagen-text-hero">
+          <h1 class="lagen-title">{{ current.title }}</h1>
+          <p v-if="current.lead" class="lagen-lead">{{ current.lead }}</p>
+        </div>
+      </div>
+      <div v-else class="lagen">
+        <StackZoom :active-layer="current.layer || null" mode="zoom" @pick="onPickLayer" />
+        <div class="lagen-overlay">
           <span v-if="current.gov" class="gov-pill">Specifiek voor de overheid</span>
           <h1 class="lagen-title">{{ current.title }}</h1>
           <p v-if="current.lead" class="lagen-lead">{{ current.lead }}</p>
@@ -333,7 +343,7 @@ onBeforeUnmount(() => {
                 <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
-            <button v-if="loopsToStart" type="button" class="restart-btn" @click="p.next()">Terug naar het begin</button>
+            <button v-if="loopsToStart" type="button" class="restart-btn" @click="p.restart()">Terug naar het begin</button>
             <button v-else type="button" class="round-btn" aria-label="Volgende slide" @click="p.next()">
               <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
                 <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -448,7 +458,7 @@ onBeforeUnmount(() => {
               v-if="loopsToStart"
               type="button"
               class="restart-btn"
-              @click="p.next()"
+              @click="p.restart()"
             >Terug naar het begin</button>
             <button
               v-else
@@ -1133,21 +1143,50 @@ onBeforeUnmount(() => {
   transition: width 0.3s ease;
 }
 
-/* Exploded-view slide: the 3D scene fills the panel; text overlays at the foot
-   over a dark gradient so it stays legible against the moving scene. */
+/* Exploded-view slide, two layouts:
+   - hero (fullscreen): a vertical split — the drawing gets its own stage at the
+     top and the intro text sits BELOW it on solid Rijksblauw, so nothing is
+     printed over the whole tekening (Roos' wens).
+   - zoom (descending): the drawing fills the rail and the layer text floats over
+     it on a soft gradient veil, which reads well against one zoomed-in layer. */
 .lagen {
   position: absolute;
   inset: 0;
   overflow: hidden;
 }
+/* Hero is a column: stage on top, text block beneath. */
+.lagen-hero {
+  display: flex;
+  flex-direction: column;
+}
+/* The drawing's stage (hero only): all the space left above the text block. The
+   StackZoom inside is position:absolute/inset:0, so it fills exactly this box. */
+.lagen-stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+/* The hero text block, below the drawing. Solid background, no veil over the art. */
+.lagen-text {
+  flex: 0 0 auto;
+  padding: 1.4rem 2.75rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: var(--rp-deck-bg, #154273);
+}
+.lagen-text-hero {
+  padding: 1.6rem clamp(3rem, 10vw, 12rem) 4.5rem;
+  align-items: center;
+  text-align: center;
+}
+/* Descending overlay: the soft gradient veil at the foot of the rail, with the
+   layer's title/lead/bullets over the zoomed-in drawing. */
 .lagen-overlay {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  /* Reach high enough that the title sits over a softly darkened drawing — but
-     between the original (bottom-only) and the full veil: the band fills the
-     lower ~55% and fades out more gently above the text. */
   min-height: 55%;
   padding: 2.5rem 2.75rem 5.5rem;
   display: flex;
@@ -1162,24 +1201,6 @@ onBeforeUnmount(() => {
     rgba(21, 66, 115, 0) 100%
   );
   pointer-events: none;
-}
-/* On the hero (fullscreen) the WHOLE drawing should stay visible and crisp, so
-   the tall veil is dropped: a short, soft gradient only behind the centered
-   intro text at the very bottom. */
-.lagen-overlay-hero {
-  min-height: 0;
-  /* Less bottom padding so the title + short subtitle sit lower on the slide. */
-  padding: 4rem clamp(3rem, 10vw, 12rem) 2.5rem;
-  align-items: center;
-  text-align: center;
-  background: linear-gradient(
-    to top,
-    rgba(21, 66, 115, 0.95) 0%,
-    rgba(21, 66, 115, 0.9) 22%,
-    rgba(21, 66, 115, 0.62) 45%,
-    rgba(21, 66, 115, 0.2) 70%,
-    rgba(21, 66, 115, 0) 88%
-  );
 }
 .lagen-title {
   font-family: 'RijksoverheidSerif', Georgia, serif;

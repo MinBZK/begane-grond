@@ -66,17 +66,17 @@ const LAYER_COPY = {
     ],
   },
   diensten: {
-    lead: 'Managed diensten: databases, brokers, storage en LLM. Zelf afnemen, geen ticket.',
+    lead: 'De PaaS-laag: gedeelde bouwstenen die elk team in het federatieve datastelsel nodig heeft. FSC, FTV, PostgreSQL, Haven-standaard, CertManager.',
     bullets: [
-      'Je neemt het af met een knop. Geen wachtrij, geen mailtje, geen ander team.',
+      'Geen losse diensten per team, maar één set golden-path-componenten die je afneemt met een knop.',
       'Elke afname is een commit op platform-config: alles is code.',
     ],
   },
   kubernetes: {
-    lead: 'Kubernetes en virtualisatie: de container- en orchestratielaag op het fundament.',
+    lead: 'Kubernetes op eigen ijzer: met metal-stack en Gardener maak je clusters aan, met nodes en namespaces per organisatie.',
     bullets: [
-      'Containers drijven op de servers; orchestratie verplaatst ze over de nodes.',
-      'Eén manier van draaien, voor elk team hetzelfde.',
+      'Metal-stack levert de machines, Gardener levert de clusters: zelfde Kubernetes als de cloud, op je eigen fundament.',
+      'Per organisatie een cluster met nodes; per team een namespace. Eén manier van draaien.',
     ],
   },
   fundament: {

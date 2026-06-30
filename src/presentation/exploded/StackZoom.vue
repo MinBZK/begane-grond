@@ -37,7 +37,7 @@ const imgStyle = computed(() => {
   // to center, then bias it UP so the layer sits in the upper ~60% of the rail,
   // clear of the slide text overlaid across the lower part. The bias is in vh.
   const shiftPct = (0.5 - fy) * 100 * scale;
-  const upBiasVh = 14; // push the focal layer up, leaving room for text below
+  const upBiasVh = 12; // push the focal layer up, leaving room for text below
   return {
     transform: `translate(-50%, calc(-50% + ${shiftPct}% - ${upBiasVh}vh)) scale(${scale})`,
     transformOrigin: 'center center',

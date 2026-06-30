@@ -241,17 +241,27 @@ function nextIndex(from, step) {
   return from;
 }
 
-// Advance to the next slide. On the last slide of a route or the pitch, loop
-// back to the chooser ("terug naar het begin"), so a deck never dead-ends and
-// you can hand the next person a fresh choice.
+// Advance to the next slide. On the last slide we do NOT silently jump tours:
+// auto-advancing off the end of a route would drop you into the pitch/intro
+// deck with no way back (the route is gone), which is exactly the dead-end Roos
+// hit. So at the end we simply stay put; looping back to the chooser is an
+// explicit choice via restart()/the "terug naar het begin" button. The one
+// exception is the chooser slide itself, which already has its own behaviour.
 async function next() {
   const target = nextIndex(index.value, 1);
   if (target !== index.value) {
     await goto(target);
-  } else if (current.value?.kind !== 'choice') {
-    // End of a route/the pitch: loop back to the chooser (not the full runway).
-    await start(CHOOSER_INDEX);
   }
+  // Otherwise we are on the last slide: stay here. prev() keeps working, and
+  // the labelled "terug naar het begin" button (restart) is the only way back
+  // to the chooser, so you never tumble into another deck by pressing space.
+}
+
+// Explicitly hand the next person a fresh choice: loop back to the chooser from
+// the end of a route/the pitch. This is the "terug naar het begin" button; it
+// is deliberate, not something next()/space triggers by accident.
+async function restart() {
+  await start(CHOOSER_INDEX);
 }
 
 // Go back to the previous slide if there is one.
@@ -429,6 +439,7 @@ export function usePresentation() {
     stop,
     next,
     prev,
+    restart,
     goto,
     toggleAutoplay,
     toggleSkipOptional,
