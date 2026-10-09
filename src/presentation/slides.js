@@ -430,7 +430,7 @@ export const slides = [
       'De volgende minuten lopen we langs het charter en langs wat het op de plek zelf zichtbaar maakt.',
     ],
     gov: 'Niet één bouwblok, maar een lens over alles: één raamwerk voor verantwoorde digitale systemen.',
-    link: { href: 'https://minbzk.github.io/NeRDS/', label: 'minbzk.github.io/NeRDS' },
+    link: { href: 'https://nerds.digitaledienst.overheid.nl/', label: 'minbzk.github.io/NeRDS' },
     route: '/nerds',
     highlight: '.rp-pillars',
     full: true,
